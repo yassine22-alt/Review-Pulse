@@ -1,0 +1,5 @@
+# Normalize line endings across Windows/macOS/Linux teammates
+* text=auto
+*.png binary
+*.jpg binary
+*.pdf binary
