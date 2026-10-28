@@ -62,13 +62,16 @@ Three things are optional:
 
 | Optional part | What it adds | How to get it |
 |---|---|---|
-| Scanned plans | reading scans and photos (a neural network for walls, plus OCR for text) | `.\setup.ps1 -Scans` or `./setup.sh --scans`, then ask me for the scan model folder and put it in `data/models/raster_seg` |
+| Scanned plans | reading scans and photos (a neural network for walls, plus OCR for text) | `.\setup.ps1 -Scans` or `./setup.sh --scans`, plus the models zip (below) |
 | Rule-drafting model | turning a requirements document into draft rules | install Ollama (ollama.com), then `ollama pull qwen2.5:7b` |
-| Trained model for CAD drawings | much better walls, doors and windows on real CAD drawings | ask me for the model folder and put it in `data/models/primitive_lgbm` |
+| Trained model for CAD drawings | much better walls, doors and windows on real CAD drawings | the models zip (below) |
 
 The trained models are not in the repository: they are large, and they learn from datasets that
-allow non-commercial use only, so I share them directly. Without the trained model, CAD drawings
-are read with the geometric rules only. That works well
+allow non-commercial use only, so I send them as one file, `ReviewPulse_models.zip`. Unzip it
+inside your `reviewpulse/` folder (the one with `setup.ps1`) and run `rp doctor`: the line
+"trained model for CAD drawings" then says `[ ok ]`. Keep the zip inside the team.
+
+Without the trained model, CAD drawings are read with the geometric rules only. That works well
 on clean drawings and is how the tests run.
 
 ## 2. Use the app
