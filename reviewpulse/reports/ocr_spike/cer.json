@@ -1,0 +1,318 @@
+{
+ "easyocr": {
+  "cer_mean": 0.612,
+  "exact": 9,
+  "n": 25,
+  "seconds": 37.6,
+  "rows": [
+   {
+    "crop": "a_00.png",
+    "truth": "m.huone",
+    "pred": "m.huone",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_03.png",
+    "truth": "h=2995",
+    "pred": "5662=4",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_05.png",
+    "truth": "MH",
+    "pred": "MH",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_06.png",
+    "truth": "PK",
+    "pred": "[('",
+    "cer": 1.5
+   },
+   {
+    "crop": "a_07.png",
+    "truth": "K",
+    "pred": "K",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_10.png",
+    "truth": "3h+k+s",
+    "pred": "1",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_11.png",
+    "truth": "SK",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_12.png",
+    "truth": "1797,5",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_15.png",
+    "truth": "OH",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_16.png",
+    "truth": "3h",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_17.png",
+    "truth": "MAKUUALKOVI",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_19.png",
+    "truth": "VH",
+    "pred": "5",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_01.png",
+    "truth": "KHH",
+    "pred": "KHH",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_02.png",
+    "truth": "3,1m²",
+    "pred": "31n'",
+    "cer": 0.6
+   },
+   {
+    "crop": "b_03.png",
+    "truth": "TK",
+    "pred": "TK",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_04.png",
+    "truth": "KK",
+    "pred": "KK",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_05.png",
+    "truth": "Leivin",
+    "pred": "Leivin",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_06.png",
+    "truth": "MH4",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_07.png",
+    "truth": "2H+K",
+    "pred": "2H+ K",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_08.png",
+    "truth": "120x370",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_11.png",
+    "truth": "MH",
+    "pred": "MH",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_12.png",
+    "truth": "k",
+    "pred": "",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_13.png",
+    "truth": "6200",
+    "pred": "8",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_14.png",
+    "truth": "3H+KK",
+    "pred": "1",
+    "cer": 1.0
+   },
+   {
+    "crop": "b_15.png",
+    "truth": "5+5mm",
+    "pred": "5+5mm:",
+    "cer": 0.2
+   }
+  ]
+ },
+ "paddle": {
+  "cer_mean": 0.1204,
+  "exact": 18,
+  "n": 25,
+  "seconds": 194.3,
+  "rows": [
+   {
+    "crop": "a_00.png",
+    "truth": "m.huone",
+    "pred": "m.huone",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_03.png",
+    "truth": "h=2995",
+    "pred": "h=2995",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_05.png",
+    "truth": "MH",
+    "pred": "MH",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_06.png",
+    "truth": "PK",
+    "pred": "TPK",
+    "cer": 0.5
+   },
+   {
+    "crop": "a_07.png",
+    "truth": "K",
+    "pred": "K",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_10.png",
+    "truth": "3h+k+s",
+    "pred": "3h+k+s",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_11.png",
+    "truth": "SK",
+    "pred": "5K",
+    "cer": 0.5
+   },
+   {
+    "crop": "a_12.png",
+    "truth": "1797,5",
+    "pred": "1797.5",
+    "cer": 0.167
+   },
+   {
+    "crop": "a_15.png",
+    "truth": "OH",
+    "pred": "HO",
+    "cer": 1.0
+   },
+   {
+    "crop": "a_16.png",
+    "truth": "3h",
+    "pred": "34",
+    "cer": 0.5
+   },
+   {
+    "crop": "a_17.png",
+    "truth": "MAKUUALKOVI",
+    "pred": "MAKUUALKOVI",
+    "cer": 0.0
+   },
+   {
+    "crop": "a_19.png",
+    "truth": "VH",
+    "pred": "VH",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_01.png",
+    "truth": "KHH",
+    "pred": "KHH",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_02.png",
+    "truth": "3,1m²",
+    "pred": "3.1m²",
+    "cer": 0.2
+   },
+   {
+    "crop": "b_03.png",
+    "truth": "TK",
+    "pred": "TK",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_04.png",
+    "truth": "KK",
+    "pred": "KK",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_05.png",
+    "truth": "Leivin",
+    "pred": "Leivin",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_06.png",
+    "truth": "MH4",
+    "pred": "MH4",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_07.png",
+    "truth": "2H+K",
+    "pred": "2H+K",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_08.png",
+    "truth": "120x370",
+    "pred": "120m370",
+    "cer": 0.143
+   },
+   {
+    "crop": "b_11.png",
+    "truth": "MH",
+    "pred": "MH",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_12.png",
+    "truth": "k",
+    "pred": "k",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_13.png",
+    "truth": "6200",
+    "pred": "6200",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_14.png",
+    "truth": "3H+KK",
+    "pred": "3H+KK",
+    "cer": 0.0
+   },
+   {
+    "crop": "b_15.png",
+    "truth": "5+5mm",
+    "pred": "5+5mm",
+    "cer": 0.0
+   }
+  ]
+ }
+}

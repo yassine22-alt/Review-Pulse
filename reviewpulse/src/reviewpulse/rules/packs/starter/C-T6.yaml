@@ -1,0 +1,22 @@
+id: C-T6
+title: Exit doors open in the direction of escape
+family: C
+class: traversal
+applies_to: {}
+check:
+  fn: swing_with_escape
+  doors: exit
+  via_edges:
+  - door
+  - opening
+severity: major
+needs:
+- room_graph
+- doors
+source:
+  doc: none (template)
+  clause: "required by fire codes for exits of public buildings and high-occupancy rooms, not for dwellings;
+    approve it from the project's own regulation (doors = route covers every door on the escape route)"
+message: Door {door.label} {detected}; it must open toward the direction of escape ({required}).
+status: draft
+version: 1

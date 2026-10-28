@@ -1,0 +1,19 @@
+id: P-1
+title: Every enclosed room is labelled
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: present
+severity: minor
+needs:
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 a
+message: An enclosed room has no label ({room.label}).
+params:
+  what: room_labels
+status: approved
+approved_by: starter-pack
+version: 1

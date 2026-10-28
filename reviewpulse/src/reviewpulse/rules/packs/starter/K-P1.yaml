@@ -1,0 +1,20 @@
+id: K-P1
+title: Rooms required by the brief are on the plan at their area
+family: K
+class: cross_reference
+applies_to: {}
+check:
+  fn: programme_rooms
+severity: major
+needs:
+- rooms
+- programme
+source:
+  doc: the project brief (programme), attached with the plan
+  clause: every room it lists, with its count and required area
+message: '{subject}: {detected}; {required}.'
+params:
+  area_tolerance: 0.0
+status: approved
+approved_by: starter-pack
+version: 1

@@ -1,0 +1,23 @@
+id: C-T3
+title: No door or opening between a garage and a bedroom
+family: C
+class: traversal
+applies_to: {}
+check:
+  fn: forbidden_link
+  via_edges:
+  - door
+  - opening
+  pairs:
+  - - garage
+    - bedroom
+severity: critical
+needs:
+- room_graph
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 4
+message: '{room.label} opens directly into {other.label}.'
+status: approved
+approved_by: starter-pack
+version: 1

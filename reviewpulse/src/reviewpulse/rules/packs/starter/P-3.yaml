@@ -1,0 +1,19 @@
+id: P-3
+title: Every tag has a schedule row and every row is used
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: join
+severity: minor
+needs:
+- schedule
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 f
+message: '{detected}.'
+params:
+  mode: completeness
+status: approved
+approved_by: starter-pack
+version: 1

@@ -1,0 +1,16 @@
+.venv
+**/__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.hypothesis
+data/raw
+data/processed
+data/cache
+data/app
+data/models/raster_seg/train
+runs
+reports
+tests
+envs
+*.egg-info

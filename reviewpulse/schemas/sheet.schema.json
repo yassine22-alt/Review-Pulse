@@ -1,0 +1,794 @@
+{
+ "$defs": {
+  "Dimension": {
+   "description": "A dimension: its stated value, what it measures and what was drawn.",
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "text_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "TextItem holding the value.",
+     "title": "Text Id"
+    },
+    "value_m": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Stated value in metres (parsed text or DXF override).",
+     "title": "Value M"
+    },
+    "measured_m": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Drawn length x scale, metres.",
+     "title": "Measured M"
+    },
+    "p1": {
+     "description": "First measured feature point (extension-line end).",
+     "maxItems": 2,
+     "minItems": 2,
+     "prefixItems": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "number"
+      }
+     ],
+     "title": "P1",
+     "type": "array"
+    },
+    "p2": {
+     "description": "Second measured feature point.",
+     "maxItems": 2,
+     "minItems": 2,
+     "prefixItems": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "number"
+      }
+     ],
+     "title": "P2",
+     "type": "array"
+    },
+    "line_ids": {
+     "default": [],
+     "description": "Primitives forming the dimension graphic.",
+     "items": {
+      "type": "string"
+     },
+     "title": "Line Ids",
+     "type": "array"
+    },
+    "measured_ids": {
+     "default": [],
+     "description": "Elements the ends touch.",
+     "items": {
+      "type": "string"
+     },
+     "title": "Measured Ids",
+     "type": "array"
+    },
+    "chain_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Dimension chain this belongs to.",
+     "title": "Chain Id"
+    },
+    "prov": {
+     "$ref": "#/$defs/Prov"
+    }
+   },
+   "required": [
+    "id",
+    "p1",
+    "p2",
+    "prov"
+   ],
+   "title": "Dimension",
+   "type": "object"
+  },
+  "Layout": {
+   "description": "Regions of the sheet, (x0, y0, x1, y1) in sheet units.",
+   "properties": {
+    "frame": {
+     "anyOf": [
+      {
+       "maxItems": 4,
+       "minItems": 4,
+       "prefixItems": [
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        }
+       ],
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Drawing frame.",
+     "title": "Frame"
+    },
+    "plan_box": {
+     "anyOf": [
+      {
+       "maxItems": 4,
+       "minItems": 4,
+       "prefixItems": [
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        }
+       ],
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Area holding the plan itself.",
+     "title": "Plan Box"
+    },
+    "title_block": {
+     "anyOf": [
+      {
+       "maxItems": 4,
+       "minItems": 4,
+       "prefixItems": [
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        }
+       ],
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Title Block"
+    },
+    "tables": {
+     "default": [],
+     "description": "Schedules and other tables.",
+     "items": {
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "number"
+       },
+       {
+        "type": "number"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "type": "array"
+     },
+     "title": "Tables",
+     "type": "array"
+    }
+   },
+   "title": "Layout",
+   "type": "object"
+  },
+  "Primitive": {
+   "description": "One drawn mark as found in the file: line, arc, polyline, polygon or circle.",
+   "properties": {
+    "id": {
+     "description": "Stable id, unique within the sheet.",
+     "title": "Id",
+     "type": "string"
+    },
+    "kind": {
+     "description": "Geometry kind.",
+     "enum": [
+      "line",
+      "arc",
+      "polyline",
+      "polygon",
+      "circle"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "pts": {
+     "default": [],
+     "description": "Line: 2 points; polyline / polygon: n points (a polygon is implicitly closed).",
+     "items": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "type": "array"
+     },
+     "title": "Pts",
+     "type": "array"
+    },
+    "center": {
+     "anyOf": [
+      {
+       "maxItems": 2,
+       "minItems": 2,
+       "prefixItems": [
+        {
+         "type": "number"
+        },
+        {
+         "type": "number"
+        }
+       ],
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Arc / circle centre.",
+     "title": "Center"
+    },
+    "radius": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Arc / circle radius, sheet units.",
+     "title": "Radius"
+    },
+    "a0": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Arc start angle, degrees counter-clockwise from +x.",
+     "title": "A0"
+    },
+    "a1": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Arc end angle, degrees counter-clockwise from +x.",
+     "title": "A1"
+    },
+    "layer": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "CAD layer, PDF optional-content group or SVG group, when the file has one.",
+     "title": "Layer"
+    },
+    "width": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Stroke width, sheet units.",
+     "title": "Width"
+    },
+    "color": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Stroke colour as written in the file.",
+     "title": "Color"
+    },
+    "dashed": {
+     "default": false,
+     "description": "Drawn with a dash pattern.",
+     "title": "Dashed",
+     "type": "boolean"
+    },
+    "filled": {
+     "default": false,
+     "description": "Filled region (solid hatch, filled PDF path).",
+     "title": "Filled",
+     "type": "boolean"
+    },
+    "block": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "DXF block name, or `dim:<id>` for dimension graphics.",
+     "title": "Block"
+    },
+    "hidden": {
+     "default": false,
+     "description": "Superseded by a derived primitive (e.g. segments replaced by a fitted arc).",
+     "title": "Hidden",
+     "type": "boolean"
+    },
+    "prov": {
+     "$ref": "#/$defs/Prov"
+    }
+   },
+   "required": [
+    "id",
+    "kind",
+    "prov"
+   ],
+   "title": "Primitive",
+   "type": "object"
+  },
+  "Prov": {
+   "description": "Where a value came from and how sure the stage that produced it is.",
+   "properties": {
+    "source": {
+     "description": "Kind of input the value was read or derived from.",
+     "enum": [
+      "vector",
+      "raster",
+      "ocr",
+      "user",
+      "derived"
+     ],
+     "title": "Source",
+     "type": "string"
+    },
+    "stage": {
+     "description": "Producing stage and version, e.g. `pdf_extract`, `walls_pairs_v1`.",
+     "title": "Stage",
+     "type": "string"
+    },
+    "confidence": {
+     "default": 1.0,
+     "description": "Stage confidence in [0, 1]; a calibrated probability only where the stage says so.",
+     "title": "Confidence",
+     "type": "number"
+    },
+    "evidence": {
+     "additionalProperties": true,
+     "description": "Stage-specific evidence, e.g. `{\"layer\": \"A-WALL\"}`; classifier probabilities `p_wall`, `p_door`; dataset ground truth under `gt` (evaluation only).",
+     "title": "Evidence",
+     "type": "object"
+    }
+   },
+   "required": [
+    "source",
+    "stage"
+   ],
+   "title": "Prov",
+   "type": "object"
+  },
+  "Scale": {
+   "description": "Drawing-to-metres conversion. Metres exist only through this object (D6).",
+   "properties": {
+    "metres_per_unit": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Metres per sheet unit; None = unknown.",
+     "title": "Metres Per Unit"
+    },
+    "method": {
+     "default": "none",
+     "description": "How the scale was obtained. `dxf_units`, `dimension_consensus`, `user` and `scale_bar` count as verified.",
+     "enum": [
+      "dxf_units",
+      "dimension_consensus",
+      "title_block",
+      "scale_bar",
+      "user",
+      "symbol_prior",
+      "none"
+     ],
+     "title": "Method",
+     "type": "string"
+    },
+    "confidence": {
+     "default": 0.0,
+     "description": "Confidence of the scale estimate in [0, 1].",
+     "title": "Confidence",
+     "type": "number"
+    },
+    "n_candidates": {
+     "default": 0,
+     "description": "Dimension candidates considered.",
+     "title": "N Candidates",
+     "type": "integer"
+    },
+    "n_inliers": {
+     "default": 0,
+     "description": "Candidates agreeing with the chosen scale.",
+     "title": "N Inliers",
+     "type": "integer"
+    }
+   },
+   "title": "Scale",
+   "type": "object"
+  },
+  "TextItem": {
+   "description": "A text run (vector text or OCR) with its classification.",
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "text": {
+     "description": "Text as read.",
+     "title": "Text",
+     "type": "string"
+    },
+    "bbox": {
+     "description": "(x0, y0, x1, y1), sheet units.",
+     "maxItems": 4,
+     "minItems": 4,
+     "prefixItems": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "number"
+      },
+      {
+       "type": "number"
+      },
+      {
+       "type": "number"
+      }
+     ],
+     "title": "Bbox",
+     "type": "array"
+    },
+    "rotation_deg": {
+     "default": 0.0,
+     "description": "Baseline rotation, degrees counter-clockwise.",
+     "title": "Rotation Deg",
+     "type": "number"
+    },
+    "height": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Character height, sheet units.",
+     "title": "Height"
+    },
+    "layer": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Layer"
+    },
+    "kind": {
+     "default": "unknown",
+     "description": "Role assigned by the text classifier (R6).",
+     "enum": [
+      "room_label",
+      "area",
+      "dimension",
+      "tag",
+      "note",
+      "title_block",
+      "unknown"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "value": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Parsed number, in `unit`.",
+     "title": "Value"
+    },
+    "unit": {
+     "anyOf": [
+      {
+       "enum": [
+        "mm",
+        "cm",
+        "m",
+        "m2"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Unit"
+    },
+    "norm": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Normalised value: room type (`bedroom`), tag key (`D1`) or title-block field.",
+     "title": "Norm"
+    },
+    "prov": {
+     "$ref": "#/$defs/Prov"
+    }
+   },
+   "required": [
+    "id",
+    "text",
+    "bbox",
+    "prov"
+   ],
+   "title": "TextItem",
+   "type": "object"
+  }
+ },
+ "description": "`sheet_<n>.json`: what was drawn on one page or layout (the Reader's output).",
+ "properties": {
+  "schema_version": {
+   "default": "0.1",
+   "title": "Schema Version",
+   "type": "string"
+  },
+  "id": {
+   "title": "Id",
+   "type": "string"
+  },
+  "source_file": {
+   "title": "Source File",
+   "type": "string"
+  },
+  "page": {
+   "default": 0,
+   "description": "Page (PDF) or layout index, from 0.",
+   "title": "Page",
+   "type": "integer"
+  },
+  "mode": {
+   "description": "Whether geometry came from vector content, pixels, or both.",
+   "enum": [
+    "vector",
+    "raster",
+    "mixed"
+   ],
+   "title": "Mode",
+   "type": "string"
+  },
+  "coord_unit": {
+   "description": "Sheet units: paper millimetres (PDF, raster, SVG) or drawing units (DXF).",
+   "enum": [
+    "paper_mm",
+    "drawing_unit"
+   ],
+   "title": "Coord Unit",
+   "type": "string"
+  },
+  "width": {
+   "description": "Sheet width, sheet units.",
+   "title": "Width",
+   "type": "number"
+  },
+  "height": {
+   "description": "Sheet height, sheet units.",
+   "title": "Height",
+   "type": "number"
+  },
+  "rotation": {
+   "default": 0,
+   "description": "Page rotation applied at extraction, degrees.",
+   "title": "Rotation",
+   "type": "integer"
+  },
+  "sheet_type": {
+   "default": "unknown",
+   "enum": [
+    "floor_plan",
+    "schedule",
+    "structural",
+    "site",
+    "other",
+    "unknown"
+   ],
+   "title": "Sheet Type",
+   "type": "string"
+  },
+  "scale": {
+   "$ref": "#/$defs/Scale",
+   "default": {
+    "metres_per_unit": null,
+    "method": "none",
+    "confidence": 0.0,
+    "n_candidates": 0,
+    "n_inliers": 0
+   }
+  },
+  "layout": {
+   "$ref": "#/$defs/Layout",
+   "default": {
+    "frame": null,
+    "plan_box": null,
+    "title_block": null,
+    "tables": []
+   }
+  },
+  "primitives": {
+   "default": [],
+   "items": {
+    "$ref": "#/$defs/Primitive"
+   },
+   "title": "Primitives",
+   "type": "array"
+  },
+  "texts": {
+   "default": [],
+   "items": {
+    "$ref": "#/$defs/TextItem"
+   },
+   "title": "Texts",
+   "type": "array"
+  },
+  "dimensions": {
+   "default": [],
+   "items": {
+    "$ref": "#/$defs/Dimension"
+   },
+   "title": "Dimensions",
+   "type": "array"
+  },
+  "layers": {
+   "default": [],
+   "items": {
+    "type": "string"
+   },
+   "title": "Layers",
+   "type": "array"
+  },
+  "warnings": {
+   "default": [],
+   "description": "Human-readable notes from every stage (fallbacks taken, data missing).",
+   "items": {
+    "type": "string"
+   },
+   "title": "Warnings",
+   "type": "array"
+  }
+ },
+ "required": [
+  "id",
+  "source_file",
+  "mode",
+  "coord_unit",
+  "width",
+  "height"
+ ],
+ "title": "Sheet",
+ "type": "object"
+}

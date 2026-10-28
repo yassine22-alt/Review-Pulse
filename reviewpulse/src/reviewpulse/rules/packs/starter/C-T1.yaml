@@ -1,0 +1,34 @@
+id: C-T1
+title: A habitable room reaches an exit without crossing a bathroom, WC or another
+  bedroom
+family: C
+class: traversal
+applies_to:
+  room_type:
+  - bedroom
+  - living
+  - dining
+  - kitchen
+  - office
+check:
+  fn: exists_path
+  from: $room
+  to: EXIT
+  via_edges:
+  - door
+  - opening
+  avoid:
+    room_type:
+    - bathroom
+    - wc
+    - bedroom
+severity: critical
+needs:
+- room_graph
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 2
+message: '{room.label} can only reach an exit through {witness.blocking}.'
+status: approved
+approved_by: starter-pack
+version: 1

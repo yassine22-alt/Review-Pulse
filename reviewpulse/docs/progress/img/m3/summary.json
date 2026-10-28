@@ -1,0 +1,95 @@
+{
+ "png": {
+  "run": "runs\\m3\\png\\cc_high_quality_architectural_1191_8747fdd3",
+  "tier": "T3",
+  "scale": {
+   "metres_per_unit": 0.13123359580052493,
+   "method": "symbol_prior",
+   "confidence": 0.4,
+   "n_candidates": 0,
+   "n_inliers": 0
+  },
+  "elements": {
+   "wall": 132,
+   "door": 16,
+   "window": 17
+  },
+  "rooms": 12,
+  "texts": 70,
+  "warnings": [
+   "no dpi in metadata, assuming 300",
+   "scale estimated from wall thickness (18.0 px = 0.2 m): metric rules give at most WARNING"
+  ],
+  "verdicts": {
+   "PASS": 34,
+   "WARNING": 16,
+   "NOT_EVALUATED": 5,
+   "FAIL": 33
+  }
+ },
+ "pdf": {
+  "run": "runs\\m3\\pdf\\cc_high_quality_architectural_1191_scan_0f5ce388",
+  "tier": "T3",
+  "scale": {
+   "metres_per_unit": 0.06947660954145438,
+   "method": "symbol_prior",
+   "confidence": 0.4,
+   "n_candidates": 0,
+   "n_inliers": 0
+  },
+  "elements": {
+   "wall": 155,
+   "door": 18,
+   "window": 17
+  },
+  "rooms": 12,
+  "texts": 61,
+  "warnings": [
+   "scale estimated from wall thickness (34.0 px = 0.2 m): metric rules give at most WARNING"
+  ],
+  "verdicts": {
+   "PASS": 30,
+   "WARNING": 16,
+   "NOT_EVALUATED": 5,
+   "FAIL": 35
+  }
+ },
+ "synthetic_fr_scan": {
+  "run": "runs\\m3\\also\\synthetic_fr_scan_3a13b64c",
+  "tier": "T3",
+  "scale": {
+   "metres_per_unit": 0.05,
+   "method": "dimension_consensus",
+   "confidence": 0.75,
+   "n_candidates": 4,
+   "n_inliers": 3
+  },
+  "rooms": [
+   [
+    "KITCHEN",
+    9.78
+   ],
+   [
+    "Salle d'eau",
+    8.68
+   ],
+   [
+    "BUREAU",
+    10.42
+   ],
+   [
+    "LIVING ROOM",
+    15.8
+   ],
+   [
+    "WC",
+    8.88
+   ]
+  ],
+  "elements": {
+   "wall": 30,
+   "door": 5,
+   "window": 4
+  }
+ }
+}

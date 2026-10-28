@@ -1,0 +1,7460 @@
+[
+{
+"split": "train",
+"label": "UNDEFINED",
+"space_class": "Undefined",
+"n": 9132
+},
+{
+"split": "train",
+"label": "MH",
+"space_class": "Bedroom",
+"n": 6714
+},
+{
+"split": "train",
+"label": "ULKOTILA",
+"space_class": "Outdoor",
+"n": 3913
+},
+{
+"split": "train",
+"label": "OH",
+"space_class": "LivingRoom",
+"n": 3314
+},
+{
+"split": "train",
+"label": "ET",
+"space_class": "Entry Lobby",
+"n": 3157
+},
+{
+"split": "train",
+"label": "K",
+"space_class": "Kitchen",
+"n": 2650
+},
+{
+"split": "train",
+"label": "WC",
+"space_class": "Bath",
+"n": 2432
+},
+{
+"split": "train",
+"label": "VH",
+"space_class": "Closet WalkIn",
+"n": 2283
+},
+{
+"split": "train",
+"label": "TK",
+"space_class": "DraughtLobby",
+"n": 1413
+},
+{
+"split": "train",
+"label": "H",
+"space_class": "Room",
+"n": 1114
+},
+{
+"split": "train",
+"label": "VAR",
+"space_class": "Storage",
+"n": 1112
+},
+{
+"split": "train",
+"label": "PH",
+"space_class": "Bath Shower",
+"n": 1103
+},
+{
+"split": "train",
+"label": "PARVEKE",
+"space_class": "Outdoor Balcony",
+"n": 956
+},
+{
+"split": "test",
+"label": "UNDEFINED",
+"space_class": "Undefined",
+"n": 932
+},
+{
+"split": "val",
+"label": "UNDEFINED",
+"space_class": "Undefined",
+"n": 898
+},
+{
+"split": "train",
+"label": "TERASSI",
+"space_class": "Outdoor Terrace",
+"n": 837
+},
+{
+"split": "train",
+"label": "KHH",
+"space_class": "Utility Laundry",
+"n": 835
+},
+{
+"split": "train",
+"label": "KH",
+"space_class": "Bath",
+"n": 815
+},
+{
+"split": "train",
+"label": "KPH",
+"space_class": "Bath",
+"n": 739
+},
+{
+"split": "test",
+"label": "MH",
+"space_class": "Bedroom",
+"n": 636
+},
+{
+"split": "val",
+"label": "MH",
+"space_class": "Bedroom",
+"n": 634
+},
+{
+"split": "train",
+"label": "KEITTIÖ",
+"space_class": "Kitchen",
+"n": 590
+},
+{
+"split": "train",
+"label": "KUISTI",
+"space_class": "Outdoor Porch",
+"n": 430
+},
+{
+"split": "train",
+"label": "PESUH",
+"space_class": "Bath Shower",
+"n": 396
+},
+{
+"split": "train",
+"label": "KK",
+"space_class": "Kitchen Kitchenette",
+"n": 390
+},
+{
+"split": "test",
+"label": "ULKOTILA",
+"space_class": "Outdoor",
+"n": 388
+},
+{
+"split": "train",
+"label": "AULA",
+"space_class": "Entry",
+"n": 370
+},
+{
+"split": "val",
+"label": "ULKOTILA",
+"space_class": "Outdoor",
+"n": 353
+},
+{
+"split": "train",
+"label": "RUOK",
+"space_class": "Dining",
+"n": 334
+},
+{
+"split": "val",
+"label": "OH",
+"space_class": "LivingRoom",
+"n": 319
+},
+{
+"split": "test",
+"label": "OH",
+"space_class": "LivingRoom",
+"n": 316
+},
+{
+"split": "test",
+"label": "ET",
+"space_class": "Entry Lobby",
+"n": 311
+},
+{
+"split": "train",
+"label": "VARASTO",
+"space_class": "Storage",
+"n": 304
+},
+{
+"split": "val",
+"label": "ET",
+"space_class": "Entry Lobby",
+"n": 298
+},
+{
+"split": "train",
+"label": "TEKN",
+"space_class": "TechnicalRoom",
+"n": 263
+},
+{
+"split": "train",
+"label": "AH",
+"space_class": "Room",
+"n": 255
+},
+{
+"split": "val",
+"label": "K",
+"space_class": "Kitchen",
+"n": 251
+},
+{
+"split": "test",
+"label": "K",
+"space_class": "Kitchen",
+"n": 251
+},
+{
+"split": "train",
+"label": "TH",
+"space_class": "Den Fireplace",
+"n": 245
+},
+{
+"split": "train",
+"label": "RT",
+"space_class": "Dining",
+"n": 242
+},
+{
+"split": "test",
+"label": "WC",
+"space_class": "Bath",
+"n": 239
+},
+{
+"split": "train",
+"label": "AUTOKATOS",
+"space_class": "CarPort",
+"n": 225
+},
+{
+"split": "val",
+"label": "VH",
+"space_class": "Closet WalkIn",
+"n": 216
+},
+{
+"split": "train",
+"label": "AUTOTALLI",
+"space_class": "Garage",
+"n": 215
+},
+{
+"split": "val",
+"label": "WC",
+"space_class": "Bath",
+"n": 213
+},
+{
+"split": "test",
+"label": "VH",
+"space_class": "Closet WalkIn",
+"n": 196
+},
+{
+"split": "train",
+"label": "PSH",
+"space_class": "Bath Shower",
+"n": 191
+},
+{
+"split": "train",
+"label": "R",
+"space_class": "Dining",
+"n": 180
+},
+{
+"split": "train",
+"label": "PESU",
+"space_class": "Bath Shower",
+"n": 170
+},
+{
+"split": "train",
+"label": "PUKUH",
+"space_class": "DressingRoom",
+"n": 155
+},
+{
+"split": "train",
+"label": "KATOS",
+"space_class": "Outdoor CoveredArea",
+"n": 141
+},
+{
+"split": "train",
+"label": "ALKOVI",
+"space_class": "Alcove",
+"n": 138
+},
+{
+"split": "train",
+"label": "TUPA",
+"space_class": "Room",
+"n": 137
+},
+{
+"split": "train",
+"label": "SH",
+"space_class": "Bath Shower",
+"n": 136
+},
+{
+"split": "test",
+"label": "TK",
+"space_class": "DraughtLobby",
+"n": 131
+},
+{
+"split": "val",
+"label": "TK",
+"space_class": "DraughtLobby",
+"n": 123
+},
+{
+"split": "train",
+"label": "PKH",
+"space_class": "DressingRoom",
+"n": 120
+},
+{
+"split": "test",
+"label": "PH",
+"space_class": "Bath Shower",
+"n": 114
+},
+{
+"split": "test",
+"label": "PARVEKE",
+"space_class": "Outdoor Balcony",
+"n": 110
+},
+{
+"split": "train",
+"label": "TYÖH",
+"space_class": "Office",
+"n": 109
+},
+{
+"split": "val",
+"label": "PARVEKE",
+"space_class": "Outdoor Balcony",
+"n": 108
+},
+{
+"split": "test",
+"label": "VAR",
+"space_class": "Storage",
+"n": 106
+},
+{
+"split": "test",
+"label": "H",
+"space_class": "Room",
+"n": 104
+},
+{
+"split": "val",
+"label": "PH",
+"space_class": "Bath Shower",
+"n": 102
+},
+{
+"split": "train",
+"label": "AT",
+"space_class": "Garage",
+"n": 101
+},
+{
+"split": "train",
+"label": "LASITETTU PARVEKE",
+"space_class": "Outdoor Balcony Glazed",
+"n": 100
+},
+{
+"split": "val",
+"label": "VAR",
+"space_class": "Storage",
+"n": 96
+},
+{
+"split": "val",
+"label": "H",
+"space_class": "Room",
+"n": 89
+},
+{
+"split": "val",
+"label": "KPH",
+"space_class": "Bath",
+"n": 88
+},
+{
+"split": "train",
+"label": "TUPAK",
+"space_class": "Kitchen Open",
+"n": 85
+},
+{
+"split": "val",
+"label": "KHH",
+"space_class": "Utility Laundry",
+"n": 83
+},
+{
+"split": "test",
+"label": "KH",
+"space_class": "Bath",
+"n": 82
+},
+{
+"split": "test",
+"label": "KHH",
+"space_class": "Utility Laundry",
+"n": 80
+},
+{
+"split": "train",
+"label": "HALLI",
+"space_class": "Hall",
+"n": 79
+},
+{
+"split": "test",
+"label": "TERASSI",
+"space_class": "Outdoor Terrace",
+"n": 76
+},
+{
+"split": "test",
+"label": "KPH",
+"space_class": "Bath",
+"n": 76
+},
+{
+"split": "train",
+"label": "PARVI",
+"space_class": "Elevated",
+"n": 73
+},
+{
+"split": "train",
+"label": "ULLAKKO",
+"space_class": "Attic",
+"n": 72
+},
+{
+"split": "val",
+"label": "TERASSI",
+"space_class": "Outdoor Terrace",
+"n": 72
+},
+{
+"split": "train",
+"label": "KATT.H",
+"space_class": "TechnicalRoom Boiler",
+"n": 71
+},
+{
+"split": "val",
+"label": "KH",
+"space_class": "Bath",
+"n": 68
+},
+{
+"split": "train",
+"label": "KÄYTÄVÄ",
+"space_class": "Hall Corridor",
+"n": 64
+},
+{
+"split": "test",
+"label": "KEITTIÖ",
+"space_class": "Kitchen",
+"n": 60
+},
+{
+"split": "train",
+"label": "ASK",
+"space_class": "RecreationRoom",
+"n": 56
+},
+{
+"split": "train",
+"label": "APUK",
+"space_class": "Kitchen Scullery",
+"n": 55
+},
+{
+"split": "train",
+"label": "SAUNA",
+"space_class": "Sauna",
+"n": 53
+},
+{
+"split": "test",
+"label": "KUISTI",
+"space_class": "Outdoor Porch",
+"n": 53
+},
+{
+"split": "train",
+"label": "S",
+"space_class": "Sauna",
+"n": 47
+},
+{
+"split": "val",
+"label": "KK",
+"space_class": "Kitchen Kitchenette",
+"n": 47
+},
+{
+"split": "train",
+"label": "KELLARI",
+"space_class": "Basement",
+"n": 46
+},
+{
+"split": "train",
+"label": "ÖLJY",
+"space_class": "Storage Oil",
+"n": 46
+},
+{
+"split": "train",
+"label": "PIHA",
+"space_class": "Outdoor Garden",
+"n": 45
+},
+{
+"split": "train",
+"label": "PE",
+"space_class": "Bath Shower",
+"n": 41
+},
+{
+"split": "val",
+"label": "KEITTIÖ",
+"space_class": "Kitchen",
+"n": 41
+},
+{
+"split": "train",
+"label": "RUOKAILU",
+"space_class": "Dining",
+"n": 40
+},
+{
+"split": "val",
+"label": "KUISTI",
+"space_class": "Outdoor Porch",
+"n": 39
+},
+{
+"split": "train",
+"label": "TUPAKEITTIÖ",
+"space_class": "Kitchen Open",
+"n": 38
+},
+{
+"split": "test",
+"label": "PESUH",
+"space_class": "Bath Shower",
+"n": 38
+},
+{
+"split": "train",
+"label": "PH/WC",
+"space_class": "UserDefined",
+"n": 37
+},
+{
+"split": "train",
+"label": "LÄMM",
+"space_class": "UserDefined",
+"n": 36
+},
+{
+"split": "train",
+"label": "AUTOVAJA",
+"space_class": "Garage",
+"n": 35
+},
+{
+"split": "train",
+"label": "KATETTU TERASSI",
+"space_class": "Outdoor Terrace Covered",
+"n": 35
+},
+{
+"split": "train",
+"label": "Undefined",
+"space_class": "Undefined",
+"n": 35
+},
+{
+"split": "test",
+"label": "AULA",
+"space_class": "Entry",
+"n": 34
+},
+{
+"split": "train",
+"label": "OLESKELU",
+"space_class": "Room",
+"n": 33
+},
+{
+"split": "train",
+"label": "PH/KHH",
+"space_class": "UserDefined",
+"n": 33
+},
+{
+"split": "train",
+"label": "KIRJASTO",
+"space_class": "Library",
+"n": 31
+},
+{
+"split": "val",
+"label": "RUOK",
+"space_class": "Dining",
+"n": 30
+},
+{
+"split": "test",
+"label": "AH",
+"space_class": "Room",
+"n": 30
+},
+{
+"split": "test",
+"label": "VARASTO",
+"space_class": "Storage",
+"n": 30
+},
+{
+"split": "train",
+"label": "KOM",
+"space_class": "UserDefined",
+"n": 29
+},
+{
+"split": "val",
+"label": "AULA",
+"space_class": "Entry",
+"n": 29
+},
+{
+"split": "train",
+"label": "WC/PH",
+"space_class": "UserDefined",
+"n": 28
+},
+{
+"split": "val",
+"label": "PESUH",
+"space_class": "Bath Shower",
+"n": 28
+},
+{
+"split": "val",
+"label": "VARASTO",
+"space_class": "Storage",
+"n": 27
+},
+{
+"split": "train",
+"label": "LASITETTU TERASSI",
+"space_class": "Outdoor Patio Glazed",
+"n": 26
+},
+{
+"split": "train",
+"label": "TEKN.TILA",
+"space_class": "TechnicalRoom",
+"n": 25
+},
+{
+"split": "train",
+"label": "LASITETTU",
+"space_class": "UserDefined",
+"n": 25
+},
+{
+"split": "test",
+"label": "RT",
+"space_class": "Dining",
+"n": 25
+},
+{
+"split": "test",
+"label": "KK",
+"space_class": "Kitchen Kitchenette",
+"n": 25
+},
+{
+"split": "train",
+"label": "VAJA",
+"space_class": "Storage Cold",
+"n": 24
+},
+{
+"split": "train",
+"label": "PANNUH",
+"space_class": "TechnicalRoom Boiler",
+"n": 24
+},
+{
+"split": "val",
+"label": "RT",
+"space_class": "Dining",
+"n": 24
+},
+{
+"split": "test",
+"label": "RUOK",
+"space_class": "Dining",
+"n": 24
+},
+{
+"split": "train",
+"label": "KPH/WC",
+"space_class": "UserDefined",
+"n": 23
+},
+{
+"split": "test",
+"label": "TEKN",
+"space_class": "TechnicalRoom",
+"n": 23
+},
+{
+"split": "val",
+"label": "TEKN",
+"space_class": "TechnicalRoom",
+"n": 22
+},
+{
+"split": "val",
+"label": "TH",
+"space_class": "Den Fireplace",
+"n": 22
+},
+{
+"split": "val",
+"label": "PSH",
+"space_class": "Bath Shower",
+"n": 22
+},
+{
+"split": "train",
+"label": "VILPOLA",
+"space_class": "Outdoor Veranda",
+"n": 21
+},
+{
+"split": "train",
+"label": "LASIKUISTI",
+"space_class": "Outdoor Veranda Glazed",
+"n": 21
+},
+{
+"split": "test",
+"label": "AUTOTALLI",
+"space_class": "Garage",
+"n": 21
+},
+{
+"split": "train",
+"label": "WC/SH",
+"space_class": "UserDefined",
+"n": 20
+},
+{
+"split": "train",
+"label": "KH/WC",
+"space_class": "UserDefined",
+"n": 20
+},
+{
+"split": "val",
+"label": "AUTOKATOS",
+"space_class": "CarPort",
+"n": 20
+},
+{
+"split": "val",
+"label": "PUKUH",
+"space_class": "DressingRoom",
+"n": 19
+},
+{
+"split": "test",
+"label": "AUTOKATOS",
+"space_class": "CarPort",
+"n": 19
+},
+{
+"split": "test",
+"label": "PUKUH",
+"space_class": "DressingRoom",
+"n": 19
+},
+{
+"split": "train",
+"label": "KHH/PH",
+"space_class": "UserDefined",
+"n": 18
+},
+{
+"split": "val",
+"label": "TUPA",
+"space_class": "Room",
+"n": 18
+},
+{
+"split": "test",
+"label": "PSH",
+"space_class": "Bath Shower",
+"n": 18
+},
+{
+"split": "test",
+"label": "TH",
+"space_class": "Den Fireplace",
+"n": 18
+},
+{
+"split": "train",
+"label": "VERANTA",
+"space_class": "Outdoor Veranda",
+"n": 17
+},
+{
+"split": "train",
+"label": "AVOK",
+"space_class": "Kitchen Open",
+"n": 17
+},
+{
+"split": "val",
+"label": "AUTOTALLI",
+"space_class": "Garage",
+"n": 17
+},
+{
+"split": "train",
+"label": "PATIO",
+"space_class": "Outdoor Patio",
+"n": 16
+},
+{
+"split": "train",
+"label": "KHH/PKH",
+"space_class": "UserDefined",
+"n": 16
+},
+{
+"split": "test",
+"label": "R",
+"space_class": "Dining",
+"n": 16
+},
+{
+"split": "test",
+"label": "PARVI",
+"space_class": "Elevated",
+"n": 16
+},
+{
+"split": "train",
+"label": "RH",
+"space_class": "Dining",
+"n": 15
+},
+{
+"split": "val",
+"label": "PKH",
+"space_class": "DressingRoom",
+"n": 15
+},
+{
+"split": "test",
+"label": "PKH",
+"space_class": "DressingRoom",
+"n": 15
+},
+{
+"split": "train",
+"label": "AVOKUISTI",
+"space_class": "UserDefined",
+"n": 14
+},
+{
+"split": "train",
+"label": "MH/TYÖH",
+"space_class": "UserDefined",
+"n": 14
+},
+{
+"split": "train",
+"label": "PARVEKE",
+"space_class": "UserDefined",
+"n": 14
+},
+{
+"split": "val",
+"label": "R",
+"space_class": "Dining",
+"n": 14
+},
+{
+"split": "test",
+"label": "HALLI",
+"space_class": "Hall",
+"n": 14
+},
+{
+"split": "train",
+"label": "AUTOSUOJA",
+"space_class": "CarPort",
+"n": 13
+},
+{
+"split": "train",
+"label": "K/RUOK",
+"space_class": "UserDefined",
+"n": 13
+},
+{
+"split": "train",
+"label": "KOMERO",
+"space_class": "UserDefined",
+"n": 13
+},
+{
+"split": "train",
+"label": "K+RUOK",
+"space_class": "UserDefined",
+"n": 13
+},
+{
+"split": "val",
+"label": "ALKOVI",
+"space_class": "Alcove",
+"n": 13
+},
+{
+"split": "test",
+"label": "ALKOVI",
+"space_class": "Alcove",
+"n": 13
+},
+{
+"split": "train",
+"label": "KYLMIÖ",
+"space_class": "Room Cold",
+"n": 12
+},
+{
+"split": "train",
+"label": "KELL",
+"space_class": "UserDefined",
+"n": 12
+},
+{
+"split": "train",
+"label": "OH+RP",
+"space_class": "UserDefined",
+"n": 12
+},
+{
+"split": "train",
+"label": "KYL",
+"space_class": "Room Cold",
+"n": 12
+},
+{
+"split": "val",
+"label": "TYÖH",
+"space_class": "Office",
+"n": 12
+},
+{
+"split": "train",
+"label": "VAR/TEKN",
+"space_class": "UserDefined",
+"n": 11
+},
+{
+"split": "train",
+"label": "PERGOLA",
+"space_class": "Outdoor Pergola",
+"n": 11
+},
+{
+"split": "train",
+"label": "WC/PSH",
+"space_class": "UserDefined",
+"n": 11
+},
+{
+"split": "train",
+"label": "TAKKA.H",
+"space_class": "Den Fireplace",
+"n": 11
+},
+{
+"split": "train",
+"label": "KHH/PUKUH",
+"space_class": "UserDefined",
+"n": 11
+},
+{
+"split": "val",
+"label": "PARVI",
+"space_class": "Elevated",
+"n": 11
+},
+{
+"split": "test",
+"label": "SH",
+"space_class": "Bath Shower",
+"n": 11
+},
+{
+"split": "train",
+"label": "WC/KH",
+"space_class": "UserDefined",
+"n": 10
+},
+{
+"split": "train",
+"label": "WC/KHH",
+"space_class": "UserDefined",
+"n": 10
+},
+{
+"split": "train",
+"label": "TKH",
+"space_class": "UserDefined",
+"n": 10
+},
+{
+"split": "train",
+"label": "YLÄ-AULA",
+"space_class": "Entry",
+"n": 10
+},
+{
+"split": "train",
+"label": "KYLMÄ ULLAKKO",
+"space_class": "UserDefined",
+"n": 10
+},
+{
+"split": "val",
+"label": "PESU",
+"space_class": "Bath Shower",
+"n": 10
+},
+{
+"split": "val",
+"label": "ASK",
+"space_class": "RecreationRoom",
+"n": 10
+},
+{
+"split": "test",
+"label": "APUK",
+"space_class": "Kitchen Scullery",
+"n": 10
+},
+{
+"split": "test",
+"label": "PESU",
+"space_class": "Bath Shower",
+"n": 10
+},
+{
+"split": "test",
+"label": "LASITETTU PARVEKE",
+"space_class": "Outdoor Balcony Glazed",
+"n": 10
+},
+{
+"split": "train",
+"label": "KT",
+"space_class": "UserDefined",
+"n": 9
+},
+{
+"split": "train",
+"label": "KHH/WC",
+"space_class": "UserDefined",
+"n": 9
+},
+{
+"split": "train",
+"label": "KYLMÄ",
+"space_class": "Room Cold",
+"n": 9
+},
+{
+"split": "train",
+"label": "KYLM",
+"space_class": "UserDefined",
+"n": 9
+},
+{
+"split": "train",
+"label": "LJH",
+"space_class": "TechnicalRoom Boiler",
+"n": 9
+},
+{
+"split": "train",
+"label": "PUKUH/KHH",
+"space_class": "UserDefined",
+"n": 9
+},
+{
+"split": "train",
+"label": "LÄMMIN VARASTO",
+"space_class": "Storage",
+"n": 9
+},
+{
+"split": "val",
+"label": "AT",
+"space_class": "Garage",
+"n": 9
+},
+{
+"split": "val",
+"label": "KATOS",
+"space_class": "Outdoor CoveredArea",
+"n": 9
+},
+{
+"split": "test",
+"label": "KATT.H",
+"space_class": "TechnicalRoom Boiler",
+"n": 9
+},
+{
+"split": "test",
+"label": "TUPA",
+"space_class": "Room",
+"n": 9
+},
+{
+"split": "test",
+"label": "SAUNA",
+"space_class": "Sauna",
+"n": 9
+},
+{
+"split": "train",
+"label": "VINTTI",
+"space_class": "Attic",
+"n": 8
+},
+{
+"split": "train",
+"label": "K+R",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "train",
+"label": "TAL.KELL",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "train",
+"label": "AVOTERASSI",
+"space_class": "Outdoor Terrace Covered Open",
+"n": 8
+},
+{
+"split": "train",
+"label": "TSTO",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "train",
+"label": "PESUH/WC",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "train",
+"label": "TEKN/VAR",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "train",
+"label": "WC/KPH",
+"space_class": "UserDefined",
+"n": 8
+},
+{
+"split": "val",
+"label": "AH",
+"space_class": "Room",
+"n": 8
+},
+{
+"split": "val",
+"label": "APUK",
+"space_class": "Kitchen Scullery",
+"n": 8
+},
+{
+"split": "test",
+"label": "ULLAKKO",
+"space_class": "Attic",
+"n": 8
+},
+{
+"split": "test",
+"label": "TUPAK",
+"space_class": "Kitchen Open",
+"n": 8
+},
+{
+"split": "test",
+"label": "ASK",
+"space_class": "RecreationRoom",
+"n": 8
+},
+{
+"split": "train",
+"label": "YLÄAULA",
+"space_class": "Room",
+"n": 7
+},
+{
+"split": "train",
+"label": "KURAET",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "train",
+"label": "PUUVAR",
+"space_class": "Storage",
+"n": 7
+},
+{
+"split": "train",
+"label": "KUIV.H",
+"space_class": "Utility Drying",
+"n": 7
+},
+{
+"split": "train",
+"label": "SAUNATUPA",
+"space_class": "Sauna",
+"n": 7
+},
+{
+"split": "train",
+"label": "K/R",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "train",
+"label": "SK",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "train",
+"label": "K+RT",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "train",
+"label": "KOM.",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "train",
+"label": "WC/S",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "val",
+"label": "LÄMM",
+"space_class": "UserDefined",
+"n": 7
+},
+{
+"split": "test",
+"label": "AT",
+"space_class": "Garage",
+"n": 7
+},
+{
+"split": "test",
+"label": "KATOS",
+"space_class": "Outdoor CoveredArea",
+"n": 7
+},
+{
+"split": "test",
+"label": "KÄYTÄVÄ",
+"space_class": "Hall Corridor",
+"n": 7
+},
+{
+"split": "train",
+"label": "AK",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "TYÖTILA",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "APUKEITTIÖ",
+"space_class": "Kitchen Scullery",
+"n": 6
+},
+{
+"split": "train",
+"label": "OH/RP",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "VIERASH",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "TV-H",
+"space_class": "LivingRoom",
+"n": 6
+},
+{
+"split": "train",
+"label": "OH+R",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "MH/TH",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "PKH/KHH",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "MH/KIRJASTO",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "OH+RT",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "KH/KHH",
+"space_class": "Utility Laundry",
+"n": 6
+},
+{
+"split": "train",
+"label": "PUUVAJA",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "AITTA",
+"space_class": "Storage Shed",
+"n": 6
+},
+{
+"split": "train",
+"label": "VARAUS",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "train",
+"label": "INV.WC",
+"space_class": "UserDefined",
+"n": 6
+},
+{
+"split": "val",
+"label": "SH",
+"space_class": "Bath Shower",
+"n": 6
+},
+{
+"split": "val",
+"label": "KATETTU TERASSI",
+"space_class": "Outdoor Terrace Covered",
+"n": 6
+},
+{
+"split": "val",
+"label": "SAUNA",
+"space_class": "Sauna",
+"n": 6
+},
+{
+"split": "test",
+"label": "PIHA",
+"space_class": "Outdoor Garden",
+"n": 6
+},
+{
+"split": "train",
+"label": "KAMARI",
+"space_class": "Bedroom",
+"n": 5
+},
+{
+"split": "train",
+"label": "PUUT",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "LIIKEH",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "K/RT",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "TK/ET",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "KYLMÄ VAR",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "KHH/TEKN",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "TYÖH/MH",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "TERASSI",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "PESU/WC",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "OH/RT",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "OH/RUOK",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "TAUKOTILA",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "ULKOVAR",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "LH",
+"space_class": "Sauna",
+"n": 5
+},
+{
+"split": "train",
+"label": "VERSTAS",
+"space_class": "RecreationRoom",
+"n": 5
+},
+{
+"split": "train",
+"label": "KATTOTERASSI",
+"space_class": "Outdoor Terrace Roof",
+"n": 5
+},
+{
+"split": "train",
+"label": "TAKKAHUONE",
+"space_class": "Den Fireplace",
+"n": 5
+},
+{
+"split": "train",
+"label": "HISSI",
+"space_class": "Elevator",
+"n": 5
+},
+{
+"split": "val",
+"label": "KIRJASTO",
+"space_class": "Library",
+"n": 5
+},
+{
+"split": "val",
+"label": "AUTOVAJA",
+"space_class": "Garage",
+"n": 5
+},
+{
+"split": "val",
+"label": "PH/WC",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "val",
+"label": "LASITETTU PARVEKE",
+"space_class": "Outdoor Balcony Glazed",
+"n": 5
+},
+{
+"split": "val",
+"label": "TUPAK",
+"space_class": "Kitchen Open",
+"n": 5
+},
+{
+"split": "val",
+"label": "ULLAKKO",
+"space_class": "Attic",
+"n": 5
+},
+{
+"split": "test",
+"label": "WC/PH",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "test",
+"label": "TYÖH",
+"space_class": "Office",
+"n": 5
+},
+{
+"split": "test",
+"label": "KHH+PH",
+"space_class": "UserDefined",
+"n": 5
+},
+{
+"split": "train",
+"label": "KPH/KHH",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "LAITEH",
+"space_class": "TechnicalRoom",
+"n": 4
+},
+{
+"split": "train",
+"label": "NURMI",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "HALOT",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "RP",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "WC/PESU",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "(H)",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "UIMA-ALLAS",
+"space_class": "SwimmingPool",
+"n": 4
+},
+{
+"split": "train",
+"label": "ET/AULA",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "LÄM",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "PUUVARASTO",
+"space_class": "Storage Wood",
+"n": 4
+},
+{
+"split": "train",
+"label": "SÄIL",
+"space_class": "Storage",
+"n": 4
+},
+{
+"split": "train",
+"label": "TAKKAH",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "TOIMISTO",
+"space_class": "Office",
+"n": 4
+},
+{
+"split": "train",
+"label": "LIIKETILA",
+"space_class": "RetailSpace",
+"n": 4
+},
+{
+"split": "train",
+"label": "ARKIET",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "KORKEA TILA",
+"space_class": "Room HighCeiling",
+"n": 4
+},
+{
+"split": "train",
+"label": "ULK.VÄL.VAR",
+"space_class": "Storage",
+"n": 4
+},
+{
+"split": "train",
+"label": "AH/MH",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "VAR/ASK",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "SALI",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "POLTTOAINE",
+"space_class": "Storage Fuel",
+"n": 4
+},
+{
+"split": "train",
+"label": "PYÖRÄT",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "OH+RUOK",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "PSH/WC",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "WC",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "VIHERH",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "PARV",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "VAR/KYLMÄ",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "val",
+"label": "PIHA",
+"space_class": "Outdoor Garden",
+"n": 4
+},
+{
+"split": "val",
+"label": "HALLI",
+"space_class": "Hall",
+"n": 4
+},
+{
+"split": "val",
+"label": "PE",
+"space_class": "Bath Shower",
+"n": 4
+},
+{
+"split": "val",
+"label": "S",
+"space_class": "Sauna",
+"n": 4
+},
+{
+"split": "val",
+"label": "KATT.H",
+"space_class": "TechnicalRoom Boiler",
+"n": 4
+},
+{
+"split": "test",
+"label": "RUOKAILU",
+"space_class": "Dining",
+"n": 4
+},
+{
+"split": "test",
+"label": "KIRJASTO",
+"space_class": "Library",
+"n": 4
+},
+{
+"split": "test",
+"label": "KHH/PKH",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "test",
+"label": "PANNUH",
+"space_class": "TechnicalRoom Boiler",
+"n": 4
+},
+{
+"split": "test",
+"label": "TEKN.TILA",
+"space_class": "TechnicalRoom",
+"n": 4
+},
+{
+"split": "test",
+"label": "LASITETTU TERASSI",
+"space_class": "Outdoor Patio Glazed",
+"n": 4
+},
+{
+"split": "test",
+"label": "LÄMM",
+"space_class": "UserDefined",
+"n": 4
+},
+{
+"split": "train",
+"label": "PUKU",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KHH/KPH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "AVOIN ALAS",
+"space_class": "OpenToBelow",
+"n": 3
+},
+{
+"split": "train",
+"label": "LÄMMIN VAR",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "ALLAS",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KÄYTTÖULLAKKO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TH/MH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "SH/WC",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "WC+SH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KYLMÄ VARASTO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "JÄTE",
+"space_class": "Garbage",
+"n": 3
+},
+{
+"split": "train",
+"label": "TYÖHUONE",
+"space_class": "Office",
+"n": 3
+},
+{
+"split": "train",
+"label": "LEIKKIH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "PE/KHH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "NEUVOTTELU",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "LÄMMITYS",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KATETTU PARVEKE",
+"space_class": "Outdoor Balcony Covered",
+"n": 3
+},
+{
+"split": "train",
+"label": "ASK/VAR",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TEKNINEN TILA",
+"space_class": "TechnicalRoom",
+"n": 3
+},
+{
+"split": "train",
+"label": "AUTOKATOS",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "ULL.VARASTO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "VARASTO/ASK",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "VALOKATE",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "ULLAKKO VARASTO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "VH/VAR",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TALOUSKELLARI",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "LÄMMIN",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TILA",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KÄYT",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TYÖHTILA",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "MYYMÄLÄ",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "ULKOVARASTO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KATETTU KUISTI",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "KYLMÄULLAKKO",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "LÄMM.",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "VAR/VH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "HARRASTETILA",
+"space_class": "RecreationRoom",
+"n": 3
+},
+{
+"split": "val",
+"label": "TUPAKEITTIÖ",
+"space_class": "Kitchen Open",
+"n": 3
+},
+{
+"split": "val",
+"label": "WC/SH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "val",
+"label": "VAJA",
+"space_class": "Storage Cold",
+"n": 3
+},
+{
+"split": "val",
+"label": "PANNUH",
+"space_class": "TechnicalRoom Boiler",
+"n": 3
+},
+{
+"split": "val",
+"label": "KÄYTÄVÄ",
+"space_class": "Hall Corridor",
+"n": 3
+},
+{
+"split": "val",
+"label": "Undefined",
+"space_class": "Undefined",
+"n": 3
+},
+{
+"split": "val",
+"label": "KHH/PH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "test",
+"label": "AUTOVAJA",
+"space_class": "Garage",
+"n": 3
+},
+{
+"split": "test",
+"label": "WC/KHH",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "test",
+"label": "KELLARI",
+"space_class": "Basement",
+"n": 3
+},
+{
+"split": "test",
+"label": "Undefined",
+"space_class": "Undefined",
+"n": 3
+},
+{
+"split": "test",
+"label": "KATETTU TERASSI",
+"space_class": "Outdoor Terrace Covered",
+"n": 3
+},
+{
+"split": "test",
+"label": "PE",
+"space_class": "Bath Shower",
+"n": 3
+},
+{
+"split": "test",
+"label": "LEKRUM",
+"space_class": "UserDefined",
+"n": 3
+},
+{
+"split": "train",
+"label": "TK/KUISTI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KHT",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KHH+PUKUH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AUTOTALLI/VARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PKH/",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "ULLAKKOVAR",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KELLARIVARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PK",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "D",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "C",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KHH-WC",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "APUK/PKH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PESUTUPA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VARASTO/TEKN",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "LASITETTU KUISTI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "HALKOV.",
+"space_class": "Storage Wood",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "WC/",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AP",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄ VINTTI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "WC/PE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VAR",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PESU+KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PUKUHUONE",
+"space_class": "DressingRoom",
+"n": 2
+},
+{
+"split": "train",
+"label": "UVV",
+"space_class": "Storage",
+"n": 2
+},
+{
+"split": "train",
+"label": "TAKKATUPA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AULA/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "OLESKELUPARVEKE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "APK",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄ/VAR",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PH/PUKUH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "ARKISTO",
+"space_class": "Library Archive",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLPYH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄ/VARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "LASIHUONE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄ ULLAKKOTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KHH+PH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KHH/PESU",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VARASTO/TEKN.TILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AH/OH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "WC/TEKN",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KPH/KH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "OH+K",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KUNTOSALI",
+"space_class": "ExerciseRoom Gym",
+"n": 2
+},
+{
+"split": "train",
+"label": "MET",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PELLETTIVAR",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "HALKOVAJA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PUULIITERI",
+"space_class": "Storage Wood",
+"n": 2
+},
+{
+"split": "train",
+"label": "OH/R",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "ALLASHUONE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PUKUTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "WC+S",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AUTOPAIKKA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "MONITOIMITILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TYÖH/VIERASH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VARASTOHALLI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "MHTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "LAS.PARVEKE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TOMISTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄKELLARI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VIHERH.",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KAUKOLÄMP",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TEKNIIKKA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "LASI PARVEKE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KH/PKH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "SOS.TILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TERASSIPARVEKE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KEL",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "RH/K",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "OLESKELUTILA",
+"space_class": "Room",
+"n": 2
+},
+{
+"split": "train",
+"label": "SIIVOUS",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KH/KHH/WC",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMIÖ VARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TERASSI/PIHA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VAR/TEKN.TILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "HARRASTUS",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AVOKONTTORI",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TEKNTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VAR/",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "VIERASHUONE",
+"space_class": "Bedroom Guest",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄ VARASTOTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PRH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KPH/",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "RUOK/K",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KYLMÄVINTTITILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "WC/PSH/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PESUH/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "SIVUKAINEN",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "ULKOTILA",
+"space_class": "Undefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "LAIPIO/VARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "AT/VARASTO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "ASK.H",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "PYYKKI-H",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "KÄYTTÖ-ULLAKKO",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "MAJOITUSH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "KHH/WC",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "KELL",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "TEKN.TILA",
+"space_class": "TechnicalRoom",
+"n": 2
+},
+{
+"split": "val",
+"label": "KURAET",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "P",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "MH/TYÖH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "RUOKAILU",
+"space_class": "Dining",
+"n": 2
+},
+{
+"split": "val",
+"label": "PATIO",
+"space_class": "Outdoor Patio",
+"n": 2
+},
+{
+"split": "val",
+"label": "KELLARI",
+"space_class": "Basement",
+"n": 2
+},
+{
+"split": "val",
+"label": "KOM",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "K/R",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "VILPOLA",
+"space_class": "Outdoor Veranda",
+"n": 2
+},
+{
+"split": "val",
+"label": "PUKUH/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "PUUVAR",
+"space_class": "Storage",
+"n": 2
+},
+{
+"split": "val",
+"label": "K+R",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "OH+RP",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "val",
+"label": "LJH",
+"space_class": "TechnicalRoom Boiler",
+"n": 2
+},
+{
+"split": "test",
+"label": "TYÖTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "KÄYT",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "POLTTOAINE",
+"space_class": "Storage Fuel",
+"n": 2
+},
+{
+"split": "test",
+"label": "TH/MH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "RH",
+"space_class": "Dining",
+"n": 2
+},
+{
+"split": "test",
+"label": "AVOK",
+"space_class": "Kitchen Open",
+"n": 2
+},
+{
+"split": "test",
+"label": "LASIT. PARVEKE",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "K+R",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "KHH/PUKUH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "ULLAKKOVAR",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "OLESKELU",
+"space_class": "Room",
+"n": 2
+},
+{
+"split": "test",
+"label": "KOM",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "KPH/WC",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "VILPOLA",
+"space_class": "Outdoor Veranda",
+"n": 2
+},
+{
+"split": "test",
+"label": "K+RUOK",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "PH/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "UIMA-ALLAS",
+"space_class": "SwimmingPool",
+"n": 2
+},
+{
+"split": "test",
+"label": "VAR/TEKN",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "S",
+"space_class": "Sauna",
+"n": 2
+},
+{
+"split": "test",
+"label": "VILORUM",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "PERSONALRUM",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "KYLMIÖ",
+"space_class": "Room Cold",
+"n": 2
+},
+{
+"split": "test",
+"label": "PUKUH/KHH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "K/RT",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "ÖLJY",
+"space_class": "Storage Oil",
+"n": 2
+},
+{
+"split": "test",
+"label": "MTILA",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "KUIV.H",
+"space_class": "Utility Drying",
+"n": 2
+},
+{
+"split": "test",
+"label": "OH+RT+K",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "TH/H",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "TV-H/OH",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "test",
+"label": "PH/WC",
+"space_class": "UserDefined",
+"n": 2
+},
+{
+"split": "train",
+"label": "TUPAKEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/WC/SH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RAKENTAMATONTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH+K+RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "K+APUK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAJA KYLMÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TH/OLESKELU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APK/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ARKIH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MAKUUPARVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TH/ASK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ENTRANCE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/PUKU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ/H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AUTOVAJA/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO/TYÖHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH/KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PP-KATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "M-SOPPI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KELARI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HUOLTO-MONTTU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUU-VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMPÖKESUKUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MAA-LÄMPÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PORRAS-AULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUUT YM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKOILUYÄL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASI-KUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/WC/PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RU",
+"space_class": "Dining",
+"n": 1
+},
+{
+"split": "train",
+"label": "TPK",
+"space_class": "Kitchen Open",
+"n": 1
+},
+{
+"split": "train",
+"label": "LAATOITUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TP",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄM.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOK/H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖTUPA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/PYYKKI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAKA OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RAKENTAMATON",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKO-",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH+KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/SH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KK+R",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TILA 5, 6, 7, 8",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "40M2",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APUK/PUKU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KYLMA KUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PKH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH+WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "H+KT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMM. VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMM. VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET( KYLMÄ )",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MUSIIKKISTUDIO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PIRTTI",
+"space_class": "Room",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH/KHT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/AK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAL.KEL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIIV.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HALLITILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC_N",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC_M",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MONITOIMIH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKN/MAAL.P",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/LVK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "(WC)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ÖLJYS.TILA",
+"space_class": "Storage Oil",
+"n": 1
+},
+{
+"split": "train",
+"label": "L",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/KUNTOILUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH YLÄOSA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUVAN YLÄOSA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RIIKKA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HANNA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "M- SOPPI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/PESUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOKAKELLARI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OLESKELU KATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/OMP",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/PESUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/APUK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKN/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MAALÄMPÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AUTOHALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "GYM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VENEVAJA/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TERASSI / LASITUSVARAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TANK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HALL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH+KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "JOHTAJA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIHTEERI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/OLESKELU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARVEKE / TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH+KK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PIHA ALUETTA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PALOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJASTO/H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/VH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLTTOPUUT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LIITERI",
+"space_class": "Storage Cold",
+"n": 1
+},
+{
+"split": "train",
+"label": "OLESKELU/TAKKAH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC+KPH+KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TH/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AJOLUISKA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKO ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AVOIN YLOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMM.JAKO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "P",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMMIN KUISTI",
+"space_class": "Outdoor Veranda",
+"n": 1
+},
+{
+"split": "train",
+"label": "KAUKOL.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKU/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SAUNAKAMARI/KIRJASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/VIERASHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESU/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LJK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LMJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VESIV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OLJY",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HARRASTEH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TV-AULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SÄILIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PERCOLA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULLAKKO/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH/KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KYLMI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MUSIIKKIH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ASK/HARR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KÄY",
+"space_class": "Hall Corridor",
+"n": 1
+},
+{
+"split": "train",
+"label": "AVOPARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KESÄKEITTIÖ",
+"space_class": "Outdoor Kitchen",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLT.TPUUT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUPA/KESÄKEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKU/PESU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ASK. H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASIT. PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VALOKATETTUPERGOLA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RT/TKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/TAKKAH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TALOVARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/KUIVAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARVI/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAATETILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YLÄOSA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APUK - PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOK\\OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH\\PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TERASSI/PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KODINHOITOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PEKNINENTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH+WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/ KIRJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH/ KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AUTOKATOS",
+"space_class": "Garage",
+"n": 1
+},
+{
+"split": "train",
+"label": "K+KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR(KYLMÄ)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VANHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMMÖN.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KPK/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VILV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULK V",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KES",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/TVH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PE/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTOHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "A 2",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "A 1",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TERASSI",
+"space_class": "Outdoor Balcony",
+"n": 1
+},
+{
+"split": "train",
+"label": "TALOUS KELLARI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PH/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SAUNAPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ/RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC+PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUIV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUPA/KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC-KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKOILUV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAL.VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VIERASMAJA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "K\\RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUISTI/TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ASK.TILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VALOKATE/VILVOITTELU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ATELJEE",
+"space_class": "RecreationRoom",
+"n": 1
+},
+{
+"split": "train",
+"label": "SUIHKUTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH-TILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VIINIK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LAAJENNUSVARA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YLÄPOHJA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESU/PSH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALLASH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH-RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OLOHUONE",
+"space_class": "LivingRoom",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO/TKN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC / KPH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKN/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KAMPAAMO-TILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAL.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKN-",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKNVAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/TK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LUHTIKÄYTÄVÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AT/ASK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTOHALLI L",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTOHALLI R",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH/PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLTTOAINE/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAL-KELL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KY",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ+RT+OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARVI-KÄYTÄVÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KOKOUSH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AT/TYÖTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUK.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULLAKKOVARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VIERASH/KIRJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUUKATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MONIK H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PIHATERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LEPOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKELTTUM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PSH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOK+OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MÄRKÄET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESU/KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APUK/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/PSH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ-RUOKAILU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AVOKUSTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/KHT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/KPH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTOTYÖTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TV.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "R/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PORR.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH/HARR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ÖS",
+"space_class": "Storage Oil",
+"n": 1
+},
+{
+"split": "train",
+"label": "AUTOTALLI/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MONIK.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HOLVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KASSA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KASSAHOLVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APUTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YHTEISTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LAS.P.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH/ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/TAKKAH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KELL.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET.HALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAATEH/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMPÖK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH-KPH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SAUNA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HUVILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTOKATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "IRT.VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "JAETTAVA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR/TEKNTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TERASSI/PUURITILÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKOILUVÄL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RH/OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/PH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TALON KERHOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOK/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJ.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KAUPPA",
+"space_class": "RetailSpace",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKOKATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KAHVILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AVOPARVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "V/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "IRTAINVAR.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖVH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PYYKINPESU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "B19",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YLÄOSÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KOMPR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KVSS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VALMISTUS-KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH/TESTAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RUOKALA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYOKALUTEHDASHALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VASTAANOTTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ARKIS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ATKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "JOHTAJANH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET/PERHEH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMM KUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VIERASH/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SH+WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASIKUISTI/TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMPÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC+KPH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TV-H/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH JA RUOKAILU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "(MH)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "(MH/TH)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/PY",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET+KÄYTÄVÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUP",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/INVA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KOULUTUSTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/N",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/M",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SERVERI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/ALKOVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIIV-",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUNTOILUTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖ-JA VARASTOTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KÄYTTÄMÄTÖN ALUSTA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASI-PARV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/VERSTAT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC-PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖ- JA VIERASH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KYLMÄ VAR.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALAHALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUUTASO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO(ASK)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SÄHKÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SOS.TILAT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMMÖNJAKOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIIVOUS/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ/RUOKAILU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUOTANTOHALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESUH/SAUNA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TILAT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC-",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIOKOMERO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR.TEKN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJASTO/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MTH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TORNI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR (LÄMMIN)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATTILAH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TKN/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TSTO-H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIS.TULO KUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARATIE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VILV.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÄMPÖKESKUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "K/OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KEITTIÖ/OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAKKAVARAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TYÖH/KIRJASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TH/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC-PE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET-AULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AH",
+"space_class": "Bedroom",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKO-OLESKELU/KATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO/VAATEH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESUH WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKOTERASSI",
+"space_class": "Outdoor Terrace",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLTTOAINEV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SPK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HARRASTUSTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ASK/TEKN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKEUTUMISH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KH\\WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULKO.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PKT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALA-AULA",
+"space_class": "Entry",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC/SU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TUPAK+H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC\\KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "APUT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLTTOAINE VARAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATTILAH VARAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/PUKEUTU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR/TEK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC.TILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TALKEL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET/KÄYT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/ASK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJ/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KHH/VH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ASK- JA KERHOHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PYÖRÄKATOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUK/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KURA-ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VH-HUOLTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "INVA-WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATETTU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TVHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MAK. ALK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MYYMÄLÄ+VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HISSI AULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "576 M2",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC-PESU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LIIKETILA/TOIMISTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MG",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VAR/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH+RU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KIRJASTO/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "OH",
+"space_class": "Den Fireplace",
+"n": 1
+},
+{
+"split": "train",
+"label": "RKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALATERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YLÄTERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ETUTERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AVOK/RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "BAARI",
+"space_class": "Bar",
+"n": 1
+},
+{
+"split": "train",
+"label": "ET/KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PESU/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LUOKKAH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ÖLJYS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASI.PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KPH/WC/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "VARASTO/VH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATETTU OSUUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ARKIOLOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PANNUH/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASI TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ULLAKKOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "WC - PE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "164M2",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIIVOUSH.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "IV-KONEHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH",
+"space_class": "Storage",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASIT.PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUIV.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "HOBBYHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "IFP.SAUNA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "(ASK/MH)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KELLARIKERROS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SAUNARAKENNUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LASIKETUKUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KATTOIKKUNA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUKUH,KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LÖYLYH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "NURMI- PIHAA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUUPATIO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PIHA/TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MATALA VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH",
+"space_class": "Room",
+"n": 1
+},
+{
+"split": "train",
+"label": "MEIKKIH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KOTITEATTERI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SISÄVAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ALAPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "YLÄPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH/RH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ÖLJY-POLTIN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TAKAOSA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MYYMÄLÄTILA",
+"space_class": "RetailSpace",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARVEKE LASITUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PATIO/TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "BAARIOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "ETEISAULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "POLTTOAIH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUIVAUSH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SIIV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "SISÄPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKNTILA- VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TALOUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PKH/TYÖTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "LAS. PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AIDATTUA PUUTARHAA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TEKN+VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PARV.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "RT/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "AULA/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "MH\\KIRJASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "PUUSEPÄN VERSTAS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TOIMISTOH.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "TERASSIPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "train",
+"label": "KUIVAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VIERASHUONE",
+"space_class": "Bedroom Guest",
+"n": 1
+},
+{
+"split": "val",
+"label": "RP",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LASITETTU KUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ET + TK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PH+WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PESU/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TV-H",
+"space_class": "LivingRoom",
+"n": 1
+},
+{
+"split": "val",
+"label": "LJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KUIV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KÄYTTÖULLAKKO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "WC/SUIHKU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "(KK)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "RUOK+KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LAITEH",
+"space_class": "TechnicalRoom",
+"n": 1
+},
+{
+"split": "val",
+"label": "SAUNAKAMMARI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖKALUVAR/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KEITTIÖ, R",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KH\\WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TAKKA.H",
+"space_class": "Den Fireplace",
+"n": 1
+},
+{
+"split": "val",
+"label": "KYLM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "WC/S",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KHH/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TAL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VILVOIT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "WC/KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "IRT.VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "MÄKIVAARANTIE 31 TALO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KATETTU PIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ETU-PIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ULKO-VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "APK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "AP",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "YLÄHALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖH/KIRJ/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KÄYT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VAR/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KUIV.H",
+"space_class": "Utility Drying",
+"n": 1
+},
+{
+"split": "val",
+"label": "RUO-KOM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "UNDEFINED",
+"space_class": "Den Fireplace",
+"n": 1
+},
+{
+"split": "val",
+"label": "ULKVARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "HARRASTETILA",
+"space_class": "RecreationRoom",
+"n": 1
+},
+{
+"split": "val",
+"label": "OH/RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ALA-AULA",
+"space_class": "Entry",
+"n": 1
+},
+{
+"split": "val",
+"label": "LASITETTU TERASSI",
+"space_class": "Outdoor Patio Glazed",
+"n": 1
+},
+{
+"split": "val",
+"label": "OLESKELUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "APUK/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "MH/VH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "MH/OH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KYLMIÖ",
+"space_class": "Room Cold",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖH/VIERASH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PE/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LAS.PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VERANTA",
+"space_class": "Outdoor Veranda",
+"n": 1
+},
+{
+"split": "val",
+"label": "MH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PIHATERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KHH/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PESUH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "AUTOSUOJA",
+"space_class": "CarPort",
+"n": 1
+},
+{
+"split": "val",
+"label": "MTH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "OH/RT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ARKIOH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PESU/PUKUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LÄMMIN VARASTO",
+"space_class": "Storage",
+"n": 1
+},
+{
+"split": "val",
+"label": "PUKUH+PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KORKEA TILA",
+"space_class": "Room HighCeiling",
+"n": 1
+},
+{
+"split": "val",
+"label": "HALKOV.",
+"space_class": "Storage Wood",
+"n": 1
+},
+{
+"split": "val",
+"label": "AVOKUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "MYYMÄLÄTILA",
+"space_class": "RetailSpace",
+"n": 1
+},
+{
+"split": "val",
+"label": "TPK",
+"space_class": "Kitchen Open",
+"n": 1
+},
+{
+"split": "val",
+"label": "VINO SISÄKATTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LEIKKI YMS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "K+RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "WC/PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "JÄÄHD",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PUKEUTUMISH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TAKKAHUONE-ASKARTELUTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KONEH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KASVIHUONE - VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "OH-KEITTIÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VALOKATEIN TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TERASSI/PATIO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ALA ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KYLMÄ",
+"space_class": "Room Cold",
+"n": 1
+},
+{
+"split": "val",
+"label": "PUU VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "POLTTOAINE VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VH/ALKOVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "UIMA-ALLAS",
+"space_class": "SwimmingPool",
+"n": 1
+},
+{
+"split": "val",
+"label": "VAR/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖH/KIRJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LÄMMIN AUTOTALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "K/RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KONE. H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ET.HALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "MAKUUSYV.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "KH/KHH",
+"space_class": "Utility Laundry",
+"n": 1
+},
+{
+"split": "val",
+"label": "URHEILUVÄLINEET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "POLTTOAINE",
+"space_class": "Storage Fuel",
+"n": 1
+},
+{
+"split": "val",
+"label": "PH\\KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "ET/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "K/RT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "OH+KK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "(LH)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "OH/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "OLESKELU",
+"space_class": "Room",
+"n": 1
+},
+{
+"split": "val",
+"label": "KAUKO-",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LAMPÖ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TEKN/",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "AVOKEITTIÖ",
+"space_class": "Kitchen Open",
+"n": 1
+},
+{
+"split": "val",
+"label": "TYÖHUONE",
+"space_class": "Office",
+"n": 1
+},
+{
+"split": "val",
+"label": "LÄMPÖKESKUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "LASITETTU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "PYÖRÄ",
+"space_class": "Storage Bike",
+"n": 1
+},
+{
+"split": "val",
+"label": "KELLARI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "VARASTO(KHH KÄYTÖSSÄ)",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "TEKN/VARASTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "val",
+"label": "AVOK",
+"space_class": "Kitchen Open",
+"n": 1
+},
+{
+"split": "val",
+"label": "YLÄAULA",
+"space_class": "Room",
+"n": 1
+},
+{
+"split": "val",
+"label": "OLESK",
+"space_class": "Room",
+"n": 1
+},
+{
+"split": "val",
+"label": "KPH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "OLESKELU+RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TH/KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ET/KÄYTÄVÄ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "WC/S",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KATOSPUUT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ASK/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "APUKEITTIÖ",
+"space_class": "Kitchen Scullery",
+"n": 1
+},
+{
+"split": "test",
+"label": "OLESJELU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "K+RUOKAILU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SAUNA/PESUH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VERSTAS/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LJH",
+"space_class": "TechnicalRoom Boiler",
+"n": 1
+},
+{
+"split": "test",
+"label": "ULK.VÄL.VAR",
+"space_class": "Storage",
+"n": 1
+},
+{
+"split": "test",
+"label": "MONITOIMH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TEKNINENTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "AVOTERASSI",
+"space_class": "Outdoor Terrace Covered Open",
+"n": 1
+},
+{
+"split": "test",
+"label": "LASI. TERASSI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "OH+RUOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KHH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SKAFFERI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KH+PE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "WC+SH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PATIO",
+"space_class": "Outdoor Patio",
+"n": 1
+},
+{
+"split": "test",
+"label": "AVOKUISTI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "AUTOSUOJA",
+"space_class": "CarPort",
+"n": 1
+},
+{
+"split": "test",
+"label": "ALVKOVI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KIRJASTO/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KHH\\PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PKH+KHH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "MH/TYÖH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "MUUTOS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TSTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SPK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PH/PKH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ASK.TILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LJ",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PORRASAULA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "AUTO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TUPAKEITTIÖ",
+"space_class": "Kitchen Open",
+"n": 1
+},
+{
+"split": "test",
+"label": "KEITTOK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "WC/N",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "WC/M",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LÄMM.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LASITETTUHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PUKUHUONE",
+"space_class": "DressingRoom",
+"n": 1
+},
+{
+"split": "test",
+"label": "MH/TH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PKH+AK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LEPOHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SIS.TULO",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ASUNTOPIHA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "BARN-WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PERS.WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VILV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "MAHD.AUTOTALLI",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VAR/HARRASTET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VAR/PYÖRÄT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KHH/TEKN",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VH/VAR",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VH/PU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "H+KK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TAKKAVARAUS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VH/ET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "MH+ OLESKELU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PH/KH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PYÖRÄTYM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "MONIK.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PUUTARHAV",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "AITTA",
+"space_class": "Storage Shed",
+"n": 1
+},
+{
+"split": "test",
+"label": "TYÖHUONE",
+"space_class": "Office",
+"n": 1
+},
+{
+"split": "test",
+"label": "PUKUH/APUK",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TV-H",
+"space_class": "LivingRoom",
+"n": 1
+},
+{
+"split": "test",
+"label": "ET/AULU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LUKUTILA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TORNIHUONE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VAJA",
+"space_class": "Storage Cold",
+"n": 1
+},
+{
+"split": "test",
+"label": "KHH/PH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KELL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KEITTIÖ+RT",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "RT+K",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ET/PORRAS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "R+K",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TARJ.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PALV.H",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KOM.",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LASITETTU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "AULA/MH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "ULKOET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "SÄILYTYSTILAA",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PSH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "KYLM",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TERASSI/PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "LASI.PARVEKE",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "RUOKAILUTILA",
+"space_class": "Dining",
+"n": 1
+},
+{
+"split": "test",
+"label": "ÖLJYS",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "VAR/KELL",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "OH",
+"space_class": "Den Fireplace",
+"n": 1
+},
+{
+"split": "test",
+"label": "KHH/PSH",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "TAKKA.H",
+"space_class": "Den Fireplace",
+"n": 1
+},
+{
+"split": "test",
+"label": "KURAET",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "PESUH/WC",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "WC/PESU",
+"space_class": "UserDefined",
+"n": 1
+},
+{
+"split": "test",
+"label": "OH/K",
+"space_class": "UserDefined",
+"n": 1
+}
+]

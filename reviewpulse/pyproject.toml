@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reviewpulse"
+version = "0.1.0"
+description = "Automated error detection on architectural plans against requirement documents"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "pymupdf>=1.24", "ezdxf>=1.3", "shapely>=2.0", "numpy", "scipy", "networkx",
+  "pydantic>=2", "typer", "rich", "opencv-python-headless", "pillow",
+  "scikit-image", "pyyaml", "lxml",
+  "lightgbm",                       # learned pass on CAD drawings (used when a trained model is present)
+  "python-docx", "openpyxl",        # briefs and requirement documents in Word / Excel
+]
+
+[project.optional-dependencies]
+dev  = ["pytest", "pytest-cov", "ruff", "hypothesis"]
+draw = ["ezdxf[draw]"]      # matplotlib, used to render synthetic fixtures
+ocr  = ["paddleocr"]        # paddlepaddle is installed separately, see README
+llm  = ["anthropic"]   # optional hosted backend for I4; the default backend (Ollama) needs no package
+# R13 raster path: learned wall/door/window segmentation (torch: install the CUDA build from
+# download.pytorch.org for GPU) and OCR (paddlepaddle==3.2.0 separately, see README).
+# GPU OCR (about 9x faster per page): paddlepaddle-gpu==3.2.0 from
+# https://www.paddlepaddle.org.cn/packages/stable/cu126/, then pin nvidia-cudnn-cu12 to the cuDNN that
+# torch bundles (torch 2.14+cu126: 9.10.2.21). Both libraries load cudnn*64_9.dll by name in one
+# process, so mismatched versions fail with "cudnn_cnn64_9.dll: procedure could not be found".
+# product service and web UI (rp serve)
+app = ["fastapi", "uvicorn[standard]", "python-multipart", "jinja2", "httpx", "python-docx", "openpyxl"]
+raster = ["torch", "torchvision", "segmentation-models-pytorch", "paddleocr", "easyocr"]
+data = ["huggingface_hub", "gdown"]          # scripts/fetch_datasets.py (public datasets for training and evaluation)
+figures = ["matplotlib", "playwright"]       # progress-report figures and app screenshots
+
+[project.scripts]
+rp = "reviewpulse.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+reviewpulse = ["rules/*.yaml", "rules/packs/**/*.yaml", "app/static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: long-running tests (dataset evaluations, large sheets)"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501", "B905"]  # zip(pts, pts[1:]) is intentionally unequal-length
+
+[tool.ruff.lint.per-file-ignores]
+"src/reviewpulse/cli.py" = ["B008"]   # typer declares options as argument defaults
+"src/reviewpulse/app/api.py" = ["B008"]   # FastAPI declares uploads as argument defaults

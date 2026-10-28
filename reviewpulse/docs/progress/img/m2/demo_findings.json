@@ -1,0 +1,72 @@
+{
+ "summary": {
+  "PASS": 74,
+  "FAIL": 6,
+  "WARNING": 1
+ },
+ "planted": [
+  "topo_exit_via_bath",
+  "metric_door_narrow",
+  "cons_written_vs_drawn",
+  "coord_swing_overlap",
+  "cons_schedule_width"
+ ],
+ "issues": [
+  {
+   "rule": "C-D1",
+   "verdict": "FAIL",
+   "message": "Door P5 is 0.70 m (drawn 0.70 m, schedule 0.70 m) wide; >= 0.80 m is required.",
+   "detected": "0.70 m (drawn 0.70 m, schedule 0.70 m)",
+   "required": ">= 0.80 m",
+   "tier": "T1"
+  },
+  {
+   "rule": "C-T1",
+   "verdict": "FAIL",
+   "message": "CHAMBRE 3 can only reach an exit through SDB.",
+   "detected": "only via SDB",
+   "required": "path to EXIT avoiding ['bathroom', 'wc', 'bedroom']",
+   "tier": "T1"
+  },
+  {
+   "rule": "C-T5",
+   "verdict": "FAIL",
+   "message": "From CHAMBRE 3 the travel distance to an exit is 18.53 m; <= 15.00 m is allowed.",
+   "detected": "18.53 m",
+   "required": "<= 15.00 m",
+   "tier": "T1"
+  },
+  {
+   "rule": "K-A1",
+   "verdict": "FAIL",
+   "message": "Dimension chain does not add up: 4.57 + 3.35 + 4.02 = 11.94 m against = 12.24 m (overall) (+0.30 m).",
+   "detected": "4.57 + 3.35 + 4.02 = 11.94 m",
+   "required": "= 12.24 m (overall)",
+   "tier": "T1"
+  },
+  {
+   "rule": "K-A2",
+   "verdict": "FAIL",
+   "message": "Dimension text does not match the drawing: written 3.35 m, drawn 3.65 m (-0.30 m).",
+   "detected": "written 3.35 m, drawn 3.65 m",
+   "required": "difference <= 0.036 m",
+   "tier": "T1"
+  },
+  {
+   "rule": "K-X1",
+   "verdict": "FAIL",
+   "message": "P6: plan 0.85 m, schedule 0.95 m.",
+   "detected": "plan 0.85 m, schedule 0.95 m",
+   "required": "equal within 0.009 m",
+   "tier": "T1"
+  },
+  {
+   "rule": "Q-1",
+   "verdict": "WARNING",
+   "message": "Door swings collide: P7/P4, overlap 0.20 m\u00b2.",
+   "detected": "overlap 0.20 m\u00b2",
+   "required": "no overlap",
+   "tier": "T1"
+  }
+ ]
+}

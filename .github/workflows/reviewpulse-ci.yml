@@ -1,0 +1,21 @@
+# Runs on every push and pull request: lint, the fast tests, then the self-check (rp doctor), which
+# checks a generated plan with planted errors through the pipeline and through the web app.
+# The ReviewPulse code lives in reviewpulse/, so every step runs there.
+name: ci
+on: [pull_request, push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reviewpulse
+    env:
+      REVIEWPULSE_LABEL_LLM: "0"      # no language model on the CI machine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -e ".[app,dev]"
+      - run: ruff check src tests
+      - run: pytest -q -m "not slow"
+      - run: python -m reviewpulse.selfcheck

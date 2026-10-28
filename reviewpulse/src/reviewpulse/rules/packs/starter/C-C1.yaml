@@ -1,0 +1,20 @@
+id: C-C1
+title: The dwelling has at least one exit door
+family: C
+class: count
+applies_to: {}
+check:
+  fn: count_exits
+  op: '>='
+  value: 1
+  unit: count
+severity: critical
+needs:
+- room_graph
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 1
+message: The plan shows {detected} exit door(s); {required} required.
+status: approved
+approved_by: starter-pack
+version: 1

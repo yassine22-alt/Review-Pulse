@@ -1,0 +1,20 @@
+id: P-6
+title: Every enclosed room has a door or opening
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: isolated_rooms
+  via_edges:
+  - door
+  - opening
+severity: major
+needs:
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 2.1
+message: '{room.label} has {detected}; {required} required.'
+status: approved
+approved_by: starter-pack
+version: 1

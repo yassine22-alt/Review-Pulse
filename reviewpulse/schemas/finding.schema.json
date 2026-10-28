@@ -1,0 +1,98 @@
+{
+ "description": "One rule result (the Judge's output, `findings.json`).",
+ "properties": {
+  "rule_id": {
+   "title": "Rule Id",
+   "type": "string"
+  },
+  "verdict": {
+   "enum": [
+    "PASS",
+    "WARNING",
+    "FAIL",
+    "NOT_EVALUATED"
+   ],
+   "title": "Verdict",
+   "type": "string"
+  },
+  "severity": {
+   "enum": [
+    "critical",
+    "major",
+    "minor",
+    "info"
+   ],
+   "title": "Severity",
+   "type": "string"
+  },
+  "subject_ids": {
+   "description": "Rooms or elements the finding is about.",
+   "items": {
+    "type": "string"
+   },
+   "title": "Subject Ids",
+   "type": "array"
+  },
+  "message": {
+   "title": "Message",
+   "type": "string"
+  },
+  "detected": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "What was measured, e.g. `0.70 m`.",
+   "title": "Detected"
+  },
+  "required": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "What the rule requires, e.g. `>= 0.80 m`.",
+   "title": "Required"
+  },
+  "tier": {
+   "enum": [
+    "T1",
+    "T2",
+    "T3"
+   ],
+   "title": "Tier",
+   "type": "string"
+  },
+  "evidence": {
+   "additionalProperties": true,
+   "description": "Witness path, dimension chain, polygons to draw.",
+   "title": "Evidence",
+   "type": "object"
+  },
+  "source": {
+   "additionalProperties": true,
+   "description": "Requirement source: `{doc, clause, span}`.",
+   "title": "Source",
+   "type": "object"
+  }
+ },
+ "required": [
+  "rule_id",
+  "verdict",
+  "severity",
+  "subject_ids",
+  "message",
+  "tier"
+ ],
+ "title": "Finding",
+ "type": "object"
+}

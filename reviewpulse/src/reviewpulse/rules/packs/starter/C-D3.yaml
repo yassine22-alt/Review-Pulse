@@ -1,0 +1,71 @@
+id: C-D3
+title: Bedroom floor area
+family: C
+class: threshold
+applies_to:
+  room_type:
+  - bedroom
+check:
+  fn: area_m2
+  op: '>='
+  value: 9.0
+  unit: m2
+severity: major
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.3
+message: '{room.label} measures {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1
+---
+id: C-D3W
+title: Bedroom minimum width
+family: C
+class: threshold
+applies_to:
+  room_type:
+  - bedroom
+check:
+  fn: min_width_m
+  op: '>='
+  value: 2.2
+  unit: m
+severity: major
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.3
+message: '{room.label} narrows to {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1
+---
+id: C-D3L
+title: Living room floor area
+family: C
+class: threshold
+applies_to:
+  room_type:
+  - living
+check:
+  fn: area_m2
+  op: '>='
+  value: 14.0
+  unit: m2
+severity: minor
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.4
+message: '{room.label} measures {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1

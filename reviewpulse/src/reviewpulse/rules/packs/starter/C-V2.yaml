@@ -1,0 +1,25 @@
+id: C-V2
+title: Bedroom escape window
+family: C
+class: derived
+applies_to:
+  room_type:
+  - bedroom
+check:
+  fn: escape_window
+severity: critical
+needs:
+- scale
+- rooms
+- windows
+- schedule
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 7.2
+message: '{room.label}: largest window {detected}; {required} is required to escape.'
+params:
+  min_width_m: 0.6
+  min_height_m: 1.0
+status: approved
+approved_by: starter-pack
+version: 1

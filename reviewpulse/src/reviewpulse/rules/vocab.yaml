@@ -1,0 +1,18 @@
+# Controlled vocabulary (I1). The validator refuses anything outside these lists.
+room_types: [bedroom, bathroom, wc, kitchen, living, dining, corridor, entry, garage, storage, stairs, terrace, office, other]
+element_classes: [wall, door, window, opening, stair, column, fixture, other]
+properties: [area_m2, min_width_m, width_m, height_m, count, sill_height_m, ratio, length_m]
+units: [m, cm, mm, m2, ratio, count]
+edge_kinds: [door, opening, window, adjacent]
+severities: [critical, major, minor, info]
+families: {C: compliance, K: consistency, P: completeness, Q: coordination}
+classes: [threshold, derived, count, traversal, cross_reference, arithmetic, presence]
+operators: [">=", ">", "<=", "<", "==", "!="]
+needs: [scale, room_graph, schedule, dimensions, windows, layout, doors, rooms, labels, swing_polygons, programme]
+# plausible ranges used to flag drafted values (I4)
+plausible:
+  door.width_m: [0.6, 1.5]
+  corridor.min_width_m: [0.8, 3.0]
+  stair.riser_m: [0.10, 0.22]
+  room.area_m2: [3, 200]
+  room.min_width_m: [1.5, 6.0]
