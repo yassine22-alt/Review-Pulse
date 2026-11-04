@@ -19,10 +19,12 @@ from rich.console import Console
 from rich.table import Table
 
 from .ingest.classify import IngestError
+from .interpreter.cli import app as interpreter_app
 
 app = typer.Typer(add_completion=False, help="ReviewPulse: automated error detection on architectural plans.")
 rules_app = typer.Typer(help="Rule packs: validate, test, review.")
 app.add_typer(rules_app, name="rules")
+app.add_typer(interpreter_app, name="interpret")
 # drawings carry any script (OCR'd labels, Arabic, CJK): a console or pipe with a narrow code page
 # must show a replacement character, never crash the command
 for _stream in (sys.stdout, sys.stderr):

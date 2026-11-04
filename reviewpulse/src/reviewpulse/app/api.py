@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+from ..interpreter.api import interpreter_router
 from . import service
 from .jobs import JobRunner
 from .store import PLAN_TYPES, REQ_TYPES, Store
@@ -67,6 +68,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     app = FastAPI(title="ReviewPulse", version="0.1.0", lifespan=lifespan,
                   description="Automated review of architectural plans against requirement documents")
     app.state.store, app.state.jobs = store, jobs
+    app.include_router(interpreter_router(llm))
 
     def project(pid: str):
         try:

@@ -21,3 +21,36 @@ outputs/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Additional local environments and development caches
+.venv*/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local credentials (keep distributable example files)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Shared model bundles and binary checkpoints
+/ReviewPulse_models/
+/ReviewPulse_models.zip
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.hdf5
+*.tflite
+*.safetensors
+
+# Local project references, sample input and scratch files
+/ReviewPulse*.pdf
+/ReviewPulse*.pptx
+/ReviewPulse_Project_Plan_*.xlsx
+/floor_plan.png
+/tmp/

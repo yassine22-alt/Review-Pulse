@@ -37,6 +37,16 @@ errors and prints what was found. The API is documented at `/docs` on a running 
 
 ## How it works
 
+### Compound regulation interpreter (opt-in)
+
+`rp interpret demo runs/interpreter-demo` runs three compound examples offline. The new
+`rp interpret` commands and `/api/interpreter` endpoints support source context, drafting,
+independent semantic review, explicit approval, and deterministic checking with evidence traces.
+They handle nested conditions, exemptions, quantifiers, aggregates, and filtered routes using the
+existing building model. See [the interpreter guide](docs/regulation_interpreter.md) for the workflow,
+input contract, tests, and current boundaries. Compound results are separate from the legacy Rules
+tab and finding exports while those interfaces are migrated.
+
 ```
 file ──R1──> sheets.json ──R2/R3──> sheet_<n>.json ──R5-R14──> building_<n>.json ──J1-J7──> findings + report
              (inspect)              (what was drawn)            (what it means)              (what is wrong)
