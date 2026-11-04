@@ -23,14 +23,12 @@ You need Python 3.11 or 3.12 (python.org) and git.
 **Windows (PowerShell):**
 
 ```
-cd reviewpulse
 .\setup.ps1
 ```
 
 **Mac or Linux:**
 
 ```
-cd reviewpulse
 ./setup.sh
 ```
 
@@ -68,7 +66,7 @@ Three things are optional:
 
 The trained models are not in the repository: they are large, and they learn from datasets that
 allow non-commercial use only, so I send them as one file, `ReviewPulse_models.zip`. Unzip it
-inside your `reviewpulse/` folder (the one with `setup.ps1`) and run `rp doctor`: the line
+inside the repository root (the folder with `pyproject.toml` and `setup.ps1`) and run `rp doctor`: the line
 "trained model for CAD drawings" then says `[ ok ]`. Keep the zip inside the team.
 
 Without the trained model, CAD drawings are read with the geometric rules only. That works well

@@ -4,7 +4,7 @@ The `rule-interpreter` branch adds a separate, opt-in interpretation workflow to
 
 ## Run an offline demonstration
 
-From the `reviewpulse` package folder after its normal installation:
+From the repository root after its normal installation:
 
 ```powershell
 rp interpret demo runs/interpreter-demo

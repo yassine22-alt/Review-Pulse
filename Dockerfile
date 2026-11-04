@@ -16,7 +16,7 @@ COPY pyproject.toml README.md ./
 COPY src ./src
 COPY docs ./docs
 # trained models (data/models/*) are optional: present ones are copied, absent ones disable their path
-COPY data/models ./data/models
+COPY data ./data
 RUN pip install -e ".[app]" lightgbm \
     && if [ "$WITH_RASTER" = "1" ]; then \
          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu \

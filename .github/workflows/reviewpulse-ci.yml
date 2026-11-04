@@ -1,14 +1,11 @@
 # Runs on every push and pull request: lint, the fast tests, then the self-check (rp doctor), which
 # checks a generated plan with planted errors through the pipeline and through the web app.
-# The ReviewPulse code lives in reviewpulse/, so every step runs there.
+# The active application lives at the repository root.
 name: ci
 on: [pull_request, push]
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: reviewpulse
     env:
       REVIEWPULSE_LABEL_LLM: "0"      # no language model on the CI machine
     steps:

@@ -54,3 +54,44 @@ htmlcov/
 /ReviewPulse_Project_Plan_*.xlsx
 /floor_plan.png
 /tmp/
+
+# Active application data and experiment artifacts
+data/raw/
+data/processed/
+runs/
+tests/synth/out/
+*.pkl
+.baseline_venv/
+data/cache/
+# trained models are large binaries: shared separately (see data/LICENSES.md), never committed
+data/models/
+
+# ---- private: stays on my laptop, not for the team repo ----
+# my long-running job files (personal paths, my own overnight workflow)
+scripts/jobs/
+# intermediate experiment results: only the final evidence and the files the docs cite are shared
+reports/*
+!reports/m6_final/
+!reports/v4_fuse/
+!reports/v4_rebuild/
+!reports/v4_rules/
+!reports/baseline/
+!reports/ocr_spike/
+!reports/rule_baseline.json
+!reports/results.csv
+!reports/drafting_code_accord.json
+!reports/2026-10-24_drafting_ollama-qwen2.5_7b.md
+!reports/2026-10-24_scale_rules.md
+!reports/2026-10-25_findings_pdf_rules.md
+!reports/2026-10-25_findings_rules.md
+!reports/2026-10-25_ocr_spike_paddle_vs_easyocr.md
+!reports/2026-10-25_raster_all.md
+!reports/2026-10-25_raster_model_scan.md
+!reports/2026-10-25_room_labels_cubicasa.md
+!reports/2026-10-25_rooms_resplan.md
+!reports/2026-10-25_rule_tests.md
+!reports/2026-10-25_walls_floorplancad_rules-oracle-scale.md
+
+# Generated outputs of the archived prototype
+/legacy/deepfloorplan/outputs/*
+!/legacy/deepfloorplan/outputs/.gitkeep

@@ -1,6 +1,6 @@
-"""Baseline 0 (A1): run the ORIGINAL repo pipeline (root main.py, DeepFloorPlan) unchanged.
+"""Baseline 0 (A1): run the archived DeepFloorPlan prototype unchanged.
 
-Runs in its own venv (reviewpulse/.baseline_venv, the root requirements.txt):
+Runs in its own venv (.baseline_venv, legacy/deepfloorplan/requirements.txt):
 
     .baseline_venv/Scripts/python.exe scripts/baseline_run.py --list runs/baseline/inputs.txt --out runs/baseline/out
 
@@ -29,8 +29,8 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]          # reviewpulse/
-REPO = ROOT.parent                                   # original repo root
+ROOT = Path(__file__).resolve().parents[1]          # active repository root
+REPO = ROOT / "legacy" / "deepfloorplan"             # original prototype
 WEIGHTS = ROOT / "data" / "models" / "deepfloorplan" / "model" / "store"
 
 

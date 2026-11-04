@@ -64,8 +64,8 @@ Behavioural limits that follow from the code itself, independent of how well the
   as ReviewPulse, it wraps three functions `main.py` imports
   (`_prepare_masks_for_contour_extraction`, `build_geometries`, `check_compliance`). Each wrapper
   calls the original and keeps a copy of what it returns. Behaviour is unchanged.
-- **Environment**: its own venv, `reviewpulse/.baseline_venv` (Python 3.11, root
-  `requirements.txt`, TensorFlow 2.21 CPU, OpenCV, scikit-image, Shapely, pdf2image with Poppler
+- **Environment**: its own venv, `.baseline_venv` (Python 3.11,
+  `legacy/deepfloorplan/requirements.txt`, TensorFlow 2.21 CPU, OpenCV, scikit-image, Shapely, pdf2image with Poppler
   24.08).
 - **Weights**: the team-drive `store/` folder the README asks for isn't available. The public
   TF2DeepFloorplan SavedModel (VGG16 backbone, trained on R3D, GPL-3.0) was used instead: source and
