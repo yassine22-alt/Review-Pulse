@@ -33,7 +33,7 @@ REQUIRED = {
 OPTIONAL_FEATURES = {
     "web app (rp serve)": (["fastapi", "uvicorn", "multipart", "jinja2", "httpx"], 'pip install -e ".[app]"'),
     "scanned plans: wall/door/window model": (["torch", "segmentation_models_pytorch"], 'see README, "Scans"'),
-    "scanned plans: text reading (OCR)": (["paddleocr"], 'see README, "Scans"'),
+    "scanned plans: text reading (OCR)": (["paddleocr", "easyocr"], 'pip install easyocr (or paddleocr + paddlepaddle)'),
     "tests": (["pytest", "hypothesis"], 'pip install -e ".[dev]"'),
 }
 PLANTED = ("metric_door_narrow", "metric_room_small", "topo_exit_via_bath")
@@ -67,7 +67,8 @@ def check_install() -> bool:
     else:
         _line(OK, f"required packages ({len(REQUIRED)})")
     for feature, (mods, how) in OPTIONAL_FEATURES.items():
-        if all(_importable(m) for m in mods):
+        check_modules = any if feature == "scanned plans: text reading (OCR)" else all
+        if check_modules(_importable(m) for m in mods):
             _line(OK, feature)
         else:
             _line(OPTIONAL, feature, how)
