@@ -199,7 +199,17 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
     sheet.layout = build_layout(sheet, walls, table_boxes)
     sheet.sheet_type = sheet_type(sheet, walls)
 
-    model = BuildingModel(sheet=sheet, elements=walls + columns + openings, rooms=rooms, edges=edges,
+    stairs: list = []
+    if scale_known:                      # a tread depth in unknown units means nothing: no scale, no stairs
+        from .perception.stairs import find_stairs
+
+        try:
+            stairs = find_stairs(sheet, mpu)
+        except Exception as exc:  # noqa: BLE001 - stairs are an addition; a failure must not lose the building
+            sheet.warnings.append(f"stair finder failed ({type(exc).__name__}): stairs not reported")
+        if stairs:
+            sheet.warnings.append(f"{len(stairs)} stair flight(s) found from their tread lines")
+    model = BuildingModel(sheet=sheet, elements=walls + columns + openings + stairs, rooms=rooms, edges=edges,
                           schedules=[{k: v for k, v in s.items()} for s in schedules])
     model.tier = tier(sheet)
     apply_confirmation(model, confirmed)

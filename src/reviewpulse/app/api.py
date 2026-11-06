@@ -13,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from ..interpreter.api import interpreter_router
+from . import interpret as interpretation
 from . import service
 from .jobs import JobRunner
 from .store import PLAN_TYPES, REQ_TYPES, Store
@@ -199,6 +200,32 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     def get_clauses(pid: str):
         project(pid)
         return service.clauses(store, pid)
+
+    @app.get("/api/projects/{pid}/document")
+    def get_document(pid: str):
+        project(pid)
+        try:
+            return interpretation.document(store, pid)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/interpreted")
+    def get_interpreted(pid: str):
+        project(pid)
+        return interpretation.load_results(store, pid)
+
+    @app.post("/api/projects/{pid}/interpret/{clause_id:path}")
+    def interpret_one(pid: str, clause_id: str):
+        project(pid)
+        try:
+            return interpretation.interpret_clause(store, pid, clause_id, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/interpret", status_code=202)
+    def interpret_everything(pid: str):
+        project(pid)
+        return jobs.submit(pid, "interpret", lambda job: interpretation.interpret_all(store, pid, job, llm))
 
     @app.get("/api/projects/{pid}/drafts")
     def get_drafts(pid: str):

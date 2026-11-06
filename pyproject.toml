@@ -39,7 +39,7 @@ rp = "reviewpulse.cli:app"
 where = ["src"]
 
 [tool.setuptools.package-data]
-reviewpulse = ["rules/*.yaml", "rules/packs/**/*.yaml", "app/static/*"]
+reviewpulse = ["rules/*.yaml", "rules/packs/**/*.yaml", "app/static/*", "xeval/cues.yaml", "perception/stairs_calibration.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
