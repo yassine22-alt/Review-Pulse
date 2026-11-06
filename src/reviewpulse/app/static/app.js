@@ -62,7 +62,7 @@ function watchJob(pid, job, onDone) {
 }
 
 function jobName(kind) {
-  return { analyse: "Plan analysis", draft: "Rule drafting", check: "Check" }[kind] || kind;
+  return { analyse: "Plan analysis", draft: "Rule drafting", check: "Check", interpret: "Reading requirements" }[kind] || kind;
 }
 
 function renderJob(rec) {
@@ -145,6 +145,7 @@ async function projectView(pid, tab) {
     </div>
     <nav class="tabs">
       <a href="#/p/${pid}/setup" class="${tab === "setup" ? "on" : ""}">Inputs</a>
+      <a href="#/p/${pid}/requirements" class="${tab === "requirements" ? "on" : ""}">Requirements</a>
       <a href="#/p/${pid}/rules" class="${tab === "rules" ? "on" : ""}">Rules${nd ? `<span class="n">${nd} to review</span>` : ""}</a>
       <a href="#/p/${pid}/results" class="${tab === "results" ? "on" : ""}">Results</a>
     </nav>
@@ -158,6 +159,7 @@ async function projectView(pid, tab) {
       if (tab === "results") $("#tab").insertAdjacentHTML("afterbegin", `<div data-job-kind="${job.kind}"></div>`);
     } catch (e) { toast(e.message, true); }
   });
+  if (tab === "requirements") return requirementsTab(pid);
   if (tab === "rules") return rulesTab(pid);
   if (tab === "results") return resultsTab(pid);
   return setupTab(pid);
@@ -354,6 +356,51 @@ function wireDraft(pid, row, d) {
       } catch (e) { toast(e.message, true); b.disabled = false; }
     });
   }
+}
+
+
+/* ---------------------------------------------------------------- requirements tab */
+const OUTCOME_TEXT = { SATISFIED: "satisfied on this plan", VIOLATED: "violated on this plan", NOT_APPLICABLE: "does not apply to this plan",
+  EXEMPT: "exempt on this plan", UNRESOLVED: "cannot be decided from this plan" };
+
+async function requirementsTab(pid) {
+  const p = state.project;
+  let doc;
+  try { doc = await api(`/api/projects/${pid}/document`); }
+  catch (e) { $("#tab").innerHTML = `<div class="card pad"><div class="empty">${esc(e.message)}. Upload a requirement document on the Inputs tab.</div></div>`; return; }
+  const got = await api(`/api/projects/${pid}/interpreted`);
+  const job = p.active_jobs.find((j) => j.kind === "interpret");
+  const done = doc.clauses.filter((c) => got[c.id]);
+  const n = (st) => done.filter((c) => got[c.id].status === st).length;
+  $("#tab").innerHTML = `
+    <div data-job-kind="interpret"></div>
+    <div class="toolbar">
+      <span><b>${esc(doc.name)}</b> · ${doc.clauses.length} clauses · ${n("DRAFTED")} with a rule · ${n("UNRESOLVED")} not checked yet · ${doc.clauses.length - done.length} not read yet</span>
+      <span class="spacer"></span>
+      <button class="btn primary" id="readall" ${p.plan ? "" : "disabled"} title="${p.plan ? "" : "Upload a plan first: rules are written against what the plan reader can measure"}">Read all clauses</button>
+    </div>
+    <p class="muted pad">Each clause becomes a rule only if the rule agrees with the sentence (category, numbers, comparison direction) and uses only facts this plan provides. Otherwise it is marked not checked yet, with the reason. Nothing here is approved: a person approves a rule before it counts.</p>
+    <div class="card" id="clauses">${doc.clauses.map((c) => clauseCard(c, got[c.id])).join("")}</div>`;
+  $("#readall").addEventListener("click", async () => {
+    try { const j = await api(`/api/projects/${pid}/interpret`, { method: "POST" }); toast("Reading started"); watchJob(pid, j, () => route()); } catch (e) { toast(e.message, true); }
+  });
+  for (const b of $$("[data-read]")) b.addEventListener("click", async () => {
+    b.disabled = true; b.textContent = "Reading…";
+    try { await api(`/api/projects/${pid}/interpret/${encodeURIComponent(b.dataset.read)}`, { method: "POST" }); } catch (e) { toast(e.message, true); }
+    requirementsTab(pid);
+  });
+  if (job) { renderJob(job); watchJob(pid, job, () => route()); }
+}
+
+function clauseCard(c, r) {
+  const head = `<div class="clause"><div class="cid">${esc(c.id)}</div><p>${esc(c.text)}</p></div>`;
+  if (!r) return `<div class="draft">${head}<div class="muted">Not read yet</div><div class="row"><button class="btn" data-read="${esc(c.id)}">Read this clause</button></div></div>`;
+  const body = r.status === "DRAFTED"
+    ? `<div class="flag" style="color:var(--pass)">Rule written. It reads: <code>${esc(r.readback)}</code>${r.applies_when && r.applies_when !== "true" ? `<br>Applies when: <code>${esc(r.applies_when)}</code>` : ""}${r.unless && r.unless !== "false" ? `<br>Unless: <code>${esc(r.unless)}</code>` : ""}</div>
+       <div class="muted">On this plan (preview, not approved): <b>${esc(OUTCOME_TEXT[r.preview?.outcome] || r.preview?.outcome || "")}</b>${(r.preview?.missing || []).length ? ` · needs: ${esc(r.preview.missing.join(", "))}` : ""}</div>
+       ${(r.notes || []).map((x) => `<div class="flag">${esc(x)}</div>`).join("")}`
+    : `<div class="flag">Not checked yet: ${esc(r.reason)}</div>`;
+  return `<div class="draft">${head}${body}<div class="row"><button class="btn" data-read="${esc(c.id)}">Read again</button></div></div>`;
 }
 
 /* ---------------------------------------------------------------- results tab */

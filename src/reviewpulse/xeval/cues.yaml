@@ -1,0 +1,124 @@
+# Wording tables for the sentence-versus-rule checks. Data, not code: add a language by adding a block.
+#
+#   words    common function words, used only to recognise the language of a sentence
+#   decimal  the decimal separator the language writes
+#   ge/le/gt/lt   wordings placed BEFORE a number:  >=  <=  >  <
+#   after_le / after_ge   wordings placed AFTER a number ("3 storeys or fewer")
+#   aggregate wordings that say the quantity is a sum over several members (the rule must then contain a sum)
+#   numbers  spelled-out numbers (allowed in a rule, never required: "at least one" needs no literal)
+#
+# Honesty note: en and fr are exercised by the synthetic corpus and the stress rewrites. The other languages are
+# covered by unit tests only and have NOT been evaluated on real documents. A language with no block here is not an
+# error: the wording check is reported as "not verified" and the draft goes to a person.
+
+en:
+  decimal: "."
+  words: [the, of, and, shall, must, each, every, at, least, with, is, be, in, a, an, to, any, not, than]
+  ge: [at least, not less than, no less than, not fewer than, a minimum of, minimum of, minimum, equal to or greater than]
+  le: [no taller than, no higher than, no larger than, not taller than, at most, not more than, no more than,
+       no greater than, a maximum of, maximum of, maximum, not exceed, not exceeding, up to]
+  gt: [more than, greater than, exceeds, exceed, exceeding, in excess of, over, taller than, larger than, higher than,
+       longer than, wider than]
+  lt: [less than, below, under, fewer than, smaller than, shorter than, lower than]
+  after_le: [or fewer, or less, or lower, or below]
+  after_ge: [or more, or greater, or higher]
+  aggregate: [sum of, total of, combined, in total, altogether]
+  numbers: {one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10}
+
+fr:
+  decimal: ","
+  words: [le, la, les, des, du, de, et, doit, doivent, chaque, dans, au, moins, une, un, sauf, est, sont, pour]
+  ge: [d'au moins, au moins, non inférieur à, non inférieure à, supérieur ou égal à, supérieure ou égale à,
+       un minimum de, minimum]
+  le: [d'au plus, au plus, ne dépassant pas, ne doit pas dépasser, inférieur ou égal à, inférieure ou égale à, maximum]
+  gt: [strictement supérieur à, strictement supérieure à, plus de, supérieur à, supérieure à, dépasse, plus que]
+  lt: [strictement inférieur à, strictement inférieure à, moins de, inférieur à, inférieure à]
+  after_le: [ou moins, ou en dessous]
+  after_ge: [ou plus, ou davantage]
+  aggregate: [somme, au total, ensemble des, cumulé, cumulée]
+  numbers: {un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10}
+
+de:
+  decimal: ","
+  words: [der, die, das, und, muss, müssen, jeder, jede, jedes, mindestens, von, mit, ist, im, ein, eine, nicht, als]
+  ge: [mindestens, nicht weniger als, wenigstens]
+  le: [höchstens, nicht mehr als, maximal, bis zu]
+  gt: [mehr als, größer als, grösser als, über]
+  lt: [weniger als, kleiner als, unter]
+  after_le: [oder weniger]
+  after_ge: [oder mehr]
+  aggregate: [summe, insgesamt, gesamt]
+  numbers: {ein: 1, eine: 1, zwei: 2, drei: 3, vier: 4, fünf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10}
+
+es:
+  decimal: ","
+  words: [el, la, los, las, de, y, debe, deben, cada, al, menos, con, es, en, un, una, por, que]
+  ge: [al menos, como mínimo, por lo menos, no menos de, no inferior a, mínimo de]
+  le: [como máximo, a lo sumo, no más de, no superior a, máximo de]
+  gt: [más de, superior a, mayor que, mayor de]
+  lt: [menos de, inferior a, menor que, menor de]
+  after_le: [o menos]
+  after_ge: [o más]
+  aggregate: [suma de, la suma, en total, total de]
+  numbers: {un: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10}
+
+it:
+  decimal: ","
+  words: [il, lo, la, gli, le, di, e, deve, devono, ogni, almeno, con, è, nel, un, una, per, che]
+  ge: [almeno, non meno di, non inferiore a, minimo di]
+  le: [al massimo, non più di, non superiore a, massimo di]
+  gt: [più di, superiore a, maggiore di]
+  lt: [meno di, inferiore a, minore di]
+  after_le: [o meno]
+  after_ge: [o più]
+  aggregate: [somma, in totale, totale di]
+  numbers: {uno: 1, una: 1, due: 2, tre: 3, quattro: 4, cinque: 5, sei: 6, sette: 7, otto: 8, nove: 9, dieci: 10}
+
+nl:
+  decimal: ","
+  words: [de, het, een, en, moet, moeten, elke, van, met, is, minstens, voor, dat, niet]
+  ge: [ten minste, minstens, minimaal, niet minder dan]
+  le: [hoogstens, maximaal, niet meer dan]
+  gt: [meer dan, groter dan]
+  lt: [minder dan, kleiner dan]
+  after_le: [of minder]
+  after_ge: [of meer]
+  aggregate: [som van, in totaal, totaal van]
+  numbers: {een: 1, twee: 2, drie: 3, vier: 4, vijf: 5, zes: 6, zeven: 7, acht: 8, negen: 9, tien: 10}
+
+pt:
+  decimal: ","
+  words: [o, a, os, as, de, e, deve, devem, cada, pelo, menos, com, é, em, um, uma, para, que]
+  ge: [pelo menos, no mínimo, não inferior a, mínimo de]
+  le: [no máximo, não superior a, máximo de]
+  gt: [mais de, superior a, maior que]
+  lt: [menos de, inferior a, menor que]
+  after_le: [ou menos]
+  after_ge: [ou mais]
+  aggregate: [soma de, a soma, no total, total de]
+  numbers: {um: 1, uma: 1, dois: 2, duas: 2, três: 3, quatro: 4, cinco: 5, seis: 6, sete: 7, oito: 8, nove: 9, dez: 10}
+
+sv:
+  decimal: ","
+  words: [och, ska, måste, varje, minst, av, med, är, en, ett, som, för, inte, att]
+  ge: [åtminstone, inte mindre än, minst]
+  le: [inte mer än, som mest, högst]
+  gt: [mer än, större än]
+  lt: [mindre än]
+  after_le: [eller mindre]
+  after_ge: [eller mer]
+  aggregate: [summan av, totalt, sammanlagt]
+  numbers: {en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7, åtta: 8, nio: 9, tio: 10}
+
+fi:
+  decimal: ","
+  words: [ja, on, tulee, täytyy, jokaisen, vähintään, ei, että, ovat, tai, kun, se]
+  ge: [vähintään]
+  le: [enintään, korkeintaan]
+  gt: [enemmän kuin, suurempi kuin, yli]
+  lt: [vähemmän kuin, pienempi kuin, alle]
+  after_le: [tai vähemmän]
+  after_ge: [tai enemmän]
+  aggregate: [summa, yhteensä, kokonaismäärä]
+  numbers: {yksi: 1, kaksi: 2, kolme: 3, neljä: 4, viisi: 5, kuusi: 6, seitsemän: 7, kahdeksan: 8, yhdeksän: 9,
+            kymmenen: 10}

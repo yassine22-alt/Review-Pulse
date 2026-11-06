@@ -378,6 +378,13 @@ def plausibility(rule: dict) -> list[str]:
     return []
 
 
+def _spelled_out(num: float, text: str) -> bool:
+    """A number written as a word ("at least one exit") is in the text; the wording tables know the common languages."""
+    from ..xeval.verify import detect_language, number_words
+
+    return any(abs(num - x) < 1e-6 for x in number_words(text, detect_language(text)))
+
+
 def validate(out: dict, clause: Clause, doc: str) -> Draft:
     d = Draft(clause_id=clause.id, clause_text=clause.text, span=[clause.start, clause.end],
               checkable=checkable_of(out), rase=out.get("rase", {}),
@@ -391,7 +398,7 @@ def validate(out: dict, clause: Clause, doc: str) -> Draft:
         d.errors.append("no function for this property")
         return d
     num = out.get("number")
-    if num is not None and not any(abs(num - x) < 1e-6 for x in _numbers_in(clause.text))             and out.get("unit_written") != "fraction":
+    if num is not None and out.get("unit_written") != "fraction"             and not any(abs(num - x) < 1e-6 for x in _numbers_in(clause.text))             and not _spelled_out(num, clause.text):
         d.flags.append(f"number {num} does not appear in the clause text")
     try:
         rule = Rule.model_validate(rd)

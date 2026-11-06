@@ -6,9 +6,11 @@ from collections.abc import Callable
 
 from fastapi import APIRouter, HTTPException
 
+from ..factgraph.schema import FactGraph
 from ..rules.clauses import split_text
 from ..schema import BuildingModel
 from .building import building_graph
+from .checked import checked_draft
 from .context import ContextBundle, assemble_context
 from .draft import draft_program
 from .review import ReviewArtifact, approve_program, review_program
@@ -26,6 +28,10 @@ class ContextRequest(Model):
 class DraftRequest(Model):
     context: ContextBundle
     inputs: Inputs
+
+
+class CheckedDraftRequest(DraftRequest):
+    factgraph: FactGraph | None = None
 
 
 class ReviewRequest(DraftRequest):
@@ -71,6 +77,11 @@ def interpreter_router(llm_factory: Callable) -> APIRouter:
         return _execute(
             draft_program, body.context, body.inputs.bindings, list(body.inputs.collections), client()
         )
+
+    @router.post("/draft_checked")
+    def draft_checked(body: CheckedDraftRequest):
+        """The measured-best drafting path: expression format, sentence and catalogue checks, UNRESOLVED with a reason."""
+        return _execute(checked_draft, body.context, body.inputs, body.factgraph, client())
 
     @router.post("/review")
     def review(body: ReviewRequest):

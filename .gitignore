@@ -95,3 +95,18 @@ reports/*
 # Generated outputs of the archived prototype
 /legacy/deepfloorplan/outputs/*
 !/legacy/deepfloorplan/outputs/.gitkeep
+
+# Application data written by the running app (uploads, runs, drafts)
+data/app/
+
+# Evaluation output: only the findings that the docs cite are shared; row-level logs and the generated corpus stay local
+!reports/extractor_eval/
+reports/extractor_eval/*
+!reports/extractor_eval/ablate_findings.md
+!reports/extractor_eval/ablate_summary.json
+!reports/extractor_eval/baseline_findings.md
+!reports/extractor_eval/expr5_findings.md
+!reports/extractor_eval/vote_findings.md
+!reports/extractor_eval/demand.md
+!reports/extractor_eval/real_wording.jsonl
+!reports/extractor_eval/stairs_results.md
