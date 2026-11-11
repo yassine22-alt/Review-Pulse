@@ -213,3 +213,13 @@ label.field input, label.field select { color: var(--fg); }
 .toasts { position: fixed; right: 18px; bottom: 18px; display: grid; gap: 8px; z-index: 50; }
 .toast { min-width: 260px; max-width: 420px; padding: 10px 14px; border-radius: 8px; background: var(--fg); color: var(--bg); box-shadow: 0 6px 20px rgba(0,0,0,.18); font-size: 13px; }
 .toast.err { background: var(--fail); color: #fff; }
+
+/* requirement approval */
+.invbox { margin-bottom: 14px; }
+.invbox p { margin: 8px 0 0; }
+.appr { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); display: grid; gap: 8px; }
+.appr .notes { font-size: 13px; padding: 8px 12px; border-radius: 8px; background: var(--surface-2); }
+.appr .notes ul { margin: 4px 0 0; padding-left: 18px; }
+.apprform .field { flex: 1; min-width: 160px; }
+.ack { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.covline { font-size: 12.5px; padding: 2px; }

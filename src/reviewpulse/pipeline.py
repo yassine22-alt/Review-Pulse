@@ -256,9 +256,13 @@ def apply_rejection(model: BuildingModel, rejected: set) -> None:
 
 
 def check(run_dir: str | Path, pack, confirmed: set | None = None,
-          dismissed: dict | None = None, reports: bool = True, brief: str | Path | None = None) -> dict:
+          dismissed: dict | None = None, reports: bool = True, brief: str | Path | None = None,
+          programs: list | None = None, inventory_complete: bool = False) -> dict:
     """Run the rules on every sheet of a run. ``brief``: the project's brief (programme) table; it is
-    kept in the run folder so later checks use it too."""
+    kept in the run folder so later checks use it too. ``programs``: rules approved by a reviewer from the requirement
+    document (interpreter programs); they run on the same plan and their findings join the others, with the full
+    outcome of each saved in ``interpreted_results.json``. ``inventory_complete``: a person confirmed that every room,
+    door and window was found, which is what allows a rule over "every" member to be reported as satisfied."""
     import shutil
 
     from .engine.run import run, summarise
@@ -280,6 +284,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     dismissed = {**triage.get("dismissed", {}), **(dismissed or {})}
     all_findings = []
     models = []
+    interpreted_results: list[dict] = []
     for bp in sorted(run_dir.glob("building_*.json")):
         model = load(BuildingModel, bp)
         if briefs and n_sheets == 1:
@@ -292,6 +297,8 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
         if confirmed:
             apply_confirmation(model, confirmed)
         findings = run(model, rules, confirmed)
+        if programs:
+            findings += _run_programs(model, programs, inventory_complete, interpreted_results)
         for f in findings:
             key = finding_key(f)
             f.evidence["finding_id"] = key
@@ -301,6 +308,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
         all_findings += findings
         models.append(model)
     save_findings(all_findings, run_dir / "findings.json")
+    (run_dir / "interpreted_results.json").write_text(json.dumps(interpreted_results, indent=1), encoding="utf-8")
     write_csv(all_findings, models, run_dir / "findings.csv")
     if reports and models:
         from .report.html_report import write_html
@@ -309,6 +317,29 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
         write_annotated_pdf(models, all_findings, run_dir / "report.pdf")
         write_html(models, all_findings, run_dir / "report.html")
     return summarise(all_findings)
+
+
+def _run_programs(model, programs, inventory_complete: bool, results: list[dict]) -> list:
+    """Approved interpreter programs on one sheet: findings for the viewer and one outcome record per program."""
+    from .factgraph.convert import to_graph, to_inputs
+    from .factgraph.from_building import from_building
+    from .interpreter.findings import to_findings
+
+    graph_facts = from_building(model, complete=inventory_complete)
+    inputs, graph = to_inputs(graph_facts), to_graph(graph_facts)
+    out = []
+    for program in programs:
+        found, explained = to_findings(program, inputs, graph, model, model.tier)
+        out += found
+        clause = program.sources[0].clause if program.sources else None
+        results.append({
+            "sheet": model.sheet.id, "program_id": program.id, "title": program.title, "clause": clause,
+            "outcome": explained.outcome, "checked": explained.selected,
+            "violated": [m.entity for m in explained.members if m.state == "violated"],
+            "unknown": [m.entity for m in explained.members if m.state == "unknown"],
+            "missing": explained.missing[:10], "issues": [i.code.value for i in explained.issues],
+            "approved_by": program.approved_by})
+    return out
 
 
 # ---------------------------------------------------------------------------

@@ -46,8 +46,11 @@ def rules_summary(store: Store, p: Project) -> dict:
     packs = packs_for(store, p)
     rules = pipeline.load_packs(packs) if packs else []
     own = {f.stem for f in store.pack_dir(p.id).glob("*.yaml")}
+    from . import interpret
+
     return {"total": len(rules), "approved": sum(r.status == "approved" for r in rules),
-            "project": len(own), "base_pack": p.base_pack}
+            "project": len(own), "base_pack": p.base_pack,
+            "interpreted_approved": len(interpret.approved_programs(store, p.id))}
 
 
 # -- LLM -------------------------------------------------------------------------
@@ -107,10 +110,13 @@ def check(store: Store, pid: str, job: Job | None = None) -> dict:
     run = store.run_dir(pid)
     if not any(run.glob("building_*.json")):
         raise ValueError("the plan has not been analysed yet")
+    from . import interpret
+
     packs = packs_for(store, p)
-    if not packs:
+    programs = interpret.approved_programs(store, p.id)
+    if not packs and not programs:
         raise ValueError("no rules: approve drafted rules or choose a base pack")
-    summary = pipeline.check(run, packs)
+    summary = pipeline.check(run, packs, programs=programs, inventory_complete=p.inventory_reviewed)
     if job:
         job.progress(0.95, "preparing the viewer")
     write_view(run)

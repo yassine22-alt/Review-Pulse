@@ -67,14 +67,18 @@ Do not rewrite the source or approve the program. Return issues and limitations 
 
 
 def approve_program(
-    program: Program, context: ContextBundle, inputs: Inputs, report: ReviewArtifact, reviewer: str
+    program: Program, context: ContextBundle, inputs: Inputs, report: ReviewArtifact, reviewer: str,
+    acknowledge: bool = False,
 ) -> Program:
-    """One approval policy shared by CLI and HTTP; a critic's approval is not a proof."""
+    """One approval policy shared by CLI and HTTP; a critic's approval is not a proof.
+
+    `acknowledge`: the named reviewer states they read the critic's issues and limitations and approves anyway. The
+    caller keeps the notes with the approval. Without it, any issue or limitation blocks approval, as before."""
     if not reviewer.strip():
         raise ValueError("a reviewer name is required")
     if report.fingerprint != review_fingerprint(program, context, inputs):
         raise ValueError("semantic review is stale; review the current program and context")
-    if report.review.issues or report.review.limitations:
+    if (report.review.issues or report.review.limitations) and not acknowledge:
         raise ValueError("resolve semantic review issues and limitations before approval")
     if program.unresolved or context.missing:
         raise ValueError("resolve interpretation and context dependencies before approval")

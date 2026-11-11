@@ -58,6 +58,7 @@ class Project:
     requirements: str | None = None     # file name under inputs/req
     base_pack: str | None = "starter"   # a folder of rules/packs, or None for project rules only
     curator: str = ""
+    inventory_reviewed: bool = False    # a person confirmed every room, door and window was found: passes may be reported
     updated: str = ""
     notes: dict = field(default_factory=dict)
 

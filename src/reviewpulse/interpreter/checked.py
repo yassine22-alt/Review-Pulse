@@ -53,6 +53,7 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         return out
     program = draft.program
     program.status, program.approved_by, program.document = "draft", None, context.document
+    program.id = "I-" + "".join(ch if ch.isalnum() or ch in ".-" else "_" for ch in context.target)
     program.unresolved = sorted(set(program.unresolved + context.missing))
     for span in program.sources:
         context.check_span(span)

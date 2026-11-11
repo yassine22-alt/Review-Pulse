@@ -1,0 +1,465 @@
+{
+ "rows": [
+  {
+   "plan": 0,
+   "errors": [],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 23
+  },
+  {
+   "plan": 0,
+   "errors": [],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 23
+  },
+  {
+   "plan": 0,
+   "errors": [],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 23
+  },
+  {
+   "plan": 1,
+   "errors": [
+    "metric_door_narrow"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "door_09e239bf11"
+   ],
+   "new_fail": [
+    "door_09e239bf11"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 22
+  },
+  {
+   "plan": 1,
+   "errors": [
+    "metric_door_narrow"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 22
+  },
+  {
+   "plan": 1,
+   "errors": [
+    "metric_door_narrow"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 22
+  },
+  {
+   "plan": 2,
+   "errors": [
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 24
+  },
+  {
+   "plan": 2,
+   "errors": [
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_ccdf47fb52"
+   ],
+   "new_fail": [
+    "room_ccdf47fb52"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 24
+  },
+  {
+   "plan": 2,
+   "errors": [
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_836aa13f5e"
+   ],
+   "new_fail": [
+    "room_836aa13f5e"
+   ],
+   "planted_for_clause": 0,
+   "seconds": 24
+  },
+  {
+   "plan": 3,
+   "errors": [
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 26
+  },
+  {
+   "plan": 3,
+   "errors": [
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 26
+  },
+  {
+   "plan": 3,
+   "errors": [
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_a2e36784c8"
+   ],
+   "new_fail": [
+    "room_a2e36784c8"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 26
+  },
+  {
+   "plan": 4,
+   "errors": [
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 28
+  },
+  {
+   "plan": 4,
+   "errors": [
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_cc7da89527"
+   ],
+   "new_fail": [
+    "room_cc7da89527"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 28
+  },
+  {
+   "plan": 4,
+   "errors": [
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_82ff759d97"
+   ],
+   "new_fail": [
+    "room_82ff759d97"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 28
+  },
+  {
+   "plan": 5,
+   "errors": [
+    "metric_door_narrow",
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "door_1358ae972f"
+   ],
+   "new_fail": [
+    "door_1358ae972f"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 24
+  },
+  {
+   "plan": 5,
+   "errors": [
+    "metric_door_narrow",
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_bb47d2f425"
+   ],
+   "new_fail": [
+    "room_bb47d2f425"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 24
+  },
+  {
+   "plan": 5,
+   "errors": [
+    "metric_door_narrow",
+    "metric_room_small"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_c32404d993"
+   ],
+   "new_fail": [
+    "room_c32404d993"
+   ],
+   "planted_for_clause": 0,
+   "seconds": 24
+  },
+  {
+   "plan": 6,
+   "errors": [
+    "metric_door_narrow",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "door_e99cb7cdf5"
+   ],
+   "new_fail": [
+    "door_e99cb7cdf5"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 22
+  },
+  {
+   "plan": 6,
+   "errors": [
+    "metric_door_narrow",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 22
+  },
+  {
+   "plan": 6,
+   "errors": [
+    "metric_door_narrow",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_f6ad3f5ec5"
+   ],
+   "new_fail": [
+    "room_f6ad3f5ec5"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 22
+  },
+  {
+   "plan": 7,
+   "errors": [
+    "metric_room_small",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 25
+  },
+  {
+   "plan": 7,
+   "errors": [
+    "metric_room_small",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 1,
+   "seconds": 25
+  },
+  {
+   "plan": 7,
+   "errors": [
+    "metric_room_small",
+    "metric_living_small"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_76c873171e"
+   ],
+   "new_fail": [
+    "room_76c873171e"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 25
+  },
+  {
+   "plan": 8,
+   "errors": [
+    "metric_door_narrow",
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "door_d764569a41"
+   ],
+   "new_fail": [
+    "door_d764569a41"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 27
+  },
+  {
+   "plan": 8,
+   "errors": [
+    "metric_door_narrow",
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_3e75f3dfd7"
+   ],
+   "new_fail": [
+    "room_3e75f3dfd7"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 27
+  },
+  {
+   "plan": 8,
+   "errors": [
+    "metric_door_narrow",
+    "metric_bedroom_narrow"
+   ],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "VIOLATED",
+   "old_fail": [
+    "room_aed9584454"
+   ],
+   "new_fail": [
+    "room_aed9584454"
+   ],
+   "planted_for_clause": 1,
+   "seconds": 27
+  },
+  {
+   "plan": 9,
+   "errors": [],
+   "clause": "Art. 6.1",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 25
+  },
+  {
+   "plan": 9,
+   "errors": [],
+   "clause": "Art. 6.3",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 25
+  },
+  {
+   "plan": 9,
+   "errors": [],
+   "clause": "Art. 6.4",
+   "draft": "DRAFTED",
+   "outcome": "SATISFIED",
+   "old_fail": [],
+   "new_fail": [],
+   "planted_for_clause": 0,
+   "seconds": 25
+  }
+ ],
+ "summary": {
+  "clause runs": 30,
+  "drafted": 30,
+  "old finds an error": 15,
+  "new finds the same elements": 15,
+  "new misses an element the old engine found": 0,
+  "new reports an element the old engine did not": 0,
+  "clean: new reports a violation (false alarm)": 0,
+  "clean: new says unresolved": 0,
+  "no clause read": 0
+ }
+}

@@ -1,4 +1,90 @@
 {
+ "$defs": {
+  "Assessment": {
+   "properties": {
+    "outcome": {
+     "enum": [
+      "SATISFIED",
+      "VIOLATED",
+      "UNRESOLVED",
+      "NOT_APPLICABLE",
+      "EXEMPT"
+     ],
+     "title": "Outcome",
+     "type": "string"
+    },
+    "evidence_issues": {
+     "items": {
+      "$ref": "#/$defs/EvidenceIssue"
+     },
+     "title": "Evidence Issues",
+     "type": "array"
+    },
+    "severity": {
+     "enum": [
+      "CRITICAL",
+      "MAJOR",
+      "MINOR"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "rule_authority": {
+     "enum": [
+      "APPROVED_REQUIREMENT",
+      "ADVISORY_GUIDANCE"
+     ],
+     "title": "Rule Authority",
+     "type": "string"
+    },
+    "dependencies": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Dependencies",
+     "type": "array"
+    }
+   },
+   "required": [
+    "outcome",
+    "severity",
+    "rule_authority"
+   ],
+   "title": "Assessment",
+   "type": "object"
+  },
+  "EvidenceIssue": {
+   "properties": {
+    "code": {
+     "$ref": "#/$defs/IssueCode"
+    },
+    "detail": {
+     "title": "Detail",
+     "type": "string"
+    }
+   },
+   "required": [
+    "code",
+    "detail"
+   ],
+   "title": "EvidenceIssue",
+   "type": "object"
+  },
+  "IssueCode": {
+   "enum": [
+    "UNCERTAIN_SCALE",
+    "UNKNOWN_CLASS",
+    "INCOMPLETE_INVENTORY",
+    "MISSING_CONNECTION",
+    "POSSIBLE_TEXT_OMISSION",
+    "UNVERIFIED_GEOMETRY",
+    "MISSING_INPUT",
+    "TOLERANCE_BAND"
+   ],
+   "title": "IssueCode",
+   "type": "string"
+  }
+ },
  "description": "One rule result (the Judge's output, `findings.json`).",
  "properties": {
   "rule_id": {
@@ -83,6 +169,17 @@
    "description": "Requirement source: `{doc, clause, span}`.",
    "title": "Source",
    "type": "object"
+  },
+  "assessment": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/Assessment"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null
   }
  },
  "required": [

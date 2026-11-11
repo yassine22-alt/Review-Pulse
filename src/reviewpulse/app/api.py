@@ -35,7 +35,19 @@ class Settings(BaseModel):
     name: str | None = None
     base_pack: str | None = None
     curator: str | None = None
+    inventory_reviewed: bool | None = None
     clear_base_pack: bool = False
+
+
+class ClauseRef(BaseModel):
+    clause: str
+
+
+class Decision(ClauseRef):
+    action: str                       # approve | reject | reset
+    reviewer: str = ""
+    note: str = ""
+    acknowledge: bool = False         # the reviewer read the second reader's notes and approves anyway
 
 
 class Approve(BaseModel):
@@ -134,6 +146,8 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             p.name = body.name.strip() or p.name
         if body.curator is not None:
             p.curator = body.curator.strip()
+        if body.inventory_reviewed is not None:
+            p.inventory_reviewed = body.inventory_reviewed
         if body.clear_base_pack:
             p.base_pack = None
         elif body.base_pack is not None:
@@ -219,6 +233,43 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         project(pid)
         try:
             return interpretation.interpret_clause(store, pid, clause_id, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/review")
+    def review_one(pid: str, body: ClauseRef):
+        project(pid)
+        try:
+            return interpretation.review_clause(store, pid, body.clause, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/decision")
+    def decide_one(pid: str, body: Decision):
+        project(pid)
+        try:
+            return interpretation.decide_clause(store, pid, body.clause, body.action, body.reviewer, body.note,
+                                                body.acknowledge, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/coverage")
+    def get_coverage(pid: str):
+        project(pid)
+        try:
+            return interpretation.coverage(store, pid)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/coverage.html", include_in_schema=False)
+    def get_coverage_html(pid: str):
+        from fastapi.responses import HTMLResponse
+
+        from ..report.coverage import render_html
+
+        project(pid)
+        try:
+            return HTMLResponse(render_html(interpretation.coverage(store, pid)))
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
 

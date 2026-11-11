@@ -242,6 +242,19 @@ def check_aggregate(program: Program, text: str, lang: str) -> list[Issue]:
                                        "member on its own")]
 
 
+def check_route(program: Program) -> list[Issue]:
+    """A route rule ("reaches an exit without passing through ...") cannot be compared with its sentence by any check here:
+    who may be passed through is exactly what a model gets wrong. It is allowed, but the reviewer is told to read it."""
+    from ..interpreter.schema import PathExpr
+
+    for expr in (program.applicability, program.exemption, program.requirement):
+        if any(isinstance(n, PathExpr) for n in walk(expr)):
+            return [Issue("route_unchecked", "this rule is about routes between rooms; no automatic check can confirm which "
+                                             "rooms the sentence allows a route to pass through, so read the rule carefully",
+                          blocking=False)]
+    return []
+
+
 # ---- entry point -----------------------------------------------------------------------------------
 
 
@@ -252,7 +265,7 @@ def verify(program: Program, text: str, cat: dict, lang: str | None = None) -> l
     from .semantic import check_grounding_words, check_owners, check_values
 
     issues = check_scope(program, flat, cat) + check_numbers(program, text, code) \
-        + check_owners(program, cat) + check_values(program, cat)
+        + check_owners(program, cat) + check_values(program, cat) + check_route(program)
     if code:
         issues += check_directions(program, text, code) + check_aggregate(program, text, code)
         if code == "en":
