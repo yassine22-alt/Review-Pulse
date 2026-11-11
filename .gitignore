@@ -112,3 +112,6 @@ reports/extractor_eval/*
 !reports/extractor_eval/stairs_results.md
 !reports/extractor_eval/closed_loop_eval.json
 !reports/extractor_eval/coverage_demo.html
+
+# Personal copies with this machine's paths and notes stay on the machine
+*.local.md
