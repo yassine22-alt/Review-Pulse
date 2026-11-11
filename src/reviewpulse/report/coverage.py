@@ -38,7 +38,15 @@ STATUS_LABEL = {
 DECIDED = {"violated", "satisfied", "not_applicable"}
 
 
-def _status(entry: dict | None, result: dict | None) -> tuple[str, str]:
+def _every(kinds: list[str] | None) -> str:
+    """The phrase "every room, door and window" from the kinds a producer looked for; "every member" otherwise."""
+    if not kinds:
+        return "every member"
+    kinds = [k.replace("_", " ") for k in kinds]
+    return "every " + (kinds[0] if len(kinds) == 1 else ", ".join(kinds[:-1]) + " and " + kinds[-1])
+
+
+def _status(entry: dict | None, result: dict | None, looked_for: str = "every member") -> tuple[str, str]:
     """(status, reason) for one clause."""
     if entry is None:
         return "not_read", "this clause has not been read yet"
@@ -60,12 +68,13 @@ def _status(entry: dict | None, result: dict | None) -> tuple[str, str]:
         return "not_applicable", "the rule's condition does not hold on this plan" if outcome == "NOT_APPLICABLE" else "an exemption applies"
     missing = ", ".join(x for x in result.get("missing", []) if not x.startswith("incomplete"))[:200]
     if "INCOMPLETE_INVENTORY" in result.get("issues", []) and not missing:
-        return "undecided", ("no violation was found among what the plan reader found, but a person has not confirmed "
-                             "that it found every room, door and window")
+        return "undecided", (f"no violation was found among what was found, but a person has not confirmed that "
+                             f"{looked_for} was found")
     return "undecided", f"missing: {missing or 'facts the plan does not provide'}"
 
 
-def build(project: dict, document: dict, interpreted: dict, results: list[dict], findings: list[dict]) -> dict:
+def build(project: dict, document: dict, interpreted: dict, results: list[dict], findings: list[dict],
+          looked_for: list[str] | None = None) -> dict:
     """`document`: {name, clauses:[{id, text}]}. `interpreted`: per clause. `results`: one record per approved rule and sheet."""
     by_clause: dict[str, list[dict]] = {}
     for r in results:
@@ -87,11 +96,12 @@ def build(project: dict, document: dict, interpreted: dict, results: list[dict],
             result = next((r for r in rows if r["outcome"] == outcome), None)
             if result:
                 break
-        status, reason = _status(entry, result)
+        status, reason = _status(entry, result, _every(looked_for))
         decision = (entry or {}).get("decision") or {}
         program = (entry or {}).get("approved_program") or (entry or {}).get("program")
         line = {"id": c["id"], "text": c["text"], "status": status, "status_label": STATUS_LABEL[status], "reason": reason,
                 "rule": (entry or {}).get("readback") if entry and entry.get("status") == "DRAFTED" else None,
+                "plain": (entry or {}).get("plain") if entry and entry.get("status") == "DRAFTED" else None,
                 "applies_when": (entry or {}).get("applies_when"), "unless": (entry or {}).get("unless"),
                 "approved_by": decision.get("by") if decision.get("state") == "approved" else None,
                 "approved_at": decision.get("at") if decision.get("state") == "approved" else None,
@@ -109,6 +119,7 @@ def build(project: dict, document: dict, interpreted: dict, results: list[dict],
         "generated": datetime.now().isoformat(timespec="seconds"),
         "project": project.get("name"), "plan": project.get("plan"), "document": document.get("name"),
         "inventory_reviewed": bool(project.get("inventory_reviewed")),
+        "looked_for": _every(looked_for),
         "summary": {"clauses": total, "decided": decided, "decided_share": round(decided / total, 3) if total else 0.0,
                     "counts": counts},
         "clauses": sorted(clauses, key=lambda c: (STATUS_ORDER.index(c["status"]), c["id"])),
@@ -148,14 +159,16 @@ def render_html(data: dict) -> str:
         for k in STATUS_ORDER if s["counts"][k])
     note = ""
     if not data["inventory_reviewed"]:
-        note = ('<div class="note"><b>Satisfied is reported only after a person confirms the plan reader found every room, '
-                "door and window.</b> Until then a rule over every member can show a violation but never a pass, because "
-                "an element the reader missed could hide a problem.</div>")
+        note = (f'<div class="note"><b>Satisfied is reported only after a person confirms that {_e(data["looked_for"])} '
+                "was found.</b> Until then a rule over every member can show a violation but never a pass, because "
+                "something that was missed could hide a problem.</div>")
     parts = []
     for c in data["clauses"]:
         lines = [f'<p>{_e(c["text"])}</p>']
+        if c.get("plain"):
+            lines.append(f'<p><b>Rule, in words:</b> {_e(c["plain"])}</p>')
         if c["rule"]:
-            lines.append(f'<p class="muted">Rule as written: <code>{_e(c["rule"])}</code>'
+            lines.append(f'<p class="muted">Exact form: <code>{_e(c["rule"])}</code>'
                          + (f' &middot; applies when <code>{_e(c["applies_when"])}</code>' if c["applies_when"] not in (None, "true") else "")
                          + (f' &middot; unless <code>{_e(c["unless"])}</code>' if c["unless"] not in (None, "false") else "") + "</p>")
         if c["approved_by"]:

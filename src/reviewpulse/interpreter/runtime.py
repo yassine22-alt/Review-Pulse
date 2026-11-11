@@ -14,6 +14,7 @@ from .schema import (
     Expr,
     FactExpr,
     Inputs,
+    LinkExpr,
     LiteralExpr,
     LogicExpr,
     PathExpr,
@@ -115,6 +116,8 @@ class Evaluator:
             return Trace.combine(expr.node, value, children)
         if isinstance(expr, PathExpr):
             return self._path(expr, variables)
+        if isinstance(expr, LinkExpr):
+            return self._link(expr, variables)
         return self._set(expr, variables)
 
     def _path(self, expr: PathExpr, variables: dict[str, str]) -> Trace:
@@ -136,9 +139,12 @@ class Evaluator:
         possible.add_nodes_from([origin, target])
         children, node_truth = [], {}
         for node in self.graph:
+            # a route filter ("not through a bathroom") limits the rooms passed through; the room the route starts
+            # from and the place it ends are never excluded by it (the legacy engine behaves the same way)
+            exempt = origin != target and node in (origin, target)
             result = (
                 self.evaluate(expr.node_filter, {**variables, "$node": node})
-                if (expr.node_filter and node not in ("EXIT", "EXTERIOR"))
+                if (expr.node_filter and self.graph.nodes[node].get("role") != "boundary" and not exempt)
                 else Trace("literal", True)
             )
             node_truth[node] = result.value
@@ -172,6 +178,27 @@ class Evaluator:
             value = None
         missing = [] if self.inputs.graph_complete else ["incomplete room graph"]
         return Trace.combine(expr.node, value, children, missing)
+
+    def _link(self, expr: LinkExpr, variables: dict[str, str]) -> Trace:
+        """True when a door or opening joins the two nodes directly; unknown when the connections may be incomplete."""
+        self.dependencies.add("connections")
+        if not self.inputs.graph_complete:
+            self.evidence_issues["connections"] = EvidenceIssue(
+                code=IssueCode.INCOMPLETE_INVENTORY, detail="connection inventory is incomplete")
+        if self.graph is None:
+            return Trace(expr.node, missing=["room graph"])
+        a, b = variables.get(expr.a, expr.a), variables.get(expr.b, expr.b)
+        if a not in self.graph or b not in self.graph:
+            return Trace(expr.node, missing=["link endpoint not present in graph"])
+        edges = [d for d in (self.graph.get_edge_data(a, b) or {}).values()
+                 if not expr.via_edges or d.get("kind") in expr.via_edges]
+        if any(d.get("trusted", False) for d in edges):
+            return Trace(expr.node, True)
+        if edges:
+            return Trace(expr.node, missing=[f"unverified connection:{edges[0].get('via') or (a, b)}"])
+        if self.inputs.graph_complete:
+            return Trace(expr.node, False)
+        return Trace(expr.node, missing=["incomplete room graph"])
 
     def _set(self, expr: SetExpr, variables: dict[str, str]) -> Trace:
         self.dependencies.add(f"inventory:{expr.collection}")

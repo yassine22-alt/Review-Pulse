@@ -25,18 +25,19 @@ from __future__ import annotations
 
 import re
 
+from ..interpreter import units
 from ..interpreter.schema import Binding
+from ..interpreter.units import is_unit
 
 KEYWORDS = {"forall", "exists", "count", "sum", "min", "max", "where", "and", "or", "not", "true", "false",
-            "reaches", "through"}
+            "reaches", "through", "avoiding", "linked"}
 TOKEN = re.compile(r"""\s*(?:
-    (?P<num>\d+(?:\.\d+)?)(?:\s?(?P<unit>m2|m²|cm|mm|m|%)(?![A-Za-z0-9_]))?
+    (?P<num>\d+(?:\.\d+)?)(?P<unitrun>\s?(?:[^\W\d_°µ]|[°µ%])[^\s,()<>=!:+*]*)?
   | (?P<str>'[^']*'|"[^"]*")
   | (?P<op>>=|<=|==|!=|>|<|\+|-|\*|/|\(|\)|:|,|\.)
   | (?P<id>[A-Za-z_][A-Za-z0-9_]*)
 )""", re.X)
-UNIT_FACTOR = {"m": ("m", 1.0), "cm": ("m", 0.01), "mm": ("m", 0.001), "m2": ("m2", 1.0), "m²": ("m2", 1.0),
-               "%": ("1", 0.01)}
+AGGREGATES = {"count", "sum", "min", "max"}      # words that are also units (min) unless a bracket follows
 COMPARE = {">=": "ge", "<=": "le", ">": "gt", "<": "lt", "==": "eq", "!=": "ne"}
 
 
@@ -52,9 +53,21 @@ def tokenize(text: str) -> list[tuple[str, str, str | None]]:
         if not m or m.end() == pos:
             raise ExprError(f"cannot read the expression at: {text[pos:pos + 25]!r}")
         pos = m.end()
+        unit = None
+        if m.group("num") is not None and m.group("unitrun"):
+            # the longest stretch after the number that is a unit ("kPa", "L/min", "m2"); a word like "and" is not one
+            run = m.group("unitrun").strip()
+            keep = next((run[:k] for k in range(len(run), 0, -1)
+                         if (run[:k].lower() not in KEYWORDS or (run[:k].lower() in AGGREGATES and run[k:k + 1] != "("))
+                         and is_unit(run[:k])), None)           # "30 min" is minutes; "min(" would be the aggregate
+            if keep:
+                unit = keep
+                pos = m.start("unitrun") + (len(m.group("unitrun")) - len(m.group("unitrun").lstrip())) + len(keep)
+            else:
+                pos = m.end("num")
         for kind in ("num", "str", "op", "id"):
             if m.group(kind) is not None:
-                out.append((kind, m.group(kind), m.group("unit") if kind == "num" else None))
+                out.append((kind, m.group(kind), unit if kind == "num" else None))
                 break
     return out
 
@@ -209,27 +222,51 @@ class Parser:
         destination = "$" + target if target in self.vars else target
         node = {"node": "path_exists", "origin": "$" + origin, "destination": destination}
         if self.accept(","):
-            self.expect("through")
-            name = self.ident("a variable")
-            self.vars.append(name)
-            self.alias[name] = "node"
-            try:
-                self.expect(":")
-                node["node_filter"] = self.expr()
-            finally:
-                self.vars.pop()
-                self.alias.pop(name, None)
+            if self.accept("avoiding"):
+                # reaches(v, EXIT, avoiding 'a', 'b'): the model names categories; the filter is built from declared values
+                values = []
+                while True:
+                    kind, value, _ = self.take()
+                    if kind != "str":
+                        raise ExprError("avoiding needs category values in single quotes, such as avoiding 'bathroom'")
+                    values.append(value[1:-1])
+                    if not self.accept(","):
+                        break
+                node["_avoid"] = values
+            else:
+                self.expect("through")
+                name = self.ident("a variable")
+                self.vars.append(name)
+                self.alias[name] = "node"
+                try:
+                    self.expect(":")
+                    node["node_filter"] = self.expr()
+                finally:
+                    self.vars.pop()
+                    self.alias.pop(name, None)
         self.expect(")")
         return node
 
+    def linked(self) -> dict:
+        """linked(a, b): a door or opening joins the two rooms directly."""
+        self.expect("(")
+        ends = []
+        for k in range(2):
+            name = self.ident("a variable")
+            if name not in self.vars:
+                raise ExprError(f"'{name}' is not a variable of an enclosing forall/exists/aggregate")
+            ends.append("$" + name)
+            if k == 0:
+                self.expect(",")
+        self.expect(")")
+        return {"node": "linked", "a": ends[0], "b": ends[1]}
     def atom(self) -> dict:
         kind, value, unit = self.peek()
         if kind == "num":
             self.i += 1
             number = float(value)
             if unit:
-                u, factor = UNIT_FACTOR[unit]
-                return {"node": "literal", "value": round(number * factor, 9), "unit": u}
+                return {"node": "literal", "value": number, "unit": unit, "_written": True}
             return {"node": "literal", "value": int(number) if number.is_integer() else number, "unit": "1",
                     "_bare": True}
         if kind == "str":
@@ -253,6 +290,9 @@ class Parser:
             if value == "reaches" and self.peek(1)[1] == "(":
                 self.i += 1
                 return self.reaches()
+            if value == "linked" and self.peek(1)[1] == "(":
+                self.i += 1
+                return self.linked()
             if value in KEYWORDS:
                 raise ExprError(f"unexpected keyword '{value}'")
             self.i += 1
@@ -287,10 +327,26 @@ def _unit(node: dict, bindings: dict[str, Binding]) -> str | None:
         return _unit(node["body"], bindings)
     if kind in ("add", "sub"):
         return _unit(node["left"], bindings) or _unit(node["right"], bindings)
-    if kind == "div":
+    if kind in ("mul", "div"):
         left, right = _unit(node["left"], bindings), _unit(node["right"], bindings)
-        return "1" if left and left == right else None
+        if left and right:
+            try:
+                return units.combine(left, right, kind)
+            except units.UnitError:
+                return None
+        return left or (right if kind == "mul" else None)          # a bare number leaves the other unit unchanged
     return None
+
+
+def _convert_written(lit: dict, target: str) -> None:
+    """A number written with a unit takes the unit of what it is compared with: 90 cm against a length in m is 0.9 m."""
+    try:
+        if units.compatible(lit["unit"], target):
+            lit["value"] = round(units.convert(lit["value"], lit["unit"], target), 9)
+            lit["unit"] = target
+            lit.pop("_written", None)
+    except units.UnitError:
+        pass                                                   # incompatible: the validator refuses it with its reason
 
 
 def _infer(node, bindings: dict[str, Binding]) -> None:
@@ -311,11 +367,23 @@ def _infer(node, bindings: dict[str, Binding]) -> None:
                 if unit:
                     lit["unit"] = unit
                     del lit["_bare"]
+            elif lit.get("node") == "literal" and lit.get("_written"):
+                unit = _unit(other, bindings)
+                if unit:
+                    _convert_written(lit, unit)
 
 
 def _strip(node) -> None:
     if isinstance(node, dict):
         node.pop("_bare", None)
+        if node.pop("_written", None):                          # compared with nothing that has a unit: coherent SI
+            try:
+                u = units.parse_unit(node["unit"])
+                if not u.offset:
+                    node["value"] = round(node["value"] * u.factor, 9)
+                    node["unit"] = units.symbol_of(units.Unit(1.0, u.dims))
+            except units.UnitError:
+                pass
         for child in node.values():
             _strip(child)
     elif isinstance(node, list):
@@ -330,8 +398,49 @@ def to_expression(text: str, bindings: dict[str, Binding], entities: set[str] | 
     return tree
 
 
+def resolve_avoiding(node, kinds: dict | None) -> None:
+    """Turn `_avoid: ['a', 'b']` into a route filter on the category fact whose declared values contain them all."""
+    if isinstance(node, list):
+        for child in node:
+            resolve_avoiding(child, kinds)
+        return
+    if not isinstance(node, dict):
+        return
+    for child in node.values():
+        if isinstance(child, (dict, list)):
+            resolve_avoiding(child, kinds)
+    values = node.pop("_avoid", None)
+    if values is None:
+        return
+    fact = next((name for name, declared in (kinds or {}).items() if set(values) <= set(declared)), None)
+    if fact is None:
+        raise ExprError(f"avoiding {values}: no category fact declares all of these values; use only declared values")
+    tests = [{"node": "ne", "left": {"node": "fact", "entity": "$node", "name": fact},
+              "right": {"node": "literal", "value": v, "unit": "1"}} for v in values]
+    node["node_filter"] = tests[0] if len(tests) == 1 else {"node": "all", "args": tests}
+
+
+def apply_passable(node, passable: list[str] | None) -> None:
+    """Routes and links follow the connections the fact graph declares passable (a door, an opening, a pipe)."""
+    if passable is None:
+        return
+    if isinstance(node, list):
+        for child in node:
+            apply_passable(child, passable)
+        return
+    if not isinstance(node, dict):
+        return
+    if node.get("node") in ("path_exists", "linked") and "via_edges" not in node:
+        node["via_edges"] = list(passable)
+    for child in node.values():
+        if isinstance(child, (dict, list)):
+            apply_passable(child, passable)
+
+
 def compile_expr_program(fields: dict, document: str, bindings: dict[str, Binding],
-                         entities: set[str] | None = None) -> dict:
+                         entities: set[str] | None = None, kinds: dict | None = None,
+                         passable: list[str] | None = None, labels: dict | None = None,
+                         groups: dict | None = None) -> dict:
     """The model's small JSON (strings for applies_when / unless / require) -> a Program dict."""
     if not str(fields.get("require", "")).strip():
         raise ExprError("require is empty")
@@ -346,6 +455,13 @@ def compile_expr_program(fields: dict, document: str, bindings: dict[str, Bindin
         program["applicability"] = to_expression(fields["applies_when"], bindings, entities)
     if (fields.get("unless") or "").strip():
         program["exemption"] = to_expression(fields["unless"], bindings, entities)
+    for key in ("requirement", "applicability", "exemption"):
+        if key in program:
+            from .terms import resolve_terms
+
+            resolve_terms(program[key], kinds or {}, labels or {}, groups or {})
+            resolve_avoiding(program[key], kinds)
+            apply_passable(program[key], passable)
     return program
 
 
@@ -369,9 +485,11 @@ def to_text(node: dict, parent: int = 0) -> str:
             return "true" if value else "false"
         if isinstance(value, str):
             return "'" + value + "'"
-        return _number(value) + (f" {unit}" if unit in ("m", "m2") else "")
+        return _number(value) + (f" {unit}" if unit not in ("1", "count") else "")
     if kind == "fact":
         return f"{'n' if node['entity'] == '$node' else node['entity'].lstrip('$')}.{node['name']}"
+    if kind == "linked":
+        return f"linked({node['a'].lstrip('$')}, {node['b'].lstrip('$')})"
     if kind == "path_exists":
         through = f", through n: {to_text(node['node_filter'])}" if node.get("node_filter") else ""
         return f"reaches({node['origin'].lstrip('$')}, {node['destination'].lstrip('$')}{through})"

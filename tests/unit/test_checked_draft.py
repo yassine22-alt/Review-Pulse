@@ -81,3 +81,13 @@ def test_a_route_requirement_is_drafted_and_judged_on_the_plan_graph():
     assert run_program(program, to_inputs(bad), include_drafts=True, graph=to_graph(bad))["outcome"] == "VIOLATED"
     good = from_building(handmade.build(bed_b_via_bath=False), complete=True)
     assert run_program(program, to_inputs(good), include_drafts=True, graph=to_graph(good))["outcome"] == "SATISFIED"
+
+
+def test_a_clause_title_is_not_part_of_the_checked_requirement():
+    from reviewpulse.interpreter.checked import strip_title
+
+    assert strip_title("Circulation. Every habitable room reaches an exit.") == "Every habitable room reaches an exit."
+    assert strip_title("Dead ends. A room with a single door has a window.") == "A room with a single door has a window."
+    assert strip_title("Width 0.9 m. Doors open outward.") == "Width 0.9 m. Doors open outward."     # a digit: kept
+    assert strip_title("Every door is at least 0.80 m wide.") == "Every door is at least 0.80 m wide."
+    assert strip_title("Sortie. Tout logement a une porte.") == "Tout logement a une porte."

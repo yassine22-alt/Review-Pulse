@@ -25,7 +25,18 @@ from .demand import quantities
 
 BARE_NUMBER = re.compile(r"(?<![\w.,])\d+(?:[.,]\d+)?(?![\w²])")
 FLIP = {"ge": "le", "le": "ge", "gt": "lt", "lt": "gt", "eq": "eq", "ne": "ne"}
-CANON = {"mm": 0.001, "cm": 0.01, "m": 1.0, "m2": 1.0, "ratio": 1.0, "%": 0.01, "km": 1000.0}
+CANON = {"mm": 0.001, "cm": 0.01, "m": 1.0, "m2": 1.0, "ratio": 1.0, "%": 0.01, "km": 1000.0}      # fallback only
+
+
+def si_factor(unit: str) -> float | None:
+    """The factor to the coherent SI unit for any unit the table knows; None when the unit is not recognised."""
+    from ..interpreter import units as U
+
+    if unit in ("ratio", "1"):
+        return 1.0
+    if U.is_unit(unit) and not U.parse_unit(unit).offset:
+        return U.parse_unit(unit).factor
+    return CANON.get(unit)
 UNIT_SCALES = (1.0, 0.01, 0.001)       # a number with an unrecognised unit word may be cm or mm of a metre rule
 REFERENCE = re.compile(
     r"\b(?:articles?|art\.?|sections?|clauses?|paragraphs?|para\.?|tables?|figures?|annex(?:es?)?|appendix|chapters?|"
@@ -108,7 +119,8 @@ def number_spans(text: str, comma: bool) -> list[tuple[float, int, int, bool]]:
     flat = prepare(text)
     found = []
     for q in quantities(flat, comma):
-        found.append((round(q.value * CANON.get(q.unit, 1.0), 9), q.span[0], q.span[1], q.unit not in CANON))
+        factor = si_factor(q.unit)
+        found.append((round(q.value * (factor if factor is not None else 1.0), 9), q.span[0], q.span[1], factor is None))
     for m in BARE_NUMBER.finditer(flat):
         if not any(a <= m.start() < b for _, a, b, _ in found):
             raw = m.group(0)
@@ -127,9 +139,14 @@ def number_words(text: str, lang: str | None) -> list[float]:
 
 
 def program_numbers(program: Program) -> list[float]:
-    return [round(float(node.value), 9)
-            for expr in (program.applicability, program.exemption, program.requirement) for node in walk(expr)
-            if isinstance(node, LiteralExpr) and not isinstance(node.value, (bool, str))]
+    """Every number the rule uses, in coherent SI, whatever unit the fact it is compared with is declared in."""
+    out = []
+    for expr in (program.applicability, program.exemption, program.requirement):
+        for node in walk(expr):
+            if isinstance(node, LiteralExpr) and not isinstance(node.value, (bool, str)):
+                factor = si_factor(node.unit) if node.unit not in ("1", "count") else 1.0
+                out.append(round(float(node.value) * (factor if factor is not None else 1.0), 9))
+    return out
 
 
 def _match(value: float, pool: list[float], scales: tuple[float, ...] = (1.0,)) -> bool:
@@ -220,6 +237,9 @@ def check_scope(program: Program, text: str, cat: dict) -> list[Issue]:
             if not words or sum(value in vs for vs in cat["kinds"].values()) == 1:
                 words.add(value.replace("_", " "))       # a value shared by several facts ("external") is ambiguous
             mentioned = any(re.search(rf"(?<![^\W\d_]){re.escape(w.lower())}(?![^\W\d_])", low) for w in words if w)
+            for term, members in cat.get("groups", {}).get(fact, {}).items():
+                if value in members and re.search(rf"(?<![^\W\d_]){re.escape(term.split()[0])}", low):
+                    mentioned = True        # the sentence names a group the document defined, which includes this value
             if mentioned and (fact, value) not in used:
                 issues.append(Issue("scope_dropped", f"the sentence names '{value}' but the rule has no condition "
                                                      f"on it, so it applies to every member"))
@@ -245,10 +265,10 @@ def check_aggregate(program: Program, text: str, lang: str) -> list[Issue]:
 def check_route(program: Program) -> list[Issue]:
     """A route rule ("reaches an exit without passing through ...") cannot be compared with its sentence by any check here:
     who may be passed through is exactly what a model gets wrong. It is allowed, but the reviewer is told to read it."""
-    from ..interpreter.schema import PathExpr
+    from ..interpreter.schema import LinkExpr, PathExpr
 
     for expr in (program.applicability, program.exemption, program.requirement):
-        if any(isinstance(n, PathExpr) for n in walk(expr)):
+        if any(isinstance(n, (PathExpr, LinkExpr)) for n in walk(expr)):
             return [Issue("route_unchecked", "this rule is about routes between rooms; no automatic check can confirm which "
                                              "rooms the sentence allows a route to pass through, so read the rule carefully",
                           blocking=False)]

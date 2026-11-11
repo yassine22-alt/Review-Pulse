@@ -68,7 +68,10 @@ def build(bed_b_via_bath: bool = True, narrow_door: bool = False, tier: str = "T
         if r.has_window:
             edges.append(Edge(a=r.id, b="EXTERIOR", kind="window", prov=P))
     els.append(Element(id="w1", cls="window", geom=rect(0, 1, 0.2, 2), attrs={"width_m": 1.0}, prov=P))
-    return BuildingModel(sheet=sheet, elements=els, rooms=rooms, edges=edges, tier=tier)
+    model = BuildingModel(sheet=sheet, elements=els, rooms=rooms, edges=edges, tier=tier)
+    # every object shares the module's Prov above; a round trip gives each its own copy, so one test that edits a room's
+    # provenance (for example marks its label as read by a model) cannot change the plans other tests build
+    return BuildingModel.model_validate(model.model_dump())
 
 
 if __name__ == "__main__":     # writes tests/fixtures/handmade_model.json

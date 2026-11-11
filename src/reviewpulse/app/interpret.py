@@ -216,4 +216,7 @@ def coverage(store: Store, pid: str) -> dict:
 
     findings = read("findings.json", {})
     findings = findings.get("findings", []) if isinstance(findings, dict) else findings
-    return build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings)
+    from ..factgraph.from_building import LOOKED_FOR
+
+    return build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings,
+                 looked_for=list(LOOKED_FOR))

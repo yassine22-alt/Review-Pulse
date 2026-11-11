@@ -41,18 +41,28 @@ Return a JSON object. require is a one-line expression:
   exists <collection> <v> [where <condition>]: <condition>      at least one member does
   count(<collection> <v> [where <condition>])                    a number; also sum(<c> <v> [where ..]: <value>),
                                                                  min(..), max(..)
-  reaches(<v>, EXIT)                                             a route over doors and openings from member v to the
-  reaches(<v>, EXIT, through n: <condition on n>)                outside; with `through`, only passing through rooms n
-                                                                 that satisfy the condition (n.<fact> reads the room)
-  <v>.<fact> is a fact of a member; building.<fact> is a fact of the whole. Compare with >= <= > < == !=;
+  reaches(<v>, <B>)                                              a route over the passable connections leads from member
+  reaches(<v>, <B>, avoiding 'a', 'b')                           v to the boundary B (one of `boundaries`); `avoiding` names
+                                                                 categories the route must not pass through (values from
+                                                                 category_values); the start is never avoided
+  reaches(<v>, <B>, through n: <condition on n>)                 the same with any condition on the members passed through
+  linked(<a>, <b>)                                               a connection joins members a and b directly
+  Connection counts and routes are also facts of each member (see facts_of, e.g. links_..., reaches_...).
+  <v>.<fact> is a fact of a member; <whole>.<fact> is a fact of the whole, named in `whole`. Compare with >= <= > < == !=;
   combine with and, or, not and parentheses. Write numbers with units: 90 cm, 0.9 m, 900 mm, 9 m2, 25 %.
   A number without a unit is a count. Text values are in single quotes.
 applies_when: a condition under which the rule applies at all (null if it always applies).
 unless: a condition that removes the obligation (null if none).
 Rules to follow:
   - Use only collection and fact names that are declared: `facts_of` lists the facts of each collection and
-    `building_facts` those of the whole; `category_values` lists the only values a category fact can have
+    `whole_facts` those of the whole; `category_values` lists the only values a category fact can have
     (write a value exactly as listed). Never invent a name or a value. Do not compare two variables.
+  - In the examples below the whole is called site; use the name given in `whole`.
+  - A sentence about the whole thing ("every dwelling has ...", "the network has ...") is a rule about the whole: use
+    `<whole>.<fact>` and no collection. A sentence about each member of a kind ("every room ...") loops over it.
+  - `category_groups` lists names the document defines for several values ("habitable room"); you may compare a
+    category fact with such a name. A describing word that is neither a value nor a group (enclosed, any, every,
+    each) is not a filter: leave it out.
   - Every category the sentence names (a kind of room, door, stair...) must appear as a condition on its kind fact.
   - Every number in the sentence must appear in the expression, with the comparison the wording implies:
     "at least" is >=, "more than" is >, "at most" is <=, "less than" is <.
@@ -64,21 +74,29 @@ Examples (made-up facts):
 {"title":"shelter area","applies_when":null,"unless":null,"require":"forall shelters s: s.shelters_area >= 7 m2",
  "sources":[{"clause":"Art. 1","quote":"Each shelter shall have a floor area of at least 7 m2"}],"unresolved":[]}
 "Each covered cabin has a width of at least 90 cm and a depth of at least 1.2 m, except in sites of 2 pontoons or fewer."
-{"title":"covered cabins","applies_when":null,"unless":"building.pontoons <= 2",
+{"title":"covered cabins","applies_when":null,"unless":"site.pontoons <= 2",
  "require":"forall cabins c where c.cabins_kind == 'covered': c.cabins_width >= 90 cm and c.cabins_depth >= 1.2 m",
  "sources":[{"clause":"Art. 1","quote":"Each covered cabin has a width of at least 90 cm and a depth of at least 1.2 m"}],
  "unresolved":[]}
 "From every shelter there is a way out that does not pass through a store."
 {"title":"way out","applies_when":null,"unless":null,"require":"forall shelters s: reaches(s, EXIT, through n: n.shelters_kind != 'store')",
  "sources":[{"clause":"Art. 1","quote":"From every shelter there is a way out that does not pass through a store"}],"unresolved":[]}
+"No door joins a store directly to a shelter."
+{"title":"store and shelter","applies_when":null,"unless":null,"require":"forall shelters s where s.shelters_kind == 'store': forall shelters t where t.shelters_kind == 'sleeping': not linked(s, t)",
+ "sources":[{"clause":"Art. 1","quote":"No door joins a store directly to a shelter"}],"unresolved":[]}
+"Every shelter has at least one door, and one with a single door has a window."
+{"title":"doors and windows","applies_when":null,"unless":null,"require":"forall shelters s: s.shelters_doors >= 1 and (s.shelters_doors != 1 or s.shelters_has_window)",
+ "sources":[{"clause":"Art. 1","quote":"Every shelter has at least one door, and one with a single door has a window"}],"unresolved":[]}
 "At least 2 cabins shall be 1 m wide or more."
 {"title":"wide cabins","applies_when":null,"unless":null,"require":"count(cabins c where c.cabins_width >= 1 m) >= 2",
  "sources":[{"clause":"Art. 1","quote":"At least 2 cabins shall be 1 m wide or more"}],"unresolved":[]}"""
 
 
-def _build(raw: dict, ctx, bindings, collections, entities, check=None) -> Program:
+def _build(raw: dict, ctx, bindings, collections, entities, check=None, kinds=None, passable=None,
+           cat=None) -> Program:
     try:
-        tree = hoist(compile_expr_program(raw, ctx.document, bindings, entities))
+        tree = hoist(compile_expr_program(raw, ctx.document, bindings, entities, kinds=kinds, passable=passable,
+                                         labels=(cat or {}).get("kind_labels"), groups=(cat or {}).get("groups")))
     except ExprError as exc:
         raise ValueError(f"expression: {exc}") from exc
     tree["sources"] = fix_spans([{"quote": s["quote"]} for s in raw.get("sources", [])], ctx)
@@ -113,7 +131,7 @@ def draft_expr(arm: str, item, client) -> Draft:
     try:
         raw = client.complete(EXPR_SYSTEM, user, EXPR_SCHEMA)
         try:
-            return Draft(arm, _build(raw, ctx, bindings, collections, entities, check), "ok", "",
+            return Draft(arm, _build(raw, ctx, bindings, collections, entities, check, cat.get("kinds"), cat.get("passable"), cat), "ok", "",
                          time.time() - t0, raw)
         except Exception as exc:  # noqa: BLE001
             if arm == "expr":
@@ -122,7 +140,7 @@ def draft_expr(arm: str, item, client) -> Draft:
         again = user + chr(10) + "PREVIOUS_DRAFT:" + json.dumps(raw) + chr(10) + "CHECKER_ERROR: " + first
         raw2 = client.complete(EXPR_SYSTEM + REPAIR_NOTE, again, EXPR_SCHEMA)
         try:
-            program = _build(raw2, ctx, bindings, collections, entities, check)
+            program = _build(raw2, ctx, bindings, collections, entities, check, cat.get("kinds"), cat.get("passable"), cat)
         except Exception as exc:  # noqa: BLE001
             return Draft(arm, None, _stage(exc), f"after repair: {type(exc).__name__}: {str(exc)[:250]}",
                          time.time() - t0, raw2, repaired=True)

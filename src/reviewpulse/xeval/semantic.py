@@ -66,7 +66,7 @@ def check_owners(program: Program, cat: dict) -> list[Issue]:
             if facts is not None and name not in facts:
                 where = "a fact of the whole" if name in building else "not a fact of it"
                 issues.append(Issue("fact_wrong_owner", f"'{name}' is {where}, but it is read from a member of "
-                                                        f"{coll}; use building.{name} or one of {sorted(facts)}"))
+                                                        f"{coll}; use {cat.get('whole') or 'the whole'}.{name} or one of {sorted(facts)}"))
         elif name not in building and entity not in ("", "$"):
             issues.append(Issue("fact_wrong_owner", f"'{name}' is not a fact of {entity}"))
     return issues
@@ -157,6 +157,6 @@ def _requirement_facts(program: Program) -> list[str]:
 
     names: list[str] = []
     for node in walk(program.requirement):
-        if isinstance(node, FactExpr) and node.name not in names and not str(node.entity).startswith("building"):
+        if isinstance(node, FactExpr) and node.name not in names and str(node.entity).startswith("$"):
             names.append(node.name)
     return names

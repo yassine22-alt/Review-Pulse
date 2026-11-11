@@ -69,6 +69,12 @@ class FactGraph(Model):
         description="Per string attribute, per value, the words documents use for it in any language "
                     "(room_type -> bedroom -> [chambre, bedroom, ...]); lets a sentence be matched to a value")
     graph_complete: bool = Field(default=False, description="Every relation is listed, so 'no route' can be proven")
+    route_targets: list[str] | None = Field(
+        default=None, description="Boundary nodes a route may END at (the exit, the outlet); None means every boundary. "
+                                  "A boundary reached only through edges a route cannot follow (a window to the outside) "
+                                  "is left out so no fact about it exists to be mistaken for the real target")
+    passable: list[str] | None = Field(
+        default=None, description="Edge kinds a route may follow (a door, an opening, a pipe); None means every kind")
 
     @model_validator(mode="after")
     def consistent(self):

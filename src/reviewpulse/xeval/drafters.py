@@ -100,8 +100,11 @@ def _payload(ctx: ContextBundle, cat: dict) -> str:
         "collections": list(cat["collections"]),
         # which facts belong to which collection, which are facts of the whole, and the only values a category fact has
         "facts_of": {name: spec["facts"] for name, spec in cat["collections"].items()},
-        "building_facts": cat.get("building", []),
+        "whole": cat.get("whole") or "building",
+        "whole_facts": cat.get("building", []),
         "category_values": cat.get("kinds", {}),
+        "boundaries": cat.get("boundaries", []),
+        "category_groups": {term: values for groups in cat.get("groups", {}).values() for term, values in groups.items()},
     }, ensure_ascii=False)
 
 

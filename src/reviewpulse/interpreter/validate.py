@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from . import units
 from .schema import (
     BinaryExpr,
     Binding,
     Expr,
     FactExpr,
+    LinkExpr,
     LiteralExpr,
     LogicExpr,
     PathExpr,
@@ -15,6 +17,13 @@ from .schema import (
     scalar_kind,
     walk,
 )
+
+
+def _same_type(a: tuple[str, str], b: tuple[str, str]) -> bool:
+    """Same kind, and for numbers the same dimensions AND scale (a length in cm is not comparable with one in m)."""
+    if a[0] != b[0]:
+        return False
+    return a[0] != "number" or units.same_unit(a[1], b[1])
 
 
 def expression_type(
@@ -34,6 +43,11 @@ def expression_type(
     if isinstance(expr, LogicExpr):
         if any(expression_type(arg, bindings, variables) != ("boolean", "1") for arg in expr.args):
             raise ValueError("logical operators require booleans")
+        return "boolean", "1"
+    if isinstance(expr, LinkExpr):
+        for endpoint in (expr.a, expr.b):
+            if endpoint.startswith("$") and endpoint not in variables:
+                raise ValueError(f"unbound link endpoint {endpoint}")
         return "boolean", "1"
     if isinstance(expr, PathExpr):
         for endpoint in (expr.origin, expr.destination):
@@ -61,25 +75,17 @@ def expression_type(
     left = expression_type(expr.left, bindings, variables)
     right = expression_type(expr.right, bindings, variables)
     if expr.node in ("eq", "ne", "lt", "le", "gt", "ge", "add", "sub"):
-        if left != right:
+        if not _same_type(left, right):
             raise ValueError(f"{expr.node} has incompatible types/units: {left} and {right}")
         if expr.node not in ("eq", "ne") and left[0] != "number":
             raise ValueError(f"{expr.node} requires numbers")
         return left if expr.node in ("add", "sub") else ("boolean", "1")
     if not isinstance(expr, BinaryExpr) or left[0] != "number" or right[0] != "number":
         raise ValueError("arithmetic requires numbers")
-    if expr.node == "mul":
-        if "1" in (left[1], right[1]):
-            return "number", right[1] if left[1] == "1" else left[1]
-        if left[1] == right[1] == "m":
-            return "number", "m2"
-    elif left[1] == right[1]:
-        return "number", "1"
-    elif right[1] == "1":
-        return left
-    elif left[1] == "m2" and right[1] == "m":
-        return "number", "m"
-    raise ValueError(f"unsupported dimensional arithmetic: {left[1]} {expr.node} {right[1]}")
+    try:
+        return "number", units.combine(left[1], right[1], "mul" if expr.node == "mul" else "div")
+    except units.UnitError as exc:
+        raise ValueError(f"unsupported dimensional arithmetic: {left[1]} {expr.node} {right[1]} ({exc})") from exc
 
 
 def validate_program(

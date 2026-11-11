@@ -137,6 +137,11 @@ def _issues_from_missing(missing: list[str]) -> list[EvidenceIssue]:
 # ---- geometry and wording ------------------------------------------------------------------------------------------
 
 
+def _collection(program: Program) -> str:
+    req = program.requirement
+    return req.collection if isinstance(req, SetExpr) else "members"
+
+
 def geometry_of(model: BuildingModel, entity: str) -> dict:
     """Where an entity is on the sheet, in the evidence format the viewer draws."""
     for room in model.rooms:
@@ -160,7 +165,17 @@ def _source(program: Program) -> dict:
             "span": [span.start, span.end] if span else None}
 
 
-def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel, tier: str) -> tuple[list[Finding], Explained]:
+def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | None = None, tier: str = "T1",
+                locate=None) -> tuple[list[Finding], Explained]:
+    """`locate(entity) -> {polygons, label_at, name}` says where a member is drawn. The building plan reader's locator is
+    used when `model` is given; any other producer passes its own, or none (findings then carry no outline)."""
+    if locate is None:
+        if model is not None:
+            def locate(entity):
+                return geometry_of(model, entity)
+        else:
+            def locate(entity):
+                return {"polygons": [], "label_at": None, "name": entity}
     explained = explain(program, inputs, graph)
     assessment = Assessment(outcome=explained.outcome, evidence_issues=explained.issues, severity="MAJOR",
                             rule_authority="APPROVED_REQUIREMENT", dependencies=explained.dependencies)
@@ -172,7 +187,7 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel, t
     if explained.outcome == "VIOLATED":
         violated = [m for m in explained.members if m.state == "violated"]
         for m in violated:
-            geo = geometry_of(model, m.entity)
+            geo = locate(m.entity)
             labels = [{"at": geo["label_at"], "text": m.detected}] if geo["label_at"] and m.detected else []
             said = "; ".join(f"{f['what']} is {f['detected']} ({f['required']} required)" for f in m.fails)
             findings.append(Finding(
@@ -195,7 +210,7 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel, t
             findings.append(Finding(
                 **base, verdict="WARNING", subject_ids=[m.entity for m in explained.members],
                 message=f"{program.title}: no violation among the {explained.selected} found; not confirmed, because the "
-                        f"plan reader's list was not confirmed complete.",
+                        f"nobody confirmed that the list of {_collection(program)} is complete.",
                 evidence={**meta, "checked": explained.selected}))
         else:
             reason = ", ".join(explained.missing[:FACT_LIMIT]) or "facts the plan does not provide"

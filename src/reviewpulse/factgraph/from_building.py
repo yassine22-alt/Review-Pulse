@@ -22,6 +22,8 @@ BINDINGS = {
     "tag": Binding(kind="string", description="Schedule tag of the element"),
     "tread_depth_m": Binding(kind="number", unit="m", description="Stair tread depth (pitch of the tread lines)"),
     "stair_width_m": Binding(kind="number", unit="m", description="Stair flight width (length of the tread lines)"),
+    "exit_distance_m": Binding(kind="number", unit="m",
+                               description="Travel distance from the farthest point of the room to the outside"),
     "tread_lines": Binding(kind="number", unit="count", description="Number of tread lines drawn in the stair flight"),
 }
 STAIR_TRUST = 0.8                                   # calibrated probability a detected flight must reach to be trusted
@@ -60,6 +62,7 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
         used.add(name)
         return Fact(value=value, source=source, trusted=trusted)
 
+    distances = _exit_distances(model)
     for room in model.rooms:
         src = f"{model.sheet.id}:{room.id}"
         label_ok = t1 and room.prov.evidence.get("label_source") not in ("llm", "vlm")
@@ -68,7 +71,14 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
             "area_m2": fact("area_m2", room.area_m2, src, measured),
             "min_width_m": fact("min_width_m", room.min_width_m, src, measured),
             "has_window": fact("has_window", room.has_window, src, measured),
+            # a walked distance needs the geometry and the scale; how rooms connect is derived from the graph below
         }.items() if v is not None}
+        if model.sheet.scale.metres_per_unit:
+            # with a scale the distance is a fact of every room; where no route reaches the outside its value is unknown
+            # (not absent), so a rule about it is undecided instead of impossible to write
+            used.add("exit_distance_m")
+            attrs["exit_distance_m"] = Fact(value=distances.get(room.id), source=src,
+                                            trusted=measured and room.id in distances)
         nodes.append(Node(id=room.id, kind="room", label=room.label, attrs=attrs))
     for el in model.elements:
         if el.cls in ("wall", "other", "fixture"):
@@ -94,8 +104,9 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
         }.items() if v is not None}
         nodes.append(Node(id=el.id, kind=el.cls, label=el.tag, attrs=attrs))
     nodes.append(Node(id="building", kind="building", role="whole"))
-    boundary = {e.b for e in model.edges if e.b in BOUNDARY} | {e.a for e in model.edges if e.a in BOUNDARY}
-    nodes += [Node(id=b, kind=BOUNDARY[b], role="boundary") for b in sorted(boundary)]
+    # the outside is always declared: a plan with no door to it is a plan where "no route" is true, not a plan that
+    # never mentioned an exit
+    nodes += [Node(id=b, kind=kind, role="boundary") for b, kind in sorted(BOUNDARY.items())]
 
     confirmed = {e.id for e in model.elements if e.confirmed}
     edges = []
@@ -111,9 +122,42 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
     # the stair finder reaches about half of drawn stairs (see docs/progress/M7): its list is never claimed complete,
     # so a rule over stairs reads UNRESOLVED instead of passing because none were found
     inventory["stair"] = Inventory(complete=False, trusted=False)
-    return FactGraph(
+    from .relations import derive_relations
+
+    return derive_relations(FactGraph(
         provenance=Provenance(document=model.sheet.source_file, sheet=model.sheet.id, tier=model.tier,
                               scale=model.sheet.scale.method, producer="reviewpulse.building_model"),
         bindings={k: v for k, v in BINDINGS.items() if k in used}, nodes=nodes, edges=edges,
         inventory=inventory, graph_complete=complete,
-        value_labels={"room_type": room_labels({n.attrs["room_type"].value for n in nodes if "room_type" in n.attrs})})
+        value_labels={"room_type": room_labels(_room_vocabulary() | {n.attrs["room_type"].value for n in nodes
+                                                                     if "room_type" in n.attrs})},
+        passable=["door", "opening"], route_targets=["EXIT"]))
+
+
+def _exit_distances(model: BuildingModel) -> dict[str, float]:
+    """Travel distance from the farthest point of each room to the outside, walked around corners, door to door: the
+    same computation the rule engine uses for its travel-distance check. Empty when the scale is unknown or it fails."""
+    if not model.sheet.scale.metres_per_unit:
+        return {}
+    try:
+        from ..engine.context import Context
+        from ..engine.traversal import _EscapeField
+
+        ctx = Context.of(model)
+        field = _EscapeField(ctx, ["door", "opening"])
+        out = {}
+        for room in model.rooms:
+            far = field.farthest(room.id)
+            if far is not None:
+                out[room.id] = round(far[0] * ctx.mpu, 3)
+        return out
+    except Exception:  # noqa: BLE001 - a geometry problem leaves distances unknown; it never loses the plan
+        return {}
+
+
+def _room_vocabulary() -> set[str]:
+    """Every room type the plan reader can name, so a rule may speak of a type this plan happens not to contain."""
+    import yaml
+
+    path = Path(__file__).resolve().parents[1] / "annotate" / "lexicon" / "curated.yaml"
+    return set(yaml.safe_load(path.read_text(encoding="utf-8"))["types"])

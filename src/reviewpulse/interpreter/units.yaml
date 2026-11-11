@@ -1,0 +1,97 @@
+# Units of measure as DATA: a numeric factor to the coherent SI unit and a vector of exponents over the base dimensions
+# (the model of UCUM and QUDT). Add a domain's unit by adding a line; nothing in code names a unit.
+#
+#   base      the dimensions; "count" is a pseudo dimension so that a number of things is not mistaken for a ratio
+#   units     symbol: {factor to the coherent unit, dims: exponents, offset: added after scaling (temperatures only)}
+#   prefixes  SI prefixes, accepted on every unit listed in `prefixable`
+#
+# Not supported on purpose: offset units inside products or quotients (degC * m is ambiguous, as in pint); use K there.
+
+base: [m, kg, s, A, K, mol, cd, count]
+
+units:
+  "1": {dims: {}}
+  "%": {factor: 0.01, dims: {}}
+  ppm: {factor: 1.0e-6, dims: {}}
+  count: {dims: {count: 1}}
+  # length
+  m: {dims: {m: 1}}
+  in: {factor: 0.0254, dims: {m: 1}}
+  ft: {factor: 0.3048, dims: {m: 1}}
+  yd: {factor: 0.9144, dims: {m: 1}}
+  mi: {factor: 1609.344, dims: {m: 1}}
+  # area and volume
+  ha: {factor: 10000, dims: {m: 2}}
+  L: {factor: 0.001, dims: {m: 3}}
+  l: {factor: 0.001, dims: {m: 3}}
+  gal: {factor: 0.003785411784, dims: {m: 3}}
+  # mass
+  g: {factor: 0.001, dims: {kg: 1}}
+  t: {factor: 1000, dims: {kg: 1}}
+  lb: {factor: 0.45359237, dims: {kg: 1}}
+  # time
+  s: {dims: {s: 1}}
+  min: {factor: 60, dims: {s: 1}}
+  h: {factor: 3600, dims: {s: 1}}
+  d: {factor: 86400, dims: {s: 1}}
+  Hz: {dims: {s: -1}}
+  # mechanics
+  N: {dims: {kg: 1, m: 1, s: -2}}
+  Pa: {dims: {kg: 1, m: -1, s: -2}}
+  bar: {factor: 100000, dims: {kg: 1, m: -1, s: -2}}
+  atm: {factor: 101325, dims: {kg: 1, m: -1, s: -2}}
+  psi: {factor: 6894.757293168, dims: {kg: 1, m: -1, s: -2}}
+  J: {dims: {kg: 1, m: 2, s: -2}}
+  Wh: {factor: 3600, dims: {kg: 1, m: 2, s: -2}}
+  W: {dims: {kg: 1, m: 2, s: -3}}
+  # electricity, temperature, amount, light
+  A: {dims: {A: 1}}
+  V: {dims: {kg: 1, m: 2, s: -3, A: -1}}
+  K: {dims: {K: 1}}
+  Cel: {dims: {K: 1}, offset: 273.15}
+  degC: {dims: {K: 1}, offset: 273.15}
+  "°C": {dims: {K: 1}, offset: 273.15}
+  degF: {factor: 0.5555555555555556, dims: {K: 1}, offset: 255.3722222222222}
+  "°F": {factor: 0.5555555555555556, dims: {K: 1}, offset: 255.3722222222222}
+  mol: {dims: {mol: 1}}
+  cd: {dims: {cd: 1}}
+  lx: {dims: {cd: 1, m: -2}}
+  # angle is dimensionless
+  rad: {dims: {}}
+  deg: {factor: 0.017453292519943295, dims: {}}
+  "°": {factor: 0.017453292519943295, dims: {}}
+
+prefixes: {Y: 1e24, Z: 1e21, E: 1e18, P: 1e15, T: 1e12, G: 1e9, M: 1e6, k: 1e3, h: 1e2, da: 1e1, d: 1e-1, c: 1e-2,
+           m: 1e-3, u: 1e-6, "µ": 1e-6, n: 1e-9, p: 1e-12, f: 1e-15}
+
+# units that take a prefix (kilo-, milli-, ...); "min", "h", "d", "ha"... do not, except where listed
+prefixable: [m, g, s, Hz, N, Pa, bar, J, Wh, W, A, V, K, mol, cd, lx, L, l, rad]
+
+# how documents write units in words (all lower case); the value is a symbol above
+words:
+  m2: [square metres, square meters, sq m, sq. m, mètres carrés, metre carre, quadratmeter, metros cuadrados, metri quadrati]
+  m3: [cubic metres, cubic meters, mètres cubes, kubikmeter, metros cúbicos, metri cubi]
+  mm: [millimetres, millimeters, millimètres, millimetre, millimeter, millimètre, millimeter, milímetros]
+  cm: [centimetres, centimeters, centimètres, centimetre, centimeter, centimètre, zentimeter, centímetros]
+  km: [kilometres, kilometers, kilomètres, kilometre, kilometer, kilomètre, kilómetros]
+  m: [metres, meters, mètres, metre, meter, mètre, metros, metri]
+  L: [litres, liters, litre, liter, litros, litri]
+  kg: [kilograms, kilogrammes, kilogram, kilogramme, kilogramm, kilogramos]
+  g: [grams, grammes, gram, gramme]
+  t: [tonnes, tonne, tonnen]
+  s: [seconds, secondes, second, seconde, sekunden, segundos]
+  min: [minutes, minute, minuten, minutos]
+  h: [hours, heures, hour, heure, stunden, stunde, horas]
+  d: [days, jours, day, jour, tage, días]
+  "%": [per cent, percent, pour cent, pourcent, prozent, por ciento, per cento]
+  deg: [degrees, degrés, degree, degré, grad, grados]
+  Pa: [pascals, pascal]
+  kPa: [kilopascals, kilopascal]
+  bar: [bars]
+  W: [watts, watt]
+  kW: [kilowatts, kilowatt]
+  N: [newtons, newton]
+  kN: [kilonewtons, kilonewton]
+  V: [volts, volt]
+  A: [amperes, amps, ampère, ampères]
+  Cel: [degrees celsius, degrés celsius, grad celsius, degree celsius]

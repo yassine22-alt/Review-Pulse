@@ -95,6 +95,11 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         d["analysed"] = (store.run_dir(p.id) / "view.json").exists()
         d["checked"] = (store.run_dir(p.id) / "findings.json").exists()
         d["has_drafts"] = any(store.drafts_dir(p.id).glob("*.drafts.yaml"))
+        # what the plan reader looks for, in words: the screens say what a person confirms, from the data
+        from ..factgraph.from_building import LOOKED_FOR
+        from ..report.coverage import _every
+
+        d["looked_for"] = _every([k + "s" if not k.endswith("s") else k for k in LOOKED_FOR])
         try:
             d["rules"] = service.rules_summary(store, p)
         except ValueError as e:

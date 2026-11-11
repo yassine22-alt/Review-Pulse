@@ -377,7 +377,7 @@ function inventoryBox(p) {
       <span class="badge ${ok ? "state-approved" : "state-pending"}" role="status" aria-live="polite">${ok ? "Confirmed" : "Not confirmed"}</span>
       <span class="spacer"></span>
       <button class="btn ${ok ? "" : "primary"}" id="invconfirm">${ok ? "Withdraw confirmation" : "Confirm"}</button></div>
-    <p class="muted">Passes are reported only after you confirm that every room, door and window on the plan was found. Until then a rule can show a violation but never a pass.</p>
+    <p class="muted">Passes are reported only after you confirm that ${esc((p.looked_for || "every member").replace(/^every /, "all the "))} on the plan were found. Until then a rule can show a violation but never a pass.</p>
   </div>`;
 }
 
@@ -502,7 +502,7 @@ function clauseCard(c, r) {
   if (!r) return `<div class="draft">${head}<div class="muted">Not read yet</div><div class="row"><button class="btn" data-read="${esc(c.id)}">Read this clause</button></div></div>`;
   const appr = r.decision && r.decision.state === "approved";
   const body = r.status === "DRAFTED"
-    ? `<div class="flag" style="color:var(--pass)">Rule written. It reads: <code>${esc(r.readback)}</code>${r.applies_when && r.applies_when !== "true" ? `<br>Applies when: <code>${esc(r.applies_when)}</code>` : ""}${r.unless && r.unless !== "false" ? `<br>Unless: <code>${esc(r.unless)}</code>` : ""}</div>
+    ? `<div class="flag" style="color:var(--pass)"><b>Rule written. In words:</b> ${esc(r.plain || r.readback)}${r.plain_applies_when ? `<br>Applies when: ${esc(r.plain_applies_when)}` : ""}${r.plain_unless ? `<br>Unless: ${esc(r.plain_unless)}` : ""}<br><span class="muted">Exact form: <code>${esc(r.readback)}</code></span></div>
        <div class="muted">On this plan (${appr ? "preview" : "preview, not approved"}): <b>${esc(OUTCOME_TEXT[r.preview?.outcome] || r.preview?.outcome || "")}</b>${(r.preview?.missing || []).length ? ` · needs: ${esc(r.preview.missing.join(", "))}` : ""}</div>
        ${(r.notes || []).map((x) => `<div class="flag">${esc(x)}</div>`).join("")}
        ${approvalBlock(c, r)}`

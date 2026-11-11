@@ -16,21 +16,30 @@ from pathlib import Path
 
 # ---- quantities ----------------------------------------------------------------------------------
 
-UNITS = [  # (regex for the unit, canonical unit); longer spellings first
-    (r"m\s?2|m²|sq(?:uare)?\.?\s?m(?:et(?:re|er)s?)?|mètres? carrés?", "m2"),
-    (r"m\s?3|m³|cubic m(?:et(?:re|er)s?)?|mètres? cubes?", "m3"),
-    (r"millimet(?:re|er)s?|millimètres?", "mm"), (r"centimet(?:re|er)s?|centimètres?", "cm"),
-    (r"mm", "mm"), (r"cm", "cm"),
-    (r"MJ", "MJ"),
-    (r"km", "km"),
-    (r"m(?:et(?:re|er)s?|ètres?)?(?![a-zA-Z²³0-9])", "m"),
-    (r"%|per ?cent|pour ?cent", "%"),
-    (r"degrees?|°|degrés?", "deg"),
-    (r"minutes?|mins?\b", "min"), (r"hours?|heures?|\bh\b", "h"), (r"seconds?|secondes?", "s"),
-    (r"kN/m2|kN", "kN"), (r"kg/m2|kg", "kg"),
-    (r"W/\(?m2\s?K\)?|W/m2K", "W/m2K"), (r"kW|W\b", "W"),
-    (r"dB", "dB"), (r"lux|lx", "lux"), (r"l/s|litres? per second", "l/s"), (r"Pa\b", "Pa"),
-]
+def _unit_patterns() -> list[tuple[str, str]]:
+    """(regex, canonical symbol), longest spellings first: the words people write, then every symbol of the unit table with
+    its SI prefixes. Symbols are matched case-sensitively (a lower-case "a" after a number is a word, not an ampere)."""
+    from ..interpreter import units as U
+
+    out: list[tuple[str, str]] = []
+    words = sorted(((w, sym) for sym, ws in U._DATA.get("words", {}).items() for w in ws), key=lambda t: -len(t[0]))
+    for word, sym in words:
+        out.append((r"(?i:" + re.escape(word).replace(r"\ ", r"\s?") + r")(?![^\W\d_])", sym))
+    extra = [(r"m\s?2|m²", "m2"), (r"m\s?3|m³", "m3"), (r"°C|°F", "Cel"), (r"l/s", "L/s"), (r"W/m2K|W/\(?m2\s?K\)?", "W/m2K"),
+             (r"kN/m2", "kN/m2"), (r"kg/m2", "kg/m2"), (r"dB", "dB"), (r"lux", "lx"), (r"per ?cent|pour ?cent", "%")]
+    out += extra
+    prefixes = sorted(U.PREFIXES, key=len, reverse=True)
+    symbols = sorted((s for s in U.UNITS if s not in ("1", "count") and s.isascii()), key=len, reverse=True)
+    for sym in symbols:
+        if sym in U.PREFIXABLE:
+            out.append(((r"(?-i:(?:" + "|".join(map(re.escape, prefixes)) + r")?" + re.escape(sym) + r")") + r"(?![A-Za-zµ°²³0-9])", sym))
+        else:
+            out.append((r"(?-i:" + re.escape(sym) + r")(?![A-Za-zµ°²³0-9])", sym))
+    out += [(r"%", "%"), (r"°", "deg")]
+    return out
+
+
+UNITS = _unit_patterns()
 UNIT_RE = "|".join(f"(?P<u{i}>{pat})" for i, (pat, _) in enumerate(UNITS))
 NUMBER = r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:[.,]\d+)?"
 QUANTITY = re.compile(rf"(?P<num>{NUMBER})\s*(?:-|–|to|à|et|and|or)?\s*(?P<num2>{NUMBER})?\s*(?:{UNIT_RE})", re.I)
@@ -59,6 +68,11 @@ def quantities(sentence: str, french: bool = False) -> list[Quantity]:
     found = []
     for m in QUANTITY.finditer(sentence):
         unit = next(UNITS[i][1] for i in range(len(UNITS)) if m.group(f"u{i}"))
+        written = m.group(0)[len(m.group("num")):].strip()
+        from ..interpreter.units import is_unit
+
+        if is_unit(written):               # a prefixed symbol keeps the unit as it was written ("kPa", "mm")
+            unit = written
         try:
             found.append(Quantity(to_number(m.group("num"), french), unit, m.span()))
             if m.group("num2"):         # a range keeps both bounds
