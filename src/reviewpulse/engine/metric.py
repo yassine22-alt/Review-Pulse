@@ -12,7 +12,7 @@ from shapely.geometry import Polygon
 from ..annotate.text_classify import tag_key
 from ..rules.schema import Rule
 from .context import Context
-from .policy import AREA_TOL_REL, Raw, compare, length_tol
+from .policy import AREA_TOL_REL, Measurement, Raw, compare, length_tol
 
 
 def _tol(rule: Rule, value: float, area: bool = False) -> float:
@@ -62,6 +62,7 @@ def fn_width_m(rule: Rule, ctx: Context) -> list[Raw]:
             det += f" after frame allowance {allowance:.2f} m"
         name = el.tag or el.id[-6:]
         out.append(Raw([el.id], violated, beyond_band=beyond, metric=True, deciding_ids=[el.id],
+                       measurement=Measurement(used, rule.check.op, limit, tol) if not sched and not allowance else None,
                        detected=det, required=f"{rule.check.op} {limit:.2f} m",
                        vars={"subject": {"tag": name, "__str__": name}},
                        evidence={"polygons": [el.geom] + ([el.attrs["swing_polygon"]] if el.attrs.get("swing_polygon") else []),
@@ -82,6 +83,7 @@ def _room_metric(rule: Rule, ctx: Context, attr: str, area: bool) -> list[Raw]:
         unit = "m²" if area else "m"
         c = Polygon(room.polygon).centroid
         out.append(Raw([room.id], violated, beyond_band=beyond, metric=True, deciding_ids=[],
+                       measurement=Measurement(val, rule.check.op, limit, tol, 2 if area else 1),
                        detected=f"{val:.2f} {unit}", required=f"{rule.check.op} {limit:.2f} {unit}",
                        vars={"room": {"label": ctx.name(room.id), "__str__": ctx.name(room.id)}},
                        evidence={"polygons": [room.polygon], "labels": [{"at": (c.x, c.y), "text": f"{val:.2f} {unit}"}]}))

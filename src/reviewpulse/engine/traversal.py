@@ -18,7 +18,7 @@ from shapely.geometry import Polygon
 from ..core.geometry import Walkable
 from ..rules.schema import Rule
 from .context import EXIT, EXTERIOR, Context
-from .policy import Raw, compare
+from .policy import Measurement, Raw, compare
 
 
 def _via_graph(ctx: Context, via: list[str]) -> nx.Graph:
@@ -282,6 +282,7 @@ def fn_shortest_path_m(rule: Rule, ctx: Context) -> list[Raw]:
         doors = field.route(door)
         pts = [corner] + [_opening_mid(ctx, d) for d in doors]
         out.append(Raw([room.id], violated, beyond_band=beyond, metric=True, deciding_ids=doors,
+                       measurement=Measurement(dist, rule.check.op or "<=", limit, tol),
                        detected=f"{dist:.2f} m", required=f"{rule.check.op} {limit:.2f} m",
                        vars={"room": {"label": ctx.name(room.id), "__str__": ctx.name(room.id)}},
                        evidence={"polylines": [pts], "points": [corner]},

@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass, field
 
 import networkx as nx
 
+from ..outcomes import EvidenceIssue, IssueCode, Outcome
 from .schema import (
     BinaryExpr,
     Expr,
@@ -71,6 +72,8 @@ class Evaluator:
         self.inputs = inputs
         self.graph = graph
         self.remaining = max_steps
+        self.dependencies: set[str] = set()
+        self.evidence_issues: dict[str, EvidenceIssue] = {}
 
     def evaluate(self, expr: Expr, variables: dict[str, str] | None = None) -> Trace:
         self.remaining -= 1
@@ -84,6 +87,7 @@ class Evaluator:
             if expr.name == "id":
                 return Trace(expr.node, entity)
             key = f"{entity}.{expr.name}"
+            self.dependencies.add(key)
             fact = self.inputs.facts.get(entity, {}).get(expr.name)
             if fact is None:
                 return Trace(expr.node, missing=[key])
@@ -114,6 +118,10 @@ class Evaluator:
         return self._set(expr, variables)
 
     def _path(self, expr: PathExpr, variables: dict[str, str]) -> Trace:
+        self.dependencies.add("connections")
+        if not self.inputs.graph_complete:
+            self.evidence_issues["connections"] = EvidenceIssue(
+                code=IssueCode.INCOMPLETE_INVENTORY, detail="connection inventory is incomplete")
         if self.graph is None:
             return Trace(expr.node, missing=["room graph"])
         origin = variables.get(expr.origin, expr.origin)
@@ -166,6 +174,7 @@ class Evaluator:
         return Trace.combine(expr.node, value, children, missing)
 
     def _set(self, expr: SetExpr, variables: dict[str, str]) -> Trace:
+        self.dependencies.add(f"inventory:{expr.collection}")
         collection = self.inputs.collections.get(expr.collection)
         if collection is None:
             return Trace(expr.node, missing=[f"collection:{expr.collection}"])
@@ -174,6 +183,9 @@ class Evaluator:
             raise ValueError("collection evaluation budget exceeded")
         children, selected = [], []
         uncertain = not collection.complete
+        if not collection.complete:
+            self.evidence_issues[expr.collection] = EvidenceIssue(
+                code=IssueCode.INCOMPLETE_INVENTORY, detail=f"incomplete collection:{expr.collection}")
         for entity in collection.items:
             scope = {**variables, expr.variable: entity}
             condition = self.evaluate(expr.where, scope) if expr.where else Trace("literal", True)
@@ -238,6 +250,7 @@ def run_program(
     applicability = evaluator.evaluate(program.applicability)
     exemption = evaluator.evaluate(program.exemption)
     requirement = evaluator.evaluate(program.requirement)
+    outcome: Outcome
     if program.unresolved:
         outcome = "UNRESOLVED"
     elif applicability.value is False:
@@ -256,6 +269,8 @@ def run_program(
     return {
         "rule_id": program.id,
         "outcome": outcome,
+        "dependencies": sorted(evaluator.dependencies),
+        "evidence_issues": [i.model_dump(mode="json") for i in evaluator.evidence_issues.values()],
         "preview": program.status == "draft",
         "document": program.document,
         "sources": [source.model_dump() for source in program.sources],

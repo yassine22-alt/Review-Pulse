@@ -17,6 +17,7 @@ import json
 import subprocess
 import sys
 import time
+from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -34,6 +35,52 @@ class Case:
     planted: set[str] = field(default_factory=set)   # rule ids that must be reported
     sheets: int = 1
     note: str = ""
+    verdict_truth: list[dict] = field(default_factory=list)
+
+
+def verdict_metrics(findings: list[dict], truth: list[dict]) -> dict:
+    """Score only explicit subject-level truth. Unlabelled findings are never assumed correct."""
+    def key(row):
+        return row["rule_id"], tuple(sorted(row["subject_ids"]))
+
+    predictions = {key(f): f for f in findings}
+    counts = Counter(key(f) for f in findings)
+    ambiguous = {k for k, n in counts.items() if n > 1}
+    predictions = {k: f for k, f in predictions.items() if k not in ambiguous}
+    if len({key(t) for t in truth}) != len(truth):
+        raise ValueError("duplicate verdict ground truth")
+
+    def outcome(f):
+        return f.get("assessment", {}).get("outcome") if f else None
+
+    matched = [(t, predictions.get(key(t))) for t in truth]
+    labelled_violations = [(t, f) for t, f in matched if outcome(f) == "VIOLATED"]
+    actual_violations = [(t, f) for t, f in matched if t["outcome"] == "VIOLATED"]
+    unresolved = [(t, f) for t, f in matched
+                  if t["outcome"] == "UNRESOLVED" and "evidence_issues" in t]
+    reason_correct = 0
+    for t, f in unresolved:
+        actual = {i["code"] for i in f.get("assessment", {}).get("evidence_issues", [])} if f else set()
+        reason_correct += outcome(f) == "UNRESOLVED" and actual == set(t["evidence_issues"])
+
+    def fraction(n, d):
+        return n / d if d else None
+
+    structured = [f for f in findings if outcome(f) is not None]
+    return {
+        "labelled_checks": len(truth),
+        "ambiguous_prediction_keys": len(ambiguous),
+        "matched_checks": sum(f is not None for _, f in matched),
+        "verdict_correctness": fraction(sum(t["outcome"] == outcome(f) for t, f in matched), len(truth)),
+        "precision_violated": fraction(sum(t["outcome"] == "VIOLATED" for t, _ in labelled_violations),
+                                       len(labelled_violations)),
+        "false_pass_rate": fraction(sum(outcome(f) == "SATISFIED" for _, f in actual_violations),
+                                    len(actual_violations)),
+        "decisive_coverage": fraction(sum(outcome(f) != "UNRESOLVED" for f in structured), len(findings)),
+        "unresolved_reason_accuracy": fraction(reason_correct, len(unresolved)),
+        "reason_labelled_checks": len(unresolved),
+        "unlabelled_predictions": sum(key(f) not in {key(t) for t in truth} for f in findings),
+    }
 
 
 # ---- input builders ---------------------------------------------------------------------------------
@@ -204,15 +251,18 @@ def run_case(case: Case, work: Path, env: dict | None = None) -> dict:
         if f["verdict"] != "FAIL":
             continue
         c = cls_of.get(f["rule_id"])
-        if f["tier"] != "T1" and c in METRIC_CLASSES:
+        if f["tier"] != "T1" and c in METRIC_CLASSES and not f.get("evidence", {}).get("measurement_interval"):
             res["problems"].append(f"unsafe FAIL: metric rule {f['rule_id']} at {f['tier']}")
-        if c == "presence" and raster:
+        if c == "presence" and raster and any(i["code"] == "POSSIBLE_TEXT_OMISSION"
+                                              for i in f.get("assessment", {}).get("evidence_issues", [])):
             res["problems"].append(f"unsafe FAIL: presence rule {f['rule_id']} on OCR text")
         if llm_rooms & set(f["subject_ids"]):
             res["problems"].append(f"unsafe FAIL: {f['rule_id']} on an LLM-typed room")
     reported = {f["rule_id"] for f in findings if f["verdict"] in ("FAIL", "WARNING")}
     res["planted_found"] = sorted(case.planted & reported)
     res["planted_missed"] = sorted(case.planted - reported)
+    res["detection_recall"] = len(res["planted_found"]) / len(case.planted) if case.planted else None
+    res["verdict_metrics"] = verdict_metrics(findings, case.verdict_truth)
     if res["planted_missed"] and case.kind == "vector":
         res["problems"].append(f"planted errors missed: {res['planted_missed']}")
     res["ok"] = not res["problems"]
@@ -221,7 +271,7 @@ def run_case(case: Case, work: Path, env: dict | None = None) -> dict:
 
 def write_report(results: list[dict], out: Path) -> Path:
     lines = ["# Acceptance: every input type through `rp check`", "",
-             "| case | kind | ok | sheets | tier | walls | rooms | area / truth | FAIL/WARN | planted found | s/page | problems |",
+             "| case | kind | ok | sheets | tier | walls | rooms | area / truth | FAIL/WARN | detection recall (found/total) | s/page | problems |",
              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in results:
         v = r.get("verdicts", {})

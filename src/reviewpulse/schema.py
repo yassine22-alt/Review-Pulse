@@ -15,7 +15,9 @@ import json
 from pathlib import Path
 from typing import Literal, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
+
+from .outcomes import Assessment
 
 SCHEMA_VERSION = "0.1"
 
@@ -191,6 +193,17 @@ class Finding(BaseModel):
     tier: Tier
     evidence: dict = F(default_factory=dict, d="Witness path, dimension chain, polygons to draw.")
     source: dict = F(default_factory=dict, d="Requirement source: `{doc, clause, span}`.")
+    assessment: Assessment | None = None
+
+    @model_validator(mode="after")
+    def legacy_assessment(self):
+        if self.assessment is None:
+            self.assessment = Assessment(
+                outcome={"PASS": "SATISFIED", "FAIL": "VIOLATED"}.get(self.verdict, "UNRESOLVED"),
+                severity=self.severity.upper() if self.severity != "info" else "MINOR",
+                rule_authority="APPROVED_REQUIREMENT" if self.source.get("doc") else "ADVISORY_GUIDANCE",
+            )
+        return self
 
 
 # ---------------------------------------------------------------------------

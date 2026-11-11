@@ -11,11 +11,19 @@ from __future__ import annotations
 
 import string
 
+from ..outcomes import Assessment, EvidenceIssue, IssueCode
 from ..rules.registry import resolve
 from ..rules.schema import Rule
 from ..schema import BuildingModel, Finding
 from .context import Context
-from .policy import Decision, Raw, decide
+from .policy import ESTIMATED_SCALE_RELATIVE_UNCERTAINTY, Raw, decide
+
+
+def assessment(rule: Rule, outcome="UNRESOLVED", issues=(), dependencies=()) -> Assessment:
+    return Assessment(outcome=outcome, evidence_issues=list(issues),
+                      severity=rule.severity.upper() if rule.severity != "info" else "MINOR",
+                      rule_authority="ADVISORY_GUIDANCE" if rule.is_guidance else "APPROVED_REQUIREMENT",
+                      dependencies=sorted(set(dependencies)))
 
 
 class _SafeDict(dict):
@@ -50,7 +58,10 @@ def render_message(template: str, raw: Raw, detected: str | None, required: str 
 def not_evaluated(rule: Rule, missing: list[str], tier: str) -> Finding:
     return Finding(rule_id=rule.id, verdict="NOT_EVALUATED", severity=rule.severity, subject_ids=[],
                    message=f"{rule.title}: not evaluated, missing {', '.join(missing)}", tier=tier,
-                   source=rule.source.model_dump(), evidence={"missing": missing})
+                   source=rule.source.model_dump(), evidence={"missing": missing},
+                   assessment=assessment(rule, issues=[EvidenceIssue(code=IssueCode.MISSING_INPUT,
+                                                                     detail=", ".join(missing))],
+                                         dependencies=missing))
 
 
 OCR_ABSENCE = "verify on the drawing (text read by OCR may be missed)"
@@ -68,11 +79,15 @@ def _group_ocr_absences(rule: Rule, fs: list[Finding], tier: str) -> list[Findin
                     message=f"{rule.title}: {len(fs)} items without the required text as read by OCR "
                             f"[{OCR_ABSENCE}]",
                     tier=tier, source=rule.source.model_dump(),
+                    assessment=assessment(rule, issues=[EvidenceIssue(code=IssueCode.POSSIBLE_TEXT_OMISSION,
+                                                                       detail=OCR_ABSENCE)],
+                                          dependencies=[d for f in fs for d in f.assessment.dependencies]),
                     evidence={"grouped": len(fs), **({"polygons": polys} if polys else {})})]
 
 
 def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
-        include_drafts: bool = False) -> list[Finding]:
+        include_drafts: bool = False, *,
+        relative_uncertainty: float = ESTIMATED_SCALE_RELATIVE_UNCERTAINTY) -> list[Finding]:
     ctx = Context.of(model, confirmed)
     out: list[Finding] = []
     scale_verified = model.sheet.scale.method in ("dxf_units", "dimension_consensus", "user", "scale_bar")
@@ -92,18 +107,26 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
             # a check that names no deciding elements is decided by its subjects: below T1 they must be
             # confirmed too, or an absence read from estimated input (a missed OCR label) could FAIL
             all_conf = all(ctx.is_confirmed(i) for i in (raw.deciding_ids or raw.subject_ids))
+            deciding = set(raw.subject_ids + raw.deciding_ids)
+            raw.dependencies += [f"classification:{i}" for i in sorted(deciding)]
+            raw.dependencies += [f"geometry:{i}" for i in sorted(deciding)]
+            if rule.check.fn == "present":
+                raw.dependencies += [f"annotation:{i}" for i in sorted(deciding)]
+                if raw.violated and ocr_text:
+                    raw.evidence_issues.append(EvidenceIssue(code=IssueCode.POSSIBLE_TEXT_OMISSION,
+                                                            detail=OCR_ABSENCE))
+            if rule.check.fn == "isolated_rooms" and raw.violated and model.tier != "T1":
+                raw.evidence_issues.append(EvidenceIssue(code=IssueCode.MISSING_CONNECTION,
+                                                        detail="no confirmed opening connects this room"))
+                raw.dependencies.append("connections")
+            if any((r := ctx.room(i)) is not None and
+                   r.prov.evidence.get("label_source") in ("llm", "vlm") for i in deciding):
+                raw.evidence_issues.append(EvidenceIssue(code=IssueCode.UNKNOWN_CLASS,
+                                                        detail="verify room type (label read by a language model)"))
             dec = decide(raw, ctx.tier, guidance=rule.is_guidance,
                          max_verdict=rule.params.get("max_verdict", "FAIL"),
-                         all_confirmed=all_conf, scale_verified=scale_verified)
-            if dec.verdict == "FAIL" and any((r := ctx.room(i)) is not None
-                                             and r.prov.evidence.get("label_source") in ("llm", "vlm")
-                                             for i in raw.subject_ids):
-                # the room's type was read by a language or vision model, not matched in the lexicon
-                dec = Decision("WARNING", "verify room type (label read by a language model)")
-            elif dec.verdict in ("FAIL", "WARNING") and rule.cls == "presence" and ocr_text:
-                # an absence (no label, no tag) found in OCR'd text is uncertain first of all because
-                # the text may simply not have been read
-                dec = Decision("WARNING", OCR_ABSENCE)
+                         all_confirmed=all_conf, scale_verified=scale_verified,
+                         relative_uncertainty=relative_uncertainty)
             msg = render_message(rule.message, raw, raw.detected, raw.required)
             if dec.reason and dec.verdict != "PASS":
                 msg += f" [{dec.reason}]"
@@ -112,10 +135,15 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
                 ev["note"] = raw.note
             if raw.deciding_ids:
                 ev["deciding_ids"] = raw.deciding_ids
+            if dec.interval is not None:
+                ev["measurement_interval"] = list(dec.interval)
+                ev["regulatory_tolerance"] = raw.measurement.tolerance
             f = Finding(rule_id=rule.id, verdict=dec.verdict, severity=rule.severity,
                         subject_ids=raw.subject_ids, message=msg, detected=raw.detected,
-                        required=raw.required, tier=ctx.tier, evidence=ev, source=rule.source.model_dump())
-            (ocr_absences if dec.reason == OCR_ABSENCE else out).append(f)
+                        required=raw.required, tier=ctx.tier, evidence=ev, source=rule.source.model_dump(),
+                        assessment=assessment(rule, dec.outcome, dec.evidence_issues, dec.dependencies))
+            text_absence = any(i.code == IssueCode.POSSIBLE_TEXT_OMISSION for i in dec.evidence_issues)
+            (ocr_absences if text_absence else out).append(f)
         out += _group_ocr_absences(rule, ocr_absences, ctx.tier)
         if rule.applies_to.get("room_type"):
             # a room whose type is unknown (no label read) may be one this rule applies to: say so,
@@ -126,7 +154,10 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
                                    subject_ids=untyped, tier=ctx.tier, source=rule.source.model_dump(),
                                    message=f"{rule.title}: not evaluated for {len(untyped)} room(s) of unknown "
                                            "type (no label read); label or confirm their type",
-                                   evidence={"missing": ["room_type"]}))
+                                   evidence={"missing": ["room_type"]},
+                                   assessment=assessment(rule, issues=[EvidenceIssue(code=IssueCode.UNKNOWN_CLASS,
+                                                                                     detail="room class is unknown")],
+                                                         dependencies=[f"classification:{i}" for i in untyped])))
     return out
 
 
