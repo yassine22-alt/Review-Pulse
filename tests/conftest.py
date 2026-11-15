@@ -6,6 +6,7 @@ import pytest
 
 # unit/golden tests are hermetic: the LLM label fallback is exercised by tests/acceptance with a stub
 os.environ.setdefault("REVIEWPULSE_LABEL_LLM", "0")
+os.environ.setdefault("REVIEWPULSE_SHEET_KIND", "text")      # tests never wait on a vision model
 # ...and do not depend on whether a trained primitive model is installed (data/models is not in git):
 # the rules pass is the default here; tests of the learned pass ask for it explicitly
 os.environ.setdefault("REVIEWPULSE_LEARNED", "0")

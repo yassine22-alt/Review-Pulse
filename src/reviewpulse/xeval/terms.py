@@ -36,6 +36,33 @@ def normalise_value(word: str, fact: str, kinds: dict, labels: dict) -> str | No
     return hits.pop() if len(hits) == 1 else None
 
 
+def default_groups(kinds: dict) -> dict[str, dict[str, list[str]]]:
+    """Per category fact, the class words requirements commonly use ("habitable room"), from groups.yaml: {fact: {term: [values]}}.
+    A class is offered only where the plan knows enough of its kinds of space. A document's own definition replaces it."""
+    from pathlib import Path
+
+    import yaml
+
+    spec = yaml.safe_load((Path(__file__).with_name("groups.yaml")).read_text(encoding="utf-8")) or {}
+    out: dict[str, dict[str, list[str]]] = {}
+    for definition in spec.values():
+        for fact, values in kinds.items():
+            present = sorted(m for m in definition.get("members", []) if m in values)
+            if present and len(present) >= int(definition.get("min_members", 1)):
+                for term in definition.get("terms", []):
+                    out.setdefault(fact, {})[_key(term)] = present
+                break
+    return out
+
+
+def with_default_groups(groups: dict, kinds: dict) -> dict[str, dict[str, list[str]]]:
+    """The document's groups, plus the default class words it does not define itself."""
+    merged = {fact: dict(terms) for fact, terms in default_groups(kinds).items()}
+    for fact, terms in groups.items():
+        merged.setdefault(fact, {}).update(terms)
+    return merged
+
+
 def document_groups(text: str, kinds: dict, labels: dict) -> dict[str, dict[str, list[str]]]:
     """Per category fact, the groups the document defines by enumeration: {fact: {term: [values]}}."""
     out: dict[str, dict[str, list[str]]] = {}

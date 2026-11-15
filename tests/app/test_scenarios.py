@@ -23,7 +23,7 @@ from reviewpulse.synth.random_plan import random_plan  # noqa: E402
 from reviewpulse.synth.scenarios import SCENARIOS  # noqa: E402
 
 DOC = Path(__file__).parents[2] / "docs" / "requirements_example.md"
-HAB = "r.room_type == 'bedroom' or r.room_type == 'living' or r.room_type == 'kitchen'"
+HAB = "r.room_type == 'bedroom' or r.room_type == 'living' or r.room_type == 'kitchen' or r.room_type == 'office'"   # the default class 'habitable'
 # clause -> (rule as one line, quote from the clause, the older engine's rules for the same requirement)
 RULES = {
     "Art. 1": ("building.links_to_exit >= 1", "Every dwelling has at least one exit door to the outside", ["C-C1"]),
@@ -76,7 +76,7 @@ def wait(c, pid, job):
 def run_scenario(tmp_path, kind, kw):
     paths = make_plan(tmp_path / "plan", png=False, **kw) if kind == "make" else random_plan(tmp_path / "plan", **kw)
     with TestClient(create_app(tmp_path / "data", llm=lambda: Scripted(), workers=1)) as c:
-        pid = c.post("/api/projects", json={"name": "s", "curator": "t"}).json()["id"]
+        pid = c.post("/api/projects", json={"name": "s", "curator": "t", "base_pack": "starter"}).json()["id"]
         with open(paths["dxf"], "rb") as f:
             wait(c, pid, c.post(f"/api/projects/{pid}/plan", files={"file": ("plan.dxf", f)}).json())
         with open(DOC, "rb") as f:

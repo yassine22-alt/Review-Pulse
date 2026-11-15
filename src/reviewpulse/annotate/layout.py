@@ -43,12 +43,22 @@ def title_block_box(sheet: Sheet) -> tuple | None:
             max(t.bbox[2] for t in tb) + pad, max(t.bbox[3] for t in tb) + pad)
 
 
-def sheet_type(sheet: Sheet, walls: list[Element]) -> str:
+def title_blob(sheet: Sheet) -> str:
+    """The words that name a sheet: its title block and its largest text."""
     texts = [t for t in sheet.texts if t.kind == "title_block"]
     if sheet.texts:
         hmax = max((t.height or 0) for t in sheet.texts)
         texts += [t for t in sheet.texts if (t.height or 0) >= 0.8 * hmax]
-    blob = " ".join(normalise(t.text) for t in texts)
+    return " ".join(normalise(t.text) for t in texts)
+
+
+def sheet_type(sheet: Sheet, walls: list[Element]) -> str:
+    from .sheet_kind import SHEET_TYPE, from_words
+
+    blob = title_blob(sheet)
+    kind = from_words(blob)
+    if kind is not None and kind != "floor_plan":
+        return SHEET_TYPE[kind]
     for name, pat in SHEET_TYPES:
         if re.search(pat, blob):
             return name

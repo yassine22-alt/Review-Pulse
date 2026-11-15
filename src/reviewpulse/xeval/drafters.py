@@ -90,9 +90,11 @@ def context_for(item: Item) -> ContextBundle:
     return assemble_context("synth", text, split_text(text), "Art. 1")
 
 
-def _payload(ctx: ContextBundle, cat: dict) -> str:
+def _payload(ctx: ContextBundle, cat: dict, redact: bool = False) -> str:
+    """The question sent to the model. For an external model the document's file name (which may name a project or a
+    client) is replaced by a neutral word; only clause text and the declared facts go out, never a plan."""
     return json.dumps({
-        "document": ctx.document,
+        "document": "document" if redact else ctx.document,
         "target": ctx.target,
         "clauses": [{"id": c.id, "text": c.text, "start": c.start, "end": c.end} for c in ctx.clauses],
         "unresolved_dependencies": ctx.missing,
@@ -108,6 +110,16 @@ def _payload(ctx: ContextBundle, cat: dict) -> str:
     }, ensure_ascii=False)
 
 
+def citation(item, limit: int = 600) -> str:
+    """What a rule built by a program cites as its source: the clause as the document wrote it. The sentence a program reads has been
+    normalised (feet marks, section numbers dropped), so it is not a quotation; the original is, and it is checked like any quote.
+    Cut at a word boundary, because a quote is matched word by word."""
+    original = " ".join(str(getattr(item, "quote", None) or item.text).split())
+    if len(original) <= limit:
+        return original
+    return original[:limit].rsplit(" ", 1)[0]
+
+
 def fix_spans(sources: list[dict], ctx: ContextBundle) -> list[dict]:
     """Compute character offsets from the quoted text; the model only has to copy words."""
     clause = next(c for c in ctx.clauses if c.id == ctx.target)
@@ -118,9 +130,14 @@ def fix_spans(sources: list[dict], ctx: ContextBundle) -> list[dict]:
         if quote:
             # a document wraps lines and doubles spaces; the quote is matched word by word and the document's own
             # characters are kept as the quote
-            found = re.search(r"\s+".join(re.escape(w) for w in quote.split()), ctx.text[clause.start:clause.end])
-            if found:
-                at, end = clause.start + found.start(), clause.start + found.end()
+            body = ctx.text[clause.start:clause.end]
+            # a model sometimes escapes a quotation mark (8 1/4\") or copies a list symbol (a check box); neither is a word of the
+            # clause. The words must still be found, in order, in the clause: nothing else is loosened
+            for candidate in (quote, re.sub(r"^[^\w\"'(]+", "", quote.replace('\\"', '"').replace("\\'", "'"))):
+                found = re.search(r"\s+".join(re.escape(w) for w in candidate.split()), body) if candidate.strip() else None
+                if found:
+                    at, end = clause.start + found.start(), clause.start + found.end()
+                    break
         if at < 0:
             raise ValueError(f"quote not found in the clause: {quote[:60]!r}")
         fixed.append({"clause": ctx.target, "start": at, "end": end, "quote": ctx.text[at:end]})

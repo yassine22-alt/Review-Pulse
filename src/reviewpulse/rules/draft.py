@@ -93,7 +93,17 @@ def make_client(backend: str = "ollama", model: str | None = None) -> LLMClient:
         return OllamaClient(model=model or "qwen2.5:7b")
     if backend == "claude":
         return ClaudeClient(model=model or DEFAULT_MODEL)
-    raise ValueError(f"unknown LLM backend {backend!r} (ollama | claude)")
+    if backend == "openai":                      # Groq, OpenRouter, Gemini, Mistral, Cloudflare, vLLM ...: see llm/config.py
+        import os
+
+        from ..llm import primary_from_env
+
+        client = primary_from_env({**os.environ, "REVIEWPULSE_LLM_MODEL": model} if model else None)
+        if client is None:
+            raise ValueError("REVIEWPULSE_LLM=openai needs REVIEWPULSE_LLM_PROVIDER or REVIEWPULSE_LLM_BASE_URL, "
+                             "REVIEWPULSE_LLM_MODEL and REVIEWPULSE_LLM_API_KEY")
+        return client
+    raise ValueError(f"unknown LLM backend {backend!r} (ollama | openai | claude)")
 
 
 class ClaudeClient:

@@ -788,6 +788,7 @@
       "scale_bar",
       "user",
       "symbol_prior",
+      "stated_areas",
       "none"
      ],
      "title": "Method",
@@ -879,10 +880,26 @@
       "schedule",
       "structural",
       "site",
+      "elevation",
+      "section",
+      "ceiling",
+      "cover",
       "other",
       "unknown"
      ],
      "title": "Sheet Type",
+     "type": "string"
+    },
+    "sheet_kind": {
+     "default": "",
+     "description": "What the sheet mainly shows, in the recogniser's own words (annotate/sheet_kind.py).",
+     "title": "Sheet Kind",
+     "type": "string"
+    },
+    "kind_source": {
+     "default": "",
+     "description": "Who decided the kind: vision, text or off.",
+     "title": "Kind Source",
      "type": "string"
     },
     "scale": {

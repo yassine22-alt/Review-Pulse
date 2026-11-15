@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 
@@ -93,9 +94,40 @@ def extract(run_dir: str | Path, units: str | None = None) -> list[Path]:
     return out
 
 
+UNVERIFIED_SCALES = ("title_block", "symbol_prior")   # a written ratio or a door-size guess: checked against printed room areas
+AREA_DISAGREE = 0.06                                  # to replace a written scale, the printed areas must imply one this far off ...
+AREA_OVERRIDE_MIN_ROOMS = 5                           # ... from at least this many rooms ...
+AREA_OVERRIDE_SPREAD = 0.04                           # ... that agree to within this relative spread (a measured area runs short of a
+                                                      # printed one by a varying amount, so scattered rooms prove nothing)
+
+
+def area_calibrated_scale(rooms, assumed_mpu: float):
+    """A scale from the room areas the drawing prints itself. A room's printed area over its drawn area is the square of the
+    length ratio, so every labelled room gives one estimate; the scale is accepted only when at least three rooms agree
+    closely (a merged or missed room gives an outlier, not a consensus). Returns (Scale, relative spread) or None."""
+    import statistics
+
+    from .schema import Scale
+
+    est = [math.sqrt(r.stated_area_m2 / r.area_m2) * assumed_mpu for r in rooms
+           if r.stated_area_m2 and r.stated_area_m2 >= 1.5 and r.area_m2 and r.area_m2 > 0]
+    if len(est) < 3:
+        return None
+    med = statistics.median(est)
+    inl = [e for e in est if abs(e - med) <= 0.12 * med]
+    if len(inl) < 3 or len(inl) < 0.6 * len(est):
+        return None
+    mean = statistics.fmean(inl)
+    spread = statistics.pstdev(inl) / mean
+    if spread > 0.08:
+        return None
+    return (Scale(metres_per_unit=mean, method="stated_areas", confidence=0.6, n_candidates=len(est), n_inliers=len(inl)),
+            spread)
+
+
 def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | None = None,
                 run_dir: Path | None = None, index: int = 0, learned: bool | None = None,
-                annotator=None, learned_mode: str | None = None) -> BuildingModel:
+                annotator=None, learned_mode: str | None = None, scale_hint=None) -> BuildingModel:
     """``learned``: run the learned primitive classifier as a second pass (None = whenever a trained
     model is present, unless env REVIEWPULSE_LEARNED=0). On by default since D8: on real CAD it lifts
     wall F1 0.28 -> 0.52, doors 0.66 -> 0.90, windows 0.20 -> 0.69 (FloorPlanCAD), with no room or
@@ -121,7 +153,15 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
     # R12 tables first: their text must not feed labels, tags or the scale
     schedules, table_boxes = find_schedules(sheet)
     # R7 scale
+    pristine = sheet.model_copy(deep=True) if scale_hint is None else None      # for a second pass once a scale is found
     scale, scale_rep = recover_scale(sheet, calibrate)
+    if scale_hint is not None and (scale.metres_per_unit is None or scale.method in UNVERIFIED_SCALES):
+        if scale.metres_per_unit is not None:
+            scale_rep.notes.append(f"the {scale.method} scale (1 m = {1 / scale.metres_per_unit:.4g} units) disagrees with the room "
+                                   "areas printed on the drawing (a page fitted to the paper?): the printed areas are used")
+        scale = scale_hint
+        scale_rep.method = "stated_areas"
+        scale_rep.notes.append(f"scale from the printed room areas ({scale_hint.n_inliers} of {scale_hint.n_candidates} rooms agree)")
     sheet.scale = scale
     scale_known = scale.metres_per_unit is not None
     from .annotate.dimensions import tag_dimension_graphics
@@ -189,6 +229,15 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
             rooms, edges, room_warn = detect_rooms(sheet, walls, columns, openings, mpu, scale_known)
             sheet.warnings.append("learned primitive classifier applied (second pass)")
     sheet.warnings += room_warn
+    if pristine is not None and rooms and (not scale_known or scale.method in UNVERIFIED_SCALES):
+        found = area_calibrated_scale(rooms, mpu)
+        hint, spread = found if found else (None, 1.0)
+        if hint is not None and (not scale_known or (abs(hint.metres_per_unit / mpu - 1) > AREA_DISAGREE
+                                                     and hint.n_inliers >= AREA_OVERRIDE_MIN_ROOMS
+                                                     and spread <= AREA_OVERRIDE_SPREAD)):
+            # no written scale and no usable dimensions, but the drawing prints room areas that agree on one: use it, and read the
+            # drawing again with it, because every threshold (wall thickness, door size) depends on the scale
+            return build_model(pristine, calibrate, confirmed, run_dir, index, learned, annotator, learned_mode, scale_hint=hint)
     # R11 dimensions
     if not sheet.dimensions and scale_rep.candidates:
         # no DIMENSION entities (PDF, or exploded CAD dimensions): build them from text/line pairs
@@ -218,6 +267,25 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
     return model
 
 
+def gate_sheet(model: BuildingModel, preview: Path) -> None:
+    """Only a floor plan is read as a floor plan. A drawing set also holds elevations, sections, details, site plans and
+    schedules, and the wall finder finds "rooms" in all of them (58 and 114 rooms on two elevation sheets of one real set).
+    The sheet is named; when it is not a floor plan its elements and rooms are dropped and the reason is recorded."""
+    from .annotate.layout import title_blob
+    from .annotate.sheet_kind import SHEET_TYPE, judge, plan_bearing
+
+    n_walls = sum(1 for e in model.elements if e.cls == "wall")
+    if not n_walls and not model.rooms:
+        return                                     # nothing was found, so there is nothing to wrongly keep
+    j = judge(preview if preview.exists() else None, title_blob(model.sheet), n_walls, len(model.rooms))
+    model.sheet.sheet_kind, model.sheet.kind_source = j["kind"], j["source"]
+    model.sheet.sheet_type = SHEET_TYPE[j["kind"]]
+    if not plan_bearing(j):
+        model.sheet.warnings.append(f"this sheet shows {j['kind'].replace('_', ' ')}, not a floor plan: no rooms, openings or "
+                                    f"routes were taken from it ({j['source']})")
+        model.elements, model.rooms, model.edges = [], [], []
+
+
 def build(run_dir: str | Path, calibrate: tuple | None = None, confirmed: set | None = None,
           images: bool = True) -> list[Path]:
     run_dir = Path(run_dir)
@@ -226,6 +294,7 @@ def build(run_dir: str | Path, calibrate: tuple | None = None, confirmed: set | 
         idx = int(sp.stem.split("_")[1])
         sheet = load(Sheet, sp)
         model = build_model(sheet, calibrate, confirmed, run_dir, idx)
+        gate_sheet(model, run_dir / f"preview_{idx}.png")
         out.append(save(model, run_dir / f"building_{idx}.json"))
         if images:
             from .report.debug_png import rooms_png
@@ -285,7 +354,9 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     all_findings = []
     models = []
     interpreted_results: list[dict] = []
-    for bp in sorted(run_dir.glob("building_*.json")):
+    paths = sorted(run_dir.glob("building_*.json"))
+    n_plans = sum(1 for bp in paths if _is_plan(load(BuildingModel, bp)))
+    for bp in paths:
         model = load(BuildingModel, bp)
         if briefs and n_sheets == 1:
             attach_programme(model, briefs[0])
@@ -296,9 +367,12 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
         apply_rejection(model, rejected)
         if confirmed:
             apply_confirmation(model, confirmed)
+        if not _is_plan(model):                  # an elevation, a section, a schedule: nothing here can be checked as a plan
+            models.append(model)
+            continue
         findings = run(model, rules, confirmed)
         if programs:
-            findings += _run_programs(model, programs, inventory_complete, interpreted_results)
+            findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1)
         for f in findings:
             key = finding_key(f)
             f.evidence["finding_id"] = key
@@ -319,13 +393,18 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     return summarise(all_findings)
 
 
-def _run_programs(model, programs, inventory_complete: bool, results: list[dict]) -> list:
+def _is_plan(model) -> bool:
+    """Floor plan, or a sheet nobody has named (old runs, the recogniser off): kept, as before."""
+    return not model.sheet.sheet_kind or model.sheet.sheet_kind == "floor_plan"
+
+
+def _run_programs(model, programs, inventory_complete: bool, results: list[dict], part_of_set: bool = False) -> list:
     """Approved interpreter programs on one sheet: findings for the viewer and one outcome record per program."""
     from .factgraph.convert import to_graph, to_inputs
     from .factgraph.from_building import from_building
     from .interpreter.findings import to_findings
 
-    graph_facts = from_building(model, complete=inventory_complete)
+    graph_facts = from_building(model, complete=inventory_complete, part_of_set=part_of_set)
     inputs, graph = to_inputs(graph_facts), to_graph(graph_facts)
     out = []
     for program in programs:

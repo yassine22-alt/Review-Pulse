@@ -1,38 +1,52 @@
 # ReviewPulse
 
-**New here? Start with [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md): one command to set up,
-one to check that everything works.**
+**Reviews plans against the requirements that apply to them, and shows its evidence.**
 
-Automated error detection on architectural plans, checked against a requirements document.
-A plan goes in (vector PDF, DXF, DWG, SVG or a supported scan), an annotated PDF and an HTML report come out,
-with every finding tied to its evidence on the drawing and to the clause it comes from.
+An architect, engineer or reviewer gives ReviewPulse a plan (a vector PDF, DXF, DWG, SVG or a supported scan) and the documents
+that set the requirements (a building code, a brief, a client specification, in PDF, Word, Markdown or text). ReviewPulse reads
+both, proposes the checks, lets a person approve them, runs them, and reports every finding on the drawing itself, with the measured
+value, the limit and the clause it comes from. A finding it cannot support is reported as "cannot be determined", never guessed.
 
-This repository root is the active application. The earlier DeepFloorPlan experiment is preserved
-under [legacy/deepfloorplan](legacy/deepfloorplan/README.md).
+## How it works, in three steps
+
+1. **Read the plan.** Scale, walls, doors, windows, stairs and rooms are found from the drawing, and each is marked with how
+   sure the tool is. Text drawn as outlines is read by OCR.
+2. **Read the requirements.** The document is split into its clauses (numbered, lettered, in tables, or plain paragraphs). A
+   language model proposes one checkable rule per clause. A set of programs then tests the rule against the sentence (the numbers,
+   the direction of the limit, what is measured) and rejects what does not match. A person approves each rule before it runs.
+3. **Check and report.** Approved rules run with no model, on the facts found in the plan. The report shows each result on the
+   plan, with a coverage page that accounts for every clause: checked, not checkable from a plan (and why), or waiting for a person.
+
+## What can be trusted today
+
+See **[docs/SCOPE.md](docs/SCOPE.md)**: what ReviewPulse does well, what it does with caveats, and what it does not do yet, each
+backed by a measurement. You can check the plan reading yourself on real drawings: `python scripts/review_pack.py` writes a report
+a reviewer can open in a browser (see [docs/RUNBOOK.md](docs/RUNBOOK.md)).
+
+## Where to start
+
+| If you want to | Read |
+| --- | --- |
+| install it and see it work | [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) |
+| know what it covers and what it does not | [docs/SCOPE.md](docs/SCOPE.md) |
+| run the commands yourself | [docs/RUNBOOK.md](docs/RUNBOOK.md) |
+| understand how rules are written and checked | [docs/regulation_interpreter.md](docs/regulation_interpreter.md) |
+| see what was measured and why decisions were taken | [docs/progress/](docs/progress/) and [docs/DECISIONS.md](docs/DECISIONS.md) |
+| work on the code | [docs/rule_interpreter_handoff.md](docs/rule_interpreter_handoff.md) |
 
 ## Repository map
 
 ```text
-Review-Pulse/
-  pyproject.toml, setup.ps1, setup.sh   installation from this directory
-  src/reviewpulse/                     active Python package
-    interpreter/                      compound regulation interpreter
-    app/                              API and existing web interface
-    engine/                           existing checks and verdict policy
-  tests/                              active application tests
-  docs/                               architecture, guides and project evidence
-  scripts/                            evaluation and maintenance commands
-  schemas/                            data contracts
-  data/                               mappings and local data/models
-  reports/                            checked-in evaluation evidence
-  legacy/deepfloorplan/                archived original prototype
+src/reviewpulse/   the Python package (plan reading, rule interpreter, web app, checks)
+tests/             automated tests
+docs/              guides, scope, design decisions and measured results
+scripts/           evaluation and maintenance commands
+schemas/           data contracts (generated from the code)
+data/              mappings; local data and models (real drawings and documents used for testing are never committed)
+legacy/            an archived earlier prototype, kept for reference
 ```
 
-`src/reviewpulse` is the importable Python package, not another repository. There is no longer a
-second application folder to enter. Run installation, `rp`, tests and Docker commands from here.
-For the interpreter handoff, start with [the team architecture document](docs/rule_interpreter_handoff.md).
-If you already installed the old nested layout, activate your environment and run
-`python -m pip install -e ".[app,dev]"` once from this root to refresh its editable package path.
+Install and run everything from the repository root.
 
 ## Quickstart: the web app
 
@@ -48,13 +62,14 @@ or, with Docker (the app and the drafting model in two containers):
 docker compose up --build        # http://localhost:8000 ; first start downloads qwen2.5:7b (~4.7 GB)
 ```
 
-In the app: create a project, drop the plan (PDF, DXF, SVG, PNG/JPG scan) and the requirement document
-(PDF, DOCX, Markdown, text). The plan is analysed and checked against the base rule pack at once; the
-document is split into clauses and each clause is drafted into a rule by the local model. The Rules tab
-shows every clause next to its drafted rule: approve, edit or reject (approval runs the rule's self-test).
-The Results tab shows the plan with each finding drawn on it, filters by verdict and severity, and lets
-the reviewer confirm or reject detected elements and dismiss findings with a reason; every change re-runs
-the check. Annotated PDF, HTML, CSV and JSON reports download from the same page.
+In the app: create a project, drop the plan (PDF, DXF, SVG, PNG/JPG scan) and the source documents to
+review (PDF, scanned PDF or photo of a page, Word, Excel or csv checklist, web page, Markdown, text). New projects do not apply a built-in rule pack by default: the
+user-supplied documents define the review criteria. The Requirements tab reads clauses into checked
+interpretations; a reviewer approves or rejects each interpretation before it runs. Built-in packs remain
+available as an explicit optional choice. The Results tab shows the plan with each finding drawn on it,
+filters by verdict and severity, and lets the reviewer confirm or reject detected elements and dismiss
+findings with a reason; every change re-runs the check. Annotated PDF, HTML, CSV and JSON reports
+download from the same page.
 
 `python scripts/demo.py` runs that whole flow through the HTTP API on a generated plan with planted
 errors and prints what was found. The API is documented at `/docs` on a running server.

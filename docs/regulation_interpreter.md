@@ -32,6 +32,7 @@ The exported input file is also the capability catalogue. Extend its declared bi
 ## Document context
 
 The existing splitter supplies clauses and offsets. Context assembly follows subitem parents/children and explicit numbered paragraph/article/section/table references, with a cycle guard and a 40-clause budget. Missing, ambiguous or budget-truncated references remain unresolved. Definitions and references that are not explicitly numbered can be supplied in a JSON link map via `context ... --links links.json`.
+In the project Requirements tab, **Link supporting clauses** accepts the same map as JSON from a source clause ID to an array of supporting clause IDs. Changing the map invalidates previous interpretations and approvals for that document; replacing the requirement document clears the map. IDs that do not resolve remain visible as missing dependencies and block approval.
 
 This does not yet reconstruct an arbitrary PDF's full heading/definition/table hierarchy or resolve external standards automatically. Source quotes are checked against exact document offsets. Anchors establish traceability, not semantic completeness; a model can still omit meaning and requires independent review and evaluation.
 

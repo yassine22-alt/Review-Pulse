@@ -186,7 +186,9 @@ def symbol_of(unit: Unit) -> str:
     if unit.dims == ZERO and math.isclose(unit.factor, 1.0, rel_tol=1e-9):
         return "1"
     parts = [f"{b}{e if e != 1 else ''}" for b, e in zip(BASE, unit.dims, strict=True) if e]
-    body = ".".join(parts) or "1"
+    body = ".".join(parts)
+    if not body:
+        return f"{unit.factor:.12g}"
     if body == "count":
         body = "count"
     return body if math.isclose(unit.factor, 1.0, rel_tol=1e-9) else f"{unit.factor:.12g}.{body}"

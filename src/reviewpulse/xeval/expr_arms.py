@@ -127,7 +127,7 @@ def draft_expr(arm: str, item, client) -> Draft:
                 found += check_grounding(prog, item.text, cat, client)
             return found
     t0, raw = time.time(), None
-    user = _payload(ctx, cat)
+    user = _payload(ctx, cat, redact=getattr(client, "external", False))
     try:
         raw = client.complete(EXPR_SYSTEM, user, EXPR_SCHEMA)
         try:
@@ -162,7 +162,7 @@ def draft_rec(arm: str, item, client) -> Draft:
     check = lambda prog: verify(prog, item.text, cat, getattr(item, "lang", None))  # noqa: E731
     schema = Program.model_json_schema()
     t0, raw = time.time(), None
-    user = _payload(ctx, cat)
+    user = _payload(ctx, cat, redact=getattr(client, "external", False))
 
     def build(data: dict) -> Program:
         data = dict(data)

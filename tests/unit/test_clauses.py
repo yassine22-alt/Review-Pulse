@@ -31,3 +31,41 @@ def test_english_numbered_and_subitems():
 def test_french_article_variants():
     txt = "Article 12 - Les portes ont 0,90 m.\nARTICLE 13 Les couloirs.\nArt. 14.2 Les chambres.\n"
     assert [c.id for c in split_text(txt)] == ["Art. 12", "Art. 13", "Art. 14.2"]
+
+
+def test_a_reference_at_the_start_of_a_wrapped_line_does_not_start_a_clause():
+    txt = ("233.3.1 Minimum Number. Where facilities contain 15 or fewer dwelling units, the requirements of\n"
+           "233.3.1.1 and 233.3.1.2 shall apply to the total number of units constructed under one contract.\n"
+           "\n"
+           "233.3.2 Other Facilities. Facilities shall provide at least 5 percent accessible units.\n")
+    ids = [c.id for c in split_text(txt)]
+    assert ids == ["233.3.1", "233.3.2"]
+
+
+def test_a_numbered_clause_after_a_finished_sentence_still_starts_a_clause():
+    txt = ("3.1 Doors. Every door shall be at least 800 mm wide.\n"
+           "3.2 Corridors. Corridors shall be at least 1.0 m wide.\n")
+    assert [c.id for c in split_text(txt)] == ["3.1", "3.2"]
+
+
+def test_a_heading_in_plain_type_is_not_the_tail_of_the_clause_above_it():
+    txt = ("8.2\tCavity barriers should be provided to reduce the spread of fire.\n"
+           "\n"
+           "Junctions and cavity closures\n"
+           "\n"
+           "8.3\tCavity barriers should be provided at all of the following locations.\n")
+    cl = split_text(txt)
+    assert [c.id for c in cl] == ["8.2", "8.3"]
+    assert "Junctions" not in cl[0].text
+    assert cl[1].scope == "Junctions and cavity closures"
+    assert cl[0].scope == ""
+
+
+def test_a_short_sentence_before_a_numbered_clause_is_not_taken_for_a_heading():
+    txt = ("8.2 Cavity barriers should be provided.\n"
+           "\n"
+           "Barriers shall be fitted.\n"
+           "\n"
+           "8.3 Another requirement shall apply.\n")
+    cl = split_text(txt)
+    assert "Barriers shall be fitted." in cl[0].text

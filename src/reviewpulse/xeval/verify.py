@@ -20,7 +20,17 @@ from pathlib import Path
 
 import yaml
 
-from ..interpreter.schema import BinaryExpr, LiteralExpr, Program, walk
+from ..interpreter.schema import (
+    BinaryExpr,
+    FactExpr,
+    LinkExpr,
+    LiteralExpr,
+    LogicExpr,
+    PathExpr,
+    Program,
+    SetExpr,
+    walk,
+)
 from .demand import quantities
 
 BARE_NUMBER = re.compile(r"(?<![\w.,])\d+(?:[.,]\d+)?(?![\w²])")
@@ -65,7 +75,8 @@ def detect_language(text: str) -> str | None:
     tokens = set(re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)?", text.lower()))
     scores = {code: len(tokens & set(spec["words"])) for code, spec in wording().items()}
     ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
-    if not ranked or ranked[0][1] < 2 or (len(ranked) > 1 and ranked[0][1] == ranked[1][1]):
+    # one function word is enough when no other language shares it ("must" is English only): short checklist lines have few
+    if not ranked or ranked[0][1] < 1 or (len(ranked) > 1 and ranked[0][1] == ranked[1][1]):
         return None
     return ranked[0][0]
 
@@ -165,7 +176,11 @@ def check_numbers(program: Program, text: str, lang: str | None) -> list[Issue]:
             continue                     # structural constants (zero, one) are allowed
         if not _match(value, allowed):
             issues.append(Issue("number_not_in_sentence", f"the rule uses {value:g}, which the sentence does not state"))
+    existential = any(isinstance(n, SetExpr) and n.node in ("exists", "count") for e in (program.applicability, program.exemption,
+                                                                                     program.requirement) for n in walk(e))
     for value, _, _, bare in spans:
+        if value == 1.0 and existential:
+            continue                     # "1 egress door required": the one is the quantifier (exists), not a figure to compare with
         if not _match(value, used, UNIT_SCALES if bare else (1.0,)):
             issues.append(Issue("number_ignored", f"the sentence states {value:g}, but the rule never uses it"))
     return issues
@@ -219,9 +234,65 @@ def check_directions(program: Program, text: str, lang: str) -> list[Issue]:
 # ---- category (scope) ------------------------------------------------------------------------------
 
 
+def fold_accents(text: str) -> str:
+    """Lower-case text without accents or umlauts ("séjour" -> "sejour", "küche" -> "kuche", "straße" -> "strasse"). The category
+    labels of the fact graph are written without them, so a sentence must be folded the same way before they are compared."""
+    import unicodedata
+
+    text = text.lower().replace("ß", "ss")
+    return "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+
+
+def _names(word: str, low: str) -> bool:
+    """Does the (folded, lower-case) text name this category word? A whole word, or the word with a short ending, so that the label
+    'stair' is named by 'stairways' and 'bedroom' by 'bedrooms'. Short words (under four letters) must match whole."""
+    w = re.escape(fold_accents(word.lower()))
+    tail = r"[^\W\d_]{0,4}" if len(word) >= 4 else ""
+    return re.search(rf"(?<![^\W\d_]){w}{tail}(?![^\W\d_])", low) is not None
+
+
+@cache
+def _label_languages() -> dict[str, frozenset[str]]:
+    """Each room word of the curated lexicon -> the languages it belongs to ("scale" is Italian for stairs, not the English word)."""
+    path = Path(__file__).resolve().parents[1] / "annotate" / "lexicon" / "curated.yaml"
+    out: dict[str, set[str]] = {}
+    for entries in yaml.safe_load(path.read_text(encoding="utf-8"))["types"].values():
+        for lang, words in (entries or {}).items():
+            for word in words:
+                out.setdefault(fold_accents(str(word).lower()), set()).add(lang)
+    return {w: frozenset(v) for w, v in out.items()}
+
+
+def _foreign(word: str, lang: str | None) -> bool:
+    """A label word that only other languages than the sentence's write: it is not a mention of the category."""
+    if lang is None:
+        return False
+    table = _label_languages()
+    w = fold_accents(word.lower())
+    langs = table.get(w) or table.get(w[:-1]) if w[-1:] in ("s", "x") else table.get(w)
+    return bool(langs) and lang not in langs
+
+
+def named_categories(text: str, cat: dict, fact: str) -> list[str]:
+    """The category values (or group names) of `fact` that the sentence names in words: the candidates the model must confirm."""
+    low = fold_accents(prepare(text).lower())
+    lang = detect_language(prepare(text))
+    labels = cat.get("kind_labels", {}).get(fact, {})
+    found = []
+    for value in cat.get("kinds", {}).get(fact, []):
+        words = set(labels.get(value, [])) | {value.replace("_", " ")}
+        if any(_names(w, low) for w in words if w and not _foreign(w, lang)):
+            found.append(value)
+    for term in (cat.get("groups", {}).get(fact) or {}):
+        if re.search(rf"(?<![^\W\d_]){re.escape(term.split()[0])}", low):
+            found.append(term)
+    return found
+
+
 def check_scope(program: Program, text: str, cat: dict) -> list[Issue]:
     """Every category the sentence names must appear in the rule as a condition, or the rule covers everything."""
-    low = prepare(text).lower()
+    low = fold_accents(prepare(text).lower())
+    lang = detect_language(prepare(text))
     used = set()                      # (category fact, value) pairs the rule compares, so 'external' on doors is not
     for expr in (program.applicability, program.exemption, program.requirement):     # mistaken for 'external' on stairs
         for node in walk(expr):
@@ -236,7 +307,7 @@ def check_scope(program: Program, text: str, cat: dict) -> list[Issue]:
             words = set(labels.get(value, []))
             if not words or sum(value in vs for vs in cat["kinds"].values()) == 1:
                 words.add(value.replace("_", " "))       # a value shared by several facts ("external") is ambiguous
-            mentioned = any(re.search(rf"(?<![^\W\d_]){re.escape(w.lower())}(?![^\W\d_])", low) for w in words if w)
+            mentioned = any(_names(w, low) for w in words if w and not _foreign(w, lang))
             for term, members in cat.get("groups", {}).get(fact, {}).items():
                 if value in members and re.search(rf"(?<![^\W\d_]){re.escape(term.split()[0])}", low):
                     mentioned = True        # the sentence names a group the document defined, which includes this value
@@ -247,6 +318,82 @@ def check_scope(program: Program, text: str, cat: dict) -> list[Issue]:
                 issues.append(Issue("scope_invented", f"the rule restricts to '{value}', which the sentence "
                                                       f"does not name"))
     return issues
+
+
+def _requirement_parts(expr):
+    """The nodes of a requirement that say what must hold: everything except the `where` of a quantifier, which only picks the members."""
+    yield expr
+    if isinstance(expr, SetExpr):
+        children = [expr.body] if expr.body is not None else []
+    elif isinstance(expr, LogicExpr):
+        children = expr.args
+    elif isinstance(expr, BinaryExpr):
+        children = [expr.left, expr.right]
+    else:
+        children = []
+    for child in children:
+        yield from _requirement_parts(child)
+
+
+def _is_positive_test(node: BinaryExpr, cat: dict) -> bool:
+    """`area > 0`, `width >= 0`, `0 < length`: a measured size (an area, a width, a count) compared with zero or less. A size is never
+    negative and a drawn element is never empty, so the test passes whatever the plan shows ("Square Footage" became "every room has
+    an area above zero")."""
+    left, right, op = node.left, node.right, node.node
+    if isinstance(left, LiteralExpr) and isinstance(right, FactExpr):
+        left, right, op = right, left, {"lt": "gt", "le": "ge", "gt": "lt", "ge": "le"}[op]
+    if not (isinstance(left, FactExpr) and isinstance(right, LiteralExpr)):
+        return False
+    value = right.value
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    kind = cat.get("bindings", {}).get(left.name, {}).get("kind")
+    if kind is not None and kind != "number":
+        return False
+    return (op == "ge" and value <= 0) or (op == "gt" and value < 0) or (op == "gt" and value == 0)
+
+
+def check_vacuous(program: Program, cat: dict) -> list[Issue]:
+    """A rule that cannot fail says nothing, and an unnoticed rule that always passes is worse than no rule ("true", "every bedroom:
+    true", "room type equals room type", "room type is bedroom" for rooms already picked as bedrooms). The requirement must test a
+    measured or yes/no fact, a route or a link, and must never compare a thing with itself."""
+    kinds = set(cat.get("kinds", {}))
+    tested, issues = False, []
+    for node in _requirement_parts(program.requirement):
+        if isinstance(node, (PathExpr, LinkExpr)) or (isinstance(node, SetExpr) and node.node in ("count", "sum", "min", "max")):
+            tested = True
+        elif isinstance(node, FactExpr) and node.name not in kinds:
+            tested = True
+        elif isinstance(node, BinaryExpr) and node.node in ("eq", "ne", "lt", "le", "gt", "ge") \
+                and node.left.model_dump() == node.right.model_dump():
+            issues.append(Issue("vacuous", "the rule compares a value with itself, so it can never fail or can never pass"))
+        elif isinstance(node, BinaryExpr) and node.node in ("lt", "le", "gt", "ge") and _is_positive_test(node, cat):
+            issues.append(Issue("vacuous", "the rule only says a measured size is above zero, which every real element satisfies"))
+    if not tested:
+        issues.append(Issue("vacuous", "the rule tests no measured or yes/no fact and no route, so it would pass whatever the plan shows"))
+    return issues
+
+
+def check_alternatives(program: Program, text: str, lang: str | None) -> list[Issue]:
+    """"Bathrooms need a 3 sq ft window or a mechanical exhaust": a rule with no `or` in it demands only the first alternative and would
+    fail a plan that meets the second. A sentence with an alternative and a rule without one is not accepted."""
+    if not lang or lang not in wording():
+        return []
+    table = wording()[lang]
+    cues = table.get("either", [])
+    if not cues:
+        return []
+    low = text.lower()
+    for tail in sorted(table.get("after_le", []) + table.get("after_ge", []), key=len, reverse=True):
+        low = low.replace(tail.lower(), " ")            # "3 storeys or fewer" is a comparison, not an alternative
+    if not any(re.search(rf"(?<![^\W\d_]){re.escape(c)}(?![^\W\d_])", low) for c in cues):
+        return []
+    # a route or a link already stands for "door or opening" (its edge kinds); a rule with an `or` of its own has the alternative
+    if any((isinstance(n, LogicExpr) and n.node == "any") or isinstance(n, (PathExpr, LinkExpr))
+           or (isinstance(n, FactExpr) and n.name.startswith(("links_", "reaches_")))
+           for e in (program.applicability, program.exemption, program.requirement) for n in walk(e)):
+        return []
+    return [Issue("alternative_dropped", "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them")]
 
 
 def check_aggregate(program: Program, text: str, lang: str) -> list[Issue]:
@@ -278,17 +425,25 @@ def check_route(program: Program) -> list[Issue]:
 # ---- entry point -----------------------------------------------------------------------------------
 
 
-def verify(program: Program, text: str, cat: dict, lang: str | None = None) -> list[Issue]:
-    """All checks. `lang` is a hint; otherwise it is detected. Wording checks run only for languages with a table."""
+def verify(program: Program, text: str, cat: dict, lang: str | None = None, grounding_words: bool = True) -> list[Issue]:
+    """All checks. `lang` is a hint; otherwise it is detected. Wording checks run only for languages with a table.
+    `grounding_words`: the English word-overlap test between the sentence and the measured fact. A rule a program wrote from an explicit
+    multiple choice of the fact has been grounded more precisely (interpreter/grounding.py), and the overlap test, which cannot know
+    that "wide" is the same quantity as "width", would only refuse it; those arms turn it off."""
     flat = prepare(text)
     code = lang if lang in wording() else detect_language(flat)
     from .semantic import check_grounding_words, check_owners, check_values
 
-    issues = check_scope(program, flat, cat) + check_numbers(program, text, code) \
-        + check_owners(program, cat) + check_values(program, cat) + check_route(program)
+    # the parts of the sentence the rule declares it does not cover are not held against it: their figures are not "ignored"
+    covered = flat
+    for part in program.not_checked:
+        covered = covered.replace(part, " ")
+    issues = check_scope(program, flat, cat) + check_numbers(program, covered, code) \
+        + check_owners(program, cat) + check_values(program, cat) + check_route(program) + check_vacuous(program, cat)
     if code:
-        issues += check_directions(program, text, code) + check_aggregate(program, text, code)
-        if code == "en":
+        issues += check_directions(program, covered, code) + check_aggregate(program, text, code) \
+            + check_alternatives(program, covered, code)
+        if code == "en" and grounding_words:
             issues += check_grounding_words(program, text, cat)
     else:
         issues.append(Issue("unchecked", "the comparison wording was not checked: this sentence's language has no "

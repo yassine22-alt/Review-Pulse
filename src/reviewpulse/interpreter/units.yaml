@@ -69,6 +69,9 @@ prefixable: [m, g, s, Hz, N, Pa, bar, J, Wh, W, A, V, K, mol, cd, lx, L, l, rad]
 
 # how documents write units in words (all lower case); the value is a symbol above
 words:
+  ft: [feet, foot]
+  in: [inches, inch]
+  ft2: [square feet, square foot, sq ft, sq. ft., sq.ft., s.f., sf]
   m2: [square metres, square meters, sq m, sq. m, mètres carrés, metre carre, quadratmeter, metros cuadrados, metri quadrati]
   m3: [cubic metres, cubic meters, mètres cubes, kubikmeter, metros cúbicos, metri cubi]
   mm: [millimetres, millimeters, millimètres, millimetre, millimeter, millimètre, millimeter, milímetros]

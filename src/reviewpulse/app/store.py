@@ -24,7 +24,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 PLAN_TYPES = {".pdf", ".dxf", ".dwg", ".svg", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
-REQ_TYPES = {".pdf", ".md", ".txt", ".docx"}
+REQ_TYPES = {".pdf", ".md", ".txt", ".docx", ".xlsx", ".xlsm", ".csv", ".tsv", ".html", ".htm", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
 
 
 def now() -> str:
@@ -56,8 +56,10 @@ class Project:
     created: str
     plan: str | None = None             # file name under inputs/plan
     requirements: str | None = None     # file name under inputs/req
-    base_pack: str | None = "starter"   # a folder of rules/packs, or None for project rules only
+    base_pack: str | None = None        # an explicit optional pack; user-supplied requirements are the default
+    context_links: dict[str, list[str]] = field(default_factory=dict)
     curator: str = ""
+    external_consent: bool = False      # the reviewer allowed clause text (never plans) to go to a hosted model for hard clauses
     inventory_reviewed: bool = False    # a person confirmed every room, door and window was found: passes may be reported
     updated: str = ""
     notes: dict = field(default_factory=dict)
@@ -91,7 +93,7 @@ class Store:
         return self.dir(p.id) / "inputs" / "req" / p.requirements if p.requirements else None
 
     # -- projects ------------------------------------------------------------
-    def create(self, name: str, base_pack: str | None = "starter", curator: str = "") -> Project:
+    def create(self, name: str, base_pack: str | None = None, curator: str = "") -> Project:
         p = Project(id=uuid.uuid4().hex[:12], name=name.strip() or "Untitled project", created=now(),
                     base_pack=base_pack, curator=curator)
         d = self.dir(p.id)
@@ -145,6 +147,7 @@ class Store:
             shutil.rmtree(self.run_dir(p.id), ignore_errors=True)
         else:
             p.requirements = name
+            p.context_links = {}
             for old in self.drafts_dir(p.id).glob("*"):
                 old.unlink()
         self.save(p)

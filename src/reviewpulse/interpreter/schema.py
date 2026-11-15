@@ -136,6 +136,9 @@ class Program(Model):
     requirement: Expr
     sources: list[Span] = Field(min_length=1)
     unresolved: list[str] = Field(default_factory=list)
+    # Parts of the sentence the plan cannot show (a riser height, a handrail). The rule covers the rest: a violation of the covered
+    # part is a violation whatever the uncovered part says, but the rule can never report "satisfied" while a part is unchecked.
+    not_checked: list[str] = Field(default_factory=list)
 
 
 class Binding(Model):

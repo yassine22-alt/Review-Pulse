@@ -10,8 +10,9 @@ from ..rules.clauses import Clause
 from .schema import Model, Span
 
 REFERENCE = re.compile(
-    r"\b(?:article|art\.?|paragraph|section|table)\s+(\d+(?:\.\d+)*)(?:\(([a-z0-9]+)\))?", re.I
+    r"\b(article|art\.?|paragraph|section|table|tableau|rule|regulation|clause|§)\s*(\d+(?:\.\d+)*)(?:\(([a-z0-9]+)\))?", re.I
 )
+TABLE_WORDS = {"table", "tableau"}
 
 
 class ContextBundle(Model):
@@ -39,6 +40,26 @@ class ContextBundle(Model):
             or self.text[span.start : span.end] != span.quote
         ):
             raise ValueError(f"unsupported source quote/span: {span.clause}")
+
+
+QUOTED = re.compile(r"[“\"«‘]\s*([^”\"»’\n]{3,60}?)\s*[”\"»’]")
+MEANS = re.compile(r"([^\W\d_][\w'’ -]{2,50}?)\s+(?:means|shall mean|refers to|is defined as|are defined as|signifie|désigne|"
+                   r"bedeutet|significa|si intende|betekent|se entiende)\b", re.I)
+
+
+def defined_terms(text: str) -> list[str]:
+    """The terms a definition clause defines: the quoted ones, else the words before "means"."""
+    terms = [t.lower() for t in QUOTED.findall(text)]
+    if not terms:
+        terms = [m.group(1).lower() for m in MEANS.finditer(text)]
+    return [t.strip(" .,:;") for t in terms if t.strip()]
+
+
+def _uses_term(definition: Clause, used_text: str) -> bool:
+    terms = defined_terms(definition.text)
+    if not terms:
+        return True                                         # cannot tell what it defines: keep it, as before
+    return any(t in used_text or t.rstrip("s") in used_text for t in terms)
 
 
 def assemble_context(
@@ -76,15 +97,34 @@ def assemble_context(
         queue.extend(c.id for c in clauses if c.parent == cid)
         queue.extend((links or {}).get(cid, []))
         for match in REFERENCE.finditer(clause.text):
-            number, subitem = match.groups()
-            candidates = [number, f"Art. {number}"]
+            word, number, subitem = match.groups()
+            if word.lower() in TABLE_WORDS:                 # "Table 2" is the table, never clause 2
+                candidates = [f"Table {number}", f"Tableau {number}"]
+            else:
+                candidates = [number, f"Art. {number}", f"§ {number}", f"{word.capitalize()} {number}"]
             if subitem:
-                candidates = [f"{candidate} {subitem})" for candidate in candidates]
-            matches = [candidate for candidate in candidates if candidate in by_id]
+                candidates = [f"{candidate} ({subitem})" if subitem.isdigit() else f"{candidate} {subitem})"
+                              for candidate in candidates]
+            matches = sorted({candidate for candidate in candidates if candidate in by_id})
             if len(matches) == 1:
                 queue.append(matches[0])
             else:
                 missing.add(f"unresolved reference:{match.group(0)}")
+        # a clause that names another by its own code ("see REQ-002") is linked to it
+        for other in clauses:
+            if other.id != cid and re.search(r"[A-Za-z]", other.id) and re.search(r"[-_.\d]", other.id) \
+                    and re.search(rf"(?<![\w-]){re.escape(other.id)}(?![\w-])", clause.text):
+                queue.append(other.id)
+    # a definition travels with the clauses that use its term ("a habitable room means ..."), not with every clause: a long
+    # standard defines dozens of terms and a prompt full of unrelated definitions is slow and distracting
+    grew = True
+    while grew and len(selected) < max_clauses:
+        grew = False
+        used = " ".join(c.text for c in selected.values()).lower()
+        for c in clauses:
+            if c.kind == "definition" and c.id not in selected and _uses_term(c, used):
+                selected[c.id] = c
+                grew = True
     return ContextBundle(
         document=document,
         text=text,

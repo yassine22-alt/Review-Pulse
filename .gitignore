@@ -115,3 +115,10 @@ reports/extractor_eval/*
 
 # Personal copies with this machine's paths and notes stay on the machine
 *.local.md
+
+# real public documents used only for local testing (copyright, size); never committed
+data/real_docs/
+data/real_plans/
+
+# cached answers of hosted models (private to the machine)
+data/llm_cache.sqlite*

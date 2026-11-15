@@ -82,11 +82,16 @@ def main() -> None:
                 wait(c, pid, c.post(f"/api/projects/{pid}/plan", files={"file": ("plan.dxf", f)}).json())
             with open(DOCS[args.doc], "rb") as f:
                 wait(c, pid, c.post(f"/api/projects/{pid}/requirements", files={"file": ("requirements.md", f)}).json())
-            for clause in CLAUSES:
+            print(f"[{name}] plan analysed, requirements uploaded; reading {len(CLAUSES)} clauses", flush=True)
+            for k, clause in enumerate(CLAUSES, 1):
+                t1 = time.time()
                 r = c.post(f"/api/projects/{pid}/interpret/{clause}").json()
+                said = r.get("plain") or r.get("reason", "")
+                print(f"  {k:>2}/{len(CLAUSES)} {clause:<9} {r['status']:<10} {time.time() - t1:>4.0f}s  {said[:105]}", flush=True)
                 if r["status"] == "DRAFTED":
                     c.post(f"/api/projects/{pid}/decision",
                            json={"clause": clause, "action": "approve", "reviewer": "demo reviewer", "acknowledge": True})
+            print(f"[{name}] rules approved, running the check", flush=True)
             c.patch(f"/api/projects/{pid}", json={"inventory_reviewed": True})
             wait(c, pid, c.post(f"/api/projects/{pid}/check").json())
             cov = c.get(f"/api/projects/{pid}/coverage").json()

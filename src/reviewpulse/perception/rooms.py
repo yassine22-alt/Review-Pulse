@@ -25,6 +25,8 @@ ADJ_SHARED_M = 0.30
 OUTDOOR_LABEL_M = 3.0       # balcony/terrace label this close to the outer side of a door
 ADJ_GAP_M = 0.35            # rooms separated by at most one wall (thickest 0.30 m + tolerance)
 GARAGE_DOOR_M = 2.0
+ENCLOSED_MIN = 0.35         # a piece cut out of the outside is a room only if this share of its edge is barrier
+SPLIT_EDGE_MIN_M = 0.3     # pieces of one space that touch along at least this are joined by an inferred opening
 ENVELOPE_WARN = 0.40
 GRID = 1e-4                 # stored coordinates are rounded to this (sheet units)
 
@@ -81,7 +83,8 @@ def _room_type(label: str | None) -> str | None:
 
 
 def detect_rooms(sheet: Sheet, walls: list[Element], columns: list[Element], openings: list[Element],
-                 mpu: float, scale_known: bool = True, barrier=None) -> tuple[list[Room], list[Edge], list[str]]:
+                 mpu: float, scale_known: bool = True, barrier=None,
+                 seeded: bool = True) -> tuple[list[Room], list[Edge], list[str]]:
     """``barrier`` may be given directly (e.g. true wall polygons from a dataset) to test this
     stage alone; otherwise it is built from the wall, column and opening elements."""
     ids = IdFactory(sheet.id)
@@ -102,7 +105,35 @@ def detect_rooms(sheet: Sheet, walls: list[Element], columns: list[Element], ope
     exterior = [g for g in comps if any(g.buffer(1e-6).contains(c) for c in corners)]
     min_area = MIN_ROOM_M2 / (mpu * mpu) if scale_known else 0.0005 * env.area
     inner = [g for g in comps if g not in exterior and g.area >= min_area]
-    leaked = _seal_envelope_leaks(exterior, corners, LEAK_GAP_M / 2 / mpu, min_area)
+    seeds: list[dict] = []
+    if seeded:
+        from .seeded import seeds_from_texts
+
+        seeds = seeds_from_texts(sheet.texts)
+    # an outside region that holds room names is not outside: the building is joined to it through gaps no recognised opening
+    # explains. The outside is then one more seed (the sheet margin), the rooms are flooded against it, and what the outside wins
+    # is dropped. A piece must be mostly enclosed by barrier to be a room (a label floating in the open is not one).
+    flooded: list = []
+    plain_exterior = []
+    for g in exterior:
+        inside = [s for s in seeds if g.contains(Point(s["x"], s["y"]))]
+        if not inside:
+            plain_exterior.append(g)
+            continue
+        from .seeded import split_region
+
+        outside = [{"x": c.x, "y": c.y, "label": None, "norm": None, "area_m2": None, "outside": True} for c in corners]
+        for q, s in split_region(g, seeds + outside, mpu):
+            if s is None or s.get("outside") or q.area < min_area:
+                continue
+            edge = q.exterior                      # the outer edge only: islands of furniture inside must not count as walls
+            enclosed = edge.intersection(closed.buffer(0.3 / mpu)).length / (edge.length or 1.0)
+            if enclosed >= ENCLOSED_MIN:
+                flooded.append((q, s))
+    if flooded:
+        warnings.append(f"{len(flooded)} room(s) lie in space joined to the outside through gaps no opening explains: "
+                        "they were separated from the outside using their labels (inferred boundaries)")
+    leaked = _seal_envelope_leaks(plain_exterior, corners, LEAK_GAP_M / 2 / mpu, min_area)
     if leaked:
         warnings.append(f"envelope leak sealed: {len(leaked)} space(s) reached the outside only through "
                         f"a gap narrower than {LEAK_GAP_M} m (undrawn wall or unrecognised opening)")
@@ -114,8 +145,35 @@ def detect_rooms(sheet: Sheet, walls: list[Element], columns: list[Element], ope
 
     labels = [t for t in sheet.texts if t.kind == "room_label"]
     areas = [t for t in sheet.texts if t.kind == "area"]
+    # a free-space region that holds several named rooms is separated among them (inferred boundaries, marked as such)
+    seed_of: dict[int, dict] = {}
+    group_of: dict[int, int] = {}
+    if seeded:
+        from .seeded import split_region
+
+        pieces = []
+        for gi, g in enumerate(inner):
+            parts = split_region(g, seeds, mpu) if len(seeds) >= 2 else [(g, None)]
+            for q, s in parts:
+                pieces.append(q)
+                if s is not None:
+                    seed_of[id(q)] = s
+                if len(parts) > 1:
+                    group_of[id(q)] = gi
+        base = len(inner)
+        for q, s in flooded:                                # pieces of an outside region: all cut from one space
+            pieces.append(q)
+            seed_of[id(q)] = s
+            group_of[id(q)] = base
+        n_split = sum(1 for gi in set(group_of.values()) if list(group_of.values()).count(gi) > 1)
+        if n_split:
+            warnings.append(f"{n_split} merged space(s) were separated using the room labels: those boundaries are "
+                            "inferred from the names on the drawing, not from drawn walls")
+        inner = pieces
     rooms: list[Room] = []
+    room_group: dict[str, int] = {}
     for g in sorted(inner, key=lambda g: (-g.centroid.y, g.centroid.x)):
+        key = id(g)
         # snap to the stored precision as a whole: rounding each vertex alone can push two nearly
         # touching edges across each other, and a self-intersecting room breaks every area and
         # overlap computed on it downstream
@@ -126,6 +184,7 @@ def detect_rooms(sheet: Sheet, walls: list[Element], columns: list[Element], ope
         holes = [[(round(x, 4), round(y, 4)) for x, y in list(h.coords)[:-1]] for h in g.interiors]
         lab = _pick_label(g, labels)
         stated = None
+        seed = seed_of.get(key)
         if lab is not None and lab.value is not None:
             stated = lab.value
         else:
@@ -133,20 +192,42 @@ def detect_rooms(sheet: Sheet, walls: list[Element], columns: list[Element], ope
             if near:
                 ref = Point(_centre(lab)) if lab else g.centroid
                 stated = min(near, key=lambda t: Point(_centre(t)).distance(ref)).value
+        if seed is not None:                  # the room's own name lines (stacked) and area, whichever line was nearest
+            stated = seed["area_m2"] if seed["area_m2"] is not None else stated
         mn, med = width_profile(g)
         ev = {"label_id": lab.id if lab else None, "median_width_m": round(med * mpu, 4)}
         if lab is not None and lab.prov.evidence.get("label_source"):
             ev["label_source"] = lab.prov.evidence["label_source"]
+        if key in group_of:
+            ev["boundary"] = "inferred_from_labels"
+        text = seed["label"] if seed and seed["label"] else (lab.text if lab else None)
+        rtype = (seed["norm"] if seed and seed["norm"] else None) or (lab.norm if lab else None)
         rooms.append(Room(
-            id=ids("room", poly), polygon=poly, holes=holes, label=lab.text if lab else None,
-            type=lab.norm if lab else None, stated_area_m2=stated,
+            id=ids("room", poly), polygon=poly, holes=holes, label=text,
+            type=rtype, stated_area_m2=stated,
             area_m2=round(g.area * mpu * mpu, 4), min_width_m=round(mn * mpu, 4),
             prov=Prov(source="derived", stage="rooms_v1", confidence=1.0 if scale_known else 0.7,
                       evidence=ev),
         ))
+        if key in group_of:
+            room_group[rooms[-1].id] = group_of[key]
 
     outdoor_labels = [t for t in sheet.texts if t.kind == "room_label" and t.norm == "terrace"]
     edges = _edges(rooms, openings, mpu, outdoor_labels)
+    if room_group:                  # rooms cut from one space meet where nothing was drawn: connected, but only inferred
+        have = {frozenset((e.a, e.b)) for e in edges}
+        by_id = {r.id: Polygon(r.polygon, r.holes) for r in rooms}
+        ids_in = list(room_group)
+        for i, a in enumerate(ids_in):
+            for b in ids_in[i + 1:]:
+                if room_group[a] != room_group[b] or frozenset((a, b)) in have:
+                    continue
+                tol = 0.05 / mpu
+                shared = by_id[a].boundary.buffer(tol).intersection(by_id[b].boundary)
+                if shared.length * mpu >= SPLIT_EDGE_MIN_M:
+                    edges.append(Edge(a=a, b=b, kind="opening", width_m=None,
+                                      prov=Prov(source="derived", stage="room_graph_v1", confidence=0.4,
+                                                evidence={"inferred": "label_seeded_split"})))
     for room in rooms:
         g = Polygon(room.polygon)
         n_doors = sum(1 for e in edges if room.id in (e.a, e.b) and e.kind in ("door", "opening"))

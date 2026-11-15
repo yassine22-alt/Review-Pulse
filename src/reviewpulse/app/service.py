@@ -57,25 +57,38 @@ def rules_summary(store: Store, p: Project) -> dict:
 def default_llm() -> object | None:
     """The configured drafting model, or None when it is not reachable (drafting then degrades to
     clauses only: the curator writes or edits rules by hand, and the base pack still applies)."""
-    backend = os.environ.get("REVIEWPULSE_LLM", "ollama")
+    from ..llm import setting
+
+    backend = setting("REVIEWPULSE_LLM", "ollama")
     if backend == "none":
         return None
     try:
-        client = make_client(backend, os.environ.get("REVIEWPULSE_LLM_MODEL") or None)
-    except ImportError:
+        client = make_client(backend, setting("REVIEWPULSE_LLM_MODEL"))
+    except (ImportError, ValueError):       # not installed, or a hosted backend that is not fully configured
         return None
     if isinstance(client, OllamaClient) and not client.available():
         return None
     return client
 
 
+def default_fallback() -> object | None:
+    """The optional hosted model (REVIEWPULSE_FALLBACK=openai ...), or None. Used only for projects whose reviewer allowed it."""
+    from ..llm import fallback_from_env
+
+    try:
+        return fallback_from_env()
+    except Exception:       # a misconfigured fallback must never stop the local reading
+        return None
+
+
 def llm_status(factory: Callable[[], object | None]) -> dict:
+    from ..llm import describe
+
     client = factory()
     if client is None:
         return {"available": False, "backend": os.environ.get("REVIEWPULSE_LLM", "ollama"),
                 "model": os.environ.get("REVIEWPULSE_LLM_MODEL") or "qwen2.5:7b"}
-    return {"available": True, "backend": type(client).__name__.replace("Client", "").lower(),
-            "model": getattr(client, "model", "")}
+    return {"backend": type(client).__name__.replace("Client", "").lower(), **describe(client)}
 
 
 # -- jobs -------------------------------------------------------------------------
@@ -96,7 +109,9 @@ def analyse(store: Store, pid: str, job: Job, then_check: bool = True) -> dict:
     models = [load(BuildingModel, b) for b in sorted(run.glob("building_*.json"))]
     out = {"sheets": len(models),
            "elements": sum(len(m.elements) for m in models), "rooms": sum(len(m.rooms) for m in models),
-           "tiers": [m.tier for m in models]}
+           "tiers": [m.tier for m in models],
+           "not_floor_plans": [{"sheet": m.sheet.id, "kind": m.sheet.sheet_kind} for m in models
+                                if m.sheet.sheet_kind and m.sheet.sheet_kind != "floor_plan"]}
     if then_check and packs_for(store, p):
         job.progress(0.80, "checking the rules")
         out["findings"] = check(store, pid, job)["summary"]

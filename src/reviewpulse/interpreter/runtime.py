@@ -292,7 +292,9 @@ def run_program(
         outcome = "UNRESOLVED"
     else:
         outcome = "VIOLATED"
-    root = Trace.combine("program", None, [applicability, exemption, requirement], program.unresolved)
+    if program.not_checked and outcome == "SATISFIED":
+        outcome = "UNRESOLVED"            # the covered part holds; a part of the sentence was never checked, so no pass is claimed
+    root = Trace.combine("program", None, [applicability, exemption, requirement], [*program.unresolved, *program.not_checked])
     return {
         "rule_id": program.id,
         "outcome": outcome,

@@ -450,6 +450,7 @@ def compile_expr_program(fields: dict, document: str, bindings: dict[str, Bindin
         "sources": [{"clause": s["clause"], "start": 0, "end": 1, "quote": s["quote"]}
                     for s in fields.get("sources", [])],
         "unresolved": list(fields.get("unresolved") or []),
+        "not_checked": list(fields.get("not_checked") or []),
     }
     if (fields.get("applies_when") or "").strip():
         program["applicability"] = to_expression(fields["applies_when"], bindings, entities)

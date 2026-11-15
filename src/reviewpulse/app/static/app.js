@@ -106,7 +106,7 @@ async function projectsView() {
     </div>
     <form class="card pad newproj" id="newproj">
       <label class="field">Project name<input type="text" name="name" required placeholder="e.g. Résidence Les Pins, lot B"></label>
-      <label class="field">Base rule pack<select name="base_pack">${packOpts}<option value="">none (project rules only)</option></select></label>
+      <label class="field">Built-in rule pack (optional)<select name="base_pack"><option value="" selected>None · use rules from uploaded documents</option>${packOpts}</select></label>
       <label class="field">Reviewer<input type="text" name="curator" placeholder="your name"></label>
       <button class="btn primary" type="submit">Create project</button>
     </form>
@@ -396,6 +396,13 @@ async function requirementsTab(pid) {
   $("#tab").innerHTML = `
     <div data-job-kind="interpret"></div>
     ${p.plan ? inventoryBox(p) : ""}
+    ${hostedBox(p)}
+    <details class="card pad">
+      <summary><b>Link supporting clauses</b> <span class="muted">Optional · for definitions or references not detected automatically</span></summary>
+      <p class="muted">Map a clause ID to the clause IDs that define or qualify it. These source clauses are included in its interpretation context. Unresolved IDs block approval rather than being guessed. Changing links clears existing interpretations and approvals for this document.</p>
+      <label class="field">Clause links (JSON)<textarea id="contextlinks" rows="5" spellcheck="false">${esc(JSON.stringify(p.context_links || {}, null, 2))}</textarea></label>
+      <button class="btn sm" id="savecontextlinks">Save source links</button>
+    </details>
     <div class="toolbar">
       <span><b>${esc(doc.name)}</b> · ${doc.clauses.length} clauses · ${n("DRAFTED")} with a rule · ${approved} approved · ${waiting} waiting for a reviewer · ${n("UNRESOLVED")} not checked yet · ${doc.clauses.length - done.length} not read yet</span>
       <span class="spacer"></span>
@@ -404,6 +411,14 @@ async function requirementsTab(pid) {
     ${approved ? `<p class="muted pad" style="padding-top:0">Approved rules are applied when you click Run check.</p>` : ""}
     <p class="muted pad">Each clause becomes a rule only if the rule agrees with the sentence (category, numbers, comparison direction) and uses only facts this plan provides. Otherwise it is marked not checked yet, with the reason. A rule counts only after a reviewer approves it.</p>
     <div class="card" id="clauses">${doc.clauses.map((c) => clauseCard(c, got[c.id])).join("")}</div>`;
+  const hostedToggle = $("#hostedconsent");
+  if (hostedToggle) hostedToggle.addEventListener("change", async () => {
+    try {
+      await api(`/api/projects/${pid}`, { method: "PATCH", json: { external_consent: hostedToggle.checked } });
+      toast(hostedToggle.checked ? "Hosted help allowed for this project" : "Hosted help switched off");
+    } catch (e) { toast(e.message, true); }
+    refreshReq(pid);
+  });
   const inv = $("#invconfirm");
   if (inv) inv.addEventListener("click", async () => {
     inv.disabled = true;
@@ -411,6 +426,21 @@ async function requirementsTab(pid) {
       await api(`/api/projects/${pid}`, { method: "PATCH", json: { inventory_reviewed: !p.inventory_reviewed } });
       toast(p.inventory_reviewed ? "Confirmation withdrawn" : "Plan inventory confirmed");
     } catch (e) { toast(e.message, true); }
+    refreshReq(pid);
+  });
+  $("#savecontextlinks").addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    try {
+      const links = JSON.parse($("#contextlinks").value);
+      if (!links || Array.isArray(links) || typeof links !== "object"
+          || Object.values(links).some((ids) => !Array.isArray(ids) || ids.some((id) => typeof id !== "string"))) {
+        throw new Error("Source links must map clause IDs to arrays of clause IDs");
+      }
+      await api(`/api/projects/${pid}/context-links`, { method: "PUT", json: { links } });
+      toast("Source links saved; prior interpretations were cleared if the links changed");
+    } catch (e) { toast(e.message, true); }
+    finally { button.disabled = false; }
     refreshReq(pid);
   });
   $("#readall").addEventListener("click", async () => {
@@ -846,6 +876,18 @@ function elementPopover(e, ev) {
   for (const b of $$("[data-t]", pop)) b.addEventListener("click", () => { closePop(); triage({ [b.dataset.t]: [e.id], recheck: true }); });
 }
 
+/* A hosted model is offered only when the server has one configured; the reviewer decides per project. */
+function hostedBox(p) {
+  const h = state.health && state.health.hosted;
+  if (!h || !h.available) return "";
+  return `<div class="card pad">
+    <label><input type="checkbox" id="hostedconsent" ${p.external_consent ? "checked" : ""}>
+      <b>Allow hosted help for clauses the local model cannot read</b></label>
+    <p class="muted">Only the clause text and the names of the facts this plan provides are sent to <b>${esc(h.provider)}</b> (${esc(h.model)}). Never the plan or the drawing, and the document's file name is replaced by the word "document". The answer goes through the same checks and needs the same approval.</p>
+    ${h.data_note ? `<p class="muted">${esc(h.data_note)} Read the provider's current terms before allowing a confidential document.</p>` : ""}
+  </div>`;
+}
+
 /* ---------------------------------------------------------------- boot */
 async function boot() {
   try {
@@ -853,7 +895,7 @@ async function boot() {
     const l = state.health.llm;
     const pill = $("#llm");
     pill.className = "pill " + (l.available ? "on" : "off");
-    pill.textContent = l.available ? `drafting model · ${l.model}` : `drafting model offline`;
+    pill.textContent = l.available ? `drafting model · ${l.model}${l.external ? " (hosted)" : " (local)"}` : `drafting model offline`;
   } catch (e) { toast("Server not reachable: " + e.message, true); }
   window.addEventListener("hashchange", route);
   route();

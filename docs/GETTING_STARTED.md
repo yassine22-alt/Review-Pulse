@@ -79,10 +79,12 @@ on clean drawings and is how the tests run.
 rp serve
 ```
 
-Open http://127.0.0.1:8000. Create a project, drop in a plan, and it is analysed and checked
-straight away against the starter rules. Drop in a requirements document and each clause is
-drafted into a rule; you approve, edit or reject each one. The Results tab shows the findings on
-the plan, and the reports download from there (annotated PDF, HTML, CSV, JSON).
+Open http://127.0.0.1:8000. Create a project and upload a plan and the source documents to review.
+By default, no built-in rule pack is applied: the documents the user supplies define the review
+criteria. The Requirements tab reads clauses into checked interpretations; you review and approve
+them before they run. A built-in rule pack can still be selected explicitly when appropriate. The
+Results tab shows findings on the plan, and reports download from there (annotated PDF, HTML, CSV,
+JSON).
 
 To see the whole flow without clicking: `python scripts/demo.py`.
 

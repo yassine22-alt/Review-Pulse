@@ -120,6 +120,57 @@ python scripts/stairs_synth.py 200                     # stair finder against kn
 python scripts/stairs_eval.py 150                      # stair finder against FloorPlanCAD labels
 ```
 
+## 6b. Test on documents and drawings other people wrote
+
+Put public documents under `data\real_docs\` and drawings under `data\real_plans\` (both are ignored by git: never commit
+other people's files). Then, from the repository folder with the environment set as in section 1:
+
+```powershell
+# what the splitter makes of a document, and a random sample of clauses read through the product on a plan
+python scripts\real_doc_study.py data\real_docs\your_document.pdf --n 20
+# or the clauses you pick (ids as shown in the Requirements tab)
+python scripts\real_doc_study.py data\real_docs\your_document.pdf --ids "3.2,item 27"
+
+# how well the splitter reads every document of the folder, with no labels (clauses cut mid sentence, started mid sentence)
+python scripts\split_audit.py dataeal_docs --json reports\split_audit.json
+# the same clauses written out as text, Word, Excel, csv, a web page and a scan, then read back (recall and precision per variant)
+python scriptsormat_robustness.py
+# every line of the checklists in benchmarks\checklist_labels.json read with the model (see docs\progress\M13_reading_any_document.md)
+python scripts\checklist_benchmark.py --out reportsenchmark
+
+# every page of a drawing set through the plan analysis, with a picture of each page
+python scripts\real_plan_study.py data\real_plans\your_set.pdf --max-pages 12
+
+# how well the sheet recogniser names pages (needs the pictures from the command above and the labels in the script)
+python scripts\sheet_kind_eval.py
+```
+
+To repeat a reading with a hosted model instead of the local one, put your key in a `.env` file in the repository folder
+(never commit it), for example for Groq:
+
+```
+REVIEWPULSE_LLM=openai
+REVIEWPULSE_LLM_PROVIDER=groq
+REVIEWPULSE_LLM_API_KEY=your key
+```
+
+and run the same `real_doc_study.py` command. Compare the two outputs in `reports\real_docs\`.
+
+## 6c. Produce an evaluation pack for a reviewer
+
+A pack is a folder a reviewer (a colleague, a client, a professor) can open in a browser without installing anything. It runs real
+drawings through the plan analysis and shows, for each sheet, the original page next to what was found, the scale and how it was
+found, the rooms, doors and routes, how the measured room areas compare with the areas the drawing prints, and a plain verdict.
+
+```powershell
+python scripts\review_pack.py                         # the default set of sheets in data\real_plans
+python scripts\review_pack.py --only "German"         # only sheets whose name contains this text
+python scripts\review_pack.py --set my_sheets.json    # your own list: [{"name", "pdf", "pages": [1, 2], "source"}]
+```
+
+The result is in `reports\review_pack\`: open `index.html`. The folder also holds `metrics.json` and a `README.md` for the reader. The
+drawings are third party documents: share the folder only where that is allowed.
+
 ## 7. Stop and clean up
 
 ```powershell
@@ -147,3 +198,17 @@ If `git status -sb` says `behind`, someone pushed first: run `git rebase origin/
 - what each milestone built and measured: `docs\progress\M7_*.md`, `M8_*.md`
 - the facts format: `docs\fact_graph.md`
 - decisions and their evidence: `docs\DECISIONS.md` (A52 onward)
+
+### Free hosted models: what the limits are and how to spend them
+
+A free tier limits requests per minute, tokens per minute and **tokens per day** (Groq, `openai/gpt-oss-120b`: 8 000 tokens a minute and
+200 000 a day when measured in November 2026). The daily figure is the one that ends a study: a full read of 31 checklist lines
+costs about 190 000 tokens when nothing is cached.
+
+- The client paces itself from the provider's own rate-limit headers and asks a reasoning model for the lowest reasoning effort (the
+  questions are multiple choices), which cuts the tokens per answer.
+- Every answer is cached on disk (`data/llm_cache.sqlite`). A change that alters a prompt (a fact description, a question) makes the
+  answers for that prompt new, so it costs again. Iterate on the local model, which is free, and run the hosted model once per milestone.
+- When the daily allowance is used up the client stops at once with a clear message. A call that failed is counted
+  (`usage.errors`) and the benchmark reports such lines as "call failed", never as a refusal by the model.
+- Models have separate allowances: when one is used up, a second model (or the second provider, Gemini) can carry on.

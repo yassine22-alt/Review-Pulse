@@ -66,7 +66,8 @@ def main(n: int):
         for k in range(n):
             errors = SETS[k % len(SETS)]
             paths = make_plan(Path(tmp) / f"p{k}", seed=100 + k, errors=errors, png=False)
-            pid = c.post("/api/projects", json={"name": f"p{k}", "curator": "eval"}).json()["id"]
+            pack = (c.get("/api/packs").json() or [{}])[0].get("name")       # the reference engine needs its rule pack chosen
+            pid = c.post("/api/projects", json={"name": f"p{k}", "curator": "eval", "base_pack": pack}).json()["id"]
             with open(paths["dxf"], "rb") as f:
                 wait(c, pid, c.post(f"/api/projects/{pid}/plan", files={"file": ("plan.dxf", f)}).json())
             with open(DOC, "rb") as f:
