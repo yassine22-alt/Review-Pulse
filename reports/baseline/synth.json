@@ -1,0 +1,28 @@
+{
+ "png": {
+  "ran": 15,
+  "clean_plans": 5,
+  "violations_on_clean_plans": 330,
+  "clean_DOOR_NOT_TOUCHING_WALL": 270,
+  "clean_ROOM_WITHOUT_DOOR": 16,
+  "clean_DOOR_NOT_CONNECTING_TWO_ROOMS": 36,
+  "clean_MIN_ROOM_AREA": 8,
+  "planted": 10,
+  "planted_type_reported_elsewhere": 9,
+  "violations_total_on_error_plans": 910,
+  "seconds_median": 366.6
+ },
+ "pdf": {
+  "ran": 15,
+  "clean_plans": 5,
+  "violations_on_clean_plans": 369,
+  "clean_MIN_ROOM_AREA": 9,
+  "clean_DOOR_NOT_TOUCHING_WALL": 297,
+  "clean_ROOM_WITHOUT_DOOR": 20,
+  "clean_DOOR_NOT_CONNECTING_TWO_ROOMS": 43,
+  "planted": 10,
+  "planted_type_reported_elsewhere": 10,
+  "violations_total_on_error_plans": 1087,
+  "seconds_median": 325.61
+ }
+}

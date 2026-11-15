@@ -1,0 +1,27 @@
+id: C-T2
+title: A bedroom is not reached only through another bedroom
+family: C
+class: traversal
+applies_to:
+  room_type:
+  - bedroom
+check:
+  fn: exists_path
+  from: $room
+  to: EXIT
+  via_edges:
+  - door
+  - opening
+  avoid:
+    room_type:
+    - bedroom
+severity: major
+needs:
+- room_graph
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 3
+message: '{room.label} is reached only through {witness.blocking}.'
+status: approved
+approved_by: starter-pack
+version: 1

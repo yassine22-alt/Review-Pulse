@@ -1,0 +1,3031 @@
+{
+ "summary": {
+  "dataset": "archcad",
+  "drawings": 200,
+  "crashes": 0,
+  "reference": "rooms from the dataset's true wall/door/window lines (our room building)",
+  "seconds": 2332,
+  "rules": {
+   "tp": 103,
+   "pred": 413,
+   "ref": 172,
+   "area_within_5pct": 40,
+   "precision": 0.2494,
+   "recall": 0.5988,
+   "f1": 0.3521,
+   "matched_area_within_5pct": 0.3883
+  },
+  "default": {
+   "tp": 112,
+   "pred": 160,
+   "ref": 172,
+   "area_within_5pct": 61,
+   "precision": 0.7,
+   "recall": 0.6512,
+   "f1": 0.6747,
+   "matched_area_within_5pct": 0.5446
+  }
+ },
+ "per_drawing": [
+  {
+   "item": "0021727b-dfc3-43d1-b18a-db379672186a",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "01a062cd-f8ba-41ff-9a90-e00f8c24e0c4",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "022c92a5-8d68-4ea5-a51b-f1c1fbed6161",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "031738d3-d0e1-492d-9e9d-2466c1b704b5",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "048fd43c-7013-4324-9aec-16af110b4542",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "062d58c1-abd9-41e4-8cf9-cdfd29de7281",
+   "rules": {
+    "tp": 5,
+    "pred": 5,
+    "ref": 5,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 5,
+    "pred": 5,
+    "ref": 5,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "070138dc-09a9-453f-810c-5b6d6e0d5982",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "077b48d1-c34d-42c9-a20d-721e10350f7a",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "0894f08c-e1d2-4bb7-8372-83af95d90c04",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "09328830-d694-4fb9-8f64-9dbca8caeed3",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "09d4954a-8bda-403b-99b0-b228aabef824",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 3,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 4,
+    "ref": 3,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "0a55ae38-a02b-4788-9786-4664cdcdafaa",
+   "rules": {
+    "tp": 1,
+    "pred": 5,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 5,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "0b6ad659-5183-4638-bbbc-7c7509599c20",
+   "rules": {
+    "tp": 2,
+    "pred": 6,
+    "ref": 3,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 3,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "0c392e60-2d94-4909-a7f9-42ea3a0682e8",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "0e915b3e-d61f-4219-8f6f-fb232e95ab69",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "0f540a12-3dd6-4beb-9591-6fb4905e6c8c",
+   "rules": {
+    "tp": 0,
+    "pred": 9,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1009c1ea-086f-4347-b661-2154ae54bdde",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "120237ec-c902-4878-aa0d-8fa97d353c34",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "12e9fca3-2185-4fa2-958a-f713d76bf070",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1488fc60-7c24-481f-ac70-9e057f605112",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "15869beb-dafd-4be8-a13b-7f5deea78af6",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "19107252-fbb4-46f7-9885-289eb041ba79",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "19a41146-700c-42e1-8fd3-0d8676d095b8",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1a30af18-1164-4f7a-8272-35e2160d544b",
+   "rules": {
+    "tp": 4,
+    "pred": 5,
+    "ref": 8,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 5,
+    "pred": 5,
+    "ref": 8,
+    "area_within_5pct": 4
+   }
+  },
+  {
+   "item": "1ab27855-91ac-4d66-88ae-ac09e1c305ef",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1b5b208a-4378-4bcc-9fca-9b527cf195ef",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 2,
+    "pred": 3,
+    "ref": 2,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "1c27d5c5-3858-4810-b10b-b2b6094c3077",
+   "rules": {
+    "tp": 3,
+    "pred": 3,
+    "ref": 3,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 3,
+    "pred": 3,
+    "ref": 3,
+    "area_within_5pct": 3
+   }
+  },
+  {
+   "item": "1ca9bb8a-ef43-47e9-adf7-5dbed3f0d76e",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1d509873-cf3f-4db1-9dbc-8bd39a6ffc93",
+   "rules": {
+    "tp": 0,
+    "pred": 10,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1df23de8-77f0-4830-bf0e-16c935ea618e",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "1f029e18-5470-4801-9dff-169e5a937054",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "2177a8a0-8d6e-4c49-ab10-850a0e1f8f41",
+   "rules": {
+    "tp": 3,
+    "pred": 4,
+    "ref": 3,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 2,
+    "pred": 3,
+    "ref": 3,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "23df2c02-b0b4-412b-8c66-0fe023768105",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "24be192f-1288-4307-b40a-779f8bed3ea4",
+   "rules": {
+    "tp": 1,
+    "pred": 5,
+    "ref": 2,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "26af4d41-760d-4861-845e-a8e20bd08637",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "29f465f0-2dec-4aef-ad47-721ccdc7da99",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "2ba41f09-3d31-4e31-a61d-69ba30b2afa8",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "2d452a79-4b9a-43fe-b8eb-31af0ac39e9c",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "2daee4ea-0b14-4e21-9fc4-ca09c370fb3e",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 3,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 3,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "2f6a4885-16ef-4c08-91bf-e1137295c988",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "30965160-5a45-4cfa-b046-622e8aa7b71e",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "32069585-b2be-41bf-8f69-63066e16d66e",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "33f6b678-6d08-4ea9-91e8-2cfc0868e9e0",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "35141919-8179-4089-a8f4-077e3c22e743",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "35dbf1a3-8ab3-4772-90ba-9dd9079d7b8a",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "37912a03-8537-49bb-b6ad-41de603ee7e9",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "39be4220-2943-4717-a3d1-d5947592b4d6",
+   "rules": {
+    "tp": 2,
+    "pred": 7,
+    "ref": 7,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 6,
+    "pred": 8,
+    "ref": 7,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "3ac124ed-e120-401e-8da5-f7c60319517d",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "3b7981eb-7046-40c3-aa0f-a14c40ead18c",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "3d3edfc3-dc2f-4903-b757-3228ef0e312a",
+   "rules": {
+    "tp": 3,
+    "pred": 7,
+    "ref": 4,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 3,
+    "pred": 3,
+    "ref": 4,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "3e3e19b7-4fe6-4cae-b844-412234b6c0c9",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "3f0b073f-c46e-494c-8c33-302da77152cf",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "403d792b-d7cb-4761-a57d-b15ff8baa0d9",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "40e3affb-f891-41a1-96ac-d61340c1e5fa",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "41b0aad3-c26d-457b-967b-7417c77b4852",
+   "rules": {
+    "tp": 2,
+    "pred": 3,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "424bb39f-bddb-4d84-9829-454bd680419d",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "4469a06c-2e78-4fba-95f2-376b1cf29091",
+   "rules": {
+    "tp": 2,
+    "pred": 11,
+    "ref": 6,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 3,
+    "pred": 4,
+    "ref": 6,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "45bb027c-dc3d-456d-95b6-79eb8cf1e472",
+   "rules": {
+    "tp": 2,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 4,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 3
+   }
+  },
+  {
+   "item": "4648da39-dbc5-4626-93f4-8e4f1022722f",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "46ed86b1-3919-4dba-9cb3-290c242b2335",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "48073a72-927a-49c2-a3cb-95a74a088d38",
+   "rules": {
+    "tp": 4,
+    "pred": 5,
+    "ref": 4,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 4,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "4881fcae-d5f6-452b-a044-f90ccefc0de0",
+   "rules": {
+    "tp": 3,
+    "pred": 13,
+    "ref": 6,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 3,
+    "pred": 3,
+    "ref": 6,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "49389d3c-87b4-4072-8dcd-41d8bc2ff1a7",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "4abface0-e082-44a3-8fa4-cc35db445f97",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "4cde152a-b7e3-47c9-ad80-fd77718c7bb7",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "4faa41da-a15c-417b-abf7-3bf3fc1fa97a",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "509d03c0-8853-4aaa-9c1b-db0b51e03b73",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "510fddfb-7eea-4f7b-98eb-1960a515c447",
+   "rules": {
+    "tp": 0,
+    "pred": 12,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "525ac786-a99a-4051-9217-ed7e8d8bcefc",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "530152eb-4508-42e7-8d48-ccd150883370",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "53c36df8-a0f2-4345-b526-16c7d79e00b0",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "551557d5-c645-47a4-874c-08017098c6c9",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5597a992-0f43-44e9-abcc-41d921795a85",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "572fcd29-226a-4dc0-afab-fdecf7712016",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "58ed9246-92d3-46b3-9909-910916fa23d3",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "599df3d5-aeb7-4629-a1a1-f7c9af4f84f5",
+   "rules": {
+    "tp": 3,
+    "pred": 6,
+    "ref": 3,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 3,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "5aefccfc-f3da-4c5d-b30f-37ce228ab028",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5c2b20a7-311b-4221-9173-2501ef517ca9",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5ddf6b99-387b-4ce7-a7fa-a9cefe1404aa",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5e7d974b-7fd5-4db5-93b4-13e870257f76",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5ed5665a-73d4-41c6-af94-42f9af001b4c",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "5fa48b6e-2788-496f-b106-a8c747cefe6c",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "627133b6-ce40-4aaf-a995-ad6a5baa78d1",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "62ffedbe-9d3a-427b-b66f-789923e9781a",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "63c81254-fe0f-480f-8720-19a46296ffba",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "651ed003-ffb8-4e4e-a0b0-752d5e37ab6a",
+   "rules": {
+    "tp": 5,
+    "pred": 5,
+    "ref": 5,
+    "area_within_5pct": 5
+   },
+   "default": {
+    "tp": 5,
+    "pred": 5,
+    "ref": 5,
+    "area_within_5pct": 5
+   }
+  },
+  {
+   "item": "65cf611a-c117-4fce-8945-e7b9f6b4ec6a",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "66888c16-46e7-4281-8987-a47741a2953f",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "671a3519-b46d-4ce2-8dc3-f01ca1c75a80",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "68095411-0fa0-4010-9d8b-87bef692ebc7",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "692609a8-3e60-4e37-93cc-fb69168c682d",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "6c0c9713-49b0-48f7-8fd0-64aa547548d4",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "6c5af867-b08e-425f-a711-a60c98350750",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "6d0b9aad-f4d6-4b37-8fb6-856257a6167b",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "6e86a542-0de6-4ad3-b75b-734db349f308",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "701ab303-2d43-4972-860b-85c4be2a7dd7",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "71b51c89-9e12-4df4-9f5f-fc5d9af3d3be",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "729e786d-c1b9-4ce9-bd92-4ab82b8ec7a7",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "73c39ec0-385b-424b-9745-93c47554e1e4",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "74a3ed9e-4617-4925-966b-86c1a336d33d",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "757e9430-0d81-43c9-9e9c-1b6d8eb3930e",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "7735b3b7-6a08-4f4d-afbd-233273a092b6",
+   "rules": {
+    "tp": 4,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 3,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 3
+   }
+  },
+  {
+   "item": "77c8fa48-6088-498e-9e85-d37a34438a72",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "78bf1697-6719-48da-9479-d5aafc0b4b9d",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "79438347-da5f-4ef7-b485-bbd0181a9178",
+   "rules": {
+    "tp": 3,
+    "pred": 7,
+    "ref": 8,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 5,
+    "pred": 6,
+    "ref": 8,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "7b4cf2b9-bdb2-469f-a0fd-b616a308cd42",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "7c883cf9-bc32-47db-8c15-01e027b1abc9",
+   "rules": {
+    "tp": 6,
+    "pred": 6,
+    "ref": 7,
+    "area_within_5pct": 2
+   },
+   "default": {
+    "tp": 6,
+    "pred": 6,
+    "ref": 7,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "7d4d4390-eb76-464d-b97c-554efe6b9d8b",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "7e1a8023-b72d-42f4-8ddd-3de4e7987ae0",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "7e78ccb4-39a9-4136-a2d8-e3cef5fee9e4",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "825c1cd7-0639-45fc-838a-9016c59d912e",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "836ddd78-3005-4d5a-9a2d-90c130014327",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "8666a9b4-c972-45ba-9c66-c87a19f0a06f",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "875346c8-a802-4767-9e94-63f49a72ee0a",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "887492f3-1361-4ea0-bd27-73b92e8913ed",
+   "rules": {
+    "tp": 2,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 4,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "8c6c0680-daa6-47d0-9025-cee1e6616908",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "8d06d034-0411-4dfd-aa42-477dd117deb4",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "8eb55170-c149-4d7f-a4a2-435c16d13e2e",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "9128fd56-953a-45f6-a9b2-32e63a93bb1d",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "965bab3d-7318-498c-b8e6-12b559c583a1",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9746759a-e51c-4f1b-aba7-e3b5b5eaf1fa",
+   "rules": {
+    "tp": 1,
+    "pred": 9,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "998538a8-bb88-400a-a77d-877ed5ce4726",
+   "rules": {
+    "tp": 0,
+    "pred": 10,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 7,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9ae9d1ca-fb87-4578-9b69-ab42c3577ef9",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9c52b0fa-17fa-4fae-a579-a868c818c3c8",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9d488ded-55c3-4c06-a3f4-4f044120c508",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9e11ad4b-fa9e-41d9-872e-0ff3476abe7b",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9e923ccf-dabd-458d-a184-0bdfa7409531",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "9f692baf-d9b1-41fd-a9c5-ab3a3a38dfec",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 3,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 3,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a0923f4b-c7f6-48e3-81b1-a096131e4943",
+   "rules": {
+    "tp": 0,
+    "pred": 4,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a3723980-edf4-4eb3-b640-76f292f5e424",
+   "rules": {
+    "tp": 0,
+    "pred": 12,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a53fc8e0-1638-4a76-ae2a-a21e0f6a564f",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a5c81608-8e85-4a9a-8ebb-3c842305fc8c",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 2,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a6aef144-f535-426a-bd15-04ad897c60cd",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "a83ceeab-ff19-47e9-b88c-7bc5b149b02a",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "aaaa8c87-74c5-4169-9acc-2f0724b9f95b",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ab6fb432-07c8-4517-a65d-f8ebc9ef3294",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "acc7c8a4-b1cd-4616-90cf-e6240729b2ea",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "addf036a-f8cf-412f-9f10-18df2bdad5ec",
+   "rules": {
+    "tp": 2,
+    "pred": 4,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "af68cdf5-4bdd-4b76-9664-ba7335133859",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b18f6474-652c-4696-bb30-c3f22765bd6e",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b22ca245-1799-45cf-870c-20325299ca45",
+   "rules": {
+    "tp": 1,
+    "pred": 2,
+    "ref": 5,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 4,
+    "pred": 5,
+    "ref": 5,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b3c95ce0-96ce-4343-8cb1-9581155fed2f",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b76265f8-efe0-430d-8e3f-1f5e5fb34b02",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b91073f9-08a9-4d1c-98db-0a97c4188553",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "b9e4dbbc-42f9-4620-8205-a87023776730",
+   "rules": {
+    "tp": 0,
+    "pred": 8,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ba8c1879-b907-4e96-a16e-7f4127f2b4a5",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "be07a922-10b5-4e02-93f0-a0518fbb39bc",
+   "rules": {
+    "tp": 1,
+    "pred": 3,
+    "ref": 1,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "bf2f42f2-530e-410d-a896-9577d076205c",
+   "rules": {
+    "tp": 0,
+    "pred": 4,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "bfc4f6d5-2af9-49b9-af35-03aa2788224e",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c07b7fd9-0317-43bb-a25f-54e9cb1ef8f5",
+   "rules": {
+    "tp": 0,
+    "pred": 8,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c2718368-30ea-419b-ba01-16df89f70141",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "c3f156c2-e84a-46c2-a3ec-a28f8287a938",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c492726b-2b96-4512-b1d6-801698a0f479",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c645d521-6b39-43c6-ba8b-48585e0524f0",
+   "rules": {
+    "tp": 0,
+    "pred": 9,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c6feb97b-a0ca-481c-97b0-a4ac97142435",
+   "rules": {
+    "tp": 1,
+    "pred": 2,
+    "ref": 4,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 4,
+    "pred": 4,
+    "ref": 4,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "c8ff4402-a86c-4630-b4b8-aafd0dd233f7",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "c98286dc-3452-432b-a412-3385ee4ff1ea",
+   "rules": {
+    "tp": 0,
+    "pred": 7,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ca2dc640-f12a-4777-980c-a71cdafbcfe1",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "caddfe25-732c-41a6-92dd-c547ff632153",
+   "rules": {
+    "tp": 2,
+    "pred": 4,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 2
+   }
+  },
+  {
+   "item": "cc40530a-5214-4a44-86f8-57e1fa0b90a0",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "cce0bf5a-2f6b-496b-8d06-fea9235f6413",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "cd9f27b8-f066-4ff8-9ef3-1ca47d69341c",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ce3cf860-52fe-4a5d-af08-26f713a63487",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "cec2d289-efa6-4d7a-9772-7fe27d7bb150",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d00e204c-0149-48c1-9662-d99943052f5f",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d0cb6414-5ac8-4e42-beea-1d89435d6116",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d2329666-672a-4ec7-95e3-e0fa53eeb651",
+   "rules": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 3,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "d332c928-e1f8-41d2-ae3b-1e4eb123f675",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d671acad-fb25-48d3-8198-f206546dc21a",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d7fdadc8-5786-4791-ab0d-266eb0ec4a8c",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d8939c62-d194-4d0f-93a0-f63f9f0bcec0",
+   "rules": {
+    "tp": 2,
+    "pred": 3,
+    "ref": 3,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 3,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "d93c8f44-99e6-4253-898b-853e2be0fdb0",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 2,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 2,
+    "ref": 2,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "da11bc2a-0d70-4f3e-9d4b-f07fea44056d",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "dac4c2a8-f6eb-4372-8ae5-fb27ddadb1b4",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "dc9149ef-7603-4686-b4cd-5e321c57a97e",
+   "rules": {
+    "tp": 0,
+    "pred": 4,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "dd4d6270-a442-400f-8d11-89bf7abbab86",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ddc7243e-d1d2-4169-8707-fffac138152e",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "deb71a4f-e542-41cb-b414-50484038420e",
+   "rules": {
+    "tp": 6,
+    "pred": 6,
+    "ref": 6,
+    "area_within_5pct": 6
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 6,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "dffb0aec-3020-4066-ab01-fc30e0e1f292",
+   "rules": {
+    "tp": 0,
+    "pred": 5,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e0d176fa-1908-48a6-8668-a29c5fd7121e",
+   "rules": {
+    "tp": 0,
+    "pred": 4,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e1531074-517f-4951-b50b-e8f0d7e41d3f",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e42dc561-de4e-4c6e-9d12-b4018ea6e34b",
+   "rules": {
+    "tp": 0,
+    "pred": 5,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e6a0dd88-9664-45f4-b47d-2611f419d232",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e75be97d-0e7f-4d43-a8e4-153e28f43a44",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e873fd78-9b0d-46e3-b2fb-b891e4726320",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e93b6bd0-6626-4ef2-8c22-459f63a5ff36",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "e99c7b33-7235-43eb-abdc-e24e5470eb9b",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "eae6d801-48d9-42e5-a7ed-a8dfa5430057",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ebce3105-dafb-4b96-ae9e-acc17c69b858",
+   "rules": {
+    "tp": 1,
+    "pred": 8,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "ef635cd0-92c8-446f-9bc3-769b574070a5",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 1,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f02ace9e-50e6-4759-ac51-3235d0503866",
+   "rules": {
+    "tp": 0,
+    "pred": 3,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f3176218-6135-4613-8c5b-2e7064f6453d",
+   "rules": {
+    "tp": 0,
+    "pred": 1,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f421ea1a-8916-460b-b72e-9f2dc70230b9",
+   "rules": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 3,
+    "area_within_5pct": 1
+   },
+   "default": {
+    "tp": 1,
+    "pred": 1,
+    "ref": 3,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "f4fbd17d-63ba-4d31-8c6e-88feff51435c",
+   "rules": {
+    "tp": 0,
+    "pred": 6,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f5755308-d9f6-4712-bf38-1a262d7fe523",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f5c2d0d3-39d9-4439-b222-2c87a82e80f2",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f7c18d52-8f42-4ab4-a155-2e6d0eaa9ea9",
+   "rules": {
+    "tp": 0,
+    "pred": 2,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "f8b887b6-124e-4efb-b773-9d640bdcc95e",
+   "rules": {
+    "tp": 2,
+    "pred": 5,
+    "ref": 4,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 2,
+    "pred": 6,
+    "ref": 4,
+    "area_within_5pct": 1
+   }
+  },
+  {
+   "item": "fb8acb57-8a22-4382-a0ec-5f3d8fabdfd1",
+   "rules": {
+    "tp": 0,
+    "pred": 11,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  },
+  {
+   "item": "fff3a1e1-3bb9-4358-81c0-19a2f9addef5",
+   "rules": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   },
+   "default": {
+    "tp": 0,
+    "pred": 0,
+    "ref": 0,
+    "area_within_5pct": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+id: C-T4
+title: A one-door habitable room has a window
+family: C
+class: traversal
+applies_to:
+  room_type:
+  - bedroom
+  - living
+  - dining
+  - kitchen
+  - office
+check:
+  fn: dead_end_no_window
+severity: major
+needs:
+- room_graph
+- windows
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 5
+message: '{room.label} has a single door and no window.'
+status: approved
+approved_by: starter-pack
+version: 1

@@ -1,0 +1,252 @@
+{
+ "a_00.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\7798\\F1_original.png",
+  "bbox": [
+   92,
+   638,
+   64,
+   13
+  ],
+  "text": "m.huone"
+ },
+ "a_03.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\10768\\F1_original.png",
+  "bbox": [
+   441,
+   193,
+   39,
+   10
+  ],
+  "text": "h=2995"
+ },
+ "a_05.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\6578\\F1_original.png",
+  "bbox": [
+   77,
+   684,
+   29,
+   16
+  ],
+  "text": "MH"
+ },
+ "a_06.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\7859\\F1_original.png",
+  "bbox": [
+   450,
+   821,
+   12,
+   8
+  ],
+  "text": "PK"
+ },
+ "a_07.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\7780\\F1_original.png",
+  "bbox": [
+   442,
+   160,
+   13,
+   19
+  ],
+  "text": "K"
+ },
+ "a_10.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\8628\\F1_original.png",
+  "bbox": [
+   157,
+   264,
+   36,
+   11
+  ],
+  "text": "3h+k+s"
+ },
+ "a_11.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\925\\F1_original.png",
+  "bbox": [
+   96,
+   444,
+   11,
+   16
+  ],
+  "text": "SK"
+ },
+ "a_12.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\7773\\F1_original.png",
+  "bbox": [
+   208,
+   1156,
+   41,
+   13
+  ],
+  "text": "1797,5"
+ },
+ "a_15.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9347\\F1_original.png",
+  "bbox": [
+   193,
+   280,
+   9,
+   14
+  ],
+  "text": "OH"
+ },
+ "a_16.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\10685\\F1_original.png",
+  "bbox": [
+   193,
+   194,
+   15,
+   11
+  ],
+  "text": "3h"
+ },
+ "a_17.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\6660\\F1_original.png",
+  "bbox": [
+   392,
+   168,
+   103,
+   14
+  ],
+  "text": "MAKUUALKOVI"
+ },
+ "a_19.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9869\\F1_original.png",
+  "bbox": [
+   161,
+   634,
+   20,
+   15
+  ],
+  "text": "VH"
+ },
+ "b_01.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\10786\\F1_original.png",
+  "bbox": [
+   619,
+   234,
+   43,
+   23
+  ],
+  "text": "KHH"
+ },
+ "b_02.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9735\\F1_original.png",
+  "bbox": [
+   925,
+   462,
+   35,
+   13
+  ],
+  "text": "3,1m²"
+ },
+ "b_03.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\6626\\F1_original.png",
+  "bbox": [
+   514,
+   403,
+   24,
+   33
+  ],
+  "text": "TK"
+ },
+ "b_04.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9677\\F1_original.png",
+  "bbox": [
+   86,
+   182,
+   13,
+   21
+  ],
+  "text": "KK"
+ },
+ "b_05.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9284\\F1_original.png",
+  "bbox": [
+   1513,
+   1403,
+   82,
+   27
+  ],
+  "text": "Leivin"
+ },
+ "b_06.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\11059\\F1_original.png",
+  "bbox": [
+   1151,
+   382,
+   17,
+   8
+  ],
+  "text": "MH4"
+ },
+ "b_07.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\709\\F1_original.png",
+  "bbox": [
+   678,
+   400,
+   128,
+   42
+  ],
+  "text": "2H+K"
+ },
+ "b_08.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\8608\\F1_original.png",
+  "bbox": [
+   308,
+   152,
+   7,
+   25
+  ],
+  "text": "120x370"
+ },
+ "b_11.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\9086\\F1_original.png",
+  "bbox": [
+   1681,
+   2020,
+   62,
+   43
+  ],
+  "text": "MH"
+ },
+ "b_12.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\6578\\F1_original.png",
+  "bbox": [
+   165,
+   459,
+   10,
+   15
+  ],
+  "text": "k"
+ },
+ "b_13.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\836\\F1_original.png",
+  "bbox": [
+   114,
+   94,
+   33,
+   12
+  ],
+  "text": "6200"
+ },
+ "b_14.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\7649\\F1_original.png",
+  "bbox": [
+   198,
+   166,
+   7,
+   29
+  ],
+  "text": "3H+KK"
+ },
+ "b_15.png": {
+  "source": "data\\raw\\cubicasa5k\\cubicasa5k\\high_quality_architectural\\8310\\F1_original.png",
+  "bbox": [
+   72,
+   59,
+   76,
+   18
+  ],
+  "text": "5+5mm"
+ }
+}

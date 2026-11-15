@@ -1,0 +1,22 @@
+id: P-4
+title: Title block states scale, revision and date
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: present
+severity: info
+needs: []
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 g
+message: 'Title block: {detected}.'
+params:
+  what: title_block
+  fields:
+  - scale
+  - revision
+  - date
+status: approved
+approved_by: starter-pack
+version: 1

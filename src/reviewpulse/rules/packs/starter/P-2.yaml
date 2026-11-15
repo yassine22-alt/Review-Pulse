@@ -1,0 +1,18 @@
+id: P-2
+title: The plan sheet has dimensions
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: present
+severity: minor
+needs: []
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 b
+message: The sheet has {detected}; {required} required.
+params:
+  what: dimensions
+status: approved
+approved_by: starter-pack
+version: 1

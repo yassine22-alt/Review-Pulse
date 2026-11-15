@@ -1,0 +1,19 @@
+id: K-X1
+title: Door and window widths match the schedule
+family: K
+class: cross_reference
+applies_to: {}
+check:
+  fn: join
+severity: major
+needs:
+- schedule
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 f
+message: '{subject.tag}: {detected}.'
+params:
+  mode: widths
+status: approved
+approved_by: starter-pack
+version: 1

@@ -1,0 +1,33 @@
+id: C-T5
+title: Travel distance to an exit
+family: C
+class: traversal
+applies_to:
+  room_type:
+  - bedroom
+  - living
+  - dining
+  - kitchen
+  - office
+check:
+  fn: shortest_path_m
+  from: $room
+  to: EXIT
+  op: <=
+  value: 15.0
+  unit: m
+  via_edges:
+  - door
+  - opening
+severity: major
+needs:
+- scale
+- room_graph
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 8
+message: From {room.label} the travel distance to an exit is {detected}; {required}
+  is allowed.
+status: approved
+approved_by: starter-pack
+version: 1

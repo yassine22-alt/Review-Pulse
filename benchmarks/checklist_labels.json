@@ -1,0 +1,400 @@
+{
+ "us_allentown_irc_checklist.md": {
+  "item 1": {
+   "label": "not_plan"
+  },
+  "item 2": {
+   "label": "needs_fact",
+   "need": "wall fire rating notes"
+  },
+  "item 3": {
+   "label": "needs_fact",
+   "need": "wall fire rating notes"
+  },
+  "item 4": {
+   "label": "needs_fact",
+   "need": "door fire rating note"
+  },
+  "item 5": {
+   "label": "not_plan"
+  },
+  "item 6": {
+   "label": "rule_now",
+   "numbers": [
+    0.08
+   ],
+   "facts_all": [
+    "window_area_ratio"
+   ]
+  },
+  "item 7": {
+   "label": "needs_fact",
+   "need": "window openable area / exhaust fan symbol"
+  },
+  "item 8": {
+   "label": "needs_fact",
+   "need": "stair light / switch symbols"
+  },
+  "item 9": {
+   "label": "rule_now",
+   "numbers": [
+    6.50321,
+    2.1336
+   ],
+   "facts_all": [
+    "area_m2",
+    "min_width_m"
+   ]
+  },
+  "item 10": {
+   "label": "not_plan"
+  },
+  "item 11": {
+   "label": "not_plan"
+  },
+  "item 12": {
+   "label": "needs_fact",
+   "need": "carport openness"
+  },
+  "item 13": {
+   "label": "needs_fact",
+   "need": "window clear opening area and sill height"
+  },
+  "item 14": {
+   "label": "rule_now",
+   "numbers": [
+    0.8128
+   ],
+   "facts_all": [
+    "width_m"
+   ],
+   "partial": true
+  },
+  "item 15": {
+   "label": "rule_now",
+   "numbers": [
+    0.9144
+   ],
+   "facts_all": [
+    "min_width_m"
+   ]
+  },
+  "item 16": {
+   "label": "needs_fact",
+   "need": "stair flights found on the plan (the benchmark plan has none)"
+  },
+  "item 17": {
+   "label": "not_plan"
+  },
+  "item 18": {
+   "label": "needs_fact",
+   "need": "stair flights found on the plan (the benchmark plan has none)"
+  },
+  "item 19": {
+   "label": "needs_fact",
+   "need": "stair landing"
+  },
+  "item 20": {
+   "label": "needs_fact",
+   "need": "handrail symbol and riser count"
+  },
+  "item 21": {
+   "label": "needs_fact",
+   "need": "guard / drop height"
+  },
+  "item 22": {
+   "label": "needs_fact",
+   "need": "window sill height"
+  },
+  "item 23": {
+   "label": "needs_fact",
+   "need": "sprinkler note"
+  },
+  "item 24": {
+   "label": "needs_fact",
+   "need": "smoke alarm symbols"
+  },
+  "item 25": {
+   "label": "needs_fact",
+   "need": "CO detector symbol"
+  },
+  "item 26": {
+   "label": "not_plan"
+  },
+  "item 27": {
+   "label": "not_plan"
+  },
+  "item 28": {
+   "label": "not_plan"
+  },
+  "item 29": {
+   "label": "not_plan"
+  },
+  "item 30": {
+   "label": "not_plan"
+  },
+  "item 31": {
+   "label": "not_plan"
+  },
+  "item 32": {
+   "label": "not_plan"
+  },
+  "item 33": {
+   "label": "not_plan"
+  },
+  "item 34": {
+   "label": "not_plan"
+  },
+  "item 35": {
+   "label": "not_plan"
+  },
+  "item 36": {
+   "label": "not_plan"
+  },
+  "item 37": {
+   "label": "needs_fact",
+   "need": "attic access dimensions"
+  },
+  "item 38": {
+   "label": "not_plan"
+  },
+  "item 39": {
+   "label": "not_plan"
+  },
+  "item 40": {
+   "label": "needs_fact",
+   "need": "appliance clearances"
+  },
+  "item 41": {
+   "label": "not_plan"
+  },
+  "item 42": {
+   "label": "not_plan"
+  },
+  "item 43": {
+   "label": "not_plan"
+  },
+  "item 44": {
+   "label": "not_plan"
+  },
+  "item 45": {
+   "label": "not_plan"
+  }
+ },
+ "us_berkeley_floor_plan_checklist.pdf": {
+  "item 2": {
+   "label": "rule_now",
+   "facts_all": [
+    "has_label"
+   ],
+   "numbers": []
+  },
+  "item 3": {
+   "label": "needs_fact",
+   "need": "covered parking dimensions"
+  },
+  "item 5": {
+   "label": "not_plan"
+  },
+  "item 6": {
+   "label": "needs_fact",
+   "need": "wall load-bearing marking"
+  },
+  "item 7": {
+   "label": "needs_fact",
+   "need": "window area and egress opening"
+  },
+  "item 8": {
+   "label": "not_plan"
+  },
+  "item 9": {
+   "label": "not_plan"
+  },
+  "item 10": {
+   "label": "not_plan"
+  },
+  "item 11": {
+   "label": "needs_fact",
+   "need": "smoke detector symbols"
+  },
+  "item 12": {
+   "label": "not_plan"
+  },
+  "item 13": {
+   "label": "not_plan"
+  },
+  "item 14": {
+   "label": "not_plan"
+  },
+  "item 16": {
+   "label": "needs_fact",
+   "need": "landings and handrail symbols"
+  },
+  "item 17": {
+   "label": "needs_fact",
+   "need": "exterior landings"
+  },
+  "item 18": {
+   "label": "not_plan"
+  },
+  "item 19": {
+   "label": "not_plan"
+  },
+  "P1": {
+   "label": "rule_now",
+   "facts_any": [
+    "scale_stated",
+    "is_dimensioned"
+   ],
+   "numbers": [],
+   "partial": true
+  },
+  "P2": {
+   "label": "not_plan"
+  },
+  "P3": {
+   "label": "not_plan"
+  },
+  "P4": {
+   "label": "not_plan"
+  },
+  "P5": {
+   "label": "not_plan"
+  }
+ },
+ "us_bloomfield_residential_checklist.pdf": {
+  "_default": {
+   "label": "not_plan"
+  },
+  "item 2": {
+   "label": "rule_now",
+   "facts_any": [
+    "is_dimensioned"
+   ],
+   "numbers": []
+  },
+  "item 3": {
+   "label": "needs_fact",
+   "need": "drawing scale value"
+  },
+  "item 5": {
+   "label": "needs_fact",
+   "need": "sheet paper size"
+  },
+  "item 21": {
+   "label": "rule_now",
+   "facts_any": [
+    "has_label"
+   ],
+   "numbers": []
+  },
+  "item 25": {
+   "label": "needs_fact",
+   "need": "stair risers and direction arrow"
+  },
+  "item 26": {
+   "label": "needs_fact",
+   "need": "smoke alarm symbols"
+  },
+  "item 27": {
+   "label": "needs_fact",
+   "need": "carbon monoxide alarm symbols"
+  },
+  "item 29": {
+   "label": "needs_fact",
+   "need": "attic and crawl space access opening sizes"
+  },
+  "item 30": {
+   "label": "needs_fact",
+   "need": "operable egress window approval"
+  },
+  "item 59": {
+   "label": "needs_fact",
+   "need": "handrail detail"
+  },
+  "item 60": {
+   "label": "needs_fact",
+   "need": "guardrail detail"
+  },
+  "item 64": {
+   "label": "needs_fact",
+   "need": "door fire rating note"
+  },
+  "item 65": {
+   "label": "needs_fact",
+   "need": "egress window labels and window well size"
+  },
+  "item 66": {
+   "label": "needs_fact",
+   "need": "safety glazing labels"
+  }
+ },
+ "us_stpete_residential_checklist.pdf": {
+  "_default": {
+   "label": "not_plan"
+  },
+  "item 7": {
+   "label": "bundle"
+  },
+  "item 25": {
+   "label": "rule_now",
+   "facts_any": [
+    "scale_stated"
+   ],
+   "numbers": []
+  },
+  "item 26": {
+   "label": "bundle"
+  },
+  "item 48": {
+   "label": "rule_now",
+   "facts_any": [
+    "has_label"
+   ],
+   "numbers": []
+  },
+  "item 49": {
+   "label": "needs_fact",
+   "need": "ceiling heights"
+  },
+  "item 50": {
+   "label": "needs_fact",
+   "need": "plumbing fixtures"
+  },
+  "item 52": {
+   "label": "needs_fact",
+   "need": "fixture clearances"
+  },
+  "item 53": {
+   "label": "needs_fact",
+   "need": "egress window size and location"
+  },
+  "item 55": {
+   "label": "bundle"
+  },
+  "item 56": {
+   "label": "needs_fact",
+   "need": "safety glazing labels"
+  },
+  "item 57": {
+   "label": "needs_fact",
+   "need": "attic access size"
+  },
+  "item 61": {
+   "label": "needs_fact",
+   "need": "exhaust fan symbols"
+  },
+  "item 62": {
+   "label": "needs_fact",
+   "need": "smoke and CO alarm symbols"
+  },
+  "item 63": {
+   "label": "needs_fact",
+   "need": "garage separation"
+  },
+  "item 64": {
+   "label": "needs_fact",
+   "need": "appliance locations"
+  }
+ }
+}

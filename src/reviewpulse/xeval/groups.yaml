@@ -1,0 +1,47 @@
+# Class words that requirements use for several kinds of space at once. Data, not code: edit a line or add a language.
+#
+# A requirement often says "habitable rooms" and expects the reader to know which rooms those are; a plan only has named rooms
+# (bedroom, kitchen ...). A document that defines the class itself ("habitable rooms: bedrooms, living rooms and kitchens") always
+# wins over this file. Members are kinds of space as the plan reader names them; a class is offered only where the plan actually
+# has at least `min_members` of its kinds, and the person who approves a rule sees it written out with those kinds.
+#
+#   members       kinds of space (the values of the category fact, see annotate/lexicon)
+#   min_members   how many of them the plan must know before the class is offered
+#   terms         the words documents use for the class, lower case, singular; the plural and a bare first word are matched too
+
+habitable:
+  members: [bedroom, living, kitchen, office]
+  min_members: 2
+  terms:
+    - habitable room
+    - habitable space
+    - pièce principale
+    - pièce habitable
+    - aufenthaltsraum
+    - habitación habitable
+    - locale abitabile
+    - woonruimte
+    - rum för vistelse
+
+sleeping:
+  members: [bedroom]
+  min_members: 1
+  terms:
+    - sleeping room
+    - sleeping area
+    - schlafraum
+    - chambre à coucher
+    - habitación para dormir
+    - camera da letto
+
+wet:
+  members: [bathroom, wc, storage]
+  min_members: 2
+  terms:
+    - wet room
+    - wet area
+    - pièce humide
+    - pièce d'eau
+    - nassraum
+    - local húmedo
+    - locale umido

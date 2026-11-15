@@ -1,0 +1,19 @@
+id: K-A3
+title: Stated room area matches computed area
+family: K
+class: arithmetic
+applies_to: {}
+check:
+  fn: stated_vs_computed_area
+  tolerance_rel: 0.05
+severity: minor
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 e
+message: '{room.label}: {detected}, tolerance {required}.'
+status: approved
+approved_by: starter-pack
+version: 1

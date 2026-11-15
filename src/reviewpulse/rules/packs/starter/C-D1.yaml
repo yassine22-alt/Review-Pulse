@@ -1,0 +1,24 @@
+id: C-D1
+title: Door clear width
+family: C
+class: threshold
+applies_to:
+  element: door
+check:
+  fn: width_m
+  op: '>='
+  value: 0.8
+  unit: m
+severity: major
+needs:
+- scale
+- doors
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.1
+message: Door {subject.tag} is {detected} wide; {required} is required.
+params:
+  frame_allowance_m: 0.0
+status: approved
+approved_by: starter-pack
+version: 1

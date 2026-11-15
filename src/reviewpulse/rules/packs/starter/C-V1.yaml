@@ -1,0 +1,29 @@
+id: C-V1
+title: Glazed area at least 1/6 of the floor area
+family: C
+class: derived
+applies_to:
+  room_type:
+  - bedroom
+  - living
+  - dining
+  - kitchen
+  - office
+check:
+  fn: ratio
+  op: '>='
+  value: 0.1667
+  unit: ratio
+severity: major
+needs:
+- scale
+- rooms
+- windows
+- schedule
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 7
+message: '{room.label} has a glazed ratio of {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1

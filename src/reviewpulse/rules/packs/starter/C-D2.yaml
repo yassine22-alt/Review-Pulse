@@ -1,0 +1,23 @@
+id: C-D2
+title: Corridor clear width
+family: C
+class: threshold
+applies_to:
+  room_type:
+  - corridor
+check:
+  fn: min_width_m
+  op: '>='
+  value: 1.0
+  unit: m
+severity: major
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.2
+message: '{room.label} narrows to {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1

@@ -1,0 +1,18 @@
+{
+ "easyocr": {
+  "precision": 0.8817,
+  "recall": 0.2046,
+  "f1": 0.3321,
+  "pages": 30,
+  "truth_boxes": 1129,
+  "sec_per_page": 3.5
+ },
+ "paddle": {
+  "precision": 0.83,
+  "recall": 0.783,
+  "f1": 0.8058,
+  "pages": 30,
+  "truth_boxes": 1129,
+  "sec_per_page": 116.5
+ }
+}

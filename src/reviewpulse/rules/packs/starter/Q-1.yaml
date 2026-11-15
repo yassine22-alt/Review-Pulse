@@ -1,0 +1,20 @@
+id: Q-1
+title: Door swings do not collide
+family: Q
+class: derived
+applies_to:
+  element: door
+check:
+  fn: swing_conflicts
+severity: minor
+needs:
+- swing_polygons
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 h
+message: 'Door swings collide: {subject.tag}, {detected}.'
+params:
+  max_verdict: WARNING
+status: approved
+approved_by: starter-pack
+version: 1

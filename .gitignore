@@ -21,3 +21,104 @@ outputs/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Additional local environments and development caches
+.venv*/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local credentials (keep distributable example files)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Shared model bundles and binary checkpoints
+/ReviewPulse_models/
+/ReviewPulse_models.zip
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.hdf5
+*.tflite
+*.safetensors
+
+# Local project references, sample input and scratch files
+/ReviewPulse*.pdf
+/ReviewPulse*.pptx
+/ReviewPulse_Project_Plan_*.xlsx
+/floor_plan.png
+/tmp/
+
+# Active application data and experiment artifacts
+data/raw/
+data/processed/
+runs/
+tests/synth/out/
+*.pkl
+.baseline_venv/
+data/cache/
+# trained models are large binaries: shared separately (see data/LICENSES.md), never committed
+data/models/
+
+# ---- private: stays on my laptop, not for the team repo ----
+# my long-running job files (personal paths, my own overnight workflow)
+scripts/jobs/
+# intermediate experiment results: only the final evidence and the files the docs cite are shared
+reports/*
+!reports/m6_final/
+!reports/v4_fuse/
+!reports/v4_rebuild/
+!reports/v4_rules/
+!reports/baseline/
+!reports/ocr_spike/
+!reports/rule_baseline.json
+!reports/results.csv
+!reports/drafting_code_accord.json
+!reports/2026-10-24_drafting_ollama-qwen2.5_7b.md
+!reports/2026-10-24_scale_rules.md
+!reports/2026-10-25_findings_pdf_rules.md
+!reports/2026-10-25_findings_rules.md
+!reports/2026-10-25_ocr_spike_paddle_vs_easyocr.md
+!reports/2026-10-25_raster_all.md
+!reports/2026-10-25_raster_model_scan.md
+!reports/2026-10-25_room_labels_cubicasa.md
+!reports/2026-10-25_rooms_resplan.md
+!reports/2026-10-25_rule_tests.md
+!reports/2026-10-25_walls_floorplancad_rules-oracle-scale.md
+
+# Generated outputs of the archived prototype
+/legacy/deepfloorplan/outputs/*
+!/legacy/deepfloorplan/outputs/.gitkeep
+
+# Application data written by the running app (uploads, runs, drafts)
+data/app/
+
+# Evaluation output: only the findings that the docs cite are shared; row-level logs and the generated corpus stay local
+!reports/extractor_eval/
+reports/extractor_eval/*
+!reports/extractor_eval/ablate_findings.md
+!reports/extractor_eval/ablate_summary.json
+!reports/extractor_eval/baseline_findings.md
+!reports/extractor_eval/expr5_findings.md
+!reports/extractor_eval/vote_findings.md
+!reports/extractor_eval/demand.md
+!reports/extractor_eval/real_wording.jsonl
+!reports/extractor_eval/stairs_results.md
+!reports/extractor_eval/closed_loop_eval.json
+!reports/extractor_eval/coverage_demo.html
+
+# Personal copies with this machine's paths and notes stay on the machine
+*.local.md
+
+# real public documents used only for local testing (copyright, size); never committed
+data/real_docs/
+data/real_plans/
+
+# cached answers of hosted models (private to the machine)
+data/llm_cache.sqlite*

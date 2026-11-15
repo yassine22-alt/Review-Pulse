@@ -1,0 +1,309 @@
+{
+ "$defs": {
+  "Binding": {
+   "additionalProperties": false,
+   "properties": {
+    "kind": {
+     "enum": [
+      "boolean",
+      "number",
+      "string"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "unit": {
+     "default": "1",
+     "enum": [
+      "1",
+      "m",
+      "m2",
+      "count"
+     ],
+     "title": "Unit",
+     "type": "string"
+    },
+    "description": {
+     "default": "",
+     "title": "Description",
+     "type": "string"
+    }
+   },
+   "required": [
+    "kind"
+   ],
+   "title": "Binding",
+   "type": "object"
+  },
+  "Edge": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "minLength": 1,
+     "title": "Id",
+     "type": "string"
+    },
+    "a": {
+     "title": "A",
+     "type": "string"
+    },
+    "b": {
+     "title": "B",
+     "type": "string"
+    },
+    "kind": {
+     "description": "door, opening, window, adjacent, ...",
+     "minLength": 1,
+     "title": "Kind",
+     "type": "string"
+    },
+    "via": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Node id of the door or opening that realises the relation",
+     "title": "Via"
+    },
+    "trusted": {
+     "default": false,
+     "description": "The relation itself is established, not just plausible",
+     "title": "Trusted",
+     "type": "boolean"
+    },
+    "attrs": {
+     "additionalProperties": {
+      "$ref": "#/$defs/Fact"
+     },
+     "title": "Attrs",
+     "type": "object"
+    }
+   },
+   "required": [
+    "id",
+    "a",
+    "b",
+    "kind"
+   ],
+   "title": "Edge",
+   "type": "object"
+  },
+  "Fact": {
+   "additionalProperties": false,
+   "properties": {
+    "value": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "integer"
+      },
+      {
+       "type": "number"
+      },
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Value"
+    },
+    "source": {
+     "minLength": 1,
+     "title": "Source",
+     "type": "string"
+    },
+    "trusted": {
+     "default": false,
+     "title": "Trusted",
+     "type": "boolean"
+    },
+    "conflicting": {
+     "default": false,
+     "title": "Conflicting",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "source"
+   ],
+   "title": "Fact",
+   "type": "object"
+  },
+  "Inventory": {
+   "additionalProperties": false,
+   "properties": {
+    "complete": {
+     "default": false,
+     "description": "Every member of this kind is listed (reviewed or exact)",
+     "title": "Complete",
+     "type": "boolean"
+    },
+    "trusted": {
+     "default": false,
+     "description": "Membership is established, so a listed member really exists",
+     "title": "Trusted",
+     "type": "boolean"
+    }
+   },
+   "title": "Inventory",
+   "type": "object"
+  },
+  "Node": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "minLength": 1,
+     "title": "Id",
+     "type": "string"
+    },
+    "kind": {
+     "description": "Any name the producer declares: room, stair, duct, span, sheet, ...",
+     "minLength": 1,
+     "title": "Kind",
+     "type": "string"
+    },
+    "role": {
+     "default": "member",
+     "description": "member: one of many things of its kind (listed in a collection); whole: the subject as a whole (building, site, structure) carrying global facts; boundary: where things lead to (outside, an exit) rather than a thing to measure",
+     "enum": [
+      "member",
+      "whole",
+      "boundary"
+     ],
+     "title": "Role",
+     "type": "string"
+    },
+    "label": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Text as drawn, or a schedule tag",
+     "title": "Label"
+    },
+    "attrs": {
+     "additionalProperties": {
+      "$ref": "#/$defs/Fact"
+     },
+     "description": "Measured facts, each with source and trust",
+     "title": "Attrs",
+     "type": "object"
+    }
+   },
+   "required": [
+    "id",
+    "kind"
+   ],
+   "title": "Node",
+   "type": "object"
+  },
+  "Provenance": {
+   "additionalProperties": false,
+   "properties": {
+    "document": {
+     "default": "",
+     "title": "Document",
+     "type": "string"
+    },
+    "sheet": {
+     "default": "",
+     "title": "Sheet",
+     "type": "string"
+    },
+    "tier": {
+     "default": "unknown",
+     "enum": [
+      "T1",
+      "T2",
+      "T3",
+      "unknown"
+     ],
+     "title": "Tier",
+     "type": "string"
+    },
+    "scale": {
+     "default": "unknown",
+     "description": "Method that fixed the scale, or unknown",
+     "title": "Scale",
+     "type": "string"
+    },
+    "producer": {
+     "default": "",
+     "title": "Producer",
+     "type": "string"
+    }
+   },
+   "title": "Provenance",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "format_version": {
+   "const": "1.0",
+   "default": "1.0",
+   "title": "Format Version",
+   "type": "string"
+  },
+  "provenance": {
+   "$ref": "#/$defs/Provenance"
+  },
+  "bindings": {
+   "additionalProperties": {
+    "$ref": "#/$defs/Binding"
+   },
+   "description": "Meaning, type and unit of every attribute name used",
+   "title": "Bindings",
+   "type": "object"
+  },
+  "nodes": {
+   "items": {
+    "$ref": "#/$defs/Node"
+   },
+   "title": "Nodes",
+   "type": "array"
+  },
+  "edges": {
+   "items": {
+    "$ref": "#/$defs/Edge"
+   },
+   "title": "Edges",
+   "type": "array"
+  },
+  "inventory": {
+   "additionalProperties": {
+    "$ref": "#/$defs/Inventory"
+   },
+   "description": "Per node kind the producer looked for, including kinds with no member found (an empty collection is different from a kind nobody looked for)",
+   "title": "Inventory",
+   "type": "object"
+  },
+  "graph_complete": {
+   "default": false,
+   "description": "Every relation is listed, so 'no route' can be proven",
+   "title": "Graph Complete",
+   "type": "boolean"
+  }
+ },
+ "required": [
+  "bindings",
+  "nodes"
+ ],
+ "title": "FactGraph",
+ "type": "object"
+}

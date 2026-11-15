@@ -1,0 +1,23 @@
+id: C-D5
+title: Kitchen floor area
+family: C
+class: threshold
+applies_to:
+  room_type:
+  - kitchen
+check:
+  fn: area_m2
+  op: '>='
+  value: 7.0
+  unit: m2
+severity: major
+needs:
+- scale
+- rooms
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 6.5
+message: '{room.label} measures {detected}; {required} is required.'
+status: approved
+approved_by: starter-pack
+version: 1

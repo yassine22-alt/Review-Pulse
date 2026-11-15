@@ -1,0 +1,22 @@
+{
+ "png": {
+  "ran": 15,
+  "fail": 2,
+  "clean_plans": 5,
+  "flagged_on_clean_plans": 124,
+  "fail_on_clean_plans": 0,
+  "planted": 10,
+  "planted_found": 9,
+  "seconds_median": 49.47
+ },
+ "pdf": {
+  "ran": 15,
+  "fail": 19,
+  "clean_plans": 5,
+  "flagged_on_clean_plans": 0,
+  "fail_on_clean_plans": 0,
+  "planted": 10,
+  "planted_found": 10,
+  "seconds_median": 3.57
+ }
+}

@@ -1,0 +1,16 @@
+id: K-A1
+title: Dimension chain sums to the overall dimension
+family: K
+class: arithmetic
+applies_to: {}
+check:
+  fn: sum_parts
+severity: minor
+needs: []
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 c
+message: 'Dimension chain does not add up: {detected} against {required} ({chain.diff}).'
+status: approved
+approved_by: starter-pack
+version: 1

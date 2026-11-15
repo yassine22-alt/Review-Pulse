@@ -1,0 +1,36 @@
+# docker compose up --build      then open http://localhost:8000
+# First start downloads the drafting model (qwen2.5:7b, about 4.7 GB) into the ollama volume.
+services:
+  app:
+    build:
+      context: .
+      args:
+        WITH_RASTER: "0"          # "1" adds scanned-plan support (larger image)
+    ports: ["8000:8000"]
+    environment:
+      REVIEWPULSE_LLM: ollama
+      REVIEWPULSE_LLM_MODEL: qwen2.5:7b
+      OLLAMA_HOST: http://ollama:11434
+    volumes: ["rp-data:/data"]
+    depends_on:
+      ollama:
+        condition: service_started
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:0.9.0
+    volumes: ["ollama:/root/.ollama"]
+    restart: unless-stopped
+    # GPU: uncomment on a host with the NVIDIA container toolkit
+    # deploy: {resources: {reservations: {devices: [{driver: nvidia, count: all, capabilities: [gpu]}]}}}
+
+  ollama-pull:                     # one-shot: makes sure the drafting model is present
+    image: ollama/ollama:0.9.0
+    environment: {OLLAMA_HOST: "ollama:11434"}
+    entrypoint: ["/bin/sh", "-c", "sleep 3 && ollama pull qwen2.5:7b"]
+    depends_on: [ollama]
+    restart: "no"
+
+volumes:
+  rp-data:
+  ollama:

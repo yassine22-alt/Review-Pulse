@@ -1,0 +1,17 @@
+id: K-A2
+title: Written length matches drawn length
+family: K
+class: arithmetic
+applies_to: {}
+check:
+  fn: drawn_vs_stated
+severity: minor
+needs:
+- scale
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 d
+message: 'Dimension text does not match the drawing: {detected} ({dim.diff}).'
+status: approved
+approved_by: starter-pack
+version: 1

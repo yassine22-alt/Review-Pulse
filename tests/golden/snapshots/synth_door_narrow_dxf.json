@@ -1,0 +1,47 @@
+{
+ "elements": {
+  "door": 7,
+  "wall": 23,
+  "window": 6
+ },
+ "rooms_m2": [
+  10.79,
+  11.25,
+  12.08,
+  13.31,
+  13.88,
+  14.98,
+  18.48
+ ],
+ "edges": 17,
+ "scale": 1.0,
+ "verdicts": [
+  "C-C1:PASS",
+  "C-D1:FAIL",
+  "C-D1:PASS",
+  "C-D2:PASS",
+  "C-D3:PASS",
+  "C-D3L:PASS",
+  "C-D3W:PASS",
+  "C-D5:PASS",
+  "C-T1:PASS",
+  "C-T2:PASS",
+  "C-T3:PASS",
+  "C-T4:PASS",
+  "C-T5:PASS",
+  "C-V1:PASS",
+  "C-V2:PASS",
+  "K-A1:PASS",
+  "K-A2:PASS",
+  "K-A3:PASS",
+  "K-P1:NOT_EVALUATED",
+  "K-X1:PASS",
+  "P-1:PASS",
+  "P-2:PASS",
+  "P-3:PASS",
+  "P-4:PASS",
+  "P-5:PASS",
+  "P-6:PASS",
+  "Q-1:PASS"
+ ]
+}

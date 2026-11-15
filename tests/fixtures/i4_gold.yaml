@@ -1,0 +1,119 @@
+# I4 gold set: clauses written for the evaluation (regulation-like wording, not a real code),
+# each translated by hand into the expected rule fields. `checkable` is the expected label.
+# Fields compared: fn, op, value (in the function's unit), unit, room_types / element.
+
+- id: G01
+  text: "Toute porte doit présenter une largeur de passage d'au moins 0,80 m."
+  checkable: from_drawings
+  expect: {fn: width_m, op: ">=", value: 0.80, unit: m, element: door}
+- id: G02
+  text: "Every door shall have a clear opening width of not less than 850 mm."
+  checkable: from_drawings
+  expect: {fn: width_m, op: ">=", value: 0.85, unit: m, element: door}
+- id: G03
+  text: "Les couloirs ont une largeur minimale de 1,20 m sur toute leur longueur."
+  checkable: from_drawings
+  expect: {fn: min_width_m, op: ">=", value: 1.20, unit: m, room_types: [corridor]}
+- id: G04
+  text: "Corridors shall be at least 90 cm wide."
+  checkable: from_drawings
+  expect: {fn: min_width_m, op: ">=", value: 0.90, unit: m, room_types: [corridor]}
+- id: G05
+  text: "La surface habitable d'une chambre n'est pas inférieure à 9 m²."
+  checkable: from_drawings
+  expect: {fn: area_m2, op: ">=", value: 9.0, unit: m2, room_types: [bedroom]}
+- id: G06
+  text: "A bedroom shall have a floor area of at least 7.5 square metres."
+  checkable: from_drawings
+  expect: {fn: area_m2, op: ">=", value: 7.5, unit: m2, room_types: [bedroom]}
+- id: G07
+  text: "Le séjour a une surface d'au moins 18 m²."
+  checkable: from_drawings
+  expect: {fn: area_m2, op: ">=", value: 18.0, unit: m2, room_types: [living]}
+- id: G08
+  text: "La cuisine mesure au moins 6 m²."
+  checkable: from_drawings
+  expect: {fn: area_m2, op: ">=", value: 6.0, unit: m2, room_types: [kitchen]}
+- id: G09
+  text: "No dimension of a bedroom shall be less than 2.40 m."
+  checkable: from_drawings
+  expect: {fn: min_width_m, op: ">=", value: 2.40, unit: m, room_types: [bedroom]}
+- id: G10
+  text: "Chaque pièce principale doit pouvoir rejoindre une sortie sans traverser une salle de bain ou un WC."
+  checkable: from_drawings
+  expect: {fn: exists_path, room_types: [bedroom, living, dining, kitchen, office], avoid: [bathroom, wc]}
+- id: G11
+  text: "A bedroom must not be accessed solely through another bedroom."
+  checkable: from_drawings
+  expect: {fn: exists_path, room_types: [bedroom], avoid: [bedroom]}
+- id: G12
+  text: "Aucune porte ne doit relier directement le garage à une chambre."
+  checkable: from_drawings
+  expect: {fn: forbidden_link, pairs: [[garage, bedroom]]}
+- id: G13
+  text: "There shall be no direct opening between a WC and a kitchen."
+  checkable: from_drawings
+  expect: {fn: forbidden_link, pairs: [[wc, kitchen]]}
+- id: G14
+  text: "Le logement dispose d'au moins une porte donnant sur l'extérieur."
+  checkable: from_drawings
+  expect: {fn: count_exits, op: ">=", value: 1}
+- id: G15
+  text: "Each dwelling shall have at least two exit doors."
+  checkable: from_drawings
+  expect: {fn: count_exits, op: ">=", value: 2}
+- id: G16
+  text: "La distance à parcourir depuis toute pièce principale jusqu'à une sortie ne dépasse pas 15 m."
+  checkable: from_drawings
+  expect: {fn: shortest_path_m, op: "<=", value: 15.0, unit: m}
+- id: G17
+  text: "Travel distance from any habitable room to an exit shall not exceed 25 metres."
+  checkable: from_drawings
+  expect: {fn: shortest_path_m, op: "<=", value: 25.0, unit: m}
+- id: G18
+  text: "La surface vitrée d'une pièce principale est au moins égale au sixième de sa surface."
+  checkable: from_drawings
+  expect: {fn: ratio, op: ">=", value: 0.1667}
+- id: G19
+  text: "Glazing in habitable rooms shall be not less than 10% of the floor area."
+  checkable: from_drawings
+  expect: {fn: ratio, op: ">=", value: 0.10}
+- id: G20
+  text: "Chaque pièce fermée porte une désignation sur le plan."
+  checkable: from_drawings
+  expect: {fn: present}
+- id: G21
+  text: "Les cotes partielles d'une chaîne de cotation doivent correspondre à la cote totale."
+  checkable: from_drawings
+  expect: {fn: sum_parts}
+- id: G22
+  text: "Written dimensions shall agree with the drawn geometry."
+  checkable: from_drawings
+  expect: {fn: drawn_vs_stated}
+- id: G23
+  text: "Les repères des menuiseries du plan correspondent au tableau des menuiseries."
+  checkable: from_drawings
+  expect: {fn: join}
+- id: G24
+  text: "Door swings shall not overlap one another."
+  checkable: from_drawings
+  expect: {fn: swing_conflicts}
+- id: G25
+  text: "La surface indiquée dans chaque pièce correspond à la surface dessinée à 5 % près."
+  checkable: from_drawings
+  expect: {fn: stated_vs_computed_area}
+- id: G26
+  text: "Les portes intérieures ont une hauteur de passage de 2,04 m minimum."
+  checkable: needs_other_data
+- id: G27
+  text: "Les parois séparatives entre logements présentent un degré coupe-feu de 1 heure."
+  checkable: not_checkable
+- id: G28
+  text: "The sound insulation between dwellings shall be at least 53 dB."
+  checkable: not_checkable
+- id: G29
+  text: "Les travaux sont réalisés conformément aux règles de l'art."
+  checkable: not_checkable
+- id: G30
+  text: "The window sill height in bedrooms shall not exceed 1.10 m."
+  checkable: needs_other_data

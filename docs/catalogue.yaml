@@ -1,0 +1,295 @@
+# Extraction catalogue (task B2): what ReviewPulse extracts from a drawing, at which priority.
+# Source of truth for docs/extraction_catalogue.md (python scripts/gen_docs.py; a test fails when stale).
+#
+# priority: P0 = an approved starter rule cannot run without it; P1 = makes results more accurate or
+#           more rules runnable; P2 = later.
+# needs / fns: engine capabilities (engine/context.py `has`) and check functions (rules/registry.py)
+#           the item feeds. The rules that depend on it are found from the rule packs, not listed here.
+# measured: {report, key} reads the value from the report's metrics block (the generator stops if the
+#           report or key is missing); {report, value} quotes a table cell of a report that exists.
+
+groups:
+  geometry: Geometry
+  objects: Building objects
+  spaces: Spaces
+  text: Text and dimensions
+  document: Document structure
+  derived: Derived properties
+
+items:
+- id: G1
+  group: geometry
+  name: Drawn primitives (lines, arcs, polylines, polygons, circles) with layer, stroke, fill
+  priority: P0
+  produced_by: ingest/pdf_backend.py, ingest/dxf_reader.py, ingest/svg_reader.py
+  schema: Sheet.primitives
+  needs: []
+  fns: []
+  status: done
+- id: G2
+  group: geometry
+  name: Arcs fitted from segment chains; glazing, door-leaf, hatch and dimension graphics tagged
+  priority: P0
+  produced_by: core/normalise.py, annotate/dimensions.py
+  schema: Primitive.hidden, Prov.evidence
+  needs: []
+  fns: []
+  status: done
+- id: G3
+  group: geometry
+  name: Walls (centreline, thickness, junctions)
+  priority: P0
+  produced_by: perception/walls.py, perception/learned/, perception/raster/
+  schema: Element(cls=wall)
+  needs: [rooms, room_graph]
+  fns: []
+  status: done
+  measured:
+  - {label: "synthetic DXF, 60 randomised plans, F1 (default pass)", report: reports/v4_fuse/2026-10-27_random_learned.md, key: walls.f1}
+  - {label: "synthetic PDF, 60 randomised plans, F1 (default pass)", report: reports/v4_fuse/2026-10-27_random_pdf_learned.md, key: walls.f1}
+  - {label: "FloorPlanCAD test, 100 drawings, length F1 (default pass; rules only 0.283)", report: reports/v4_fuse/2026-10-27_walls_floorplancad_learned-oracle-scale.md, key: wall_length_weighted.f1}
+  - {label: "CubiCasa5K test scans, 100, F1 at 3 px", report: reports/2026-10-25_raster_model_scan.md, key: model_scan.walls_3px.f1}
+- id: G4
+  group: geometry
+  name: Columns and filled structural elements
+  priority: P1
+  produced_by: perception/walls.py
+  schema: Element(cls=column)
+  needs: []
+  fns: []
+  status: done
+- id: O1
+  group: objects
+  name: Doors (clear width, hinge, swing area, double leaves)
+  priority: P0
+  produced_by: perception/openings.py, perception/learned/openings.py, perception/raster/
+  schema: Element(cls=door)
+  needs: [doors, swing_polygons]
+  fns: [width_m, swing_conflicts, count_exits]
+  status: done
+  measured:
+  - {label: "synthetic DXF, 60 randomised plans, F1 (default pass)", report: reports/v4_fuse/2026-10-27_random_learned.md, key: door.f1}
+  - {label: "FloorPlanCAD test, 100 drawings, instance F1 (default pass)", report: reports/v4_fuse/2026-10-27_walls_floorplancad_learned-oracle-scale.md, key: door_instances.f1}
+  - {label: "CubiCasa5K test scans, F1 at IoU 0.5", report: reports/2026-10-25_raster_model_scan.md, key: model_scan.door_iou50.f1}
+- id: O2
+  group: objects
+  name: Windows (width, glazing lines)
+  priority: P0
+  produced_by: perception/openings.py, perception/learned/openings.py, perception/raster/
+  schema: Element(cls=window)
+  needs: [windows]
+  fns: [ratio, escape_window, dead_end_no_window]
+  status: done
+  measured:
+  - {label: "FloorPlanCAD test, 100 drawings, instance F1 (default pass)", report: reports/v4_fuse/2026-10-27_walls_floorplancad_learned-oracle-scale.md, key: window_instances.f1}
+  - {label: "CubiCasa5K test scans, F1 at IoU 0.5", report: reports/2026-10-25_raster_model_scan.md, key: model_scan.window_iou50.f1}
+- id: O3
+  group: objects
+  name: Openings without a leaf (pass-throughs, arches)
+  priority: P1
+  produced_by: perception/openings.py
+  schema: Element(cls=opening)
+  needs: []
+  fns: [forbidden_link]
+  status: done
+- id: O4
+  group: objects
+  name: Stairs, lifts, ramps
+  priority: P2
+  produced_by: "-"
+  schema: Element(cls=stair)
+  needs: []
+  fns: []
+  status: not started
+- id: O5
+  group: objects
+  name: Fixtures and furniture (sanitary, kitchen, beds) as objects
+  priority: P2
+  produced_by: "- (recognised only to keep them out of walls)"
+  schema: Element(cls=fixture)
+  needs: []
+  fns: []
+  status: not started
+- id: S1
+  group: spaces
+  name: Rooms (polygons, holes)
+  priority: P0
+  produced_by: perception/rooms.py
+  schema: BuildingModel.rooms
+  needs: [rooms]
+  fns: [present, isolated_rooms]
+  status: done
+  measured:
+  - {label: "ResPlan, 1,632 real plans, space F1", report: reports/2026-10-25_rooms_resplan.md, key: spaces_iou50.f1}
+  - {label: "synthetic PDF, 60 randomised plans, F1 (default pass)", report: reports/v4_fuse/2026-10-27_random_pdf_learned.md, key: rooms.f1}
+  - {label: "CubiCasa5K test scans, F1 at IoU 0.5", report: reports/2026-10-25_raster_model_scan.md, key: model_scan.rooms_iou50.f1}
+- id: S2
+  group: spaces
+  name: Room type from its label (multilingual lexicon, LLM fallback)
+  priority: P0
+  produced_by: annotate/text_classify.py
+  schema: Room.label, Room.type
+  needs: [labels]
+  fns: [present]
+  status: done
+  measured:
+  - {label: "CubiCasa5K test labels (Finnish), share correct", report: reports/2026-10-25_room_labels_cubicasa.md, value: "1.000 (FR/EN only: 0.065)"}
+- id: S3
+  group: spaces
+  name: Room graph (doors, openings, EXIT / EXTERIOR edges)
+  priority: P0
+  produced_by: perception/rooms.py
+  schema: BuildingModel.edges
+  needs: [room_graph]
+  fns: [exists_path, forbidden_link, dead_end_no_window, count_exits, shortest_path_m]
+  status: done
+  measured:
+  - {label: "ResPlan, door edges F1", report: reports/2026-10-25_rooms_resplan.md, key: door_edges.f1}
+- id: S4
+  group: spaces
+  name: Room area and minimum clear width
+  priority: P0
+  produced_by: perception/rooms.py
+  schema: Room.area_m2, Room.min_width_m
+  needs: []
+  fns: [area_m2, min_width_m, stated_vs_computed_area]
+  status: done
+- id: T1
+  group: text
+  name: Text runs (vector text; OCR on scans)
+  priority: P0
+  produced_by: ingest/*, ingest/ocr.py
+  schema: Sheet.texts
+  needs: []
+  fns: []
+  status: done
+- id: T2
+  group: text
+  name: Text roles (room label, area, dimension, tag, note, title block)
+  priority: P0
+  produced_by: annotate/text_classify.py
+  schema: TextItem.kind, TextItem.value, TextItem.norm
+  needs: []
+  fns: []
+  status: done
+- id: T3
+  group: text
+  name: Scale (DXF units, dimension consensus, symbol prior)
+  priority: P0
+  produced_by: annotate/scale.py
+  schema: Sheet.scale
+  needs: [scale]
+  fns: []
+  status: done
+  measured:
+  - {label: "synthetic PDFs, 30 plans, mean relative error", report: reports/2026-10-24_scale_rules.md, key: mean_rel_error}
+- id: T4
+  group: text
+  name: Dimensions and dimension chains (stated vs drawn)
+  priority: P0
+  produced_by: annotate/dimensions.py
+  schema: Sheet.dimensions
+  needs: [dimensions]
+  fns: [sum_parts, drawn_vs_stated]
+  status: done
+- id: T5
+  group: text
+  name: Tags on doors and windows, associated to elements
+  priority: P1
+  produced_by: annotate/schedules.py, pipeline.associate_tags
+  schema: Element.tag
+  needs: []
+  fns: [join]
+  status: done
+- id: D1
+  group: document
+  name: Sheet layout (frame, plan box, title block, tables)
+  priority: P1
+  produced_by: annotate/layout.py
+  schema: Sheet.layout
+  needs: [layout]
+  fns: []
+  status: done
+- id: D2
+  group: document
+  name: Schedules (door / window tables) parsed into rows
+  priority: P1
+  produced_by: annotate/schedules.py
+  schema: BuildingModel.schedules
+  needs: [schedule]
+  fns: [join]
+  status: done
+- id: D3
+  group: document
+  name: Several pages / layouts, sheet type per page
+  priority: P1
+  produced_by: ingest/classify.py, pipeline.py
+  schema: Sheet.page, Sheet.sheet_type
+  needs: []
+  fns: []
+  status: partial (one model per page; sheet type not yet classified)
+- id: D4
+  group: document
+  name: Requirement clauses from the specification document, drafted into rules
+  priority: P0
+  produced_by: rules/clauses.py, rules/draft.py
+  schema: rules/schema.py (Rule)
+  needs: []
+  fns: []
+  status: done
+  measured:
+  - {label: "30 gold clauses, check-type label accuracy (local Qwen2.5-7B)", report: reports/2026-10-24_drafting_ollama-qwen2.5_7b.md, key: all.label_accuracy}
+- id: X1
+  group: derived
+  name: Travel distance to an exit
+  priority: P1
+  produced_by: engine/traversal.py
+  schema: Finding.evidence (witness path)
+  needs: []
+  fns: [shortest_path_m]
+  status: done
+- id: X2
+  group: derived
+  name: Glazed area ratio, escape windows
+  priority: P1
+  produced_by: engine/metric.py
+  schema: Finding.evidence
+  needs: []
+  fns: [ratio, escape_window]
+  status: done
+- id: X3
+  group: derived
+  name: Door swing conflicts
+  priority: P1
+  produced_by: engine/swing.py
+  schema: Finding.evidence (overlap polygons)
+  needs: []
+  fns: [swing_conflicts]
+  status: done
+- id: X4
+  group: derived
+  name: Evidence tier and confirmation state per element
+  priority: P0
+  produced_by: core/tiers.py
+  schema: BuildingModel.tier, Element.confirmed
+  needs: []
+  fns: []
+  status: done
+- id: D5
+  group: document
+  name: Project brief (programme) table, read from CSV, XLSX, DOCX, PDF or Markdown
+  priority: P0
+  produced_by: rules/programme.py
+  schema: BuildingModel.schedules (name programme)
+  needs: []
+  fns: [programme_rooms]
+  status: done
+- id: X5
+  group: derived
+  name: Escape routes (walked distance from each door to an exit, direction of travel through each door)
+  priority: P0
+  produced_by: engine/traversal.py, core/geometry.py (Walkable)
+  schema: computed by the rules from rooms, doors and the room graph
+  needs: []
+  fns: [shortest_path_m, swing_with_escape]
+  status: done

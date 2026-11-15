@@ -1,0 +1,19 @@
+id: P-5
+title: Every door and window is tagged
+family: P
+class: presence
+applies_to: {}
+check:
+  fn: present
+severity: minor
+needs:
+- doors
+source:
+  doc: docs/requirements_example.md
+  clause: Art. 9 i
+message: '{subject.tag} has no tag.'
+params:
+  what: opening_tags
+status: approved
+approved_by: starter-pack
+version: 1

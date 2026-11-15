@@ -1,0 +1,64 @@
+{
+ "planted": [
+  "metric_escape_window",
+  "comp_door_untagged",
+  "topo_isolated_room",
+  "metric_kitchen_small"
+ ],
+ "summary": {
+  "PASS": 91,
+  "FAIL": 10
+ },
+ "issues": [
+  [
+   "C-D3",
+   "FAIL",
+   "CHAMBRE 3 measures 5.97 m\u00b2; >= 9.00 m\u00b2 is required."
+  ],
+  [
+   "C-D3W",
+   "FAIL",
+   "CHAMBRE 3 narrows to 1.55 m; >= 2.20 m is required."
+  ],
+  [
+   "C-D5",
+   "FAIL",
+   "CUISINE measures 6.31 m\u00b2; >= 7.00 m\u00b2 is required."
+  ],
+  [
+   "C-V1",
+   "FAIL",
+   "CHAMBRE 1 has a glazed ratio of 0.115; >= 0.167 is required."
+  ],
+  [
+   "C-V1",
+   "FAIL",
+   "CHAMBRE 3 has a glazed ratio of 0.085; >= 0.167 is required."
+  ],
+  [
+   "C-V1",
+   "FAIL",
+   "CUISINE has a glazed ratio of 0.081; >= 0.167 is required."
+  ],
+  [
+   "C-V2",
+   "FAIL",
+   "CHAMBRE 1: largest window F4: 2.20 x 0.80 m; >= 0.60 x 1.00 m is required to escape."
+  ],
+  [
+   "C-V2",
+   "FAIL",
+   "CHAMBRE 3: largest window F5: 0.85 x 0.60 m; >= 0.60 x 1.00 m is required to escape."
+  ],
+  [
+   "P-5",
+   "FAIL",
+   "door 13cbc3 has no tag."
+  ],
+  [
+   "P-6",
+   "FAIL",
+   "SDB has 0 door(s) or opening(s); >= 1 required."
+  ]
+ ]
+}

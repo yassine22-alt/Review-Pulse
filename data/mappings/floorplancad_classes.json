@@ -1,0 +1,59 @@
+{
+ "classes": {
+  "1": "single door",
+  "2": "double door",
+  "3": "sliding door",
+  "4": "folding door",
+  "5": "revolving door",
+  "6": "rolling door",
+  "7": "window",
+  "8": "bay window",
+  "9": "blind window",
+  "10": "opening symbol",
+  "11": "sofa",
+  "12": "bed",
+  "13": "chair",
+  "14": "table",
+  "15": "TV cabinet",
+  "16": "wardrobe",
+  "17": "cabinet",
+  "18": "gas stove",
+  "19": "sink",
+  "20": "refrigerator",
+  "21": "air conditioner",
+  "22": "bath",
+  "23": "bath tub",
+  "24": "washing machine",
+  "25": "squat toilet",
+  "26": "urinal",
+  "27": "toilet",
+  "28": "stairs",
+  "29": "elevator",
+  "30": "escalator",
+  "31": "row chairs",
+  "32": "parking spot",
+  "33": "wall",
+  "34": "curtain wall",
+  "35": "railing"
+ },
+ "groups": {
+  "wall": [
+   33
+  ],
+  "door": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "window": [
+   7,
+   8,
+   9
+  ]
+ },
+ "unit_m": 0.1,
+ "note": "class ids checked against geometry: ids 1-2 arc-heavy (doors), 33 straight lines (walls); unit from median door radius 8.78 -> 0.88 m"
+}
