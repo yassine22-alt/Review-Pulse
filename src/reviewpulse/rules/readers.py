@@ -201,7 +201,7 @@ def ocr_lines(png_or_array) -> list[str]:
     if not result:
         return []
     items = []
-    for box, text, score in result:
+    for box, text, _score in result:
         ys = [p[1] for p in box]
         xs = [p[0] for p in box]
         items.append((min(ys), max(ys), min(xs), text))
