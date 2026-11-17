@@ -26,13 +26,46 @@ of zero is undefined. API_UNAVAILABLE outcomes are excluded from semantic
 failure counts, even when the original pipeline catches a transport exception
 and returns its own UNRESOLVED status.
 
-## Current live preflight
+## Initial offline preflight
 
 No `GEMINI_API_KEY` is present in the environment. The
 [attempt report](../reports/hosted-resilient-attempt.json) records
 MISSING_ENV_CREDENTIAL, 0/0 request attempts, 0/46 semantic evaluations and all
 46 obligations pending. No batch was submitted. No claim about provider
 availability or model interpretation follows from this preflight.
+
+## Replacement credential after Windows restart
+
+The process can now read GEMINI_API_KEY. Google's model-list endpoint
+authenticated the replacement key; no credential value was printed or stored.
+Gemini 3.8 Flash's small generation probe timed out on 3/3 attempts at 45
+seconds each. A listed Gemini 2.5 Flash alternative returned HTTP 404 on 1/1
+attempt. Model listing does not prove usable generation or quota.
+
+The original-pipeline run used 8,192 output tokens, 45-second requests,
+concurrency one, batch size four and three retry cycles. The first batch
+recorded 3/3 request errors in each cycle, 9/9 overall: 7/9 HTTP 429 and
+2/9 network timeouts. The circuit marked 4/4 batch obligations unavailable
+per cycle and prevented further calls within each cycle. After cycle three
+the run stopped: 0/46 semantic evaluations, all 46 pending. The remaining
+42 obligations were not submitted. Wrong approvable / approvable remains
+undefined, 0/0. The 45-second budget is not a completed model capacity test.
+
+The redesigned hosted comparison and fourth-document run were not submitted.
+[Original-pipeline availability report](../reports/hosted-original-replacement-key.json)
+and [credential preflight](../reports/gemini-replacement-preflight.json) retain
+only non-secret statuses and request counts. The interrupted restricted-process
+probe is not a completed retry cycle. A separate credential-free curl check
+reported a Windows TLS identity error under the restricted process; public TLS
+and authenticated model listing succeeded under the normal Windows identity.
+Generation failures still occurred under that normal identity.
+
+No billing setting changed. HTTP 429 establishes a rate/quota rejection; its
+subtype and whether payment is required are unmeasured because provider error
+bodies were discarded. Only the Gemini credential is configured; the other
+provider adapters below were not called. Other listed Flash models include
+3.5, 3.6 and 3.7, but their generation is untested in this round. No further
+provider or model request followed the three-cycle stop.
 
 Five automated tests passed. They cover missing credentials, HTTP 429 and
 503 backoff, bounded attempts, circuit behavior, concurrency, structured

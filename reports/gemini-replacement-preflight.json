@@ -1,0 +1,32 @@
+{
+  "replacement_credential": {
+    "process_variable_present": true,
+    "authentication": "SUCCEEDED_MODEL_LIST",
+    "credential_value_printed_or_stored": false
+  },
+  "generation_checks": [
+    {
+      "model": "gemini-3.8-flash",
+      "report": "gemini-replacement-connectivity.json",
+      "result": "API_UNAVAILABLE",
+      "errors": 3,
+      "attempts": 3,
+      "timeout_seconds": 45
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "report": "gemini-flash-connectivity.json",
+      "result": "HTTP_404",
+      "errors": 1,
+      "attempts": 1
+    }
+  ],
+  "semantic_evaluations": 0,
+  "planned_obligations": 46,
+  "limitations": [
+    "Model-list authentication does not prove generation availability or quota.",
+    "Transport and API configuration outcomes are excluded from semantic failure counts.",
+    "The earlier restricted-process probe was interrupted and is not a completed retry cycle.",
+    "No billing setting changed; no other provider credential used."
+  ]
+}

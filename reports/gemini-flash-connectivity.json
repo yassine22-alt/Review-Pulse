@@ -1,0 +1,14 @@
+{
+  "status": "API_UNAVAILABLE",
+  "reason": "HTTP_404",
+  "http_status": 404,
+  "attempts": 1,
+  "events": [
+    {
+      "attempt": 1,
+      "http_status": 404,
+      "reason": "HTTP_404",
+      "seconds": 0.313
+    }
+  ]
+}

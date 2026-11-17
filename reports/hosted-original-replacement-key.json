@@ -1,0 +1,221 @@
+{
+  "backend": "gemini",
+  "model": "gemini-3.8-flash",
+  "code_fingerprint": "f10493f14576ca83ecf62fc35da20ccf5b50a6c476fbb0f6e22c50af7f45f94f",
+  "batch_size": 4,
+  "retry_cycles": 3,
+  "http_attempts_per_completion": 3,
+  "concurrency": 1,
+  "max_tokens": 8192,
+  "timeout": 45.0,
+  "batches": [
+    {
+      "number": 1,
+      "cycle": 1,
+      "ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        3,
+        3
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        4,
+        4
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": null,
+          "reason": "NETWORK_ERROR",
+          "seconds": 45.172
+        },
+        {
+          "attempt": 2,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.281
+        },
+        {
+          "attempt": 3,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.344
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "cycle": 2,
+      "ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        3,
+        3
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        4,
+        4
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.313
+        },
+        {
+          "attempt": 2,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.218
+        },
+        {
+          "attempt": 3,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.36
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "cycle": 3,
+      "ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        3,
+        3
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        4,
+        4
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.25
+        },
+        {
+          "attempt": 2,
+          "http_status": null,
+          "reason": "NETWORK_ERROR",
+          "seconds": 45.093
+        },
+        {
+          "attempt": 3,
+          "http_status": 429,
+          "reason": "HTTP_429",
+          "seconds": 0.265
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "M01",
+      "batch": 1,
+      "cycle": 3,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "program": null
+    },
+    {
+      "id": "M02",
+      "batch": 1,
+      "cycle": 3,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "program": null
+    },
+    {
+      "id": "M03",
+      "batch": 1,
+      "cycle": 3,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "program": null
+    },
+    {
+      "id": "M04",
+      "batch": 1,
+      "cycle": 3,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "program": null
+    }
+  ],
+  "configured_key_variables": [
+    "GEMINI_API_KEY"
+  ],
+  "invocation": 1,
+  "semantic_evaluated": 0,
+  "pending": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "A09",
+    "A10",
+    "A11",
+    "A12",
+    "A13",
+    "A14",
+    "A15",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15"
+  ],
+  "status": "API_UNAVAILABLE"
+}

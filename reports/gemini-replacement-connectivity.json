@@ -1,0 +1,26 @@
+{
+  "status": "API_UNAVAILABLE",
+  "reason": "NETWORK_ERROR",
+  "http_status": null,
+  "attempts": 3,
+  "events": [
+    {
+      "attempt": 1,
+      "http_status": null,
+      "reason": "NETWORK_ERROR",
+      "seconds": 45.235
+    },
+    {
+      "attempt": 2,
+      "http_status": null,
+      "reason": "NETWORK_ERROR",
+      "seconds": 45.14
+    },
+    {
+      "attempt": 3,
+      "http_status": null,
+      "reason": "NETWORK_ERROR",
+      "seconds": 45.094
+    }
+  ]
+}

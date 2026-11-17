@@ -15,22 +15,26 @@ inputs survive with the existing catalogue. With author-proposed declarations,
 unresolved for context or specialist meaning. This does not measure an LLM.
 Removing expression syntax alone does not solve grounding or applicability.
 
-Hosted comparison is pending. The user reports rotating the exposed key and
-placing its replacement in Codex Cloud Personal Vault. This local Windows
-process cannot read GEMINI_API_KEY. It has made **0/0** replacement-key HTTP
-attempts and completed **0/46** hosted semantic evaluations. Availability
-failures are excluded from semantic failure counts.
+Hosted comparison is pending. After the Windows restart, GEMINI_API_KEY is
+visible and the replacement key authenticated to Google's model-list endpoint.
+Its value was not displayed or written. Generation remained unavailable:
+the original-pipeline batch stopped after three failed retry cycles, each
+**3/3** request errors (**9/9** total): **7/9 HTTP 429**, **2/9 timeouts**.
+Completed hosted semantic evaluations remain **0/46**. These are availability
+outcomes, excluded from semantic failure counts; they do not measure capacity.
 
 The fourth document is frozen and unrun: RPS 2000 version 2011, official French
 Bulletin Officiel 6206, 21 November 2013. Its **17 obligations and 48 synthetic
 scenarios** were committed at `41b1ad14b466fb52500b118d69593319da649e23`.
 Interpretations and applicability labels remain separate from drafting input.
 
-Next: finish the paired local comparison, make the replacement credential
-available to this process, then run original and redesigned hosted drafting on
-the same 46 development obligations. Only then run the frozen fourth document
-once, without further tuning. Inspect wrong approvable drafts separately from
-retention. Do not add checker capabilities to improve these numbers.
+Next: finish the paired local comparison and obtain usable hosted generation,
+then run original and redesigned hosted drafting on the same 46 development
+obligations. The runner stopped at its retry limit. Only after the comparison
+should the frozen fourth document run once, without further tuning. Inspect
+wrong approvable drafts separately from retention. Do not add capabilities to
+improve numbers. HTTP 429 establishes a rate/quota rejection; its subtype and
+whether billing is required were not determined from these discarded bodies.
 
 Local comparison checkpoint before the requested restart: **20/46** redesigned
 obligations have completed, with **0/20** retained. Terminal stages are
@@ -48,7 +52,8 @@ See [partial local trace](../reports/local-after-slots-partial.json).
 | Gold-slot compiler, author-proposed facts | 17/46 exact and behavioral matches; 27/46 verifier rejection; 2/46 context/binding unresolved. Proposed facts do not create plan computations |
 | Original local drafting, Qwen2.5 1.5B | 45/46 evaluated, 1/46 transport timeout. 1/45 semantic cases retained; that draft was wrong. Wrong technically approvable / approvable = 1/1 with a synthetic issue-free review, not a real critic |
 | Generated behavior | 64 fact worlds per retained oracle input; finite tests, not a proof |
-| New credential visibility | Absent from local process, Windows user and machine environment; value never printed |
+| Replacement credential | Visible after Windows restart; model-list authentication succeeded. Value never printed or written |
+| Hosted original pipeline, replacement key | First batch: 3/3 errors in each of three cycles; 9/9 overall (7 HTTP 429, 2 timeouts). 4/4 unavailable per cycle; circuit prevented further calls. 0/46 semantic evaluations; all 46 pending |
 | Current non-slow suite | 978 passed, 2 skipped, 45 slow tests deselected; 530.44 seconds. Redesign pushed at e2d0acf4516d5e3395869f4f470108b0111e1053 |
 | Secrets scan | 597 working text files; 776 reachable Git blobs, 286 trees, 37 commits, including refs/reflogs; no credential-pattern match in scanned repository content. Exclusions and access failures are documented |
 | Previous complete slow suite | 45/45 passed at the earlier checkpoint; this is historical validation, not a new interpreter result |

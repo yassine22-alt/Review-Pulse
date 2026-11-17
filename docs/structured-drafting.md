@@ -88,5 +88,8 @@ by source, catalogue, model settings and drafting/validation code contents.
 Scripted model responses used in unit tests do not enter either evaluation.
 
 The fourth document and its labels are excluded from the development loader.
-No model or checker is run on that frozen document in this round. Hosted runs
-remain pending while this Windows process cannot read GEMINI_API_KEY.
+No model or checker has run on that frozen document in this round. The
+replacement environment credential authenticated after the Windows restart,
+but the original hosted run stopped after three failed availability cycles
+(7 HTTP 429 and 2 timeouts in 9 attempts). The paired hosted comparison remains
+pending; these failures are excluded from semantic counts.
