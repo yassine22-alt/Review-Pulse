@@ -1,0 +1,4267 @@
+{
+  "scope": "All 46 development obligations. Scoped readings; source interpretation accuracy is not measured.",
+  "assumptions": [
+    "Ordinal material classes need an approved class hierarchy; numeric encodings are proposed oracle data.",
+    "Adapted/usable properties are externally established evidence, not automated geometry computations.",
+    "Scope remains the pre-existing development fixture scope.",
+    "Each quantified fixture collection denotes only the relevant entities with complete meaning, not measured inventory completeness."
+  ],
+  "cases": [
+    {
+      "id": "M01",
+      "frozen_reading": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "count",
+          "collection": "exits",
+          "variable": "$e",
+          "where": {
+            "node": "fact",
+            "name": "eligible",
+            "entity": "$e"
+          }
+        },
+        "right": {
+          "node": "literal",
+          "value": 2,
+          "unit": "count"
+        }
+      },
+      "slots": {
+        "id": "M01",
+        "title": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+        "subject": "| Effectif | Nombre de dégagements (sorties ou escaliers) |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$e",
+            "name": "eligible",
+            "id": "n2"
+          },
+          {
+            "op": "count",
+            "collection": "exits",
+            "variable": "$e",
+            "where": "n2",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 2,
+            "unit": "count",
+            "id": "n4"
+          },
+          {
+            "op": "ge",
+            "left": "n3",
+            "right": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          },
+          {
+            "clause": "M01",
+            "quote": "| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "eligible": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "eligible"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M02",
+      "frozen_reading": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "normal"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "accessory"
+          }
+        ]
+      },
+      "slots": {
+        "id": "M02",
+        "title": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+        "subject": "| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "normal",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "accessory",
+            "id": "n3"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n3"
+            ],
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          },
+          {
+            "clause": "M02",
+            "quote": "| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |\n| de 20 à 50 | RDC : 2 | 1 dégagement de 1 UP ; 1 dégagement accessoire |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "normal": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "normal"
+        },
+        "accessory": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "accessory"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M03",
+      "frozen_reading": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "any",
+        "args": [
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "eq",
+                "left": {
+                  "node": "count",
+                  "collection": "exits",
+                  "variable": "$e",
+                  "where": {
+                    "node": "fact",
+                    "name": "eligible",
+                    "entity": "$e"
+                  }
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 1,
+                  "unit": "count"
+                }
+              },
+              {
+                "node": "le",
+                "left": {
+                  "node": "fact",
+                  "name": "travel",
+                  "entity": "building"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 30,
+                  "unit": "m"
+                }
+              }
+            ]
+          },
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "ge",
+                "left": {
+                  "node": "count",
+                  "collection": "exits",
+                  "variable": "$e",
+                  "where": {
+                    "node": "fact",
+                    "name": "eligible",
+                    "entity": "$e"
+                  }
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 2,
+                  "unit": "count"
+                }
+              },
+              {
+                "node": "le",
+                "left": {
+                  "node": "fact",
+                  "name": "travel",
+                  "entity": "building"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 50,
+                  "unit": "m"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "slots": {
+        "id": "M03",
+        "title": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+        "subject": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$e",
+            "name": "eligible",
+            "id": "n2"
+          },
+          {
+            "op": "count",
+            "collection": "exits",
+            "variable": "$e",
+            "where": "n2",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 1,
+            "unit": "count",
+            "id": "n4"
+          },
+          {
+            "op": "eq",
+            "left": "n3",
+            "right": "n4",
+            "id": "n5"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "travel",
+            "id": "n6"
+          },
+          {
+            "op": "literal",
+            "value": 30,
+            "unit": "m",
+            "id": "n7"
+          },
+          {
+            "op": "le",
+            "left": "n6",
+            "right": "n7",
+            "id": "n8"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n5",
+              "n8"
+            ],
+            "id": "n9"
+          },
+          {
+            "op": "fact",
+            "entity": "$e",
+            "name": "eligible",
+            "id": "n10"
+          },
+          {
+            "op": "count",
+            "collection": "exits",
+            "variable": "$e",
+            "where": "n10",
+            "id": "n11"
+          },
+          {
+            "op": "literal",
+            "value": 2,
+            "unit": "count",
+            "id": "n12"
+          },
+          {
+            "op": "ge",
+            "left": "n11",
+            "right": "n12",
+            "id": "n13"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "travel",
+            "id": "n14"
+          },
+          {
+            "op": "literal",
+            "value": 50,
+            "unit": "m",
+            "id": "n15"
+          },
+          {
+            "op": "le",
+            "left": "n14",
+            "right": "n15",
+            "id": "n16"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n13",
+              "n16"
+            ],
+            "id": "n17"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n9",
+              "n17"
+            ],
+            "id": "n18"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n18",
+        "sources": [
+          {
+            "clause": "M03",
+            "quote": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "eligible": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "eligible"
+        },
+        "travel": {
+          "kind": "number",
+          "unit": "m",
+          "description": "travel"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M04",
+      "frozen_reading": "Walk from the public-room door to the dead-end junction at most 10 m.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "dead_end"
+        },
+        "right": {
+          "node": "literal",
+          "value": 10.0,
+          "unit": "m"
+        }
+      },
+      "slots": {
+        "id": "M04",
+        "title": "Walk from the public-room door to the dead-end junction at most 10 m.",
+        "subject": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "dead_end",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 10.0,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "M04",
+            "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "dead_end": {
+          "kind": "number",
+          "unit": "m",
+          "description": "dead end"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M05",
+      "frozen_reading": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "connector"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.4,
+          "unit": "m"
+        }
+      },
+      "slots": {
+        "id": "M05",
+        "title": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+        "subject": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "connector",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.4,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          },
+          {
+            "clause": "M05",
+            "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "connector": {
+          "kind": "number",
+          "unit": "m",
+          "description": "connector"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M06",
+      "frozen_reading": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "any",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "direct_outdoors"
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "discharge"
+            },
+            "right": {
+              "node": "literal",
+              "value": 20.0,
+              "unit": "m"
+            }
+          }
+        ]
+      },
+      "slots": {
+        "id": "M06",
+        "title": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+        "subject": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "direct_outdoors",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "discharge",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 20.0,
+            "unit": "m",
+            "id": "n4"
+          },
+          {
+            "op": "le",
+            "left": "n3",
+            "right": "n4",
+            "id": "n5"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n2",
+              "n5"
+            ],
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "M06",
+            "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "direct_outdoors": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "direct outdoors"
+        },
+        "discharge": {
+          "kind": "number",
+          "unit": "m",
+          "description": "discharge"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M07",
+      "frozen_reading": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "door_width"
+        },
+        "right": {
+          "node": "mul",
+          "left": {
+            "node": "literal",
+            "value": 0.9,
+            "unit": "m"
+          },
+          "right": {
+            "node": "sub",
+            "left": {
+              "node": "literal",
+              "value": 1,
+              "unit": "1"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.05,
+              "unit": "1"
+            }
+          }
+        }
+      },
+      "slots": {
+        "id": "M07",
+        "title": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+        "subject": "La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "door_width",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.9,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 1,
+            "unit": "1",
+            "id": "n4"
+          },
+          {
+            "op": "literal",
+            "value": 0.05,
+            "unit": "1",
+            "id": "n5"
+          },
+          {
+            "op": "sub",
+            "left": "n4",
+            "right": "n5",
+            "id": "n6"
+          },
+          {
+            "op": "mul",
+            "left": "n3",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n7",
+            "id": "n8"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n8",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          },
+          {
+            "clause": "M07",
+            "quote": "La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "door_width": {
+          "kind": "number",
+          "unit": "m",
+          "description": "door width"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M08",
+      "frozen_reading": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "fact",
+        "entity": "building",
+        "name": "two_way"
+      },
+      "slots": {
+        "id": "M08",
+        "title": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+        "subject": "Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "two_way",
+            "id": "n2"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n2",
+        "sources": [
+          {
+            "clause": "M08",
+            "quote": "Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "two_way": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "two way"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M09",
+      "frozen_reading": "No isolated group of one or two steps in the principal circulation.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "step_groups",
+        "variable": "$g",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ne",
+              "left": {
+                "node": "fact",
+                "entity": "$g",
+                "name": "steps"
+              },
+              "right": {
+                "node": "literal",
+                "value": 1.0,
+                "unit": "count"
+              }
+            },
+            {
+              "node": "ne",
+              "left": {
+                "node": "fact",
+                "entity": "$g",
+                "name": "steps"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "count"
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "id": "M09",
+        "title": "No isolated group of one or two steps in the principal circulation.",
+        "subject": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$g",
+            "name": "steps",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.0,
+            "unit": "count",
+            "id": "n3"
+          },
+          {
+            "op": "ne",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "$g",
+            "name": "steps",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 2.0,
+            "unit": "count",
+            "id": "n6"
+          },
+          {
+            "op": "ne",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          },
+          {
+            "op": "forall",
+            "collection": "step_groups",
+            "variable": "$g",
+            "body": "n8",
+            "id": "n9"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n9",
+        "sources": [
+          {
+            "clause": "M09",
+            "quote": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "steps": {
+          "kind": "number",
+          "unit": "count",
+          "description": "steps"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M10",
+      "frozen_reading": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "partition_rating"
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "required_structure_rating"
+        }
+      },
+      "slots": {
+        "id": "M10",
+        "title": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+        "subject": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "partition_rating",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "required_structure_rating",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "M10",
+            "quote": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "partition_rating": {
+          "kind": "number",
+          "unit": "h",
+          "description": "partition rating"
+        },
+        "required_structure_rating": {
+          "kind": "number",
+          "unit": "h",
+          "description": "required structure rating"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M11",
+      "frozen_reading": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "literal",
+        "value": true,
+        "unit": "1"
+      },
+      "slots": {
+        "id": "M11",
+        "title": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+        "subject": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression).",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n2"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n2",
+        "sources": [
+          {
+            "clause": "M11",
+            "quote": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression)."
+          }
+        ],
+        "unresolved": [
+          "Referenced smoke-control provision and specialist interpretation are missing."
+        ]
+      },
+      "proposed_bindings": {},
+      "specialist_or_context_gap": "Referenced smoke-control provision and specialist interpretation are missing."
+    },
+    {
+      "id": "M12",
+      "frozen_reading": "Door glazing is transparent and is neither red nor orange.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "transparent"
+          },
+          {
+            "node": "not",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "red"
+              }
+            ]
+          },
+          {
+            "node": "not",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "orange"
+              }
+            ]
+          }
+        ]
+      },
+      "slots": {
+        "id": "M12",
+        "title": "Door glazing is transparent and is neither red nor orange.",
+        "subject": "Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "transparent",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "red",
+            "id": "n3"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n3"
+            ],
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "orange",
+            "id": "n5"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n5"
+            ],
+            "id": "n6"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n4",
+              "n6"
+            ],
+            "id": "n7"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n7",
+        "sources": [
+          {
+            "clause": "M12",
+            "quote": "Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "transparent": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "transparent"
+        },
+        "red": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "red"
+        },
+        "orange": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "orange"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M13",
+      "frozen_reading": "A nonmotorized sliding door cannot close a public evacuation exit.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "not",
+        "args": [
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "sliding"
+              },
+              {
+                "node": "not",
+                "args": [
+                  {
+                    "node": "fact",
+                    "entity": "building",
+                    "name": "motorized"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "slots": {
+        "id": "M13",
+        "title": "A nonmotorized sliding door cannot close a public evacuation exit.",
+        "subject": "Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "sliding",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "motorized",
+            "id": "n3"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n3"
+            ],
+            "id": "n4"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n4"
+            ],
+            "id": "n5"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n5"
+            ],
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "M13",
+            "quote": "Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "sliding": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "sliding"
+        },
+        "motorized": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "motorized"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M14",
+      "frozen_reading": "Horizontal circulation ceiling finish meets M1.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "ceiling_class"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "slots": {
+        "id": "M14",
+        "title": "Horizontal circulation ceiling finish meets M1.",
+        "subject": "Revêtement des circulations : plafonds : M1",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "ceiling_class",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "M14",
+            "quote": "Revêtement des circulations : plafonds : M1"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "ceiling_class": {
+          "kind": "number",
+          "unit": "1",
+          "description": "ceiling class"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M15",
+      "frozen_reading": "Circulation partition and floor finish meet M2 and M4 respectively.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "partition_class"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2,
+              "unit": "1"
+            }
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "floor_class"
+            },
+            "right": {
+              "node": "literal",
+              "value": 4,
+              "unit": "1"
+            }
+          }
+        ]
+      },
+      "slots": {
+        "id": "M15",
+        "title": "Circulation partition and floor finish meet M2 and M4 respectively.",
+        "subject": "Revêtement des circulations : cloisons : M2 ; sols : M4",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "partition_class",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 2,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "floor_class",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 4,
+            "unit": "1",
+            "id": "n6"
+          },
+          {
+            "op": "le",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n8",
+        "sources": [
+          {
+            "clause": "M15",
+            "quote": "Revêtement des circulations : cloisons : M2 ; sols : M4"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "partition_class": {
+          "kind": "number",
+          "unit": "1",
+          "description": "partition class"
+        },
+        "floor_class": {
+          "kind": "number",
+          "unit": "1",
+          "description": "floor class"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "M16",
+      "frozen_reading": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "any",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "push_release"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "easy_device_each_leaf"
+          }
+        ]
+      },
+      "slots": {
+        "id": "M16",
+        "title": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+        "subject": "En présence du public, toutes les portes doivent pouvoir s’ouvrir de l’intérieur par simple poussée ou par la manoeuvre facile d’un seul dispositif par vantail tel que bec-de-cane, poignée tournante, crémone à poignée ou à levier ou de tout autre dispositif conforme aux normes en vigueur.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "push_release",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "easy_device_each_leaf",
+            "id": "n3"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n2",
+              "n3"
+            ],
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "M16",
+            "quote": "En présence du public, toutes les portes doivent pouvoir s’ouvrir de l’intérieur par simple poussée ou par la manoeuvre facile d’un seul dispositif par vantail tel que bec-de-cane, poignée tournante, crémone à poignée ou à levier ou de tout autre dispositif conforme aux normes en vigueur."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "push_release": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "push release"
+        },
+        "easy_device_each_leaf": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "easy device each leaf"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A01",
+      "frozen_reading": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "firm"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "smooth"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "unobstructed"
+          }
+        ]
+      },
+      "slots": {
+        "id": "A01",
+        "title": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+        "subject": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "firm",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "smooth",
+            "id": "n3"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "unobstructed",
+            "id": "n4"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n3",
+              "n4"
+            ],
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "A01",
+            "quote": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "firm": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "firm"
+        },
+        "smooth": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "smooth"
+        },
+        "unobstructed": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "unobstructed"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A02",
+      "frozen_reading": "Each substantial change in level needs an inclined path.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "level_changes",
+        "variable": "$c",
+        "body": {
+          "node": "fact",
+          "entity": "$c",
+          "name": "has_ramp"
+        },
+        "where": {
+          "node": "fact",
+          "entity": "$c",
+          "name": "substantial"
+        }
+      },
+      "slots": {
+        "id": "A02",
+        "title": "Each substantial change in level needs an inclined path.",
+        "subject": "Toute dénivelée importante doit être doublée d'un plan incliné.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$c",
+            "name": "substantial",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "$c",
+            "name": "has_ramp",
+            "id": "n3"
+          },
+          {
+            "op": "forall",
+            "collection": "level_changes",
+            "variable": "$c",
+            "where": "n2",
+            "body": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "A02",
+            "quote": "Toute dénivelée importante doit être doublée d'un plan incliné."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "substantial": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "substantial"
+        },
+        "has_ramp": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "has ramp"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A03",
+      "frozen_reading": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "sidewalks",
+        "variable": "$s",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$s",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 1.5,
+                "unit": "m"
+              }
+            },
+            {
+              "node": "le",
+              "left": {
+                "node": "fact",
+                "entity": "$s",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "m"
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "id": "A03",
+        "title": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+        "subject": "Les trottoirs doivent avoir une largeur allant de 1.50 m à 2.00 m.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$s",
+            "name": "width",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.5,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "$s",
+            "name": "width",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 2.0,
+            "unit": "m",
+            "id": "n6"
+          },
+          {
+            "op": "le",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          },
+          {
+            "op": "forall",
+            "collection": "sidewalks",
+            "variable": "$s",
+            "body": "n8",
+            "id": "n9"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n9",
+        "sources": [
+          {
+            "clause": "A03",
+            "quote": "Les trottoirs doivent avoir une largeur allant de 1.50 m à 2.00 m."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "width": {
+          "kind": "number",
+          "unit": "m",
+          "description": "width"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A04",
+      "frozen_reading": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "curb_surfaces",
+        "variable": "$s",
+        "body": {
+          "node": "lt",
+          "left": {
+            "node": "fact",
+            "entity": "$s",
+            "name": "slope"
+          },
+          "right": {
+            "node": "literal",
+            "value": 0.05,
+            "unit": "1"
+          }
+        }
+      },
+      "slots": {
+        "id": "A04",
+        "title": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+        "subject": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$s",
+            "name": "slope",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.05,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "lt",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "curb_surfaces",
+            "variable": "$s",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "A04",
+            "quote": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "slope": {
+          "kind": "number",
+          "unit": "1",
+          "description": "slope"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A05",
+      "frozen_reading": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "reserved_stalls"
+          },
+          "right": {
+            "node": "literal",
+            "value": 20,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_stalls"
+        }
+      },
+      "slots": {
+        "id": "A05",
+        "title": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+        "subject": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "reserved_stalls",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 20,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "mul",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "total_stalls",
+            "id": "n5"
+          },
+          {
+            "op": "ge",
+            "left": "n4",
+            "right": "n5",
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "A05",
+            "quote": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "reserved_stalls": {
+          "kind": "number",
+          "unit": "count",
+          "description": "reserved stalls"
+        },
+        "total_stalls": {
+          "kind": "number",
+          "unit": "count",
+          "description": "total stalls"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A06",
+      "frozen_reading": "The listed building classes must be adapted and have a usable accessible approach route.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "accessible_approach"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_building"
+          }
+        ]
+      },
+      "slots": {
+        "id": "A06",
+        "title": "The listed building classes must be adapted and have a usable accessible approach route.",
+        "subject": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "accessible_approach",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "adapted_building",
+            "id": "n3"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n3"
+            ],
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "A06",
+            "quote": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "accessible_approach": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "accessible approach"
+        },
+        "adapted_building": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "adapted building"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A07",
+      "frozen_reading": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_counters"
+          },
+          "right": {
+            "node": "literal",
+            "value": 10,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_counters"
+        }
+      },
+      "slots": {
+        "id": "A07",
+        "title": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+        "subject": "Lorsque la fonction d'un bâtiment ouvert au public amène les usagers à utiliser des guichets, étagères ou écritoires, un sur dix de ces équipements doit être aménagé pour servir les personnes handicapées.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "adapted_counters",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 10,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "mul",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "total_counters",
+            "id": "n5"
+          },
+          {
+            "op": "ge",
+            "left": "n4",
+            "right": "n5",
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "A07",
+            "quote": "Lorsque la fonction d'un bâtiment ouvert au public amène les usagers à utiliser des guichets, étagères ou écritoires, un sur dix de ces équipements doit être aménagé pour servir les personnes handicapées."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "adapted_counters": {
+          "kind": "number",
+          "unit": "count",
+          "description": "adapted counters"
+        },
+        "total_counters": {
+          "kind": "number",
+          "unit": "count",
+          "description": "total counters"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A08",
+      "frozen_reading": "One in twenty seats in public rooms must be adapted.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_seats"
+          },
+          "right": {
+            "node": "literal",
+            "value": 20,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_seats"
+        }
+      },
+      "slots": {
+        "id": "A08",
+        "title": "One in twenty seats in public rooms must be adapted.",
+        "subject": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "adapted_seats",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 20,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "mul",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "total_seats",
+            "id": "n5"
+          },
+          {
+            "op": "ge",
+            "left": "n4",
+            "right": "n5",
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "A08",
+            "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "adapted_seats": {
+          "kind": "number",
+          "unit": "count",
+          "description": "adapted seats"
+        },
+        "total_seats": {
+          "kind": "number",
+          "unit": "count",
+          "description": "total seats"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A09",
+      "frozen_reading": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_equipment"
+          },
+          "right": {
+            "node": "literal",
+            "value": 10,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_equipment"
+        }
+      },
+      "slots": {
+        "id": "A09",
+        "title": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+        "subject": "Les équipements au niveau des chambres, salles de bain, cabinets d'aisance dans les bâtiments ouverts au public notamment les hôtels, les hôpitaux et les structures d'accueil doivent être adaptés aux personnes handicapées à hauteur d'un équipement sur dix.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "adapted_equipment",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 10,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "mul",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "total_equipment",
+            "id": "n5"
+          },
+          {
+            "op": "ge",
+            "left": "n4",
+            "right": "n5",
+            "id": "n6"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n6",
+        "sources": [
+          {
+            "clause": "A09",
+            "quote": "Les équipements au niveau des chambres, salles de bain, cabinets d'aisance dans les bâtiments ouverts au public notamment les hôtels, les hôpitaux et les structures d'accueil doivent être adaptés aux personnes handicapées à hauteur d'un équipement sur dix."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "adapted_equipment": {
+          "kind": "number",
+          "unit": "count",
+          "description": "adapted equipment"
+        },
+        "total_equipment": {
+          "kind": "number",
+          "unit": "count",
+          "description": "total equipment"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A10",
+      "frozen_reading": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "literal",
+        "value": true,
+        "unit": "1"
+      },
+      "slots": {
+        "id": "A10",
+        "title": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+        "subject": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n2"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n2",
+        "sources": [
+          {
+            "clause": "A10",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur"
+          }
+        ],
+        "unresolved": [
+          "Lift conformity depends on a referenced standard that is not supplied."
+        ]
+      },
+      "proposed_bindings": {},
+      "specialist_or_context_gap": "Lift conformity depends on a referenced standard that is not supplied."
+    },
+    {
+      "id": "A11",
+      "frozen_reading": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "passages",
+        "variable": "$p",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$p",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "m"
+              }
+            },
+            {
+              "node": "le",
+              "left": {
+                "node": "fact",
+                "entity": "$p",
+                "name": "slope"
+              },
+              "right": {
+                "node": "literal",
+                "value": 0.12,
+                "unit": "1"
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "id": "A11",
+        "title": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+        "subject": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$p",
+            "name": "width",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 2.0,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "$p",
+            "name": "slope",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 0.12,
+            "unit": "1",
+            "id": "n6"
+          },
+          {
+            "op": "le",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          },
+          {
+            "op": "forall",
+            "collection": "passages",
+            "variable": "$p",
+            "body": "n8",
+            "id": "n9"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n9",
+        "sources": [
+          {
+            "clause": "A11",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "width": {
+          "kind": "number",
+          "unit": "m",
+          "description": "width"
+        },
+        "slope": {
+          "kind": "number",
+          "unit": "1",
+          "description": "slope"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A12",
+      "frozen_reading": "Each change of direction needs a resting landing of at least 1 m².",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "direction_changes",
+        "variable": "$c",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$c",
+            "name": "landing_area"
+          },
+          "right": {
+            "node": "literal",
+            "value": 1.0,
+            "unit": "m2"
+          }
+        }
+      },
+      "slots": {
+        "id": "A12",
+        "title": "Each change of direction needs a resting landing of at least 1 m².",
+        "subject": "Le changement de direction des passages doit être assuré par un palier de repos d'une surface de 1.00 m2 au minimum.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$c",
+            "name": "landing_area",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.0,
+            "unit": "m2",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "direction_changes",
+            "variable": "$c",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "A12",
+            "quote": "Le changement de direction des passages doit être assuré par un palier de repos d'une surface de 1.00 m2 au minimum."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "landing_area": {
+          "kind": "number",
+          "unit": "m2",
+          "description": "landing area"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A13",
+      "frozen_reading": "The relevant passages require handrails on both sides.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "passages",
+        "variable": "$p",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "fact",
+              "entity": "$p",
+              "name": "left_rail"
+            },
+            {
+              "node": "fact",
+              "entity": "$p",
+              "name": "right_rail"
+            }
+          ]
+        }
+      },
+      "slots": {
+        "id": "A13",
+        "title": "The relevant passages require handrails on both sides.",
+        "subject": "Ces passages doivent être munis de rampes servant de main courante sur les deux côtés.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$p",
+            "name": "left_rail",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "$p",
+            "name": "right_rail",
+            "id": "n3"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n3"
+            ],
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "passages",
+            "variable": "$p",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "passage-context",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,"
+          },
+          {
+            "clause": "A13",
+            "quote": "Ces passages doivent être munis de rampes servant de main courante sur les deux côtés."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "left_rail": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "left rail"
+        },
+        "right_rail": {
+          "kind": "boolean",
+          "unit": "1",
+          "description": "right rail"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A14",
+      "frozen_reading": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "all",
+        "args": [
+          {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "entrance_width"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.0,
+              "unit": "m"
+            }
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "lateral_slope"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.2,
+              "unit": "1"
+            }
+          }
+        ]
+      },
+      "slots": {
+        "id": "A14",
+        "title": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+        "subject": "Pour les constructions ouvertes au public et les immeubles collectifs et à usage d'habitation, les dispositions précitées sont exigées pour l'entrée principale qui doit avoir une pente latérale d'une valeur de 20% au maximum et d'une largeur de 1.00 m au minimum.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "entrance_width",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.0,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "lateral_slope",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 0.2,
+            "unit": "1",
+            "id": "n6"
+          },
+          {
+            "op": "le",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n8",
+        "sources": [
+          {
+            "clause": "passage-context",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,"
+          },
+          {
+            "clause": "A14",
+            "quote": "Pour les constructions ouvertes au public et les immeubles collectifs et à usage d'habitation, les dispositions précitées sont exigées pour l'entrée principale qui doit avoir une pente latérale d'une valeur de 20% au maximum et d'une largeur de 1.00 m au minimum."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "entrance_width": {
+          "kind": "number",
+          "unit": "m",
+          "description": "entrance width"
+        },
+        "lateral_slope": {
+          "kind": "number",
+          "unit": "1",
+          "description": "lateral slope"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "A15",
+      "frozen_reading": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "forall",
+        "collection": "entrances",
+        "variable": "$e",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$e",
+            "name": "adapted_phones"
+          },
+          "right": {
+            "node": "literal",
+            "value": 1.0,
+            "unit": "count"
+          }
+        }
+      },
+      "slots": {
+        "id": "A15",
+        "title": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+        "subject": "Le nombre de téléphones fixes pour servir les malvoyants ou malentendants dans les constructions publiques et constructions affectées au logement collectif est fixé à un téléphone par entrée.",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$e",
+            "name": "adapted_phones",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.0,
+            "unit": "count",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "entrances",
+            "variable": "$e",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "sources": [
+          {
+            "clause": "A15",
+            "quote": "Le nombre de téléphones fixes pour servir les malvoyants ou malentendants dans les constructions publiques et constructions affectées au logement collectif est fixé à un téléphone par entrée."
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "adapted_phones": {
+          "kind": "number",
+          "unit": "count",
+          "description": "adapted phones"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T01",
+      "frozen_reading": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.65,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T01",
+        "title": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "roof_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.65,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T01 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T01",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "roof_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "roof u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T02",
+      "frozen_reading": "wall_u le 0.7, within frozen Z3 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.7,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T02",
+        "title": "wall_u le 0.7, within frozen Z3 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "wall_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.7,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T02 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T02",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "wall_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "wall u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T03",
+      "frozen_reading": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T03",
+        "title": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "window_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 2.6,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T03 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+          },
+          {
+            "clause": "T03",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "window_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "window u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T04",
+      "frozen_reading": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.75,
+          "unit": "m2*K/W"
+        }
+      },
+      "slots": {
+        "id": "T04",
+        "title": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "slab_r",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.75,
+            "unit": "m2*K/W",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T04 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+          },
+          {
+            "clause": "T04",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "slab_r": {
+          "kind": "number",
+          "unit": "m2*K/W",
+          "description": "slab r"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T05",
+      "frozen_reading": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.5,
+          "unit": "1"
+        }
+      },
+      "slots": {
+        "id": "T05",
+        "title": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "solar",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.5,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T05 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+          },
+          {
+            "clause": "T05",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "solar": {
+          "kind": "number",
+          "unit": "1",
+          "description": "solar"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T06",
+      "frozen_reading": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.55,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T06",
+        "title": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "roof_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.55,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T06 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T06",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "roof_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "roof u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T07",
+      "frozen_reading": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T07",
+        "title": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "wall_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.6,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T07 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T07",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "wall_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "wall u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T08",
+      "frozen_reading": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T08",
+        "title": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "window_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 2.6,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T08 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+          },
+          {
+            "clause": "T08",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "window_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "window u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T09",
+      "frozen_reading": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.25,
+          "unit": "m2*K/W"
+        }
+      },
+      "slots": {
+        "id": "T09",
+        "title": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "slab_r",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.25,
+            "unit": "m2*K/W",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T09 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+          },
+          {
+            "clause": "T09",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "slab_r": {
+          "kind": "number",
+          "unit": "m2*K/W",
+          "description": "slab r"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T10",
+      "frozen_reading": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "1"
+        }
+      },
+      "slots": {
+        "id": "T10",
+        "title": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "solar",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.6,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T10 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+          },
+          {
+            "clause": "T10",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "solar": {
+          "kind": "number",
+          "unit": "1",
+          "description": "solar"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T11",
+      "frozen_reading": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.55,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T11",
+        "title": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "roof_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.55,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T11 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T11",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "roof_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "roof u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T12",
+      "frozen_reading": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T12",
+        "title": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "wall_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.6,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T12 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T12",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "wall_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "wall u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T13",
+      "frozen_reading": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "slots": {
+        "id": "T13",
+        "title": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "window_u",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 2.6,
+            "unit": "W/m2/K",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T13 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+          },
+          {
+            "clause": "T13",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "window_u": {
+          "kind": "number",
+          "unit": "W/m2/K",
+          "description": "window u"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T14",
+      "frozen_reading": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.0,
+          "unit": "m2*K/W"
+        }
+      },
+      "slots": {
+        "id": "T14",
+        "title": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "slab_r",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1.0,
+            "unit": "m2*K/W",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T14 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+          },
+          {
+            "clause": "T14",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "slab_r": {
+          "kind": "number",
+          "unit": "m2*K/W",
+          "description": "slab r"
+        }
+      },
+      "specialist_or_context_gap": null
+    },
+    {
+      "id": "T15",
+      "frozen_reading": "solar le 0.4, within frozen Z5 residential prescriptive scope",
+      "scope": "The previously frozen fixture scope is assumed for this development oracle.",
+      "slot_origin": "Benchmark-author translation of the frozen manual reading; no independent review.",
+      "reference_expression": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.4,
+          "unit": "1"
+        }
+      },
+      "slots": {
+        "id": "T15",
+        "title": "solar le 0.4, within frozen Z5 residential prescriptive scope",
+        "subject": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | Autres : ≤ 0,4 |",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "building",
+            "name": "solar",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.4,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "le",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "sources": [
+          {
+            "clause": "T15 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+          },
+          {
+            "clause": "T15",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | Autres : ≤ 0,4 |"
+          }
+        ],
+        "unresolved": []
+      },
+      "proposed_bindings": {
+        "solar": {
+          "kind": "number",
+          "unit": "1",
+          "description": "solar"
+        }
+      },
+      "specialist_or_context_gap": null
+    }
+  ]
+}
