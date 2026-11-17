@@ -1,0 +1,35 @@
+{
+  "document": "Morocco, Decree 2-14-499, Bulletin Officiel 6306, 6 November 2014, fire-safety annex",
+  "source": "https://aute.gov.ma/s/a/library/2023-11-01/0a4d2c47-5b19-4b4f-858f-67f605534364.pdf",
+  "scope": "Author-labelled hypothetical ground-floor public establishments, 35 occupants each, no declared exceptions. Both plans have a main circulation, a public room on a dead end, a protected stair, a two-way escape corridor with a subdivision door, door glazing, and a public egress door. This fixture starts at the plan-fact boundary.",
+  "plans": {
+    "A": {
+      "description": "Two eligible exits including one accessory and an extra candidate that is not a distinct exit. Both qualifying exits are available to the room. Travel 32 m; dead end 8 m; connector 1.50 m; stair discharge 12 m; one-UP door clear width 0.91 m. No isolated steps. Partitions and smoke protection satisfy the clause. Subdivision door swings both ways. Glazing clear and neutral. A manual sliding door closes one public exit. Finishes conform. Interior release easy.",
+      "observed": {"exits":[true,true,null],"normal":true,"accessory":true,"travel":32,"connector":1.5,"door_width":0.91,"two_way":true},
+      "reviewed": {"exits":[true,true,false],"dead_end":8,"discharge":12}
+    },
+    "B": {
+      "description": "One eligible normal exit; the apparent second exit is a fixed panel. Travel 34 m; dead end 12 m; connector 1.25 m; stair discharge 22 m; one-UP door clear width 0.80 m. Two isolated steps. Partition fire rating is insufficient; smoke protection conforms. Subdivision door swings one way. Glazing transparent red. A manual sliding door closes the public exit. Ceiling finish fails; wall and floor finishes conform. Interior release requires a key.",
+      "observed": {"exits":[true,null],"normal":true,"travel":34,"connector":1.25,"door_width":0.80,"two_way":false},
+      "reviewed": {"exits":[true,false],"accessory":false,"dead_end":12,"discharge":22}
+    }
+  },
+  "clauses": [
+    {"id":"M01","ref":"2.5.8.6, table, 20–50, RDC","meaning":"At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.","truth":["PASS","FAIL"],"check":["count","ge",2],"blocker":"incomplete inventory","gap":"Verified egress inventory"},
+    {"id":"M02","ref":"2.5.8.6, same row, exit composition","meaning":"One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.","truth":["PASS","FAIL"],"check":["both","normal","accessory"],"blocker":"missing evidence","gap":"Exit eligibility and accessory designation"},
+    {"id":"M03","ref":"2.5.8.2, ground-floor travel","meaning":"Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.","truth":["PASS","FAIL"],"check":["travel"],"blocker":"incomplete inventory","gap":"Verified egress inventory"},
+    {"id":"M04","ref":"2.5.8.1, public-room doors on dead ends","meaning":"Walk from the public-room door to the dead-end junction at most 10 m.","truth":["PASS","FAIL"],"check":["fact","dead_end","le",10,"m"],"blocker":"missing evidence","gap":"Dead-end junction and walked distance"},
+    {"id":"M05","ref":"2.5.8.1, ground-floor connectors; 2.4.2.6","meaning":"The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.","truth":["PASS","FAIL"],"check":["fact","connector","ge",1.4,"m"],"blocker":"missing evidence","gap":"Verified connector clear width"},
+    {"id":"M06","ref":"2.5.8.2, protected stair discharge","meaning":"Protected stair leads directly outdoors or discharges at most 20 m from an exit.","truth":["PASS","FAIL"],"check":["fact","discharge","le",20,"m"],"blocker":"missing evidence","gap":"Protected-stair discharge distance"},
+    {"id":"M07","ref":"2.5.8.4, door characteristics §1; 2.4.2.6","meaning":"Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.","truth":["PASS","FAIL"],"check":["fact","door_width","ge",0.855,"m"],"blocker":"missing evidence","gap":"Verified door clear width"},
+    {"id":"M08","ref":"2.5.8.4, operation §3","meaning":"Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.","truth":["PASS","FAIL"],"check":["fact","two_way","eq",true,"1"],"blocker":"missing evidence","gap":"Door operation evidence"},
+    {"id":"M09","ref":"2.5.8.1, isolated steps","meaning":"No isolated group of one or two steps in the principal circulation.","truth":["PASS","FAIL"],"blocker":"missing computation","gap":"Isolated level-change detection"},
+    {"id":"M10","ref":"2.5.8.3, partition fire resistance","meaning":"Horizontal circulation enclosure fire rating meets the rating required for the structure.","truth":["PASS","FAIL"],"blocker":"missing evidence","gap":"Partition and structure rating evidence"},
+    {"id":"M11","ref":"2.5.8.3, smoke protection","meaning":"Horizontal circulation provides prescribed smoke protection under the general provision.","truth":["PASS","PASS"],"blocker":"specialist judgment","gap":"Smoke-control design verification"},
+    {"id":"M12","ref":"2.5.8.4, door characteristics §3","meaning":"Door glazing is transparent and is neither red nor orange.","truth":["PASS","FAIL"],"blocker":"missing evidence","gap":"Door glazing and operation evidence"},
+    {"id":"M13","ref":"2.5.8.4, special doors §4","meaning":"A nonmotorized sliding door cannot close a public evacuation exit.","truth":["FAIL","FAIL"],"blocker":"missing evidence","gap":"Door glazing and operation evidence"},
+    {"id":"M14","ref":"2.5.9.2, ceiling finish","meaning":"Horizontal circulation ceiling finish meets M1.","truth":["PASS","FAIL"],"blocker":"missing evidence","gap":"Circulation finish schedule with classifications"},
+    {"id":"M15","ref":"2.5.9.2, partitions and floor finishes","meaning":"Circulation partition and floor finish meet M2 and M4 respectively.","truth":["PASS","PASS"],"blocker":"missing evidence","gap":"Circulation finish schedule with classifications"},
+    {"id":"M16","ref":"2.5.8.4, operation §2","meaning":"With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.","truth":["PASS","FAIL"],"blocker":"missing evidence","gap":"Door glazing and operation evidence"}
+  ]
+}
