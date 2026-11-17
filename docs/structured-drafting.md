@@ -63,8 +63,12 @@ This does not measure a real semantic critic. Request-level transport error
 counts for that run were not instrumented and remain unmeasured. The
 [assessment](../reports/local-before-assessment.json) lists every obligation.
 
-The paired redesigned run is not yet complete. No comparison or improvement
-is claimed from these baseline results alone.
+The paired redesigned run is not yet complete. Its pre-restart snapshot has
+20/46 completed, 0/20 retained: 17/20 stop at the generation budget and 3/20
+at source-subject grounding. Five batches each record 0/12 request errors,
+0/60 overall. The remaining 26/46 have not been scored in this snapshot.
+No comparison or improvement is claimed from this incomplete result. In
+particular, zero retained rules does not demonstrate useful accuracy.
 
 The final non-slow suite passed 978 tests, with 2 skipped and 45 slow tests
 deselected, in 530.44 seconds. The JUnit report is

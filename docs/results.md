@@ -32,6 +32,14 @@ the same 46 development obligations. Only then run the frozen fourth document
 once, without further tuning. Inspect wrong approvable drafts separately from
 retention. Do not add checker capabilities to improve these numbers.
 
+Local comparison checkpoint before the requested restart: **20/46** redesigned
+obligations have completed, with **0/20** retained. Terminal stages are
+generation cap **17/20** and absent source subject **3/20**. Request failures
+were **0/60** in the five completed batches (12 calls per batch, 0/12 errors
+each). This is an incomplete, negative result, not evidence of accuracy or
+improvement. The remaining **26/46** are pending in the saved snapshot.
+See [partial local trace](../reports/local-after-slots-partial.json).
+
 ## Measured
 
 | Measurement | Result and scope |
