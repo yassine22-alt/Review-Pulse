@@ -1,0 +1,103 @@
+{
+  "document": "Morocco RPS 2000 version 2011, annex to Decree 2-12-682",
+  "publication": "Bulletin Officiel no. 6206, French official translation, 21 November 2013",
+  "source": "https://aute.gov.ma/s/a/library/2023-11-01/cbea8546-d41b-4d12-968b-e5450ce7e7bb.pdf",
+  "official_host": "Agence Urbaine de Tétouan, government-hosted official gazette reproduction",
+  "pdf_sha256": "7650732566d1dadd3a17d9c2ba7112cbe609ce869e77beb80bd2c5b21f3dc714",
+  "edition_note": "Fixed historical edition. This is not a claim about the consolidated regulation in force.",
+  "general_scope_text": "### 1.2- DOMAINE D’APPLICATION\nLe présent règlement s’applique aux constructions nouvelles, aux bâtiments existants subissant des modifications importantes, tels que :\n\n▪ le changement d’usage ;\n▪ la construction d’un ajout.\nLe domaine d’application du présent règlement couvre les bâtiments et les structures de comportement similaire, tels que les réservoirs élevés en béton armé ou en acier et dont le système de résistance aux forces sismiques horizontales est assuré par l’un des trois systèmes structuraux suivants :\n### 1.2.1- SYSTÈME DE PORTIQUES\nIl s’agit d’une ossature composée de poteaux et poutres à nœuds rigides ou d’une charpente contreventée, capable de résister aussi bien aux charges verticales qu’aux charges\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)  BULLETIN OFFICIEL  2585\n\nhorizontales(Figure : 1.1).\n\n**1.2.2- SYSTÈME DE VOILES**\nLe système est constitué de plusieurs murs isolés ou couplés, destinés à résister aux forces verticales et horizontales. Les murs couplés sont reliés entre eux par des linteaux régulièrement espacés et adéquatement renforcés (Figure : 1.2).\n\n**1.2.3- SYSTÈME MIXTE**\n\nC’est le système structural composé de portiques et de voiles. La résistance aux efforts sismiques est assurée par les voiles et les portiques, proportionnellement à leurs rigidités respectives (Figure : 1.3).\nLe domaine d’application du règlement ne s’étend donc pas à toutes les catégories de constructions. Sont exclus de ce domaine :\n\n- Les constructions dont les conséquences d’un dommage, même léger, peuvent être très graves : centrales nucléaires, usines chimiques ;\n- Les ouvrages enterrés et ouvrages d’art : tunnels, barrages ;\n- Les ouvrages réalisés par des matériaux ou des systèmes non couverts par les normes en vigueur.\nPour les structures non couvertes par le présent règlement, des exigences spécifiques, complémentaires, sont à prendre en considération. L’analyse de ces structures fait appel à des méthodes dynamiques plus appropriées, basées sur des modèles mathématiques qui reproduisent le mieux possible les différents paramètres intervenant dans la réponse sismique de la structure.",
+  "source_contexts": {
+    "site": "## 4.3- CHOIX DU SITE\n\na) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage.\nb) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement.",
+    "foundations": "4.4- SYSTEME DE FONDATIONS\na) Le système de fondation représente l’ensemble des semelles et des éléments au dessous du niveau de base. Le choix de ce système est en principe effectué dans les mêmes conditions qu’en situations non sismiques et il est dimensionné conformément aux règles en vigueur.\n\nb) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens.\nc) Le système de fondation doit pouvoir :\n- assurer l’encastrement de la structure dans le terrain ;\n- transmettre au sol la totalité des efforts issus de la superstructure ;\n- limiter les tassements différentiels et/ou les déplacements relatifs horizontaux qui pourraient réduire la rigidité et/ou la résistance du système structural.\n\nd) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité.",
+    "joints": "4.5- STRUCTURE\n\n4.5.1- CONFIGURATION SIMPLE\n\nPour permettre à une structure d’avoir un comportement performant vis à vis des sollicitations sismiques, celle-ci doit avoir une configuration simple autant que possible.\nDans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. (Figure 4.2)\n\n<visual_element id=\"e1\">\nFigure 4.2: schematic of building block configurations; left shows a T-shaped plan made of a horizontal rectangle over a vertical rectangle, right shows a staggered/offset arrangement with a slanted connector between two horizontal rectangles.\n</visual_element>\n4.5.2- ESPACEMENT ENTRE DEUX BLOCS.\n\nIl faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés (Figure 4.3 et 4.4)\n\na) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un\n\n2602  BULLETIN OFFICIEL  N° 6206 – 17 moharrem 1435 (21-11-2013)\n\nbloc à l’autre. (Figure 4.3).\nb) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion.\n\nc) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier.\n\nd) La largeur minimale entre joints ne doit pas être inférieure à 50 mm.\ne) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux (Figure 4.4), ou être reliés entre eux.",
+    "nonstructural": "4.6- ELEMENTS NON STRUCTURAUX\na) Les éléments non structuraux peuvent être affectés suite à des vibrations sismiques en raison de la déformation excessive du système structural ou de la détérioration de leur résistance.\n\nb) Il faut s’assurer que les panneaux de séparation négligés dans le calcul ne créent pas d’efforts de torsion importants.\nc) Il faut s’assurer dans le cas des murs de remplissage que les poteaux et les poutres adjacents à ces murs peuvent supporter le cisaillement développé par les poussées des murs aux nœuds du portique.\n\nd) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul.\nN° 6206 – 17 moharrem 1435 (21-11-2013)  BULLETIN OFFICIEL  2603\n\ne) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments.",
+    "analysis": "6.1- DIRECTION DE L’ACTION SISMIQUE\nLe comportement d’une structure durant un tremblement de terre est essentiellement un problème de vibrations. Par hypothèse, les forces sismiques agissent dans toutes les directions horizontales. Cependant il est admis que des calculs distincts par rapport à chacun de deux axes principaux suffisent pour donner à la structure la résistance adéquate aux forces sismiques agissant dans toutes les directions.\n6.2- APPROCHES DE CALCUL DE L’ACTION SISMIQUE\nLe calcul des actions sismiques peut être mené par deux approches distinctes : Une approche dite statique équivalente et une approche dynamique.\n6.2.1- APPROCHE STATIQUE ÉQUIVALENTE\n6.2.1.1- PRINCIPE\nL’approche statique équivalente a comme principe de base de substituer aux efforts dynamiques développés dans une structure par le mouvement sismique du sol, des sollicitations statiques calculées à partir d’un système de forces, dans la direction du séisme, et dont les effets sont censés équivaloir à ceux de l’action sismique.\na) La force statique résultante équivalente est donnée par une expression forfaitaire qui relie, d’une façon quantitative, les paramètres de mouvement du sol, les propriétés physiques et dynamiques du bâtiment et son usage principal. Elle agit à la base du bâtiment et elle est supposée répartie sur sa hauteur depuis sa base où elle est nulle jusqu’au sommet (Figure 6.1).\nb) La structure étant soumise à ces forces statiques équivalentes, on est alors ramené à un calcul de contreventement s’effectuant par les méthodes usuelles de calcul des structures.\nc) Le dimensionnement des éléments structuraux est ensuite effectué en utilisant les règlements de béton armé ou de construction métallique en vigueur.\n6.2.1.2- CONDITIONS D’APPLICATION\nL’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes :\na) Le bâtiment doit être régulier conformément aux critères définis dans l’article 4.3.\nb) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes."
+  },
+  "clauses": [
+    {
+      "id": "S01",
+      "reference": "4.3(a)",
+      "text": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage."
+    },
+    {
+      "id": "S02",
+      "reference": "4.3(b)",
+      "text": "b) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement."
+    },
+    {
+      "id": "S03",
+      "reference": "4.3(d)",
+      "text": "d) Dans les sites à risques, tels les talus naturels ou artificiels, ou les sols liquéfiables, les constructions ne sont autorisées que si des mesures pour limiter les risques sont prises."
+    },
+    {
+      "id": "S04",
+      "reference": "4.4(b)",
+      "text": "b) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens."
+    },
+    {
+      "id": "S05",
+      "reference": "4.4(d)",
+      "text": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+    },
+    {
+      "id": "S06",
+      "reference": "4.4(g)",
+      "text": "g) Dans le cas des fondations en pieux, ces derniers doivent être entretoisés dans au moins deux directions pour reprendre les efforts horizontaux appliqués au niveau du chevêtre des pieux sauf s’il est démontré que des moyens de retenue des pieux équivalents sont en place."
+    },
+    {
+      "id": "S07",
+      "reference": "4.5.1, second sentence",
+      "text": "Dans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. (Figure 4.2)"
+    },
+    {
+      "id": "S08",
+      "reference": "4.5.2, opening paragraph",
+      "text": "Il faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés (Figure 4.3 et 4.4)"
+    },
+    {
+      "id": "S09",
+      "reference": "4.5.2(a)",
+      "text": "a) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un\n\n2602  BULLETIN OFFICIEL  N° 6206 – 17 moharrem 1435 (21-11-2013)\n\nbloc à l’autre. (Figure 4.3)."
+    },
+    {
+      "id": "S10",
+      "reference": "4.5.2(b)",
+      "text": "b) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion."
+    },
+    {
+      "id": "S11",
+      "reference": "4.5.2(c)",
+      "text": "c) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier."
+    },
+    {
+      "id": "S12",
+      "reference": "4.5.2(d)",
+      "text": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm."
+    },
+    {
+      "id": "S13",
+      "reference": "4.5.2(e)",
+      "text": "e) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux (Figure 4.4), ou être reliés entre eux."
+    },
+    {
+      "id": "S14",
+      "reference": "4.6(d)",
+      "text": "d) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul."
+    },
+    {
+      "id": "S15",
+      "reference": "4.6(e)",
+      "text": "e) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments."
+    },
+    {
+      "id": "S16",
+      "reference": "6.2.1.2",
+      "text": "6.2.1.2- CONDITIONS D’APPLICATION\nL’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes :\na) Le bâtiment doit être régulier conformément aux critères définis dans l’article 4.3.\nb) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes."
+    },
+    {
+      "id": "S17",
+      "reference": "6.4.3.1, second paragraph",
+      "text": "Dans le cas des modèles plans, l’analyse doit prendre en compte un minimum de trois modes de vibration (les trois premiers). Dans le cas d’un modèle spatial, il faut prendre en compte les quatre premiers modes au minimum."
+    }
+  ]
+}

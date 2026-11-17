@@ -1,0 +1,663 @@
+{
+  "document": "Morocco RPS 2000 version 2011, annex to Decree 2-12-682",
+  "publication": "Bulletin Officiel no. 6206, French official translation, 21 November 2013",
+  "source": "https://aute.gov.ma/s/a/library/2023-11-01/cbea8546-d41b-4d12-968b-e5450ce7e7bb.pdf",
+  "official_host": "Agence Urbaine de Tétouan, government-hosted official gazette reproduction",
+  "pdf_sha256": "7650732566d1dadd3a17d9c2ba7112cbe609ce869e77beb80bd2c5b21f3dc714",
+  "edition_note": "Fixed historical edition. This is not a claim about the consolidated regulation in force.",
+  "sealed": true,
+  "model_runs": 0,
+  "checker_runs": 0,
+  "author": "Benchmark author; no independent review",
+  "conditions_protocol": "The drafter receives source clauses and source contexts only. Gold interpretations, scope facts, scenarios and labels are withheld. Conditions must be extracted from the source. Unknown project conditions must produce evidence requests.",
+  "general_case_scope": "Unless a case explicitly states otherwise, a new ordinary building covered by the source's section 1.2. This fact belongs to evaluation project evidence and is not included in drafting prompts.",
+  "inventory_protocol": "A satisfying universal fixture has a complete inventory only when explicitly stated. A confirmed counterexample can establish violation with incomplete inventory.",
+  "attestations": "Any future reviewer evidence in these scenarios is synthetic.",
+  "clauses": [
+    {
+      "id": "S01",
+      "interpretation": "Fault present and class I/II requires distance at least 120 m AND protection at least 1.5 times. Class III near an active fault needs the special site study.",
+      "applicability_and_exception_facts": [
+        "fault_present",
+        "building_class",
+        "near_active_fault"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "fault_present": true,
+            "building_class": "I",
+            "fault_distance_m": 130,
+            "protection_factor": 1.2
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "fault_present": true,
+            "building_class": "I",
+            "fault_distance_m": 130,
+            "protection_factor": 1.5
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "fault_present": true,
+            "fault_distance_m": 130,
+            "protection_factor": 1.5
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "interpretation": "Foundation site requires a soil study that permits the prescribed site classification.",
+      "applicability_and_exception_facts": [
+        "covered_by_rps",
+        "foundation_site"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "soil_study_available": false,
+            "site_classification_established": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "soil_study_available": true,
+            "site_classification_established": true
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "interpretation": "Construction on a risk site is allowed only with risk-limiting measures. The adequacy of the measures requires specialist evidence.",
+      "applicability_and_exception_facts": [
+        "risk_site"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "risk_site": true,
+            "risk_limiting_measures": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "risk_site": true,
+            "risk_limiting_measures": true
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "risk_limiting_measures": false
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "interpretation": "Each building block has a homogeneous AND rigid foundation. Listed foundation types are examples.",
+      "applicability_and_exception_facts": [
+        "covered_by_rps",
+        "building_blocks"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "confirmed_block": {
+              "homogeneous": false,
+              "rigid": true
+            },
+            "inventory_complete": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "confirmed_block": {
+              "homogeneous": true,
+              "rigid": true
+            },
+            "inventory_complete": true
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "incomplete_inventory",
+          "trusted_project_facts": {
+            "confirmed_block": {
+              "homogeneous": true,
+              "rigid": true
+            },
+            "inventory_complete": false
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "interpretation": "Tie each block's supports with a bidirectional tie-beam network or equivalent system. Exemption requires suitable anchorage in unfractured and unweathered rock.",
+      "applicability_and_exception_facts": [
+        "block_supports",
+        "suitable_rock_anchorage",
+        "rock_fractured",
+        "rock_weathered"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "bidirectional_ties": false,
+            "equivalent_ties": false,
+            "suitable_rock_anchorage": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "exempt",
+          "trusted_project_facts": {
+            "bidirectional_ties": false,
+            "suitable_rock_anchorage": true,
+            "rock_fractured": false,
+            "rock_weathered": false
+          },
+          "expected": "EXEMPT",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_exception_evidence",
+          "trusted_project_facts": {
+            "bidirectional_ties": false,
+            "equivalent_ties": false,
+            "suitable_rock_anchorage": true
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "interpretation": "Pile foundations need bracing in at least two directions unless equivalent restraint is demonstrated.",
+      "applicability_and_exception_facts": [
+        "foundation_type",
+        "equivalent_restraint_demonstrated"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "foundation_type": "piles",
+            "bracing_directions": 1,
+            "equivalent_restraint_demonstrated": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "foundation_type": "piles",
+            "bracing_directions": 2,
+            "equivalent_restraint_demonstrated": false
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "exempt",
+          "trusted_project_facts": {
+            "foundation_type": "piles",
+            "bracing_directions": 1,
+            "equivalent_restraint_demonstrated": true
+          },
+          "expected": "EXEMPT",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "interpretation": "Unusual plan configuration needs seismic joints to simplify the structure. Shape identification must be established from the project.",
+      "applicability_and_exception_facts": [
+        "unusual_plan_configuration"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "unusual_plan_configuration": true,
+            "seismic_joints": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "unusual_plan_configuration": true,
+            "seismic_joints": true
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "seismic_joints": false
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "interpretation": "Interlaced levels require joints. Both height and mass differences over 15% establish the other stated case. The text leaves the AND/OR treatment of a single large difference ambiguous, requiring review.",
+      "applicability_and_exception_facts": [
+        "interlaced_levels",
+        "relative_height_difference",
+        "relative_mass_difference"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "relative_height_difference": 0.2,
+            "relative_mass_difference": 0.2,
+            "interlaced_levels": false,
+            "separation_joint": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "interlaced_levels": true,
+            "separation_joint": true
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "ambiguous_single_difference",
+          "trusted_project_facts": {
+            "relative_height_difference": 0.2,
+            "relative_mass_difference": 0.1,
+            "interlaced_levels": false,
+            "separation_joint": false
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "interpretation": "Adjacent-block separation joints allow movement without harmful contact AND their filler cannot transfer force between blocks.",
+      "applicability_and_exception_facts": [
+        "adjacent_blocks"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "adjacent_blocks": true,
+            "movement_without_harmful_contact": true,
+            "filler_can_transfer_force": true
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "adjacent_blocks": true,
+            "movement_without_harmful_contact": true,
+            "filler_can_transfer_force": false
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "interpretation": "Joint width is at least the sum of both lateral deformations, including torsion.",
+      "applicability_and_exception_facts": [
+        "two_structures",
+        "lateral_deformation_including_torsion"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "joint_width_m": 0.06,
+            "left_deformation_m": 0.03,
+            "right_deformation_m": 0.04
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "joint_width_m": 0.08,
+            "left_deformation_m": 0.03,
+            "right_deformation_m": 0.04
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_evidence",
+          "trusted_project_facts": {
+            "joint_width_m": 0.08,
+            "left_deformation_m": 0.03
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "interpretation": "Without a justification, joint width must be strictly above a times the shorter block height. a is 0.003 for concrete and 0.005 for steel.",
+      "applicability_and_exception_facts": [
+        "justification_available",
+        "structure_material",
+        "shorter_block_height"
+      ],
+      "scenarios": [
+        {
+          "name": "strict_boundary_violation",
+          "trusted_project_facts": {
+            "justification_available": false,
+            "structure_material": "concrete",
+            "shorter_height_m": 20,
+            "joint_width_m": 0.06
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "justification_available": false,
+            "structure_material": "concrete",
+            "shorter_height_m": 20,
+            "joint_width_m": 0.061
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "justified_alternative",
+          "trusted_project_facts": {
+            "justification_available": true
+          },
+          "expected": "NOT_APPLICABLE",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "joint_width_m": 0.061,
+            "shorter_height_m": 20
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "interpretation": "The separation joint minimum width is 50 mm inclusive, read within the joint-width section.",
+      "applicability_and_exception_facts": [
+        "separation_joint"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "separation_joint": true,
+            "width_mm": 45
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "boundary_satisfied",
+          "trusted_project_facts": {
+            "separation_joint": true,
+            "width_mm": 50
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S13",
+      "interpretation": "Insufficient joint width requires stiffening by walls or columns, or linking the buildings.",
+      "applicability_and_exception_facts": [
+        "joint_width_insufficient"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "joint_width_insufficient": true,
+            "stiffening_walls": false,
+            "stiffening_columns": false,
+            "buildings_linked": false
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied_alternative",
+          "trusted_project_facts": {
+            "joint_width_insufficient": true,
+            "stiffening_walls": false,
+            "stiffening_columns": true,
+            "buildings_linked": false
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "stiffening_walls": false,
+            "stiffening_columns": false,
+            "buildings_linked": false
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S14",
+      "interpretation": "Without structural/nonstructural interaction, nonstructural elements must not transfer forces omitted from the structural calculation.",
+      "applicability_and_exception_facts": [
+        "structural_nonstructural_interaction"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "structural_nonstructural_interaction": false,
+            "omitted_force_transferred": true
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "structural_nonstructural_interaction": false,
+            "omitted_force_transferred": false
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "omitted_force_transferred": true
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S15",
+      "interpretation": "When rigid nonstructural elements interact, their action or failure must not reduce structural resistance.",
+      "applicability_and_exception_facts": [
+        "rigid_nonstructural_interaction"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "rigid_nonstructural_interaction": true,
+            "resistance_before_kN": 100,
+            "minimum_resistance_after_action_or_failure_kN": 80
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "rigid_nonstructural_interaction": true,
+            "resistance_before_kN": 100,
+            "minimum_resistance_after_action_or_failure_kN": 100
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S16",
+      "interpretation": "Using the equivalent static method requires a regular building, height at most 60 m AND fundamental period at most 2 s. The printed regularity cross-reference is questionable and must remain visible.",
+      "applicability_and_exception_facts": [
+        "analysis_method",
+        "regularity",
+        "height",
+        "fundamental_period"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "analysis_method": "equivalent_static",
+            "regularity_established": true,
+            "height_m": 60,
+            "period_s": 2.1
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "boundary_satisfied",
+          "trusted_project_facts": {
+            "analysis_method": "equivalent_static",
+            "regularity_established": true,
+            "height_m": 60,
+            "period_s": 2
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "height_m": 60,
+            "period_s": 2,
+            "regularity_established": true
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    },
+    {
+      "id": "S17",
+      "interpretation": "Modal spectral analysis needs at least three vibration modes for a planar model and four for a spatial model.",
+      "applicability_and_exception_facts": [
+        "analysis_method",
+        "model_dimension"
+      ],
+      "scenarios": [
+        {
+          "name": "violation",
+          "trusted_project_facts": {
+            "analysis_method": "modal_spectral",
+            "model_dimension": "spatial",
+            "modes": 3
+          },
+          "expected": "VIOLATED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "satisfied",
+          "trusted_project_facts": {
+            "analysis_method": "modal_spectral",
+            "model_dimension": "planar",
+            "modes": 3
+          },
+          "expected": "SATISFIED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        },
+        {
+          "name": "missing_scope",
+          "trusted_project_facts": {
+            "analysis_method": "modal_spectral",
+            "modes": 3
+          },
+          "expected": "UNRESOLVED",
+          "facts_origin": "Synthetic benchmark author observations; no independent review."
+        }
+      ]
+    }
+  ]
+}
