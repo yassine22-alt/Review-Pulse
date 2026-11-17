@@ -2,6 +2,53 @@
 
 ## Measured
 
+### Current Gemini ceiling access
+
+M01–M16, A01–A15 and T01–T15 are development data in the requested hosted
+comparison. The historical thermal holdout below describes the earlier run.
+No fourth-document held-out evaluation has been run.
+
+The key authenticated to Google's API. One regulation-only access check
+generated a response from Gemini 3.8 Flash. The subsequent ceiling attempt
+stopped during repeated HTTP 503 responses. Gemini 3.1 Pro reported free-tier
+quota limits of 0 for input tokens, requests per minute and requests per day.
+The [access investigation](gemini-ceiling-status.md) records model-specific
+responses, the unchanged pipeline commit and the distinction between
+transport failure and interpretation failure.
+
+Completed hosted drafting evaluations are **0/46**. Matching or wrong
+interpretation rates are unmeasured. Wrong approvable / approvable is
+undefined, **0/0**. The M01 artifact's UNRESOLVED status came from failed API
+calls and is reported as API_UNAVAILABLE. It is excluded from semantic failure
+counts. The requested redesign and its before/after comparison await the
+hosted baseline.
+
+The raster investigation identified a failed checksum in the EasyOCR Latin
+recognition cache. The installed EasyOCR corruption-recovery branch used an
+undefined `corrupt_msg`, causing the earlier NameError. Restoring the official
+checksum-verified recognition checkpoint fixed that local cache defect. The
+segmentation source and checkpoint stayed identical to the pinned version.
+A comparison on one prepared synthetic plan had **0/262,144** changed class
+pixels, a maximum probability difference of 0.0, and equal rescale factors.
+The [regression artifact](../reports/segmentation-regression-gemini-round.json)
+records hashes and the scope of this comparison.
+
+The **complete slow selection passed 45/45**, with **0 failures**, **0 skipped**
+and **948 non-slow tests deselected**, in 905.97 seconds. All five previously
+crashing raster acceptance cases passed. The
+[JUnit report](../reports/gemini-complete-slow.xml) records every selected test.
+The cache repair and regression evidence were pushed at
+`574a298e2c5f90ea8e349dd26b7b0ad70a310d24`.
+
+| Requested item in this round | Status |
+| --- | --- |
+| 1, hosted ceiling on 46 obligations | Blocked by provider availability and quota. Access report pushed at `12528a0bfd6420e65b63b90a5e89eadd0ecc7cf0` |
+| 2, redesign and paired development comparison | Pending the hosted ceiling diagnosis |
+| 3, applicability discovery without supplied scope | Unmeasured |
+| 4, fourth-document frozen labels and hosted/local comparison | Pending. No fourth-document model run or label freeze |
+| 5, full slow suite and raster cause | Complete, 45/45 passed and prediction comparison identical |
+| 6, measured / not measured / do not claim | Updated in this document |
+
 ### Archived development baseline
 
 The fire-safety and accessibility obligations are both development data for
@@ -160,9 +207,9 @@ bindings. Legacy facts can lack an origin. Fixture imports do not verify
 reviewer identity or authenticate citations. Conflicts remain open when another
 attestation is appended.
 
-### Third document and execution ceiling
+### Archived thermal run and execution ceiling
 
-The sole held-out source is Morocco's Decree 2-13-874, thermal annex, printed
+The third source in the earlier held-out run was Morocco's Decree 2-13-874, thermal annex, printed
 page 4265 of the French official translation of the *Bulletin Officiel* no.
 6306, 6 November 2014. The [gazette reproduction](https://anre.ma/wp-content/uploads/2020/09/Decret_n_2-13-874.pdf)
 is hosted by Morocco's National Electricity Regulation Authority. The
@@ -234,6 +281,13 @@ includes the concurrent cache test and it passed.
 
 ## Not measured
 
+The new hosted ceiling, the requested drafting redesign's paired results,
+automatic applicability discovery and the fourth-document comparison remain
+unmeasured. No semantic comparison or wrong-approvable rate can be derived
+from the failed API requests. Their completed evaluation denominator is
+0/46. The local cache repair and passing raster tests do not resolve this
+dependency.
+
 Whole-document extraction, discovery of table applicability, drawing extraction
 accuracy, other model settings, reviewer disagreement,
 and coverage on real projects remain unmeasured. The samples are small.
@@ -243,6 +297,11 @@ prompt, fixture or development files outside the holdout artifacts. It
 does not rule out paraphrases or pretraining exposure.
 
 ## Do not claim
+
+Successful key authentication or one successful access-check response does
+not establish usable capacity for the 46-obligation experiment. An HTTP 503
+or zero project quota cannot diagnose the interpreter's reasoning or its
+pipeline. This round supplies no new automated-interpretation accuracy result.
 
 Zero false passes with zero decisions is abstention. It does not establish
 safety, precision, useful zero-code transfer, or statutory compliance.
