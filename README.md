@@ -37,10 +37,11 @@ a reviewer can open in a browser (see [docs/RUNBOOK.md](docs/RUNBOOK.md)).
 ## 18 November demo and verification
 
 For the November 18 demonstration, see the [walkthrough](docs/nov18-demo.md)
-and [one-page results](docs/nov18-results.md). The comparison found 9 of 32
-applicable checks decidable on the supplied facts, up from 7, with zero false
-passes in both versions. It uses one regulation and two synthetic plans with
-manual interpretations. The evaluator has a finite set of capabilities, and
+and [current results](docs/results.md). The earlier manual-interpretation
+comparison found 9 of 32 applicable checks decidable on supplied facts, up from
+7, with zero false passes in both versions. This was one regulation and two
+synthetic plans; it did not measure automated interpretation. Current drafting
+measurements and unresolved limitations are recorded separately. The evaluator has a finite set of capabilities, and
 the 25% estimated-scale bound is provisional. Use the setup below with
 `.[app,dev]` to run the scripted rehearsal and tests.
 
