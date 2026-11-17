@@ -21,9 +21,14 @@ def contexts(source):
     for zone, band, *cells in source["rows"]:
         for header, cell in zip(source["headers"], cells, strict=True):
             key = f"T{len(cases) + 1:02}"
-            scope = f"{source['caption']} | Zone climatique | TGBV"
-            text = f"| {scope} | {header} |\n| — | {zone} | {band} | {cell} |"
-            cases[key] = bundle(source["document"], key, text, {})
+            header_id = f"{key} header"
+            header_line = f"| Usage et approche | Zone climatique | TGBV | {header} |"
+            text = f"| {source['caption']} | {zone} | {band} | {cell} |"
+            context = bundle(source["document"], key, text, {header_id: header_line})
+            context.clauses[0].kind = "table_header"
+            context.clauses[1].kind = "table_row"
+            context.clauses[1].parent = header_id
+            cases[key] = context
     return cases
 
 
@@ -57,12 +62,12 @@ def evidence(labels, base, plan):
 
 
 def reference(context, name, operator, threshold, unit):
-    text = context.text
+    target = next(clause for clause in context.clauses if clause.id == context.target)
     return {
         "status": "DRAFTED",
         "program": {
             "id": context.target, "title": name, "document": context.document,
-            "sources": [{"clause": context.target, "start": 0, "end": len(text), "quote": text}],
+            "sources": [{"clause": target.id, "start": target.start, "end": target.end, "quote": target.text}],
             "requirement": {"node": operator, "left": {"node": "fact", "entity": "building", "name": name},
                             "right": {"node": "literal", "value": threshold, "unit": unit}},
         },
