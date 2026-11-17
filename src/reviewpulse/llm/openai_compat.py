@@ -177,6 +177,8 @@ class OpenAICompatClient:
                     return json.loads(r.read().decode())
             except urllib.error.HTTPError as exc:
                 text = exc.read().decode("utf-8", "replace")[:600]
+                if self._key:
+                    text = text.replace(self._key, "[redacted credential]")
                 if exc.code == 400 and "reasoning_effort" in text.lower() and "reasoning_effort" in body:
                     body = {k: v for k, v in body.items() if k != "reasoning_effort"}
                     self.reasoning_effort, data = None, json.dumps(body).encode()

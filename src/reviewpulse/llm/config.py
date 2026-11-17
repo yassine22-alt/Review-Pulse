@@ -5,7 +5,7 @@ Two roles:
   fallback    an optional hosted model that is asked ONLY about a clause the primary could not turn into a checked rule, and
               ONLY for a project whose reviewer allowed it. Its answer goes through exactly the same checks as any other.
 
-Environment (a `.env` file in the working folder is read too; real environment variables win):
+Non-secret settings can also come from `.env`. Credentials are read from the environment only.
 
   REVIEWPULSE_LLM=ollama | openai | claude | none            primary backend ("openai" = any OpenAI-compatible endpoint)
   REVIEWPULSE_LLM_REASONING_EFFORT=low|medium|high|off         default low for gpt-oss models (fewer hidden tokens)
@@ -64,7 +64,15 @@ def read_dotenv(path: str | Path = ".env") -> dict[str, str]:
 
 def setting(name: str, default: str | None = None) -> str | None:
     """One setting: the real environment first, then the .env file in the working folder, then the default."""
+    if name.endswith(("_API_KEY", "_TOKEN", "_SECRET")):
+        return os.environ.get(name) or default
     return os.environ.get(name) or read_dotenv().get(name) or default
+
+
+def _configuration(env: dict | None) -> dict:
+    public = {name: value for name, value in read_dotenv().items()
+              if not name.endswith(("_API_KEY", "_TOKEN", "_SECRET"))}
+    return {**public, **(env if env is not None else os.environ)}
 
 
 def _get(env: dict, *names: str) -> str | None:
@@ -101,13 +109,13 @@ def _wrap(client, env: dict):
 
 def primary_from_env(env: dict | None = None):
     """The primary client for an OpenAI-compatible backend, or None (the local backends are built elsewhere)."""
-    env = {**read_dotenv(), **(env if env is not None else os.environ)}
+    env = _configuration(env)
     return _wrap(_openai_from(env, "REVIEWPULSE_LLM"), env)
 
 
 def fallback_from_env(env: dict | None = None):
     """The hosted fallback client, or None when it is not configured."""
-    env = {**read_dotenv(), **(env if env is not None else os.environ)}
+    env = _configuration(env)
     if (env.get("REVIEWPULSE_FALLBACK") or "").lower() not in ("openai", "hosted", "1", "true"):
         return None
     return _wrap(_openai_from(env, "REVIEWPULSE_FALLBACK"), env)

@@ -127,6 +127,30 @@ def test_bad_key_message_never_contains_the_key(server):
     assert "sk-secret" not in str(e.value) and "rejected" in str(e.value)
 
 
+def test_error_body_redacts_credential_outside_auth_errors(server):
+    s = server([(400, {}, {"error": "request contained test-credential"})])
+    client = OpenAICompatClient(s.url, "test-credential", "m", structured="json_schema")
+    with pytest.raises(LLMError) as error:
+        client.complete("a", "b", SCHEMA)
+    assert "test-credential" not in str(error.value)
+    assert "test-credential" not in client.usage.get("last_error", "")
+
+
+def test_credentials_are_ignored_in_dotenv(tmp_path, monkeypatch):
+    from reviewpulse.llm.config import setting
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("REVIEWPULSE_LLM_API_KEY", raising=False)
+    (tmp_path / ".env").write_text(
+        "REVIEWPULSE_LLM_PROVIDER=gemini\nREVIEWPULSE_LLM_MODEL=model\n"
+        "REVIEWPULSE_LLM_API_KEY=file-credential\nREVIEWPULSE_LLM_CACHE=off\n", encoding="utf-8")
+    client = primary_from_env({})
+    assert client._key is None
+    assert setting("REVIEWPULSE_LLM_API_KEY") is None
+    client = primary_from_env({"REVIEWPULSE_LLM_API_KEY": "environment-credential"})
+    assert client._key == "environment-credential"
+
+
 def test_truncated_answer_is_an_error_not_a_guess(server):
     s = server([ok('{"x": ', finish="length")])
     with pytest.raises(LLMError, match="cut off"):
