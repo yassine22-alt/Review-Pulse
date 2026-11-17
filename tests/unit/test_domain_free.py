@@ -4,6 +4,8 @@ Clause -> checked rule (scripted model) -> judge -> findings -> coverage report,
 no EXIT. If any part of the core assumed a building, this test would fail.
 """
 
+from slot_responses import slot_response
+
 from reviewpulse.factgraph.convert import to_catalogue, to_graph, to_inputs
 from reviewpulse.factgraph.relations import derive_relations
 from reviewpulse.factgraph.schema import Edge, FactGraph, Inventory, Node
@@ -28,6 +30,7 @@ ANSWERS = {
 class Scripted:
     model = "scripted"
 
+    @slot_response
     def complete(self, system, user, schema):
         import json
 
@@ -117,6 +120,7 @@ def test_units_of_any_domain_flow_through_drafting_checking_and_judging():
     class Model:
         model = "scripted"
 
+        @slot_response
         def complete(self, system, user, schema):
             clause = json.loads(user)["target"]
             require, quote = answers[clause]

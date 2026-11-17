@@ -121,6 +121,16 @@ def sample_world(rng: random.Random, cat: dict, pool: dict[str, set[float]], str
             return Fact(value=None if rng.random() < 0.5 else value, source="world", trusted=False)
         return Fact(value=value, source="world", trusted=True)
 
+    def value_of(name):
+        binding = bindings[name]
+        if binding.kind == "boolean":
+            return rng.choice([True, False])
+        if binding.kind == "string":
+            values = kinds.get(name) or sorted(strings) or [""]
+            used = [value for value in values if value in strings]
+            return rng.choice(used) if used and rng.random() < 0.7 else rng.choice(values)
+        return _number(rng, binding.unit, pool)
+
     facts: dict[str, dict[str, Fact]] = {}
     collections: dict[str, Collection] = {}
     complete = rng.random() > 0.05
@@ -138,17 +148,15 @@ def sample_world(rng: random.Random, cat: dict, pool: dict[str, set[float]], str
                 binding = bindings[name]
                 forced = bool(rows) and name in (plan["kind_fact"], plan["value_fact"])
                 if binding.kind == "string":
-                    values = kinds[name]
-                    used = [v for v in values if v in strings]
-                    value = rng.choice(used) if used and rng.random() < 0.7 else rng.choice(values)
+                    value = value_of(name)
                     if rows and name == plan["kind_fact"]:
                         value = rows[i][0]
                 else:
-                    value = _number(rng, binding.unit, pool)
+                    value = value_of(name)
                     if rows and name == plan["value_fact"]:
                         value = rows[i][1]
                 member[name] = fact(value, forced)
             facts[eid] = member
         collections[coll] = Collection(items=ids, complete=complete, trusted=True)
-    facts[BUILDING] = {name: fact(_number(rng, bindings[name].unit, pool)) for name in cat.get("building", [])}
+    facts[BUILDING] = {name: fact(value_of(name)) for name in cat.get("building", [])}
     return Inputs(bindings=bindings, facts=facts, collections=collections, graph_complete=False)

@@ -1,0 +1,420 @@
+{
+  "model": "qwen2.5:1.5b",
+  "obligations": 46,
+  "semantic_evaluated": 45,
+  "transport_unavailable": 1,
+  "terminal_stages": {
+    "source_span": 10,
+    "expression_parse": 9,
+    "retained": 1,
+    "transport": 1,
+    "binding": 1,
+    "triage": 24
+  },
+  "retained": 1,
+  "matches": 0,
+  "wrong": 1,
+  "wrong_technically_approvable": [
+    1,
+    1
+  ],
+  "limitations": [
+    "Development data. Author assessment, no independent review.",
+    "Approval test supplies an explicitly synthetic issue-free review; it does not measure a real critic.",
+    "HTTP request error counts for this original run were not instrumented and are unmeasured.",
+    "M06 timeout is excluded from semantic failures.",
+    "No end-to-end or held-out accuracy inference."
+  ],
+  "cases": [
+    {
+      "id": "M01",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'La largeur minimale de chaque dégagement doit être calculée '"
+      ]
+    },
+    {
+      "id": "M02",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'La largeur minimale de chaque dégagement doit être calculée '"
+      ]
+    },
+    {
+      "id": "M03",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: cannot read the expression at: 'ée >= 50 m and (b.rez-de-'"
+      ]
+    },
+    {
+      "id": "M04",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found 'and'"
+      ]
+    },
+    {
+      "id": "M05",
+      "stage": "retained",
+      "status": "DRAFTED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: wrote a rule"
+      ],
+      "technically_approvable_with_issue_free_review": true,
+      "drafted_readback": "forall exits e: e.eligible",
+      "author_rating": "wrong",
+      "rating_reason": "The only retained candidate is a Boolean eligibility assertion and omits the source's numeric clear-width obligation."
+    },
+    {
+      "id": "M06",
+      "stage": "transport",
+      "status": "API_UNAVAILABLE",
+      "trace": [
+        "slots: no quantity chosen",
+        "limits: the plan provides none of the quantities the sentence limits (read as exits: no numeric fact)",
+        "relation: the plan offers no connections between spaces",
+        "free-form: TimeoutError: timed out"
+      ]
+    },
+    {
+      "id": "M07",
+      "stage": "binding",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: no quantity chosen",
+        "limits: the plan provides none of the quantities the sentence limits (read as exits: no numeric fact)",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: unsupported fact tolerance"
+      ]
+    },
+    {
+      "id": "M08",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M09",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M10",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M11",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M12",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M13",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M14",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M15",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "M16",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A01",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A02",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A03",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A04",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A05",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A06",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A07",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A08",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A09",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A10",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A11",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A12",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A13",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A14",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "A15",
+      "stage": "triage",
+      "status": "UNRESOLVED",
+      "trace": []
+    },
+    {
+      "id": "T01",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: unexpected 'R' after a complete expression"
+      ]
+    },
+    {
+      "id": "T02",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ]
+    },
+    {
+      "id": "T03",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ]
+    },
+    {
+      "id": "T04",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T04'"
+      ]
+    },
+    {
+      "id": "T05",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | Facteur solaire'"
+      ]
+    },
+    {
+      "id": "T06",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T06'"
+      ]
+    },
+    {
+      "id": "T07",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ]
+    },
+    {
+      "id": "T08",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T08'"
+      ]
+    },
+    {
+      "id": "T09",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T09'"
+      ]
+    },
+    {
+      "id": "T10",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | Facteur solaire'"
+      ]
+    },
+    {
+      "id": "T11",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ]
+    },
+    {
+      "id": "T12",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected a variable name but found ':'"
+      ]
+    },
+    {
+      "id": "T13",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | TGBV | U des fe'"
+      ]
+    },
+    {
+      "id": "T14",
+      "stage": "source_span",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | R des planchers'"
+      ]
+    },
+    {
+      "id": "T15",
+      "stage": "expression_parse",
+      "status": "UNRESOLVED",
+      "trace": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ]
+    }
+  ]
+}

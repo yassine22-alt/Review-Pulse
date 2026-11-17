@@ -29,6 +29,7 @@ en:
   either: [or]
 
 fr:
+  negation_before_comparison: [pas]
   decimal: ","
   words: [le, la, les, des, du, de, et, doit, doivent, chaque, dans, au, moins, une, un, sauf, est, sont, pour]
   ge: [d'au moins, au moins, non inférieur à, non inférieure à, supérieur ou égal à, supérieure ou égale à,

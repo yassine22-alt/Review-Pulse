@@ -1,0 +1,1094 @@
+{
+  "backend": "ollama",
+  "model": "qwen2.5:1.5b",
+  "code_fingerprint": "0850beb6ea2524edb0b71afed7f0f685e14070d9c4b7aa5ae4d8f5c6f424c639",
+  "batch_size": 4,
+  "retry_cycles": 3,
+  "http_attempts_per_completion": 3,
+  "concurrency": 1,
+  "max_tokens": 4096,
+  "timeout": 600.0,
+  "batches": [
+    {
+      "number": 1,
+      "cycle": 1,
+      "ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 2,
+      "cycle": 1,
+      "ids": [
+        "M05",
+        "M06",
+        "M07",
+        "M08"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 3,
+      "cycle": 1,
+      "ids": [
+        "M09",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 4,
+      "cycle": 1,
+      "ids": [
+        "M13",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 5,
+      "cycle": 1,
+      "ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 6,
+      "cycle": 1,
+      "ids": [
+        "A05",
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 7,
+      "cycle": 1,
+      "ids": [
+        "A09",
+        "A10",
+        "A11",
+        "A12"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 8,
+      "cycle": 1,
+      "ids": [
+        "A13",
+        "A14",
+        "A15",
+        "T01"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 9,
+      "cycle": 1,
+      "ids": [
+        "T02",
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 10,
+      "cycle": 1,
+      "ids": [
+        "T06",
+        "T07",
+        "T08",
+        "T09"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 11,
+      "cycle": 1,
+      "ids": [
+        "T10",
+        "T11",
+        "T12",
+        "T13"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": []
+    },
+    {
+      "number": 12,
+      "cycle": 1,
+      "ids": [
+        "T14",
+        "T15"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        0
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        2
+      ],
+      "events": []
+    }
+  ],
+  "results": [
+    {
+      "id": "M01",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: fire rating note)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'La largeur minimale de chaque dégagement doit être calculée '"
+      ],
+      "needs": "fire rating note"
+    },
+    {
+      "id": "M02",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a short phrase)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'La largeur minimale de chaque dégagement doit être calculée '"
+      ],
+      "needs": "a short phrase"
+    },
+    {
+      "id": "M03",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: cannot read the expression at: 'ée >= 50 m and (b.rez-de-'"
+      ],
+      "needs": "the building's layout"
+    },
+    {
+      "id": "M04",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found 'and'"
+      ],
+      "needs": "distance"
+    },
+    {
+      "id": "M05",
+      "batch": 2,
+      "cycle": 1,
+      "status": "DRAFTED",
+      "reason": "a rule was written and passed the structure and sentence checks",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": {
+        "schema_version": "1.0",
+        "id": "I-M05",
+        "title": "horizontal circulation",
+        "document": "Décret 2-14-499, BO 6306, extrait ERP",
+        "status": "draft",
+        "approved_by": null,
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "exits",
+          "variable": "$e",
+          "where": null,
+          "body": {
+            "node": "fact",
+            "entity": "$e",
+            "name": "eligible"
+          }
+        },
+        "sources": [
+          {
+            "clause": "M05",
+            "start": 433,
+            "end": 607,
+            "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": []
+      },
+      "readback": "forall exits e: e.eligible",
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: wrote a rule"
+      ],
+      "plain": "For every exit: ce dégagement distinct est admissible pour l'évacuation.",
+      "plain_applies_when": null,
+      "plain_unless": null,
+      "applies_when": "true",
+      "unless": "false"
+    },
+    {
+      "id": "M06",
+      "batch": 2,
+      "cycle": 1,
+      "status": "API_UNAVAILABLE",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: no quantity chosen",
+        "limits: the plan provides none of the quantities the sentence limits (read as exits: no numeric fact)",
+        "relation: the plan offers no connections between spaces",
+        "free-form: TimeoutError: timed out"
+      ],
+      "needs": "a fire rating note",
+      "pipeline_status": "UNRESOLVED",
+      "stage": "transport",
+      "transport_classification": "Operational timeout in the original drafting trace; excluded from semantic scoring."
+    },
+    {
+      "id": "M07",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "needs a quantity the plan does not provide (the rule would have needed 'tolerance') (the sentence seems to need: the building dimensions and layout)",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: no quantity chosen",
+        "limits: the plan provides none of the quantities the sentence limits (read as exits: no numeric fact)",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: unsupported fact tolerance"
+      ],
+      "needs": "the building dimensions and layout"
+    },
+    {
+      "id": "M08",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M09",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M10",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M11",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M12",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M13",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited.",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M14",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M15",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "M16",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A01",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A02",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A03",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A04",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A05",
+      "batch": 6,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A06",
+      "batch": 6,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A07",
+      "batch": 6,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A08",
+      "batch": 6,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A09",
+      "batch": 7,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A10",
+      "batch": 7,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A11",
+      "batch": 7,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A12",
+      "batch": 7,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A13",
+      "batch": 8,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A14",
+      "batch": 8,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "A15",
+      "batch": 8,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+      "arm": "triage",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "triaged": true
+    },
+    {
+      "id": "T01",
+      "batch": 8,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: unexpected 'R' after a complete expression"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T02",
+      "batch": 9,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T03",
+      "batch": 9,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T04",
+      "batch": 9,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T04'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T05",
+      "batch": 9,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | Facteur solaire'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T06",
+      "batch": 10,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T06'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T07",
+      "batch": 10,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T08",
+      "batch": 10,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T08'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T09",
+      "batch": 10,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'T09'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T10",
+      "batch": 11,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | Facteur solaire'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T11",
+      "batch": 11,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T12",
+      "batch": 11,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected a variable name but found ':'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T13",
+      "batch": 11,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | TGBV | U des fe'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T14",
+      "batch": 12,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: quote not found in the clause: 'Usage et approche | Zone climatique | TGBV | R des planchers'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    },
+    {
+      "id": "T15",
+      "batch": 12,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "arm": "expr_verify",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "slots: not a plain limit on one quantity",
+        "limits: not a sentence of limits this arm can read",
+        "relation: the plan offers no connections between spaces",
+        "free-form: after repair: ValueError: expression: expected '.' but found '/'"
+      ],
+      "needs": "the building as a whole (roof_u, slab_r, solar, wall_u, window_u)"
+    }
+  ],
+  "configured_key_variables": [],
+  "invocation": 1,
+  "semantic_evaluated": 45,
+  "pending": [
+    "M06"
+  ],
+  "status": "COMPLETE",
+  "availability_note": "The initial original-pipeline wrapper did not record HTTP events. Request error rates for that local run are unmeasured; operational exceptions were classified from its retained trace."
+}

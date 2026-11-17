@@ -1,6 +1,7 @@
 """Documents written for US readers: feet and inch marks, fractions of an inch, s.f.; a terse checklist item is a plain limit."""
 
 import pytest
+from slot_responses import slot_response
 
 from reviewpulse.interpreter.quantities import normalise_quantities, us_typography
 from reviewpulse.xeval.slot_arm import plan_limit
@@ -84,7 +85,15 @@ def test_a_rule_cites_the_clause_as_written_even_when_the_sentence_read_was_norm
     class Model:
         model = "scripted"
 
+        @slot_response
         def complete(self, system, user, schema):
+            if "nodes" in schema["properties"]:
+                import json
+
+                payload = json.loads(user)
+                target = next(clause for clause in payload["clauses"] if clause["id"] == payload["target"])
+                return {"title": "clear width", "require": "forall rooms r where r.room_type == 'corridor': r.min_width_m >= 3 ft",
+                        "sources": [{"clause": target["id"], "quote": target["text"]}]}
             key = next(iter(schema["properties"]))
             if key == "values":
                 return {"values": answers["values"]}
@@ -97,7 +106,7 @@ def test_a_rule_cites_the_clause_as_written_even_when_the_sentence_read_was_norm
     out = checked_draft(context, inputs, graph, Model())
     assert out["program"] is not None, out["reason"] + str(out.get("tried"))
     assert out["program"]["sources"][0]["quote"].startswith("- Hallways must be min. 3' wide.")
-    assert out["tried"][0].startswith("slots")
+    assert out["arm"] == "structured_slots"
     _ = SimpleNamespace, to_catalogue
 
 
@@ -156,7 +165,10 @@ def test_a_declined_clause_says_what_it_seems_to_need(monkeypatch):
 
     def declined(context, catalogue, body, client, **_):
         return {"status": "UNRESOLVED", "reason": "no rule that matches the sentence could be written", "model": "m",
-                "external": False, "program": None, "readback": None, "notes": []}
+                "external": False, "program": None, "readback": None, "notes": [],
+                "evidence_requests": [{"entity": "building", "fact": "alarm_symbols", "unit": "count",
+                                       "reason": "missing", "why": "required alarm inventory",
+                                       "where_to_look": "symbol legend", "clause": "r"}]}
 
     monkeypatch.setattr(checked, "_attempt", declined)
     monkeypatch.setattr(checked, "catalogue_from", lambda inputs, graph: {"kinds": {}, "kind_labels": {}})
@@ -166,12 +178,13 @@ def test_a_declined_clause_says_what_it_seems_to_need(monkeypatch):
     class Model:
         model = "m"
 
+        @slot_response
         def complete(self, system, user, schema):
-            return {"needs": "alarm symbols"}
+            raise AssertionError("typed diagnostics need no explanatory model call")
 
     out = checked.checked_draft(SimpleNamespace(text="t"), None, None, Model())
-    assert out["status"] == "UNRESOLVED" and out["needs"] == "alarm symbols"
-    assert out["reason"].startswith("no rule that matches") and "alarm symbols" in out["reason"]
+    assert out["status"] == "UNRESOLVED" and out["needs"] == "alarm_symbols"
+    assert out["evidence_requests"][0]["where_to_look"] == "symbol legend"
 
 
 def test_an_unreachable_model_is_not_explained_as_a_need(monkeypatch):
@@ -189,6 +202,7 @@ def test_an_unreachable_model_is_not_explained_as_a_need(monkeypatch):
     class Model:
         model = "m"
 
+        @slot_response
         def complete(self, system, user, schema):
             return {"needs": "should never be asked"}
 

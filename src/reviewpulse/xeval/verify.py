@@ -200,8 +200,15 @@ def _expected_operator(flat: str, start: int, end: int, lang: str) -> str | None
         for m in pattern.finditer(window):
             key = (m.end(), m.end() - m.start())
             if best is None or key > best[0]:
-                best = (key, op)
-    return best[1] if best and best[0][0] >= len(window) - 6 else None
+                best = (key, op, m.start())
+    if not best or best[0][0] < len(window) - 6:
+        return None
+    op = best[1]
+    prefix = window[:best[2]]
+    if any(re.search(rf"(?<!\w){re.escape(cue)}(?!\w)", prefix)
+           for cue in wording()[lang].get("negation_before_comparison", [])):
+        op = {"gt": "le", "ge": "lt", "lt": "ge", "le": "gt"}[op]
+    return op
 
 
 def check_directions(program: Program, text: str, lang: str) -> list[Issue]:

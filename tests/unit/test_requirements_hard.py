@@ -239,6 +239,25 @@ def test_many_clauses_read_at_once_never_collide_on_the_split_cache(tmp_path):
     assert len(set(got)) == 1 and got[0] > 0
 
 
+def test_a_temporarily_unreadable_split_cache_is_rebuilt(tmp_path, monkeypatch):
+    from pathlib import Path
+
+    from reviewpulse.rules.clauses import split_cached
+
+    doc = tmp_path / "req.md"
+    doc.write_text("Every room must have an opening.", encoding="utf-8")
+    expected = split_cached(doc, tmp_path / "cache")
+    read_text = Path.read_text
+
+    def locked_cache(path, *args, **kwargs):
+        if path.name.startswith("split_"):
+            raise PermissionError("cache replacement in progress")
+        return read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", locked_cache)
+    assert split_cached(doc, tmp_path / "cache") == expected
+
+
 def test_a_two_column_page_is_read_one_column_after_the_other(tmp_path):
     import pymupdf
 

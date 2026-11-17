@@ -13,6 +13,7 @@ import time
 from pathlib import Path
 
 import pytest
+from slot_responses import slot_response
 
 pytest.importorskip("fastapi")
 from fastapi.testclient import TestClient  # noqa: E402
@@ -47,6 +48,7 @@ RULES = {
 class Scripted:
     model = "scripted"
 
+    @slot_response
     def complete(self, system, user, schema):
         props = schema.get("properties", {})
         if "CLAUSE_JSON:" in user:

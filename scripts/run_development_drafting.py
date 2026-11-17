@@ -3,6 +3,7 @@ import argparse
 import importlib.util
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -37,12 +38,33 @@ def main():
     from reviewpulse.interpreter.checked import catalogue_from, checked_draft
     from reviewpulse.xeval.drafters import BoundedOllama
 
+    class TrackedOllama(BoundedOllama):
+        def __init__(self):
+            super().__init__(model=args.model, num_predict=args.max_tokens, timeout_s=args.timeout)
+            self.unavailable = False
+            self.events = []
+
+        def complete(self, system, user, json_schema):
+            if self.unavailable:
+                raise RuntimeError("API_UNAVAILABLE: local circuit is open")
+            try:
+                result = super().complete(system, user, json_schema)
+            except Exception as error:
+                self.unavailable = isinstance(error, (OSError, TimeoutError, ConnectionError)) or bool(
+                    re.search(r"not reachable|connection refused", str(error), re.I))
+                self.events.append({"http_status": None if self.unavailable else 200,
+                                    "reason": type(error).__name__})
+                raise
+            self.events.append({"http_status": 200})
+            return result
+
     transport = module_from_current(repo, "gemini")
     caching = module_from_current(repo, "result_cache")
     cache = caching.ResultCache(args.cache)
     code = caching.fingerprint({
         str(path.relative_to(source)): path.read_text(encoding="utf-8")
-        for package in ("interpreter", "xeval") for path in (source / "reviewpulse" / package).glob("*.py")
+        for package in ("interpreter", "xeval") for path in (source / "reviewpulse" / package).iterdir()
+        if path.is_file() and path.suffix in {".py", ".yaml", ".json"}
     })
     transport_code = caching.fingerprint({"source": (repo / "src/reviewpulse/llm/gemini.py").read_text(encoding="utf-8")})
     cases = load_cases(repo, args.access_text)
@@ -76,8 +98,7 @@ def main():
         pending = cases[start:start + args.batch_size]
         for cycle in range(args.cycles):
             client = (transport.GeminiClient(model=args.model, max_tokens=args.max_tokens, timeout_s=args.timeout)
-                      if args.backend == "gemini" else BoundedOllama(
-                          model=args.model, num_predict=args.max_tokens, timeout_s=args.timeout))
+                      if args.backend == "gemini" else TrackedOllama())
             before = len(getattr(client, "events", []))
             unavailable = []
             batch = {"number": start // args.batch_size + 1, "cycle": cycle + 1, "ids": [], "cache_hits": 0}

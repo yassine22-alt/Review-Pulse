@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 import pytest
+from slot_responses import slot_response
 
 pytest.importorskip("fastapi")
 from fastapi.testclient import TestClient  # noqa: E402
@@ -33,6 +34,7 @@ class ScriptedModel:
         self.review = {"issues": [], "limitations": []}
         self.calls = {"draft": 0, "review": 0}
 
+    @slot_response
     def complete(self, system, user, schema):
         props = schema.get("properties", {})
         if "CLAUSE_JSON:" in user:                       # the older drafting flow, run when a document is uploaded
@@ -172,6 +174,7 @@ def test_demo_reviewed_schedule_updates_existing_rule(tmp_path):
     quote = "Every door has a scheduled height of at least 1.90 m."
 
     class DemoModel(ScriptedModel):
+        @slot_response
         def complete(self, system, user, schema):
             if "CLAUSE_JSON:" not in user and "issues" not in schema.get("properties", {}):
                 target = json.loads(user)["target"]

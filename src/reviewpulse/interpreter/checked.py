@@ -1,26 +1,12 @@
-"""Draft a clause the way that measured best: one readable expression, then checks, then UNRESOLVED instead of a guess.
-
-The original `draft_program` asks the model for the whole nested rule structure in one go. On our test sentences that
-gave a correct rule in about 1 case in 10. This path asks for a one-line expression, builds the structure in code,
-compares the result with the clause (scope, numbers, direction, sums, what is measured) and with the declared facts
-(owner, allowed values), gives the model one chance to repair, and otherwise answers UNRESOLVED with a reason.
-See docs/progress/M7_rule_extraction_facts_and_stairs.md for the measurements.
-"""
+"""Draft regulations as typed slots. Triage is advisory and every verdict requires approval."""
 
 from __future__ import annotations
 
-import os
 import re
-from types import SimpleNamespace
 
 from ..factgraph.convert import to_catalogue
 from ..factgraph.schema import FactGraph
 from ..rules.clauses import BULLET_LEAD, MODALS
-from ..xeval.arms import draft_arm
-from ..xeval.expr_ir import to_text
-from ..xeval.readback import describe_rule
-from ..xeval.status import clause_status
-from ..xeval.verify import verify
 from .context import ContextBundle
 from .quantities import normalise_quantities
 from .schema import Inputs
@@ -67,13 +53,6 @@ def is_bare_label(body: str) -> bool:
     return 0 < len(words) <= 2 and not any(ch.isdigit() for ch in body) and not MODALS.search(body)
 
 
-def _is_numeric_table(context: ContextBundle, body: str) -> bool:
-    if not any(ch.isdigit() for ch in body):
-        return False
-    target = next(c for c in context.clauses if c.id == context.target)
-    return target.kind == "table_row" or any(line.strip().startswith("|") for line in target.text.splitlines())
-
-
 def _row_with_header(header: str, row: str) -> str | None:
     """A table row read with the names of its columns: "Bedroom | 7 m2" under "Room | Minimum area" says "Room: Bedroom; Minimum area:
     7 m2". Alone the row says nothing about what 7 m2 is. None when the header does not fit the row (different number of cells, or a
@@ -118,32 +97,23 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         return {"status": "UNRESOLVED", "arm": "label", "model": getattr(client, "model", None),
                 "reason": "a bare heading or label: it names a topic but states no requirement, so there is nothing to check",
                 "external": False, "program": None, "readback": None, "notes": [], "tried": []}
-    # The triage sees a sentence, not a table. Send numeric rows through checked drafting.
-    if triage and not _is_numeric_table(context, body):
+    opinion = None
+    if triage:
         from .triage import triage as ask
 
         ok, why = ask(client, body, catalogue)
-        if not ok:
-            return {"status": "UNRESOLVED", "reason": f"judged not checkable from a plan: {why}" if why else
-                    "judged not checkable from a plan", "arm": "triage", "model": getattr(client, "model", None),
-                    "external": bool(getattr(client, "external", False)), "program": None, "readback": None,
-                    "notes": [], "triaged": True}
-    out = _attempt(context, catalogue, body, client, judge=fallback or client)
+        opinion = {"checkable": ok, "reason": why, "advisory": True}
+    out = _attempt(context, catalogue, body, client)
     if out["status"] != "DRAFTED" and fallback is not None:
-        second = _attempt(context, catalogue, body, fallback, judge=fallback)
+        second = _attempt(context, catalogue, body, fallback)
         if second["status"] == "DRAFTED":
             second["escalated_from"] = {"model": out["model"], "reason": out["reason"]}
+            second["triage"] = opinion
             return second
         out["fallback_tried"] = {"model": second["model"], "reason": second["reason"]}
-    if out["status"] != "DRAFTED" and "could not be reached" not in (out.get("reason") or ""):
-        # an opaque "no rule could be written" tells a reviewer nothing: one short question says what the sentence seems to need.
-        # It explains only; the clause stays declined and no verdict depends on it
-        from .triage import explain_decline
-
-        needs = explain_decline(client, body, catalogue)
-        if needs:
-            out["needs"] = needs
-            out["reason"] = f"{out['reason']} (the sentence seems to need: {needs})"
+    if out.get("evidence_requests"):
+        out["needs"] = "; ".join(request["fact"] for request in out["evidence_requests"])
+    out["triage"] = opinion
     return out
 
 
@@ -163,84 +133,7 @@ def sentences(text: str) -> list[str]:
     return [x for x in out if len(x) > 3]
 
 
-def _plain_arms(item, client, tried: list, label: str = ""):
-    for arm, switch in (("expr_slots", "REVIEWPULSE_SLOTS"), ("expr_limits", "REVIEWPULSE_LIMITS"),
-                        ("expr_relation", "REVIEWPULSE_RELATIONS")):
-        if os.environ.get(switch, "on") == "off":
-            continue
-        attempt = draft_arm(arm, item, client)
-        tried.append(label + f"{arm.removeprefix('expr_')}: " + (
-            "wrote a rule" if attempt.program is not None else (attempt.detail or attempt.stage or "declined")[:180]
-            + (f" [drafted: {attempt.raw['require'][:150]}]" if isinstance(attempt.raw, dict) and attempt.raw.get("require") else "")))
-        if attempt.program is not None:
-            return attempt
-    return None
+def _attempt(context: ContextBundle, catalogue: dict, body: str, client) -> dict:
+    from .structured import draft_structured
 
-
-def _attempt(context: ContextBundle, catalogue: dict, body: str, client, judge=None) -> dict:
-    # `text` is what is read (normalised); `quote` is what a rule cites: the clause as the document wrote it
-    quote = next(c.text for c in context.clauses if c.id == context.target)
-    item = SimpleNamespace(id=context.target, text=body, catalogue=catalogue, lang=None, ctx=context, quote=quote)
-    draft, tried = None, []
-    # the arms in order: a limit on one quantity, several limits / an exception / "at least one", how spaces connect; each one
-    # declines when the sentence is not its shape, and the free-form arm reads what none of them took
-    draft = _plain_arms(item, client, tried)
-    rest: list[str] = []
-    parts = sentences(body)
-    if draft is None and len(parts) > 1:
-        # a checklist line often holds several requirements ("1 egress door required min. 32 in. Door must not require a key.").
-        # Each sentence is tried on its own; the first that becomes a rule is kept and the others are listed as not checked
-        for i, part in enumerate(parts):
-            sub = SimpleNamespace(id=item.id, text=part, catalogue=catalogue, lang=None, ctx=context, quote=quote)
-            found = _plain_arms(sub, client, tried, label=f"sentence {i + 1}: ")
-            if found is not None:
-                draft, rest = found, [p for j, p in enumerate(parts) if j != i]
-                break
-    if draft is None:
-        draft = draft_arm("expr_verify", item, client)
-        tried.append("free-form: " + ("wrote a rule" if draft.program is not None else (draft.detail or draft.stage or "declined")[:180]))
-    status, reason = clause_status(draft)
-    out = {"status": status, "reason": reason, "arm": draft.arm, "model": getattr(client, "model", None),
-           "external": bool(getattr(client, "external", False)), "program": None, "readback": None, "notes": [], "tried": tried}
-    if draft.program is None:
-        return out
-    program = draft.program
-    program.status, program.approved_by, program.document = "draft", None, context.document
-    program.id = "I-" + "".join(ch if ch.isalnum() or ch in ".-" else "_" for ch in context.target)
-    program.unresolved = sorted(set(program.unresolved + context.missing))
-    program.not_checked = list(program.not_checked) + rest
-    for span in program.sources:
-        context.check_span(span)
-    dumped = program.model_dump(mode="json")
-    out["program"] = dumped
-    out["readback"] = to_text(dumped["requirement"])
-    if status == "DRAFTED" and os.environ.get("REVIEWPULSE_GROUNDING", "on") != "off":
-        from .grounding import check_concern, check_measured
-
-        why = (check_measured(client, body, dumped["requirement"], catalogue.get("bindings", {}))
-               or check_concern(client, body, dumped["requirement"], catalogue.get("bindings", {})))
-        if why:                      # a valid rule about the wrong quantity is worse than no rule
-            out.update(status="UNRESOLVED", reason=f"grounding: {why}", program=None, readback=None)
-            return out
-    out.update(describe_rule(dumped["requirement"], dumped["applicability"], dumped["exemption"],
-                             catalogue.get("bindings", {}), catalogue.get("whole") or "building"))
-    if status == "DRAFTED" and os.environ.get("REVIEWPULSE_ROUNDTRIP", "on") != "off":
-        from .roundtrip import compare
-
-        verdict = compare(judge or client, body, out.get("plain") or out["readback"], program.not_checked)
-        if verdict == "different":              # two answers agree the rule says something else: a wrong rule is worse than none
-            out.update(status="UNRESOLVED", program=None, readback=None,
-                       reason="round trip: the rule as written is about something different from the sentence, so it was not kept: "
-                              + str(out.get("plain") or "")[:200])
-            tried.append("round trip: refused")
-            return out
-        if verdict == "partial":
-            out["notes"] = list(out.get("notes") or []) + ["The rule may check only part of this sentence; please read it."]
-    out["applies_when"] = to_text(dumped["applicability"])
-    out["unless"] = to_text(dumped["exemption"])
-    out["notes"] = [i.message for i in verify(program, body, catalogue) if not i.blocking]
-    if "silent_direction" in (draft.detail or ""):
-        out["notes"].append("The sentence gives a figure but not whether it is a minimum or a maximum. The reading model chose "
-                            f"'{draft.detail.rsplit('=', 1)[1]}' the same way twice; please confirm the direction.")
-    out["notes"] += [f"Not checked by this rule (the plan does not show it): {part}" for part in program.not_checked]
-    return out
+    return draft_structured(context, catalogue, body, client)

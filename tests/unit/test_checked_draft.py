@@ -1,5 +1,7 @@
 """The production drafting path: a checked rule, or UNRESOLVED with a reason. A fake model stands in for Ollama."""
 
+from slot_responses import slot_response
+
 from reviewpulse.interpreter.checked import checked_draft, clause_body
 from reviewpulse.interpreter.context import assemble_context
 from reviewpulse.interpreter.runtime import run_program
@@ -15,6 +17,7 @@ class FakeModel:
     def __init__(self, require: str):
         self.require, self.calls = require, 0
 
+    @slot_response
     def complete(self, system, user, schema):
         self.calls += 1
         return {"title": "door width", "applies_when": None, "unless": None, "require": self.require,
@@ -51,7 +54,7 @@ def test_bulk_triage_does_not_discard_numeric_table_rows(monkeypatch):
     monkeypatch.setattr(checked, "_attempt", lambda *_, **__: {"status": "DRAFTED"})
     assert checked_draft(ctx, inputs, None, SimpleNamespace(), triage=True)["status"] == "DRAFTED"
     ordinary, _ = setup()
-    assert checked_draft(ordinary, inputs, None, SimpleNamespace(), triage=True)["triaged"] is True
+    assert checked_draft(ordinary, inputs, None, SimpleNamespace(), triage=True)["triage"]["checkable"] is False
 
 
 def test_a_correct_draft_is_returned_with_a_readback_and_runs():
@@ -69,7 +72,7 @@ def test_a_draft_with_the_wrong_number_is_never_returned(monkeypatch):
     model = FakeModel("forall doors d: d.doors_width >= 0.9 m")
     out = checked_draft(ctx, inputs, None, model)
     assert out["status"] == "UNRESOLVED" and out["program"] is None and "0.9" in out["reason"]
-    assert model.calls == 3                      # one repair was offered and was also wrong; the third call explains the decline
+    assert model.calls == 2                      # the bounded repair also failed validation
 
 
 def test_a_draft_that_measures_something_else_is_unresolved():
@@ -88,6 +91,7 @@ def test_a_route_requirement_is_drafted_and_judged_on_the_plan_graph():
     ctx = assemble_context("doc", text, split_text(text), "Art. 1")
 
     class RouteModel(FakeModel):
+        @slot_response
         def complete(self, system, user, schema):
             out = super().complete(system, user, schema)
             out["sources"] = [{"clause": "Art. 1", "quote": "Every bedroom reaches an exit without passing through a bathroom"}]

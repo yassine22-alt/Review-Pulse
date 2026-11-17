@@ -17,6 +17,7 @@ Op = Literal[
     "literal", "fact", "all", "any", "not",
     "eq", "ne", "lt", "le", "gt", "ge", "add", "sub", "mul", "div",
     "forall", "exists", "count", "sum", "min", "max",
+    "path_exists", "linked",
 ]
 BINARY = {"eq", "ne", "lt", "le", "gt", "ge", "add", "sub", "mul", "div"}
 LOGIC = {"all", "any", "not"}
@@ -37,6 +38,13 @@ class FlatNode(Model):
     variable: str | None = None
     where: str | None = None
     body: str | None = None
+    origin: str | None = None
+    destination: str | None = None
+    via_edges: list[str] | None = None
+    node_filter: str | None = None
+    edge_filter: str | None = None
+    a: str | None = None
+    b: str | None = None
 
 
 class FlatSpan(Model):
@@ -83,6 +91,18 @@ def compile_flat(flat: FlatProgram, document: str) -> dict:
             return {"node": node.op, "args": [sub(a) for a in node.args]}
         if node.op in BINARY:
             return {"node": node.op, "left": sub(node.left), "right": sub(node.right)}
+        if node.op == "path_exists":
+            if not node.origin or not node.destination:
+                raise ValueError("a path requires origin and destination")
+            out = {"node": node.op, "origin": node.origin, "destination": node.destination}
+            if node.via_edges is not None:
+                out["via_edges"] = node.via_edges
+            for name in ("node_filter", "edge_filter"):
+                if getattr(node, name):
+                    out[name] = sub(getattr(node, name))
+            return out
+        if node.op == "linked":
+            return {"node": node.op, "a": node.a, "b": node.b, "via_edges": node.via_edges or []}
         out = {"node": node.op, "collection": node.collection, "variable": node.variable}
         if node.where:
             out["where"] = sub(node.where)
