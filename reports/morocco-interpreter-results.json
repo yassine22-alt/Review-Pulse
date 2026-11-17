@@ -1,0 +1,1947 @@
+{
+  "fire": {
+    "drafting": {
+      "ratings": {
+        "missed executable": 7,
+        "needs review": 1,
+        "correctly unsupported": 8
+      },
+      "presented": 0,
+      "approvable": 0,
+      "wrong_presented": [
+        0,
+        0
+      ],
+      "wrong_unflagged": [
+        0,
+        0
+      ],
+      "wrong_approvable": [
+        0,
+        0
+      ],
+      "wrong_or_partial_approvable": [
+        0,
+        0
+      ]
+    },
+    "interpretations": [
+      {
+        "id": "M01",
+        "ref": "2.5.8.6, table, 20–50, RDC",
+        "frozen": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Bulk triage misclassified a count-table cell as administrative; no eligibility count drafted under the fixture's known occupant/floor scope.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "M02",
+        "ref": "2.5.8.6, same row, exit composition",
+        "frozen": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Bulk triage rejected the table's distinct normal/accessory exit composition; neither condition was retained.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "M03",
+        "ref": "2.5.8.2, ground-floor travel",
+        "frozen": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Malformed expression after repair; no 30 m versus 50 m branch tied to the count of available exits.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)"
+      },
+      {
+        "id": "M04",
+        "ref": "2.5.8.1, public-room doors on dead ends",
+        "frozen": "Walk from the public-room door to the dead-end junction at most 10 m.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Request hit the 384-token cap. No rule retained for the 10 m dead-end junction distance, which was in the catalogue and supplied in the reviewed evidence.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)"
+      },
+      {
+        "id": "M05",
+        "ref": "2.5.8.1, ground-floor connectors; 2.4.2.6",
+        "frozen": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Repair cited the passage-unit definition instead of the obligation. No 2-UP (1.40 m) stair/exit connector rule retained.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: circulation elements, their sizes, areas, counts, distances and positions)"
+      },
+      {
+        "id": "M06",
+        "ref": "2.5.8.2, protected stair discharge",
+        "frozen": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Parser rejected the repair. No direct-outside alternative or 20 m discharge-distance rule retained.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)"
+      },
+      {
+        "id": "M07",
+        "ref": "2.5.8.4, door characteristics §1; 2.4.2.6",
+        "frozen": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+        "rating": "needs review",
+        "blocker": "interpretation",
+        "difference": "Verifier rejected facts bound to the wrong owner. The 5% tolerance applies to a door's assigned passage-unit width; deriving the assignment generally needs the applicable table row and occupancy context.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "every draft disagreed with the sentence: 'dead_end' is a fact of the whole, but it is read from a member of exits; use building.dead_end or one of ['eligible']; 'discharge' is a fact of the whole, but it is read from a member of exits; use b (the sentence seems to need: the building dimensions and layout)"
+      },
+      {
+        "id": "M08",
+        "ref": "2.5.8.4, operation §3",
+        "frozen": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+        "rating": "missed executable",
+        "blocker": "interpretation",
+        "difference": "Triage rejected a door-operation clause despite the fixture's bidirectional-swing observation.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "M09",
+        "ref": "2.5.8.1, isolated steps",
+        "frozen": "No isolated group of one or two steps in the principal circulation.",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "No isolated one- or two-step group detection in the observed facts.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "M10",
+        "ref": "2.5.8.3, partition fire resistance",
+        "frozen": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Partition and structure fire ratings are unavailable.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "M11",
+        "ref": "2.5.8.3, smoke protection",
+        "frozen": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+        "rating": "correctly unsupported",
+        "blocker": "specialist judgment",
+        "difference": "Prescribed smoke protection cannot be established from these observations.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process"
+      },
+      {
+        "id": "M12",
+        "ref": "2.5.8.4, door characteristics §3",
+        "frozen": "Door glazing is transparent and is neither red nor orange.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No door glazing transparency or color facts.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "M13",
+        "ref": "2.5.8.4, special doors §4",
+        "frozen": "A nonmotorized sliding door cannot close a public evacuation exit.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No door sliding or motorization classification.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited."
+      },
+      {
+        "id": "M14",
+        "ref": "2.5.9.2, ceiling finish",
+        "frozen": "Horizontal circulation ceiling finish meets M1.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No ceiling finish reaction-to-fire classification.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "M15",
+        "ref": "2.5.9.2, partitions and floor finishes",
+        "frozen": "Circulation partition and floor finish meet M2 and M4 respectively.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Neither partition nor floor finish classifications are available.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "M16",
+        "ref": "2.5.8.4, operation §2",
+        "frozen": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "The release device, ease of opening and number of actions per leaf are unavailable.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      }
+    ],
+    "execution": {
+      "match_only_automatic": {
+        "metrics": {
+          "applicable": 32,
+          "decided": 0,
+          "pass": 0,
+          "violated": 0,
+          "unresolved": 32,
+          "false_passes": 0,
+          "confirmed_violation_precision": [
+            0,
+            0
+          ],
+          "lost_manual_decisions": 9,
+          "changed_manual_decisions": 0,
+          "wrong_decisions": 0
+        },
+        "cases": [
+          {
+            "plan": "A",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: needs review"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: needs review"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          }
+        ]
+      },
+      "match_only_reviewed": {
+        "metrics": {
+          "applicable": 32,
+          "decided": 0,
+          "pass": 0,
+          "violated": 0,
+          "unresolved": 32,
+          "false_passes": 0,
+          "confirmed_violation_precision": [
+            0,
+            0
+          ],
+          "lost_manual_decisions": 16,
+          "changed_manual_decisions": 0,
+          "wrong_decisions": 0
+        },
+        "cases": [
+          {
+            "plan": "A",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: needs review"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: needs review"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: missed executable"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "reviewer withheld approval: correctly unsupported"
+            ],
+            "manual": "UNRESOLVED"
+          }
+        ]
+      },
+      "as_is_automatic": {
+        "metrics": {
+          "applicable": 32,
+          "decided": 0,
+          "pass": 0,
+          "violated": 0,
+          "unresolved": 32,
+          "false_passes": 0,
+          "confirmed_violation_precision": [
+            0,
+            0
+          ],
+          "lost_manual_decisions": 9,
+          "changed_manual_decisions": 0,
+          "wrong_decisions": 0
+        },
+        "cases": [
+          {
+            "plan": "A",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: circulation elements, their sizes, areas, counts, distances and positions)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "every draft disagreed with the sentence: 'dead_end' is a fact of the whole, but it is read from a member of exits; use building.dead_end or one of ['eligible']; 'discharge' is a fact of the whole, but it is read from a member of exits; use b (the sentence seems to need: the building dimensions and layout)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited."
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: circulation elements, their sizes, areas, counts, distances and positions)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "every draft disagreed with the sentence: 'dead_end' is a fact of the whole, but it is read from a member of exits; use building.dead_end or one of ['eligible']; 'discharge' is a fact of the whole, but it is read from a member of exits; use b (the sentence seems to need: the building dimensions and layout)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited."
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          }
+        ]
+      },
+      "as_is_reviewed": {
+        "metrics": {
+          "applicable": 32,
+          "decided": 0,
+          "pass": 0,
+          "violated": 0,
+          "unresolved": 32,
+          "false_passes": 0,
+          "confirmed_violation_precision": [
+            0,
+            0
+          ],
+          "lost_manual_decisions": 16,
+          "changed_manual_decisions": 0,
+          "wrong_decisions": 0
+        },
+        "cases": [
+          {
+            "plan": "A",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: circulation elements, their sizes, areas, counts, distances and positions)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "every draft disagreed with the sentence: 'dead_end' is a fact of the whole, but it is read from a member of exits; use building.dead_end or one of ['eligible']; 'discharge' is a fact of the whole, but it is read from a member of exits; use b (the sentence seems to need: the building dimensions and layout)"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "SATISFIED"
+          },
+          {
+            "plan": "A",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited."
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "A",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M01",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M02",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M03",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building's layout)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M04",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: distance)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M05",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: circulation elements, their sizes, areas, counts, distances and positions)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M06",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: a fire rating note)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M07",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "every draft disagreed with the sentence: 'dead_end' is a fact of the whole, but it is read from a member of exits; use building.dead_end or one of ['eligible']; 'discharge' is a fact of the whole, but it is read from a member of exits; use b (the sentence seems to need: the building dimensions and layout)"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M08",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "VIOLATED"
+          },
+          {
+            "plan": "B",
+            "id": "M09",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M10",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M11",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M12",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M13",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: The sentence is about what the plan does not show, which is the specific type of door that is prohibited."
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M14",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M15",
+            "outcome": "UNRESOLVED",
+            "gold": "SATISFIED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+            ],
+            "manual": "UNRESOLVED"
+          },
+          {
+            "plan": "B",
+            "id": "M16",
+            "outcome": "UNRESOLVED",
+            "gold": "VIOLATED",
+            "missing": [
+              "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+            ],
+            "manual": "UNRESOLVED"
+          }
+        ]
+      }
+    }
+  },
+  "access": {
+    "drafting": {
+      "ratings": {
+        "correctly unsupported": 15
+      },
+      "presented": 0,
+      "approvable": 0,
+      "wrong_presented": [
+        0,
+        0
+      ],
+      "wrong_unflagged": [
+        0,
+        0
+      ],
+      "wrong_approvable": [
+        0,
+        0
+      ],
+      "wrong_or_partial_approvable": [
+        0,
+        0
+      ]
+    },
+    "interpretations": [
+      {
+        "id": "A01",
+        "ref": "Art. 2, first sentence",
+        "frozen": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Path surface, obstruction and usable clearance are unavailable; the reason from triage was generic.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A02",
+        "ref": "Art. 2, last sentence",
+        "frozen": "Each substantial change in level needs an inclined path.",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "The flat plan does not establish level changes and whether a ramp serves each one.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "A03",
+        "ref": "Art. 3, first sentence",
+        "frozen": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Interior corridor widths do not identify or measure exterior sidewalks.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A04",
+        "ref": "Art. 3, curb-cut slopes",
+        "frozen": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "No curb-cut slopes for the perpendicular approach and both side transitions.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "A05",
+        "ref": "Art. 4",
+        "frozen": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No car park inventory or reserved-bay designation.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A06",
+        "ref": "Art. 6, first sentence",
+        "frozen": "The listed building classes must be adapted and have a usable accessible approach route.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "The door graph alone cannot establish accessible usable paths or the absence of obstacles.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A07",
+        "ref": "Art. 6, counters",
+        "frozen": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No counter, shelf and writing-surface inventory with accessible designations.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A08",
+        "ref": "Art. 6, seats",
+        "frozen": "One in twenty seats in public rooms must be adapted.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Public-room seating and adapted-seat counts are absent.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A09",
+        "ref": "Art. 7",
+        "frozen": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "Adapting a room label cannot establish the adaptations or count of the equipment inside it.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A10",
+        "ref": "Art. 8, opening paragraph, lift limb",
+        "frozen": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+        "rating": "correctly unsupported",
+        "blocker": "specialist judgment",
+        "difference": "No lift compliance evidence and the referenced standards are outside the supplied document.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "A11",
+        "ref": "Art. 8, opening paragraph, passage limb",
+        "frozen": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "The width limb has relevant observations, but the supplied catalogue cannot express passage slope; dropping the slope would change the rule.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "A12",
+        "ref": "Art. 8, direction changes",
+        "frozen": "Each change of direction needs a resting landing of at least 1 m².",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "No detected direction-change landing or its area; generic room area is not equivalent.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A13",
+        "ref": "Art. 8, handrails",
+        "frozen": "The relevant passages require handrails on both sides.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "The graph has no handrail placement or coverage by side.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      },
+      {
+        "id": "A14",
+        "ref": "Art. 8, principal entrance numeric limb",
+        "frozen": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+        "rating": "correctly unsupported",
+        "blocker": "missing computation",
+        "difference": "Exterior door width alone does not establish principal-entrance identity or lateral slope.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+      },
+      {
+        "id": "A15",
+        "ref": "Art. 14",
+        "frozen": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+        "rating": "correctly unsupported",
+        "blocker": "missing evidence",
+        "difference": "No telephone inventory, accessibility type or entrance association.",
+        "draft": null,
+        "applies_when": null,
+        "unless": null,
+        "reason": "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+      }
+    ],
+    "execution": {
+      "metrics": {
+        "applicable": 15,
+        "decided": 0,
+        "pass": 0,
+        "violated": 0,
+        "unresolved": 15,
+        "false_passes": 0,
+        "confirmed_violation_precision": [
+          0,
+          0
+        ],
+        "lost_manual_decisions": 0,
+        "changed_manual_decisions": 0,
+        "wrong_decisions": 0
+      },
+      "cases": [
+        {
+          "id": "A01",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A02",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+          ],
+          "blocker": "missing computation"
+        },
+        {
+          "id": "A03",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A04",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+          ],
+          "blocker": "missing computation"
+        },
+        {
+          "id": "A05",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A06",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A07",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A08",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A09",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A10",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+          ],
+          "blocker": "specialist judgment"
+        },
+        {
+          "id": "A11",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+          ],
+          "blocker": "missing computation"
+        },
+        {
+          "id": "A12",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing computation"
+        },
+        {
+          "id": "A13",
+          "outcome": "UNRESOLVED",
+          "gold": "VIOLATED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        },
+        {
+          "id": "A14",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p"
+          ],
+          "blocker": "missing computation"
+        },
+        {
+          "id": "A15",
+          "outcome": "UNRESOLVED",
+          "gold": "SATISFIED",
+          "missing": [
+            "judged not checkable from a plan: the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,"
+          ],
+          "blocker": "missing evidence"
+        }
+      ],
+      "unresolved_by_blocker": {
+        "missing evidence": 9,
+        "missing computation": 5,
+        "specialist judgment": 1
+      }
+    }
+  }
+}

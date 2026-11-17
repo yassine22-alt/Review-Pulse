@@ -1,4 +1,55 @@
-# 18 November verification results
+# ReviewPulse verification results
+
+## Measured
+
+### Automated interpretation and transfer
+
+The same production checker was used on both French source sets. The complete
+run used the app's bulk drafting path with real local Qwen2.5 1.5B, without
+cached responses. The 7B configuration completed one diagnostic clause, M01,
+in 322.8 seconds and retained no rule. It was stopped for runtime. A separate
+1.5B single-clause probe also declined M01 and M02. Neither probe enters the
+table. [Method and reproduction](interpreter-holdout-method.md) ·
+[Per-obligation source references, frozen readings and drafts](interpreter-holdout-clauses.md) ·
+[Paired execution results](../reports/morocco-interpreter-results.json) ·
+[Raw drafting trace](../reports/morocco-interpreter-drafts.jsonl).
+
+| Drafting outcome | 2-14-499 fire safety | 2-11-246 accessibility |
+|---|---:|---:|
+| Obligations submitted | 16 | 15 |
+| Matches / partly matches / wrong retained drafts | 0 / 0 / 0 | 0 / 0 / 0 |
+| Correctly unsupported | 8 | 15 |
+| Needs interpretation or context review | 1 | 0 |
+| Missed an executable interpretation under the frozen plan scope | 7 | 0 |
+| Wrong rules presented / rules presented | 0 / 0 | 0 / 0 |
+| Wrong rules approvable / rules approvable | 0 / 0 | 0 / 0 |
+
+The last two denominators are empty. The results say nothing about how
+often an offered draft is wrong. The fire-safety triage declined the count
+and composition table obligations. Later stages also failed on source
+spans, expression parsing, ownership of facts and a generation cap.
+
+| Same 32 fire-safety checks | Manual interpretation | Only matching drafts approved | Drafts approved as written |
+|---|---:|---:|---:|
+| Initial decisions, pass / violated | 6 / 3 | 0 / 0 | 0 / 0 |
+| Initial unresolved | 23 | 32 | 32 |
+| Decisions with frozen reviewer evidence, pass / violated | 8 / 8 | 0 / 0 | 0 / 0 |
+| Unresolved with reviewer evidence | 16 | 32 | 32 |
+| False passes, initial / reviewed | 0 / 0 | 0 / 0 | 0 / 0 |
+| Confirmed violation precision, initial / reviewed | 3/3 / 8/8 | undefined / undefined | undefined / undefined |
+| Manual decisions lost, initial / reviewed | — | 9 / 16 | 9 / 16 |
+| Manual decisions changed to the wrong verdict | — | 0 | 0 |
+
+Both scripted approval policies had zero candidates to approve. The
+accessibility transfer run had zero correct drafts, zero automatic decisions,
+zero false passes, and 15 unresolved obligations. The blockers were missing
+evidence (9), missing computation (5), specialist judgment (1),
+interpretation (0), and incomplete inventory (0). These are the benchmark
+author's categories. Several model explanations did not name the real gap.
+No checker changes were needed to run the second document. Useful adaptation
+was not demonstrated.
+
+### Manual execution comparison
 
 The holdout uses 16 separately scored obligations from Morocco's Decree 2-14-499
 across two independently specified synthetic ground-floor plans. Separately scored
@@ -49,11 +100,32 @@ route graph even after inventory review. An erroneous human attestation can
 still lead to a wrong result. The checker cannot detect an omitted entity
 from the completeness flag alone.
 
-**Measured:** controlled execution with manually authored interpretations,
-existing predicates and frozen plan facts. The two extra automatic results
-were correct and did not add false passes on these cases.
-**Unmeasured:** automated parsing of the decree, drawing extraction accuracy,
-independent expert agreement, and coverage on another document or real project.
-The ground truth was written separately from the checker by the benchmark author,
-with no independent professional review. Do not claim statutory approval,
-general accuracy improvement or automatic checking of the whole decree.
+## Not measured
+
+Whole-document extraction, source-reference discovery, drawing extraction
+accuracy, a complete 7B run, other model settings, reviewer disagreement,
+and coverage on real projects remain unmeasured. The samples are small.
+The benchmark author wrote the labels and rated drafts without independent
+review. The explicit leakage scan found zero matching excerpts in tracked
+prompt, fixture or development files outside the holdout artifacts. It
+does not rule out paraphrases or pretraining exposure.
+
+## Do not claim
+
+Zero false passes with zero decisions is abstention. It does not establish
+safety, precision, useful zero-code transfer, or statutory compliance.
+The earlier two-decision gain applies only to manually interpreted rules
+on the frozen fact fixtures. The provisional scale bound and the finite
+checker capability set remain documented limitations.
+
+The largest named gaps tie at three obligations apiece across the two
+documents: door glazing and operation evidence (M12, M13, M16), and adapted
+equipment and seating schedules (A07–A09). If we next pilot one capability,
+choose **reviewed door glazing and operation evidence**. The existing opening
+inventory gives a place to attach it. Three is the number of directly
+addressed clauses, not a measured coverage gain. Test with independently
+labelled glazing, sliders and release hardware, including a missing field,
+a conflicting schedule, an ambiguous tag, and an inapplicable door. Run both
+frozen documents again with the same drafting configuration. Count a gain
+only when a correct draft reaches a correct new decision and false passes
+do not increase. No new capability was built for this evaluation.
