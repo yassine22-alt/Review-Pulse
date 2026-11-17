@@ -48,5 +48,17 @@ configured key before retaining an error message.
 
 The security configuration and provider-client tests passed 17/17. Tests
 cover an ignored file credential and redaction outside authentication errors.
-No Gemini API key is currently present in the process environment. The live
-hosted batch will wait for a rotated `GEMINI_API_KEY` supplied there.
+At the initial audit no Gemini API key was present in the process environment.
+After rotation and the Windows restart, GEMINI_API_KEY became accessible and
+authenticated to Google's model-list endpoint. Generation availability is
+reported separately; successful authentication does not establish quota.
+
+## Replacement credential follow-up
+
+An exact-value check used the replacement credential only in memory. It
+scanned 621 tracked working files and 829 Git blobs reachable from all local
+refs and reflogs. There were zero matches and no unreadable tracked paths.
+The credential value and fingerprint were not retained. The
+[follow-up artifact](../reports/replacement-credential-audit.json) records the
+counts and exclusions. This narrower follow-up excludes ignored artifacts and
+unrelated conversation records; it does not replace the broader audit above.
