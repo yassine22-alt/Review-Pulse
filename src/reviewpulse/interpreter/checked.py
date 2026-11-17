@@ -67,6 +67,13 @@ def is_bare_label(body: str) -> bool:
     return 0 < len(words) <= 2 and not any(ch.isdigit() for ch in body) and not MODALS.search(body)
 
 
+def _is_numeric_table(context: ContextBundle, body: str) -> bool:
+    if not any(ch.isdigit() for ch in body):
+        return False
+    target = next(c for c in context.clauses if c.id == context.target)
+    return target.kind == "table_row" or any(line.strip().startswith("|") for line in target.text.splitlines())
+
+
 def _row_with_header(header: str, row: str) -> str | None:
     """A table row read with the names of its columns: "Bedroom | 7 m2" under "Room | Minimum area" says "Room: Bedroom; Minimum area:
     7 m2". Alone the row says nothing about what 7 m2 is. None when the header does not fit the row (different number of cells, or a
@@ -111,12 +118,8 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         return {"status": "UNRESOLVED", "arm": "label", "model": getattr(client, "model", None),
                 "reason": "a bare heading or label: it names a topic but states no requirement, so there is nothing to check",
                 "external": False, "program": None, "readback": None, "notes": [], "tried": []}
-    target = next(c for c in context.clauses if c.id == context.target)
-    numeric_table = bool(re.search(r"\d", body)) and (
-        target.kind == "table_row" or any(line.strip().startswith("|") for line in target.text.splitlines())
-    )
     # The triage sees a sentence, not a table. Send numeric rows through checked drafting.
-    if triage and not numeric_table:
+    if triage and not _is_numeric_table(context, body):
         from .triage import triage as ask
 
         ok, why = ask(client, body, catalogue)
