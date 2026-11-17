@@ -1,0 +1,37 @@
+{
+  "publication": "Morocco, Bulletin Officiel no. 6306, French official translation, 6 November 2014, Decree 2-13-874, thermal regulation annex, printed page 4265.",
+  "source": "https://anre.ma/wp-content/uploads/2020/09/Decret_n_2-13-874.pdf",
+  "source_host": "Moroccan National Electricity Regulation Authority. Official gazette reproduction.",
+  "sample": "Fifteen independently scored numeric obligations, five table cells each from three adjacent residential prescriptive rows. These are not fifteen distinct numbered articles. Solar cells are the Other-orientations limb applied to known non-north glazing. The north limb is outside the fixture.",
+  "selection": "Z3, Z4, Z5; all residential TGBV 26–35% rows, first four numeric columns and one non-north solar column. No modeling outputs informed selection or truth.",
+  "scope": "Three new urban residential buildings on the prescriptive path, independently identified as Z3, Z4 and Z5, each with 30% TGBV, one uniform assembly per category and a single non-north glazing type. No exception is asserted. Applicable pairs are each row against its own building.",
+  "facts": {
+    "roof_u": ["Coefficient U des toitures exposées", "W/m2/K", "Roof assembly thermal calculation, exposed roof"],
+    "wall_u": ["Coefficient U des murs extérieurs", "W/m2/K", "Exterior wall assembly thermal calculation"],
+    "window_u": ["Coefficient U des fenêtres", "W/m2/K", "Window test certificate or verified whole-window specification"],
+    "slab_r": ["Résistance thermique R des planchers sur sol", "m2*K/W", "Ground floor assembly calculation"],
+    "solar": ["Facteur solaire FS du vitrage hors nord", "1", "Glazing specification and applicable shading calculation"]
+  },
+  "plans": {
+    "Z3": {"observed":{"roof_u":0.60,"wall_u":0.80},"attested":{"window_u":2.50,"slab_r":0.65,"solar":0.45},"source":"Synthetic signed envelope calculation Z3, rows 1–5"},
+    "Z4": {"observed":{"roof_u":0.60,"wall_u":0.55},"attested":{"window_u":2.75,"slab_r":1.35},"source":"Synthetic signed envelope calculation Z4, rows 1–4. Solar evidence unavailable. Design oracle solar 0.65."},
+    "Z5": {"observed":{"roof_u":0.50,"wall_u":0.65},"attested":{"window_u":2.45,"solar":0.45},"source":"Synthetic signed envelope calculation Z5, rows 1–3 and 5. Conflicting slab R attestations 0.90 and 1.10. Design oracle 0.90.","conflict":{"slab_r":[0.90,1.10]}}
+  },
+  "clauses": [
+    ["T01","Z3","roof_u","le",0.65,"SATISFIED"],
+    ["T02","Z3","wall_u","le",0.70,"VIOLATED"],
+    ["T03","Z3","window_u","le",2.60,"SATISFIED"],
+    ["T04","Z3","slab_r","ge",0.75,"VIOLATED"],
+    ["T05","Z3","solar","le",0.50,"SATISFIED"],
+    ["T06","Z4","roof_u","le",0.55,"VIOLATED"],
+    ["T07","Z4","wall_u","le",0.60,"SATISFIED"],
+    ["T08","Z4","window_u","le",2.60,"VIOLATED"],
+    ["T09","Z4","slab_r","ge",1.25,"SATISFIED"],
+    ["T10","Z4","solar","le",0.60,"VIOLATED"],
+    ["T11","Z5","roof_u","le",0.55,"SATISFIED"],
+    ["T12","Z5","wall_u","le",0.60,"VIOLATED"],
+    ["T13","Z5","window_u","le",2.60,"SATISFIED"],
+    ["T14","Z5","slab_r","ge",1.00,"VIOLATED"],
+    ["T15","Z5","solar","le",0.40,"VIOLATED"]
+  ]
+}
