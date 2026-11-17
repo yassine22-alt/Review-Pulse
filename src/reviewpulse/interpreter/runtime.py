@@ -293,7 +293,11 @@ class Evaluator:
             return result
         if expr.node == "count":
             lower = sum(child.value is True for child in children)
-            upper = possible_count if collection.complete else None
+            upper = possible_count if collection.complete and collection.trusted else None
+            if collection.complete and not collection.trusted:
+                missing = [f"unverified collection coverage:{expr.collection}"]
+                self.evidence_issues[expr.collection] = EvidenceIssue(
+                    code=IssueCode.INCOMPLETE_INVENTORY, detail=missing[0])
             result = Trace.combine(expr.node, lower if lower == upper else None, children, missing)
             result.count_bounds = (lower, upper)
             return result

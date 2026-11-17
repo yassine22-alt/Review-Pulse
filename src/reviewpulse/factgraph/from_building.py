@@ -11,6 +11,7 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
+from ..annotate.schedules import TAG_PREFIX_CLS
 from ..annotate.text_classify import tag_key
 from ..interpreter.schema import Binding, Fact
 from ..schema import BuildingModel
@@ -50,13 +51,17 @@ LOOKED_FOR = ("room", "door", "window", "opening", "stair")      # what this pla
 def _scheduled_heights(model: BuildingModel) -> dict[tuple[str, str], list[tuple[int, object, bool]]]:
     entries = defaultdict(list)
     for index, schedule in enumerate(model.schedules):
-        kind = {"doors": "door", "windows": "window"}.get(schedule.get("name"))
-        if kind is None:
+        schedule_name = schedule.get("name")
+        if schedule_name not in ("doors", "windows", "openings"):
             continue
         for row in schedule.get("rows", []):
             if row.get("tag"):
+                tag = tag_key(row["tag"])
+                kind = {"doors": "door", "windows": "window"}.get(schedule_name, TAG_PREFIX_CLS.get(tag[:1]))
+                if kind is None:
+                    continue
                 declared_unit = row.get("height_unit") in ("m", "cm", "mm")
-                entries[kind, tag_key(row["tag"])].append((index, row.get("height_m"), declared_unit))
+                entries[kind, tag].append((index, row.get("height_m"), declared_unit))
     return entries
 
 

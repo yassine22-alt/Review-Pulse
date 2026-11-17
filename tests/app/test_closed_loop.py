@@ -166,6 +166,75 @@ def test_a_pass_needs_a_person_to_confirm_the_inventory(env, tmp_path_factory):
     assert [f["verdict"] for f in mine] == ["PASS"]
 
 
+def test_demo_reviewed_schedule_updates_existing_rule(tmp_path):
+    import ezdxf
+
+    quote = "Every door has a scheduled height of at least 1.90 m."
+
+    class DemoModel(ScriptedModel):
+        def complete(self, system, user, schema):
+            if "CLAUSE_JSON:" not in user and "issues" not in schema.get("properties", {}):
+                target = json.loads(user)["target"]
+                if target == "Art. 2":
+                    return {"title": "scheduled height", "applies_when": None, "unless": None,
+                            "require": "forall doors d: d.scheduled_height_m >= 1.90 m",
+                            "sources": [{"clause": target, "quote": quote}], "unresolved": []}
+                return {"title": "door width", "applies_when": None, "unless": None,
+                        "require": "forall doors d: d.width_m >= 0.8 m",
+                        "sources": [{"clause": target, "quote": QUOTE}], "unresolved": []}
+            return super().complete(system, user, schema)
+
+    drawing = make_plan(tmp_path / "plan", seed=3, errors=("metric_door_narrow",), png=False)["dxf"]
+    dxf = ezdxf.readfile(drawing)
+    table = [t for t in dxf.modelspace().query("TEXT") if t.dxf.layer == "A-ANNO-TABL"]
+    header = next(t for t in table if t.dxf.text == "HAUTEUR")
+    header.dxf.text = "HAUTEUR (m)"
+    col = header.dxf.insert.x
+    heights = [t for t in table if t is not header and abs(t.dxf.insert.x - col) < 1e-6]
+    assert heights
+    cell = max(heights, key=lambda t: t.dxf.insert.y)
+    original = cell.dxf.text
+    cell.dxf.text = "-"
+    first, verified = tmp_path / "initial.dxf", tmp_path / "verified.dxf"
+    dxf.saveas(first)
+    cell.dxf.text = original
+    dxf.saveas(verified)
+    doc = tmp_path / "demo.md"
+    doc.write_text(f"Art. 1: {QUOTE}.\n\nArt. 2: {quote}\n", encoding="utf-8")
+
+    with TestClient(create_app(tmp_path / "data", llm=lambda: DemoModel(), workers=1)) as c:
+        pid = c.post("/api/projects", json={"name": "18 November rehearsal", "curator": "Demo"}).json()["id"]
+        c.patch(f"/api/projects/{pid}", json={"clear_base_pack": True})
+        wait(c, pid, upload(c, pid, "plan", first))
+        wait(c, pid, upload(c, pid, "requirements", doc))
+        for cid in ("Art. 1", "Art. 2"):
+            draft = c.post(f"/api/projects/{pid}/interpret/{cid}")
+            assert draft.json()["status"] == "DRAFTED", draft.text
+            response = c.post(f"/api/projects/{pid}/decision",
+                              json={"clause": cid, "action": "approve", "reviewer": "Demo"})
+            assert response.status_code == 200, response.text
+
+        def check():
+            c.patch(f"/api/projects/{pid}", json={"inventory_reviewed": True})
+            wait(c, pid, c.post(f"/api/projects/{pid}/check").json())
+            coverage = c.get(f"/api/projects/{pid}/coverage").json()
+            return {line["id"]: line["status"] for line in coverage["clauses"]}
+
+        initial = check()
+        assert initial == {"Art. 1": "violated", "Art. 2": "undecided"}, initial
+        findings = c.get(f"/api/projects/{pid}/findings").json()["findings"]
+        assert any(f["source"].get("clause") == "Art. 1" and f["evidence"].get("polygons") for f in findings)
+        print("Initial review:", initial)
+        (tmp_path / "coverage-before.html").write_text(
+            c.get(f"/api/projects/{pid}/coverage.html").text, encoding="utf-8")
+        wait(c, pid, upload(c, pid, "plan", verified))
+        final = check()
+        assert final == {"Art. 1": "violated", "Art. 2": "satisfied"}, final
+        print("With the verified schedule cell:", final)
+        (tmp_path / "coverage-after.html").write_text(
+            c.get(f"/api/projects/{pid}/coverage.html").text, encoding="utf-8")
+
+
 def test_the_second_readers_notes_must_be_acknowledged_and_stay_on_record(env, plan):
     c, model = env
     pid = project_with_plan_and_document(c, plan)

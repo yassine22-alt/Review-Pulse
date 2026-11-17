@@ -34,6 +34,16 @@ a reviewer can open in a browser (see [docs/RUNBOOK.md](docs/RUNBOOK.md)).
 | see what was measured and why decisions were taken | [docs/progress/](docs/progress/) and [docs/DECISIONS.md](docs/DECISIONS.md) |
 | work on the code | [docs/rule_interpreter_handoff.md](docs/rule_interpreter_handoff.md) |
 
+## 18 November demo and verification
+
+For the November 18 demonstration, see the [walkthrough](docs/nov18-demo.md)
+and [one-page results](docs/nov18-results.md). The comparison found 9 of 32
+applicable checks decidable on the supplied facts, up from 7, with zero false
+passes in both versions. It uses one regulation and two synthetic plans with
+manual interpretations. The evaluator has a finite set of capabilities, and
+the 25% estimated-scale bound is provisional. Use the setup below with
+`.[app,dev]` to run the scripted rehearsal and tests.
+
 ## Repository map
 
 ```text

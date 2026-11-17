@@ -121,6 +121,15 @@ def test_count_of_reachable_targets_keeps_route_restriction():
     assert check() == "VIOLATED"
 
 
+@pytest.mark.parametrize("inventory", [{}, {"complete": True}])
+def test_unattested_inventory_cannot_prove_no_remaining_members(inventory):
+    inputs = Inputs(bindings={}, collections={"items": {"items": [], **inventory}})
+    count = {"node": "count", "collection": "items", "variable": "$x"}
+    for op in ("ge", "lt"):
+        rule = program(binary(op, count, literal(1, "count")))
+        assert outcome(rule, inputs) == "UNRESOLVED"
+
+
 @pytest.mark.parametrize(
     ("a", "b", "expected"),
     [(True, None, "SATISFIED"), (False, None, "UNRESOLVED"), (False, False, "VIOLATED")],

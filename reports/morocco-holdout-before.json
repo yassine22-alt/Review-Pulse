@@ -1,0 +1,638 @@
+{
+  "automatic": {
+    "applicable": 32,
+    "pass": 4,
+    "violated": 3,
+    "unresolved": 25,
+    "false_passes": 0,
+    "violation_precision": 1.0,
+    "violation_precision_numerator": 3,
+    "violation_precision_denominator": 3
+  },
+  "after_review": {
+    "applicable": 32,
+    "pass": 8,
+    "violated": 8,
+    "unresolved": 16,
+    "false_passes": 0,
+    "violation_precision": 1.0,
+    "violation_precision_numerator": 8,
+    "violation_precision_denominator": 8
+  },
+  "newly_decided_by_review": {
+    "SATISFIED": 4,
+    "VIOLATED": 5
+  },
+  "blockers_after_review": {
+    "missing computation": 2,
+    "missing evidence": 12,
+    "specialist judgment": 2
+  },
+  "potential_unlocks_unique_clauses": {
+    "Circulation finish schedule with classifications": 2,
+    "Door glazing and operation evidence": 3,
+    "Isolated level-change detection": 1,
+    "Partition and structure rating evidence": 1,
+    "Smoke-control design verification": 1
+  },
+  "cases": [
+    {
+      "plan": "A",
+      "clause": "M01",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "e3.eligible (unverified)",
+          "incomplete collection:exits"
+        ]
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": "incomplete inventory",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M02",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M03",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "e3.eligible (unverified)",
+          "incomplete collection:exits"
+        ]
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": "incomplete inventory",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M04",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "building.dead_end"
+        ]
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M05",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M06",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "building.discharge"
+        ]
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M07",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M08",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "SATISFIED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "A",
+      "clause": "M09",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Isolated level-change detection"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Isolated level-change detection"
+        ]
+      },
+      "automatic_blocker": "missing computation",
+      "blocker": "missing computation",
+      "gap": "Isolated level-change detection"
+    },
+    {
+      "plan": "A",
+      "clause": "M10",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Partition and structure rating evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Partition and structure rating evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Partition and structure rating evidence"
+    },
+    {
+      "plan": "A",
+      "clause": "M11",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Smoke-control design verification"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Smoke-control design verification"
+        ]
+      },
+      "automatic_blocker": "specialist judgment",
+      "blocker": "specialist judgment",
+      "gap": "Smoke-control design verification"
+    },
+    {
+      "plan": "A",
+      "clause": "M12",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    },
+    {
+      "plan": "A",
+      "clause": "M13",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    },
+    {
+      "plan": "A",
+      "clause": "M14",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Circulation finish schedule with classifications"
+    },
+    {
+      "plan": "A",
+      "clause": "M15",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Circulation finish schedule with classifications"
+    },
+    {
+      "plan": "A",
+      "clause": "M16",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    },
+    {
+      "plan": "B",
+      "clause": "M01",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "e2.eligible (unverified)",
+          "incomplete collection:exits"
+        ]
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": "incomplete inventory",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M02",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "building.accessory"
+        ]
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M03",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "e2.eligible (unverified)",
+          "incomplete collection:exits"
+        ]
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": "incomplete inventory",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M04",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "building.dead_end"
+        ]
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M05",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M06",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "building.discharge"
+        ]
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M07",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M08",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "reviewed": {
+        "outcome": "VIOLATED",
+        "missing": []
+      },
+      "automatic_blocker": null,
+      "blocker": null,
+      "gap": null
+    },
+    {
+      "plan": "B",
+      "clause": "M09",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Isolated level-change detection"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Isolated level-change detection"
+        ]
+      },
+      "automatic_blocker": "missing computation",
+      "blocker": "missing computation",
+      "gap": "Isolated level-change detection"
+    },
+    {
+      "plan": "B",
+      "clause": "M10",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Partition and structure rating evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Partition and structure rating evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Partition and structure rating evidence"
+    },
+    {
+      "plan": "B",
+      "clause": "M11",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Smoke-control design verification"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Smoke-control design verification"
+        ]
+      },
+      "automatic_blocker": "specialist judgment",
+      "blocker": "specialist judgment",
+      "gap": "Smoke-control design verification"
+    },
+    {
+      "plan": "B",
+      "clause": "M12",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    },
+    {
+      "plan": "B",
+      "clause": "M13",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    },
+    {
+      "plan": "B",
+      "clause": "M14",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Circulation finish schedule with classifications"
+    },
+    {
+      "plan": "B",
+      "clause": "M15",
+      "gold": "SATISFIED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Circulation finish schedule with classifications"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Circulation finish schedule with classifications"
+    },
+    {
+      "plan": "B",
+      "clause": "M16",
+      "gold": "VIOLATED",
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "missing": [
+          "Door glazing and operation evidence"
+        ]
+      },
+      "automatic_blocker": "missing evidence",
+      "blocker": "missing evidence",
+      "gap": "Door glazing and operation evidence"
+    }
+  ]
+}

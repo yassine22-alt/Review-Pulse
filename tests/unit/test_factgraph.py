@@ -102,13 +102,14 @@ def test_lower_tier_measurements_are_untrusted_so_a_rule_cannot_fail_on_them():
     assert run_program(rule, to_inputs(fg), include_drafts=True)["outcome"] == "UNRESOLVED"
 
 
-@pytest.mark.parametrize("tier,unit,duplicate,expected", [
-    ("T1", "cm", False, "VIOLATED"),
-    ("T2", "cm", False, "UNRESOLVED"),
-    ("T1", None, False, "UNRESOLVED"),
-    ("T1", "cm", True, "UNRESOLVED"),
+@pytest.mark.parametrize("tier,unit,duplicate_height,expected", [
+    ("T1", "cm", None, "VIOLATED"),
+    ("T2", "cm", None, "UNRESOLVED"),
+    ("T1", None, None, "UNRESOLVED"),
+    ("T1", "cm", 1.9, "UNRESOLVED"),
+    ("T1", "cm", 2.1, "UNRESOLVED"),
 ])
-def test_schedule_height_is_separate_evidence(tier, unit, duplicate, expected):
+def test_schedule_height_is_separate_evidence(tier, unit, duplicate_height, expected):
     model = handmade.build(tier=tier)
     door = next(el for el in model.elements if el.cls == "door" and el.tag)
     header = f"Height ({unit})" if unit else "Height"
@@ -117,9 +118,9 @@ def test_schedule_height_is_separate_evidence(tier, unit, duplicate, expected):
         for i, (text, x, y) in enumerate([("Tag", 0, 10), (header, 10, 10), (door.tag, 0, 6), ("190", 10, 6)])
     ]
     model.schedules, _ = find_schedules(model.sheet)
-    if duplicate:
+    if duplicate_height is not None:
         rows = model.schedules[0]["rows"]
-        rows.append({**rows[0], "height_m": 2.1})
+        rows.append({**rows[0], "height_m": duplicate_height})
     graph = from_building(model)
     inputs = to_inputs(graph)
     # A catalogue may declare a needed fact even when this drawing cannot supply it.
@@ -129,7 +130,11 @@ def test_schedule_height_is_separate_evidence(tier, unit, duplicate, expected):
     assert result["outcome"] == expected
     if expected == "VIOLATED":
         assert ":schedule:" in inputs.facts[door.id]["scheduled_height_m"].source
+    if duplicate_height is not None:
         assert "height_m" not in inputs.facts[door.id]
+    inputs.bindings["clear_height_m"] = Binding(kind="number", unit="m")
+    clear = program(binary("ge", fact("clear_height_m", door.id), lit(1.8, "m")))
+    assert run_program(clear, inputs, include_drafts=True)["outcome"] == "UNRESOLVED"
 
 
 def test_the_format_rejects_inconsistent_files():
