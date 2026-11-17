@@ -1,0 +1,48 @@
+{
+  "fire": {
+    "document": "Décret 2-14-499, BO 6306, extrait ERP",
+    "context": {
+      "unit": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m.",
+      "table-scope": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+    },
+    "clauses": [
+      ["M01","| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |"],
+      ["M02","| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |\n| de 20 à 50 | RDC : 2 | 1 dégagement de 1 UP ; 1 dégagement accessoire |"],
+      ["M03","Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie."],
+      ["M04","Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."],
+      ["M05","Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."],
+      ["M06","Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."],
+      ["M07","La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %."],
+      ["M08","Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient."],
+      ["M09","Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales."],
+      ["M10","Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale."],
+      ["M11","En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression)."],
+      ["M12","Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites."],
+      ["M13","Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement."],
+      ["M14","Revêtement des circulations : plafonds : M1"],
+      ["M15","Revêtement des circulations : cloisons : M2 ; sols : M4"],
+      ["M16","En présence du public, toutes les portes doivent pouvoir s’ouvrir de l’intérieur par simple poussée ou par la manoeuvre facile d’un seul dispositif par vantail tel que bec-de-cane, poignée tournante, crémone à poignée ou à levier ou de tout autre dispositif conforme aux normes en vigueur."]
+    ]
+  },
+  "access": {
+    "document": "Décret 2-11-246, BO 5988, extrait",
+    "url": "https://auessaouira.ma/wp-content/uploads/2015/06/decret_81.pdf",
+    "anchors": [
+      ["A01","Le sol des cheminements","les cannes."],
+      ["A02","Toute dénivelée importante","plan incliné."],
+      ["A03","Les trottoirs doivent avoir","2.00 m."],
+      ["A04","Ce bateau est constitué","raccordement au trottoir."],
+      ["A05","Le nombre de places de stationnement","une place sur vingt."],
+      ["A06","Les constructions ouvertes au public","un cheminement praticable."],
+      ["A07","Lorsque la fonction d'un bâtiment","les personnes handicapées."],
+      ["A08","Le nombre de sièges adaptés","siège sur vingt."],
+      ["A09","Les équipements au niveau","un équipement sur dix."],
+      ["A10","Les dispositions architecturales","aux normes en vigueur"],
+      ["A11","Les dispositions architecturales","aux personnes handicapées,"],
+      ["A12","Le changement de direction","au minimum."],
+      ["A13","Ces passages doivent être munis","les deux côtés."],
+      ["A14","Pour les constructions ouvertes au public et les immeubles","1.00 m au minimum."],
+      ["A15","Le nombre de téléphones fixes","un téléphone par entrée."]
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "document": "Décret marocain 2-11-246, BO 5988, 20 octobre 2011",
+  "source": "https://auessaouira.ma/wp-content/uploads/2015/06/decret_81.pdf",
+  "scope": "Hypothetical public hospital with collective accommodation, public seating and counters, a garage, an exterior crossing and a marked public circulation network. The labels are manual scenario judgements for the selected obligations, without independent review.",
+  "plan_truth": "Firm smooth paths have a fixed bollard blocking wheelchair passage; the significant level change has no ramp. One sidewalk is 1.65 m; the curb cut has slopes 4%, 4%, 6%. One of twenty garage stalls is adapted. The bollard blocks the only accessible approach. One of ten counters and one of twenty seats is adapted. Zero of ten patient-room/toilet equipment groups are adapted. No compliant lift. Public circulation spans are 2.20 m and 1.80 m wide with longitudinal slopes at 5% and 8%. Turning landing is 0.8 m². Handrails are on one side. Main entrance 1.10 m wide with 10% lateral slope. Two entries, with an appropriate fixed telephone at both.",
+  "observed_plan": {
+    "rooms": [
+      {"id":"c1","kind":"room","room_type":"corridor","min_width_m":2.2},
+      {"id":"c2","kind":"room","room_type":"corridor","min_width_m":1.8},
+      {"id":"h","kind":"room","room_type":"lobby","min_width_m":3.5}
+    ],
+    "doors": [
+      {"id":"e1","kind":"door","width_m":1.1,"leads_to_exit":true},
+      {"id":"e2","kind":"door","width_m":1.0,"leads_to_exit":false}
+    ],
+    "edges": [["EXIT","h","e1"],["h","c1","e2"]],
+    "complete": false
+  },
+  "clauses": [
+    {"id":"A01","ref":"Art. 2, first sentence","meaning":"Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.","truth":"VIOLATED","blocker":"missing evidence","gap":"Accessible surface and obstruction evidence"},
+    {"id":"A02","ref":"Art. 2, last sentence","meaning":"Each substantial change in level needs an inclined path.","truth":"VIOLATED","blocker":"missing computation","gap":"Level-change and ramp geometry"},
+    {"id":"A03","ref":"Art. 3, first sentence","meaning":"Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.","truth":"SATISFIED","blocker":"missing evidence","gap":"Exterior pedestrian inventory and clear widths"},
+    {"id":"A04","ref":"Art. 3, curb-cut slopes","meaning":"The perpendicular curb-cut incline and both side transitions must each be below 5%.","truth":"VIOLATED","blocker":"missing computation","gap":"Curb-cut and ramp slope geometry"},
+    {"id":"A05","ref":"Art. 4","meaning":"At least one in twenty stalls in public car parks or open-to-public garages must be reserved.","truth":"SATISFIED","blocker":"missing evidence","gap":"Parking bay inventory and reserved designation"},
+    {"id":"A06","ref":"Art. 6, first sentence","meaning":"The listed building classes must be adapted and have a usable accessible approach route.","truth":"VIOLATED","blocker":"missing evidence","gap":"Accessible surface and obstruction evidence"},
+    {"id":"A07","ref":"Art. 6, counters","meaning":"When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.","truth":"SATISFIED","blocker":"missing evidence","gap":"Adapted equipment and seating schedules"},
+    {"id":"A08","ref":"Art. 6, seats","meaning":"One in twenty seats in public rooms must be adapted.","truth":"SATISFIED","blocker":"missing evidence","gap":"Adapted equipment and seating schedules"},
+    {"id":"A09","ref":"Art. 7","meaning":"In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.","truth":"VIOLATED","blocker":"missing evidence","gap":"Adapted equipment and seating schedules"},
+    {"id":"A10","ref":"Art. 8, opening paragraph, lift limb","meaning":"Public circulation spaces must be served by lifts that conform to the referenced standards.","truth":"VIOLATED","blocker":"specialist judgment","gap":"Lift conformance evidence against referenced standard"},
+    {"id":"A11","ref":"Art. 8, opening paragraph, passage limb","meaning":"Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.","truth":"VIOLATED","blocker":"missing computation","gap":"Curb-cut and ramp slope geometry"},
+    {"id":"A12","ref":"Art. 8, direction changes","meaning":"Each change of direction needs a resting landing of at least 1 m².","truth":"VIOLATED","blocker":"missing computation","gap":"Turn-specific landing geometry"},
+    {"id":"A13","ref":"Art. 8, handrails","meaning":"The relevant passages require handrails on both sides.","truth":"VIOLATED","blocker":"missing evidence","gap":"Handrail side and coverage evidence"},
+    {"id":"A14","ref":"Art. 8, principal entrance numeric limb","meaning":"The principal entrance must be at least 1 m wide with lateral slope no more than 20%.","truth":"SATISFIED","blocker":"missing computation","gap":"Principal entrance identification and lateral slope"},
+    {"id":"A15","ref":"Art. 14","meaning":"Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.","truth":"SATISFIED","blocker":"missing evidence","gap":"Telephone inventory, accessible type and entrance association"}
+  ]
+}
