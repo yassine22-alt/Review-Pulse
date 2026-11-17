@@ -1,0 +1,1081 @@
+{
+  "backend": "ollama",
+  "model": "qwen2.5:1.5b",
+  "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+  "batch_size": 4,
+  "retry_cycles": 3,
+  "http_attempts_per_completion": 3,
+  "concurrency": 1,
+  "max_tokens": 4096,
+  "timeout": 600.0,
+  "batches": [
+    {
+      "number": 1,
+      "cycle": 1,
+      "ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        12
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": [
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "cycle": 1,
+      "ids": [
+        "M05",
+        "M06",
+        "M07",
+        "M08"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        12
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": [
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "cycle": 1,
+      "ids": [
+        "M09",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        12
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": [
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "cycle": 1,
+      "ids": [
+        "M13",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        12
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": [
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "cycle": 1,
+      "ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        12
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        4
+      ],
+      "events": [
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        },
+        {
+          "http_status": 200,
+          "reason": "RuntimeError"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "M01",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M02",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M03",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "subject",
+      "reason": "subject phrase is absent from the supplied source",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "subject: subject phrase is absent from the supplied source",
+        "subject: subject phrase is absent from the supplied source"
+      ],
+      "diagnostics": [
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        },
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": true,
+        "reason": "the sentence states something about the building's access and exits, which a plan could show or violate.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M04",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": true,
+        "reason": "the sentence states something about the size of the door width, which a plan could show or violate.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M05",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": true,
+        "reason": "the sentence states something about the building as a whole (accessory, connector, dead_end, discharge, door_width, normal, travel, two_way) that a plan could s",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M06",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": true,
+        "reason": "the sentence states something about the plan, specifically the existence of exits and the distance to a door width.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M07",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": true,
+        "reason": "the sentence states something about the size of the passage that a plan could show or violate.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M08",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M09",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "subject: subject phrase is absent from the supplied source",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M10",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "subject: subject phrase is absent from the supplied source",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M11",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M12",
+      "batch": 3,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M13",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "The sentence is about what the plan does not show, which is the specific type of door that is prohibited.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M14",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "subject",
+      "reason": "subject phrase is absent from the supplied source",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "subject: subject phrase is absent from the supplied source",
+        "subject: subject phrase is absent from the supplied source"
+      ],
+      "diagnostics": [
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        },
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        }
+      ],
+      "evidence_requests": [
+        {
+          "entity": "M14",
+          "fact": "The subject phrase 'M14' is present in the supplied source document context.",
+          "unit": "1",
+          "reason": "missing",
+          "why": "The subject phrase 'M14' is not present in the supplied source document context.",
+          "where_to_look": "The subject phrase 'M14' is present in the supplied source document context.",
+          "clause": "M14"
+        }
+      ],
+      "needs": "The subject phrase 'M14' is present in the supplied source document context.",
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M15",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "subject",
+      "reason": "subject phrase is absent from the supplied source",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "subject: subject phrase is absent from the supplied source",
+        "subject: subject phrase is absent from the supplied source"
+      ],
+      "diagnostics": [
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        },
+        {
+          "stage": "subject",
+          "detail": "subject phrase is absent from the supplied source"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M16",
+      "batch": 4,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "A01",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "A02",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    },
+    {
+      "id": "A03",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something the plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance,",
+        "advisory": true
+      }
+    },
+    {
+      "id": "A04",
+      "batch": 5,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "generation_cap",
+      "reason": "configured generation budget exhausted",
+      "arm": "structured_slots",
+      "model": "qwen2.5:1.5b",
+      "external": false,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "generation_cap: configured generation budget exhausted",
+        "generation_cap: configured generation budget exhausted"
+      ],
+      "diagnostics": [
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        },
+        {
+          "stage": "generation_cap",
+          "detail": "configured generation budget exhausted"
+        }
+      ],
+      "evidence_requests": [],
+      "triage": {
+        "checkable": false,
+        "reason": "the sentence is about something a plan does not show: administrative or legal process, who may do what, permits, fees, dates, materials and their performance, p",
+        "advisory": true
+      }
+    }
+  ],
+  "configured_key_variables": [],
+  "invocation": 1,
+  "semantic_evaluated": 20,
+  "pending": [
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "A09",
+    "A10",
+    "A11",
+    "A12",
+    "A13",
+    "A14",
+    "A15",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15"
+  ],
+  "status": "IN_PROGRESS_SNAPSHOT",
+  "snapshot_note": "Incomplete local run saved before the requested Codex restart; not a completed paired comparison."
+}
