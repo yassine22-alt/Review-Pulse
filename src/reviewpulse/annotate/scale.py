@@ -37,8 +37,12 @@ MIN_CANDIDATES = 3
 MIN_CONFIDENCE = 0.6
 SNAP_TOL = 0.015
 OUTLIER_TOL = 0.02
-STANDARD_SCALES = [10, 20, 25, 50, 75, 100, 125, 150, 200, 250, 500]
-TITLE_SCALE_RE = re.compile(r"(ech|echelle|scale)\s*[:=]?\s*1\s*[:/]\s*(\d+)")
+MAX_TAU = 0.04          # inliers lie within 4% of the median at most
+TITLE_AGREE = 0.03      # a dimension pair confirms a written scale when its ratio is within 3% of it
+IMPERIAL_SCALE_RE = re.compile(r"(?<![\d/])(\d{1,2}(?:\s*/\s*\d{1,2})?)\s*(?:\"|in\b|inch)\s*=\s*1\s*(?:'|ft\b|foot)")
+STANDARD_SCALES = [10, 20, 24, 25, 32, 48, 50, 64, 75, 96, 100, 125, 128, 150, 200, 250, 500]   # metric and 1/2, 3/8, 1/4, 3/16, 1/8, 3/32 in = 1 ft
+TITLE_SCALE_RE = re.compile(r"(ech|echelle|scale|ma(?:ss|ß)stab|mst|escala|scala|schaal|skala|mittakaava)\.?\s*[:=]?\s*1\s*[:/]\s*(\d+)")
+LONE_RATIO_RE = re.compile(r"^\s*(?:m\.?\s*)?1\s*:\s*(\d+)\s*$", re.I)     # "1:100", "M 1:100": a ratio on its own
 
 
 @dataclass
@@ -182,7 +186,7 @@ def consensus(pairs: list[DimPair], snap_to=STANDARD_SCALES) -> tuple[float | No
     sure = [p.ratio for p in pairs if not p.ambiguous] or [p.ratio for p in pairs]
     med = statistics.median(sure)
     mad = statistics.median([abs(r - med) for r in sure])
-    tau = max(0.01 * med, 4 * mad)
+    tau = min(max(0.01 * med, 4 * mad), MAX_TAU * med)     # a wide spread is disagreement, not noise
     # ambiguous texts keep only the reading closest to the median
     chosen: dict[str, DimPair] = {}
     for p in pairs:
@@ -203,10 +207,21 @@ def consensus(pairs: list[DimPair], snap_to=STANDARD_SCALES) -> tuple[float | No
 
 def title_block_scale(texts: list[TextItem]) -> int | None:
     for t in texts:
+        w = t.text.replace("″", '"').replace("′", "'").replace("”", '"').replace("’", "'")
+        m = IMPERIAL_SCALE_RE.search(w.lower())        # 1/4" = 1'-0"  ->  1:48 (tried first: "scale: 1/8" = 1'" is not 1:8)
+        if m:
+            num, _, den = m.group(1).partition("/")
+            inches = int(num) / int(den) if den.strip() else float(num)
+            if inches > 0 and round(12 / inches, 2) in (12, 16, 24, 32, 48, 64, 96, 128, 192, 384):
+                return int(round(12 / inches))
+            continue
         m = TITLE_SCALE_RE.search(normalise(t.text))
         if m:
             return int(m.group(2))
-    return None
+    # a ratio standing alone ("1:100" next to a "Massstab" label that is a separate text run): used only when the sheet writes
+    # one standard ratio and no other, so a detail drawn at 1:20 on a 1:100 sheet leaves the scale open
+    ratios = {int(m.group(1)) for t in texts if (m := LONE_RATIO_RE.match(t.text)) and int(m.group(1)) in STANDARD_SCALES}
+    return ratios.pop() if len(ratios) == 1 else None
 
 
 DRAWING_UNIT_MM = [1.0, 10.0, 1000.0, 25.4, 304.8]     # mm, cm, m, inch, foot per drawing unit
@@ -288,6 +303,11 @@ def _recover_scale(sheet: Sheet, calibrate: tuple[float, float, float, float, fl
     denom = title_block_scale(sheet.texts)
     if denom:
         rep.method = "title_block"
+        agree = {p.text_id for p in pairs if abs(p.ratio - denom) / denom <= TITLE_AGREE}
+        if len(agree) >= 2:        # written scale and measured dimensions say the same: two independent sources
+            rep.notes.append(f"title block says 1:{denom}; {len(agree)} written dimensions agree with it")
+            return Scale(metres_per_unit=denom / 1000, method="title_block", confidence=0.85,
+                         n_candidates=n_cand, n_inliers=len(agree)), rep
         rep.notes.append(f"title block says 1:{denom} (unverified)")
         return Scale(metres_per_unit=denom / 1000, method="title_block", confidence=0.7,
                      n_candidates=n_cand, n_inliers=len(inl)), rep

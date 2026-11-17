@@ -19,10 +19,20 @@ def normalise(s: str) -> str:
     s = unicodedata.normalize("NFKD", s)
     s = "".join(c for c in s if not unicodedata.combining(c))
     s = s.replace("²", "2")
+    s = re.sub(r"(?<=m)�", "2", s)          # OCR drops the superscript of "m²" and leaves a replacement character
     return re.sub(r"\s+", " ", s.strip().lower())
 
 
-AREA_RE = re.compile(r"(\d+(?:[.,]\d+)?)\s*(m2|m\^2|㎡)")
+AREA_RE = re.compile(r"(\d+(?:[.,]\d+)?)\s*(m2|m\^2|㎡|sq\.?\s*m(?![a-z])|sqm(?![a-z])|sq\.?\s*ft(?![a-z])|sqft(?![a-z])|sf(?![a-z])|ft2|ft\^2)")
+SQ_FT_M2 = 0.09290304
+
+
+def area_m2(m: re.Match) -> float:
+    """Value of an AREA_RE match in square metres (square feet are converted)."""
+    v = float(m.group(1).replace(",", "."))
+    return round(v * SQ_FT_M2, 3) if re.match(r"sq\.?\s*ft|sqft|sf|ft", m.group(2)) else v
+# feet and inches as written on drawings: 12'-6", 15'-0 1/8", 9', 8", 4'-5 3/4"
+IMPERIAL_RE = re.compile(r"^(?:(\d{1,3})\s*')?\s*-?\s*(?:(\d{1,2})(?:\s+(\d{1,2})\s*/\s*(\d{1,2}))?|(\d{1,2})\s*/\s*(\d{1,2}))?\s*\"?$")
 DIM_RE = re.compile(r"^\s*(\d{1,2}[.,]\d{1,3}|\d{3,5}|\d{1,3})\s*(mm|cm|m)?\s*$")
 TAG_RE = re.compile(r"^([pfdwv])[ -]?(\d{1,3})$")
 
@@ -79,7 +89,7 @@ def label_core(text: str) -> str:
     t = normalise(text)
     t = re.split(r"\s*[/+&]\s*", t)[0]                             # "sejour/salon" -> "sejour"
     t = re.sub(r"\b([a-z])\.(?=[a-z])", r"\1", t)                  # "s.d.b" -> "sdb", "w.c." -> "wc."
-    t = re.sub(r"[\s.]*\d+([.,]\d+)?\s*m2.*$", "", t).strip()     # drop a trailing stated area
+    t = re.sub(r"[\s.]*\d+([.,]\d+)?\s*(m2|sq\.?\s*(m|ft)(?![a-z])|sqm|sqft|sf(?![a-z])|ft2).*$", "", t).strip()     # drop a trailing stated area
     # drop a trailing index: digits, or a separated OCR look-alike letter ("chambre l" = "chambre 1")
     t = re.sub(r"(?:[\s\-_]*[0-9]{1,2}|[\s\-_]+[lios])$", "", t).strip()
     return t.strip(" .:-")
@@ -140,6 +150,27 @@ def match_room_fuzzy(text: str) -> str | None:
     return next(iter(types)) if best <= cap and len(types) == 1 else None
 
 
+def imperial_mm(text: str) -> float | None:
+    """Feet-and-inches text as millimetres, or None. Needs a foot or inch mark (' or ") so that a plain number is never
+    read as imperial; typographic marks are accepted."""
+    t = text.strip().replace("′", "'").replace("’", "'").replace("″", '"').replace("”", '"')
+    t = t.replace("''", '"')
+    if "'" not in t and '"' not in t:
+        return None
+    m = IMPERIAL_RE.match(t)
+    if not m or not any(m.groups()):
+        return None
+    feet, inch, num, den, fnum, fden = m.groups()
+    total = int(feet or 0) * 12.0 + float(inch or 0)
+    if num and den and int(den):
+        total += int(num) / int(den)
+    if fnum and fden and int(fden):
+        total += int(fnum) / int(fden)
+    if total <= 0 or total > 12 * 400:
+        return None
+    return round(total * 25.4, 3)
+
+
 def classify(text: str) -> Classified:
     t = normalise(text)
     if not t:
@@ -147,7 +178,11 @@ def classify(text: str) -> Classified:
 
     m = AREA_RE.search(t)
     if m and len(t) <= 24:
-        return Classified("area", float(m.group(1).replace(",", ".")), "m2")
+        return Classified("area", area_m2(m), "m2")
+
+    mm = imperial_mm(text)
+    if mm is not None:
+        return Classified("dimension", mm, "mm")
 
     m = DIM_RE.match(t)
     if m:
@@ -171,7 +206,7 @@ def classify(text: str) -> Classified:
     rtype = match_room(text)
     if rtype:
         area = AREA_RE.search(t)
-        return Classified("room_label", float(area.group(1).replace(",", ".")) if area else None,
+        return Classified("room_label", area_m2(area) if area else None,
                           "m2" if area else None, rtype)
 
     for field, pat in TITLE_KEYWORDS.items():

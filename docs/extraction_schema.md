@@ -48,7 +48,9 @@
 | `width` | `float` | required | Sheet width, sheet units. |
 | `height` | `float` | required | Sheet height, sheet units. |
 | `rotation` | `int` | 0 | Page rotation applied at extraction, degrees. |
-| `sheet_type` | `Literal['floor_plan', 'schedule', 'structural', 'site', 'other', 'unknown']` | 'unknown' |  |
+| `sheet_type` | `Literal['floor_plan', 'schedule', 'structural', 'site', 'elevation', 'section', 'ceiling', 'cover', 'other', 'unknown']` | 'unknown' |  |
+| `sheet_kind` | `str` | '' | What the sheet mainly shows, in the recogniser's own words (annotate/sheet_kind.py). |
+| `kind_source` | `str` | '' | Who decided the kind: vision, text or off. |
 | `scale` | `Scale` | Scale(metres_per_unit=None, method='none', confidence=0.0, n_candidates=0, n_inliers=0) |  |
 | `layout` | `Layout` | Layout(frame=None, plan_box=None, title_block=None, tables=[]) |  |
 | `primitives` | `list[Primitive]` | [] |  |
@@ -104,7 +106,7 @@ Drawing-to-metres conversion. Metres exist only through this object (D6).
 | field | type | default | meaning |
 |---|---|---|---|
 | `metres_per_unit` | `float \| None` | None | Metres per sheet unit; None = unknown. |
-| `method` | `Literal['dxf_units', 'dimension_consensus', 'title_block', 'scale_bar', 'user', 'symbol_prior', 'none']` | 'none' | How the scale was obtained. `dxf_units`, `dimension_consensus`, `user` and `scale_bar` count as verified. |
+| `method` | `Literal['dxf_units', 'dimension_consensus', 'title_block', 'scale_bar', 'user', 'symbol_prior', 'stated_areas', 'none']` | 'none' | How the scale was obtained. `dxf_units`, `dimension_consensus`, `user` and `scale_bar` count as verified. |
 | `confidence` | `float` | 0.0 | Confidence of the scale estimate in [0, 1]. |
 | `n_candidates` | `int` | 0 | Dimension candidates considered. |
 | `n_inliers` | `int` | 0 | Candidates agreeing with the chosen scale. |

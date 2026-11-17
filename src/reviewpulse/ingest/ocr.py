@@ -70,9 +70,20 @@ def _paddle(det: str = DET_MODEL, rec: str = REC_MODEL):
                      use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=True)
 
 
+@lru_cache(maxsize=1)
+def _rapid():
+    """RapidOCR: PaddleOCR models run through onnxruntime. Small, no PyTorch or PaddlePaddle, CPU friendly."""
+    from rapidocr_onnxruntime import RapidOCR
+
+    return RapidOCR()
+
+
+RAPID_ROTATIONS = (0, 90, 270)      # upside-down text is rare on plans; one pass fewer on the lighter engine
+
+
 def available_backends() -> list[str]:
     out = []
-    for name, mod in (("paddle", "paddleocr"), ("easyocr", "easyocr")):
+    for name, mod in (("paddle", "paddleocr"), ("easyocr", "easyocr"), ("rapidocr", "rapidocr_onnxruntime")):
         try:
             __import__(mod)
             out.append(name)
@@ -82,6 +93,9 @@ def available_backends() -> list[str]:
 
 
 def _read_tile(tile: np.ndarray, backend: str, det: str = DET_MODEL, rec: str = REC_MODEL) -> list[tuple[np.ndarray, str, float]]:
+    if backend == "rapidocr":
+        res, _ = _rapid()(tile)
+        return [(np.array(b, float), t, float(s)) for b, t, s in (res or [])]
     if backend == "easyocr":
         import torch
 
@@ -98,11 +112,11 @@ def _read_tile(tile: np.ndarray, backend: str, det: str = DET_MODEL, rec: str = 
 def read_page(gray: np.ndarray, backend: str | None = None, rotations=None, det: str | None = None,
               rec: str | None = None) -> list[Word]:
     """Words of a grey page image (uint8), boxes in page pixels."""
-    rotations = rotations or ROTATIONS
     det, rec = det or DET_MODEL, rec or REC_MODEL
     backend = backend or (available_backends() or [None])[0]
     if backend is None:
-        raise RuntimeError("no OCR backend installed: pip install easyocr (or paddleocr + paddlepaddle==3.2.0)")
+        raise RuntimeError("no OCR backend installed: pip install rapidocr-onnxruntime (or easyocr, or paddleocr + paddlepaddle==3.2.0)")
+    rotations = rotations or (RAPID_ROTATIONS if backend == "rapidocr" else ROTATIONS)
     H, W = gray.shape
     words: list[Word] = []
     step = TILE - OVERLAP

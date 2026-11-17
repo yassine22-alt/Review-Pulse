@@ -17,6 +17,9 @@ def clause_status(draft) -> tuple[str, str]:
     if raw.get("unresolved"):
         return "UNRESOLVED", "needs something the plan does not provide: " + "; ".join(map(str, raw["unresolved"]))
     detail = draft.detail or ""
+    if re.search(r"not reachable|is not reachable|daily allowance|API key was rejected|connection refused", detail, re.I):
+        # the clause was not read at all: saying "no rule could be written" would tell a user the requirement cannot be checked
+        return "UNRESOLVED", "the reading model could not be reached, so this clause was not read: start it (or check the key) and read it again"
     missing = re.search(r"unsupported fact (\w+)|'(\w+)' is not a variable", detail)
     if missing:
         name = next(g for g in missing.groups() if g)

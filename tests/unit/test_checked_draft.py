@@ -44,12 +44,14 @@ def test_a_correct_draft_is_returned_with_a_readback_and_runs():
     assert run_program(program, inputs, include_drafts=True)["outcome"] == "VIOLATED"
 
 
-def test_a_draft_with_the_wrong_number_is_never_returned():
+def test_a_draft_with_the_wrong_number_is_never_returned(monkeypatch):
+    for arm in ("SLOTS", "LIMITS", "RELATIONS"):             # this test counts the free-form drafts, not the questions of the other arms
+        monkeypatch.setenv(f"REVIEWPULSE_{arm}", "off")
     ctx, inputs = setup()
     model = FakeModel("forall doors d: d.doors_width >= 0.9 m")
     out = checked_draft(ctx, inputs, None, model)
     assert out["status"] == "UNRESOLVED" and out["program"] is None and "0.9" in out["reason"]
-    assert model.calls == 2                      # one repair was offered, and it was also wrong
+    assert model.calls == 3                      # one repair was offered and was also wrong; the third call explains the decline
 
 
 def test_a_draft_that_measures_something_else_is_unresolved():
@@ -81,3 +83,23 @@ def test_a_route_requirement_is_drafted_and_judged_on_the_plan_graph():
     assert run_program(program, to_inputs(bad), include_drafts=True, graph=to_graph(bad))["outcome"] == "VIOLATED"
     good = from_building(handmade.build(bed_b_via_bath=False), complete=True)
     assert run_program(program, to_inputs(good), include_drafts=True, graph=to_graph(good))["outcome"] == "SATISFIED"
+
+
+def test_a_clause_title_is_not_part_of_the_checked_requirement():
+    from reviewpulse.interpreter.checked import strip_title
+
+    assert strip_title("Circulation. Every habitable room reaches an exit.") == "Every habitable room reaches an exit."
+    assert strip_title("Dead ends. A room with a single door has a window.") == "A room with a single door has a window."
+    assert strip_title("Width 0.9 m. Doors open outward.") == "Width 0.9 m. Doors open outward."     # a digit: kept
+    assert strip_title("Every door is at least 0.80 m wide.") == "Every door is at least 0.80 m wide."
+    assert strip_title("Sortie. Tout logement a une porte.") == "Tout logement a une porte."
+
+
+def test_a_list_item_is_read_together_with_the_sentence_that_introduces_the_list():
+    text = ("Art. 1 Les portes doivent offrir les caractéristiques suivantes:\n"
+            "- une largeur minimale de 0,90 mètre ;\n- un effort de manoeuvre limité.\n")
+    ctx = assemble_context("doc", text, split_text(text), "Art. 1 item 1")
+    body = clause_body(ctx)
+    assert body.startswith("Les portes doivent") and body.endswith("une largeur minimale de 0,90 mètre ;")
+    plain = assemble_context("doc", TEXT, split_text(TEXT), "Art. 1")
+    assert clause_body(plain) == "Every door has a clear width of at least 0.80 m."          # an ordinary clause is unchanged

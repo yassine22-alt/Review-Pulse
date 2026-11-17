@@ -79,7 +79,7 @@ class Scale(BaseModel):
     """Drawing-to-metres conversion. Metres exist only through this object (D6)."""
     metres_per_unit: float | None = F(None, d="Metres per sheet unit; None = unknown.")
     method: Literal["dxf_units", "dimension_consensus", "title_block", "scale_bar", "user",
-                    "symbol_prior", "none"] = F("none", d="How the scale was obtained. `dxf_units`, "
+                    "symbol_prior", "stated_areas", "none"] = F("none", d="How the scale was obtained. `dxf_units`, "
                                                 "`dimension_consensus`, `user` and `scale_bar` count as verified.")
     confidence: float = F(0.0, d="Confidence of the scale estimate in [0, 1].")
     n_candidates: int = F(0, d="Dimension candidates considered.")
@@ -120,7 +120,10 @@ class Sheet(BaseModel):
     width: float = F(d="Sheet width, sheet units.")
     height: float = F(d="Sheet height, sheet units.")
     rotation: int = F(0, d="Page rotation applied at extraction, degrees.")
-    sheet_type: Literal["floor_plan", "schedule", "structural", "site", "other", "unknown"] = "unknown"
+    sheet_type: Literal["floor_plan", "schedule", "structural", "site", "elevation", "section", "ceiling", "cover", "other",
+                        "unknown"] = "unknown"
+    sheet_kind: str = F("", d="What the sheet mainly shows, in the recogniser's own words (annotate/sheet_kind.py).")
+    kind_source: str = F("", d="Who decided the kind: vision, text or off.")
     scale: Scale = Scale()
     layout: Layout = Layout()
     primitives: list[Primitive] = []

@@ -84,8 +84,53 @@ def test_health_and_packs(client):
     assert client.get("/").status_code == 200 and "ReviewPulse" in client.get("/").text
 
 
-def test_full_flow(client, plan):
+def test_new_projects_do_not_apply_a_builtin_pack_by_default(client):
     pid = new_project(client)
+    project = client.get(f"/api/projects/{pid}").json()
+    assert project["base_pack"] is None
+    assert project["rules"]["total"] == 0
+
+
+def test_context_links_are_persisted_and_used_to_assemble_source_context(client):
+    from reviewpulse.app.interpret import _context
+
+    pid = new_project(client)
+    store = client.app.state.store
+    store.put_input(
+        store.get(pid),
+        "requirements",
+        "req.md",
+        b"Art. 1: Follow the defined term.\n2 Definition A: The term used in Art. 1.\n",
+    )
+    interpreted = store.drafts_dir(pid) / "interpreted.json"
+    interpreted.write_text('{"Art. 1": {"status": "DRAFTED"}}', encoding="utf-8")
+    links = {"Art. 1": ["2", "Table 2"]}
+    response = client.put(f"/api/projects/{pid}/context-links", json={"links": links})
+    assert response.status_code == 200 and response.json()["links"] == links
+    assert client.get(f"/api/projects/{pid}").json()["context_links"] == links
+    assert not interpreted.exists()
+
+    context = _context(store, pid, "Art. 1")
+    assert {clause.id for clause in context.clauses} == {"Art. 1", "2"}
+    assert context.missing == ["unresolved reference:Table 2"]
+
+    interpreted.write_text('{"Art. 1": {"status": "DRAFTED"}}', encoding="utf-8")
+    response = client.put(f"/api/projects/{pid}/context-links", json={"links": links})
+    assert response.status_code == 200 and interpreted.exists()
+
+
+def test_replacing_requirements_clears_document_specific_context_links(client):
+    pid = new_project(client)
+    store = client.app.state.store
+    project = store.get(pid)
+    project.context_links = {"Art. 1": ["Definition A"]}
+    store.save(project)
+    store.put_input(project, "requirements", "new.md", b"Art. 1: New source document.\n")
+    assert store.get(pid).context_links == {}
+
+
+def test_full_flow(client, plan):
+    pid = new_project(client, base_pack="starter")
     rec = wait(client, pid, upload(client, pid, "plan", plan["dxf"]))
     assert rec["result"]["sheets"] >= 1 and rec["result"]["rooms"] > 0 and rec["result"]["tiers"] == ["T1"]
 

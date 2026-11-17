@@ -27,7 +27,7 @@ DOWNLOADS = {"report.pdf": "application/pdf", "report.html": "text/html", "findi
 
 class NewProject(BaseModel):
     name: str
-    base_pack: str | None = "starter"
+    base_pack: str | None = None
     curator: str = ""
 
 
@@ -35,7 +35,20 @@ class Settings(BaseModel):
     name: str | None = None
     base_pack: str | None = None
     curator: str | None = None
+    inventory_reviewed: bool | None = None
+    external_consent: bool | None = None
     clear_base_pack: bool = False
+
+
+class ClauseRef(BaseModel):
+    clause: str
+
+
+class Decision(ClauseRef):
+    action: str                       # approve | reject | reset
+    reviewer: str = ""
+    note: str = ""
+    acknowledge: bool = False         # the reviewer read the second reader's notes and approves anyway
 
 
 class Approve(BaseModel):
@@ -45,6 +58,10 @@ class Approve(BaseModel):
 
 class Decide(BaseModel):
     curator: str = ""
+
+
+class ContextLinks(BaseModel):
+    links: dict[str, list[str]]
 
 
 class Triage(BaseModel):
@@ -57,10 +74,11 @@ class Triage(BaseModel):
 
 
 def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | None] | None = None,
-               workers: int = 2) -> FastAPI:
+               workers: int = 2, fallback: Callable[[], object | None] | None = None) -> FastAPI:
     store = Store(data_dir)
     jobs = JobRunner(store, workers)
     llm = llm or service.default_llm
+    fallback = fallback if fallback is not None else service.default_fallback
     @asynccontextmanager
     async def lifespan(_app):
         yield
@@ -83,6 +101,11 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         d["analysed"] = (store.run_dir(p.id) / "view.json").exists()
         d["checked"] = (store.run_dir(p.id) / "findings.json").exists()
         d["has_drafts"] = any(store.drafts_dir(p.id).glob("*.drafts.yaml"))
+        # what the plan reader looks for, in words: the screens say what a person confirms, from the data
+        from ..factgraph.from_building import LOOKED_FOR
+        from ..report.coverage import _every
+
+        d["looked_for"] = _every([k + "s" if not k.endswith("s") else k for k in LOOKED_FOR])
         try:
             d["rules"] = service.rules_summary(store, p)
         except ValueError as e:
@@ -104,8 +127,8 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     def health():
         # probing the model server takes seconds; the answer is kept for LLM_STATUS_TTL_S
         if time.time() - llm_cache.get("at", 0) > LLM_STATUS_TTL_S:
-            llm_cache.update(at=time.time(), status=service.llm_status(llm))
-        return {"ok": True, "llm": llm_cache["status"], "plan_types": sorted(PLAN_TYPES),
+            llm_cache.update(at=time.time(), status=service.llm_status(llm), hosted=service.llm_status(fallback))
+        return {"ok": True, "llm": llm_cache["status"], "hosted": llm_cache["hosted"], "plan_types": sorted(PLAN_TYPES),
                 "requirement_types": sorted(REQ_TYPES)}
 
     @app.get("/api/packs")
@@ -134,6 +157,10 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             p.name = body.name.strip() or p.name
         if body.curator is not None:
             p.curator = body.curator.strip()
+        if body.inventory_reviewed is not None:
+            p.inventory_reviewed = body.inventory_reviewed
+        if body.external_consent is not None:
+            p.external_consent = body.external_consent
         if body.clear_base_pack:
             p.base_pack = None
         elif body.base_pack is not None:
@@ -209,6 +236,11 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
 
+    @app.put("/api/projects/{pid}/context-links")
+    def put_context_links(pid: str, body: ContextLinks):
+        project(pid)
+        return {"links": interpretation.set_context_links(store, pid, body.links)}
+
     @app.get("/api/projects/{pid}/interpreted")
     def get_interpreted(pid: str):
         project(pid)
@@ -218,14 +250,51 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     def interpret_one(pid: str, clause_id: str):
         project(pid)
         try:
-            return interpretation.interpret_clause(store, pid, clause_id, llm)
+            return interpretation.interpret_clause(store, pid, clause_id, llm, fallback)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/review")
+    def review_one(pid: str, body: ClauseRef):
+        project(pid)
+        try:
+            return interpretation.review_clause(store, pid, body.clause, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/decision")
+    def decide_one(pid: str, body: Decision):
+        project(pid)
+        try:
+            return interpretation.decide_clause(store, pid, body.clause, body.action, body.reviewer, body.note,
+                                                body.acknowledge, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/coverage")
+    def get_coverage(pid: str):
+        project(pid)
+        try:
+            return interpretation.coverage(store, pid)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/coverage.html", include_in_schema=False)
+    def get_coverage_html(pid: str):
+        from fastapi.responses import HTMLResponse
+
+        from ..report.coverage import render_html
+
+        project(pid)
+        try:
+            return HTMLResponse(render_html(interpretation.coverage(store, pid)))
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
 
     @app.post("/api/projects/{pid}/interpret", status_code=202)
     def interpret_everything(pid: str):
         project(pid)
-        return jobs.submit(pid, "interpret", lambda job: interpretation.interpret_all(store, pid, job, llm))
+        return jobs.submit(pid, "interpret", lambda job: interpretation.interpret_all(store, pid, job, llm, fallback))
 
     @app.get("/api/projects/{pid}/drafts")
     def get_drafts(pid: str):

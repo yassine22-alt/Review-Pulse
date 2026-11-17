@@ -48,6 +48,9 @@ def building_inputs(model: BuildingModel, *, complete: bool = False) -> Inputs:
 
 def building_graph(model: BuildingModel):
     graph = build_graph(model)
+    for _node, data in graph.nodes(data=True):     # the evaluator knows boundaries by role, whatever the domain
+        if data.get("kind") in ("exit", "exterior"):
+            data["role"] = "boundary"
     confirmed = {element.id for element in model.elements if element.confirmed}
     for _a, _b, data in graph.edges(data=True):
         data["trusted"] = model.tier == "T1" or data.get("via") in confirmed

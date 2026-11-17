@@ -53,7 +53,9 @@ def to_catalogue(fg: FactGraph) -> dict:
         "bindings": {n: b.model_dump() for n, b in fg.bindings.items()},
         # a text fact is a category (something documents name in words) when the producer gave words for its values;
         # identifiers such as schedule tags are text too, but a rule must never be restricted to one of them
-        "kinds": {n: sorted(v) for n, v in values.items() if n in fg.value_labels},
-        "kind_labels": {n: {k: v for k, v in labels.items() if k in values.get(n, ())}
-                        for n, labels in fg.value_labels.items()},
+        "kinds": {n: sorted(set(values.get(n, ())) | set(fg.value_labels[n])) for n in fg.value_labels},
+        "kind_labels": {n: dict(labels) for n, labels in fg.value_labels.items()},
+        "boundaries": sorted(n.id for n in fg.nodes if n.role == "boundary"
+                             and (fg.route_targets is None or n.id in fg.route_targets)),
+        "passable": sorted(fg.passable) if fg.passable is not None else sorted({e.kind for e in fg.edges}),
     }

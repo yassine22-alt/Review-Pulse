@@ -24,6 +24,7 @@ from ..schema import Element, Primitive, Prov, Sheet
 from .walls import angle_of, dist_to_axis, wall_axis
 
 DOOR_SWEEP = (75.0, 105.0)
+PARTIAL_SWEEP = (30.0, 75.0)     # doors drawn part-open (45 degrees is common): accepted only with a leaf line at the hinge
 DOOR_RADIUS_M = (0.55, 1.20)
 LEAF_TOL = 0.05
 GAP_M = (0.50, 3.00)
@@ -88,7 +89,8 @@ def _door_arcs(sheet: Sheet, mpu: float, walls: list[Element], scale_known: bool
         if p.kind != "arc" or p.hidden or (p.block or "").startswith("dim:"):
             continue
         sw = arc_sweep(p.a0, p.a1)
-        if not (DOOR_SWEEP[0] <= sw <= DOOR_SWEEP[1]) or not (rmin <= p.radius <= rmax):
+        partial = PARTIAL_SWEEP[0] <= sw < DOOR_SWEEP[0]
+        if not (DOOR_SWEEP[0] <= sw <= DOOR_SWEEP[1] or partial) or not (rmin <= p.radius <= rmax):
             continue
         c = np.array(p.center)
         e0, e1 = _arc_end(c, p.radius, p.a0), _arc_end(c, p.radius, p.a1)
@@ -107,6 +109,8 @@ def _door_arcs(sheet: Sheet, mpu: float, walls: list[Element], scale_known: bool
                         da.leaf, da.open_end, da.closed_end = ln, e1, e0
                 if da.leaf:
                     break
+        if partial and da.leaf is None:       # a part-open arc is a door only with its leaf line (else a curved stair, a sink)
+            continue
         # the wall that carries the hinge and the closed end
         best = None
         for w in walls:

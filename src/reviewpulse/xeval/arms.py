@@ -65,6 +65,18 @@ def draft_arm(arm: str, item, client) -> Draft:
         from .expr_arms import draft_vote
 
         return draft_vote(arm, item, client)
+    if arm == "expr_slots":
+        from .slot_arm import draft_slots
+
+        return draft_slots(arm, item, client)
+    if arm == "expr_limits":
+        from .limits_arm import draft_limits
+
+        return draft_limits(arm, item, client)
+    if arm == "expr_relation":
+        from .relation_arm import draft_relation
+
+        return draft_relation(arm, item, client)
     if arm.startswith("expr"):
         from .expr_arms import draft_expr
 

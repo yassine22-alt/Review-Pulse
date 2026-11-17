@@ -33,7 +33,7 @@ REQUIRED = {
 OPTIONAL_FEATURES = {
     "web app (rp serve)": (["fastapi", "uvicorn", "multipart", "jinja2", "httpx"], 'pip install -e ".[app]"'),
     "scanned plans: wall/door/window model": (["torch", "segmentation_models_pytorch"], 'see README, "Scans"'),
-    "scanned plans: text reading (OCR)": (["paddleocr", "easyocr"], 'pip install easyocr (or paddleocr + paddlepaddle)'),
+    "scanned plans: text reading (OCR)": (["paddleocr", "easyocr", "rapidocr_onnxruntime"], 'pip install rapidocr-onnxruntime (small, CPU) or easyocr or paddleocr'),
     "tests": (["pytest", "hypothesis"], 'pip install -e ".[dev]"'),
 }
 PLANTED = ("metric_door_narrow", "metric_room_small", "topo_exit_via_bath")

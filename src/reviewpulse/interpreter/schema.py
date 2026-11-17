@@ -6,6 +6,7 @@ import math
 from typing import Annotated, Literal
 
 from pydantic import (
+    AfterValidator,
     BaseModel,
     ConfigDict,
     Field,
@@ -16,7 +17,19 @@ from pydantic import (
     model_validator,
 )
 
-Unit = Literal["1", "m", "m2", "count"]
+
+def _valid_unit(text: str) -> str:
+    """Any unit the dimensional-analysis table can parse (m, kPa, L/min, kg/m3 ...); see units.yaml."""
+    from .units import UnitError, parse_unit
+
+    try:
+        parse_unit(text)
+    except UnitError as exc:
+        raise ValueError(str(exc)) from exc
+    return text
+
+
+Unit = Annotated[str, AfterValidator(_valid_unit)]
 Scalar = StrictBool | StrictInt | StrictFloat | StrictStr
 
 
@@ -77,15 +90,23 @@ class PathExpr(Model):
     node: Literal["path_exists"]
     origin: str
     destination: str = "EXIT"
-    via_edges: list[Literal["door", "opening"]] = Field(default_factory=lambda: ["door", "opening"])
+    via_edges: list[str] = Field(default_factory=lambda: ["door", "opening"])
     node_filter: Expr | None = None
     edge_filter: Expr | None = None
 
 
+class LinkExpr(Model):
+    """An edge of one of `via_edges` kinds directly between two nodes (nothing in between); empty: any kind."""
+    node: Literal["linked"]
+    a: str
+    b: str
+    via_edges: list[str] = Field(default_factory=list)
+
+
 Expr = Annotated[
-    LiteralExpr | FactExpr | LogicExpr | BinaryExpr | SetExpr | PathExpr, Field(discriminator="node")
+    LiteralExpr | FactExpr | LogicExpr | BinaryExpr | SetExpr | PathExpr | LinkExpr, Field(discriminator="node")
 ]
-for _cls in (LogicExpr, BinaryExpr, SetExpr, PathExpr):
+for _cls in (LogicExpr, BinaryExpr, SetExpr, PathExpr, LinkExpr):
     _cls.model_rebuild()
 
 
@@ -115,6 +136,9 @@ class Program(Model):
     requirement: Expr
     sources: list[Span] = Field(min_length=1)
     unresolved: list[str] = Field(default_factory=list)
+    # Parts of the sentence the plan cannot show (a riser height, a handrail). The rule covers the rest: a violation of the covered
+    # part is a violation whatever the uncovered part says, but the rule can never report "satisfied" while a part is unchecked.
+    not_checked: list[str] = Field(default_factory=list)
 
 
 class Binding(Model):

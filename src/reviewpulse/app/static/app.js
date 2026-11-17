@@ -106,7 +106,7 @@ async function projectsView() {
     </div>
     <form class="card pad newproj" id="newproj">
       <label class="field">Project name<input type="text" name="name" required placeholder="e.g. Résidence Les Pins, lot B"></label>
-      <label class="field">Base rule pack<select name="base_pack">${packOpts}<option value="">none (project rules only)</option></select></label>
+      <label class="field">Built-in rule pack (optional)<select name="base_pack"><option value="" selected>None · use rules from uploaded documents</option>${packOpts}</select></label>
       <label class="field">Reviewer<input type="text" name="curator" placeholder="your name"></label>
       <button class="btn primary" type="submit">Create project</button>
     </form>
@@ -363,6 +363,24 @@ function wireDraft(pid, row, d) {
 const OUTCOME_TEXT = { SATISFIED: "satisfied on this plan", VIOLATED: "violated on this plan", NOT_APPLICABLE: "does not apply to this plan",
   EXEMPT: "exempt on this plan", UNRESOLVED: "cannot be decided from this plan" };
 
+async function refreshReq(pid) {
+  const y = window.scrollY;
+  try { state.project = await api(`/api/projects/${pid}`); } catch { /* keep the old copy */ }
+  await requirementsTab(pid);
+  window.scrollTo(0, y);
+}
+
+function inventoryBox(p) {
+  const ok = !!p.inventory_reviewed;
+  return `<div class="card pad invbox">
+    <div class="row"><b>Plan inventory</b>
+      <span class="badge ${ok ? "state-approved" : "state-pending"}" role="status" aria-live="polite">${ok ? "Confirmed" : "Not confirmed"}</span>
+      <span class="spacer"></span>
+      <button class="btn ${ok ? "" : "primary"}" id="invconfirm">${ok ? "Withdraw confirmation" : "Confirm"}</button></div>
+    <p class="muted">Passes are reported only after you confirm that ${esc((p.looked_for || "every member").replace(/^every /, "all the "))} on the plan were found. Until then a rule can show a violation but never a pass.</p>
+  </div>`;
+}
+
 async function requirementsTab(pid) {
   const p = state.project;
   let doc;
@@ -372,35 +390,154 @@ async function requirementsTab(pid) {
   const job = p.active_jobs.find((j) => j.kind === "interpret");
   const done = doc.clauses.filter((c) => got[c.id]);
   const n = (st) => done.filter((c) => got[c.id].status === st).length;
+  const drafted = done.filter((c) => got[c.id].status === "DRAFTED");
+  const approved = drafted.filter((c) => got[c.id].decision && got[c.id].decision.state === "approved").length;
+  const waiting = drafted.filter((c) => !got[c.id].decision).length;
   $("#tab").innerHTML = `
     <div data-job-kind="interpret"></div>
+    ${p.plan ? inventoryBox(p) : ""}
+    ${hostedBox(p)}
+    <details class="card pad">
+      <summary><b>Link supporting clauses</b> <span class="muted">Optional · for definitions or references not detected automatically</span></summary>
+      <p class="muted">Map a clause ID to the clause IDs that define or qualify it. These source clauses are included in its interpretation context. Unresolved IDs block approval rather than being guessed. Changing links clears existing interpretations and approvals for this document.</p>
+      <label class="field">Clause links (JSON)<textarea id="contextlinks" rows="5" spellcheck="false">${esc(JSON.stringify(p.context_links || {}, null, 2))}</textarea></label>
+      <button class="btn sm" id="savecontextlinks">Save source links</button>
+    </details>
     <div class="toolbar">
-      <span><b>${esc(doc.name)}</b> · ${doc.clauses.length} clauses · ${n("DRAFTED")} with a rule · ${n("UNRESOLVED")} not checked yet · ${doc.clauses.length - done.length} not read yet</span>
+      <span><b>${esc(doc.name)}</b> · ${doc.clauses.length} clauses · ${n("DRAFTED")} with a rule · ${approved} approved · ${waiting} waiting for a reviewer · ${n("UNRESOLVED")} not checked yet · ${doc.clauses.length - done.length} not read yet</span>
       <span class="spacer"></span>
       <button class="btn primary" id="readall" ${p.plan ? "" : "disabled"} title="${p.plan ? "" : "Upload a plan first: rules are written against what the plan reader can measure"}">Read all clauses</button>
     </div>
-    <p class="muted pad">Each clause becomes a rule only if the rule agrees with the sentence (category, numbers, comparison direction) and uses only facts this plan provides. Otherwise it is marked not checked yet, with the reason. Nothing here is approved: a person approves a rule before it counts.</p>
+    ${approved ? `<p class="muted pad" style="padding-top:0">Approved rules are applied when you click Run check.</p>` : ""}
+    <p class="muted pad">Each clause becomes a rule only if the rule agrees with the sentence (category, numbers, comparison direction) and uses only facts this plan provides. Otherwise it is marked not checked yet, with the reason. A rule counts only after a reviewer approves it.</p>
     <div class="card" id="clauses">${doc.clauses.map((c) => clauseCard(c, got[c.id])).join("")}</div>`;
+  const hostedToggle = $("#hostedconsent");
+  if (hostedToggle) hostedToggle.addEventListener("change", async () => {
+    try {
+      await api(`/api/projects/${pid}`, { method: "PATCH", json: { external_consent: hostedToggle.checked } });
+      toast(hostedToggle.checked ? "Hosted help allowed for this project" : "Hosted help switched off");
+    } catch (e) { toast(e.message, true); }
+    refreshReq(pid);
+  });
+  const inv = $("#invconfirm");
+  if (inv) inv.addEventListener("click", async () => {
+    inv.disabled = true;
+    try {
+      await api(`/api/projects/${pid}`, { method: "PATCH", json: { inventory_reviewed: !p.inventory_reviewed } });
+      toast(p.inventory_reviewed ? "Confirmation withdrawn" : "Plan inventory confirmed");
+    } catch (e) { toast(e.message, true); }
+    refreshReq(pid);
+  });
+  $("#savecontextlinks").addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    try {
+      const links = JSON.parse($("#contextlinks").value);
+      if (!links || Array.isArray(links) || typeof links !== "object"
+          || Object.values(links).some((ids) => !Array.isArray(ids) || ids.some((id) => typeof id !== "string"))) {
+        throw new Error("Source links must map clause IDs to arrays of clause IDs");
+      }
+      await api(`/api/projects/${pid}/context-links`, { method: "PUT", json: { links } });
+      toast("Source links saved; prior interpretations were cleared if the links changed");
+    } catch (e) { toast(e.message, true); }
+    finally { button.disabled = false; }
+    refreshReq(pid);
+  });
   $("#readall").addEventListener("click", async () => {
     try { const j = await api(`/api/projects/${pid}/interpret`, { method: "POST" }); toast("Reading started"); watchJob(pid, j, () => route()); } catch (e) { toast(e.message, true); }
   });
   for (const b of $$("[data-read]")) b.addEventListener("click", async () => {
+    if ((got[b.dataset.read] || {}).decision && !confirm("Reading again replaces the rule and removes its approval.")) return;
     b.disabled = true; b.textContent = "Reading…";
     try { await api(`/api/projects/${pid}/interpret/${encodeURIComponent(b.dataset.read)}`, { method: "POST" }); } catch (e) { toast(e.message, true); }
-    requirementsTab(pid);
+    refreshReq(pid);
   });
-  if (job) { renderJob(job); watchJob(pid, job, () => route()); }
+  for (const card of $$("[data-appr]")) wireApproval(pid, card);
+  if (job) {
+    renderJob(job); watchJob(pid, job, () => route());
+    // rules appear while the document is being read: look again every few seconds and redraw when one is new
+    const seen = Object.keys(got).length;
+    const look = async () => {
+      let now = got;
+      try { now = await api(`/api/projects/${pid}/interpreted`); } catch { /* try again */ }
+      if (Object.keys(now).length !== seen) refreshReq(pid); else state.polls.set("req-live", setTimeout(look, 3000));
+    };
+    state.polls.set("req-live", setTimeout(look, 3000));
+  }
+}
+
+function reviewNotes(r) {
+  const rv = r.review && r.review.review;
+  if (!rv) return { html: "", count: 0 };
+  const issues = rv.issues || [], lims = rv.limitations || [];
+  const items = issues.map((i) => `<li>${esc(i.message)}${i.source ? ` <span class="muted">(${esc(i.source)})</span>` : ""}</li>`)
+    .concat(lims.map((x) => `<li>${esc(x)}</li>`));
+  return { count: items.length, html: items.length
+    ? `<div class="notes"><b>Second reader notes</b><ul>${items.join("")}</ul></div>`
+    : `<div class="notes muted">The second reader found nothing to add.</div>` };
+}
+
+function approvalBlock(c, r) {
+  const d = r.decision;
+  const name = localStorage.getItem("rp_reviewer") || state.project.curator || "";
+  const chip = !d ? `<span class="badge state-pending">Waiting for a reviewer</span>`
+    : d.state === "approved" ? `<span class="badge state-approved">Approved by ${esc(d.by)}${d.at ? ` on ${esc(fmtDate(d.at))}` : ""}</span>`
+    : `<span class="badge state-rejected">Rejected by ${esc(d.by)}</span>`;
+  const notes = reviewNotes(r);
+  const id = "a" + String(c.id).replace(/[^A-Za-z0-9]/g, "_");
+  return `<div class="appr" data-appr="${esc(c.id)}" data-notes="${notes.count}">
+    <div class="row">${chip}<button class="btn sm" data-act="second">${r.review ? "Run second reader again" : "Second reader"}</button></div>
+    ${d && d.note ? `<div class="muted">Note: ${esc(d.note)}</div>` : ""}
+    <div class="notebox" aria-live="polite">${notes.html}</div>
+    <div class="row apprform">
+      <label class="field" for="${id}n">Reviewer<input type="text" id="${id}n" data-f="name" value="${esc(name)}" placeholder="your name"></label>
+      <label class="field" for="${id}t">Note (optional)<input type="text" id="${id}t" data-f="note" placeholder="why"></label>
+    </div>
+    <label class="ack ${notes.count ? "" : "hide"}"><input type="checkbox" data-f="ack"> I read the second reader's notes</label>
+    <div class="actions">
+      <button class="btn sm primary" data-act="approve" ${notes.count ? "disabled" : ""}>Approve</button>
+      <button class="btn sm danger" data-act="reject">Reject</button>
+      ${d ? `<button class="btn sm" data-act="reset">Withdraw decision</button>` : ""}
+    </div></div>`;
+}
+
+function wireApproval(pid, box) {
+  const clause = box.dataset.appr;
+  const f = (k) => $(`[data-f="${k}"]`, box);
+  const ack = f("ack"), approve = $('[data-act="approve"]', box);
+  ack.addEventListener("change", () => { approve.disabled = +box.dataset.notes > 0 && !ack.checked; });
+  const url = (x) => `/api/projects/${pid}/${x}`;
+  for (const b of $$("[data-act]", box)) b.addEventListener("click", async () => {
+    const act = b.dataset.act;
+    const reviewer = f("name").value.trim();
+    if (act !== "second" && !reviewer) { toast("Enter the reviewer name first", true); f("name").focus(); return; }
+    if (reviewer) localStorage.setItem("rp_reviewer", reviewer);
+    $$("button", box).forEach((x) => { x.disabled = true; });
+    if (act === "second") b.textContent = "Reading, please wait…";
+    try {
+      if (act === "second") {
+        await api(url("review"), { method: "POST", json: { clause } });
+        toast("Second reader finished");
+      } else {
+        await api(url("decision"), { method: "POST", json: { clause, action: act, reviewer, note: f("note").value.trim(), acknowledge: ack.checked } });
+        toast({ approve: "Rule approved", reject: "Rule rejected", reset: "Decision withdrawn" }[act]);
+      }
+    } catch (e) { toast(e.message, true); }
+    refreshReq(pid);
+  });
 }
 
 function clauseCard(c, r) {
   const head = `<div class="clause"><div class="cid">${esc(c.id)}</div><p>${esc(c.text)}</p></div>`;
   if (!r) return `<div class="draft">${head}<div class="muted">Not read yet</div><div class="row"><button class="btn" data-read="${esc(c.id)}">Read this clause</button></div></div>`;
+  const appr = r.decision && r.decision.state === "approved";
   const body = r.status === "DRAFTED"
-    ? `<div class="flag" style="color:var(--pass)">Rule written. It reads: <code>${esc(r.readback)}</code>${r.applies_when && r.applies_when !== "true" ? `<br>Applies when: <code>${esc(r.applies_when)}</code>` : ""}${r.unless && r.unless !== "false" ? `<br>Unless: <code>${esc(r.unless)}</code>` : ""}</div>
-       <div class="muted">On this plan (preview, not approved): <b>${esc(OUTCOME_TEXT[r.preview?.outcome] || r.preview?.outcome || "")}</b>${(r.preview?.missing || []).length ? ` · needs: ${esc(r.preview.missing.join(", "))}` : ""}</div>
-       ${(r.notes || []).map((x) => `<div class="flag">${esc(x)}</div>`).join("")}`
+    ? `<div class="flag" style="color:var(--pass)"><b>Rule written. In words:</b> ${esc(r.plain || r.readback)}${r.plain_applies_when ? `<br>Applies when: ${esc(r.plain_applies_when)}` : ""}${r.plain_unless ? `<br>Unless: ${esc(r.plain_unless)}` : ""}<br><span class="muted">Exact form: <code>${esc(r.readback)}</code></span></div>
+       <div class="muted">On this plan (${appr ? "preview" : "preview, not approved"}): <b>${esc(OUTCOME_TEXT[r.preview?.outcome] || r.preview?.outcome || "")}</b>${(r.preview?.missing || []).length ? ` · needs: ${esc(r.preview.missing.join(", "))}` : ""}</div>
+       ${(r.notes || []).map((x) => `<div class="flag">${esc(x)}</div>`).join("")}
+       ${approvalBlock(c, r)}`
     : `<div class="flag">Not checked yet: ${esc(r.reason)}</div>`;
-  return `<div class="draft">${head}${body}<div class="row"><button class="btn" data-read="${esc(c.id)}">Read again</button></div></div>`;
+  return `<div class="draft">${head}<div>${body}<div class="row" style="margin-top:10px"><button class="btn" data-read="${esc(c.id)}">Read again</button></div></div></div>`;
 }
 
 /* ---------------------------------------------------------------- results tab */
@@ -422,6 +559,7 @@ async function resultsTab(pid) {
     <div class="results">
       <div class="card viewer" id="viewer"></div>
       <aside class="side">
+        <div class="muted covline hide" id="covline" aria-live="polite"></div>
         <div class="summary" id="summary"></div>
         <div class="filters">
           <input type="text" id="q" placeholder="Search findings, rules, rooms">
@@ -429,6 +567,7 @@ async function resultsTab(pid) {
         </div>
         <div class="card flist" id="flist"></div>
         <div class="downloads">
+          <a class="btn sm" href="/api/projects/${pid}/coverage.html" target="_blank" rel="noopener">Coverage report</a>
           <a class="btn sm" href="/api/projects/${pid}/files/report.pdf" target="_blank">Annotated PDF</a>
           <a class="btn sm" href="/api/projects/${pid}/files/report.html" target="_blank">HTML report</a>
           <a class="btn sm" href="/api/projects/${pid}/files/findings.csv">CSV</a>
@@ -441,7 +580,20 @@ async function resultsTab(pid) {
   renderSummary();
   renderViewer();
   renderFindings();
+  coverageLine(pid);
   if (active) { renderJob(active); watchJob(pid, active, () => route()); }
+}
+
+async function coverageLine(pid) {
+  try {
+    const { summary: s } = await api(`/api/projects/${pid}/coverage`);
+    const c = s.counts || {};
+    const other = (c.not_checked || 0) + (c.not_read || 0) + (c.not_run || 0) + (c.awaiting_approval || 0) + (c.rejected || 0);
+    const box = $("#covline");
+    if (!box) return;
+    box.textContent = `${s.decided} of ${s.clauses} clauses decided on this plan · ${c.violated || 0} violated · ${c.satisfied || 0} satisfied · ${c.undecided || 0} could not be decided · ${other} not checked`;
+    box.classList.remove("hide");
+  } catch { /* no coverage yet: keep the line hidden */ }
 }
 
 function sheetOf(R) { return R.view.sheets[R.sheet] || { findings: [], elements: [], rooms: [] }; }
@@ -483,6 +635,7 @@ function renderFindings() {
       <p class="msg">${esc(f.message)}</p>
       ${f.detected || f.required ? `<p class="vals">detected <b>${esc(f.detected || "–")}</b> · required <b>${esc(f.required || "–")}</b></p>` : ""}
       ${src.clause ? `<p class="src">${esc(src.clause)}${src.doc ? ` · ${esc(String(src.doc).split("/").pop())}` : ""}</p>` : ""}
+      ${f.evidence && f.evidence.interpreted === true ? `<p class="src"><span class="badge state-approved">From clause ${esc(src.clause || "")}, approved by ${esc(f.evidence.approved_by || "")}</span></p>` : ""}
       ${dism ? `<p class="src">dismissed: ${esc(dism)}</p>` : ""}
       <div class="fact">${f.verdict !== "PASS" ? (dism ? `<button class="btn sm" data-act="restore">Restore</button>` : `<button class="btn sm" data-act="dismiss">Dismiss…</button>`) : ""}
         ${f.subject_ids.length ? `<button class="btn sm ok" data-act="confirm">Confirm elements</button>` : ""}</div>
@@ -723,6 +876,18 @@ function elementPopover(e, ev) {
   for (const b of $$("[data-t]", pop)) b.addEventListener("click", () => { closePop(); triage({ [b.dataset.t]: [e.id], recheck: true }); });
 }
 
+/* A hosted model is offered only when the server has one configured; the reviewer decides per project. */
+function hostedBox(p) {
+  const h = state.health && state.health.hosted;
+  if (!h || !h.available) return "";
+  return `<div class="card pad">
+    <label><input type="checkbox" id="hostedconsent" ${p.external_consent ? "checked" : ""}>
+      <b>Allow hosted help for clauses the local model cannot read</b></label>
+    <p class="muted">Only the clause text and the names of the facts this plan provides are sent to <b>${esc(h.provider)}</b> (${esc(h.model)}). Never the plan or the drawing, and the document's file name is replaced by the word "document". The answer goes through the same checks and needs the same approval.</p>
+    ${h.data_note ? `<p class="muted">${esc(h.data_note)} Read the provider's current terms before allowing a confidential document.</p>` : ""}
+  </div>`;
+}
+
 /* ---------------------------------------------------------------- boot */
 async function boot() {
   try {
@@ -730,7 +895,7 @@ async function boot() {
     const l = state.health.llm;
     const pill = $("#llm");
     pill.className = "pill " + (l.available ? "on" : "off");
-    pill.textContent = l.available ? `drafting model · ${l.model}` : `drafting model offline`;
+    pill.textContent = l.available ? `drafting model · ${l.model}${l.external ? " (hosted)" : " (local)"}` : `drafting model offline`;
   } catch (e) { toast("Server not reachable: " + e.message, true); }
   window.addEventListener("hashchange", route);
   route();
