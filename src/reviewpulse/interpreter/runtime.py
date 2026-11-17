@@ -35,6 +35,7 @@ OPERATIONS = {
     "mul": operator.mul,
     "div": operator.truediv,
 }
+COMPARISONS = {"eq", "ne", "lt", "le", "gt", "ge"}
 
 
 @dataclass
@@ -44,6 +45,8 @@ class Trace:
     missing: list[str] = field(default_factory=list)
     evidence: list[str] = field(default_factory=list)
     children: list[Trace] = field(default_factory=list)
+    # An absent upper bound means the inventory may contain unseen members.
+    count_bounds: tuple[int, int | None] | None = None
 
     @classmethod
     def combine(cls, node: str, value: Scalar | None, children: list[Trace], missing=()) -> Trace:
@@ -65,6 +68,36 @@ def _logic(node: str, children: list[Trace]) -> Trace:
     else:
         value = True if True in values else None if None in values else False
     return Trace.combine(node, value, children)
+
+
+def _compare_bounds(node: str, left: Trace, right: Trace) -> bool | None:
+    def bounds(trace: Trace) -> tuple[int | float, int | float] | None:
+        if trace.count_bounds is not None:
+            lower, upper = trace.count_bounds
+            return lower, math.inf if upper is None else upper
+        if type(trace.value) in (int, float):
+            return trace.value, trace.value
+        return None
+
+    a, b = bounds(left), bounds(right)
+    if a is None or b is None:
+        return None
+    a_min, a_max = a
+    b_min, b_max = b
+    if node in ("eq", "ne"):
+        equal = True if a_min == a_max == b_min == b_max else (
+            False if a_max < b_min or b_max < a_min else None
+        )
+        return None if equal is None else (equal if node == "eq" else not equal)
+    if node in ("gt", "ge"):
+        a_min, a_max, b_min, b_max = b_min, b_max, a_min, a_max
+        node = "lt" if node == "gt" else "le"
+    compare = OPERATIONS[node]
+    if compare(a_max, b_min):
+        return True
+    if not compare(a_min, b_max):
+        return False
+    return None
 
 
 class Evaluator:
@@ -103,7 +136,8 @@ class Evaluator:
             children = [self.evaluate(arg, variables) for arg in (expr.left, expr.right)]
             left, right = (child.value for child in children)
             if left is None or right is None:
-                return Trace.combine(expr.node, None, children)
+                result = _compare_bounds(expr.node, *children) if expr.node in COMPARISONS else None
+                return Trace.combine(expr.node, result, children)
             if expr.node == "div" and right == 0:
                 return Trace.combine(expr.node, None, children, ["division by zero"])
             try:
@@ -182,6 +216,7 @@ class Evaluator:
         if self.remaining < 0:
             raise ValueError("collection evaluation budget exceeded")
         children, selected = [], []
+        possible_count = 0
         uncertain = not collection.complete
         if not collection.complete:
             self.evidence_issues[expr.collection] = EvidenceIssue(
@@ -207,10 +242,13 @@ class Evaluator:
                 children.append(branch)
             else:
                 children.append(condition)
+                if expr.node == "count":
+                    possible_count += 1
+                    continue
                 if condition.value is None:
                     uncertain = True
                     continue
-                body = Trace("literal", 1) if expr.node == "count" else self.evaluate(expr.body, scope)
+                body = self.evaluate(expr.body, scope)
                 children.append(body)
                 if body.value is None:
                     uncertain = True
@@ -226,11 +264,17 @@ class Evaluator:
             result = _logic("all" if expr.node == "forall" else "any", children)
             result.node = expr.node
             return result
+        if expr.node == "count":
+            lower = sum(child.value is True for child in children)
+            upper = possible_count if collection.complete else None
+            result = Trace.combine(expr.node, lower if lower == upper else None, children, missing)
+            result.count_bounds = (lower, upper)
+            return result
         if uncertain:
             return Trace.combine(expr.node, None, children, missing)
         if expr.node in ("min", "max") and not selected:
             return Trace.combine(expr.node, None, children, [f"empty aggregate:{expr.collection}"])
-        fn = {"count": len, "sum": sum, "min": min, "max": max}[expr.node]
+        fn = {"sum": sum, "min": min, "max": max}[expr.node]
         value = fn(selected)
         if isinstance(value, float) and not math.isfinite(value):
             return Trace.combine(expr.node, None, children, ["non-finite aggregate result"])

@@ -131,6 +131,8 @@ def find_schedules(sheet: Sheet) -> tuple[list[dict], list[tuple]]:
             for f in ("width", "height", "sill"):
                 if r.get(f) and _num(r[f]) is not None:
                     row[f + "_m"] = round(_to_m(_num(r[f]), units.get(f), units[f + "_max"]), 4)
+            if units.get("height") and re.fullmatch(r"\d+(?:[.,]\d+)?", r.get("height", "")):
+                row["height_unit"] = units["height"]
             if r.get("type"):
                 row["type"] = r["type"]
             if r.get("qty") and _num(r["qty"]) is not None:

@@ -214,6 +214,7 @@ One rule result (the Judge's output, `findings.json`).
 | `tier` | `Literal['T1', 'T2', 'T3']` | required |  |
 | `evidence` | `dict` | {} | Witness path, dimension chain, polygons to draw. |
 | `source` | `dict` | {} | Requirement source: `{doc, clause, span}`. |
+| `assessment` | `reviewpulse.outcomes.Assessment \| None` | None |  |
 
 ### Prov
 
@@ -423,6 +424,11 @@ These objects are built and validated by the generator (round-trip and attrs con
  "source": {
   "doc": "docs/requirements_example.md",
   "clause": "Art. 6.2"
+ },
+ "assessment": {
+  "outcome": "UNRESOLVED",
+  "severity": "MAJOR",
+  "rule_authority": "APPROVED_REQUIREMENT"
  }
 }
 ```

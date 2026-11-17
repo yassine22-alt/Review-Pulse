@@ -57,6 +57,9 @@ Their uncertainty propagation needs separate work.
 
 The runner attaches OCR-omission issues only to the annotation presence function.
 An isolated room on uncertain input receives MISSING_CONNECTION.
+Positive but unconfirmed annotation evidence receives UNVERIFIED_ANNOTATION.
+For a forbidden-connection rule, observing no offending edge on a T2/T3 plan
+cannot prove absence across the whole plan; it receives INCOMPLETE_INVENTORY.
 Unknown inferred classes block both pass and fail. Shared scale, geometry,
 classification and annotation dependency identifiers are recorded on findings.
 The compound evaluator records every fact read, connection dependency and collection
@@ -93,6 +96,11 @@ input returned PASS rather than WARNING. New tests cover both comparator directi
 interval boundaries, independent tolerance, annotation/connectivity attribution,
 critical severity, quantifiers, dependencies and labelled evaluation metrics.
 The saved-model replay and all 19 original passes are listed in verdict-policy-scan.md.
+
+On the final replay, two old passes remain SATISFIED and seventeen become
+UNRESOLVED. None becomes VIOLATED. The two decisive scalar checks have intervals
+entirely above their limits and confirmed geometry under the existing confirmation
+mechanism. This remains conditional on the provisional uncertainty bound.
 
 The 25% bound is a policy assumption and may underestimate actual scale error.
 Geometry confirmations still use the existing mechanism. Source tiers are not

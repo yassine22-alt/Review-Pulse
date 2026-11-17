@@ -111,10 +111,16 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
             raw.dependencies += [f"classification:{i}" for i in sorted(deciding)]
             raw.dependencies += [f"geometry:{i}" for i in sorted(deciding)]
             if rule.check.fn == "present":
+                raw.confirmation_issue = EvidenceIssue(code=IssueCode.UNVERIFIED_ANNOTATION,
+                                                        detail="annotation evidence needs confirmation")
                 raw.dependencies += [f"annotation:{i}" for i in sorted(deciding)]
                 if raw.violated and ocr_text:
                     raw.evidence_issues.append(EvidenceIssue(code=IssueCode.POSSIBLE_TEXT_OMISSION,
                                                             detail=OCR_ABSENCE))
+            if rule.check.fn == "forbidden_link" and raw.violated is False and model.tier != "T1":
+                raw.evidence_issues.append(EvidenceIssue(code=IssueCode.INCOMPLETE_INVENTORY,
+                                                        detail="connection inventory is not confirmed complete"))
+                raw.dependencies.append("inventory:connections")
             if rule.check.fn == "isolated_rooms" and raw.violated and model.tier != "T1":
                 raw.evidence_issues.append(EvidenceIssue(code=IssueCode.MISSING_CONNECTION,
                                                         detail="no confirmed opening connects this room"))

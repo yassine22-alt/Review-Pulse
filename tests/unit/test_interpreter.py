@@ -66,6 +66,61 @@ def outcome(rule, inputs):
     return run_program(rule, inputs, include_drafts=True)["outcome"]
 
 
+@pytest.mark.parametrize("op,limit,complete,trusted,expected", [
+    ("ge", 2, False, True, "SATISFIED"),
+    ("ge", 3, False, True, "UNRESOLVED"),
+    ("ge", 4, True, True, "VIOLATED"),
+    ("le", 2, True, True, "UNRESOLVED"),
+    ("le", 3, True, True, "SATISFIED"),
+    ("le", 1, False, True, "VIOLATED"),
+    ("eq", 1, False, True, "VIOLATED"),
+    ("ne", 4, True, True, "SATISFIED"),
+    ("gt", 1, False, True, "SATISFIED"),
+    ("lt", 4, True, True, "SATISFIED"),
+    ("ge", 2, False, False, "UNRESOLVED"),
+])
+def test_count_comparison_uses_only_justified_bounds(op, limit, complete, trusted, expected):
+    inputs = Inputs(
+        bindings={"eligible": {"kind": "boolean"}},
+        collections={"items": {"items": ["a", "b", "c", "d"], "complete": complete, "trusted": trusted}},
+        facts={k: {"eligible": {"value": v, "source": k, "trusted": True}}
+               for k, v in {"a": True, "b": True, "c": None, "d": False}.items()},
+    )
+    count = {"node": "count", "collection": "items", "variable": "$x", "where": fact("eligible", "$x")}
+    result = run_program(program(binary(op, count, literal(limit, "count"))), inputs, include_drafts=True)
+    assert result["outcome"] == expected
+    assert result["trace"]["children"][2]["children"][0]["count_bounds"] == (
+        2 if trusted else 0, 3 if complete else None
+    )
+
+
+def test_count_of_reachable_targets_keeps_route_restriction():
+    inputs = Inputs(
+        bindings={"allowed": {"kind": "boolean"}},
+        collections={"targets": {"items": ["a", "b", "c"], "complete": True, "trusted": True}},
+        facts={k: {"allowed": {"value": v, "source": k, "trusted": True}}
+               for k, v in {"a": True, "b": True, "c": True, "passage": None}.items()},
+        graph_complete=True,
+    )
+    graph = nx.MultiGraph()
+    graph.add_edges_from([("EXIT", "a"), ("EXIT", "b"), ("EXIT", "passage"), ("passage", "c")],
+                         kind="door", trusted=True)
+    route = {"node": "path_exists", "origin": "EXIT", "destination": "$x",
+             "node_filter": fact("allowed", "$node")}
+    count = {"node": "count", "collection": "targets", "variable": "$x", "where": route}
+    requirement = binary("ge", count, literal(2, "count"))
+    rule = program(requirement)
+
+    def check():
+        return run_program(rule, inputs, graph=graph, include_drafts=True)["outcome"]
+
+    assert check() == "SATISFIED"
+    graph.remove_edge("EXIT", "b")
+    assert check() == "UNRESOLVED"
+    inputs.facts["passage"]["allowed"].value = False
+    assert check() == "VIOLATED"
+
+
 @pytest.mark.parametrize(
     ("a", "b", "expected"),
     [(True, None, "SATISFIED"), (False, None, "UNRESOLVED"), (False, False, "VIOLATED")],

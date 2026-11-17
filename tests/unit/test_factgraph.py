@@ -3,12 +3,14 @@
 import handmade
 import pytest
 
+from reviewpulse.annotate.schedules import find_schedules
 from reviewpulse.factgraph import FactGraph, to_catalogue, to_graph, to_inputs
 from reviewpulse.factgraph import io as fio
 from reviewpulse.factgraph.from_building import from_building
 from reviewpulse.interpreter.building import building_graph, building_inputs
 from reviewpulse.interpreter.runtime import run_program
 from reviewpulse.interpreter.schema import Binding, Fact, Program
+from reviewpulse.schema import TextItem
 from reviewpulse.xeval.synth import binary, fact, lit, setop
 from reviewpulse.xeval.world import bindings_of
 
@@ -98,6 +100,36 @@ def test_lower_tier_measurements_are_untrusted_so_a_rule_cannot_fail_on_them():
     assert all(not f.trusted for n in fg.nodes for name, f in n.attrs.items() if name == "area_m2")
     rule = program(setop("forall", "rooms", binary("ge", fact("area_m2"), lit(100, "m2"))))
     assert run_program(rule, to_inputs(fg), include_drafts=True)["outcome"] == "UNRESOLVED"
+
+
+@pytest.mark.parametrize("tier,unit,duplicate,expected", [
+    ("T1", "cm", False, "VIOLATED"),
+    ("T2", "cm", False, "UNRESOLVED"),
+    ("T1", None, False, "UNRESOLVED"),
+    ("T1", "cm", True, "UNRESOLVED"),
+])
+def test_schedule_height_is_separate_evidence(tier, unit, duplicate, expected):
+    model = handmade.build(tier=tier)
+    door = next(el for el in model.elements if el.cls == "door" and el.tag)
+    header = f"Height ({unit})" if unit else "Height"
+    model.sheet.texts = [
+        TextItem(id=str(i), text=text, bbox=(x, y, x + 3, y + 2), prov=door.prov)
+        for i, (text, x, y) in enumerate([("Tag", 0, 10), (header, 10, 10), (door.tag, 0, 6), ("190", 10, 6)])
+    ]
+    model.schedules, _ = find_schedules(model.sheet)
+    if duplicate:
+        rows = model.schedules[0]["rows"]
+        rows.append({**rows[0], "height_m": 2.1})
+    graph = from_building(model)
+    inputs = to_inputs(graph)
+    # A catalogue may declare a needed fact even when this drawing cannot supply it.
+    inputs.bindings.setdefault("scheduled_height_m", Binding(kind="number", unit="m"))
+    rule = program(binary("ge", fact("scheduled_height_m", door.id), lit(2, "m")))
+    result = run_program(rule, inputs, include_drafts=True)
+    assert result["outcome"] == expected
+    if expected == "VIOLATED":
+        assert ":schedule:" in inputs.facts[door.id]["scheduled_height_m"].source
+        assert "height_m" not in inputs.facts[door.id]
 
 
 def test_the_format_rejects_inconsistent_files():

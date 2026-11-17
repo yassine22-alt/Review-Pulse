@@ -7,8 +7,11 @@ a verified scale, openings below that need a confirmed element, labels read by a
 
 from __future__ import annotations
 
+import math
+from collections import defaultdict
 from pathlib import Path
 
+from ..annotate.text_classify import tag_key
 from ..interpreter.schema import Binding, Fact
 from ..schema import BuildingModel
 from .schema import Edge, FactGraph, Inventory, Node, Provenance
@@ -20,6 +23,8 @@ BINDINGS = {
     "width_m": Binding(kind="number", unit="m", description="Clear width of an opening"),
     "has_window": Binding(kind="boolean", description="The room has a window"),
     "tag": Binding(kind="string", description="Schedule tag of the element"),
+    "scheduled_height_m": Binding(kind="number", unit="m",
+                                  description="Nominal opening height listed in the opening schedule"),
     "tread_depth_m": Binding(kind="number", unit="m", description="Stair tread depth (pitch of the tread lines)"),
     "stair_width_m": Binding(kind="number", unit="m", description="Stair flight width (length of the tread lines)"),
     "tread_lines": Binding(kind="number", unit="count", description="Number of tread lines drawn in the stair flight"),
@@ -28,6 +33,19 @@ STAIR_TRUST = 0.8                                   # calibrated probability a d
 SCALE_METHODS = ("dxf_units", "dimension_consensus", "user", "scale_bar")
 BOUNDARY = {"EXIT": "exit", "EXTERIOR": "exterior"}
 LOOKED_FOR = ("room", "door", "window", "opening", "stair")      # what this plan reader searches for
+
+
+def _scheduled_heights(model: BuildingModel) -> dict[tuple[str, str], list[tuple[int, object, bool]]]:
+    entries = defaultdict(list)
+    for index, schedule in enumerate(model.schedules):
+        kind = {"doors": "door", "windows": "window"}.get(schedule.get("name"))
+        if kind is None:
+            continue
+        for row in schedule.get("rows", []):
+            if row.get("tag"):
+                declared_unit = row.get("height_unit") in ("m", "cm", "mm")
+                entries[kind, tag_key(row["tag"])].append((index, row.get("height_m"), declared_unit))
+    return entries
 
 
 def room_labels(types: set[str]) -> dict[str, list[str]]:
@@ -51,6 +69,10 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
     t1 = model.tier == "T1"
     scale_known = model.sheet.scale.method in SCALE_METHODS
     measured = t1 and scale_known
+    schedules = _scheduled_heights(model)
+    vector_schedule = t1 and model.sheet.mode == "vector" and not any(
+        t.prov.source == "ocr" for t in model.sheet.texts
+    )
     nodes: list[Node] = []
     used: set[str] = set()
 
@@ -92,6 +114,14 @@ def from_building(model: BuildingModel, *, complete: bool = False) -> FactGraph:
             "width_m": fact("width_m", el.attrs.get("width_m"), src, trusted),
             "tag": fact("tag", el.tag, src, t1 or el.confirmed),
         }.items() if v is not None}
+        rows = schedules.get((el.cls, tag_key(el.tag)), ()) if el.tag else ()
+        if len(rows) == 1:
+            index, height, declared_unit = rows[0]
+            if declared_unit and type(height) in (float, int) and math.isfinite(height) and height > 0:
+                source = f"{model.sheet.id}:schedule:{index}:{tag_key(el.tag)}"
+                attrs["scheduled_height_m"] = fact(
+                    "scheduled_height_m", height, source, vector_schedule
+                )
         nodes.append(Node(id=el.id, kind=el.cls, label=el.tag, attrs=attrs))
     nodes.append(Node(id="building", kind="building", role="whole"))
     boundary = {e.b for e in model.edges if e.b in BOUNDARY} | {e.a for e in model.edges if e.a in BOUNDARY}
