@@ -77,3 +77,18 @@ All 262,144 class pixels agreed. The maximum probability difference was
 [comparison artifact](../reports/segmentation-regression-gemini-round.json)
 records the image, checkpoint and output hashes. This verifies prediction
 stability for one prepared image. New segmentation accuracy was not measured.
+
+## Complete slow suite
+
+The complete slow test selection passed **45/45**, with **0 failures**, **0
+skips** and **948 non-slow tests deselected**, in 905.97 seconds. All five
+raster acceptance cases that previously crashed passed after restoring the
+recognition checkpoint. The invocation was:
+
+```text
+python -m pytest -m slow -q --tb=short --basetemp=runs/gemini-complete-slow --junitxml=runs/gemini-complete-slow.xml -p no:cacheprovider
+```
+
+The [JUnit report](../reports/gemini-complete-slow.xml) preserves every selected
+test result. This run verifies the existing slow tests in the current local
+environment. No held-out segmentation accuracy claim follows from it.

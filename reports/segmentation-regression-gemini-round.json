@@ -1,0 +1,16 @@
+{
+  "baseline_commit": "aa0d957120378b5cc7fc77f6cabecb956656eafb",
+  "source_identical": true,
+  "checkpoint_sha256": "25951fa33d8da57b95b6e9aec9265b6c891bd7df5c0197217c453228dfe85ac6",
+  "sample": "synth_0014_topo_exit_via_bath_200dpi.png",
+  "prepared_image_shape": [
+    512,
+    512
+  ],
+  "prepared_image_sha256": "d3f7dbd3c7ca96fec8dc70cf91eba515a2568bfd432905db2ddb4a293339a539",
+  "pixels_different": 0,
+  "maximum_probability_difference": 0.0,
+  "scale_equal": true,
+  "class_map_sha256": "fafd558a3eb9022029807a8cdf415edb3abc947b76f0b482dbf8a745a82f629f",
+  "meaning": "Prediction regression on one synthetic acceptance image. No new accuracy benchmark."
+}
