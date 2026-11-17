@@ -111,7 +111,12 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         return {"status": "UNRESOLVED", "arm": "label", "model": getattr(client, "model", None),
                 "reason": "a bare heading or label: it names a topic but states no requirement, so there is nothing to check",
                 "external": False, "program": None, "readback": None, "notes": [], "tried": []}
-    if triage:                       # a quick yes/no first; a no is shown with its reason and can be overridden
+    target = next(c for c in context.clauses if c.id == context.target)
+    numeric_table = bool(re.search(r"\d", body)) and (
+        target.kind == "table_row" or any(line.strip().startswith("|") for line in target.text.splitlines())
+    )
+    # The triage sees a sentence, not a table. Send numeric rows through checked drafting.
+    if triage and not numeric_table:
         from .triage import triage as ask
 
         ok, why = ask(client, body, catalogue)

@@ -75,10 +75,10 @@ def derive_relations(fg: FactGraph) -> FactGraph:
         source = f"derived:{node.id}"
         for kind in kinds:
             mine = [e for e in edges if e.kind == kind]
-            node.attrs[f"links_{_slug(kind)}"] = Fact(value=len(mine), source=source,
+            node.attrs[f"links_{_slug(kind)}"] = Fact(value=len(mine), source=source, origin="computed",
                                                      trusted=all(e.trusted for e in mine) or fg.graph_complete)
         mine = [e for e in edges if e.kind in passable]
-        node.attrs["links_passable"] = Fact(value=len(mine), source=source,
+        node.attrs["links_passable"] = Fact(value=len(mine), source=source, origin="computed",
                                             trusted=all(e.trusted for e in mine) or fg.graph_complete)
         for b in boundaries:
             if nx.has_path(trusted_graph, node.id, b.id):
@@ -87,12 +87,12 @@ def derive_relations(fg: FactGraph) -> FactGraph:
                 value, trusted = True, False          # only through connections nobody confirmed
             else:
                 value, trusted = False, fg.graph_complete
-            node.attrs[f"reaches_{_slug(b.id)}"] = Fact(value=value, source=source, trusted=trusted)
+            node.attrs[f"reaches_{_slug(b.id)}"] = Fact(value=value, source=source, trusted=trusted, origin="computed")
     whole = fg.whole()
     if whole is not None:
         for b in boundaries:
             touching = [e for e in incident.get(b.id, []) if e.kind in passable]
-            whole.attrs[f"links_to_{_slug(b.id)}"] = Fact(value=len(touching), source=f"derived:{b.id}",
+            whole.attrs[f"links_to_{_slug(b.id)}"] = Fact(value=len(touching), source=f"derived:{b.id}", origin="computed",
                                                          trusted=all(e.trusted for e in touching) or fg.graph_complete)
     fg.bindings = bindings
     return fg

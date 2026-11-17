@@ -128,11 +128,11 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
     nodes: list[Node] = []
     used: set[str] = set()
 
-    def fact(name, value, source, trusted):
+    def fact(name, value, source, trusted, origin="computed"):
         if value is None:
             return None
         used.add(name)
-        return Fact(value=value, source=source, trusted=trusted)
+        return Fact(value=value, source=source, trusted=trusted, origin=origin)
 
     distances = _exit_distances(model)
     rows = schedule_rows(model)
@@ -146,7 +146,7 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         # never a failure
         sure = measured and room.prov.evidence.get("boundary") != "inferred_from_labels"
         attrs = {k: v for k, v in {
-            "room_type": fact("room_type", room.type, src, label_ok),
+            "room_type": fact("room_type", room.type, src, label_ok, "extracted"),
             "area_m2": fact("area_m2", room.area_m2, src, sure),
             "min_width_m": fact("min_width_m", room.min_width_m, src, sure),
             "has_window": fact("has_window", room.has_window, src, measured),
@@ -158,16 +158,17 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         glazing = window_area(model, room.id, opening_area)
         if glazing is not None:
             used.update(("window_area_m2",))
-            attrs["window_area_m2"] = Fact(value=round(glazing, 4), source=src, trusted=measured)
+            attrs["window_area_m2"] = Fact(value=round(glazing, 4), source=src, trusted=measured, origin="computed")
             if room.area_m2:
                 used.add("window_area_ratio")
-                attrs["window_area_ratio"] = Fact(value=round(glazing / room.area_m2, 4), source=src, trusted=sure)
+                attrs["window_area_ratio"] = Fact(value=round(glazing / room.area_m2, 4), source=src,
+                                                trusted=sure, origin="computed")
         if model.sheet.scale.metres_per_unit:
             # with a scale the distance is a fact of every room; where no route reaches the outside its value is unknown
             # (not absent), so a rule about it is undecided instead of impossible to write
             used.add("exit_distance_m")
             attrs["exit_distance_m"] = Fact(value=distances.get(room.id), source=src,
-                                            trusted=sure and room.id in distances)
+                                            trusted=sure and room.id in distances, origin="computed")
         nodes.append(Node(id=room.id, kind="room", label=room.label, attrs=attrs))
     for el in model.elements:
         if el.cls in ("wall", "other", "fixture"):
@@ -191,10 +192,11 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         height, sill = (row or {}).get("height_m"), (row or {}).get("sill_m")
         attrs = {k: v for k, v in {
             "width_m": fact("width_m", el.attrs.get("width_m"), src, trusted),
-            "height_m": fact("height_m", height, src, t1 or el.confirmed),
-            "sill_height_m": fact("sill_height_m", sill if el.cls == "window" else None, src, t1 or el.confirmed),
+            "height_m": fact("height_m", height, src, t1 or el.confirmed, "schedule"),
+            "sill_height_m": fact("sill_height_m", sill if el.cls == "window" else None, src,
+                                   t1 or el.confirmed, "schedule"),
             "opening_area_m2": fact("opening_area_m2", opening_area.get(el.id), src, trusted),
-            "tag": fact("tag", el.tag, src, t1 or el.confirmed),
+            "tag": fact("tag", el.tag, src, t1 or el.confirmed, "extracted"),
             # an exit door (egress door, entrance) is one whose far side is the outside; only a door has the property
             "leads_to_exit": fact("leads_to_exit", el.id in exit_openings, src, t1 or el.confirmed) if el.cls == "door" else None,
         }.items() if v is not None}
@@ -208,7 +210,7 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
             if declared_unit and type(height) in (float, int) and math.isfinite(height) and height > 0:
                 source = f"{model.sheet.id}:schedule:{index}:{tag_key(el.tag)}"
                 attrs["scheduled_height_m"] = fact(
-                    "scheduled_height_m", height, source, vector_schedule
+                    "scheduled_height_m", height, source, vector_schedule, "schedule"
                 )
         nodes.append(Node(id=el.id, kind=el.cls, label=el.tag, attrs=attrs))
     # what the sheet itself says about the drawing: plan reviewers ask whether it is to scale and whether it is dimensioned
@@ -228,7 +230,8 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         attrs = {}
         if e.width_m is not None:
             used.add("width_m")
-            attrs["width_m"] = Fact(value=e.width_m, source=f"{model.sheet.id}:{e.via or i}", trusted=measured)
+            attrs["width_m"] = Fact(value=e.width_m, source=f"{model.sheet.id}:{e.via or i}", trusted=measured,
+                                    origin="computed")
         inferred = bool(e.prov.evidence.get("inferred"))          # joined by label-seeded splitting, not by a drawn opening
         edges.append(Edge(id=f"e{i}", a=e.a, b=e.b, kind=e.kind, via=e.via, attrs=attrs,
                           trusted=(t1 or (e.via in confirmed)) and not inferred))

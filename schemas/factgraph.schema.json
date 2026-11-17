@@ -131,6 +131,36 @@
      "default": false,
      "title": "Conflicting",
      "type": "boolean"
+    },
+    "origin": {
+     "anyOf": [
+      {
+       "enum": [
+        "extracted",
+        "computed",
+        "schedule",
+        "reviewer-attested"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Origin"
+    },
+    "reviewer": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reviewer"
     }
    },
    "required": [

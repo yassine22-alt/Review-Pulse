@@ -1,0 +1,10 @@
+{
+  "document": "Decree 2-13-874, Bulletin Officiel 6306, p. 4265",
+  "caption": "Approche prescriptive, bâtiments résidentiels",
+  "headers": ["U des toitures exposées (W/m²/K)", "U des murs extérieurs (W/m²/K)", "U des fenêtres (W/m²/K)", "R des planchers sur sol (m²·K/W)", "Facteur solaire FS du vitrage"],
+  "rows": [
+    ["Z3", "26 – 35 %", "≤ 0,65", "≤ 0,70", "≤ 2,60", "≥ 0,75", "Autres : ≤ 0,5"],
+    ["Z4", "26 – 35 %", "≤ 0,55", "≤ 0,60", "≤ 2,60", "≥ 1,25", "Autres : ≤ 0,6"],
+    ["Z5", "26 – 35 %", "≤ 0,55", "≤ 0,60", "≤ 2,60", "≥ 1,00", "Autres : ≤ 0,4"]
+  ]
+}

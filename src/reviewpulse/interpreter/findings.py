@@ -39,6 +39,8 @@ class Explained:
     selected: int                       # members the rule applied to (a filter may leave some out)
     issues: list[EvidenceIssue] = field(default_factory=list)      # why a decisive answer is not possible
     dependencies: list[str] = field(default_factory=list)          # facts and inventories the answer rests on
+    evidence_requests: list[dict] = field(default_factory=list)
+    fact_provenance: list[dict] = field(default_factory=list)
 
 
 def _fmt(value, unit: str | None) -> str:
@@ -113,7 +115,8 @@ def explain(program: Program, inputs: Inputs, graph=None) -> Explained:
                 members.append(MemberResult(entity, "unknown", missing=body.missing[:FACT_LIMIT]))
     issues = [EvidenceIssue.model_validate(i) for i in result.get("evidence_issues", [])]
     issues += [i for i in _issues_from_missing(missing) if i.code not in {x.code for x in issues}]
-    return Explained(outcome, missing, members, selected, issues, list(result.get("dependencies", [])))
+    return Explained(outcome, missing, members, selected, issues, result["dependencies"],
+                     result["evidence_requests"], result["fact_provenance"])
 
 
 def _issues_from_missing(missing: list[str]) -> list[EvidenceIssue]:
@@ -182,7 +185,8 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | 
     base = {"rule_id": program.id, "severity": "major", "tier": tier, "source": _source(program),
             "assessment": assessment}
     meta = {"outcome": explained.outcome, "program_id": program.id, "interpreted": True,
-            "approved_by": program.approved_by, "title": program.title}
+            "approved_by": program.approved_by, "title": program.title,
+            "evidence_requests": explained.evidence_requests, "fact_provenance": explained.fact_provenance}
     findings: list[Finding] = []
     if explained.outcome == "VIOLATED":
         violated = [m for m in explained.members if m.state == "violated"]

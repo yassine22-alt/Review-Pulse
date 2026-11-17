@@ -153,11 +153,22 @@ class Binding(Model):
         return self
 
 
+EvidenceOrigin = Literal["extracted", "computed", "schedule", "reviewer-attested"]
+
+
 class Fact(Model):
     value: Scalar | None = None
     source: str = Field(min_length=1)
     trusted: bool = False
     conflicting: bool = False
+    origin: EvidenceOrigin | None = None
+    reviewer: str | None = None
+
+    @model_validator(mode="after")
+    def named_attestation(self):
+        if self.origin == "reviewer-attested" and (not (self.reviewer or "").strip() or not self.source.strip()):
+            raise ValueError("an attestation requires a named reviewer and source citation")
+        return self
 
 
 class Collection(Model):
@@ -177,6 +188,7 @@ class Inputs(Model):
     facts: dict[str, dict[str, Fact]] = Field(default_factory=dict)
     collections: dict[str, Collection] = Field(default_factory=dict)
     graph_complete: bool = False
+    evidence_locations: dict[str, str] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def typed_facts(self):

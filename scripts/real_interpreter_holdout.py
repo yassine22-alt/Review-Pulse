@@ -153,6 +153,7 @@ def main():
     parser.add_argument("--max-tokens", type=int, default=1500)
     parser.add_argument("--request-timeout", type=float, default=240)
     parser.add_argument("--triage", action="store_true", help="enable the app's bulk-document triage")
+    parser.add_argument("--suite", choices=("fire", "access"), action="append")
     args = parser.parse_args()
     manifest, items = sources(args.repo, args.access_text)
     fire = read(args.repo / "reports/morocco-holdout-labels.json")
@@ -177,7 +178,7 @@ def main():
     if args.output.exists():
         done = {json.loads(line)["id"] for line in args.output.read_text(encoding="utf-8").splitlines()}
     with args.output.open("a", encoding="utf-8") as stream:
-        for suite in ("fire", "access"):
+        for suite in args.suite or ("fire", "access"):
             for key in items[suite]:
                 if key in done:
                     continue

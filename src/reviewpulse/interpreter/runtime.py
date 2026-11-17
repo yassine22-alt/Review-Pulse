@@ -9,6 +9,7 @@ from dataclasses import asdict, dataclass, field
 import networkx as nx
 
 from ..outcomes import EvidenceIssue, IssueCode, Outcome
+from .evidence import EvidenceRequest
 from .schema import (
     BinaryExpr,
     Expr,
@@ -108,6 +109,7 @@ class Evaluator:
         self.remaining = max_steps
         self.dependencies: set[str] = set()
         self.evidence_issues: dict[str, EvidenceIssue] = {}
+        self.fact_reads: dict[tuple[str, str], str | None] = {}
 
     def evaluate(self, expr: Expr, variables: dict[str, str] | None = None) -> Trace:
         self.remaining -= 1
@@ -124,12 +126,15 @@ class Evaluator:
             self.dependencies.add(key)
             fact = self.inputs.facts.get(entity, {}).get(expr.name)
             if fact is None:
+                self.fact_reads[entity, expr.name] = "missing"
                 return Trace(expr.node, missing=[key])
             if fact.value is None or not fact.trusted or fact.conflicting:
                 reason = (
-                    "conflicting" if fact.conflicting else "unverified" if not fact.trusted else "missing"
+                    "conflicting" if fact.conflicting else "missing" if fact.value is None else "unverified"
                 )
+                self.fact_reads[entity, expr.name] = reason
                 return Trace(expr.node, missing=[f"{key} ({reason})"], evidence=[fact.source])
+            self.fact_reads[entity, expr.name] = None
             return Trace(expr.node, fact.value, evidence=[fact.source])
         if isinstance(expr, LogicExpr):
             return _logic(expr.node, [self.evaluate(arg, variables) for arg in expr.args])
@@ -343,11 +348,29 @@ def run_program(
     if program.not_checked and outcome == "SATISFIED":
         outcome = "UNRESOLVED"            # the covered part holds; a part of the sentence was never checked, so no pass is claimed
     root = Trace.combine("program", None, [applicability, exemption, requirement], [*program.unresolved, *program.not_checked])
+    clause = program.sources[0].clause if program.sources else program.id
+    evidence_requests = []
+    fact_provenance = []
+    for (entity, name), reason in sorted(evaluator.fact_reads.items()):
+        fact = inputs.facts.get(entity, {}).get(name)
+        binding = inputs.bindings[name]
+        if fact is not None:
+            fact_provenance.append({"entity": entity, "fact": name, "unit": binding.unit,
+                                    **fact.model_dump(mode="json")})
+        if reason and outcome == "UNRESOLVED":
+            evidence_requests.append(EvidenceRequest(
+                entity=entity, fact=name, unit=binding.unit, reason=reason, clause=clause,
+                why=f"{program.title} reads {binding.description or name} for {entity}.",
+                where_to_look=inputs.evidence_locations.get(name) or
+                (fact.source if fact else "Relevant drawing, schedule or signed reviewer observation"),
+            ).model_dump(mode="json"))
     return {
         "rule_id": program.id,
         "outcome": outcome,
         "dependencies": sorted(evaluator.dependencies),
         "evidence_issues": [i.model_dump(mode="json") for i in evaluator.evidence_issues.values()],
+        "evidence_requests": evidence_requests,
+        "fact_provenance": fact_provenance,
         "preview": program.status == "draft",
         "document": program.document,
         "sources": [source.model_dump() for source in program.sources],

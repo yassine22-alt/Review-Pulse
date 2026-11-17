@@ -36,6 +36,24 @@ def test_the_clause_label_is_not_read_as_a_number():
     assert clause_body(ctx) == "Every door has a clear width of at least 0.80 m."
 
 
+def test_bulk_triage_does_not_discard_numeric_table_rows(monkeypatch):
+    from types import SimpleNamespace
+
+    from reviewpulse.interpreter import checked, triage
+    from reviewpulse.interpreter.context import ContextBundle
+    from reviewpulse.rules.clauses import Clause
+
+    body = "| Item | Limit |\n| Beam | 2 m |"
+    ctx = ContextBundle(document="spec", text=body, target="r",
+                        clauses=[Clause("r", "", body, 0, 0, len(body))])
+    _, inputs = setup()
+    monkeypatch.setattr(triage, "triage", lambda *_: (False, "administrative"))
+    monkeypatch.setattr(checked, "_attempt", lambda *_, **__: {"status": "DRAFTED"})
+    assert checked_draft(ctx, inputs, None, SimpleNamespace(), triage=True)["status"] == "DRAFTED"
+    ordinary, _ = setup()
+    assert checked_draft(ordinary, inputs, None, SimpleNamespace(), triage=True)["triaged"] is True
+
+
 def test_a_correct_draft_is_returned_with_a_readback_and_runs():
     ctx, inputs = setup()
     out = checked_draft(ctx, inputs, None, FakeModel("forall doors d: d.doors_width >= 0.8 m"))
