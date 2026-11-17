@@ -39,3 +39,26 @@ M01–M16 and A01–A15 are development data. This table codes the terminal fail
 Terminal counts out of 31 were triage 26, expression parse 2, generation cap 1, source-span grounding 1, fact ownership 1, other verifier 0, and repair-only 0. Repair ran in 4/31 and left a specific terminal failure in each case. A later prose explanation was never used to assign the stage.
 
 The two demonstrated numeric-table false triage declines support letting numeric rows reach checked drafting. This does not establish that triage should be removed for prose, that an unbounded generation budget would recover M04, or that a new expression format would recover M03 and M06. A stronger model that succeeds under the same pipeline establishes a model-sensitive case. A stronger model that still fails only establishes that the measured configuration did not overcome the observed pipeline or catalogue barrier.
+
+## Reproduce the comparison
+
+Use the source extraction described in [the original method](interpreter-holdout-method.md).
+For the original pipeline checkout use `a55ba9a421102897d915a850ca69330792efdbf1`;
+point `PYTHONPATH` at that checkout's `src` and use the benchmark runner from
+the pinned version. For the development rerun use the pinned version's `src`.
+Both use one Ollama request at a time with temperature 0, seed 42, context
+8,192 and at most 384 generated tokens per completion. A request timeout is a
+separate terminal diagnostic and is not evidence of a semantically wrong draft.
+
+```text
+python scripts/real_interpreter_holdout.py . access.txt ceiling.jsonl --suite fire --model qwen2.5:7b --max-tokens 384 --request-timeout 90 --triage
+python scripts/real_interpreter_holdout.py . access.txt development.jsonl --model qwen2.5:1.5b --max-tokens 384 --request-timeout 90 --triage
+python scripts/evidence_ledger_demo.py
+python scripts/thermal_holdout.py draft thermal-drafts.jsonl thermal-results.json
+python scripts/thermal_holdout.py score thermal-drafts.jsonl thermal-results.json
+```
+
+The local ceiling hardware is a Core i7-1165G7 with eight logical processors
+and approximately 16 GB RAM. The 7B model ran on CPU without VRAM offload.
+Qwen2.5 7B was the largest locally available model and no hosted endpoint was
+configured. This is a ceiling probe for the available deployment and time budget.

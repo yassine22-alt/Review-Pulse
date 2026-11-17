@@ -1,0 +1,1141 @@
+{
+  "metrics": {
+    "automatic": {
+      "applicable": 15,
+      "decided": 0,
+      "pass": 0,
+      "violated": 0,
+      "unresolved": 15,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        0,
+        0
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "reviewed": {
+      "applicable": 15,
+      "decided": 0,
+      "pass": 0,
+      "violated": 0,
+      "unresolved": 15,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        0,
+        0
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "as_is_automatic": {
+      "applicable": 15,
+      "decided": 0,
+      "pass": 0,
+      "violated": 0,
+      "unresolved": 15,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        0,
+        0
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "as_is_reviewed": {
+      "applicable": 15,
+      "decided": 0,
+      "pass": 0,
+      "violated": 0,
+      "unresolved": 15,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        0,
+        0
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "ceiling_automatic": {
+      "applicable": 15,
+      "decided": 6,
+      "pass": 3,
+      "violated": 3,
+      "unresolved": 9,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        3,
+        3
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "ceiling_reviewed": {
+      "applicable": 15,
+      "decided": 13,
+      "pass": 7,
+      "violated": 6,
+      "unresolved": 2,
+      "false_passes": 0,
+      "confirmed_violation_precision": [
+        6,
+        6
+      ],
+      "lost_manual_decisions": 0,
+      "changed_manual_decisions": 0,
+      "wrong_decisions": 0
+    },
+    "reviewed_blockers": {
+      "interpretation": 15
+    },
+    "drafted_correct": 0,
+    "executable_with_declared_numeric_facts_and_selected_scope": 15
+  },
+  "obligations": [
+    {
+      "id": "T01",
+      "zone": "Z3",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "roof_u le 0.65 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.6,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.6,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T02",
+      "zone": "Z3",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "wall_u le 0.7 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.8,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.8,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T03",
+      "zone": "Z3",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "window_u le 2.6 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "reason": "missing",
+            "why": "window_u reads Coefficient U des fenêtres for building.",
+            "where_to_look": "Window test certificate or verified whole-window specification",
+            "clause": "T03"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": 2.5,
+            "source": "Synthetic signed envelope calculation Z3, rows 1–5",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T04",
+      "zone": "Z3",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "slab_r ge 0.75 m2*K/W",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "reason": "missing",
+            "why": "slab_r reads Résistance thermique R des planchers sur sol for building.",
+            "where_to_look": "Ground floor assembly calculation",
+            "clause": "T04"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": 0.65,
+            "source": "Synthetic signed envelope calculation Z3, rows 1–5",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T05",
+      "zone": "Z3",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "solar le 0.5 1",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "reason": "missing",
+            "why": "solar reads Facteur solaire FS du vitrage hors nord for building.",
+            "where_to_look": "Glazing specification and applicable shading calculation",
+            "clause": "T05"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": 0.45,
+            "source": "Synthetic signed envelope calculation Z3, rows 1–5",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T06",
+      "zone": "Z4",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "roof_u le 0.55 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.6,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.6,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T07",
+      "zone": "Z4",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "wall_u le 0.6 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.55,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.55,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T08",
+      "zone": "Z4",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "window_u le 2.6 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "reason": "missing",
+            "why": "window_u reads Coefficient U des fenêtres for building.",
+            "where_to_look": "Window test certificate or verified whole-window specification",
+            "clause": "T08"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": 2.75,
+            "source": "Synthetic signed envelope calculation Z4, rows 1–4. Solar evidence unavailable. Design oracle solar 0.65.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T09",
+      "zone": "Z4",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "slab_r ge 1.25 m2*K/W",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "reason": "missing",
+            "why": "slab_r reads Résistance thermique R des planchers sur sol for building.",
+            "where_to_look": "Ground floor assembly calculation",
+            "clause": "T09"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": 1.35,
+            "source": "Synthetic signed envelope calculation Z4, rows 1–4. Solar evidence unavailable. Design oracle solar 0.65.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T10",
+      "zone": "Z4",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "solar le 0.6 1",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "reason": "missing",
+            "why": "solar reads Facteur solaire FS du vitrage hors nord for building.",
+            "where_to_look": "Glazing specification and applicable shading calculation",
+            "clause": "T10"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "reason": "missing",
+            "why": "solar reads Facteur solaire FS du vitrage hors nord for building.",
+            "where_to_look": "Glazing specification and applicable shading calculation",
+            "clause": "T10"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      }
+    },
+    {
+      "id": "T11",
+      "zone": "Z5",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "roof_u le 0.55 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.5,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "roof_u",
+            "unit": "W/m2/K",
+            "value": 0.5,
+            "source": "Synthetic observed worksheet, roof_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T12",
+      "zone": "Z5",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "wall_u le 0.6 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.65,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "wall_u",
+            "unit": "W/m2/K",
+            "value": 0.65,
+            "source": "Synthetic observed worksheet, wall_u",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "computed",
+            "reviewer": null
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T13",
+      "zone": "Z5",
+      "gold": "SATISFIED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "window_u le 2.6 W/m2/K",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "reason": "missing",
+            "why": "window_u reads Coefficient U des fenêtres for building.",
+            "where_to_look": "Window test certificate or verified whole-window specification",
+            "clause": "T13"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "SATISFIED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "window_u",
+            "unit": "W/m2/K",
+            "value": 2.45,
+            "source": "Synthetic signed envelope calculation Z5, rows 1–3 and 5. Conflicting slab R attestations 0.90 and 1.10. Design oracle 0.90.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    },
+    {
+      "id": "T14",
+      "zone": "Z5",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "slab_r ge 1.0 m2*K/W",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "reason": "missing",
+            "why": "slab_r reads Résistance thermique R des planchers sur sol for building.",
+            "where_to_look": "Ground floor assembly calculation",
+            "clause": "T14"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "reason": "conflicting",
+            "why": "slab_r reads Résistance thermique R des planchers sur sol for building.",
+            "where_to_look": "Ground floor assembly calculation",
+            "clause": "T14"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "slab_r",
+            "unit": "m2*K/W",
+            "value": null,
+            "source": "Synthetic conflicting certificate 1 | Synthetic conflicting certificate 2",
+            "trusted": false,
+            "conflicting": true,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic reviewer 1"
+          }
+        ],
+        "blocker": "missing evidence"
+      }
+    },
+    {
+      "id": "T15",
+      "zone": "Z5",
+      "gold": "VIOLATED",
+      "draft_correct": false,
+      "draft_approvable": false,
+      "draft_reason": "no rule that matches the sentence could be written automatically, so it is not being checked (the sentence seems to need: the building as a whole (roof_u, slab_r, solar, wall_u, window_u))",
+      "reference": "solar le 0.4 1",
+      "draft": null,
+      "automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_automatic": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "as_is_reviewed": {
+        "outcome": "UNRESOLVED",
+        "blocker": "interpretation"
+      },
+      "ceiling_automatic": {
+        "outcome": "UNRESOLVED",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "reason": "missing",
+            "why": "solar reads Facteur solaire FS du vitrage hors nord for building.",
+            "where_to_look": "Glazing specification and applicable shading calculation",
+            "clause": "T15"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": null,
+            "source": "Declared evidence field",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "blocker": "missing evidence"
+      },
+      "ceiling_reviewed": {
+        "outcome": "VIOLATED",
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "building",
+            "fact": "solar",
+            "unit": "1",
+            "value": 0.45,
+            "source": "Synthetic signed envelope calculation Z5, rows 1–3 and 5. Conflicting slab R attestations 0.90 and 1.10. Design oracle 0.90.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "Synthetic envelope reviewer"
+          }
+        ],
+        "blocker": null
+      }
+    }
+  ]
+}

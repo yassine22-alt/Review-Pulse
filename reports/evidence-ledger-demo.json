@@ -1,0 +1,272 @@
+[
+  {
+    "id": "M12",
+    "fixture_truth": "VIOLATED",
+    "initial": "UNRESOLVED",
+    "reviewed": "VIOLATED",
+    "requests": [
+      {
+        "entity": "building",
+        "fact": "orange",
+        "unit": "1",
+        "reason": "missing",
+        "why": "Door glazing is transparent and is neither red nor orange. reads orange for building.",
+        "where_to_look": "Glazing schedule, tested door",
+        "clause": "2.5.8.4, door characteristics \u00a73"
+      },
+      {
+        "entity": "building",
+        "fact": "red",
+        "unit": "1",
+        "reason": "missing",
+        "why": "Door glazing is transparent and is neither red nor orange. reads red for building.",
+        "where_to_look": "Glazing schedule, tested door",
+        "clause": "2.5.8.4, door characteristics \u00a73"
+      },
+      {
+        "entity": "building",
+        "fact": "transparent",
+        "unit": "1",
+        "reason": "missing",
+        "why": "Door glazing is transparent and is neither red nor orange. reads transparent for building.",
+        "where_to_look": "Glazing schedule, tested door",
+        "clause": "2.5.8.4, door characteristics \u00a73"
+      }
+    ],
+    "provenance": [
+      {
+        "entity": "building",
+        "fact": "orange",
+        "unit": "1",
+        "value": false,
+        "source": "Glazing schedule, tested door, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "building",
+        "fact": "red",
+        "unit": "1",
+        "value": true,
+        "source": "Glazing schedule, tested door, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "building",
+        "fact": "transparent",
+        "unit": "1",
+        "value": true,
+        "source": "Glazing schedule, tested door, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      }
+    ]
+  },
+  {
+    "id": "M13",
+    "fixture_truth": "VIOLATED",
+    "initial": "UNRESOLVED",
+    "reviewed": "VIOLATED",
+    "requests": [
+      {
+        "entity": "building",
+        "fact": "motorized",
+        "unit": "1",
+        "reason": "missing",
+        "why": "A nonmotorized sliding door cannot close a public evacuation exit. reads motorized for building.",
+        "where_to_look": "Public evacuation exit door schedule",
+        "clause": "2.5.8.4, special doors \u00a74"
+      },
+      {
+        "entity": "building",
+        "fact": "sliding",
+        "unit": "1",
+        "reason": "missing",
+        "why": "A nonmotorized sliding door cannot close a public evacuation exit. reads sliding for building.",
+        "where_to_look": "Public evacuation exit door schedule",
+        "clause": "2.5.8.4, special doors \u00a74"
+      }
+    ],
+    "provenance": [
+      {
+        "entity": "building",
+        "fact": "motorized",
+        "unit": "1",
+        "value": false,
+        "source": "Public evacuation exit door schedule, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "building",
+        "fact": "sliding",
+        "unit": "1",
+        "value": true,
+        "source": "Public evacuation exit door schedule, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      }
+    ]
+  },
+  {
+    "id": "M16",
+    "fixture_truth": "VIOLATED",
+    "initial": "UNRESOLVED",
+    "reviewed": "VIOLATED",
+    "requests": [
+      {
+        "entity": "building",
+        "fact": "device_per_leaf",
+        "unit": "1",
+        "reason": "missing",
+        "why": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf. reads device per leaf for building.",
+        "where_to_look": "Internal release test with public present",
+        "clause": "2.5.8.4, operation \u00a72"
+      },
+      {
+        "entity": "building",
+        "fact": "opens_by_push",
+        "unit": "1",
+        "reason": "missing",
+        "why": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf. reads opens by push for building.",
+        "where_to_look": "Internal release test with public present",
+        "clause": "2.5.8.4, operation \u00a72"
+      }
+    ],
+    "provenance": [
+      {
+        "entity": "building",
+        "fact": "device_per_leaf",
+        "unit": "1",
+        "value": false,
+        "source": "Internal release test with public present, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "building",
+        "fact": "opens_by_push",
+        "unit": "1",
+        "value": false,
+        "source": "Internal release test with public present, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      }
+    ]
+  },
+  {
+    "id": "A13",
+    "fixture_truth": "VIOLATED",
+    "initial": "UNRESOLVED",
+    "reviewed": "VIOLATED",
+    "requests": [
+      {
+        "entity": "building",
+        "fact": "left_rail",
+        "unit": "1",
+        "reason": "missing",
+        "why": "The relevant passages require handrails on both sides. reads left rail for building.",
+        "where_to_look": "Field survey of the relevant passage",
+        "clause": "Art. 8, handrails"
+      },
+      {
+        "entity": "building",
+        "fact": "right_rail",
+        "unit": "1",
+        "reason": "missing",
+        "why": "The relevant passages require handrails on both sides. reads right rail for building.",
+        "where_to_look": "Field survey of the relevant passage",
+        "clause": "Art. 8, handrails"
+      }
+    ],
+    "provenance": [
+      {
+        "entity": "building",
+        "fact": "left_rail",
+        "unit": "1",
+        "value": true,
+        "source": "Field survey of the relevant passage, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "building",
+        "fact": "right_rail",
+        "unit": "1",
+        "value": false,
+        "source": "Field survey of the relevant passage, building",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      }
+    ]
+  },
+  {
+    "id": "A15",
+    "fixture_truth": "SATISFIED",
+    "initial": "UNRESOLVED",
+    "reviewed": "SATISFIED",
+    "requests": [
+      {
+        "entity": "east",
+        "fact": "accessible_phone",
+        "unit": "1",
+        "reason": "missing",
+        "why": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance. reads accessible phone for east.",
+        "where_to_look": "Entrance-tagged accessible phone inventory",
+        "clause": "Art. 14"
+      },
+      {
+        "entity": "west",
+        "fact": "accessible_phone",
+        "unit": "1",
+        "reason": "missing",
+        "why": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance. reads accessible phone for west.",
+        "where_to_look": "Entrance-tagged accessible phone inventory",
+        "clause": "Art. 14"
+      }
+    ],
+    "provenance": [
+      {
+        "entity": "east",
+        "fact": "accessible_phone",
+        "unit": "1",
+        "value": true,
+        "source": "Entrance-tagged accessible phone inventory, east",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      },
+      {
+        "entity": "west",
+        "fact": "accessible_phone",
+        "unit": "1",
+        "value": true,
+        "source": "Entrance-tagged accessible phone inventory, west",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "Synthetic reviewer"
+      }
+    ]
+  }
+]

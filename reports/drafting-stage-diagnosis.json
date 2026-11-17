@@ -1,0 +1,281 @@
+[
+  {
+    "id": "M01",
+    "frozen_meaning": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+    "before": "triage",
+    "after": "source-span grounding",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M02",
+    "frozen_meaning": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+    "before": "triage",
+    "after": "source-span grounding",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M03",
+    "frozen_meaning": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+    "before": "expression parse",
+    "after": "expression parse",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M04",
+    "frozen_meaning": "Walk from the public-room door to the dead-end junction at most 10 m.",
+    "before": "generation cap",
+    "after": "generation cap",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M05",
+    "frozen_meaning": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+    "before": "source-span grounding",
+    "after": "source-span grounding",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M06",
+    "frozen_meaning": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+    "before": "expression parse",
+    "after": "expression parse",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M07",
+    "frozen_meaning": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+    "before": "fact ownership",
+    "after": "fact ownership",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M08",
+    "frozen_meaning": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "timeout",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M09",
+    "frozen_meaning": "No isolated group of one or two steps in the principal circulation.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M10",
+    "frozen_meaning": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M11",
+    "frozen_meaning": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M12",
+    "frozen_meaning": "Door glazing is transparent and is neither red nor orange.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M13",
+    "frozen_meaning": "A nonmotorized sliding door cannot close a public evacuation exit.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M14",
+    "frozen_meaning": "Horizontal circulation ceiling finish meets M1.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M15",
+    "frozen_meaning": "Circulation partition and floor finish meet M2 and M4 respectively.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "verifier",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "M16",
+    "frozen_meaning": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": "triage",
+    "after_retained": false,
+    "ceiling_retained": false
+  },
+  {
+    "id": "A01",
+    "frozen_meaning": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A02",
+    "frozen_meaning": "Each substantial change in level needs an inclined path.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A03",
+    "frozen_meaning": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A04",
+    "frozen_meaning": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A05",
+    "frozen_meaning": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A06",
+    "frozen_meaning": "The listed building classes must be adapted and have a usable accessible approach route.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A07",
+    "frozen_meaning": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A08",
+    "frozen_meaning": "One in twenty seats in public rooms must be adapted.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A09",
+    "frozen_meaning": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A10",
+    "frozen_meaning": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A11",
+    "frozen_meaning": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A12",
+    "frozen_meaning": "Each change of direction needs a resting landing of at least 1 m².",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A13",
+    "frozen_meaning": "The relevant passages require handrails on both sides.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A14",
+    "frozen_meaning": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  },
+  {
+    "id": "A15",
+    "frozen_meaning": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+    "before": "triage",
+    "after": "triage",
+    "ceiling": null,
+    "after_retained": false,
+    "ceiling_retained": null
+  }
+]
