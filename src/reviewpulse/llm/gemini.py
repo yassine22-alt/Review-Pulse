@@ -19,7 +19,10 @@ def decoding_schema(schema: Any) -> Any:
     https://aistudio.google.com/docs/structured-output#simplifying-complex-schemas
     """
     if isinstance(schema, dict):
-        return {key: decoding_schema(value) for key, value in schema.items() if key not in ("maxItems", "minItems")}
+        types = schema.get("type")
+        array = types == "array" or isinstance(types, list) and "array" in types
+        return {key: decoding_schema(value) for key, value in schema.items()
+                if not (array and key in ("maxItems", "minItems"))}
     if isinstance(schema, list):
         return [decoding_schema(value) for value in schema]
     return schema

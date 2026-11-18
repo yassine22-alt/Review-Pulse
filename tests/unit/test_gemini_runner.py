@@ -91,3 +91,5 @@ def test_hosted_schema_bounds_are_removed_without_mutating_validator_schema():
     assert "maxItems" not in converted and "minItems" not in converted
     assert "maxItems" not in converted["items"]["properties"]["values"]
     assert schema["maxItems"] == 64
+    named_property = {"type": "object", "properties": {"maxItems": {"type": "integer"}}}
+    assert decoding_schema(named_property) == named_property
