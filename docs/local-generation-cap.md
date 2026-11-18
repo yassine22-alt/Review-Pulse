@@ -59,3 +59,11 @@ The isolated variant excludes fact-declaration changes and has 12/12 schema
 tests passing. `reports/local-cap-protocol.json` and its companion patch record
 how to reproduce it. Its report is `reports/local-schema-after-24.json`; do not
 pool it with the prompt-only partial run or the declaration oracle.
+
+The first bounded-schema case completed with source-span rejection, 0/1
+retained (1/24 completed). Its baseline terminal stage was generation cap.
+This is narrower progress in termination, not improved interpretation. The
+remaining 23/24 are pending in this snapshot. A local continuation guard waits
+for the initial runner to exit and attempts any unsubmitted cases individually
+if one exhausts transport retries; it never approves, grades or pushes results.
+Its live merged counts are `reports/local-cap-continuation/comparison.json`.

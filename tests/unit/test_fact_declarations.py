@@ -15,6 +15,7 @@ from reviewpulse.interpreter.structured import (
     compile_slots,
     draft_structured,
     slot_schema,
+    slots_from_program,
 )
 from reviewpulse.interpreter.units import compatible, convert
 from reviewpulse.rules.clauses import Clause
@@ -43,6 +44,10 @@ def test_declaration_retains_ir_but_cannot_supply_a_value_or_a_verdict():
     program = compile_slots(SlotDraft.model_validate(raw), context, catalogue)
     assert inputs.bindings == {} and catalogue["bindings"] == {}
     assert program.fact_declarations[0].status == "declared"
+    round_trip = compile_slots(SlotDraft.model_validate(slots_from_program(program, raw["subject"])),
+                               context, catalogue)
+    assert round_trip.fact_declarations == program.fact_declarations
+    assert round_trip.requirement == program.requirement
     result = run_program(program, inputs, include_drafts=True)
     assert result["outcome"] == "UNRESOLVED"
     assert result["fact_provenance"][0]["value"] is None

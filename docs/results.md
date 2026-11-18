@@ -33,7 +33,8 @@ The local cap diagnosis is complete, but the paired model result is not.
 All **21/21** instrumented replays exhibit repetition. Prompt-only wire
 instructions did not eliminate it. A cap-only bounded-schema variant is
 running the same 24 cases with unchanged model settings; declaration changes
-are excluded. Next: finish and grade that cohort, inspect the paired hosted
+are excluded. Its first completed case is source-span rejected (1/24 completed,
+0/1 retained). Next: finish and grade that cohort, inspect the paired hosted
 pilot, then diagnose zero thermal retention if both five-case arms complete
 without retaining a rule. Do not run the fourth document.
 
@@ -44,15 +45,18 @@ without retaining a rule. Do not run the fourth document.
 | Gold-slot oracle, active catalogue | Exact and behavioral matches 5/46; binding rejected 22/46, verifier rejected 17/46, context unresolved 2/46 |
 | Gold-slot oracle, permissive author additions | Exact and behavioral matches 17/46; verifier rejected 27/46, context unresolved 2/46. This mode also adds missing collections and is not the production policy |
 | Gold-slot oracle, validated declarations | Retained 13/46; exact trees 13/13 retained; behavioral matches 13/13 retained. Rejections: verifier 23/46, entity binding 8/46, context 2/46, unit vocabulary 0/46 |
+| Thermal pilot gold frames | Verifier rejection 5/5: number coverage requires the table's 26–35% scope bounds, but frozen gold expressions assume that scope externally. Scope-contract mismatch, not a model result; no check or label bypassed |
 | Oracle behavior test scope | 64 generated complete-value worlds per retained frame; declaration provenance stripped for logical comparison only; matching evaluation errors receive no credit |
 | Historical local 24-case baseline | Retained 0/24; generation cap 21/24; absent source subject 3/24 |
 | Cap diagnosis | Historical raw responses available 0/21. New instrumented replays completed 21/21: repeated node records/IDs 20/21; repeated prose during repair 1/21. Some diagnostic replays stop loops early |
 | Prompt-only wire fix | Superseded partial run, not a 24-case result. Repeated output and a transport timeout remained; no accuracy improvement established |
+| Bounded-schema local snapshot | Semantic completion 1/24, source-span rejected 1/1, retained 0/1. Paired M01 stage: generation cap → source span; remaining 23/24 pending. This is not an accuracy gain |
 | Hosted pilot, frozen pre-declaration pipelines | Semantic completion 1/12 pilot cases per arm, 1/5 thermal per arm. Retention 0/1 per arm; matches/partly matches/wrong each 0/0 retained candidates, undefined |
 | Hosted pilot approvability | Wrong approvable / approvable = 0/0 in each arm, undefined; no final program existed to grade |
 | Hosted pilot transport | HTTP failures 10/18 attempts overall, 5/9 per arm; all 10 were HTTP 503. Per-batch denominators are retained in the pilot snapshot; no API-unavailable row is counted as a semantic failure |
 | Declaration and compatibility checks | Earlier declaration/runtime/interpreter checks 80/80 passed; focused current drafting/declaration/fallback tests 40/40 passed; isolated cap-only schema tests 12/12 passed |
-| Broad suite, first run | 1,012 passed, 2 skipped, 1 failed, 45 slow tests excluded. Fallback compatibility failure corrected; focused 40/40 passed afterwards. Fresh broad rerun pending |
+| Broad suite after correction | 1,014 passed, 2 skipped, 45 slow tests excluded; 900.23 seconds. Initial run found a fallback compatibility regression (1 failure); it was corrected and tested |
+| Current worktree secret check | 1,659 source, script, test, document, report and run text files (38,980,509 bytes); current environment key checked exactly plus provider credential patterns; 0/1,659 files matched, 0 unreadable. This is not a new full-history audit |
 | Worker checks | 23/23 targeted transport, quota, continuation and phase-order tests passed at the pilot checkpoint |
 | Fourth document freeze | RPS 2000 version 2011; official French Bulletin Officiel 6206, 21 November 2013; 17 obligations and 48 synthetic scenarios committed at `41b1ad14b466fb52500b118d69593319da649e23`; model/checker runs 0/17 |
 
@@ -62,6 +66,7 @@ Per-obligation and per-stage evidence:
 - [Gold-slot declaration oracle](../reports/slot-oracle-declarations.json): all 46 cases across the three catalogue modes.
 - [Reviewed replay diagnosis](../reports/local-cap-reviewed-diagnosis.json): all 21 cap cases and local raw trace paths. Raw responses remain local.
 - [Cap-only protocol](../reports/local-cap-protocol.json): unchanged model settings, isolated source fingerprint and reproducible patch. Live local results are `reports/local-schema-after-24.json`.
+- [Local comparison snapshot](../reports/local-cap-comparison-snapshot.json): all 24 paired IDs, completed stages and explicit pending cases. Local continuation counts are `reports/local-cap-continuation/comparison.json`; retained candidates are not automatically graded or approved.
 - [Hosted protocol](../reports/free-quota-protocol.json): frozen versions and quota accounting. Live progress is `reports/free-quota-declared-eval/progress.json`.
 
 [Pilot design](development-pilot.md), [cap diagnosis](local-generation-cap.md),

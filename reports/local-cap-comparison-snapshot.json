@@ -1,0 +1,275 @@
+{
+  "snapshot_utc": "2026-11-18T14:35:00+00:00",
+  "development_only": true,
+  "planned": 24,
+  "protocol": "reports/local-cap-protocol.json",
+  "before": {
+    "semantic_evaluated": [
+      24,
+      24
+    ],
+    "retained": [
+      0,
+      24
+    ],
+    "terminal_stages": {
+      "generation_cap": 21,
+      "subject": 3
+    }
+  },
+  "after": {
+    "status": "RUNNING",
+    "semantic_evaluated": [
+      1,
+      24
+    ],
+    "retained": [
+      0,
+      1
+    ],
+    "matches_over_retained": [
+      0,
+      0
+    ],
+    "partly_matches_over_retained": [
+      0,
+      0
+    ],
+    "wrong_over_retained": [
+      0,
+      0
+    ],
+    "wrong_approvable_over_approvable": [
+      0,
+      0
+    ],
+    "terminal_stages": {
+      "source_span": 1
+    },
+    "code_fingerprint": "ea3923c7891d424b3a354fd6ffc855c2d5bdb66784e3bf4325916e5be7bdeb95"
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "source_span",
+      "after_status": "UNRESOLVED",
+      "after_retained": false,
+      "classification": "NO_RETAINED_DRAFT"
+    },
+    {
+      "id": "M02",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M03",
+      "before_stage": "subject",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M04",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M05",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M06",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M07",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M08",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M09",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M10",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M11",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M12",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M13",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M14",
+      "before_stage": "subject",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M15",
+      "before_stage": "subject",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "M16",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A01",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A02",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A03",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A04",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A05",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A06",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A07",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    },
+    {
+      "id": "A08",
+      "before_stage": "generation_cap",
+      "before_retained": false,
+      "after_stage": "NOT_YET_EVALUATED",
+      "after_status": "PENDING",
+      "after_retained": null,
+      "classification": "NOT_EVALUATED"
+    }
+  ],
+  "limitations": [
+    "Incomplete paired comparison; no accuracy improvement claimed.",
+    "Rates with zero denominators are undefined.",
+    "API_UNAVAILABLE is excluded from semantic failures.",
+    "No fourth-document evaluation."
+  ]
+}

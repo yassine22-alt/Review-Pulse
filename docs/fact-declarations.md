@@ -45,6 +45,13 @@ of declarations are in `reports/slot-oracle-declarations.json`. The four-case
 gap from the permissive oracle reflects the refusal to create missing entity
 collections, not a hidden computation implementation.
 
+All five selected thermal pilot gold frames are among those verifier rejections
+(5/5): source-number coverage demands the table's 26–35% applicability bounds,
+while the frozen frames assume that scope externally. This is a scope-contract
+mismatch between the oracle and validator, not evidence of weak model capacity.
+No frozen label or coverage check was changed. A model could instead draft
+explicit applicability, which still needs grading against the frozen scope.
+
 Each behavioral comparison uses 64 synthetic complete-value worlds. It strips
 declaration provenance solely to compare compiled logic; it does not count
 those invented values as real ledger evidence. Matching evaluation errors
