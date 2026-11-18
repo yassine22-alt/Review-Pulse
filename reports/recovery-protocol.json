@@ -1,0 +1,23 @@
+{
+  "development_only": true,
+  "baseline_commit": "3f42459f5f88b31eb084c3d71320d0ec151cab6f",
+  "development_ids": ["T01", "M03", "M06", "M07", "M12", "A08", "A11"],
+  "selection_rationale": "Preselected numerical scope, conditional count branches, discharge relationship, tolerance, qualitative missing evidence, fraction, and compound constraints with a missing inventory. No selection based on new model outcomes.",
+  "model": "qwen2.5:7b",
+  "model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+  "temperature": 0,
+  "seed": 42,
+  "context_tokens": 8192,
+  "timeout_seconds": 180,
+  "baseline_tokens": 1536,
+  "reading_tokens": 384,
+  "formalization_tokens": 1152,
+  "repair_tokens": 512,
+  "arms": ["monolithic", "decomposed", "decomposed_constrained", "targeted_repair"],
+  "comparability": "Same seven cases, source context, runtime catalogue, model, seed and context window. Decomposed arms share their neutral reading. Targeted repair reuses the constrained candidate and makes at most one additional field correction. Report tokens and latency, including repair cost.",
+  "metrics": ["raw schema validity", "author-rated complete semantic correctness", "applicability and exception preservation", "retention", "false accepted interpretations", "unsupported/abstained", "terminal rejection stage", "verification correctness"],
+  "label_limits": "Existing 46 gold slots are author-labelled development data, not independently reviewed. Semantic ratings will state unresolved label ambiguity rather than credit it.",
+  "sealed": "Fourth RPS document remains untouched and unrun. A fresh real-source transfer slice must be labelled and committed before its first model call; it must not influence development tuning.",
+  "success_goals_not_claims": ["More completely correct real interpretations at no increase in false accepted rules", "Fewer unjustified compiler rejections", "An inspectable real-source drawing demonstration"],
+  "reproduced_before": {"gold_oracle_retained": [28,46], "verifier_rejections": [8,46], "entity_binding_rejections": [8,46], "context_rejections": [2,46]}
+}
