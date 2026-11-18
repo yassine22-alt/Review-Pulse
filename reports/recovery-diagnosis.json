@@ -1,0 +1,2126 @@
+{
+  "scope": "DEVELOPMENT only. Manual gold compiler diagnostic, not an interpreter accuracy result.",
+  "initial_rejections": [
+    18,
+    46
+  ],
+  "remaining_rejections": [
+    17,
+    46
+  ],
+  "remaining_stages": {
+    "verifier": 7,
+    "entity_binding": 8,
+    "context_or_binding": 2
+  },
+  "cause_groups": {
+    "quantity or referenced-context coverage needs semantic review": 3,
+    "missing catalogue collection or entity binding": 8,
+    "missing external or specialist context": 2,
+    "classification digits treated as numeric thresholds": 1,
+    "noun enumeration mistaken for logical alternative": 3
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "source_clause": "| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |",
+      "supplied_context": [
+        {
+          "id": "unit",
+          "text": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+        },
+        {
+          "id": "table-scope",
+          "text": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+        }
+      ],
+      "expected_interpretation": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "count",
+          "collection": "exits",
+          "variable": "$e",
+          "where": {
+            "node": "fact",
+            "name": "eligible",
+            "entity": "$e"
+          }
+        },
+        "right": {
+          "node": "literal",
+          "value": 2,
+          "unit": "count"
+        }
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "quantity or referenced-context coverage needs semantic review"
+    },
+    {
+      "id": "M02",
+      "source_clause": "| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |\n| de 20 à 50 | RDC : 2 | 1 dégagement de 1 UP ; 1 dégagement accessoire |",
+      "supplied_context": [
+        {
+          "id": "unit",
+          "text": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+        },
+        {
+          "id": "table-scope",
+          "text": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+        }
+      ],
+      "expected_interpretation": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "normal"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "accessory"
+          }
+        ]
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it; the sentence states 2, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it; the sentence states 2, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "quantity or referenced-context coverage needs semantic review"
+    },
+    {
+      "id": "M03",
+      "source_clause": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.",
+      "supplied_context": [],
+      "expected_interpretation": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+      "expected_requirement": {
+        "node": "any",
+        "args": [
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "eq",
+                "left": {
+                  "node": "count",
+                  "collection": "exits",
+                  "variable": "$e",
+                  "where": {
+                    "node": "fact",
+                    "name": "eligible",
+                    "entity": "$e"
+                  }
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 1,
+                  "unit": "count"
+                }
+              },
+              {
+                "node": "le",
+                "left": {
+                  "node": "fact",
+                  "name": "travel",
+                  "entity": "building"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 30,
+                  "unit": "m"
+                }
+              }
+            ]
+          },
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "ge",
+                "left": {
+                  "node": "count",
+                  "collection": "exits",
+                  "variable": "$e",
+                  "where": {
+                    "node": "fact",
+                    "name": "eligible",
+                    "entity": "$e"
+                  }
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 2,
+                  "unit": "count"
+                }
+              },
+              {
+                "node": "le",
+                "left": {
+                  "node": "fact",
+                  "name": "travel",
+                  "entity": "building"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 50,
+                  "unit": "m"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M04",
+      "source_clause": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac.",
+      "supplied_context": [],
+      "expected_interpretation": "Walk from the public-room door to the dead-end junction at most 10 m.",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "dead_end"
+        },
+        "right": {
+          "node": "literal",
+          "value": 10.0,
+          "unit": "m"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M05",
+      "source_clause": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles.",
+      "supplied_context": [
+        {
+          "id": "unit",
+          "text": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+        },
+        {
+          "id": "table-scope",
+          "text": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+        }
+      ],
+      "expected_interpretation": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "connector"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.4,
+          "unit": "m"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M06",
+      "source_clause": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie.",
+      "supplied_context": [],
+      "expected_interpretation": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+      "expected_requirement": {
+        "node": "any",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "direct_outdoors"
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "discharge"
+            },
+            "right": {
+              "node": "literal",
+              "value": 20.0,
+              "unit": "m"
+            }
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 1
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 1
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M07",
+      "source_clause": "La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %.",
+      "supplied_context": [
+        {
+          "id": "unit",
+          "text": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m."
+        },
+        {
+          "id": "table-scope",
+          "text": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+        }
+      ],
+      "expected_interpretation": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "door_width"
+        },
+        "right": {
+          "node": "mul",
+          "left": {
+            "node": "literal",
+            "value": 0.9,
+            "unit": "m"
+          },
+          "right": {
+            "node": "sub",
+            "left": {
+              "node": "literal",
+              "value": 1,
+              "unit": "1"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.05,
+              "unit": "1"
+            }
+          }
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M08",
+      "source_clause": "Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient.",
+      "supplied_context": [],
+      "expected_interpretation": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+      "expected_requirement": {
+        "node": "fact",
+        "entity": "building",
+        "name": "two_way"
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M09",
+      "source_clause": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales.",
+      "supplied_context": [],
+      "expected_interpretation": "No isolated group of one or two steps in the principal circulation.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "step_groups",
+        "variable": "$g",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ne",
+              "left": {
+                "node": "fact",
+                "entity": "$g",
+                "name": "steps"
+              },
+              "right": {
+                "node": "literal",
+                "value": 1.0,
+                "unit": "count"
+              }
+            },
+            {
+              "node": "ne",
+              "left": {
+                "node": "fact",
+                "entity": "$g",
+                "name": "steps"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "count"
+              }
+            }
+          ]
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "M10",
+      "source_clause": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale.",
+      "supplied_context": [],
+      "expected_interpretation": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "partition_rating"
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "required_structure_rating"
+        }
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the sentence states 1, but the rule never uses it; the sentence states 7200, but the rule never uses it; the sentence states 3600, but the rule never uses it; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence states 1, but the rule never uses it; the sentence states 7200, but the rule never uses it; the sentence states 3600, but the rule never uses it; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "quantity or referenced-context coverage needs semantic review"
+    },
+    {
+      "id": "M11",
+      "source_clause": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression).",
+      "supplied_context": [],
+      "expected_interpretation": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+      "expected_requirement": {
+        "node": "literal",
+        "value": true,
+        "unit": "1"
+      },
+      "before": {
+        "stage": "context_or_binding",
+        "detail": "Referenced smoke-control provision and specialist interpretation are missing.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "after": {
+        "stage": "context_or_binding",
+        "detail": "Referenced smoke-control provision and specialist interpretation are missing.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "likely_cause": "missing external or specialist context"
+    },
+    {
+      "id": "M12",
+      "source_clause": "Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites.",
+      "supplied_context": [],
+      "expected_interpretation": "Door glazing is transparent and is neither red nor orange.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "transparent"
+          },
+          {
+            "node": "not",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "red"
+              }
+            ]
+          },
+          {
+            "node": "not",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "orange"
+              }
+            ]
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 3
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 3
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M13",
+      "source_clause": "Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement.",
+      "supplied_context": [],
+      "expected_interpretation": "A nonmotorized sliding door cannot close a public evacuation exit.",
+      "expected_requirement": {
+        "node": "not",
+        "args": [
+          {
+            "node": "all",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "building",
+                "name": "sliding"
+              },
+              {
+                "node": "not",
+                "args": [
+                  {
+                    "node": "fact",
+                    "entity": "building",
+                    "name": "motorized"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M14",
+      "source_clause": "Revêtement des circulations : plafonds : M1",
+      "supplied_context": [],
+      "expected_interpretation": "Horizontal circulation ceiling finish meets M1.",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "ceiling_class"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 1
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 1
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "M15",
+      "source_clause": "Revêtement des circulations : cloisons : M2 ; sols : M4",
+      "supplied_context": [],
+      "expected_interpretation": "Circulation partition and floor finish meet M2 and M4 respectively.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "partition_class"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2,
+              "unit": "1"
+            }
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "floor_class"
+            },
+            "right": {
+              "node": "literal",
+              "value": 4,
+              "unit": "1"
+            }
+          }
+        ]
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the rule uses 2, which the sentence does not state; the rule uses 4, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the rule uses 2, which the sentence does not state; the rule uses 4, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "classification digits treated as numeric thresholds"
+    },
+    {
+      "id": "M16",
+      "source_clause": "En présence du public, toutes les portes doivent pouvoir s’ouvrir de l’intérieur par simple poussée ou par la manoeuvre facile d’un seul dispositif par vantail tel que bec-de-cane, poignée tournante, crémone à poignée ou à levier ou de tout autre dispositif conforme aux normes en vigueur.",
+      "supplied_context": [],
+      "expected_interpretation": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+      "expected_requirement": {
+        "node": "any",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "push_release"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "easy_device_each_leaf"
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "A01",
+      "source_clause": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes.",
+      "supplied_context": [],
+      "expected_interpretation": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "firm"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "smooth"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "unobstructed"
+          }
+        ]
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "noun enumeration mistaken for logical alternative"
+    },
+    {
+      "id": "A02",
+      "source_clause": "Toute dénivelée importante doit être doublée d'un plan incliné.",
+      "supplied_context": [],
+      "expected_interpretation": "Each substantial change in level needs an inclined path.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "level_changes",
+        "variable": "$c",
+        "body": {
+          "node": "fact",
+          "entity": "$c",
+          "name": "has_ramp"
+        },
+        "where": {
+          "node": "fact",
+          "entity": "$c",
+          "name": "substantial"
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A03",
+      "source_clause": "Les trottoirs doivent avoir une largeur allant de 1.50 m à 2.00 m.",
+      "supplied_context": [],
+      "expected_interpretation": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "sidewalks",
+        "variable": "$s",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$s",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 1.5,
+                "unit": "m"
+              }
+            },
+            {
+              "node": "le",
+              "left": {
+                "node": "fact",
+                "entity": "$s",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "m"
+              }
+            }
+          ]
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A04",
+      "source_clause": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir.",
+      "supplied_context": [],
+      "expected_interpretation": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "curb_surfaces",
+        "variable": "$s",
+        "body": {
+          "node": "lt",
+          "left": {
+            "node": "fact",
+            "entity": "$s",
+            "name": "slope"
+          },
+          "right": {
+            "node": "literal",
+            "value": 0.05,
+            "unit": "1"
+          }
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A05",
+      "source_clause": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt.",
+      "supplied_context": [],
+      "expected_interpretation": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "reserved_stalls"
+          },
+          "right": {
+            "node": "literal",
+            "value": 20,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_stalls"
+        }
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "noun enumeration mistaken for logical alternative"
+    },
+    {
+      "id": "A06",
+      "source_clause": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable.",
+      "supplied_context": [],
+      "expected_interpretation": "The listed building classes must be adapted and have a usable accessible approach route.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "accessible_approach"
+          },
+          {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_building"
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "A07",
+      "source_clause": "Lorsque la fonction d'un bâtiment ouvert au public amène les usagers à utiliser des guichets, étagères ou écritoires, un sur dix de ces équipements doit être aménagé pour servir les personnes handicapées.",
+      "supplied_context": [],
+      "expected_interpretation": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_counters"
+          },
+          "right": {
+            "node": "literal",
+            "value": 10,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_counters"
+        }
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "noun enumeration mistaken for logical alternative"
+    },
+    {
+      "id": "A08",
+      "source_clause": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt.",
+      "supplied_context": [],
+      "expected_interpretation": "One in twenty seats in public rooms must be adapted.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_seats"
+          },
+          "right": {
+            "node": "literal",
+            "value": 20,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_seats"
+        }
+      },
+      "before": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "French whole-numeral vocabulary (fixed)"
+    },
+    {
+      "id": "A09",
+      "source_clause": "Les équipements au niveau des chambres, salles de bain, cabinets d'aisance dans les bâtiments ouverts au public notamment les hôtels, les hôpitaux et les structures d'accueil doivent être adaptés aux personnes handicapées à hauteur d'un équipement sur dix.",
+      "supplied_context": [],
+      "expected_interpretation": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "mul",
+          "left": {
+            "node": "fact",
+            "entity": "building",
+            "name": "adapted_equipment"
+          },
+          "right": {
+            "node": "literal",
+            "value": 10,
+            "unit": "1"
+          }
+        },
+        "right": {
+          "node": "fact",
+          "entity": "building",
+          "name": "total_equipment"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "A10",
+      "source_clause": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur",
+      "supplied_context": [],
+      "expected_interpretation": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+      "expected_requirement": {
+        "node": "literal",
+        "value": true,
+        "unit": "1"
+      },
+      "before": {
+        "stage": "context_or_binding",
+        "detail": "Lift conformity depends on a referenced standard that is not supplied.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "after": {
+        "stage": "context_or_binding",
+        "detail": "Lift conformity depends on a referenced standard that is not supplied.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "likely_cause": "missing external or specialist context"
+    },
+    {
+      "id": "A11",
+      "source_clause": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,",
+      "supplied_context": [],
+      "expected_interpretation": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "passages",
+        "variable": "$p",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$p",
+                "name": "width"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.0,
+                "unit": "m"
+              }
+            },
+            {
+              "node": "le",
+              "left": {
+                "node": "fact",
+                "entity": "$p",
+                "name": "slope"
+              },
+              "right": {
+                "node": "literal",
+                "value": 0.12,
+                "unit": "1"
+              }
+            }
+          ]
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A12",
+      "source_clause": "Le changement de direction des passages doit être assuré par un palier de repos d'une surface de 1.00 m2 au minimum.",
+      "supplied_context": [],
+      "expected_interpretation": "Each change of direction needs a resting landing of at least 1 m².",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "direction_changes",
+        "variable": "$c",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$c",
+            "name": "landing_area"
+          },
+          "right": {
+            "node": "literal",
+            "value": 1.0,
+            "unit": "m2"
+          }
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A13",
+      "source_clause": "Ces passages doivent être munis de rampes servant de main courante sur les deux côtés.",
+      "supplied_context": [
+        {
+          "id": "passage-context",
+          "text": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,"
+        }
+      ],
+      "expected_interpretation": "The relevant passages require handrails on both sides.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "passages",
+        "variable": "$p",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "fact",
+              "entity": "$p",
+              "name": "left_rail"
+            },
+            {
+              "node": "fact",
+              "entity": "$p",
+              "name": "right_rail"
+            }
+          ]
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "A14",
+      "source_clause": "Pour les constructions ouvertes au public et les immeubles collectifs et à usage d'habitation, les dispositions précitées sont exigées pour l'entrée principale qui doit avoir une pente latérale d'une valeur de 20% au maximum et d'une largeur de 1.00 m au minimum.",
+      "supplied_context": [
+        {
+          "id": "passage-context",
+          "text": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,"
+        }
+      ],
+      "expected_interpretation": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+      "expected_requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "entrance_width"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.0,
+              "unit": "m"
+            }
+          },
+          {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "lateral_slope"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.2,
+              "unit": "1"
+            }
+          }
+        ]
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 0,
+        "declared_needs_evidence": 2
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "A15",
+      "source_clause": "Le nombre de téléphones fixes pour servir les malvoyants ou malentendants dans les constructions publiques et constructions affectées au logement collectif est fixé à un téléphone par entrée.",
+      "supplied_context": [],
+      "expected_interpretation": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+      "expected_requirement": {
+        "node": "forall",
+        "collection": "entrances",
+        "variable": "$e",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$e",
+            "name": "adapted_phones"
+          },
+          "right": {
+            "node": "literal",
+            "value": 1.0,
+            "unit": "count"
+          }
+        }
+      },
+      "before": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "after": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "likely_cause": "missing catalogue collection or entity binding"
+    },
+    {
+      "id": "T01",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+      "supplied_context": [
+        {
+          "id": "T01 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.65,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T02",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |",
+      "supplied_context": [
+        {
+          "id": "T02 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "wall_u le 0.7, within frozen Z3 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.7,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T03",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |",
+      "supplied_context": [
+        {
+          "id": "T03 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T04",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |",
+      "supplied_context": [
+        {
+          "id": "T04 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+        }
+      ],
+      "expected_interpretation": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.75,
+          "unit": "m2*K/W"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T05",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |",
+      "supplied_context": [
+        {
+          "id": "T05 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+        }
+      ],
+      "expected_interpretation": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.5,
+          "unit": "1"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T06",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |",
+      "supplied_context": [
+        {
+          "id": "T06 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.55,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T07",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |",
+      "supplied_context": [
+        {
+          "id": "T07 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T08",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |",
+      "supplied_context": [
+        {
+          "id": "T08 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T09",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |",
+      "supplied_context": [
+        {
+          "id": "T09 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+        }
+      ],
+      "expected_interpretation": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.25,
+          "unit": "m2*K/W"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T10",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |",
+      "supplied_context": [
+        {
+          "id": "T10 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+        }
+      ],
+      "expected_interpretation": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "1"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T11",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |",
+      "supplied_context": [
+        {
+          "id": "T11 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "roof_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.55,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T12",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |",
+      "supplied_context": [
+        {
+          "id": "T12 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "wall_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T13",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |",
+      "supplied_context": [
+        {
+          "id": "T13 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+        }
+      ],
+      "expected_interpretation": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "window_u"
+        },
+        "right": {
+          "node": "literal",
+          "value": 2.6,
+          "unit": "W/m2/K"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T14",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |",
+      "supplied_context": [
+        {
+          "id": "T14 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+        }
+      ],
+      "expected_interpretation": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "slab_r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1.0,
+          "unit": "m2*K/W"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    },
+    {
+      "id": "T15",
+      "source_clause": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | Autres : ≤ 0,4 |",
+      "supplied_context": [
+        {
+          "id": "T15 header",
+          "text": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+        }
+      ],
+      "expected_interpretation": "solar le 0.4, within frozen Z5 residential prescriptive scope",
+      "expected_requirement": {
+        "node": "le",
+        "left": {
+          "node": "fact",
+          "entity": "building",
+          "name": "solar"
+        },
+        "right": {
+          "node": "literal",
+          "value": 0.4,
+          "unit": "1"
+        }
+      },
+      "before": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "after": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "metadata_conditions": 5,
+        "declared_needs_evidence": 0
+      },
+      "likely_cause": "retained author-provided interpretation; not LLM inference"
+    }
+  ],
+  "local_model": {
+    "baseline_calls": [
+      7,
+      7
+    ],
+    "complete_outputs": [
+      0,
+      7
+    ],
+    "runtime_budget": [
+      7,
+      7
+    ],
+    "semantic_correctness": [
+      0,
+      0
+    ],
+    "wrong_approvable": [
+      0,
+      0
+    ],
+    "variants": "Exploratory partial experiment stopped. T01: three timed-out drafts, one partial neutral reading. M03: one timed-out expression control. No repair call. Remaining cases not attempted.",
+    "partial_output_observations": "All three T01 formalization prefixes contain visible errors (invented additional thresholds, applicability moved into requirement, or invalid expression syntax). They are incomplete, rejected outputs, not approvable rules or complete semantic-accuracy observations.",
+    "hardware": "i7-1165G7, 4 cores/8 threads, 15.7 GiB RAM, Iris Xe, no GPU offload. About 0.6 GiB available with 7B loaded. One smaller-model download failed for disk space and its incomplete files were removed.",
+    "new_model": "Qwen3 4B Instruct 2507 was not installed or evaluated. No 4B results exist."
+  },
+  "sealed": "Fourth RPS document unchanged and unrun. No new held-out semantic result.",
+  "label_caveat": "Benchmark author only; no independent review."
+}

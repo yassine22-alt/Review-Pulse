@@ -1,0 +1,182 @@
+{
+  "protocol": {
+    "development_only": true,
+    "baseline_commit": "3f42459f5f88b31eb084c3d71320d0ec151cab6f",
+    "development_ids": [
+      "T01",
+      "M03",
+      "M06",
+      "M07",
+      "M12",
+      "A08",
+      "A11"
+    ],
+    "selection_rationale": "Preselected numerical scope, conditional count branches, discharge relationship, tolerance, qualitative missing evidence, fraction, and compound constraints with a missing inventory. No selection based on new model outcomes.",
+    "model": "qwen2.5:7b",
+    "model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "temperature": 0,
+    "seed": 42,
+    "context_tokens": 8192,
+    "timeout_seconds": 180,
+    "baseline_tokens": 1536,
+    "reading_tokens": 384,
+    "formalization_tokens": 1152,
+    "repair_tokens": 512,
+    "arms": [
+      "monolithic",
+      "decomposed",
+      "decomposed_constrained",
+      "targeted_repair"
+    ],
+    "comparability": "Same seven cases, source context, runtime catalogue, model, seed and context window. Decomposed arms share their neutral reading. Targeted repair reuses the constrained candidate and makes at most one additional field correction. Report tokens and latency, including repair cost.",
+    "metrics": [
+      "raw schema validity",
+      "author-rated complete semantic correctness",
+      "applicability and exception preservation",
+      "retention",
+      "false accepted interpretations",
+      "unsupported/abstained",
+      "terminal rejection stage",
+      "verification correctness"
+    ],
+    "label_limits": "Existing 46 gold slots are author-labelled development data, not independently reviewed. Semantic ratings will state unresolved label ambiguity rather than credit it.",
+    "sealed": "Fourth RPS document remains untouched and unrun. A fresh real-source transfer slice must be labelled and committed before its first model call; it must not influence development tuning.",
+    "success_goals_not_claims": [
+      "More completely correct real interpretations at no increase in false accepted rules",
+      "Fewer unjustified compiler rejections",
+      "An inspectable real-source drawing demonstration"
+    ],
+    "reproduced_before": {
+      "gold_oracle_retained": [
+        28,
+        46
+      ],
+      "verifier_rejections": [
+        8,
+        46
+      ],
+      "entity_binding_rejections": [
+        8,
+        46
+      ],
+      "context_rejections": [
+        2,
+        46
+      ]
+    }
+  },
+  "status": "STOPPED_RESOURCE_LIMIT",
+  "cases": [
+    {
+      "id": "T01",
+      "arms": {
+        "expression_control": {
+          "retained": false,
+          "schema_valid": false,
+          "stage": "runtime_budget",
+          "detail": "local generation wall-time budget exhausted",
+          "call": {
+            "text": "{\n  \"title\": \"Prescriptive Approach for Residential Buildings in Climate Zone Z3\",\n  \"applies_when\": \"climate_zone == 'Z3' and building_class == 'résidentiel' and glazing_ratio >= 26 and glazing_ratio <= 35\",\n  \"unless\": null,\n  \"require\": \"roof_u <= 0.65 and wall_u <= 0.65 and window_u <= 0.65 and slab_r >= 0.167 and solar <= 0.75\",\n  \"sources\": [\n    {\"clause\": \"T01 header\", \"quote\": \"| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |\"},\n    {\"clause\": \"T01\", \"quote\": \"| Approche prescriptive, bâtiments résidentiels | Z3 | ",
+            "max_tokens": 1536,
+            "constrained": true,
+            "seconds": 180.093
+          }
+        },
+        "decomposed": {
+          "retained": false,
+          "schema_valid": false,
+          "stage": "runtime_budget",
+          "detail": "local generation wall-time budget exhausted",
+          "call": {
+            "text": "{\n  \"title\": \"Approche prescriptive pour bâtiments résidentiels dans la zone climatique Z3\",\n  \"applies_when\": \"forall building: building.building_class == 'résidentiel' and building.climate_zone == 'Z3'\",\n  \"unless\": null,\n  \"require\": \"forall building: building.glazing_ratio >= 26 and building.glazing_ratio <= 35 and building.roof_u <= 0.65\",\n  \"sources\": [\n    {\n      \"clause\": \"T01\",\n      \"quote\": \"| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |\"\n    }\n  ],\n  \"unresolved\": [],\n  \"subject\": \"bâtiments résidentiels\",\n  \"metadata_applicability\": [\n    {\n      \"kind\": \"string\",\n      \"field\": \"building_class\",\n      \"operator\": \"eq\",\n      \"",
+            "max_tokens": 1152,
+            "constrained": false,
+            "seconds": 180.172
+          }
+        },
+        "decomposed_constrained": {
+          "retained": false,
+          "schema_valid": false,
+          "stage": "runtime_budget",
+          "detail": "local generation wall-time budget exhausted",
+          "call": {
+            "text": "{\n  \"title\": \"Prescriptive Approach for Residential Buildings in Climate Zone Z3\",\n  \"applies_when\": \"forall building exists building_class where building_class == 'residential': and(building_class == 'residential', metadata_applicability[0].field == 'climate_zone' and metadata_applicability[0].value == 'Z3')\",\n  \"unless\": null,\n  \"require\": \"forall building exists roof_u, wall_u, window_u, slab_r, solar where roof_u.le(0.65) and wall_u.le(0.65) and window_u.le(0.65) and slab_r.ge(0.15) and solar.le(1): and(building_class == 'residential', metadata_applicability[0].field == 'climate_zone' and metadata_applicability[0].value == 'Z3')\",\n  \"sources\": [\n    {\"clause\": \"T01\", \"quote\": \"| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |\"}\n  ],\n  \"unresolved\": [],\n  \"subject\": \"bâtiments résidentiels\",\n  \"metadata_applicability\": [\n    {\n      \"kind\": \"string\",\n      \"field\": \"building_class\",\n      \"operator\": \"eq\",\n      \"value\": \"residential\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"bâtiments résidentiels\"}\n    },\n    {\n      \"kind\": \"string\",\n      \"field\": \"climate_zone\",\n      \"operator\": \"eq\",\n      \"value\": \"Z3\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"Z3\"}\n    }\n  ],\n  \"fact_declarations\": [\n    {\n      \"kind\": \"number\",\n      \"name\": \"glazing_ratio\",\n      \"entity\": \"building\",\n      \"definition\": \"Glazing percentage / taux global des baies vitrées / TGBV\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"26 – 35 %\"}\n    },\n    {\n      \"kind\": \"number\",\n      \"name\": \"roof_u\",\n      \"entity\": \"building\",\n      \"definition\": \"Coefficient U des toitures exposées\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"≤ 0,65\"}\n    },\n    {\n      \"kind\": \"number\",\n      \"name\":",
+            "max_tokens": 1152,
+            "constrained": true,
+            "seconds": 180.14
+          }
+        },
+        "targeted_repair": {
+          "retained": false,
+          "schema_valid": false,
+          "stage": "runtime_budget",
+          "detail": "local generation wall-time budget exhausted",
+          "call": {
+            "text": "{\n  \"title\": \"Prescriptive Approach for Residential Buildings in Climate Zone Z3\",\n  \"applies_when\": \"forall building exists building_class where building_class == 'residential': and(building_class == 'residential', metadata_applicability[0].field == 'climate_zone' and metadata_applicability[0].value == 'Z3')\",\n  \"unless\": null,\n  \"require\": \"forall building exists roof_u, wall_u, window_u, slab_r, solar where roof_u.le(0.65) and wall_u.le(0.65) and window_u.le(0.65) and slab_r.ge(0.15) and solar.le(1): and(building_class == 'residential', metadata_applicability[0].field == 'climate_zone' and metadata_applicability[0].value == 'Z3')\",\n  \"sources\": [\n    {\"clause\": \"T01\", \"quote\": \"| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |\"}\n  ],\n  \"unresolved\": [],\n  \"subject\": \"bâtiments résidentiels\",\n  \"metadata_applicability\": [\n    {\n      \"kind\": \"string\",\n      \"field\": \"building_class\",\n      \"operator\": \"eq\",\n      \"value\": \"residential\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"bâtiments résidentiels\"}\n    },\n    {\n      \"kind\": \"string\",\n      \"field\": \"climate_zone\",\n      \"operator\": \"eq\",\n      \"value\": \"Z3\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"Z3\"}\n    }\n  ],\n  \"fact_declarations\": [\n    {\n      \"kind\": \"number\",\n      \"name\": \"glazing_ratio\",\n      \"entity\": \"building\",\n      \"definition\": \"Glazing percentage / taux global des baies vitrées / TGBV\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"26 – 35 %\"}\n    },\n    {\n      \"kind\": \"number\",\n      \"name\": \"roof_u\",\n      \"entity\": \"building\",\n      \"definition\": \"Coefficient U des toitures exposées\",\n      \"source\": {\"clause\": \"T01\", \"quote\": \"≤ 0,65\"}\n    },\n    {\n      \"kind\": \"number\",\n      \"name\":",
+            "max_tokens": 1152,
+            "constrained": true,
+            "seconds": 180.14
+          },
+          "repair_attempted": false
+        }
+      },
+      "reading": {
+        "is_requirement": true,
+        "subject": "bâtiments résidentiels",
+        "constraints": [
+          "approche prescriptive",
+          "Z3",
+          "TGBV",
+          "U des toitures exposées ≤ 0,65 W/m²/K",
+          "26 – 35 % efficiency"
+        ],
+        "applicability": [
+          "every residential building"
+        ],
+        "exceptions": [
+          "uncertain conditions"
+        ],
+        "relationships": [
+          "U value is a property of the building envelope"
+        ],
+        "references": [
+          "T01"
+        ],
+        "uncertain": [
+          "specific conditions not explicitly stated"
+        ]
+      },
+      "reading_call": {
+        "text": "{ \"is_requirement\": true, \"subject\": \"bâtiments résidentiels\", \"constraints\": [ \"approche prescriptive\", \"Z3\", \"TGBV\", \"U des toitures exposées ≤ 0,65 W/m²/K\", \"26 – 35 % efficiency\" ], \"applicability\": [ \"every residential building\" ], \"exceptions\": [ \"uncertain conditions\" ], \"relationships\": [ \"U value is a property of the building envelope\" ], \"references\": [ \"T01\" ], \"uncertain\": [ \"specific conditions not explicitly stated\" ] }",
+        "max_tokens": 384,
+        "constrained": true,
+        "done_reason": "stop",
+        "eval_count": 142,
+        "eval_duration": 34797998000,
+        "prompt_eval_count": 198,
+        "seconds": 47.953
+      }
+    },
+    {
+      "id": "M03",
+      "arms": {
+        "expression_control": {
+          "retained": false,
+          "schema_valid": false,
+          "stage": "runtime_budget",
+          "detail": "local generation wall-time budget exhausted",
+          "call": {
+            "text": "{\n  \"title\": \"Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.\",\n  \"applies_when\": \"exists 2 exits: travel >= 50m; exists 1 exit: travel <= 30m\",\n  \"unless\": null,\n  \"require\": \"exists exits: travel; exists exits: eligible\",\n  \"sources\": [\n    {\n      \"clause\": \"M03\",\n      \"quote\": \"Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.\"\n    }\n  ],\n  \"unresolved\": [],\n  \"subject\": \"Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.\",\n  \"metadata_applicability\": [\n    {\n      \"kind\": \"number\",\n",
+            "max_tokens": 1536,
+            "constrained": true,
+            "seconds": 180.219
+          }
+        }
+      },
+      "reading": null,
+      "reading_call": null
+    }
+  ],
+  "stop_reason": "CPU-only 7B exceeded bounded runtime; replacement download failed for insufficient disk space. Remaining cases were not attempted.",
+  "protocol_deviation": "A compact expression-only exploratory control was added after the monolithic runtime failures. The paired cohort did not complete; no architecture winner or semantic accuracy gain is claimed."
+}

@@ -2043,5 +2043,11 @@
       "evidence_locations": {},
       "project_metadata": {}
     }
-  }
+  },
+  "implementation_hashes": {
+    "reviewpulse.interpreter.quantities": "c8b1016d06bc85028271b708210a335d5374a6d416d7eb13f9b00365736c64bc",
+    "reviewpulse.interpreter.structured": "fab42431be8fa455958017addc4ce5fa914842e559172294ea074f8ceec3b825",
+    "reviewpulse.xeval.verify": "5f8edfd33bf1ca75d007a96630c0219507b82518c56df054d0749d751107cbe7"
+  },
+  "implementation_hash_note": "Module hashes recorded from the before/after source versions after the paired run; no inference or outcomes were changed."
 }

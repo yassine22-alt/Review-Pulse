@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-18",
+  "branch": "rule-interpreter",
+  "suite": {
+    "command": ".venv/Scripts/python.exe -m pytest -m 'not slow' -q -p no:cacheprovider",
+    "passed": 1069,
+    "skipped": 2,
+    "slow_excluded": 45,
+    "seconds": 277.05
+  },
+  "targeted": {
+    "quantity_and_existing_xeval_passed": 27,
+    "decomposed_helper_passed": 4,
+    "included_in_final_suite": true
+  },
+  "ruff": "passed for changed Python files",
+  "diff_whitespace": "passed",
+  "not_measured": [
+    "Slow raster/dataset suite",
+    "Teammate segmentation accuracy/regression",
+    "Complete model semantic accuracy",
+    "Held-out interpreter improvement"
+  ],
+  "sealed_fourth_document": "No changes or model runs in this sprint"
+}

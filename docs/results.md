@@ -1,138 +1,185 @@
 # Review-Pulse results and current status
 
-Updated 18 November 2026. The 46 fire-safety, accessibility and thermal
-obligations are DEVELOPMENT data. The fourth document stays sealed and unrun.
-Labels are benchmark-author annotations without independent review; evidence
-attestations and plan scenarios are synthetic. These small samples do not
-establish general regulatory accuracy.
+Updated 18 November 2026. **The deterministic compiler improved; improved
+complete automated interpretation has not been demonstrated.** The 46 Morocco
+fire, accessibility and thermal obligations are DEVELOPMENT data. The fourth
+RPS document remains unchanged, sealed and unrun. Labels have no independent
+review. Earlier benchmark plans and ledger attestations remain synthetic.
 
-Applicability now has typed project-metadata conditions separate from the
-requirement predicate. Missing, conflicting, unverified or wrongly typed
-metadata creates reviewer requests. Scope bounds count toward source coverage
-without entering the requirement. The gold-slot oracle retains **28/46**,
-versus **13/46** before separation. The remaining rejections are verifier
-**8/46**, entity/catalogue binding **8/46**, missing context **2/46**. This is
-deterministic compilation, not an LLM accuracy result. Only **15/46** metadata
-scopes have supplemental gold annotations; **31/46** remain unannotated.
+Gold-input compilation now retains **29/46**, versus the reproduced **28/46**.
+The extra case, A08, was wrongly rejected because the French number vocabulary
+stopped at ten. Whole numeral phrases now ground as a unit; unsupported larger
+phrases cannot license a smaller threshold. A second general fix reads
+construction notation such as `2-1/2"` as one quantity. On a real publisher's
+drawing, this removes one unjustified rejection: **2/4 -> 3/4** manually
+interpreted whole clauses compile. Neither change adds plan computations or
+weakens the verdict policy.
 
-Raw-field scoring is independent of retention. The stopped 1.5B run completed
-**15/24**, retaining **0/15**. Some raw output exists for **16/24**: clause-span
-agreement is **13/16**, while the other scored fields have zero exact matches
-on their eligible denominators below. The local workers are stopped. A single
-field-sized schema path is implemented; one 7B backend-only probe confirms
-JSON-schema support, not interpretation quality. There is no further 1.5B tuning.
+The local-model experiment did not establish a winner. Qwen2.5 7B delivered
+**0/7** complete monolithic responses within the configured 180-second socket
+budget. Attempted compact and decomposed calls also timed out. Partial outputs
+contain visible semantic errors as well as excessive output. They never became
+approvable rules. The model was CPU-only on 15.7 GiB RAM with roughly 0.6 GiB
+available while loaded. One smaller-model download failed for disk space; it
+was not evaluated. No hosted calls, billing changes or 1.5B tuning were made.
 
-The hosted work is now a finite **12-obligation, two-arm first-draft pilot**,
-with common subject and metadata fields. It has **0/12** completed per arm.
-The attempts returned three HTTP 503s and one HTTP 400; a separate diagnostic
-returned HTTP 429. These are not semantic failures. Array bounds were moved
-out of the hosted decoding schema into compiler checks, but provider
-acceptance of that adaptation is untested. No billing or provider was changed,
-and the old 46-case worker was stopped. No standing quota protocol was expanded.
-
-The strong-model thermal score is **undefined (0/0 slots; 0/5 outputs)**, so
-the requested 70% decision is pending. Next: resume the new pilot version when
-quota permits, measure slots and retained-rule correctness separately, and
-apply the decision rule. Do not infer model capacity from unavailable responses
-or run the fourth document.
+A reproducible real-drawing trace now shows exact source clauses, manual slots,
+approval, plan evidence, findings and missing facts. **0/4 whole clauses are
+decided**, before or after the fix. A separately labelled nominal-width
+component passes on a reviewer-read schedule value; this is not a full-clause
+pass. The useful next experiment is a completed paired semantic comparison on
+adequate local resources, before choosing a new default extraction method.
+Free storage and memory first; do not tune on the sealed document.
 
 ## Measured
 
-Today’s demonstrated end-to-end path starts with manually interpreted rules
-and supplied synthetic plan facts under the frozen fixture scope. The checker
-evaluates them, exposes unresolved evidence and updates findings after reviewer
-evidence. Re-running the same **32 applicable clause–plan pairs** on current
-code gives **9/32** initial decisions (6 satisfied, 3 violated), **16/32** after
-review (8 satisfied, 8 violated), and **16/32** still unresolved. False passes
-are **0/15** gold violations; confirmed-violation precision is **3/3** initially
-and **8/8** after review. This demonstrates that manual-rule checking path,
-not automated regulation interpretation or accurate extraction from uploaded
-real drawings. See [current manual execution](../reports/manual-execution-current.json).
-
-| Measurement | Counts and scope |
-| --- | --- |
-| Gold slots before applicability separation | Retained 13/46; verifier rejection 23/46; entity binding 8/46; context 2/46 |
-| Gold slots after separation | Retained 28/46; verifier rejection 8/46; entity binding 8/46; context 2/46; unit vocabulary rejection 0/46 |
-| Retained requirement checks | Exact frozen trees 28/28; generated requirement behavior matches 28/28, 64 complete-value worlds each. Metadata/provenance stripped only for predicate comparison; scope is tested separately |
-| Supplemental scope labels | Thermal metadata annotated 15/46, other scopes unannotated 31/46; committed before the oracle at `5537191c37a3b864ba7ca719469991d1a92c5db4` |
-| Existing 1.5B bounded run, stopped | Evaluated 15/24, retained 0/15; source span 2/15, compile 1/15, subject 11/15, type/unit 1/15. No completed result for 9/24 |
-| Local constrained-decoding mechanics | Qwen2.5 7B, Q4_K_M, CPU/16 GB RAM, no GPU; 1/1 schema-only probe passed, 12 output tokens, 30.14 seconds; 0 regulation clauses submitted |
-| Historical hosted raw availability | 0 raw responses retained for previously completed hosted cases; historical slot accuracies undefined, not zero |
-| New hosted first-draft pilot | Completed 0/12 per arm; retained / evaluated 0/0 per arm; all slot-accuracy denominators 0. First invocation: 3/3 HTTP 503; second: 1/1 HTTP 400; separate diagnostic: 1/1 HTTP 429 |
-| Integration limitation | HTTP 400 is request rejection, not model error. Exact cause unknown. Schema complexity is a candidate; hosted schema adaptation acceptance unmeasured |
-| Applicability/drafting/ledger tests | 90/90 targeted tests passed before fieldwise addition |
-| Fieldwise assembly and associated tests | 35/35 passed; no fieldwise semantic benchmark run |
-| Broad verification | Initial run: 1,036 passed, 2 skipped, 45 slow tests excluded (332.16 s). Post-adapter run: 1,042 passed, 2 skipped, 45 slow tests excluded (307.35 s). Subsequent focused adapter/pilot checks: 22/22; final metadata/interpreter/findings/ledger/pilot checks: 82/82 |
-| Fourth-document integrity | RPS 2000 version 2011, official French Bulletin Officiel 6206, 21 November 2013; 17 obligations, 48 synthetic scenarios; frozen files unchanged; model/checker evaluation 0/17 |
-| Worktree integrity check | 1,764 text artifacts scanned; 0/1,764 matched the current environment key or credential patterns, 0 unreadable. Two frozen fourth-document files match their freeze commit. This is not a new full-history secrets audit |
-
-Final-captured local slot agreement, before validators:
-
-| Slot | Bounded run | Prompt-only partial run | Diagnostic cap replays |
+| Measurement | Reproduced before | After | Meaning / denominator |
 | --- | --- | --- | --- |
-| Raw cases available / selected cohort | 16/24 | 2/24 | 21/46 development corpus |
-| Subject exact | 0/16 | 0/2 | 0/21 |
-| Fact exact | 0/15 | 0/2 | 0/20 |
-| Operator exact | 0/14 | 0/2 | 0/19 |
-| Value exact | 0/9 | 0/1 | 0/11 |
-| Unit exact | 0/9 | 0/1 | 0/11 |
-| Metadata applicability exact | undefined, 0/0 | undefined, 0/0 | undefined, 0/0 |
-| Clause span exact | 13/16 | 0/2 | 1/21 |
+| Gold slots, active catalogue | 5/46 retained | 5/46 | Existing fact coverage unchanged |
+| Gold slots, validated fact declarations | 13/46 retained | 14/46 | Author-supplied declarations; no observed values created |
+| Gold slots, separated applicability | 28/46 retained | 29/46 | Manual gold inputs, not LLM outputs |
+| Retained requirement trees / generated behavior | 28/28 | 29/29 | Exact reference trees; 64 synthetic complete-value worlds per case, not a semantic proof |
+| Remaining gold-input rejections | 18/46 | 17/46 | Verifier 7/46, entity binding 8/46, context 2/46 |
+| Local monolithic complete outputs | 0/7 | No completed replacement cohort | Runtime failures; semantic correctness and wrong-approvable rate undefined (0/0) |
+| Real drawing, manually interpreted whole clauses compiled | 2/4 | 3/4 | Same four author interpretations, source and evidence |
+| Real drawing, whole-clause decisions | 0/4 | 0/4 | Missing evidence/inventory and one ambiguous requirement remain |
+| Real drawing, nominal-width component | 1/1 satisfied | 1/1 satisfied | Single reviewer-selected schedule type, not a complete requirement |
+| Existing manual synthetic execution | 9/32 decided initially | 16/32 with reviewer evidence | Same prior fixture: false passes 0/15 gold violations; violation precision 3/3 initially, 8/8 reviewed; not an upgrade gain |
 
-Denominators exclude gold-inapplicable fields and unannotated scope. Completed
-fields in truncated raw responses are scored; missing requested fields count
-incorrect. Expression interfaces that never requested a subject do not receive
-a fabricated subject score. The replays are early-stopped diagnostics, not
-recovered historical responses or a comparable before/after run. Their fact
-atom recall is **2/34**, despite **0/20** exact fact-set agreement. Retention
-does not erase that partial information. These normalized field sets do not
-measure associations between fields or whole-rule correctness.
+See [before oracle](../reports/recovery-oracle-before.json),
+[after oracle](../reports/recovery-oracle-after.json), and the
+[46-case diagnosis](../reports/recovery-diagnosis.json), which records source,
+expected interpretation, actual rejection, before/after and likely cause.
+Baseline/protocol freeze was committed as
+`55cb6e018d056340e8a429b20a94444b39e56d59`, before the fixes.
+French grounding was committed as `313e018f`.
 
-Evidence and design details:
+### Where correctness is lost
 
-- [Applicability policy and full rejection taxonomy](applicability-policy.md); [46-case oracle](../reports/slot-oracle-applicability.json).
-- [Raw-slot scoring](slot-scoring.md), with initial/final per-case scores and missing-record status in linked reports.
-- [One local decoding change](local-fieldwise.md); [backend-only probe](../reports/local-field-schema-probe.json).
-- [Minimal hosted pilot and resume command](scoped-pilot.md); [request results](../reports/scoped-first-draft-pilot.json).
-- [Pending decision and conditional edit-burden evaluation](interpreter-decision.md).
-- [Post-adapter non-slow test report](../reports/applicability-final-nonslow.xml).
+- **Document reading:** existing context assembly preserves parents, explicit
+  references and definitions; implicit references remain limited. In the real
+  drawing, the selected multi-line egress and garage notes cross automatic
+  clause boundaries. Reviewer-selected exact spans are therefore explicit in
+  the demonstration; this is not automatic segmentation success.
+- **Semantic generation:** [monolithic results](../reports/recovery-monolithic.json)
+  are 7/7 runtime-limited. The [exploratory alternatives](../reports/recovery-variants.json)
+  attempted T01 reading and three formalizations, then M03 expression control.
+  All four formalizations timed out; five other cases were unattempted. The
+  reading completed in 47.95 seconds but partly misread glazing scope as
+  efficiency and introduced uncertain exceptions. The three T01 formalization
+  prefixes invent extra thresholds, mix scope into requirements or use invalid
+  syntax. These are observed prefix errors, not scored complete interpretations.
+  Wrong approvable / approvable is **0/0**, not a measured 0% error rate.
+  Repair requests issued: **0/0 eligible complete constrained candidates**.
+- **Compiler/verifier:** of 17 remaining development rejections, **8/17** lack
+  entity collections (step groups, level changes, sidewalks, curb cuts,
+  passages, turns, entrances); **3/17** concern quantity/context coverage;
+  **3/17** mistake noun enumeration for logical alternatives; **1/17** treats
+  material-class digits as thresholds; **2/17** require external specialist
+  context. These are likely causes requiring review, not grounds to bypass
+  checks. A05 still rejects after its number is recognized because its
+  alternative semantics remain unresolved.
+- **Plan evidence:** the real sheet's vector-only baseline found two room
+  regions, not a reviewed complete inventory. The drawing visibly labels four
+  bedrooms. Zero schedules were recovered. A warning applies a rendering-only
+  scale disclaimer to the plan. Teammate segmentation models were not evaluated;
+  this is not evidence of their accuracy or regression.
+
+The compact-expression control was added after the baseline timeouts and is
+exploratory, not an originally frozen fifth arm. Reading/formalization token
+budgets were 384/1152, monolithic/control 1536, potential repair 512; raw traces
+include latency and partial output. Some tests ran concurrently, so timings are
+not isolated throughput benchmarks. No decomposed strategy is promoted into
+the application default without a completed correctness comparison.
+
+### Reproduce the real-source trace
+
+Download the first-party [Chief Architect Modern Bungalow sample](https://cloud.chiefarchitect.com/1/samples/projects/modern-bungalow/modern-bungalow.pdf),
+July 2024, sheet A-7 (PDF page 7). This is a published project drawing and its
+notes, not an official building regulation or a claim of legal applicability.
+The publisher's address is not taken as the project's jurisdiction.
+
+After the normal README environment setup:
+
+```powershell
+.venv/Scripts/python.exe scripts/recovery_drawing_demo.py data/real_plans/recovery/modern-bungalow.pdf runs/recovery-demo
+```
+
+The input PDF must match the recorded SHA-256. The script makes no LLM calls.
+It extracts source text and vector geometry, compiles the supplied manual slots
+through the existing validators, records author approval and evaluates against
+explicit evidence. It writes sheet/building JSON, findings, a drawing preview and `report.html`
+with expandable rule/evidence traces. See
+[labels and provenance](../reports/recovery-drawing-labels.json),
+[before findings](../reports/recovery-drawing-before.json) and
+[after findings](../reports/recovery-drawing-after.json).
+
+The garage/living relationship is preserved as a required fact. No connecting
+room, thickness, rating, material or self-closing behavior is inferred from a
+schedule tag. The exterior-exit clause remains NEEDS_REVIEW because its U-value
+unit is absent; its stated MIN direction is not silently corrected. D06's
+`3076` schedule label supplies a reviewer-read nominal width of 36 inches;
+it supplies neither 32-inch clear opening nor operability or glazing evidence.
+All reviewer observations here are author readings of the real sample drawing,
+not independently verified as-built measurements. Whole-clause false-pass and
+violation-precision rates are undefined: **0 labelled decisive cases, 0
+confirmed violations**. No full-clause accuracy or safety claim follows.
+
+The development oracle can be reproduced with
+`python scripts/evaluate_slot_oracle.py <accessibility-source-text> reports/oracle.json`;
+source provenance and extraction expectations are in
+[development source manifest](../reports/morocco-interpreter-source.json).
+
+### Design choice and research
+
+The production change is restricted to generic quantity grounding with
+vocabulary stored as data. It does not silently accept ambiguous alternatives,
+create inventories or convert declarations into observed facts. Small
+research helpers test source-only reading, constrained formalization and
+single-field diagnostic repair against the existing compiler. They remain
+experimental. [Grammar-constrained decoding research](https://aclanthology.org/2023.emnlp-main.674/)
+and [JSONSchemaBench](https://arxiv.org/abs/2501.10868) motivate testing structural
+constraints separately from meaning; they do not establish correctness here.
+The single attempted smaller download was the official non-thinking
+[Qwen3 4B Instruct 2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507).
+It was chosen for lower memory use, but storage prevented installation; no
+performance claim can be made for it.
+
+### Verification
+
+Final non-slow suite: **1,069 passed, 2 skipped, 45 slow tests excluded**
+in 277.05 seconds. The new quantity counterexamples and research-helper tests
+are included. Ruff and diff whitespace checks pass. This is software regression
+verification, not semantic or segmentation accuracy. See
+[validation record](../reports/recovery-validation.json).
 
 ## Not measured
 
-- Strong-model slot accuracy with separated applicability: **0/5** thermal
-  outputs. The 70% rule cannot be applied to an undefined **0/0** score.
-- A completed paired hosted pilot: **0/12** evaluated per arm. Provider
-  acceptance of the revised schema is also untested.
-- Accuracy or latency gains from per-field local prompting. Its probe tested
-  constrained output mechanics only; the existing 1.5B result remains negative.
-- Full metadata-scope discovery on the other **31/46** development clauses.
-  They are not labelled globally applicable merely because scope is unannotated.
-- Whole-rule correctness from field-set agreement, the rate of wrong approvable
-  new drafts, or new end-to-end interpreter false passes and violation precision.
-- Independent label validity, real reviewer evidence quality, or real drawing
-  extraction accuracy. Current attestations and plans are synthetic.
-- Fourth-document generalization, interpretation or applicability discovery:
-  **0/17** evaluated. Its labels have not been used for tuning.
+- Improved complete model interpretation, model-capacity ceiling, or a fair
+  completed comparison between monolithic, decomposed and repaired drafts.
+- Independent label correctness, held-out improvement or automatic
+  applicability discovery across unfamiliar rule documents. Only 15/46 current
+  scopes have supplemental author annotations. The fourth document is unrun.
+- Real automatic upload-to-verdict accuracy, whole-building perception,
+  confirmed connection inventories or calibrated measurement uncertainty.
+- A reduction in false accepted model rules: there were no complete candidate
+  outputs in the new local formalization experiment.
+- The slow raster/dataset tests and teammate segmentation accuracy in this sprint.
 
 ## Do not claim
 
-- A reliable general interpreter, demonstrated adaptation to arbitrary rule
-  sets, improved model accuracy or a fair model-capacity ceiling.
-- That 28/46 compiler retention means 28/46 model interpretations are correct
-  or that 64 generated worlds prove equivalence.
-- That high slot agreement establishes correct field associations, scope,
-  quantifiers, exceptions or legal meaning. The 70% criterion is a research
-  decision rule, not a regulatory acceptance threshold.
-- That request errors are semantic failures, or that no decisions demonstrate
-  useful accuracy or make the system "safe".
-- That declarations create observations, inventories or new computations.
-  Project metadata must be declared and verified; missing evidence stays missing.
-- Unlimited applicability expressiveness: current metadata conditions are
-  conjunctive; alternative or ambiguous scope requires review, with canonical
-  string values. Human approval remains necessary.
-- That synthetic manual-rule results establish upload-to-verdict accuracy on
-  real plans. The 25% scale bound remains provisional and uncalibrated.
+- A reliable general regulation interpreter, a winning decomposed architecture,
+  improved model accuracy, or adaptation to arbitrary regulations.
+- That 29/46 manual gold compilations are 29 correct automatic interpretations,
+  or that compilation, syntax validity, source matching or approval proves meaning.
+- That 0/4 decisions is useful accuracy or demonstrates safety. A correctly
+  unresolved result diagnoses a blocker; it does not fulfill the checking goal.
+- That the nominal-width component is a full exterior-door pass, that material
+  evidence comes from line geometry, or that a partial inventory is complete.
+- A precision gain from a 0/0 denominator. Existing synthetic tests and the
+  provisional 25% scale bound do not establish real-world accuracy.
 
-Superseded statuses and earlier measurements are in
-[results history](results-history.md). No billing changes, new checker family
-or fourth-document run were made in this round.
+Prior statuses are in [results history](results-history.md). The honest result
+is fewer unjustified compiler rejections, with an inspectable assisted real-source
+trace; improved automated understanding and useful whole-clause decision coverage
+remain unproven.

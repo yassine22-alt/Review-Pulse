@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 from collections import Counter
+from html import escape
 from pathlib import Path
 
 import pymupdf
@@ -17,6 +18,38 @@ from reviewpulse.interpreter.units import convert
 from reviewpulse.pipeline import build_model
 from reviewpulse.rules.clauses import Clause, split_text
 from reviewpulse.schema import save
+
+
+def implementation_hashes():
+    from reviewpulse.interpreter import quantities, structured
+    from reviewpulse.xeval import verify
+
+    return {module.__name__: hashlib.sha256(Path(module.__file__).read_text(encoding="utf-8").encode()).hexdigest()
+            for module in (quantities, structured, verify)}
+
+
+def write_report(report, output):
+    def section(row):
+        missing = row.get("blocker") or "; ".join(row.get("trace", {}).get("missing", []))
+        return (f'<section><h3>{escape(row["id"])}: {escape(row["outcome"])}</h3>'
+                f'<blockquote>{escape(row["source"])}</blockquote>'
+                f'<p>{escape(row.get("approval_scope") or "")}</p><p>{escape(missing)}</p>'
+                '<details><summary>Rule, evidence and execution trace</summary><pre>'
+                f'{escape(json.dumps(row, ensure_ascii=False, indent=2))}</pre></details></section>')
+
+    content = ''.join(section(row) for row in report["requirements"])
+    fragment = section(report["partial_component_only"])
+    html = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>ReviewPulse assisted drawing trace</title>'
+            '<style>body{font:16px system-ui;max-width:1100px;margin:2rem auto;padding:1rem;line-height:1.5}'
+            'img{width:100%;height:auto}section{border-top:1px solid #bbb;margin-top:2rem}'
+            'pre,blockquote{white-space:pre-wrap;overflow-wrap:anywhere}pre{font-size:12px}</style>'
+            '<h1>Assisted real-drawing trace</h1><p>Manual interpretations and author-reviewed drawing evidence; '
+            'no automated-interpretation or legal-compliance claim. Whole-clause outcomes are listed below.</p>'
+            f'<p>Source: {escape(report["source"]["publisher"])} — {escape(report["source"]["sheet"])}, '
+            f'{escape(report["source"]["edition"])}.</p><img src="drawing.png" alt="Publisher second-floor drawing">'
+            '<h2>Whole clauses</h2>' + content + '<h2>Partial component only — excluded from clause counts</h2>'
+            + fragment + '</html>')
+    (output / "report.html").write_text(html, encoding="utf-8")
 
 
 def evaluate(row, text, document, inputs, whole="building"):
@@ -56,6 +89,7 @@ def main():
     page_index = labels["source"]["page_index"]
     with pymupdf.open(args.pdf) as pdf:
         text = pdf[page_index].get_text()
+        pdf[page_index].get_pixmap(matrix=pymupdf.Matrix(0.65, 0.65)).save(args.output / "drawing.png")
     clauses = split_text(text)
     sheet = PyMuPdfBackend().extract(args.pdf, page_index, args.pdf.stem)
     save(sheet, args.output / "sheet.json")
@@ -84,7 +118,8 @@ def main():
     inputs = Inputs(bindings=component["bindings"], facts=observations)
     fragment = evaluate(component, text, labels["source"]["title"], inputs, component["entity"])
     fragment["plan_inputs"] = inputs.model_dump(mode="json")
-    report = {"source": labels["source"], "limitations": [labels["status"], labels["interpretation"],
+    report = {"source": labels["source"], "implementation_hashes": implementation_hashes(),
+              "limitations": [labels["status"], labels["interpretation"],
               "Only one sheet is processed; no complete building inventory is claimed.",
               "No LLM is called. Nominal-width component is excluded from whole-clause decision counts.",
               "Reviewer observations cite the real drawing; previous benchmark attestations remain synthetic."],
@@ -94,6 +129,7 @@ def main():
               "whole_clause_outcomes": dict(Counter(row["outcome"] for row in rows)),
               "requirements": rows, "partial_component_only": fragment}
     (args.output / "findings.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_report(report, args.output)
     print(json.dumps({"whole_clauses": report["whole_clause_outcomes"],
                       "component_only": fragment["outcome"], "vector_rooms": len(model.rooms)}))
 

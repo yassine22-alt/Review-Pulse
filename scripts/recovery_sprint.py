@@ -11,6 +11,7 @@ def main():
     parser.add_argument("access_text", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source", type=Path, required=True, help="Frozen package source directory")
+    parser.add_argument("--protocol", type=Path)
     args = parser.parse_args()
     sys.path.insert(0, str(args.source))
     from development_cases import load_cases
@@ -19,7 +20,7 @@ def main():
     from reviewpulse.xeval.drafters import BoundedOllama
 
     repo = Path(__file__).resolve().parents[1]
-    protocol = json.loads((repo / "reports/recovery-protocol.json").read_text())
+    protocol = json.loads((args.protocol or repo / "reports/recovery-protocol.json").read_text())
     cases = {case["id"]: case for case in load_cases(repo, args.access_text)}
     report = {"arm": "monolithic", "source": str(args.source), "protocol": protocol,
               "status": "RUNNING", "cases": []}
@@ -47,6 +48,8 @@ def main():
             row.update(stage="retained", retained=True, program=program.model_dump(mode="json"))
         except Exception as error:
             row.update(stage=getattr(error, "stage", "generation_or_schema"), detail=str(error))
+            if isinstance(error, TimeoutError):
+                row["stage"] = "runtime_budget"
             if client.last.get("done") == "length":
                 row["stage"] = "generation_cap"
         row.update(seconds=round(time.monotonic() - start, 3), response=client.last)
