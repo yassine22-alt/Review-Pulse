@@ -35,3 +35,31 @@ def test_rejected_request_is_not_a_model_failure_or_completed_case():
     report = pilot.summarize(rows, ["a"], ["a"])
     assert report["arms"]["structured"]["completed"] == [0, 1]
     assert report["decision"]["correct_slots"] == [0, 0]
+
+
+def test_expression_interface_uses_the_same_metadata_and_requirement_gate():
+    from test_project_metadata import scoped_rule
+
+    context, inputs, slots = scoped_rule()
+    raw = {"title": "Capacity", "subject": slots["subject"], "require": "building.capacity >= 6 count",
+           "applies_when": None, "unless": None, "sources": slots["sources"], "unresolved": [],
+           "metadata_applicability": slots["metadata_applicability"], "fact_declarations": []}
+    case = {"context": context, "inputs": inputs, "graph": None}
+    program = pilot.compile_response(raw, case, pilot.catalogue_from(inputs, None), "original_expression")
+    assert program.requirement.node == "ge" and program.requirement.right.value == 6
+    assert len(program.metadata_applicability) == 2
+
+
+def test_hosted_payload_contains_no_project_observations_or_gold_labels():
+    from test_project_metadata import scoped_rule
+
+    context, inputs, _ = scoped_rule()
+    data = inputs.model_dump()
+    data["project_metadata"] = {"occupancy": {"value": 867, "trusted": True,
+                                             "source": "private project citation", "unit": "count"}}
+    case = {"context": context, "inputs": type(inputs).model_validate(data), "graph": None}
+    for arm in ("structured", "original_expression"):
+        _, payload, _, _ = pilot.request_for(case, arm)
+        serialized = pilot.json.dumps(payload)
+        assert "867" not in serialized and "private project citation" not in serialized
+        assert "frozen_reading" not in serialized and "reference_expression" not in serialized

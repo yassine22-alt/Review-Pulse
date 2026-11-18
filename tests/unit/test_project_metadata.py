@@ -40,6 +40,8 @@ def test_scope_numbers_are_covered_without_entering_requirement():
     assert result["outcome"] == "UNRESOLVED"
     assert result["metadata_requests"][0]["request_type"] == "project_metadata"
     assert result["metadata_requests"][0]["fact"] == "occupancy"
+    assert len(result["metadata_requests"]) == 1
+    assert result["evidence_requests"][0]["request_type"] == "project_metadata"
     assert "metadata:occupancy" in result["dependencies"]
 
 
@@ -58,6 +60,8 @@ def test_metadata_is_never_assumed(value, trusted, conflicting, unit, outcome):
     result = run_program(program, Inputs.model_validate(data), include_drafts=True)
     assert result["outcome"] == outcome
     assert result["metadata_provenance"][0]["origin"] == "reviewer-attested"
+    assert result["fact_provenance"][0]["entity"] == "project"
+    assert result["fact_provenance"][0]["source"] == "Synthetic attestation"
 
 
 def test_scope_does_not_hide_a_dropped_requirement_quantity():

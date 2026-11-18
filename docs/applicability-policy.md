@@ -18,6 +18,10 @@ requests and an unresolved applicability result. A confirmed false condition
 establishes non-applicability. No climate zone or usage is inferred from a
 drawing, missing field or table row. Dependencies and metadata provenance are
 included in findings. Reviewer attestations require a name and citation.
+Metadata requests also enter the existing evidence-request channel, and known
+metadata provenance enters its existing provenance channel. Repeated bounds
+on one field do not create duplicate reviewer requests. Values currently enter
+through `Inputs.project_metadata`; this round adds no collection UI.
 
 The first version supports conjunctions of simple metadata comparisons.
 Disjunctive or ambiguous scope needs review; do not approximate it with a

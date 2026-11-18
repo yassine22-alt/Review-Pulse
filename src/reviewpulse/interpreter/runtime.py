@@ -360,8 +360,10 @@ def run_program(
         outcome = "UNRESOLVED"  # A proposed declaration is never an observation.
     root = Trace.combine("program", None, [applicability, exemption, requirement], [*program.unresolved, *program.not_checked])
     clause = program.sources[0].clause if program.sources else program.id
-    evidence_requests = []
-    fact_provenance = []
+    evidence_requests = list(metadata["requests"]) if outcome == "UNRESOLVED" else []
+    fact_provenance = [{"entity": "project", "fact": item["field"],
+                        **{key: value for key, value in item.items() if key != "field"}}
+                       for item in metadata["provenance"]]
     for (entity, name), reason in sorted(evaluator.fact_reads.items()):
         fact = inputs.facts.get(entity, {}).get(name)
         binding = inputs.bindings[name]

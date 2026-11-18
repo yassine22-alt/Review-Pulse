@@ -26,7 +26,7 @@ def metadata_vocabulary() -> dict:
 
 
 def evaluate_metadata(conditions: list[MetadataCondition], inputs: Inputs) -> dict:
-    values, requests, provenance = [], [], []
+    values, requests, provenance = [], {}, {}
     for condition in conditions:
         fact = inputs.project_metadata.get(condition.field)
         reason, value = None, None
@@ -47,13 +47,13 @@ def evaluate_metadata(conditions: list[MetadataCondition], inputs: Inputs) -> di
                 reason = "unit_mismatch"
         values.append(None if reason else COMPARATORS[condition.operator](value, condition.value))
         if fact is not None:
-            provenance.append({"field": condition.field, **fact.model_dump(mode="json")})
+            provenance[condition.field] = {"field": condition.field, **fact.model_dump(mode="json")}
         if reason:
-            requests.append(MetadataRequest(
+            requests.setdefault((condition.field, reason), MetadataRequest(
                 entity="project", fact=condition.field, kind=condition.kind, unit=condition.unit,
                 reason=reason, clause=condition.source.clause,
                 why="This metadata determines whether the obligation applies.",
                 where_to_look="Project brief, approved project schedule or named reviewer attestation").model_dump(mode="json"))
     return {"value": False if False in values else None if None in values else True,
-            "requests": requests, "provenance": provenance,
+            "requests": list(requests.values()), "provenance": list(provenance.values()),
             "dependencies": sorted({f"metadata:{condition.field}" for condition in conditions})}
