@@ -157,6 +157,10 @@ def program_numbers(program: Program) -> list[float]:
             if isinstance(node, LiteralExpr) and not isinstance(node.value, (bool, str)):
                 factor = si_factor(node.unit) if node.unit not in ("1", "count") else 1.0
                 out.append(round(float(node.value) * (factor if factor is not None else 1.0), 9))
+    for condition in program.metadata_applicability:
+        if condition.kind == "number":
+            factor = si_factor(condition.unit)
+            out.append(round(float(condition.value) * (factor if factor is not None else 1.0), 9))
     return out
 
 

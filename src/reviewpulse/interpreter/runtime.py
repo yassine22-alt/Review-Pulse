@@ -11,6 +11,7 @@ import networkx as nx
 from ..outcomes import EvidenceIssue, IssueCode, Outcome
 from .declarations import apply_declarations
 from .evidence import EvidenceRequest
+from .metadata import evaluate_metadata
 from .schema import (
     BinaryExpr,
     Expr,
@@ -330,6 +331,9 @@ def run_program(
         raise ValueError("approved programs require a named reviewer")
     evaluator = Evaluator(inputs, graph)
     applicability = evaluator.evaluate(program.applicability)
+    metadata = evaluate_metadata(program.metadata_applicability, inputs)
+    applicability = _logic("all", [applicability, Trace(
+        "project_metadata", metadata["value"], missing=[request["fact"] for request in metadata["requests"]])])
     exemption = evaluator.evaluate(program.exemption)
     requirement = evaluator.evaluate(program.requirement)
     outcome: Outcome
@@ -374,7 +378,9 @@ def run_program(
     return {
         "rule_id": program.id,
         "outcome": outcome,
-        "dependencies": sorted(evaluator.dependencies),
+        "dependencies": sorted(evaluator.dependencies | set(metadata["dependencies"])),
+        "metadata_requests": metadata["requests"] if outcome == "UNRESOLVED" else [],
+        "metadata_provenance": metadata["provenance"],
         "evidence_issues": [i.model_dump(mode="json") for i in evaluator.evidence_issues.values()],
         "evidence_requests": evidence_requests,
         "fact_provenance": fact_provenance,

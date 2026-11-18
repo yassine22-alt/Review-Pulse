@@ -92,6 +92,8 @@ def approve_program(
         context.check_span(span)
     for declaration in program.fact_declarations:
         context.check_span(declaration.source)
+    for condition in program.metadata_applicability:
+        context.check_span(condition.source)
     if context.target not in {span.clause for span in program.sources}:
         raise ValueError("program must cite the target clause")
     validate_program(program, inputs.bindings, list(inputs.collections))

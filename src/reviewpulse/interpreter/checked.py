@@ -14,13 +14,16 @@ from .schema import Inputs
 
 def catalogue_from(inputs: Inputs, graph: FactGraph | None) -> dict:
     """What the drafter may refer to. The fact graph gives categories and their words too; bare inputs give names only."""
+    from .metadata import metadata_vocabulary
+
     if graph is not None:
-        return to_catalogue(graph)
+        return {**to_catalogue(graph), "metadata_vocabulary": metadata_vocabulary()}
     collections = {}
     for name, coll in inputs.collections.items():
         facts = sorted({f for item in coll.items for f in inputs.facts.get(item, {})})
         collections[name] = {"facts": facts}
-    return {"collections": collections, "building": sorted(inputs.facts.get("building", {})), "whole": "building",
+    return {"metadata_vocabulary": metadata_vocabulary(),
+            "collections": collections, "building": sorted(inputs.facts.get("building", {})), "whole": "building",
             "bindings": {n: b.model_dump() for n, b in inputs.bindings.items()}, "kinds": {}, "kind_labels": {}}
 
 

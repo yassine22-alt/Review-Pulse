@@ -53,12 +53,13 @@ def evaluate(row, case, catalogue):
         logic_catalogue = copy.deepcopy(linked)
         for binding in logic_catalogue["bindings"].values():
             binding.pop("declaration", None)
-        behavioral = compare(reference, candidate.model_copy(update={"fact_declarations": []}),
+        behavioral = compare(reference, candidate.model_copy(update={"fact_declarations": [], "metadata_applicability": []}),
                              logic_catalogue, n_worlds=64, seed=93)
         roots_equal = candidate.requirement == reference.requirement
         return {"stage": "retained", "exact_reference_tree": roots_equal,
                 "behavioral_equivalent": behavioral["equivalent"], "worlds": 64,
                 "correct_unresolved": False,
+                "metadata_conditions": len(candidate.metadata_applicability),
                 "declared_needs_evidence": len(candidate.fact_declarations)}
     except SlotFailure as error:
         return {"stage": error.stage, "detail": str(error), "exact_reference_tree": False,
@@ -93,22 +94,26 @@ def main():
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     frozen = json.loads((repo / "reports/development-oracle-slots.json").read_text(encoding="utf-8"))
+    scopes = {row["id"]: row for row in json.loads((repo / "reports/development-metadata-labels.json").read_text(encoding="utf-8"))["cases"]}
     cases = {case["id"]: case for case in load_cases(repo, args.access_text)}
     rows = []
     for row in frozen["cases"]:
         case = cases[row["id"]]
         active = catalogue_from(case["inputs"], case["graph"])
+        scoped = with_proposals(row, case, active)
+        scoped["slots"]["metadata_applicability"] = scopes[row["id"]]["conditions"]
         rows.append({"id": row["id"], "frozen_reading": row["frozen_reading"],
                      "active_catalogue": evaluate(row, case, active),
                      "oracle_declared_facts": evaluate(row, case, oracle_catalogue(active, row)),
-                     "validated_proposals": evaluate(with_proposals(row, case, active), case, active)})
+                     "validated_proposals": evaluate(with_proposals(row, case, active), case, active),
+                     "separated_applicability": evaluate(scoped, case, active)})
     totals = {
         mode: {"denominator": len(rows),
                "exact_reference_tree": sum(row[mode]["exact_reference_tree"] for row in rows),
                "behavioral_equivalent": sum(row[mode]["behavioral_equivalent"] for row in rows),
                "correct_unresolved": sum(row[mode]["correct_unresolved"] for row in rows),
                "stages": dict(Counter(row[mode]["stage"] for row in rows))}
-        for mode in ("active_catalogue", "oracle_declared_facts", "validated_proposals")
+        for mode in ("active_catalogue", "oracle_declared_facts", "validated_proposals", "separated_applicability")
     }
     args.output.write_text(json.dumps({
         "totals": totals, "cases": rows,
@@ -120,6 +125,8 @@ def main():
             "The pre-existing fixture scope remains assumed. Broader applicability discovery is unmeasured.",
             "Validated proposals use author-supplied gold declarations, not a drafting model. Their values remain absent in the real ledger.",
             "Behavioral checks strip declaration provenance and use synthetic fact worlds to test logic only; actual missing-value execution is tested separately.",
+            "Separated applicability uses 15 author-annotated thermal scopes. The other 31 scope labels remain unannotated, never assumed unrestricted.",
+            "Requirement behavioral equivalence strips metadata on the candidate and tests predicates only; applicability is evaluated separately by runtime tests.",
         ]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(totals))
 

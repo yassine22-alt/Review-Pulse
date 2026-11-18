@@ -15,7 +15,7 @@ from .context import ContextBundle
 from .declarations import DeclarationError, declaration_catalogue
 from .evidence import EvidenceRequest
 from .quantities import normalise_quantities
-from .schema import Binding, DeclarationDescription, FactDeclaration, Program, Span, walk
+from .schema import Binding, DeclarationDescription, FactDeclaration, MetadataCondition, Program, Span, walk
 from .units import compatible, convert, vocabulary
 from .validate import validate_program
 
@@ -27,10 +27,15 @@ class ProposedFact(DeclarationDescription):
     status: Literal["proposed"] = "proposed"
 
 
+class MetadataSlot(MetadataCondition):
+    source: FlatSpan
+
+
 class SlotDraft(FlatProgram):
     subject: str = Field(min_length=1, description="Exact subject phrase from the supplied source")
     evidence_requests: list[EvidenceRequest] = Field(default_factory=list)
     fact_declarations: list[ProposedFact] = Field(default_factory=list)
+    metadata_applicability: list[MetadataSlot] = Field(default_factory=list)
 
 
 class SlotFailure(ValueError):
@@ -52,6 +57,9 @@ nodes (value, unit); properties belong in fact nodes (entity, name). Reuse an ex
 node ID when referring to it; never repeat its node record. End the node list once the
 constraint graph is complete. Follow the supplied wire contract for the JSON fields.
 Omit irrelevant optional node fields.
+Project scope belongs in metadata_applicability: typed field, operator, value, unit and exact source.
+Use separate entries for lower and upper bounds. All entries must hold.
+Do not assume project metadata values or put metadata bounds into the requirement nodes.
 Cite exact quotes and clause identifiers. Include the target clause and any definition used.
 When a needed fact has no binding, propose its name, kind, unit, known entity or collection,
 definition and exact source quote in fact_declarations. This declares a meaning, never a value.
@@ -84,6 +92,7 @@ def slot_schema(catalogue: dict, context: ContextBundle) -> dict:
     node["unit"] = {"type": "string", "enum": units}
     schema["$defs"]["ProposedFact"]["properties"]["unit"] = {"type": "string", "enum": units}
     schema["$defs"]["EvidenceRequest"]["properties"]["unit"] = {"type": "string", "enum": units}
+    schema["$defs"]["MetadataSlot"]["properties"]["unit"] = {"type": "string", "enum": units}
     collections = sorted(catalogue["collections"])
     node["collection"] = {"anyOf": ([{"type": "string", "enum": collections}] if collections else []) + [{"type": "null"}]}
     schema["$defs"]["FlatSpan"]["properties"]["clause"] = {
@@ -141,6 +150,9 @@ def slots_from_program(program: Program, subject: str) -> dict:
 
     roots = {name: encode(getattr(program, name)) for name in ("applicability", "exemption", "requirement")}
     return {"id": program.id, "title": program.title, "subject": subject, "nodes": nodes, **roots,
+            "metadata_applicability": [condition.model_dump(exclude={"source"}) | {
+                "source": {"clause": condition.source.clause, "quote": condition.source.quote}}
+                for condition in program.metadata_applicability],
             "sources": [{"clause": source.clause, "quote": source.quote} for source in program.sources],
             "fact_declarations": [declaration.model_dump(exclude={"source", "status"}) | {
                 "source": {"clause": declaration.source.clause, "quote": declaration.source.quote}}
@@ -182,6 +194,21 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
         raise SlotFailure("context_or_binding", "; ".join(frame.unresolved + context.missing) or "fact binding requires review")
     declarations = [FactDeclaration.model_validate(proposal.model_dump(exclude={"source", "status"}) | {
         "source": ground_span(proposal.source, context).model_dump()}) for proposal in frame.fact_declarations]
+    metadata = [MetadataCondition.model_validate(condition.model_dump(exclude={"source"}) | {
+        "source": ground_span(condition.source, context).model_dump()}) for condition in frame.metadata_applicability]
+    for condition in metadata:
+        if condition.kind == "number":
+            probe = Program(id="metadata", title="Metadata grounding", document=context.document,
+                            requirement={"node": "literal", "value": True}, sources=[condition.source],
+                            metadata_applicability=[condition])
+            issues = check_numbers(probe, normalise_quantities(condition.source.quote),
+                                   detect_language(condition.source.quote))
+            grounded = not any(issue.code == "number_not_in_sentence" for issue in issues)
+        else:
+            grounded = (str(condition.value).casefold() in condition.source.quote.casefold()
+                        if condition.kind == "string" else True)
+        if not grounded:
+            raise SlotFailure("metadata_value", "metadata condition value is not traceable to its source")
     try:
         catalogue = declaration_catalogue(catalogue, declarations)
     except DeclarationError as error:
@@ -193,9 +220,13 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
             raise SlotFailure("source_span", "evidence request cites an unknown clause")
         if not compatible(request.unit, catalogue["bindings"][request.fact]["unit"]):
             raise SlotFailure("types_or_units", "evidence request unit is incompatible with its binding")
-    for declaration in declarations:
+    for declaration in [*declarations, *metadata]:
         if declaration.source not in spans:
             spans.append(declaration.source)
+    for condition in metadata:
+        spec = catalogue.get("metadata_vocabulary", {}).get(condition.field)
+        if spec and (spec["kind"] != condition.kind or not compatible(spec["unit"], condition.unit)):
+            raise SlotFailure("metadata_type", "metadata condition conflicts with its declared vocabulary type")
     table = {node.id: node for node in frame.nodes}
     used = set()
 
@@ -230,6 +261,7 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
         tree = compile_flat(frame, context.document)
         tree["sources"] = [span.model_dump() for span in spans]
         tree["fact_declarations"] = [declaration.model_dump() for declaration in declarations]
+        tree["metadata_applicability"] = [condition.model_dump() for condition in metadata]
         program = Program.model_validate(tree)
     except ValueError as error:
         raise SlotFailure("compile", str(error)) from error
@@ -292,6 +324,7 @@ def draft_structured(context: ContextBundle, catalogue: dict, body: str, client)
     schema = slot_schema(catalogue, context)
     payload = {"wire_contract": wire_contract(schema), "catalogue": catalogue,
                "unit_vocabulary": vocabulary(binding.get("unit", "1") for binding in catalogue["bindings"].values()),
+               "metadata_vocabulary": catalogue.get("metadata_vocabulary", {}),
                "target": context.target,
                "clauses": [{"id": clause.id, "text": clause.text} for clause in context.clauses],
                "missing_context": context.missing}

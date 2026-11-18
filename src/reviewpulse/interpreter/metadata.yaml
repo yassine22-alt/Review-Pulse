@@ -1,0 +1,21 @@
+# Vocabulary is data. Documents may declare further fields in typed slots.
+climate_zone:
+  kind: string
+  unit: '1'
+  description: Climate zone / zone climatique
+glazing_ratio:
+  kind: number
+  unit: '%'
+  description: Glazing percentage / taux global des baies vitrées / TGBV
+building_class:
+  kind: string
+  unit: '1'
+  description: Building class or use / usage du bâtiment
+approach:
+  kind: string
+  unit: '1'
+  description: Regulatory assessment approach / approche
+occupancy:
+  kind: number
+  unit: count
+  description: Occupant count / effectif

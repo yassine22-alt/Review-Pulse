@@ -145,6 +145,21 @@ class FactDeclaration(DeclarationDescription):
     status: Literal["declared"] = "declared"
 
 
+class MetadataCondition(FactType):
+    field: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
+    operator: Literal["eq", "ne", "lt", "le", "gt", "ge"]
+    value: Scalar
+    source: Span
+
+    @model_validator(mode="after")
+    def typed_comparison(self):
+        if scalar_kind(self.value) != self.kind:
+            raise ValueError("metadata condition value has the wrong type")
+        if self.kind != "number" and self.operator not in ("eq", "ne"):
+            raise ValueError("ordered metadata comparisons require numbers")
+        return self
+
+
 class Program(Model):
     schema_version: Literal["1.0"] = "1.0"
     id: str = Field(min_length=1)
@@ -154,6 +169,7 @@ class Program(Model):
     approved_by: str | None = None
     # An exemption defeats this obligation; alternative compliance belongs in requirement.any.
     applicability: Expr = Field(default_factory=lambda: LiteralExpr(node="literal", value=True))
+    metadata_applicability: list[MetadataCondition] = Field(default_factory=list)
     exemption: Expr = Field(default_factory=lambda: LiteralExpr(node="literal", value=False))
     requirement: Expr
     sources: list[Span] = Field(min_length=1)
@@ -196,6 +212,10 @@ class Fact(Model):
         return self
 
 
+class MetadataValue(Fact):
+    unit: Unit = "1"
+
+
 class Collection(Model):
     items: list[str] = Field(default_factory=list)
     complete: bool = False
@@ -214,6 +234,7 @@ class Inputs(Model):
     collections: dict[str, Collection] = Field(default_factory=dict)
     graph_complete: bool = False
     evidence_locations: dict[str, str] = Field(default_factory=dict)
+    project_metadata: dict[str, MetadataValue] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def typed_facts(self):
