@@ -1,105 +1,105 @@
 # Review-Pulse results and current status
 
-Updated 18 November 2026. The 46 fire-safety, accessibility and thermal
-obligations are DEVELOPMENT data. They cannot support a held-out claim.
+Updated 18 November 2026. All 46 fire-safety, accessibility and thermal
+obligations are DEVELOPMENT data. The fourth document remains frozen and
+unrun. Labels were written by the benchmark author without independent
+review; ledger attestations and plan scenarios are synthetic. These are small
+samples, not evidence of general regulatory accuracy.
 
-The current priority is measuring drafting rather than adding checking
-capabilities. The offline redesign makes triage advisory and compiles typed,
-schema-constrained model slots into the existing rule language. Drafts still
-need source, type, unit and coverage validation and human approval. No new
-plan computation or checking family has been added.
+The hosted worker now prioritizes a 12-obligation stratified pilot on both
+arms: five thermal, four executable fire-safety and three accessibility
+obligations. The pre-declaration snapshot completed only T01: **1/12 per arm,
+0/1 retained per arm**. Original stopped at the verifier; structured stopped
+at context/binding after a unit diagnostic. Only **1/5 thermal cases per arm**
+has been evaluated. Do not describe this as five thermal failures. HTTP 503
+errors were **5/9 attempts per arm**, excluded from semantic failure counts.
 
-The compiler oracle retains **5/46** gold inputs with the active catalogue,
-or **17/46** with author-proposed declarations. This does not measure an LLM.
+The production declaration change has its own frozen hosted cohort. The
+worker retains the three completed original evaluations, restarts the changed
+structured arm from **0/46**, and preserves all previous request debits. It is
+waiting for free quota: **18/19** allowance used in the current window,
+**1/19** left, below the minimum start budget. Next reset is **19 November,
+08:00 UTC**. No billing was enabled. The PC must stay awake; a restart requires
+explicit resume. Previous structured versions are archived, never pooled.
 
-The key now authenticates, without its value being displayed or stored.
-Gemini 3.8 Flash exhausted its daily quota according to the user's dashboard
-(22 used / 20 limit). Its transport failures are excluded from semantic counts.
-Gemini 4 Hydrogen completed a same-model partial comparison: **2/46** clauses
-per pipeline, **0/2** retained in either. Each arm used **8/8** successful
-requests, then stopped at its configured allowance. These results do not
-establish improved accuracy or separate all model errors from pipeline errors.
+Offline, validated fact declarations compile **13/46** gold frames, versus
+**5/46** with the active catalogue and **17/46** with permissive author-added
+facts and collections. The 13 retained frames match the 13 frozen trees and
+their generated behavior checks. Eight of these 13 need new declared facts;
+declarations supply no values. They require named reviewer evidence before
+decisive execution. This measures deterministic compilation, not LLM accuracy.
 
-The fourth document is frozen and unrun: RPS 2000 version 2011, official French
-Bulletin Officiel 6206, 21 November 2013. Its **17 obligations and 48 synthetic
-scenarios** were committed at `41b1ad14b466fb52500b118d69593319da649e23`.
-Interpretations and applicability labels remain separate from drafting input.
-
-The user chose free quota across multiple days. A
-[continuation worker](free-quota-continuation.md) is configured for the
-remaining **44/46** hosted obligations per arm, starting after the **08:00 UTC
-18 November** reset. It uses fixed checkouts and at most 19 requests per day.
-The PC must stay awake; saved progress supports explicit resume after restart.
-Do not pool models. Complete the local run too, then review the full comparison
-before the fourth document runs once. No checker capabilities were added. The
-unit-vocabulary gap remains documented without a claim of unlocked checks.
-
-The resumed local snapshot has **24/46** completed, **0/24** retained: generation
-cap **21/24**, absent source subject **3/24**. It remains incomplete, with
-**22/46** pending. See the [cache snapshot](../reports/local-after-slots-cache-snapshot.json).
-The first 20 recorded 0/60 request errors. Batch HTTP counters are incomplete
-for the whole cache, because interrupted batches can leave completed entries.
+The local cap diagnosis is complete, but the paired model result is not.
+All **21/21** instrumented replays exhibit repetition. Prompt-only wire
+instructions did not eliminate it. A cap-only bounded-schema variant is
+running the same 24 cases with unchanged model settings; declaration changes
+are excluded. Next: finish and grade that cohort, inspect the paired hosted
+pilot, then diagnose zero thermal retention if both five-case arms complete
+without retaining a rule. Do not run the fourth document.
 
 ## Measured
 
-| Measurement | Result and scope |
+| Measurement | Counts and scope |
 | --- | --- |
-| Gold-slot compiler, active catalogue | 5/46 exact reference trees and generated behavioral matches; 22/46 binding rejection; 17/46 verifier rejection; 2/46 context/binding unresolved |
-| Gold-slot compiler, author-proposed facts | 17/46 exact and behavioral matches; 27/46 verifier rejection; 2/46 context/binding unresolved. Proposed facts do not create plan computations |
-| Original local drafting, Qwen2.5 1.5B | 45/46 evaluated, 1/46 transport timeout. 1/45 semantic cases retained; that draft was wrong. Wrong technically approvable / approvable = 1/1 with a synthetic issue-free review, not a real critic |
-| Generated behavior | 64 fact worlds per retained oracle input; finite tests, not a proof |
-| Replacement credential | Visible after Windows restart; model-list authentication succeeded. Value never printed or written |
-| Hosted original pipeline, replacement key | First batch: 3/3 errors in each of three cycles; 9/9 overall (7 HTTP 429, 2 timeouts). 4/4 unavailable per cycle; circuit prevented further calls. 0/46 semantic evaluations; all 46 pending |
-| Hydrogen paired development sample | 2/46 completed per arm, 0/2 retained per arm. Original terminal stages: verifier 2/2. Structured: context/binding 1/2, schema 1/2. Wrong approvable / approvable undefined, 0/0 per arm |
-| Hydrogen request accounting | 0/8 request errors per arm, 0/16 overall. Each arm stopped at its eight-request allowance; the next clause was interrupted by the client budget and 43/46 were not submitted |
-| Request allowance and pacing tests | 7/7 passed: existing retry/cache tests plus new failed-request budget, cross-cycle allowance and request-spacing checks |
-| Multi-day continuation tests | 13 continuation tests plus the 7 transport/budget tests passed 20/20. The current quota window has zero remaining worker allowance, so setup sends no new generation requests |
-| Drafting-redesign non-slow suite | 978 passed, 2 skipped, 45 slow tests deselected; 530.44 seconds at e2d0acf4516d5e3395869f4f470108b0111e1053. The later runner-only allowance changes have the separate 7/7 targeted result above |
-| Secrets scan | 597 working text files; 776 reachable Git blobs, 286 trees, 37 commits, including refs/reflogs; no credential-pattern match in scanned repository content. Exclusions and access failures are documented |
-| Previous complete slow suite | 45/45 passed at the earlier checkpoint; this is historical validation, not a new interpreter result |
-| Previous segmentation regression | 0/262,144 changed class pixels on one prepared synthetic plan; unchanged source/checkpoint, not real-plan accuracy |
+| Gold-slot oracle, active catalogue | Exact and behavioral matches 5/46; binding rejected 22/46, verifier rejected 17/46, context unresolved 2/46 |
+| Gold-slot oracle, permissive author additions | Exact and behavioral matches 17/46; verifier rejected 27/46, context unresolved 2/46. This mode also adds missing collections and is not the production policy |
+| Gold-slot oracle, validated declarations | Retained 13/46; exact trees 13/13 retained; behavioral matches 13/13 retained. Rejections: verifier 23/46, entity binding 8/46, context 2/46, unit vocabulary 0/46 |
+| Oracle behavior test scope | 64 generated complete-value worlds per retained frame; declaration provenance stripped for logical comparison only; matching evaluation errors receive no credit |
+| Historical local 24-case baseline | Retained 0/24; generation cap 21/24; absent source subject 3/24 |
+| Cap diagnosis | Historical raw responses available 0/21. New instrumented replays completed 21/21: repeated node records/IDs 20/21; repeated prose during repair 1/21. Some diagnostic replays stop loops early |
+| Prompt-only wire fix | Superseded partial run, not a 24-case result. Repeated output and a transport timeout remained; no accuracy improvement established |
+| Hosted pilot, frozen pre-declaration pipelines | Semantic completion 1/12 pilot cases per arm, 1/5 thermal per arm. Retention 0/1 per arm; matches/partly matches/wrong each 0/0 retained candidates, undefined |
+| Hosted pilot approvability | Wrong approvable / approvable = 0/0 in each arm, undefined; no final program existed to grade |
+| Hosted pilot transport | HTTP failures 10/18 attempts overall, 5/9 per arm; all 10 were HTTP 503. Per-batch denominators are retained in the pilot snapshot; no API-unavailable row is counted as a semantic failure |
+| Declaration and compatibility checks | Earlier declaration/runtime/interpreter checks 80/80 passed; focused current drafting/declaration/fallback tests 40/40 passed; isolated cap-only schema tests 12/12 passed |
+| Broad suite, first run | 1,012 passed, 2 skipped, 1 failed, 45 slow tests excluded. Fallback compatibility failure corrected; focused 40/40 passed afterwards. Fresh broad rerun pending |
+| Worker checks | 23/23 targeted transport, quota, continuation and phase-order tests passed at the pilot checkpoint |
+| Fourth document freeze | RPS 2000 version 2011; official French Bulletin Officiel 6206, 21 November 2013; 17 obligations and 48 synthetic scenarios committed at `41b1ad14b466fb52500b118d69593319da649e23`; model/checker runs 0/17 |
 
-Per-obligation oracle diagnostics are in
-[slot-oracle-results.json](../reports/slot-oracle-results.json).
-The [Hydrogen assessment](../reports/hydrogen-development-assessment.json)
-lists all 46 obligations, their frozen readings, completed results or explicit
-not-evaluated status. No final rule existed to compare as exact, partial or
-wrong. Author notes retain the differences and request limitations.
-[Structured drafting](structured-drafting.md) describes checks and limits.
-[Secrets audit](secrets-audit.md) states scan exclusions and the chat exposure.
-[Hosted runner](resilient-hosted-runner.md) describes retries, cache, circuit
-limits and provider setup. [Fourth-document freeze](fourth-document-freeze.md)
-records the official edition and source checksum.
+Per-obligation and per-stage evidence:
+
+- [Hosted pilot snapshot](../reports/hosted-stratified-pilot-snapshot.json): frozen reading, retained candidate or explicit absence, terminal stage, diagnostics and batch request counts for all 12 selected obligations in both arms.
+- [Gold-slot declaration oracle](../reports/slot-oracle-declarations.json): all 46 cases across the three catalogue modes.
+- [Reviewed replay diagnosis](../reports/local-cap-reviewed-diagnosis.json): all 21 cap cases and local raw trace paths. Raw responses remain local.
+- [Cap-only protocol](../reports/local-cap-protocol.json): unchanged model settings, isolated source fingerprint and reproducible patch. Live local results are `reports/local-schema-after-24.json`.
+- [Hosted protocol](../reports/free-quota-protocol.json): frozen versions and quota accounting. Live progress is `reports/free-quota-declared-eval/progress.json`.
+
+[Pilot design](development-pilot.md), [cap diagnosis](local-generation-cap.md),
+[fact-declaration design](fact-declarations.md) and
+[continuation instructions](free-quota-continuation.md) explain the choices.
 
 ## Not measured
 
-- A full 46-obligation hosted comparison. Only 2/46 completed per arm on
-  Hydrogen. The hosted-versus-local capacity gap remains unmeasured; the
-  earlier wrong retained local width rule was not reached in the hosted run.
-- Fourth-document drafting, unsupplied applicability discovery, end-to-end
-  verdict accuracy, false passes or violation precision. Its model/checker
-  evaluations are **0/17** obligations.
-- Production accuracy gains from the redesign. Compiler-oracle matches do not
-  establish source interpretation quality or usable application coverage.
-- Independent label quality. Labels and gold slots were written by the
-  benchmark author without independent review. The samples are small.
-- Real reviewer evidence quality: ledger attestations in benchmark scenarios
-  are synthetic. They are not independent measurements or professional review.
+- A completed paired 12-case hosted pilot or full 46-case model comparison.
+  The latest structured cohort has 0/46 completed; earlier versions stay separate.
+- A completed same-24 local before/after result or correctness grading of any
+  new retained local candidates. A reduced cap-failure count alone would not
+  measure correct interpretation.
+- Real model-proposed declaration quality. The 13/46 result uses author-supplied
+  gold declarations, not model-generated declarations.
+- Fourth-document interpretation, unsupplied applicability discovery or
+  end-to-end accuracy: 0/17 evaluated. No fourth-document result is used for tuning.
+- False-pass rate or confirmed-violation precision for the latest interpreter.
+  There are no paired end-to-end results to supply those denominators.
+- Independent label validity, real reviewer evidence quality, real-plan
+  segmentation accuracy or legal sufficiency.
 
 ## Do not claim
 
-- A reliable general regulation interpreter or adaptation to any document.
-- That unresolved-only output demonstrates useful accuracy or is "safe".
-- That schema validity, a round trip, human approval or finite behavioral tests
-  prove legal or semantic correctness.
-- That missing scale, membership, inventory or evidence can be assumed true.
-  The provisional 25% scale bound is a placeholder, not calibrated accuracy.
-- That proposed fact declarations remove the finite checker capability limit.
-  Evidence attestation supplies labelled facts; it does not implement missing
-  geometry, physics or specialist judgment.
-- That earlier thermal runs remain held-out after development used them, or
-  that these unreviewed synthetic samples establish performance in practice.
+- Improved interpreter accuracy, general adaptation to any rule set, or a fair
+  model-capacity ceiling. Those questions remain open until paired results exist.
+- That zero decisions, schema validity, round trips, finite behavior tests or
+  human approval establish correctness or make the system "safe".
+- That declarations implement geometry, physics, missing entity inventories or
+  specialist judgment. Evidence requests expose those gaps; they do not compute values.
+- That missing or conflicting evidence, unknown membership, uncertain scale or
+  incomplete inventory may be assumed verified. The provisional 25% scale bound
+  remains an uncalibrated placeholder.
+- Unlimited expression capacity: the generation wire budget permits 64 nodes
+  and bounded diagnostic messages; larger clauses can remain unresolved.
+- Any held-out result on the 46 development obligations. The only sealed fourth
+  document is unrun. Labels have no independent review; attestations are synthetic.
 
-Earlier runs, superseded statuses and their original limitations are preserved
-in [results history](results-history.md). Historical provider availability does
-not establish connectivity for the replacement credential.
+Earlier results and superseded statuses are preserved in
+[results history](results-history.md). Provider model revisions can change
+behind a fixed API identifier; that drift has not been measured.

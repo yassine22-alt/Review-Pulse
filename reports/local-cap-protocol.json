@@ -1,0 +1,53 @@
+{
+  "development_only": true,
+  "selection": "reports/local-24-cohort.json",
+  "count": 24,
+  "before": {
+    "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+    "retained": [
+      0,
+      24
+    ],
+    "stages": {
+      "generation_cap": 21,
+      "subject": 3
+    }
+  },
+  "wire_only": {
+    "commit": "21c800bdafe49128db8d31cb96e715e35461e7b2",
+    "report": "reports/local-wire-after-24.json",
+    "status": "SUPERSEDED_PARTIAL",
+    "reason": "Repeated name/reference generation persisted; transport timeout prevented a complete comparison."
+  },
+  "bounded_schema": {
+    "commit": "a8dd038b037b4e94c772741495885862cc5b4d6e",
+    "parent": "21c800bdafe49128db8d31cb96e715e35461e7b2",
+    "patch": "reports/local-cap-only-variant.patch",
+    "production_equivalent_change": "5f20d6f99d594782b9c01b06b1cea5858cdc4330",
+    "code_fingerprint": "ea3923c7891d424b3a354fd6ffc855c2d5bdb66784e3bf4325916e5be7bdeb95",
+    "report": "reports/local-schema-after-24.json",
+    "includes_fact_declarations": false
+  },
+  "settings": {
+    "model": "qwen2.5:1.5b",
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 8192,
+    "num_predict": 4096,
+    "timeout_s": 600,
+    "concurrency": 1
+  },
+  "batching": "After run writes per obligation (batch size 1); before used size 4. Model settings unchanged. Transport circuit spillover can differ.",
+  "wire_limits": {
+    "nodes": 64,
+    "references": "n plus 1-3 digits",
+    "unresolved_messages": 8,
+    "message_characters": 512
+  },
+  "limitations": [
+    "Finite wire limits may leave unusually complex clauses unresolved; no splitting or new computation is added.",
+    "No correctness gain can be claimed from a reduction in generation-cap errors.",
+    "API_UNAVAILABLE and client transport timeouts are excluded from semantic failures.",
+    "The source-grounded declaration oracle is a separate experiment, not pooled into this cap comparison."
+  ]
+}

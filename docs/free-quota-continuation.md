@@ -73,14 +73,17 @@ $quotaPlan = Get-Content -Raw runs/free-quota-plan.local.json | ConvertFrom-Json
 
 This uses the frozen worker copy recorded by the plan, even if the working
 branch has changed. The operational worker is committed at
-`80ea47d1851ba02eaf5e4611e1a7b7df98c015cb`; its byte hash is in the protocol.
+`7596e92d3f24d79a774653dc28618389386634f3`; its byte hash is in the protocol.
+The current structured code is frozen separately at
+`edbe60af9f64bb76054b3a0f1f96386b05a348be`. Its changed cohort starts at zero;
+archived structured attempts still count against the daily allowance.
 
 Without `--watch`, it performs the currently allowed work and exits instead
 of waiting for the next window. A second worker cannot take the same lock.
 
-Progress is local at `reports/free-quota-eval/progress.json`. The journal,
+Progress is local at `reports/free-quota-declared-eval/progress.json`. The journal,
 per-run JSON reports and logs are in that directory; only reviewed snapshots
-will be committed. To stop, create `reports/free-quota-eval/STOP`. The worker
+will be committed. To stop, create `reports/free-quota-declared-eval/STOP`. The worker
 checks it while waiting and during child execution. Remove that exact stop
 file before an explicit resume. Stop and restart the worker after changing
 the environment credential.

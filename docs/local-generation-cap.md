@@ -42,3 +42,20 @@ finishes. Compiler tests do not demonstrate improved local model accuracy.
 The wire-contract fix has already produced another length-finished repetitive
 response in the rerun, so cap failures have not been eliminated. Do not present
 the change as a successful accuracy fix while the cohort is incomplete.
+
+That prompt-only run was superseded after a transport timeout interrupted the
+first batch. Its single completed semantic case stopped at source-span
+grounding; it is not a 24-case result. A second, isolated cap-only variant
+constrains node IDs and references to short `n`-number identifiers, enforces
+the existing variable syntax, limits node/operand lists to 64 and bounds
+unresolved explanations to eight messages of 512 characters. These are wire
+budgets, not regulatory thresholds. More complex clauses may remain unresolved.
+Model, seed, temperature, context, timeout and generation cap remain unchanged.
+Batch size is one to persist each result and avoid a timeout opening the local
+circuit for several queued cases. Transport spillover is therefore not directly
+comparable; semantic outcomes and correctness remain the paired quantities.
+
+The isolated variant excludes fact-declaration changes and has 12/12 schema
+tests passing. `reports/local-cap-protocol.json` and its companion patch record
+how to reproduce it. Its report is `reports/local-schema-after-24.json`; do not
+pool it with the prompt-only partial run or the declaration oracle.
