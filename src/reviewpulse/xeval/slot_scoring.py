@@ -89,7 +89,7 @@ def flat_nodes(raw: dict) -> list[dict]:
 
 
 def quantity(node):
-    value, symbol = node.get("value"), node.get("unit", "1")
+    value, symbol = node.get("value"), node.get("unit") or "1"
     try:
         unit = parse_unit(symbol)
         return (round(float(value) * unit.factor + unit.offset, 9), repr(unit.dims), "count" if symbol == "count" else "physical")
