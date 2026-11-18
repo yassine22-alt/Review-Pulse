@@ -1,0 +1,199 @@
+{
+  "source_kind": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+  "scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+  "requirements": [
+    {
+      "id": "area",
+      "text": "Every reviewed bedroom shall have a floor area of at least 9 m2.",
+      "subject": "bedroom",
+      "requirement": {
+        "node": "forall",
+        "collection": "reviewed_bedrooms",
+        "variable": "$r",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "area_m2"
+          },
+          "right": {
+            "node": "literal",
+            "value": 9,
+            "unit": "m2"
+          }
+        }
+      }
+    },
+    {
+      "id": "route",
+      "text": "Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
+      "subject": "bedroom",
+      "requirement": {
+        "node": "forall",
+        "collection": "reviewed_bedrooms",
+        "variable": "$r",
+        "body": {
+          "node": "exists",
+          "collection": "reviewed_halls",
+          "variable": "$h",
+          "body": {
+            "node": "path_exists",
+            "origin": "$r",
+            "destination": "$h",
+            "node_filter": {
+              "node": "not",
+              "args": [
+                {
+                  "node": "eq",
+                  "left": {
+                    "node": "fact",
+                    "entity": "$node",
+                    "name": "room_type"
+                  },
+                  "right": {
+                    "node": "literal",
+                    "value": "bathroom",
+                    "unit": "1"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "conditional",
+      "text": "If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
+      "subject": "bedroom",
+      "requirement": {
+        "node": "forall",
+        "collection": "reviewed_bedrooms",
+        "variable": "$r",
+        "body": {
+          "node": "any",
+          "args": [
+            {
+              "node": "not",
+              "args": [
+                {
+                  "node": "lt",
+                  "left": {
+                    "node": "fact",
+                    "entity": "$r",
+                    "name": "area_m2"
+                  },
+                  "right": {
+                    "node": "literal",
+                    "value": 12,
+                    "unit": "m2"
+                  }
+                }
+              ]
+            },
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "min_width_m"
+              },
+              "right": {
+                "node": "literal",
+                "value": 2.5,
+                "unit": "m"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "clear_width",
+      "text": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
+      "subject": "door",
+      "requirement": {
+        "node": "forall",
+        "collection": "reviewed_doors",
+        "variable": "$r",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "clear_width_m"
+          },
+          "right": {
+            "node": "literal",
+            "value": 0.8,
+            "unit": "m"
+          }
+        }
+      }
+    },
+    {
+      "id": "exit_count",
+      "text": "The reviewed unit shall have at least one confirmed final exit at ground level.",
+      "subject": "unit",
+      "requirement": {
+        "node": "ge",
+        "left": {
+          "node": "count",
+          "collection": "final_exits",
+          "variable": "$e"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1,
+          "unit": "count"
+        }
+      }
+    }
+  ],
+  "reviewed_rooms": [
+    {
+      "id": "bedroom_1",
+      "label": "BEDROOM 1",
+      "dimension_quote": "12'-1\" X 10'-8\"",
+      "area_m2": 11.9741696,
+      "min_width_m": 3.2512,
+      "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+      "review_note": "Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+    },
+    {
+      "id": "bedroom_2",
+      "label": "BEDROOM 2",
+      "dimension_quote": "11'-9\" X 11'-8\"",
+      "area_m2": 12.735458399999999,
+      "min_width_m": 3.556,
+      "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"",
+      "review_note": "Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+    }
+  ],
+  "reviewed_paths": [
+    {
+      "a": "bedroom_1",
+      "b": "hall",
+      "source": "Author confirms a door connection from BEDROOM 1 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
+    },
+    {
+      "a": "bedroom_2",
+      "b": "hall",
+      "source": "Author confirms a door connection from BEDROOM 2 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
+    }
+  ],
+  "frozen_expected_after_review": {
+    "area": "SATISFIED",
+    "route": "SATISFIED",
+    "conditional": "SATISFIED",
+    "clear_width": "UNRESOLVED",
+    "exit_count": "UNRESOLVED"
+  },
+  "limits": [
+    "Rule meanings and rectangle/path interpretations authored by benchmark author with no independent review.",
+    "No synthetic clear-width or exit values are supplied. D06 nominal dimensions do not establish net clear opening.",
+    "The final exit inventory cannot be confirmed from a second-floor sheet.",
+    "This measures assisted execution after author evidence, not automated source interpretation or perception accuracy."
+  ]
+}

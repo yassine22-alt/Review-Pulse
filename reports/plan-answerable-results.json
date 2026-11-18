@@ -1,0 +1,4886 @@
+{
+  "source": {
+    "publisher": "Author demonstration profile applied to Chief Architect drawing",
+    "sheet": "A-7",
+    "edition": "July 2024 drawing; November 2026 authored profile"
+  },
+  "limits": [
+    "Rule meanings and rectangle/path interpretations authored by benchmark author with no independent review.",
+    "No synthetic clear-width or exit values are supplied. D06 nominal dimensions do not establish net clear opening.",
+    "The final exit inventory cannot be confirmed from a second-floor sheet.",
+    "This measures assisted execution after author evidence, not automated source interpretation or perception accuracy."
+  ],
+  "requirements": [
+    {
+      "id": "area",
+      "source": "1. Every reviewed bedroom shall have a floor area of at least 9 m2.",
+      "manual_slots": {
+        "id": "area",
+        "title": "Every reviewed bedroom shall have a floor area of at least 9 m2.",
+        "subject": "bedroom",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "area_m2",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 9,
+            "unit": "m2",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "reviewed_bedrooms",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "1",
+            "quote": "1. Every reviewed bedroom shall have a floor area of at least 9 m2."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Every reviewed bedroom shall have a floor area of at least 9 m2.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 9.0,
+            "unit": "m2",
+            "operator": "ge",
+            "normalized_span": [
+              59,
+              63
+            ],
+            "quote": "9 m2",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "SATISFIED",
+      "approval_scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+      "before": {
+        "rule_id": "area",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:reviewed_bedrooms"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:reviewed_bedrooms"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "1",
+            "start": 0,
+            "end": 67,
+            "quote": "1. Every reviewed bedroom shall have a floor area of at least 9 m2."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "empty scope:reviewed_bedrooms",
+            "incomplete collection:reviewed_bedrooms"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "empty scope:reviewed_bedrooms",
+                "incomplete collection:reviewed_bedrooms"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "unknown_members",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:reviewed_bedrooms"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "area",
+        "outcome": "SATISFIED",
+        "dependencies": [
+          "bedroom_1.area_m2",
+          "bedroom_2.area_m2",
+          "inventory:reviewed_bedrooms"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [],
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "bedroom_1",
+            "fact": "area_m2",
+            "unit": "m2",
+            "value": 11.9741696,
+            "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          },
+          {
+            "entity": "bedroom_2",
+            "fact": "area_m2",
+            "unit": "m2",
+            "value": 12.735458399999999,
+            "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          }
+        ],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "1",
+            "start": 0,
+            "end": 67,
+            "quote": "1. Every reviewed bedroom shall have a floor area of at least 9 m2."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [],
+          "evidence": [
+            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+          ],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": true,
+              "missing": [],
+              "evidence": [
+                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+              ],
+              "children": [
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "ge",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                      ],
+                      "children": [
+                        {
+                          "node": "fact",
+                          "value": 11.9741696,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "literal",
+                          "value": 9.0,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                },
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "ge",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                      ],
+                      "children": [
+                        {
+                          "node": "fact",
+                          "value": 12.735458399999999,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "literal",
+                          "value": 9.0,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [],
+        "evidence": [
+          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": true,
+            "missing": [],
+            "evidence": [
+              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": true,
+                "missing": [],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "ge",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": 11.9741696,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "literal",
+                        "value": 9.0,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": true,
+                "missing": [],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "ge",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": 12.735458399999999,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "literal",
+                        "value": 9.0,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "area",
+        "title": "Every reviewed bedroom shall have a floor area of at least 9 m2.",
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "status": "approved",
+        "approved_by": "benchmark author; manual interpretation",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "reviewed_bedrooms",
+          "variable": "$r",
+          "where": null,
+          "body": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "$r",
+              "name": "area_m2"
+            },
+            "right": {
+              "node": "literal",
+              "value": 9.0,
+              "unit": "m2"
+            }
+          }
+        },
+        "sources": [
+          {
+            "clause": "1",
+            "start": 0,
+            "end": 67,
+            "quote": "1. Every reviewed bedroom shall have a floor area of at least 9 m2."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "route",
+      "source": "2. Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
+      "manual_slots": {
+        "id": "route",
+        "title": "Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
+        "subject": "bedroom",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$node",
+            "name": "room_type",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": "bathroom",
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "eq",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n4"
+            ],
+            "id": "n5"
+          },
+          {
+            "op": "path_exists",
+            "origin": "$r",
+            "destination": "$h",
+            "via_edges": [
+              "door",
+              "opening"
+            ],
+            "node_filter": "n5",
+            "id": "n6"
+          },
+          {
+            "op": "exists",
+            "collection": "reviewed_halls",
+            "variable": "$h",
+            "body": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "forall",
+            "collection": "reviewed_bedrooms",
+            "variable": "$r",
+            "body": "n7",
+            "id": "n8"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n8",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "2",
+            "quote": "2. Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
+        "evidence": []
+      },
+      "outcome": "SATISFIED",
+      "approval_scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+      "before": {
+        "rule_id": "route",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:reviewed_bedrooms"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:reviewed_bedrooms"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "2",
+            "start": 69,
+            "end": 166,
+            "quote": "2. Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "empty scope:reviewed_bedrooms",
+            "incomplete collection:reviewed_bedrooms"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "empty scope:reviewed_bedrooms",
+                "incomplete collection:reviewed_bedrooms"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "unknown_members",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:reviewed_bedrooms"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "route",
+        "outcome": "SATISFIED",
+        "dependencies": [
+          "bedroom_1.room_type",
+          "bedroom_2.room_type",
+          "connections",
+          "inventory:reviewed_bedrooms",
+          "inventory:reviewed_halls"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "connection inventory is incomplete"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "bedroom_1",
+            "fact": "room_type",
+            "unit": "1",
+            "value": "bedroom",
+            "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          },
+          {
+            "entity": "bedroom_2",
+            "fact": "room_type",
+            "unit": "1",
+            "value": "bedroom",
+            "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          }
+        ],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "2",
+            "start": 69,
+            "end": 166,
+            "quote": "2. Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "incomplete room graph"
+          ],
+          "evidence": [
+            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+          ],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": true,
+              "missing": [
+                "incomplete room graph"
+              ],
+              "evidence": [
+                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+              ],
+              "children": [
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [
+                    "incomplete room graph"
+                  ],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "exists",
+                      "value": true,
+                      "missing": [
+                        "incomplete room graph"
+                      ],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                      ],
+                      "children": [
+                        {
+                          "node": "all",
+                          "value": true,
+                          "missing": [
+                            "incomplete room graph"
+                          ],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                          ],
+                          "children": [
+                            {
+                              "node": "literal",
+                              "value": true,
+                              "missing": [],
+                              "evidence": [],
+                              "children": [],
+                              "count_bounds": null
+                            },
+                            {
+                              "node": "path_exists",
+                              "value": true,
+                              "missing": [
+                                "incomplete room graph"
+                              ],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                              ],
+                              "children": [
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "not",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [
+                                    "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                  ],
+                                  "children": [
+                                    {
+                                      "node": "eq",
+                                      "value": false,
+                                      "missing": [],
+                                      "evidence": [
+                                        "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                      ],
+                                      "children": [
+                                        {
+                                          "node": "fact",
+                                          "value": "bedroom",
+                                          "missing": [],
+                                          "evidence": [
+                                            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                          ],
+                                          "children": [],
+                                          "count_bounds": null
+                                        },
+                                        {
+                                          "node": "literal",
+                                          "value": "bathroom",
+                                          "missing": [],
+                                          "evidence": [],
+                                          "children": [],
+                                          "count_bounds": null
+                                        }
+                                      ],
+                                      "count_bounds": null
+                                    }
+                                  ],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                }
+                              ],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                },
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [
+                    "incomplete room graph"
+                  ],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "exists",
+                      "value": true,
+                      "missing": [
+                        "incomplete room graph"
+                      ],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                      ],
+                      "children": [
+                        {
+                          "node": "all",
+                          "value": true,
+                          "missing": [
+                            "incomplete room graph"
+                          ],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                          ],
+                          "children": [
+                            {
+                              "node": "literal",
+                              "value": true,
+                              "missing": [],
+                              "evidence": [],
+                              "children": [],
+                              "count_bounds": null
+                            },
+                            {
+                              "node": "path_exists",
+                              "value": true,
+                              "missing": [
+                                "incomplete room graph"
+                              ],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                              ],
+                              "children": [
+                                {
+                                  "node": "not",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [
+                                    "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                  ],
+                                  "children": [
+                                    {
+                                      "node": "eq",
+                                      "value": false,
+                                      "missing": [],
+                                      "evidence": [
+                                        "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                      ],
+                                      "children": [
+                                        {
+                                          "node": "fact",
+                                          "value": "bedroom",
+                                          "missing": [],
+                                          "evidence": [
+                                            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                          ],
+                                          "children": [],
+                                          "count_bounds": null
+                                        },
+                                        {
+                                          "node": "literal",
+                                          "value": "bathroom",
+                                          "missing": [],
+                                          "evidence": [],
+                                          "children": [],
+                                          "count_bounds": null
+                                        }
+                                      ],
+                                      "count_bounds": null
+                                    }
+                                  ],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": true,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                }
+                              ],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [
+          "incomplete room graph"
+        ],
+        "evidence": [
+          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": true,
+            "missing": [
+              "incomplete room graph"
+            ],
+            "evidence": [
+              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": true,
+                "missing": [
+                  "incomplete room graph"
+                ],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "exists",
+                    "value": true,
+                    "missing": [
+                      "incomplete room graph"
+                    ],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                    ],
+                    "children": [
+                      {
+                        "node": "all",
+                        "value": true,
+                        "missing": [
+                          "incomplete room graph"
+                        ],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                        ],
+                        "children": [
+                          {
+                            "node": "literal",
+                            "value": true,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "path_exists",
+                            "value": true,
+                            "missing": [
+                              "incomplete room graph"
+                            ],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                            ],
+                            "children": [
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "not",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [
+                                  "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                ],
+                                "children": [
+                                  {
+                                    "node": "eq",
+                                    "value": false,
+                                    "missing": [],
+                                    "evidence": [
+                                      "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                    ],
+                                    "children": [
+                                      {
+                                        "node": "fact",
+                                        "value": "bedroom",
+                                        "missing": [],
+                                        "evidence": [
+                                          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\""
+                                        ],
+                                        "children": [],
+                                        "count_bounds": null
+                                      },
+                                      {
+                                        "node": "literal",
+                                        "value": "bathroom",
+                                        "missing": [],
+                                        "evidence": [],
+                                        "children": [],
+                                        "count_bounds": null
+                                      }
+                                    ],
+                                    "count_bounds": null
+                                  }
+                                ],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              }
+                            ],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": true,
+                "missing": [
+                  "incomplete room graph"
+                ],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "exists",
+                    "value": true,
+                    "missing": [
+                      "incomplete room graph"
+                    ],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                    ],
+                    "children": [
+                      {
+                        "node": "all",
+                        "value": true,
+                        "missing": [
+                          "incomplete room graph"
+                        ],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                        ],
+                        "children": [
+                          {
+                            "node": "literal",
+                            "value": true,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "path_exists",
+                            "value": true,
+                            "missing": [
+                              "incomplete room graph"
+                            ],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                            ],
+                            "children": [
+                              {
+                                "node": "not",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [
+                                  "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                ],
+                                "children": [
+                                  {
+                                    "node": "eq",
+                                    "value": false,
+                                    "missing": [],
+                                    "evidence": [
+                                      "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                    ],
+                                    "children": [
+                                      {
+                                        "node": "fact",
+                                        "value": "bedroom",
+                                        "missing": [],
+                                        "evidence": [
+                                          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\""
+                                        ],
+                                        "children": [],
+                                        "count_bounds": null
+                                      },
+                                      {
+                                        "node": "literal",
+                                        "value": "bathroom",
+                                        "missing": [],
+                                        "evidence": [],
+                                        "children": [],
+                                        "count_bounds": null
+                                      }
+                                    ],
+                                    "count_bounds": null
+                                  }
+                                ],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": true,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              }
+                            ],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "route",
+        "title": "Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "status": "approved",
+        "approved_by": "benchmark author; manual interpretation",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "reviewed_bedrooms",
+          "variable": "$r",
+          "where": null,
+          "body": {
+            "node": "exists",
+            "collection": "reviewed_halls",
+            "variable": "$h",
+            "where": null,
+            "body": {
+              "node": "path_exists",
+              "origin": "$r",
+              "destination": "$h",
+              "via_edges": [
+                "door",
+                "opening"
+              ],
+              "node_filter": {
+                "node": "not",
+                "args": [
+                  {
+                    "node": "eq",
+                    "left": {
+                      "node": "fact",
+                      "entity": "$node",
+                      "name": "room_type"
+                    },
+                    "right": {
+                      "node": "literal",
+                      "value": "bathroom",
+                      "unit": "1"
+                    }
+                  }
+                ]
+              },
+              "edge_filter": null
+            }
+          }
+        },
+        "sources": [
+          {
+            "clause": "2",
+            "start": 69,
+            "end": 166,
+            "quote": "2. Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "conditional",
+      "source": "3. If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
+      "manual_slots": {
+        "id": "conditional",
+        "title": "If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
+        "subject": "bedroom",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "area_m2",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 12,
+            "unit": "m2",
+            "id": "n3"
+          },
+          {
+            "op": "lt",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n4"
+            ],
+            "id": "n5"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "min_width_m",
+            "id": "n6"
+          },
+          {
+            "op": "literal",
+            "value": 2.5,
+            "unit": "m",
+            "id": "n7"
+          },
+          {
+            "op": "ge",
+            "left": "n6",
+            "right": "n7",
+            "id": "n8"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n5",
+              "n8"
+            ],
+            "id": "n9"
+          },
+          {
+            "op": "forall",
+            "collection": "reviewed_bedrooms",
+            "variable": "$r",
+            "body": "n9",
+            "id": "n10"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n10",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "3",
+            "quote": "3. If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 12.0,
+            "unit": "m2",
+            "operator": "lt",
+            "normalized_span": [
+              40,
+              45
+            ],
+            "quote": "12 m2",
+            "column_header": ""
+          },
+          {
+            "id": "q1",
+            "value": 2.5,
+            "unit": "m",
+            "operator": null,
+            "normalized_span": [
+              89,
+              94
+            ],
+            "quote": "2.5 m",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "SATISFIED",
+      "approval_scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+      "before": {
+        "rule_id": "conditional",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:reviewed_bedrooms"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:reviewed_bedrooms"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "3",
+            "start": 168,
+            "end": 266,
+            "quote": "3. If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "empty scope:reviewed_bedrooms",
+            "incomplete collection:reviewed_bedrooms"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "empty scope:reviewed_bedrooms",
+                "incomplete collection:reviewed_bedrooms"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "unknown_members",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:reviewed_bedrooms"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "conditional",
+        "outcome": "SATISFIED",
+        "dependencies": [
+          "bedroom_1.area_m2",
+          "bedroom_1.min_width_m",
+          "bedroom_2.area_m2",
+          "bedroom_2.min_width_m",
+          "inventory:reviewed_bedrooms"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [],
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "bedroom_1",
+            "fact": "area_m2",
+            "unit": "m2",
+            "value": 11.9741696,
+            "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          },
+          {
+            "entity": "bedroom_1",
+            "fact": "min_width_m",
+            "unit": "m",
+            "value": 3.2512,
+            "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          },
+          {
+            "entity": "bedroom_2",
+            "fact": "area_m2",
+            "unit": "m2",
+            "value": 12.735458399999999,
+            "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          },
+          {
+            "entity": "bedroom_2",
+            "fact": "min_width_m",
+            "unit": "m",
+            "value": 3.556,
+            "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author; no independent review"
+          }
+        ],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "3",
+            "start": 168,
+            "end": 266,
+            "quote": "3. If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [],
+          "evidence": [
+            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+          ],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": true,
+              "missing": [],
+              "evidence": [
+                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+              ],
+              "children": [
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "any",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                      ],
+                      "children": [
+                        {
+                          "node": "not",
+                          "value": false,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [
+                            {
+                              "node": "lt",
+                              "value": true,
+                              "missing": [],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                              ],
+                              "children": [
+                                {
+                                  "node": "fact",
+                                  "value": 11.9741696,
+                                  "missing": [],
+                                  "evidence": [
+                                    "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                                  ],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": 12.0,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                }
+                              ],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "ge",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [
+                            {
+                              "node": "fact",
+                              "value": 3.2512,
+                              "missing": [],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                              ],
+                              "children": [],
+                              "count_bounds": null
+                            },
+                            {
+                              "node": "literal",
+                              "value": 2.5,
+                              "missing": [],
+                              "evidence": [],
+                              "children": [],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                },
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [
+                    "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "any",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [
+                        "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                      ],
+                      "children": [
+                        {
+                          "node": "not",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [
+                            {
+                              "node": "lt",
+                              "value": false,
+                              "missing": [],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                              ],
+                              "children": [
+                                {
+                                  "node": "fact",
+                                  "value": 12.735458399999999,
+                                  "missing": [],
+                                  "evidence": [
+                                    "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                                  ],
+                                  "children": [],
+                                  "count_bounds": null
+                                },
+                                {
+                                  "node": "literal",
+                                  "value": 12.0,
+                                  "missing": [],
+                                  "evidence": [],
+                                  "children": [],
+                                  "count_bounds": null
+                                }
+                              ],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "ge",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [
+                            "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                          ],
+                          "children": [
+                            {
+                              "node": "fact",
+                              "value": 3.556,
+                              "missing": [],
+                              "evidence": [
+                                "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                              ],
+                              "children": [],
+                              "count_bounds": null
+                            },
+                            {
+                              "node": "literal",
+                              "value": 2.5,
+                              "missing": [],
+                              "evidence": [],
+                              "children": [],
+                              "count_bounds": null
+                            }
+                          ],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [],
+        "evidence": [
+          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": true,
+            "missing": [],
+            "evidence": [
+              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": true,
+                "missing": [],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "any",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                    ],
+                    "children": [
+                      {
+                        "node": "not",
+                        "value": false,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [
+                          {
+                            "node": "lt",
+                            "value": true,
+                            "missing": [],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                            ],
+                            "children": [
+                              {
+                                "node": "fact",
+                                "value": 11.9741696,
+                                "missing": [],
+                                "evidence": [
+                                  "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                                ],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": 12.0,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              }
+                            ],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": 3.2512,
+                            "missing": [],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 2.5,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": true,
+                "missing": [],
+                "evidence": [
+                  "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "any",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [
+                      "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                    ],
+                    "children": [
+                      {
+                        "node": "not",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [
+                          {
+                            "node": "lt",
+                            "value": false,
+                            "missing": [],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                            ],
+                            "children": [
+                              {
+                                "node": "fact",
+                                "value": 12.735458399999999,
+                                "missing": [],
+                                "evidence": [
+                                  "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                                ],
+                                "children": [],
+                                "count_bounds": null
+                              },
+                              {
+                                "node": "literal",
+                                "value": 12.0,
+                                "missing": [],
+                                "evidence": [],
+                                "children": [],
+                                "count_bounds": null
+                              }
+                            ],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [
+                          "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": 3.556,
+                            "missing": [],
+                            "evidence": [
+                              "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 2.5,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "conditional",
+        "title": "If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "status": "approved",
+        "approved_by": "benchmark author; manual interpretation",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "reviewed_bedrooms",
+          "variable": "$r",
+          "where": null,
+          "body": {
+            "node": "any",
+            "args": [
+              {
+                "node": "not",
+                "args": [
+                  {
+                    "node": "lt",
+                    "left": {
+                      "node": "fact",
+                      "entity": "$r",
+                      "name": "area_m2"
+                    },
+                    "right": {
+                      "node": "literal",
+                      "value": 12.0,
+                      "unit": "m2"
+                    }
+                  }
+                ]
+              },
+              {
+                "node": "ge",
+                "left": {
+                  "node": "fact",
+                  "entity": "$r",
+                  "name": "min_width_m"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 2.5,
+                  "unit": "m"
+                }
+              }
+            ]
+          }
+        },
+        "sources": [
+          {
+            "clause": "3",
+            "start": 168,
+            "end": 266,
+            "quote": "3. If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "clear_width",
+      "source": "4. The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
+      "manual_slots": {
+        "id": "clear_width",
+        "title": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
+        "subject": "door",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "clear_width_m",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 0.8,
+            "unit": "m",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "reviewed_doors",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "4",
+            "quote": "4. The reviewed D06 door type shall provide a net clear opening of at least 0.8 m."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 0.8,
+            "unit": "m",
+            "operator": "ge",
+            "normalized_span": [
+              73,
+              78
+            ],
+            "quote": "0.8 m",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+      "before": {
+        "rule_id": "clear_width",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:reviewed_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:reviewed_doors"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "4",
+            "start": 268,
+            "end": 350,
+            "quote": "4. The reviewed D06 door type shall provide a net clear opening of at least 0.8 m."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "empty scope:reviewed_doors",
+            "incomplete collection:reviewed_doors"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "empty scope:reviewed_doors",
+                "incomplete collection:reviewed_doors"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "unknown_members",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:reviewed_doors"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "clear_width",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "D06.clear_width_m",
+          "inventory:reviewed_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [],
+        "evidence_requests": [
+          {
+            "entity": "D06",
+            "fact": "clear_width_m",
+            "unit": "m",
+            "reason": "missing",
+            "why": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m. reads Net clear opening, not nominal door size for D06.",
+            "where_to_look": "Manufacturer clear-opening data or a dimension explicitly labelled net clear",
+            "clause": "4"
+          }
+        ],
+        "fact_provenance": [
+          {
+            "entity": "D06",
+            "fact": "clear_width_m",
+            "unit": "m",
+            "value": null,
+            "source": "A-7 D06 label 3076 is nominal; net clear opening is not specified",
+            "trusted": false,
+            "conflicting": false,
+            "origin": null,
+            "reviewer": null
+          }
+        ],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "4",
+            "start": 268,
+            "end": 350,
+            "quote": "4. The reviewed D06 door type shall provide a net clear opening of at least 0.8 m."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "D06.clear_width_m (missing)"
+          ],
+          "evidence": [
+            "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+          ],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "D06.clear_width_m (missing)"
+              ],
+              "evidence": [
+                "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+              ],
+              "children": [
+                {
+                  "node": "any",
+                  "value": null,
+                  "missing": [
+                    "D06.clear_width_m (missing)"
+                  ],
+                  "evidence": [
+                    "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "ge",
+                      "value": null,
+                      "missing": [
+                        "D06.clear_width_m (missing)"
+                      ],
+                      "evidence": [
+                        "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                      ],
+                      "children": [
+                        {
+                          "node": "fact",
+                          "value": null,
+                          "missing": [
+                            "D06.clear_width_m (missing)"
+                          ],
+                          "evidence": [
+                            "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                          ],
+                          "children": [],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "literal",
+                          "value": 0.8,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [
+          "D06.clear_width_m (missing)"
+        ],
+        "evidence": [
+          "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": null,
+            "missing": [
+              "D06.clear_width_m (missing)"
+            ],
+            "evidence": [
+              "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "D06.clear_width_m (missing)"
+                ],
+                "evidence": [
+                  "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "ge",
+                    "value": null,
+                    "missing": [
+                      "D06.clear_width_m (missing)"
+                    ],
+                    "evidence": [
+                      "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "D06.clear_width_m (missing)"
+                        ],
+                        "evidence": [
+                          "A-7 D06 label 3076 is nominal; net clear opening is not specified"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "literal",
+                        "value": 0.8,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "clear_width",
+        "title": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "status": "approved",
+        "approved_by": "benchmark author; manual interpretation",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "reviewed_doors",
+          "variable": "$r",
+          "where": null,
+          "body": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "$r",
+              "name": "clear_width_m"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.8,
+              "unit": "m"
+            }
+          }
+        },
+        "sources": [
+          {
+            "clause": "4",
+            "start": 268,
+            "end": 350,
+            "quote": "4. The reviewed D06 door type shall provide a net clear opening of at least 0.8 m."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "exit_count",
+      "source": "5. The reviewed unit shall have at least one confirmed final exit at ground level.",
+      "manual_slots": {
+        "id": "exit_count",
+        "title": "The reviewed unit shall have at least one confirmed final exit at ground level.",
+        "subject": "unit",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "count",
+            "collection": "final_exits",
+            "variable": "$e",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1,
+            "unit": "count",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "5",
+            "quote": "5. The reviewed unit shall have at least one confirmed final exit at ground level."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "The reviewed unit shall have at least one confirmed final exit at ground level.",
+        "evidence": []
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+      "before": {
+        "rule_id": "exit_count",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:final_exits"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:final_exits"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "5",
+            "start": 352,
+            "end": 434,
+            "quote": "5. The reviewed unit shall have at least one confirmed final exit at ground level."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "incomplete collection:final_exits"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "ge",
+              "value": null,
+              "missing": [
+                "incomplete collection:final_exits"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "count",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:final_exits"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": [
+                    0,
+                    null
+                  ]
+                },
+                {
+                  "node": "literal",
+                  "value": 1,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "exit_count",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:final_exits"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:final_exits"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "sources": [
+          {
+            "clause": "5",
+            "start": 352,
+            "end": 434,
+            "quote": "5. The reviewed unit shall have at least one confirmed final exit at ground level."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "incomplete collection:final_exits"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "ge",
+              "value": null,
+              "missing": [
+                "incomplete collection:final_exits"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "count",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:final_exits"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": [
+                    0,
+                    null
+                  ]
+                },
+                {
+                  "node": "literal",
+                  "value": 1,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [
+          "incomplete collection:final_exits"
+        ],
+        "evidence": [],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "ge",
+            "value": null,
+            "missing": [
+              "incomplete collection:final_exits"
+            ],
+            "evidence": [],
+            "children": [
+              {
+                "node": "count",
+                "value": null,
+                "missing": [
+                  "incomplete collection:final_exits"
+                ],
+                "evidence": [],
+                "children": [],
+                "count_bounds": [
+                  0,
+                  null
+                ]
+              },
+              {
+                "node": "literal",
+                "value": 1,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "exit_count",
+        "title": "The reviewed unit shall have at least one confirmed final exit at ground level.",
+        "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
+        "status": "approved",
+        "approved_by": "benchmark author; manual interpretation",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "ge",
+          "left": {
+            "node": "count",
+            "collection": "final_exits",
+            "variable": "$e",
+            "where": null,
+            "body": null
+          },
+          "right": {
+            "node": "literal",
+            "value": 1,
+            "unit": "count"
+          }
+        },
+        "sources": [
+          {
+            "clause": "5",
+            "start": 352,
+            "end": 434,
+            "quote": "5. The reviewed unit shall have at least one confirmed final exit at ground level."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    }
+  ],
+  "automatic_facts": {
+    "bindings": {
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Confirmed room classification",
+        "declaration": null
+      },
+      "area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Internal floor area",
+        "declaration": null
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal room width",
+        "declaration": null
+      },
+      "width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Clear width of a door or window opening, never of a room",
+        "declaration": null
+      },
+      "has_window": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room has a window",
+        "declaration": null
+      },
+      "has_label": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room is named on the drawing (its use is shown)",
+        "declaration": null
+      },
+      "window_area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Total area of the windows of the room (from the schedule)",
+        "declaration": null
+      },
+      "window_area_ratio": {
+        "kind": "number",
+        "unit": "1",
+        "description": "Window area divided by the floor area of the room",
+        "declaration": null
+      },
+      "scale_stated": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The sheet states its scale, or its scale could be found (the drawing is to scale)",
+        "declaration": null
+      },
+      "is_dimensioned": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The drawing carries dimension annotations (it is dimensioned)",
+        "declaration": null
+      },
+      "dimension_count": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of dimension annotations on the sheet",
+        "declaration": null
+      },
+      "leads_to_exit": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The door leads to the outside of the building (an exit door)",
+        "declaration": null
+      },
+      "exit_distance_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Travel distance from the farthest point of the room to the outside",
+        "declaration": null
+      },
+      "links_adjacent": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of adjacent connections of the room",
+        "declaration": null
+      },
+      "links_door": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of door connections of the room",
+        "declaration": null
+      },
+      "links_window": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of window connections of the room",
+        "declaration": null
+      },
+      "links_passable": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of connections of the room that a route can follow",
+        "declaration": null
+      },
+      "reaches_exit": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room has a route to the exit",
+        "declaration": null
+      },
+      "links_to_exit": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of direct connections to the exit",
+        "declaration": null
+      },
+      "clear_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Net clear opening, not nominal door size",
+        "declaration": null
+      }
+    },
+    "facts": {
+      "room_9cf6607676": {
+        "room_type": {
+          "value": "garage",
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 3.4941,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.043,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": false,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "window_area_m2": {
+          "value": 0.0,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "window_area_ratio": {
+          "value": 0.0,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "exit_distance_m": {
+          "value": null,
+          "source": "chief_a7:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 1,
+          "source": "derived:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_9cf6607676",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 0,
+          "source": "derived:room_9cf6607676",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 0,
+          "source": "derived:room_9cf6607676",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": false,
+          "source": "derived:room_9cf6607676",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_3509792574": {
+        "room_type": {
+          "value": "kitchen",
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 2.5139,
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.9346,
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "exit_distance_m": {
+          "value": null,
+          "source": "chief_a7:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 0,
+          "source": "derived:room_3509792574",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 4,
+          "source": "derived:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 6,
+          "source": "derived:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 4,
+          "source": "derived:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_3509792574",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_c1ff223b05": {
+        "room_type": {
+          "value": "garage",
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 36.0724,
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.197,
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "exit_distance_m": {
+          "value": 5.52,
+          "source": "chief_a7:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 1,
+          "source": "derived:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 10,
+          "source": "derived:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 11,
+          "source": "derived:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 10,
+          "source": "derived:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_c1ff223b05",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_8f4899e335": {
+        "area_m2": {
+          "value": 1.3934,
+          "source": "chief_a7:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 1.083,
+          "source": "chief_a7:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "chief_a7:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": false,
+          "source": "chief_a7:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "exit_distance_m": {
+          "value": 1.546,
+          "source": "chief_a7:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 0,
+          "source": "derived:room_8f4899e335",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 4,
+          "source": "derived:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 1,
+          "source": "derived:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 4,
+          "source": "derived:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_8f4899e335",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_600888924f": {
+        "width_m": {
+          "value": 0.1097,
+          "source": "chief_a7:door_600888924f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_600888924f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_ce95550e95": {
+        "width_m": {
+          "value": 0.3881,
+          "source": "chief_a7:door_ce95550e95",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_ce95550e95",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_9a77252844": {
+        "width_m": {
+          "value": 0.2398,
+          "source": "chief_a7:door_9a77252844",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_9a77252844",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_d3cd0adf7a": {
+        "width_m": {
+          "value": 0.4043,
+          "source": "chief_a7:door_d3cd0adf7a",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_d3cd0adf7a",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_a88cea1df3": {
+        "width_m": {
+          "value": 0.1971,
+          "source": "chief_a7:door_a88cea1df3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_a88cea1df3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_6373a8a4d4": {
+        "width_m": {
+          "value": 0.1993,
+          "source": "chief_a7:door_6373a8a4d4",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_6373a8a4d4",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_313a9ab039": {
+        "width_m": {
+          "value": 0.0311,
+          "source": "chief_a7:door_313a9ab039",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_313a9ab039",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_816c9489f6": {
+        "width_m": {
+          "value": 0.0129,
+          "source": "chief_a7:door_816c9489f6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_816c9489f6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_22cff12893": {
+        "width_m": {
+          "value": 0.1524,
+          "source": "chief_a7:door_22cff12893",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_22cff12893",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_4fb722ef1e": {
+        "width_m": {
+          "value": 0.0101,
+          "source": "chief_a7:door_4fb722ef1e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_4fb722ef1e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_b73ff649c9": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:door_b73ff649c9",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_b73ff649c9",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_430b0e36ba": {
+        "width_m": {
+          "value": 0.1971,
+          "source": "chief_a7:door_430b0e36ba",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_430b0e36ba",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_f7bc0ff3ed": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:door_f7bc0ff3ed",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_f7bc0ff3ed",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_5d69044dd2": {
+        "width_m": {
+          "value": 0.1871,
+          "source": "chief_a7:door_5d69044dd2",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_5d69044dd2",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_5b70645322": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:door_5b70645322",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_5b70645322",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_d774a2c52b": {
+        "width_m": {
+          "value": 0.3007,
+          "source": "chief_a7:door_d774a2c52b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_d774a2c52b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_f500f6ded6": {
+        "width_m": {
+          "value": 0.1971,
+          "source": "chief_a7:door_f500f6ded6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_f500f6ded6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_346cee5844": {
+        "width_m": {
+          "value": 0.1971,
+          "source": "chief_a7:door_346cee5844",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_346cee5844",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_54b119fc3b": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:door_54b119fc3b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_54b119fc3b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_80da1e22cd": {
+        "width_m": {
+          "value": 0.1951,
+          "source": "chief_a7:door_80da1e22cd",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_80da1e22cd",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_bd15fe26af": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:door_bd15fe26af",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_bd15fe26af",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_edaa20e716": {
+        "width_m": {
+          "value": 0.1971,
+          "source": "chief_a7:door_edaa20e716",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_edaa20e716",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_e588201d13": {
+        "width_m": {
+          "value": 0.3881,
+          "source": "chief_a7:door_e588201d13",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": false,
+          "source": "chief_a7:door_e588201d13",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_66eec16ef6": {
+        "width_m": {
+          "value": 0.193,
+          "source": "chief_a7:door_66eec16ef6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_66eec16ef6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_ad23ec0439": {
+        "width_m": {
+          "value": 0.196,
+          "source": "chief_a7:door_ad23ec0439",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "chief_a7:door_ad23ec0439",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_34af07d11c": {
+        "width_m": {
+          "value": 0.0122,
+          "source": "chief_a7:window_34af07d11c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_d03f928037": {
+        "width_m": {
+          "value": 0.3962,
+          "source": "chief_a7:window_d03f928037",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_2650bd99cc": {
+        "width_m": {
+          "value": 0.3962,
+          "source": "chief_a7:window_2650bd99cc",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_eb600142eb": {
+        "width_m": {
+          "value": 0.18,
+          "source": "chief_a7:window_eb600142eb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_16333b55f3": {
+        "width_m": {
+          "value": 0.3982,
+          "source": "chief_a7:window_16333b55f3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_93f7a3ab69": {
+        "width_m": {
+          "value": 0.1829,
+          "source": "chief_a7:window_93f7a3ab69",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_bf8a60e93c": {
+        "width_m": {
+          "value": 0.3982,
+          "source": "chief_a7:window_bf8a60e93c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_e0699143f6": {
+        "width_m": {
+          "value": 0.3962,
+          "source": "chief_a7:window_e0699143f6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_fd30adaed6": {
+        "width_m": {
+          "value": 0.3901,
+          "source": "chief_a7:window_fd30adaed6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_49a4527b9f": {
+        "width_m": {
+          "value": 0.1585,
+          "source": "chief_a7:window_49a4527b9f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_444e49b782": {
+        "width_m": {
+          "value": 0.3962,
+          "source": "chief_a7:window_444e49b782",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_26bc982dc7": {
+        "width_m": {
+          "value": 0.1605,
+          "source": "chief_a7:window_26bc982dc7",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_49f2f48846": {
+        "width_m": {
+          "value": 0.3942,
+          "source": "chief_a7:window_49f2f48846",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_cbded52854": {
+        "width_m": {
+          "value": 0.1625,
+          "source": "chief_a7:window_cbded52854",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_deb789c2eb": {
+        "width_m": {
+          "value": 0.4003,
+          "source": "chief_a7:window_deb789c2eb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_d5b9d9d70e": {
+        "width_m": {
+          "value": 0.1585,
+          "source": "chief_a7:window_d5b9d9d70e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_2cd15420a3": {
+        "width_m": {
+          "value": 0.4714,
+          "source": "chief_a7:window_2cd15420a3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_52546d1a8c": {
+        "width_m": {
+          "value": 0.1991,
+          "source": "chief_a7:window_52546d1a8c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_1f217f4360": {
+        "width_m": {
+          "value": 0.7071,
+          "source": "chief_a7:window_1f217f4360",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "building": {
+        "scale_stated": {
+          "value": true,
+          "source": "chief_a7:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "dimension_count": {
+          "value": 0.0,
+          "source": "chief_a7:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "is_dimensioned": {
+          "value": false,
+          "source": "chief_a7:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_to_exit": {
+          "value": 10,
+          "source": "derived:EXIT",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      }
+    },
+    "collections": {
+      "doors": {
+        "items": [
+          "door_600888924f",
+          "door_ce95550e95",
+          "door_9a77252844",
+          "door_d3cd0adf7a",
+          "door_a88cea1df3",
+          "door_6373a8a4d4",
+          "door_313a9ab039",
+          "door_816c9489f6",
+          "door_22cff12893",
+          "door_4fb722ef1e",
+          "door_b73ff649c9",
+          "door_430b0e36ba",
+          "door_f7bc0ff3ed",
+          "door_5d69044dd2",
+          "door_5b70645322",
+          "door_d774a2c52b",
+          "door_f500f6ded6",
+          "door_346cee5844",
+          "door_54b119fc3b",
+          "door_80da1e22cd",
+          "door_bd15fe26af",
+          "door_edaa20e716",
+          "door_e588201d13",
+          "door_66eec16ef6",
+          "door_ad23ec0439"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "openings": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "rooms": {
+        "items": [
+          "room_9cf6607676",
+          "room_3509792574",
+          "room_c1ff223b05",
+          "room_8f4899e335"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "stairs": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "windows": {
+        "items": [
+          "window_34af07d11c",
+          "window_d03f928037",
+          "window_2650bd99cc",
+          "window_eb600142eb",
+          "window_16333b55f3",
+          "window_93f7a3ab69",
+          "window_bf8a60e93c",
+          "window_e0699143f6",
+          "window_fd30adaed6",
+          "window_49a4527b9f",
+          "window_444e49b782",
+          "window_26bc982dc7",
+          "window_49f2f48846",
+          "window_cbded52854",
+          "window_deb789c2eb",
+          "window_d5b9d9d70e",
+          "window_2cd15420a3",
+          "window_52546d1a8c",
+          "window_1f217f4360"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "reviewed_bedrooms": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "reviewed_halls": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "reviewed_doors": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "final_exits": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      }
+    },
+    "graph_complete": false,
+    "evidence_locations": {},
+    "project_metadata": {}
+  },
+  "reviewed_facts": {
+    "bindings": {
+      "area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Internal floor area",
+        "declaration": null
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal room width",
+        "declaration": null
+      },
+      "clear_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Net clear opening, not nominal door size",
+        "declaration": null
+      },
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Confirmed room classification",
+        "declaration": null
+      }
+    },
+    "facts": {
+      "bedroom_1": {
+        "area_m2": {
+          "value": 11.9741696,
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "min_width_m": {
+          "value": 3.2512,
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "room_type": {
+          "value": "bedroom",
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "bedroom_2": {
+        "area_m2": {
+          "value": 12.735458399999999,
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "min_width_m": {
+          "value": 3.556,
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "room_type": {
+          "value": "bedroom",
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "hall": {
+        "room_type": {
+          "value": "corridor",
+          "source": "Author identifies HALL circulation on A-7",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "D06": {
+        "clear_width_m": {
+          "value": null,
+          "source": "A-7 D06 label 3076 is nominal; net clear opening is not specified",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        }
+      }
+    },
+    "collections": {
+      "reviewed_bedrooms": {
+        "items": [
+          "bedroom_1",
+          "bedroom_2"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "reviewed_halls": {
+        "items": [
+          "hall"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "reviewed_doors": {
+        "items": [
+          "D06"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "final_exits": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      }
+    },
+    "graph_complete": false,
+    "evidence_locations": {
+      "clear_width_m": "Manufacturer clear-opening data or a dimension explicitly labelled net clear",
+      "final_exits": "Ground-floor, staircase and site egress drawings"
+    },
+    "project_metadata": {}
+  },
+  "inventory_attestation": {
+    "reviewer": "benchmark author; no independent review",
+    "scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+    "building_inventory_complete": false,
+    "final_exit_inventory_complete": false
+  },
+  "automatic_decisions": 0,
+  "reviewed_decisions": 3
+}

@@ -38,7 +38,7 @@ def write_report(report, output):
                 f'{escape(json.dumps(row, ensure_ascii=False, indent=2))}</pre></details></section>')
 
     content = ''.join(section(row) for row in report["requirements"])
-    fragment = section(report["partial_component_only"])
+    fragment = ('<h2>Partial component only — excluded from clause counts</h2>' + section(report["partial_component_only"])) if "partial_component_only" in report else ""
     html = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>ReviewPulse assisted drawing trace</title>'
             '<style>body{font:16px system-ui;max-width:1100px;margin:2rem auto;padding:1rem;line-height:1.5}'
             'img{width:100%;height:auto}section{border-top:1px solid #bbb;margin-top:2rem}'
@@ -47,8 +47,7 @@ def write_report(report, output):
             'no automated-interpretation or legal-compliance claim. Whole-clause outcomes are listed below.</p>'
             f'<p>Source: {escape(report["source"]["publisher"])} — {escape(report["source"]["sheet"])}, '
             f'{escape(report["source"]["edition"])}.</p><img src="drawing.png" alt="Publisher second-floor drawing">'
-            '<h2>Whole clauses</h2>' + content + '<h2>Partial component only — excluded from clause counts</h2>'
-            + fragment + '</html>')
+            '<h2>Whole clauses</h2>' + content + fragment + '</html>')
     (output / "report.html").write_text(html, encoding="utf-8")
 
 
