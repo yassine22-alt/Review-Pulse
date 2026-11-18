@@ -52,7 +52,10 @@ def main():
     parser.add_argument("--cache", type=Path, default=Path("runs/drafting-result-cache"))
     parser.add_argument("--case-ids", type=Path, help="Ordered JSON list of development IDs to run")
     parser.add_argument("--raw-dir", type=Path, help="Local-only response capture for generation diagnosis")
+    parser.add_argument("--fieldwise", action="store_true", help="Local field-sized schema decoding; no model tuning")
     args = parser.parse_args()
+    if args.fieldwise and args.backend != "ollama":
+        parser.error("fieldwise decoding is the local experiment only")
     if min(args.batch_size, args.cycles) < 1:
         parser.error("batch size and cycles must be positive")
     if args.min_interval < 0 or (args.request_budget is not None and args.request_budget < 1):
@@ -70,6 +73,7 @@ def main():
             super().__init__(model=args.model, num_predict=args.max_tokens, timeout_s=args.timeout)
             self.unavailable = False
             self.events = []
+            self.fieldwise = args.fieldwise
 
         def complete(self, system, user, json_schema):
             if self.unavailable:

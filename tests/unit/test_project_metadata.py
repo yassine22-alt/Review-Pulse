@@ -77,3 +77,39 @@ def test_metadata_cannot_invent_scope_values():
     raw["metadata_applicability"][0]["value"] = 98
     with pytest.raises(SlotFailure, match="not traceable"):
         compile_slots(SlotDraft.model_validate(raw), context, catalogue_from(inputs, None))
+
+
+def test_fieldwise_assembly_uses_field_schemas_and_the_same_compiler():
+    import json
+
+    from reviewpulse.interpreter.structured import draft_structured
+
+    context, inputs, raw = scoped_rule()
+    skeleton = copy.deepcopy(raw)
+    for node in skeleton["nodes"]:
+        for key in ("name", "value", "unit"):
+            node.pop(key, None)
+    answers = {"subject": raw["subject"], "metadata_applicability": raw["metadata_applicability"],
+               "structure": {"nodes": skeleton["nodes"], "requirement": raw["requirement"]},
+               "facts": {"n0": "capacity"}, "operators": {"n2": "ge"},
+               "values": {"n1": 6}, "units": {"n1": "count"}, "sources": raw["sources"], "unresolved": []}
+
+    class Client:
+        fieldwise = True
+        model = "fixture"
+        calls = []
+
+        def complete(self, system, user, schema):
+            field = json.loads(user)["requested_field"]
+            assert schema["required"] == [field]
+            assert list(schema["properties"]) == [field]
+            self.calls.append(field)
+            return {field: answers[field]}
+
+    client = Client()
+    drafted = draft_structured(context, catalogue_from(inputs, None), context.text, client)
+    assert drafted["retained"]
+    assert drafted["program"]["requirement"]["right"]["value"] == 6
+    assert len(drafted["program"]["metadata_applicability"]) == 2
+    assert len(client.calls) == len(answers)
+    assert drafted["raw_slot_attempts"][0]["subject"] == raw["subject"]

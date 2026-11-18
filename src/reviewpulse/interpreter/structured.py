@@ -35,7 +35,7 @@ class SlotDraft(FlatProgram):
     subject: str = Field(min_length=1, description="Exact subject phrase from the supplied source")
     evidence_requests: list[EvidenceRequest] = Field(default_factory=list)
     fact_declarations: list[ProposedFact] = Field(default_factory=list)
-    metadata_applicability: list[MetadataSlot] = Field(default_factory=list)
+    metadata_applicability: list[MetadataSlot] = Field(default_factory=list, description="All conditions must hold. Ambiguous or alternative scope requires review.")
 
 
 class SlotFailure(ValueError):
@@ -328,12 +328,18 @@ def draft_structured(context: ContextBundle, catalogue: dict, body: str, client)
                "target": context.target,
                "clauses": [{"id": clause.id, "text": clause.text} for clause in context.clauses],
                "missing_context": context.missing}
-    attempts, evidence, proposed, diagnostic = [], [], [], None
-    for _ in range(2):
+    attempts, evidence, proposed, diagnostic, raw_attempts = [], [], [], None, []
+    for _ in range(1 if getattr(client, "fieldwise", False) else 2):
         evidence, proposed = [], []
         try:
-            raw = client.complete(SYSTEM, json.dumps({**payload, "failed_check": diagnostic}, ensure_ascii=False),
-                                  schema)
+            if getattr(client, "fieldwise", False):
+                from .fieldwise import fill_fields
+
+                raw = fill_fields(context, catalogue, schema, client)
+            else:
+                raw = client.complete(SYSTEM, json.dumps({**payload, "failed_check": diagnostic}, ensure_ascii=False),
+                                      schema)
+            raw_attempts.append(raw)
             frame = SlotDraft.model_validate(raw)
             evidence = [request.model_dump() for request in frame.evidence_requests]
             proposed = [proposal.model_dump(mode="json") for proposal in frame.fact_declarations]
@@ -354,6 +360,7 @@ def draft_structured(context: ContextBundle, catalogue: dict, body: str, client)
                     "applies_when": to_text(dumped["applicability"]), "unless": to_text(dumped["exemption"]),
                     "notes": [], "tried": [f"{item['stage']}: {item['detail']}" for item in attempts],
                     "diagnostics": attempts, "evidence_requests": evidence,
+                    "raw_slot_attempts": raw_attempts,
                     "proposed_fact_declarations": proposed,
                     "fact_declarations": [declaration.model_dump(mode="json") for declaration in program.fact_declarations]}
         except SlotFailure as error:
@@ -372,4 +379,5 @@ def draft_structured(context: ContextBundle, catalogue: dict, body: str, client)
             "external": bool(getattr(client, "external", False)), "program": None, "readback": None,
             "notes": [], "tried": [f"{item['stage']}: {item['detail']}" for item in attempts],
             "diagnostics": attempts, "evidence_requests": evidence, "proposed_fact_declarations": proposed,
+            "raw_slot_attempts": raw_attempts,
             "fact_declarations": []}

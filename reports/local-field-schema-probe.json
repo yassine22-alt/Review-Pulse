@@ -1,0 +1,12 @@
+{
+  "purpose": "Backend constrained-decoding mechanics only; not a semantic evaluation",
+  "model": "qwen2.5:7b",
+  "hardware": "CPU; 16 GB system RAM; no GPU allocation",
+  "response": {
+    "probe": "supported"
+  },
+  "seconds": 30.14,
+  "done_reason": "stop",
+  "generated_tokens": 12,
+  "development_or_holdout_clauses_sent": 0
+}
