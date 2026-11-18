@@ -56,8 +56,13 @@ Codex may also stop it. Its OS lock releases and its journal remains. Resume
 explicitly with the same plan:
 
 ```powershell
-.venv/Scripts/python.exe scripts/continue_free_quota.py runs/free-quota-plan.local.json --watch
+$quotaPlan = Get-Content -Raw runs/free-quota-plan.local.json | ConvertFrom-Json
+& $quotaPlan.python $quotaPlan.worker_script runs/free-quota-plan.local.json --watch
 ```
+
+This uses the frozen worker copy recorded by the plan, even if the working
+branch has changed. The operational worker is committed at
+`80ea47d1851ba02eaf5e4611e1a7b7df98c015cb`; its byte hash is in the protocol.
 
 Without `--watch`, it performs the currently allowed work and exits instead
 of waiting for the next window. A second worker cannot take the same lock.

@@ -40,5 +40,6 @@
   "credential": "GEMINI_API_KEY from process environment only; value never retained",
   "deployed_revision": "API identifier fixed; initial deployed patch revision was not retained. Provider-side model drift is unmeasured.",
   "sleep_or_reboot": "Awake PC required. Reboot releases worker lock; restart explicitly from saved journal.",
-  "artifacts": "Daily reports and progress stay local until review; no automatic Git commits or pushes."
+  "artifacts": "Daily reports and progress stay local until review; no automatic Git commits or pushes.",
+  "worker_commit": "80ea47d1851ba02eaf5e4611e1a7b7df98c015cb"
 }
