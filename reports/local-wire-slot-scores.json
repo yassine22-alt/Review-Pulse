@@ -1,0 +1,463 @@
+{
+  "development_only": true,
+  "planned": 24,
+  "raw_available": 2,
+  "initial": {
+    "subject": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 2,
+      "predicted_atoms": 1
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 3,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 3,
+      "predicted_atoms": 3
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 1,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 1,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 1,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 1,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 2,
+      "gold_atoms": 6,
+      "predicted_atoms": 2
+    }
+  },
+  "final": {
+    "subject": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 2,
+      "predicted_atoms": 1
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 3,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 3,
+      "predicted_atoms": 3
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 1,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 1,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 1,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 1,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 0,
+      "denominator": 2,
+      "accuracy": 0.0,
+      "matched_atoms": 1,
+      "gold_atoms": 6,
+      "predicted_atoms": 1
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 2,
+          "gold_atoms": 3,
+          "predicted_atoms": 2
+        }
+      },
+      "initial_trace": "reports\\local-wire-after-raw\\M01-25e15940c7e74e23b3ba777f82d570c7.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-wire-after-raw\\M01-64d3b7420e9f487cae50158c9043de19.json"
+    },
+    {
+      "id": "M02",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-wire-after-raw\\M02-ced2110b62db47bc98ef37393365a7b3.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-wire-after-raw\\M02-ced2110b62db47bc98ef37393365a7b3.json"
+    },
+    {
+      "id": "M03",
+      "pipeline_retained": false,
+      "status": "API_UNAVAILABLE"
+    },
+    {
+      "id": "M04",
+      "pipeline_retained": false,
+      "status": "API_UNAVAILABLE"
+    },
+    {
+      "id": "M05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M16",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A01",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A02",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    }
+  ],
+  "limitations": [
+    "Exact normalized set agreement per slot, not semantic rule accuracy. Fact aliases are not inferred.",
+    "SI-normalized values and dimensional units are scored separately; associations between fields are not scored.",
+    "Subject accepts frozen source phrases; expression-only interfaces do not request this slot and are excluded.",
+    "Only 15 thermal metadata scopes are annotated. Other applicability denominators exclude unannotated scope.",
+    "Raw-not-recorded and API-unavailable responses are not scored as zero accuracy.",
+    "Truncated output contributes only completed fields; missing requested fields count incorrect.",
+    "Initial and final captured attempts are separate; no best-of selection. Retention is independent.",
+    "Gold labels have no independent review; the fourth document is not used."
+  ]
+}

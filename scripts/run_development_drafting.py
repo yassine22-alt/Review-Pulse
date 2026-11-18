@@ -6,7 +6,6 @@ import os
 import re
 import sys
 import time
-import uuid
 from pathlib import Path
 
 
@@ -83,17 +82,12 @@ def main():
                 self.events.append({"http_status": None if self.unavailable else 200,
                                     "reason": type(error).__name__})
                 raise
-            finally:
-                if args.raw_dir and self.last.get("text"):
-                    args.raw_dir.mkdir(parents=True, exist_ok=True)
-                    path = args.raw_dir / f"{self.case_id}-{uuid.uuid4().hex}.json"
-                    path.write_text(json.dumps({"case": self.case_id, "model": self.model, **self.last},
-                                               ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             self.events.append({"http_status": 200})
             return result
 
     transport = module_from_current(repo, "gemini")
     caching = module_from_current(repo, "result_cache")
+    recording = module_from_current(repo, "recording")
     cache = caching.ResultCache(args.cache)
     code = caching.fingerprint({
         str(path.relative_to(source)): path.read_text(encoding="utf-8")
@@ -152,6 +146,7 @@ def main():
         hosted = transport.GeminiClient(model=args.model, max_tokens=args.max_tokens, timeout_s=args.timeout)
         gate = RequestGate(hosted, transport.APIUnavailable, args.request_budget, args.min_interval)
         hosted._request = gate
+        recording.record_calls(hosted, args.raw_dir)
     for start in range(0, len(cases), args.batch_size):
         pending = cases[start:start + args.batch_size]
         for cycle in range(args.cycles):
@@ -160,7 +155,7 @@ def main():
                 save()
                 print("Stopped at the configured request budget.", flush=True)
                 return
-            client = hosted if hosted is not None else TrackedOllama()
+            client = hosted if hosted is not None else recording.record_calls(TrackedOllama(), args.raw_dir)
             client.unavailable = False
             before = len(getattr(client, "events", []))
             unavailable = []

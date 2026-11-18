@@ -1,0 +1,1933 @@
+{
+  "development_only": true,
+  "planned": 24,
+  "raw_available": 16,
+  "initial": {
+    "subject": {
+      "correct": 0,
+      "denominator": 16,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 16,
+      "predicted_atoms": 16
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 15,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 24,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 14,
+      "accuracy": 0.0,
+      "matched_atoms": 2,
+      "gold_atoms": 28,
+      "predicted_atoms": 18
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 9,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 16,
+      "predicted_atoms": 15
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 9,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 11,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 14,
+      "denominator": 16,
+      "accuracy": 0.875,
+      "matched_atoms": 22,
+      "gold_atoms": 24,
+      "predicted_atoms": 22
+    }
+  },
+  "final": {
+    "subject": {
+      "correct": 0,
+      "denominator": 16,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 16,
+      "predicted_atoms": 16
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 15,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 24,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 14,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 28,
+      "predicted_atoms": 15
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 9,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 16,
+      "predicted_atoms": 13
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 9,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 11,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 13,
+      "denominator": 16,
+      "accuracy": 0.8125,
+      "matched_atoms": 18,
+      "gold_atoms": 24,
+      "predicted_atoms": 18
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 3
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 2,
+          "gold_atoms": 3,
+          "predicted_atoms": 2
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M01-e01dee8abd964ea6914a48e5558716bf.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 3
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M01-22c2017dedcf4be79afdea1f27085485.json"
+    },
+    {
+      "id": "M02",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 3,
+          "gold_atoms": 3,
+          "predicted_atoms": 3
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M02-3f49c90c72c24c32a112ee49bcf8d8ff.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 6
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M02-dcf2c73539dc457b91371b11d8422cc9.json"
+    },
+    {
+      "id": "M03",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 6,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 2
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M03-f4cf7e59cdea4bd9a457bc746291ced7.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 6,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M03-a7e07550e95049e1840666c10162982a.json"
+    },
+    {
+      "id": "M04",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M04-37291d010f004232a9c065f20014c20b.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M04-557e7e10c26842b6863250bda09de8ca.json"
+    },
+    {
+      "id": "M05",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 2,
+          "gold_atoms": 3,
+          "predicted_atoms": 2
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M05-9d77e465903d4af6a1736949def8d1a3.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M05-6243f4fc594f43c991fd9608790f8ce8.json"
+    },
+    {
+      "id": "M06",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M06-cd4c091c43184de3941edf332cadcb1d.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M06-b5e1beaeeeef45f1a3202cd1919252d3.json"
+    },
+    {
+      "id": "M07",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 3,
+          "gold_atoms": 3,
+          "predicted_atoms": 3
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M07-14dbda3e049a49d8b7fd5cad6752c32c.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 3,
+          "gold_atoms": 3,
+          "predicted_atoms": 3
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M07-018e9465d2b34b8faa37276bc2a65c96.json"
+    },
+    {
+      "id": "M08",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M08-dbbe806e903f41fe8912d5b60a41a574.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M08-ec224f4c04e44016b324d5964f459c45.json"
+    },
+    {
+      "id": "M09",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M09-1422f99155a1427cb86c598c27fa11e9.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M09-3d14e22807dc46f5998615a10ada5056.json"
+    },
+    {
+      "id": "M10",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M10-c1af362acd114caf91af761cf4c28f43.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M10-8f801971054541e3a2fa4b0f2651d3d4.json"
+    },
+    {
+      "id": "M11",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M11-35e15534ccfa4e4bb3e90bdf97b456ce.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M11-b1ebf9d8048d46fea33995c3283800f1.json"
+    },
+    {
+      "id": "M12",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M12-c37410de8ad944928f0211ec9d32e5d6.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M12-ba8c52bc51b444468121339e895ad14b.json"
+    },
+    {
+      "id": "M13",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M13-cc6d6be99a8c498d868791f3821bbdd9.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M13-626b815b51c34ef480e7f5d5b3366f5e.json"
+    },
+    {
+      "id": "M14",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M14-44541ee10f2e48f6a98c6a43d7eb4aab.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M14-43796cc6a9284494b2feba3b20ec6aa3.json"
+    },
+    {
+      "id": "M15",
+      "pipeline_retained": false,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M15-a07d61b3e4a14441a3541d7e7c8adf3a.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M15-e746f4acd8d940349fde8e8d306da5d6.json"
+    },
+    {
+      "id": "M16",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 3,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-schema-after-raw\\M16-18c5464fa1eb46729edc2a3176b934c0.json",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-schema-after-raw\\M16-3d6ff0584426469398bb56ee632a536a.json"
+    },
+    {
+      "id": "A01",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A02",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    }
+  ],
+  "limitations": [
+    "Exact normalized set agreement per slot, not semantic rule accuracy. Fact aliases are not inferred.",
+    "SI-normalized values and dimensional units are scored separately; associations between fields are not scored.",
+    "Subject accepts frozen source phrases; expression-only interfaces do not request this slot and are excluded.",
+    "Only 15 thermal metadata scopes are annotated. Other applicability denominators exclude unannotated scope.",
+    "Raw-not-recorded and API-unavailable responses are not scored as zero accuracy.",
+    "Truncated output contributes only completed fields; missing requested fields count incorrect.",
+    "Initial and final captured attempts are separate; no best-of selection. Retention is independent.",
+    "Gold labels have no independent review; the fourth document is not used."
+  ]
+}

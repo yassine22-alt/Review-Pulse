@@ -1,0 +1,363 @@
+{
+  "development_only": true,
+  "planned": 46,
+  "raw_available": 0,
+  "initial": {
+    "subject": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    }
+  },
+  "final": {
+    "subject": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "pipeline_retained": false,
+      "status": "RAW_NOT_RECORDED"
+    },
+    {
+      "id": "M02",
+      "pipeline_retained": false,
+      "status": "RAW_NOT_RECORDED"
+    },
+    {
+      "id": "M03",
+      "pipeline_retained": false,
+      "status": "API_UNAVAILABLE"
+    },
+    {
+      "id": "M04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M16",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A01",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A02",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T01",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T02",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    }
+  ],
+  "limitations": [
+    "Exact normalized set agreement per slot, not semantic rule accuracy. Fact aliases are not inferred.",
+    "SI-normalized values and dimensional units are scored separately; associations between fields are not scored.",
+    "Subject accepts frozen source phrases; expression-only interfaces do not request this slot and are excluded.",
+    "Only 15 thermal metadata scopes are annotated. Other applicability denominators exclude unannotated scope.",
+    "Raw-not-recorded and API-unavailable responses are not scored as zero accuracy.",
+    "Truncated output contributes only completed fields; missing requested fields count incorrect.",
+    "Initial and final captured attempts are separate; no best-of selection. Retention is independent.",
+    "Gold labels have no independent review; the fourth document is not used."
+  ]
+}

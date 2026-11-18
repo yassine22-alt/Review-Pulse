@@ -46,6 +46,7 @@ class GeminiClient:
             return json.load(response)
 
     def complete(self, system: str, user: str, json_schema: dict) -> dict:
+        self.last = {}
         if self.unavailable:
             raise APIUnavailable("CIRCUIT_OPEN", None, 0)
         payload = {
@@ -74,12 +75,12 @@ class GeminiClient:
                     self.events.append({"attempt": attempt + 1, "http_status": 200,
                                         "seconds": round(time.monotonic() - start, 3)})
                     candidate = (output.get("candidates") or [{}])[0]
-                    if candidate.get("finishReason") != "STOP":
-                        raise LLMError(f"generation finish: {candidate.get('finishReason', 'missing')}")
                     text = "".join(part.get("text", "") for part in candidate.get("content", {}).get("parts", [])
                                    if not part.get("thought"))
                     self.last = {"model": output.get("modelVersion", self.model),
-                                 "usage": output.get("usageMetadata", {})}
+                                 "usage": output.get("usageMetadata", {}), "text": text}
+                    if candidate.get("finishReason") != "STOP":
+                        raise LLMError(f"generation finish: {candidate.get('finishReason', 'missing')}")
                     return json.loads(text)
                 self.events.append({"attempt": attempt + 1, "http_status": status,
                                     "reason": reason, "seconds": round(time.monotonic() - start, 3)})

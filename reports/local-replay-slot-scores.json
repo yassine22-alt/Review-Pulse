@@ -1,0 +1,2568 @@
+{
+  "development_only": true,
+  "planned": 46,
+  "raw_available": 21,
+  "initial": {
+    "subject": {
+      "correct": 0,
+      "denominator": 21,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 21,
+      "predicted_atoms": 3
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 20,
+      "accuracy": 0.0,
+      "matched_atoms": 2,
+      "gold_atoms": 34,
+      "predicted_atoms": 22
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 19,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 34,
+      "predicted_atoms": 12
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 11,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 15,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 11,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 12,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 3,
+      "denominator": 21,
+      "accuracy": 0.14285714285714285,
+      "matched_atoms": 3,
+      "gold_atoms": 29,
+      "predicted_atoms": 3
+    }
+  },
+  "final": {
+    "subject": {
+      "correct": 0,
+      "denominator": 21,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 21,
+      "predicted_atoms": 1
+    },
+    "fact": {
+      "correct": 0,
+      "denominator": 20,
+      "accuracy": 0.0,
+      "matched_atoms": 2,
+      "gold_atoms": 34,
+      "predicted_atoms": 22
+    },
+    "operator": {
+      "correct": 0,
+      "denominator": 19,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 34,
+      "predicted_atoms": 13
+    },
+    "value": {
+      "correct": 0,
+      "denominator": 11,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 15,
+      "predicted_atoms": 0
+    },
+    "unit": {
+      "correct": 0,
+      "denominator": 11,
+      "accuracy": 0.0,
+      "matched_atoms": 0,
+      "gold_atoms": 12,
+      "predicted_atoms": 0
+    },
+    "applicability": {
+      "correct": 0,
+      "denominator": 0,
+      "accuracy": null,
+      "matched_atoms": 0,
+      "gold_atoms": 0,
+      "predicted_atoms": 0
+    },
+    "clause_span": {
+      "correct": 1,
+      "denominator": 21,
+      "accuracy": 0.047619047619047616,
+      "matched_atoms": 1,
+      "gold_atoms": 29,
+      "predicted_atoms": 1
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M01-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M01-2.jsonl"
+    },
+    {
+      "id": "M02",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M02-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M02-3.jsonl"
+    },
+    {
+      "id": "M03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M04",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M04-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M04-2.jsonl"
+    },
+    {
+      "id": "M05",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 9
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M05-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 9
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M05-2.jsonl"
+    },
+    {
+      "id": "M06",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 8
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M06-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 8
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M06-2.jsonl"
+    },
+    {
+      "id": "M07",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M07-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M07-2.jsonl"
+    },
+    {
+      "id": "M08",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M08-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M08-3.jsonl"
+    },
+    {
+      "id": "M09",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M09-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M09-3.jsonl"
+    },
+    {
+      "id": "M10",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 2,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M10-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M10-3.jsonl"
+    },
+    {
+      "id": "M11",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M11-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M11-2.jsonl"
+    },
+    {
+      "id": "M12",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M12-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M12-2.jsonl"
+    },
+    {
+      "id": "M13",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M13-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M13-2.jsonl"
+    },
+    {
+      "id": "M14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "M16",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\M16-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\M16-2.jsonl"
+    },
+    {
+      "id": "A01",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A01-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A01-2.jsonl"
+    },
+    {
+      "id": "A02",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A02-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A02-2.jsonl"
+    },
+    {
+      "id": "A03",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A03-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A03-2.jsonl"
+    },
+    {
+      "id": "A04",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A04-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A04-2.jsonl"
+    },
+    {
+      "id": "A05",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A05-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A05-2.jsonl"
+    },
+    {
+      "id": "A06",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A06-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A06-2.jsonl"
+    },
+    {
+      "id": "A07",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A07-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A07-2.jsonl"
+    },
+    {
+      "id": "A08",
+      "pipeline_retained": null,
+      "status": "RAW_AVAILABLE",
+      "captured_drafts": 1,
+      "initial": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "initial_trace": "reports\\local-cap-replay\\A08-2.jsonl",
+      "final": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      },
+      "final_trace": "reports\\local-cap-replay\\A08-2.jsonl"
+    },
+    {
+      "id": "A09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "A15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T01",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T02",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T03",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T04",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T05",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T06",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T07",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T08",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T09",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T10",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T11",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T12",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T13",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T14",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    },
+    {
+      "id": "T15",
+      "pipeline_retained": null,
+      "status": "NOT_EVALUATED"
+    }
+  ],
+  "limitations": [
+    "Exact normalized set agreement per slot, not semantic rule accuracy. Fact aliases are not inferred.",
+    "SI-normalized values and dimensional units are scored separately; associations between fields are not scored.",
+    "Subject accepts frozen source phrases; expression-only interfaces do not request this slot and are excluded.",
+    "Only 15 thermal metadata scopes are annotated. Other applicability denominators exclude unannotated scope.",
+    "Raw-not-recorded and API-unavailable responses are not scored as zero accuracy.",
+    "Truncated output contributes only completed fields; missing requested fields count incorrect.",
+    "Initial and final captured attempts are separate; no best-of selection. Retention is independent.",
+    "Gold labels have no independent review; the fourth document is not used."
+  ]
+}
