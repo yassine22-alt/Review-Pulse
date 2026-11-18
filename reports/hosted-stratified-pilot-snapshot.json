@@ -1,0 +1,536 @@
+{
+  "snapshot_date_utc": "2026-11-18",
+  "arms": {
+    "original": {
+      "model": "gemini-4-hydrogen",
+      "code_fingerprint": "f10493f14576ca83ecf62fc35da20ccf5b50a6c476fbb0f6e22c50af7f45f94f",
+      "pilot_evaluated": [
+        1,
+        12
+      ],
+      "thermal_evaluated": [
+        1,
+        5
+      ],
+      "retained_over_semantically_evaluated": [
+        0,
+        1
+      ],
+      "matches_over_retained": [
+        0,
+        0
+      ],
+      "partly_matches_over_retained": [
+        0,
+        0
+      ],
+      "wrong_over_retained": [
+        0,
+        0
+      ],
+      "wrong_approvable_over_approvable": [
+        0,
+        0
+      ],
+      "request_errors_over_attempts": [
+        5,
+        9
+      ],
+      "batches": [
+        {
+          "number": 1,
+          "cycle": 1,
+          "ids": [
+            "T01"
+          ],
+          "http_error_rate": [
+            4,
+            5
+          ],
+          "unavailable_rate": [
+            1,
+            1
+          ]
+        },
+        {
+          "number": 1,
+          "cycle": 2,
+          "ids": [
+            "T01"
+          ],
+          "http_error_rate": [
+            1,
+            4
+          ],
+          "unavailable_rate": [
+            0,
+            1
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "id": "T01",
+          "frozen_reading": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+          "semantic_evaluated": true,
+          "terminal_stage": null,
+          "status": "UNRESOLVED",
+          "retained": false,
+          "classification": "NO_RETAINED_DRAFT",
+          "drafted_rule": null,
+          "diagnostics": [
+            "slots: not a plain limit on one quantity",
+            "limits: not a sentence of limits this arm can read",
+            "relation: the plan offers no connections between spaces",
+            "free-form: after repair: ValueError: verifier: the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it"
+          ],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T04",
+          "frozen_reading": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T06",
+          "frozen_reading": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T09",
+          "frozen_reading": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T13",
+          "frozen_reading": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M03",
+          "frozen_reading": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M04",
+          "frozen_reading": "Walk from the public-room door to the dead-end junction at most 10 m.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M05",
+          "frozen_reading": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M06",
+          "frozen_reading": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A03",
+          "frozen_reading": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A05",
+          "frozen_reading": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A08",
+          "frozen_reading": "One in twenty seats in public rooms must be adapted.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "structured": {
+      "model": "gemini-4-hydrogen",
+      "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+      "pilot_evaluated": [
+        1,
+        12
+      ],
+      "thermal_evaluated": [
+        1,
+        5
+      ],
+      "retained_over_semantically_evaluated": [
+        0,
+        1
+      ],
+      "matches_over_retained": [
+        0,
+        0
+      ],
+      "partly_matches_over_retained": [
+        0,
+        0
+      ],
+      "wrong_over_retained": [
+        0,
+        0
+      ],
+      "wrong_approvable_over_approvable": [
+        0,
+        0
+      ],
+      "request_errors_over_attempts": [
+        5,
+        9
+      ],
+      "batches": [
+        {
+          "number": 1,
+          "cycle": 1,
+          "ids": [
+            "T01"
+          ],
+          "http_error_rate": [
+            1,
+            4
+          ],
+          "unavailable_rate": [
+            0,
+            1
+          ]
+        },
+        {
+          "number": 2,
+          "cycle": 1,
+          "ids": [
+            "T04"
+          ],
+          "http_error_rate": [
+            3,
+            4
+          ],
+          "unavailable_rate": [
+            1,
+            1
+          ]
+        },
+        {
+          "number": 2,
+          "cycle": 2,
+          "ids": [
+            "T04"
+          ],
+          "http_error_rate": [
+            1,
+            1
+          ],
+          "unavailable_rate": [
+            1,
+            1
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "id": "T01",
+          "frozen_reading": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+          "semantic_evaluated": true,
+          "terminal_stage": "context_or_binding",
+          "status": "UNRESOLVED",
+          "retained": false,
+          "classification": "NO_RETAINED_DRAFT",
+          "drafted_rule": null,
+          "diagnostics": [
+            "schema: 2 validation errors for SlotDraft\nevidence_requests.0.unit\n  Value error, unknown unit 'none' [type=value_error, input_value='none', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error\nevidence_requests.1.unit\n  Value error, unknown unit 'none' [type=value_error, input_value='none', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+            "context_or_binding: fact binding requires review"
+          ],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T04",
+          "frozen_reading": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "transport",
+          "status": "API_UNAVAILABLE",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T06",
+          "frozen_reading": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T09",
+          "frozen_reading": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "T13",
+          "frozen_reading": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M03",
+          "frozen_reading": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M04",
+          "frozen_reading": "Walk from the public-room door to the dead-end junction at most 10 m.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M05",
+          "frozen_reading": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "M06",
+          "frozen_reading": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A03",
+          "frozen_reading": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A05",
+          "frozen_reading": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "A08",
+          "frozen_reading": "One in twenty seats in public rooms must be adapted.",
+          "semantic_evaluated": false,
+          "terminal_stage": "NOT_SUBMITTED",
+          "status": "NOT_SUBMITTED",
+          "retained": null,
+          "classification": "NOT_EVALUATED",
+          "drafted_rule": null,
+          "diagnostics": [],
+          "wrong_approvable_over_approvable": [
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Development data only. Snapshot of the frozen pre-declaration pipeline.",
+    "Only T01 completed on each arm; 0/1 retained does not mean all five thermal cases failed.",
+    "API_UNAVAILABLE and client allowance interruptions are excluded from semantic counts.",
+    "Rates with denominator zero are undefined, not zero error rates.",
+    "No retained candidate exists to classify as matches, partly matches or wrong.",
+    "No independent label review; fourth document unrun."
+  ]
+}

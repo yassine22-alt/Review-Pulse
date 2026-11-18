@@ -10,7 +10,7 @@
   "reset_utc_hour": 8,
   "reset_guard_seconds": 3600,
   "expires_utc": "2026-12-18T08:00:00+00:00",
-  "pinned_repo_commit": "d2e803b4c7af8234ed4dace80329adaed72de7bf",
+  "pinned_repo_commit": "7596e92d3f24d79a774653dc28618389386634f3",
   "original_repo_commit": "3579622d166e64a2d9831c7c9ee95bb3e4ba4fef",
   "access_text_sha256": "672f8258a3cf8cdadc058d0aaaf1c16e5be5cd1e23be8cecec6313d8083a85df",
   "runtime_signature": {
@@ -32,7 +32,9 @@
       "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e"
     }
   },
-  "worker_script_sha256": "9dc2eb39f7588cb6bc73409127440adcf0a3105ccd31babfd2dc12c8521a0c0e",
+  "worker_script_sha256": "cd007daee6ed2ec74437868da3e9f18f834b6159b1e3d3bdebcd0ab0ae6b7919",
+  "phase_manifest": "reports/development-pilot.json",
+  "worker_commit": "7596e92d3f24d79a774653dc28618389386634f3",
   "scope": "46 development obligations only; no fourth-document run or approval",
   "decision": "User chose continued free quota over multiple days.",
   "existing_completed_per_arm": 2,
@@ -40,6 +42,5 @@
   "credential": "GEMINI_API_KEY from process environment only; value never retained",
   "deployed_revision": "API identifier fixed; initial deployed patch revision was not retained. Provider-side model drift is unmeasured.",
   "sleep_or_reboot": "Awake PC required. Reboot releases worker lock; restart explicitly from saved journal.",
-  "artifacts": "Daily reports and progress stay local until review; no automatic Git commits or pushes.",
-  "worker_commit": "80ea47d1851ba02eaf5e4611e1a7b7df98c015cb"
+  "artifacts": "Daily reports and progress stay local until review; no automatic Git commits or pushes."
 }
