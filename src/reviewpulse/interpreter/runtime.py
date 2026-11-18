@@ -9,6 +9,7 @@ from dataclasses import asdict, dataclass, field
 import networkx as nx
 
 from ..outcomes import EvidenceIssue, IssueCode, Outcome
+from .declarations import apply_declarations
 from .evidence import EvidenceRequest
 from .schema import (
     BinaryExpr,
@@ -321,6 +322,7 @@ def run_program(
     program: Program, inputs: Inputs, *, include_drafts: bool = False, graph: nx.MultiGraph | None = None
 ) -> dict:
     """Detailed outcomes stay separate from the legacy four-verdict Finding contract."""
+    inputs = apply_declarations(inputs, program.fact_declarations)
     validate_program(program, inputs.bindings)
     if program.status != "approved" and not include_drafts:
         raise ValueError("draft programs require explicit preview; approve before execution")
@@ -347,6 +349,11 @@ def run_program(
         outcome = "VIOLATED"
     if program.not_checked and outcome == "SATISFIED":
         outcome = "UNRESOLVED"            # the covered part holds; a part of the sentence was never checked, so no pass is claimed
+    if outcome in ("SATISFIED", "VIOLATED") and any(
+        reason is not None and inputs.bindings[name].declaration is not None
+        for (_, name), reason in evaluator.fact_reads.items()
+    ):
+        outcome = "UNRESOLVED"  # A proposed declaration is never an observation.
     root = Trace.combine("program", None, [applicability, exemption, requirement], [*program.unresolved, *program.not_checked])
     clause = program.sources[0].clause if program.sources else program.id
     evidence_requests = []
@@ -371,6 +378,7 @@ def run_program(
         "evidence_issues": [i.model_dump(mode="json") for i in evaluator.evidence_issues.values()],
         "evidence_requests": evidence_requests,
         "fact_provenance": fact_provenance,
+        "fact_declarations": [declaration.model_dump(mode="json") for declaration in program.fact_declarations],
         "preview": program.status == "draft",
         "document": program.document,
         "sources": [source.model_dump() for source in program.sources],

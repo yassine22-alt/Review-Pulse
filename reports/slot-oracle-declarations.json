@@ -1,0 +1,1235 @@
+{
+  "totals": {
+    "active_catalogue": {
+      "denominator": 46,
+      "exact_reference_tree": 5,
+      "behavioral_equivalent": 5,
+      "correct_unresolved": 2,
+      "stages": {
+        "verifier": 17,
+        "retained": 5,
+        "binding": 22,
+        "context_or_binding": 2
+      }
+    },
+    "oracle_declared_facts": {
+      "denominator": 46,
+      "exact_reference_tree": 17,
+      "behavioral_equivalent": 17,
+      "correct_unresolved": 2,
+      "stages": {
+        "verifier": 27,
+        "retained": 17,
+        "context_or_binding": 2
+      }
+    },
+    "validated_proposals": {
+      "denominator": 46,
+      "exact_reference_tree": 13,
+      "behavioral_equivalent": 13,
+      "correct_unresolved": 2,
+      "stages": {
+        "verifier": 23,
+        "retained": 13,
+        "entity_binding": 8,
+        "context_or_binding": 2
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "frozen_reading": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "M02",
+      "frozen_reading": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it; the sentence states 2, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it; the sentence states 2, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 20, but the rule never uses it; the sentence states 50, but the rule never uses it; the sentence states 2, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it; the sentence states 1, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "M03",
+      "frozen_reading": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+      "active_catalogue": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      }
+    },
+    {
+      "id": "M04",
+      "frozen_reading": "Walk from the public-room door to the dead-end junction at most 10 m.",
+      "active_catalogue": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      }
+    },
+    {
+      "id": "M05",
+      "frozen_reading": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+      "active_catalogue": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      }
+    },
+    {
+      "id": "M06",
+      "frozen_reading": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: direct_outdoors",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 1
+      }
+    },
+    {
+      "id": "M07",
+      "frozen_reading": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+      "active_catalogue": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      }
+    },
+    {
+      "id": "M08",
+      "frozen_reading": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+      "active_catalogue": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      }
+    },
+    {
+      "id": "M09",
+      "frozen_reading": "No isolated group of one or two steps in the principal circulation.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: steps",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "M10",
+      "frozen_reading": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: partition_rating, required_structure_rating",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 1, but the rule never uses it; the sentence states 7200, but the rule never uses it; the sentence states 3600, but the rule never uses it; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 1, but the rule never uses it; the sentence states 7200, but the rule never uses it; the sentence states 3600, but the rule never uses it; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "M11",
+      "frozen_reading": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+      "active_catalogue": {
+        "stage": "context_or_binding",
+        "detail": "Referenced smoke-control provision and specialist interpretation are missing.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "oracle_declared_facts": {
+        "stage": "context_or_binding",
+        "detail": "Referenced smoke-control provision and specialist interpretation are missing.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "validated_proposals": {
+        "stage": "context_or_binding",
+        "detail": "Referenced smoke-control provision and specialist interpretation are missing.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      }
+    },
+    {
+      "id": "M12",
+      "frozen_reading": "Door glazing is transparent and is neither red nor orange.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: orange, red, transparent",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 3
+      }
+    },
+    {
+      "id": "M13",
+      "frozen_reading": "A nonmotorized sliding door cannot close a public evacuation exit.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: motorized, sliding",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 2
+      }
+    },
+    {
+      "id": "M14",
+      "frozen_reading": "Horizontal circulation ceiling finish meets M1.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: ceiling_class",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 1
+      }
+    },
+    {
+      "id": "M15",
+      "frozen_reading": "Circulation partition and floor finish meet M2 and M4 respectively.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: floor_class, partition_class",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the rule uses 2, which the sentence does not state; the rule uses 4, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the rule uses 2, which the sentence does not state; the rule uses 4, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "M16",
+      "frozen_reading": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: easy_device_each_leaf, push_release",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 2
+      }
+    },
+    {
+      "id": "A01",
+      "frozen_reading": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: firm, smooth, unobstructed",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A02",
+      "frozen_reading": "Each substantial change in level needs an inclined path.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: has_ramp, substantial",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A03",
+      "frozen_reading": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: width",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A04",
+      "frozen_reading": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: slope",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A05",
+      "frozen_reading": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: reserved_stalls, total_stalls",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A06",
+      "frozen_reading": "The listed building classes must be adapted and have a usable accessible approach route.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: accessible_approach, adapted_building",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 2
+      }
+    },
+    {
+      "id": "A07",
+      "frozen_reading": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: adapted_counters, total_counters",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A08",
+      "frozen_reading": "One in twenty seats in public rooms must be adapted.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: adapted_seats, total_seats",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the rule uses 20, which the sentence does not state",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A09",
+      "frozen_reading": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: adapted_equipment, total_equipment",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 2
+      }
+    },
+    {
+      "id": "A10",
+      "frozen_reading": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+      "active_catalogue": {
+        "stage": "context_or_binding",
+        "detail": "Lift conformity depends on a referenced standard that is not supplied.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "oracle_declared_facts": {
+        "stage": "context_or_binding",
+        "detail": "Lift conformity depends on a referenced standard that is not supplied.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      },
+      "validated_proposals": {
+        "stage": "context_or_binding",
+        "detail": "Lift conformity depends on a referenced standard that is not supplied.",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": true
+      }
+    },
+    {
+      "id": "A11",
+      "frozen_reading": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: slope, width",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence names 'corridor' but the rule has no condition on it, so it applies to every member; the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A12",
+      "frozen_reading": "Each change of direction needs a resting landing of at least 1 m².",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: landing_area",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence names 'corridor' but the rule has no condition on it, so it applies to every member",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A13",
+      "frozen_reading": "The relevant passages require handrails on both sides.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: left_rail, right_rail",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "A14",
+      "frozen_reading": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: entrance_width, lateral_slope",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 0
+      },
+      "validated_proposals": {
+        "stage": "retained",
+        "exact_reference_tree": true,
+        "behavioral_equivalent": true,
+        "worlds": 64,
+        "correct_unresolved": false,
+        "declared_needs_evidence": 2
+      }
+    },
+    {
+      "id": "A15",
+      "frozen_reading": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+      "active_catalogue": {
+        "stage": "binding",
+        "detail": "catalogue lacks: adapted_phones",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence offers an alternative ('or') but the rule has none, so it demands only one of them",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "entity_binding",
+        "detail": "proposed fact has no known entity or collection",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T01",
+      "frozen_reading": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T02",
+      "frozen_reading": "wall_u le 0.7, within frozen Z3 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T03",
+      "frozen_reading": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T04",
+      "frozen_reading": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T05",
+      "frozen_reading": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T06",
+      "frozen_reading": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T07",
+      "frozen_reading": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T08",
+      "frozen_reading": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T09",
+      "frozen_reading": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T10",
+      "frozen_reading": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T11",
+      "frozen_reading": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T12",
+      "frozen_reading": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T13",
+      "frozen_reading": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T14",
+      "frozen_reading": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    },
+    {
+      "id": "T15",
+      "frozen_reading": "solar le 0.4, within frozen Z5 residential prescriptive scope",
+      "active_catalogue": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "oracle_declared_facts": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      },
+      "validated_proposals": {
+        "stage": "verifier",
+        "detail": "the sentence states 0.26, but the rule never uses it; the sentence states 0.35, but the rule never uses it",
+        "exact_reference_tree": false,
+        "behavioral_equivalent": false,
+        "correct_unresolved": false
+      }
+    }
+  ],
+  "limitations": [
+    "Development data only. No drafting model is called.",
+    "The author translated frozen readings to slots; no independent review.",
+    "Oracle-declared facts are proposed data. They are not new plan computations or approved production bindings.",
+    "64 generated fact worlds test compiled behavior; they do not establish natural-language correctness.",
+    "The pre-existing fixture scope remains assumed. Broader applicability discovery is unmeasured.",
+    "Validated proposals use author-supplied gold declarations, not a drafting model. Their values remain absent in the real ledger.",
+    "Behavioral checks strip declaration provenance and use synthetic fact worlds to test logic only; actual missing-value execution is tested separately."
+  ]
+}

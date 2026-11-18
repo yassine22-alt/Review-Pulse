@@ -104,7 +104,7 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         ok, why = ask(client, body, catalogue)
         opinion = {"checkable": ok, "reason": why, "advisory": True}
     out = _attempt(context, catalogue, body, client)
-    if out["status"] != "DRAFTED" and fallback is not None:
+    if not out.get("program") and fallback is not None:
         second = _attempt(context, catalogue, body, fallback)
         if second["status"] == "DRAFTED":
             second["escalated_from"] = {"model": out["model"], "reason": out["reason"]}

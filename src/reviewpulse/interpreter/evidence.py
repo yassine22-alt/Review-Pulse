@@ -44,6 +44,8 @@ def apply_evidence(inputs: Inputs, entries: list[EvidenceEntry]) -> Inputs:
         if not entry.source.strip():
             raise ValueError("evidence requires a source citation")
         binding = inputs.bindings[entry.fact]
+        if binding.declaration and entry.origin != "reviewer-attested":
+            raise ValueError("declared facts require named reviewer-attested evidence")
         value = entry.value
         if scalar_kind(value) != binding.kind:
             raise ValueError(f"wrong type for evidence fact: {entry.fact}")

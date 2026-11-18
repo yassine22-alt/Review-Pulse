@@ -41,6 +41,18 @@ def test_scorer_reports_missed_violation_direction():
     assert not result["equivalent"] and result["kinds"].get("missed_violation", 0) > 0
 
 
+def test_scorer_never_credits_matching_evaluation_errors(monkeypatch):
+    from reviewpulse.xeval import behavior
+
+    item = build_corpus(1, seed=2)[0]
+    ref = Program.model_validate(item.program)
+    monkeypatch.setattr(behavior, "outcome", lambda *_: "ERROR")
+    result = compare(ref, ref, item.catalogue, 3)
+    assert not result["equivalent"]
+    assert result["agreement"] == 0
+    assert result["kinds"] == {"evaluation_error": 3}
+
+
 def test_held_out_concepts_never_appear_in_dev_items():
     from reviewpulse.xeval.catalogue import CONCEPTS
 

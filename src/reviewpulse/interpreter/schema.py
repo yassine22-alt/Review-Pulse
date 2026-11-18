@@ -123,6 +123,28 @@ class Span(Model):
         return self
 
 
+class FactType(Model):
+    kind: Literal["boolean", "number", "string"]
+    unit: Unit = "1"
+
+    @model_validator(mode="after")
+    def numeric_units(self):
+        if self.kind != "number" and self.unit != "1":
+            raise ValueError("only numbers have units")
+        return self
+
+
+class DeclarationDescription(FactType):
+    name: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
+    entity: str = Field(min_length=1)
+    definition: str = Field(min_length=1)
+
+
+class FactDeclaration(DeclarationDescription):
+    source: Span
+    status: Literal["declared"] = "declared"
+
+
 class Program(Model):
     schema_version: Literal["1.0"] = "1.0"
     id: str = Field(min_length=1)
@@ -139,17 +161,20 @@ class Program(Model):
     # Parts of the sentence the plan cannot show (a riser height, a handrail). The rule covers the rest: a violation of the covered
     # part is a violation whatever the uncovered part says, but the rule can never report "satisfied" while a part is unchecked.
     not_checked: list[str] = Field(default_factory=list)
+    fact_declarations: list[FactDeclaration] = Field(default_factory=list)
 
 
-class Binding(Model):
-    kind: Literal["boolean", "number", "string"]
-    unit: Unit = "1"
+class Binding(FactType):
     description: str = ""
+    declaration: FactDeclaration | None = None
 
     @model_validator(mode="after")
-    def numeric_units(self):
-        if self.kind != "number" and self.unit != "1":
-            raise ValueError("only numbers have units")
+    def declaration_type(self):
+        from .units import same_unit
+
+        if self.declaration and (self.kind != self.declaration.kind or
+                                 not same_unit(self.unit, self.declaration.unit)):
+            raise ValueError("binding and fact declaration have incompatible types or units")
         return self
 
 
@@ -192,11 +217,23 @@ class Inputs(Model):
 
     @model_validator(mode="after")
     def typed_facts(self):
+        for name, binding in self.bindings.items():
+            if binding.declaration and name != binding.declaration.name:
+                raise ValueError("declaration name does not match binding")
         for entity, facts in self.facts.items():
             for name, fact in facts.items():
                 if name == "id" or name not in self.bindings:
                     raise ValueError(f"undeclared or reserved fact: {entity}.{name}")
                 value = fact.value
+                declaration = self.bindings[name].declaration
+                if declaration:
+                    scope = self.collections.get(declaration.entity)
+                    if entity not in (scope.items if scope else [declaration.entity]):
+                        raise ValueError(f"wrong entity for declared fact: {entity}.{name}")
+                    if fact.origin not in (None, "reviewer-attested") or (
+                        value is not None and fact.origin != "reviewer-attested"
+                    ) or (value is None and fact.trusted):
+                        raise ValueError("declared facts require reviewer evidence, never extracted or computed values")
                 if value is None:
                     continue
                 kind = scalar_kind(value)

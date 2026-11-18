@@ -57,6 +57,10 @@ def compare(reference: Program, candidate: Program, cat: dict, n_worlds: int = 3
     for _ in range(n_worlds):
         world = sample_world(rng, cat, pool, strings, plans)
         a, b = outcome(ref, world), outcome(cand, world)
+        if "ERROR" in (a, b):
+            kinds["evaluation_error"] += 1
+            first_diff = first_diff or {"reference": a, "candidate": b}
+            continue
         if a == b:
             agree += 1
             continue

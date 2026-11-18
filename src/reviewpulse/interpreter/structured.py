@@ -3,24 +3,32 @@ from __future__ import annotations
 
 import json
 import re
+from typing import Literal
 
 from pydantic import Field, ValidationError
 
 from ..xeval.expr_ir import SYMBOL, to_text
-from ..xeval.flat import BINARY, LOGIC, SETS, FlatProgram, compile_flat
+from ..xeval.flat import BINARY, LOGIC, SETS, FlatProgram, FlatSpan, compile_flat
 from ..xeval.readback import describe_rule
 from ..xeval.verify import blocking, check_numbers, detect_language, verify
 from .context import ContextBundle
+from .declarations import DeclarationError, declaration_catalogue
 from .evidence import EvidenceRequest
 from .quantities import normalise_quantities
-from .schema import Binding, Program, Span, walk
-from .units import convert
+from .schema import Binding, DeclarationDescription, FactDeclaration, Program, Span, walk
+from .units import compatible, convert, vocabulary
 from .validate import validate_program
+
+
+class ProposedFact(DeclarationDescription):
+    source: FlatSpan
+    status: Literal["proposed"] = "proposed"
 
 
 class SlotDraft(FlatProgram):
     subject: str = Field(min_length=1, description="Exact subject phrase from the supplied source")
     evidence_requests: list[EvidenceRequest] = Field(default_factory=list)
+    fact_declarations: list[ProposedFact] = Field(default_factory=list)
 
 
 class SlotFailure(ValueError):
@@ -43,7 +51,10 @@ node ID when referring to it; never repeat its node record. End the node list on
 constraint graph is complete. Follow the supplied wire contract for the JSON fields.
 Omit irrelevant optional node fields.
 Cite exact quotes and clause identifiers. Include the target clause and any definition used.
-When a needed fact has no binding, return a typed evidence request and an unresolved explanation.
+When a needed fact has no binding, propose its name, kind, unit, known entity or collection,
+definition and exact source quote in fact_declarations. This declares a meaning, never a value.
+Use only the supplied unit vocabulary. Request reviewer evidence for missing values.
+Use unresolved for ambiguous meaning or missing context, not merely missing measured values.
 Missing measurements do not prevent drafting when their meaning is already declared.
 Ambiguous interpretation or missing context goes in unresolved. Do not choose a default meaning.
 Return JSON matching the schema. The resulting draft requires human approval."""
@@ -52,7 +63,12 @@ Return JSON matching the schema. The resulting draft requires human approval."""
 def slot_schema(catalogue: dict, context: ContextBundle) -> dict:
     schema = SlotDraft.model_json_schema()
     node = schema["$defs"]["FlatNode"]["properties"]
-    node["name"] = {"anyOf": [{"type": "string", "enum": sorted(catalogue["bindings"]) + ["id"]}, {"type": "null"}]}
+    node["name"] = {"anyOf": [{"type": "string", "enum": sorted(catalogue["bindings"]) + ["id"]},
+                               {"type": "string", "pattern": r"^[A-Za-z_][A-Za-z0-9_]*$"}, {"type": "null"}]}
+    units = vocabulary(binding.get("unit", "1") for binding in catalogue["bindings"].values())
+    node["unit"] = {"type": "string", "enum": units}
+    schema["$defs"]["ProposedFact"]["properties"]["unit"] = {"type": "string", "enum": units}
+    schema["$defs"]["EvidenceRequest"]["properties"]["unit"] = {"type": "string", "enum": units}
     collections = sorted(catalogue["collections"])
     node["collection"] = {"anyOf": ([{"type": "string", "enum": collections}] if collections else []) + [{"type": "null"}]}
     schema["$defs"]["FlatSpan"]["properties"]["clause"] = {
@@ -111,12 +127,16 @@ def slots_from_program(program: Program, subject: str) -> dict:
     roots = {name: encode(getattr(program, name)) for name in ("applicability", "exemption", "requirement")}
     return {"id": program.id, "title": program.title, "subject": subject, "nodes": nodes, **roots,
             "sources": [{"clause": source.clause, "quote": source.quote} for source in program.sources],
+            "fact_declarations": [declaration.model_dump(exclude={"source", "status"}) | {
+                "source": {"clause": declaration.source.clause, "quote": declaration.source.quote}}
+                for declaration in program.fact_declarations],
             "unresolved": program.unresolved}
 
 
 def wire_contract(schema: dict) -> dict:
     """Give the model the field layout too; a decoding grammar alone cannot teach it."""
-    return {"required_root_fields": schema["required"],
+    return {"required_root_fields": schema["required"], "root_fields": list(schema["properties"]),
+            "declaration_fields": list(schema["$defs"]["ProposedFact"]["properties"]),
             "binary_operators": SYMBOL,
             "node_forms": [{"ops": choice["properties"]["op"]["enum"],
                             "required_fields": choice["required"]}
@@ -125,24 +145,42 @@ def wire_contract(schema: dict) -> dict:
             "sources": "array of objects containing clause and exact quote"}
 
 
-def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> Program:
+def ground_span(source: FlatSpan, context: ContextBundle) -> Span:
     clauses = {clause.id: clause for clause in context.clauses}
-    spans = []
-    for source in frame.sources:
-        clause = clauses.get(source.clause)
-        matches = list(re.finditer(r"\s+".join(re.escape(word) for word in source.quote.split()), clause.text)) if clause else []
-        if len(matches) != 1:
-            raise SlotFailure("source_span", "quote must identify one exact occurrence in a supplied clause")
-        start, end = clause.start + matches[0].start(), clause.start + matches[0].end()
-        span = Span(clause=clause.id, start=start, end=end, quote=context.text[start:end])
-        context.check_span(span)
-        spans.append(span)
+    clause = clauses.get(source.clause)
+    matches = list(re.finditer(r"\s+".join(re.escape(word) for word in source.quote.split()), clause.text)) if clause else []
+    if len(matches) != 1:
+        raise SlotFailure("source_span", "quote must identify one exact occurrence in a supplied clause")
+    start, end = clause.start + matches[0].start(), clause.start + matches[0].end()
+    span = Span(clause=clause.id, start=start, end=end, quote=context.text[start:end])
+    context.check_span(span)
+    return span
+
+
+def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> Program:
+    spans = [ground_span(source, context) for source in frame.sources]
     if context.target not in {span.clause for span in spans}:
         raise SlotFailure("source_span", "the target obligation must be cited")
     if not any(frame.subject.casefold() in clause.text.casefold() for clause in context.clauses):
         raise SlotFailure("subject", "subject phrase is absent from the supplied source")
-    if frame.unresolved or frame.evidence_requests or context.missing:
+    if frame.unresolved or context.missing:
         raise SlotFailure("context_or_binding", "; ".join(frame.unresolved + context.missing) or "fact binding requires review")
+    declarations = [FactDeclaration.model_validate(proposal.model_dump(exclude={"source", "status"}) | {
+        "source": ground_span(proposal.source, context).model_dump()}) for proposal in frame.fact_declarations]
+    try:
+        catalogue = declaration_catalogue(catalogue, declarations)
+    except DeclarationError as error:
+        raise SlotFailure(error.stage, str(error)) from error
+    if any(request.fact not in catalogue["bindings"] for request in frame.evidence_requests):
+        raise SlotFailure("vocabulary_gap", "an evidence request has no existing or validated proposed binding")
+    for request in frame.evidence_requests:
+        if request.clause not in {clause.id for clause in context.clauses}:
+            raise SlotFailure("source_span", "evidence request cites an unknown clause")
+        if not compatible(request.unit, catalogue["bindings"][request.fact]["unit"]):
+            raise SlotFailure("types_or_units", "evidence request unit is incompatible with its binding")
+    for declaration in declarations:
+        if declaration.source not in spans:
+            spans.append(declaration.source)
     table = {node.id: node for node in frame.nodes}
     used = set()
 
@@ -176,6 +214,7 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
     try:
         tree = compile_flat(frame, context.document)
         tree["sources"] = [span.model_dump() for span in spans]
+        tree["fact_declarations"] = [declaration.model_dump() for declaration in declarations]
         program = Program.model_validate(tree)
     except ValueError as error:
         raise SlotFailure("compile", str(error)) from error
@@ -184,17 +223,21 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
                       for node in walk(root) if node.node == "fact" and node.name not in bindings and node.name != "id"})
     if missing:
         raise SlotFailure("binding", "catalogue lacks: " + ", ".join(missing))
+    used_facts = {node.name for root in (program.applicability, program.exemption, program.requirement)
+                  for node in walk(root) if node.node == "fact"}
+    if any(declaration.name not in used_facts for declaration in declarations):
+        raise SlotFailure("declaration", "proposed fact is not used by the rule")
     missing_collections = sorted({node.collection for root in (program.applicability, program.exemption, program.requirement)
                                   for node in walk(root) if node.node in SETS and node.collection not in catalogue["collections"]})
     if missing_collections:
-        raise SlotFailure("binding", "catalogue lacks collections: " + ", ".join(missing_collections))
+        raise SlotFailure("entity_binding", "catalogue lacks collections: " + ", ".join(missing_collections))
     declared_entities = {catalogue.get("whole") or "building", *catalogue.get("boundaries", [])}
     for root in (program.applicability, program.exemption, program.requirement):
         for node in walk(root):
             for name in ("entity", "origin", "destination", "a", "b"):
                 entity = getattr(node, name, None)
                 if entity and not entity.startswith("$") and entity not in declared_entities:
-                    raise SlotFailure("binding", "undeclared entity or route endpoint")
+                    raise SlotFailure("entity_binding", "undeclared entity or route endpoint")
     # Convert a stated literal to the declared fact unit, preserving dimensional checks.
     try:
         for root in (program.applicability, program.exemption, program.requirement):
@@ -223,6 +266,8 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
     missing_numbers = {issue.message for issue in check_numbers(program, cited, detect_language(cited))
                        if issue.code == "number_not_in_sentence"}
     issues = [issue for issue in issues if issue.code != "number_not_in_sentence" or issue.message in missing_numbers]
+    if any(issue.code == "fact_wrong_owner" for issue in issues):
+        raise SlotFailure("entity_binding", "; ".join(issue.message for issue in issues))
     if issues:
         raise SlotFailure("verifier", "; ".join(issue.message for issue in issues))
     return program
@@ -230,32 +275,44 @@ def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> 
 
 def draft_structured(context: ContextBundle, catalogue: dict, body: str, client) -> dict:
     schema = slot_schema(catalogue, context)
-    payload = {"wire_contract": wire_contract(schema), "catalogue": catalogue, "target": context.target,
+    payload = {"wire_contract": wire_contract(schema), "catalogue": catalogue,
+               "unit_vocabulary": vocabulary(binding.get("unit", "1") for binding in catalogue["bindings"].values()),
+               "target": context.target,
                "clauses": [{"id": clause.id, "text": clause.text} for clause in context.clauses],
                "missing_context": context.missing}
-    attempts, evidence, diagnostic = [], [], None
+    attempts, evidence, proposed, diagnostic = [], [], [], None
     for _ in range(2):
+        evidence, proposed = [], []
         try:
             raw = client.complete(SYSTEM, json.dumps({**payload, "failed_check": diagnostic}, ensure_ascii=False),
                                   schema)
             frame = SlotDraft.model_validate(raw)
             evidence = [request.model_dump() for request in frame.evidence_requests]
+            proposed = [proposal.model_dump(mode="json") for proposal in frame.fact_declarations]
             program = compile_slots(frame, context, catalogue)
             dumped = program.model_dump(mode="json")
+            linked = declaration_catalogue(catalogue, program.fact_declarations)
             description = describe_rule(dumped["requirement"], dumped["applicability"], dumped["exemption"],
-                                        catalogue["bindings"], catalogue.get("whole", "building"))
-            return {"status": "DRAFTED", "review_status": "HUMAN_APPROVAL_REQUIRED", "stage": "retained",
+                                        linked["bindings"], linked.get("whole", "building"))
+            pending = bool(program.fact_declarations or frame.evidence_requests)
+            return {"status": "UNRESOLVED" if pending else "DRAFTED",
+                    "review_status": "NEEDS_EVIDENCE" if pending else "HUMAN_APPROVAL_REQUIRED",
+                    "stage": "declared_needs_evidence" if pending else "retained", "retained": True,
+                    "outcome": "UNRESOLVED",
                     "reason": "typed slots passed deterministic checks; human approval is required",
                     "arm": "structured_slots", "model": getattr(client, "model", None),
                     "external": bool(getattr(client, "external", False)), "program": dumped,
                     "readback": to_text(dumped["requirement"]), **description,
                     "applies_when": to_text(dumped["applicability"]), "unless": to_text(dumped["exemption"]),
                     "notes": [], "tried": [f"{item['stage']}: {item['detail']}" for item in attempts],
-                    "diagnostics": attempts, "evidence_requests": evidence}
+                    "diagnostics": attempts, "evidence_requests": evidence,
+                    "proposed_fact_declarations": proposed,
+                    "fact_declarations": [declaration.model_dump(mode="json") for declaration in program.fact_declarations]}
         except SlotFailure as error:
             stage, detail = error.stage, str(error)
         except ValidationError as error:
-            stage, detail = "schema", str(error)
+            stage = "unit_vocabulary" if any(item["loc"][-1] == "unit" for item in error.errors()) else "schema"
+            detail = str(error)
         except Exception as error:
             stage, detail = "generation", type(error).__name__
             if getattr(client, "last", {}).get("done") == "length":
@@ -266,4 +323,5 @@ def draft_structured(context: ContextBundle, catalogue: dict, body: str, client)
             "reason": detail, "arm": "structured_slots", "model": getattr(client, "model", None),
             "external": bool(getattr(client, "external", False)), "program": None, "readback": None,
             "notes": [], "tried": [f"{item['stage']}: {item['detail']}" for item in attempts],
-            "diagnostics": attempts, "evidence_requests": evidence}
+            "diagnostics": attempts, "evidence_requests": evidence, "proposed_fact_declarations": proposed,
+            "fact_declarations": []}

@@ -69,6 +69,7 @@ UNITS: dict[str, Unit] = {sym: Unit(float(spec.get("factor", 1.0)), _vector(spec
                           for sym, spec in _DATA["units"].items()}
 PREFIXES: dict[str, float] = {k: float(v) for k, v in _DATA["prefixes"].items()}
 PREFIXABLE = set(_DATA["prefixable"])
+ALIASES: dict[str, str] = dict(_DATA.get("aliases", {}))
 TOKEN = re.compile(r"\s*(?:(?P<num>\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)|(?P<sym>[^\W\d_]+|°[CF]?|%)(?P<exp>\^?-?\d+)?|(?P<op>[./*()^]))")
 
 
@@ -141,11 +142,18 @@ def parse_unit(text: str) -> Unit:
     text = (text or "").strip()
     if not text:
         raise UnitError("empty unit")
+    text = ALIASES.get(text, text)
     parser = _Parser(text.replace("²", "2").replace("³", "3"))
     unit = parser.expression()
     if parser.i != len(parser.tokens):
         raise UnitError(f"cannot read the unit {text!r}")
     return unit
+
+
+def vocabulary(extra=()) -> list[str]:
+    """Generation choices from unit data and runtime catalogue/source units."""
+    candidates = {*UNITS, *_DATA.get("words", {}), *ALIASES, *ALIASES.values(), *extra}
+    return sorted(symbol for symbol in candidates if is_unit(symbol))
 
 
 def is_unit(text: str) -> bool:
