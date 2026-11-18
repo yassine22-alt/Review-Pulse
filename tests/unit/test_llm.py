@@ -217,7 +217,7 @@ def test_cascade_asks_the_hosted_model_only_when_the_local_one_fails(monkeypatch
     def fake_attempt(context, catalogue, body, client, **_):
         calls.append(client.name)
         return {"status": client.status, "reason": client.name, "model": client.name, "external": client.external,
-                "program": None, "readback": None, "notes": []}
+                "program": getattr(client, "program", None), "readback": None, "notes": []}
 
     monkeypatch.setattr(checked, "_attempt", fake_attempt)
     monkeypatch.setattr(checked, "catalogue_from", lambda inputs, graph: {"kinds": {}, "kind_labels": {}})
@@ -225,12 +225,17 @@ def test_cascade_asks_the_hosted_model_only_when_the_local_one_fails(monkeypatch
     monkeypatch.setattr("reviewpulse.xeval.terms.document_groups", lambda *a: {})
     ctx = SimpleNamespace(text="t")
 
-    def mk(name, status, external=False):
-        return SimpleNamespace(name=name, status=status, external=external)
+    def mk(name, status, external=False, program=None):
+        return SimpleNamespace(name=name, status=status, external=external, program=program)
 
     # local succeeds: the hosted model is never asked
     assert checked.checked_draft(ctx, None, None, mk("local", "DRAFTED"), fallback=mk("hosted", "DRAFTED", True))["model"] == "local"
     assert calls == ["local"]
+    calls.clear()
+    # Retained IR awaiting evidence must not be discarded for a second model.
+    pending = checked.checked_draft(ctx, None, None, mk("local", "UNRESOLVED", program={"id": "retained"}),
+                                    fallback=mk("hosted", "DRAFTED", True))
+    assert pending["model"] == "local" and calls == ["local"]
     calls.clear()
     # local fails, hosted succeeds: its answer is used and the escalation is recorded
     out = checked.checked_draft(ctx, None, None, mk("local", "UNRESOLVED"), fallback=mk("hosted", "DRAFTED", True))
