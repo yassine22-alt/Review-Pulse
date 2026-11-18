@@ -28,3 +28,10 @@ def test_threshold_uses_raw_slots_even_when_no_rule_is_retained():
     assert report["decision"]["correct_slots"] == [6, 7]
     assert report["decision"]["status"] == "PROPOSE_NEXT_MEASUREMENT"
     assert report["arms"]["structured"]["retained"] == [0, 1]
+
+
+def test_rejected_request_is_not_a_model_failure_or_completed_case():
+    rows = [{"id": "a", "arm": "structured", "status": "REQUEST_REJECTED"}]
+    report = pilot.summarize(rows, ["a"], ["a"])
+    assert report["arms"]["structured"]["completed"] == [0, 1]
+    assert report["decision"]["correct_slots"] == [0, 0]

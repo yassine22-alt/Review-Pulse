@@ -185,6 +185,9 @@ def ground_span(source: FlatSpan, context: ContextBundle) -> Span:
 
 
 def compile_slots(frame: SlotDraft, context: ContextBundle, catalogue: dict) -> Program:
+    if (len(frame.nodes) > WIRE_NODE_LIMIT or any(len(node.args) > WIRE_NODE_LIMIT for node in frame.nodes)
+            or len(frame.unresolved) > 8 or any(len(message) > 512 for message in frame.unresolved)):
+        raise SlotFailure("wire_budget", "typed slots exceed the declared structural or diagnostic budget")
     spans = [ground_span(source, context) for source in frame.sources]
     if context.target not in {span.clause for span in spans}:
         raise SlotFailure("source_span", "the target obligation must be cited")

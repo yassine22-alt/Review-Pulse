@@ -78,13 +78,13 @@ def compile_response(raw, case, catalogue, arm):
 def summarize(rows, selected, thermal):
     arms = {}
     for arm in ("structured", "original_expression"):
-        completed = [row for row in rows if row["arm"] == arm and row["status"] != "API_UNAVAILABLE"]
+        completed = [row for row in rows if row["arm"] == arm and row["status"] in ("EVALUATED", "NEEDS_REVIEW")]
         scored = [row for row in completed if row.get("slots")]
         arms[arm] = {"completed": [len(completed), len(selected)],
                      "retained": [sum(row.get("retained", False) for row in completed), len(completed)],
                      "slot_scores": totals([row["slots"] for row in scored])}
     thermal_rows = [row for row in rows if row["arm"] == "structured" and row["id"] in thermal
-                    and row.get("slots") and row["status"] != "API_UNAVAILABLE"]
+                    and row.get("slots") and row["status"] in ("EVALUATED", "NEEDS_REVIEW")]
     correct = sum(row["slots"][slot]["exact"] is True for row in thermal_rows for slot in SLOTS)
     denominator = sum(row["slots"][slot]["eligible"] for row in thermal_rows for slot in SLOTS)
     complete = len(thermal_rows) == len(thermal) and denominator == len(thermal) * len(SLOTS)
@@ -141,7 +141,7 @@ def main():
     record_calls(client, args.output.with_suffix(".raw"))
     for key in selected:
         for arm in ("structured", "original_expression"):
-            if any(row["id"] == key and row["arm"] == arm and row["status"] != "API_UNAVAILABLE" for row in report["rows"]):
+            if any(row["id"] == key and row["arm"] == arm and row["status"] in ("EVALUATED", "NEEDS_REVIEW") for row in report["rows"]):
                 continue
             if gate.remaining == 0:
                 report["status"] = "REQUEST_ALLOWANCE_EXHAUSTED"
@@ -163,7 +163,9 @@ def main():
                 except (SlotFailure, ValidationError, ValueError) as error:
                     row.update(status="NEEDS_REVIEW", stage=getattr(error, "stage", "schema_or_expression"), detail=str(error))
             except APIUnavailable as error:
-                row.update(status="API_UNAVAILABLE", stage="transport", reason=error.reason)
+                rejected = error.http_status is not None and 400 <= error.http_status < 500 and error.http_status != 429
+                row.update(status="REQUEST_REJECTED" if rejected else "API_UNAVAILABLE",
+                           stage="request" if rejected else "transport", reason=error.reason)
             except Exception as error:
                 raw = partial_json(client.last.get("text") or "")
                 row["slots"] = score_slots(raw if isinstance(raw, dict) else {}, gold[key], labels[key])
@@ -173,8 +175,8 @@ def main():
             report["status"] = "RUNNING"
             save()
             print(key, arm, row["status"], row["stage"], flush=True)
-            if row["status"] == "API_UNAVAILABLE":
-                report["status"] = "API_UNAVAILABLE"
+            if row["status"] in ("API_UNAVAILABLE", "REQUEST_REJECTED"):
+                report["status"] = row["status"]
                 save()
                 return
     report["status"] = "COMPLETE_FIRST_DRAFTS"

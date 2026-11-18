@@ -8,8 +8,21 @@ import threading
 import time
 import urllib.error
 import urllib.request
+from typing import Any
 
 from .openai_compat import LLMError
+
+
+def decoding_schema(schema: Any) -> Any:
+    """Avoid counted-array state expansion; application validators keep the limits.
+
+    https://aistudio.google.com/docs/structured-output#simplifying-complex-schemas
+    """
+    if isinstance(schema, dict):
+        return {key: decoding_schema(value) for key, value in schema.items() if key not in ("maxItems", "minItems")}
+    if isinstance(schema, list):
+        return [decoding_schema(value) for value in schema]
+    return schema
 
 
 class APIUnavailable(LLMError):
@@ -53,7 +66,7 @@ class GeminiClient:
             "systemInstruction": {"parts": [{"text": system}]},
             "contents": [{"role": "user", "parts": [{"text": user}]}],
             "generationConfig": {"temperature": 0, "maxOutputTokens": self.max_tokens,
-                                 "responseMimeType": "application/json", "responseJsonSchema": json_schema},
+                                 "responseMimeType": "application/json", "responseJsonSchema": decoding_schema(json_schema)},
         }
         with self._semaphore:
             if self.unavailable:

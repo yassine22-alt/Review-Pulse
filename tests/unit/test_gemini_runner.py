@@ -81,3 +81,13 @@ def test_cache_resumes_and_invalidates_changed_configuration(tmp_path):
     assert cache.get(missing) is None
     (tmp_path / f"{key}.json").write_text("[]")
     assert cache.get(key) is None
+def test_hosted_schema_bounds_are_removed_without_mutating_validator_schema():
+    from reviewpulse.llm.gemini import decoding_schema
+
+    schema = {"type": "array", "maxItems": 64, "minItems": 1,
+              "items": {"type": "object", "properties": {"values": {
+                  "type": "array", "maxItems": 8, "items": {"type": "number"}}}}}
+    converted = decoding_schema(schema)
+    assert "maxItems" not in converted and "minItems" not in converted
+    assert "maxItems" not in converted["items"]["properties"]["values"]
+    assert schema["maxItems"] == 64

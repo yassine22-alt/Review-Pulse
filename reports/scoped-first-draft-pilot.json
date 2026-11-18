@@ -1,0 +1,216 @@
+{
+  "experiment": "Scope-separated first drafts, common subject and metadata fields; no triage, cascade or repair",
+  "model": "gemini-4-hydrogen",
+  "code_fingerprint": "a55efb245b2ae32c4d70979298fd4590dace68fc3ca088d546e729d0d48b3d70",
+  "max_tokens": 8192,
+  "temperature": 0,
+  "selected_ids": [
+    "T01",
+    "T04",
+    "T06",
+    "T09",
+    "T13",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "A03",
+    "A05",
+    "A08"
+  ],
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "structured",
+      "retained": false,
+      "status": "REQUEST_REJECTED",
+      "stage": "request",
+      "reason": "HTTP_400"
+    }
+  ],
+  "requests": [
+    {
+      "attempt": 1,
+      "http_status": 503,
+      "reason": "HTTP_503",
+      "seconds": 2.36
+    },
+    {
+      "attempt": 2,
+      "http_status": 503,
+      "reason": "HTTP_503",
+      "seconds": 10.359
+    },
+    {
+      "attempt": 3,
+      "http_status": 503,
+      "reason": "HTTP_503",
+      "seconds": 9.641
+    },
+    {
+      "attempt": 1,
+      "http_status": 400,
+      "reason": "HTTP_400",
+      "seconds": 7.0
+    }
+  ],
+  "invocations": 2,
+  "arms": {
+    "structured": {
+      "completed": [
+        0,
+        12
+      ],
+      "retained": [
+        0,
+        0
+      ],
+      "slot_scores": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        }
+      }
+    },
+    "original_expression": {
+      "completed": [
+        0,
+        12
+      ],
+      "retained": [
+        0,
+        0
+      ],
+      "slot_scores": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        }
+      }
+    }
+  },
+  "decision": {
+    "thermal_scored": [
+      0,
+      5
+    ],
+    "correct_slots": [
+      0,
+      0
+    ],
+    "status": "NOT_YET_MEASURED",
+    "threshold": 0.7
+  },
+  "status": "REQUEST_REJECTED",
+  "classification_correction": "HTTP 400 is REQUEST_REJECTED, not API availability or model semantics. Original code version and request history are unchanged.",
+  "separate_diagnostic": {
+    "attempts": 1,
+    "http_status": 429,
+    "model_output_available": false,
+    "not_pooled_into_pilot": true
+  }
+}

@@ -79,6 +79,17 @@ def test_metadata_cannot_invent_scope_values():
         compile_slots(SlotDraft.model_validate(raw), context, catalogue_from(inputs, None))
 
 
+def test_compiler_keeps_wire_limits_when_hosted_grammar_drops_array_bounds():
+    from reviewpulse.interpreter.structured import WIRE_NODE_LIMIT
+
+    context, inputs, raw = scoped_rule()
+    raw["nodes"] = [{"id": f"n{index}", "op": "literal", "value": True}
+                    for index in range(WIRE_NODE_LIMIT + 1)]
+    with pytest.raises(SlotFailure, match="structural") as error:
+        compile_slots(SlotDraft.model_validate(raw), context, catalogue_from(inputs, None))
+    assert error.value.stage == "wire_budget"
+
+
 def test_fieldwise_assembly_uses_field_schemas_and_the_same_compiler():
     import json
 
