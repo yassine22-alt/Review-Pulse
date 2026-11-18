@@ -103,3 +103,29 @@ def test_a_daily_allowance_that_is_used_up_fails_at_once_and_says_so():
     finally:
         server.shutdown()
     assert time.monotonic() - t < 3 and client.usage["daily_exhausted"] and client.usage["errors"] == 1
+
+
+def test_environment_credentials_and_retry_errors_are_not_recorded(monkeypatch):
+    import io
+    import urllib.error
+
+    import pytest
+
+    from reviewpulse.llm.openai_compat import APIUnavailable
+
+    monkeypatch.delenv("DRAFT_TEST_KEY", raising=False)
+    with pytest.raises(APIUnavailable, match="MISSING_ENV_CREDENTIAL"):
+        OpenAICompatClient.from_env("https://provider/v1", "DRAFT_TEST_KEY", "model")
+    monkeypatch.setenv("DRAFT_TEST_KEY", "private-test-value")
+    client = OpenAICompatClient.from_env("https://provider/v1", "DRAFT_TEST_KEY", "model",
+                                         structured="json_object", max_retries=2, seed=None)
+    sleeps = []
+    monkeypatch.setattr("reviewpulse.llm.openai_compat.time.sleep", sleeps.append)
+    def fail(*args, **kwargs):
+        raise urllib.error.HTTPError("https://provider", 503, "busy", {}, io.BytesIO(b"private-test-value"))
+    monkeypatch.setattr("reviewpulse.llm.openai_compat.urllib.request.urlopen", fail)
+    with pytest.raises(APIUnavailable) as error:
+        client.complete("source", "{}", SCHEMA)
+    assert error.value.attempts == 3 and len(sleeps) == 2
+    assert 2 <= sleeps[0] <= 4 and 4 <= sleeps[1] <= 8
+    assert "private-test-value" not in str(error.value) + json.dumps(client.events) + json.dumps(client.usage)

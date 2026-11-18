@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import ipaddress
 import json
+import os
+import random
 import re
 import threading
 import time
@@ -28,6 +30,12 @@ from urllib.parse import urlparse
 
 class LLMError(RuntimeError):
     """A failure with a message that is safe to show a user (never contains the API key)."""
+
+
+class APIUnavailable(LLMError):
+    def __init__(self, reason: str, status: int | None, attempts: int):
+        self.reason, self.http_status, self.attempts = reason, status, attempts
+        super().__init__(f"API_UNAVAILABLE: {reason}, HTTP {status}, attempts {attempts}")
 
 
 def is_external(base_url: str) -> bool:
@@ -88,13 +96,6 @@ def _strict(schema: dict) -> dict | None:
         return None
 
 
-def _first_sentence(text: str) -> str:
-    import re
-
-    m = re.search(r'"message":"([^"]{0,200})', text)
-    return (m.group(1) if m else text[:200]).strip()
-
-
 def _seconds(text: str) -> float:
     """"577ms", "1.5s", "2m3.2s" -> seconds."""
     import re
@@ -107,7 +108,7 @@ class OpenAICompatClient:
     def __init__(self, base_url: str, api_key: str | None, model: str, *, provider: str = "custom",
                  structured: str = "auto", timeout_s: float = 120.0, max_retries: int = 4, rpm: float | None = None,
                  temperature: float = 0.0, max_tokens: int = 3000, seed: int | None = 42, headers: dict | None = None,
-                 reasoning_effort: str | None = None):
+                 reasoning_effort: str | None = None, concurrency: int = 1):
         if not model:
             raise LLMError("a model name is required (set REVIEWPULSE_LLM_MODEL)")
         self.base_url = base_url.rstrip("/")
@@ -122,10 +123,19 @@ class OpenAICompatClient:
         self._min_interval = 60.0 / rpm if rpm else 0.0
         self._lock, self._next_at = threading.Lock(), 0.0
         self._mode: str | None = None if structured == "auto" else structured
+        self.events: list[dict] = []
+        self._semaphore = threading.BoundedSemaphore(concurrency)
         self.last: dict = {}
         self.usage = {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "seconds": 0.0, "errors": 0, "waited_s": 0.0}
         self._tokens_left: float | None = None             # what the provider says is left of this minute's token allowance
         self._tokens_reset = 0.0                           # when it is full again (monotonic seconds)
+
+    @classmethod
+    def from_env(cls, base_url: str, env_var: str, model: str, **kwargs):
+        key = os.environ.get(env_var)
+        if not key:
+            raise APIUnavailable("MISSING_ENV_CREDENTIAL", None, 0)
+        return cls(base_url, key, model, **kwargs)
 
     # -- transport --------------------------------------------------------------------------------------------------
     def _pace(self) -> None:
@@ -174,9 +184,13 @@ class OpenAICompatClient:
             try:
                 with urllib.request.urlopen(req, timeout=self.timeout_s) as r:
                     self._learn_limits(r.headers)
+                    self.events.append({"http_status": r.status, "attempt": attempt + 1,
+                                        "limits": {k.lower(): v for k, v in r.headers.items()
+                                                   if k.lower().startswith("x-ratelimit-")}})
                     return json.loads(r.read().decode())
             except urllib.error.HTTPError as exc:
                 text = exc.read().decode("utf-8", "replace")[:600]
+                self.events.append({"http_status": exc.code, "attempt": attempt + 1})
                 if self._key:
                     text = text.replace(self._key, "[redacted credential]")
                 if exc.code == 400 and "reasoning_effort" in text.lower() and "reasoning_effort" in body:
@@ -189,23 +203,23 @@ class OpenAICompatClient:
                     continue
                 if exc.code in (401, 403):
                     blocked = " (blocked before reaching the provider: the request signature was refused)" if "1010" in text else ""
-                    raise LLMError(f"{self.provider}: the API key was rejected ({exc.code}){blocked}") from None
+                    raise APIUnavailable("AUTH_REJECTED" + blocked, exc.code, attempt + 1) from None
                 if exc.code == 429 and ("per day" in text.lower() or "(tpd)" in text.lower() or "(rpd)" in text.lower()):
                     self.usage["daily_exhausted"] = True
-                    raise LLMError(f"{self.provider}: the daily allowance of this model is used up ({_first_sentence(text)})") from None
+                    raise APIUnavailable("daily allowance exhausted", exc.code, attempt + 1) from None
                 if exc.code in (429, 500, 502, 503, 504) and attempt < self.max_retries:
                     retry_after = exc.headers.get("retry-after") if exc.headers else None
                     time.sleep(min(60.0, float(retry_after)) if retry_after and retry_after.replace(".", "").isdigit()
-                               else min(60.0, delay))
+                               else min(60.0, delay + random.uniform(0, delay)))
                     delay *= 2
                     continue
-                raise LLMError(f"{self.provider}: HTTP {exc.code}: {text}") from None
-            except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+                raise APIUnavailable("REQUEST_REJECTED" if exc.code < 500 and exc.code != 429 else "RETRY_EXHAUSTED", exc.code, attempt + 1) from None
+            except (urllib.error.URLError, TimeoutError, ConnectionError):
                 if attempt < self.max_retries:
                     time.sleep(min(30.0, delay))
                     delay *= 2
                     continue
-                raise LLMError(f"{self.provider} is not reachable ({type(exc).__name__})") from None
+                raise APIUnavailable("NETWORK_ERROR", None, attempt + 1) from None
         raise LLMError(f"{self.provider}: no answer after {self.max_retries + 1} attempts")
 
     # -- the call ---------------------------------------------------------------------------------------------------
@@ -233,7 +247,9 @@ class OpenAICompatClient:
 
     def complete(self, system: str, user: str, json_schema: dict) -> dict:
         try:
-            return self._complete(system, user, json_schema)
+            self.last = {}
+            with self._semaphore:
+                return self._complete(system, user, json_schema)
         except LLMError as exc:
             self.usage["errors"] += 1
             self.usage["last_error"] = str(exc)[:300]
@@ -254,14 +270,15 @@ class OpenAICompatClient:
                 raise
             self._mode = mode if self.structured == "auto" else self._mode
             choice = (out.get("choices") or [{}])[0]
-            if choice.get("finish_reason") == "length":
-                raise LLMError(f"{self.provider}: the answer was cut off at {self.max_tokens} tokens")
             usage = out.get("usage") or {}
             self.last = {"prompt_tokens": usage.get("prompt_tokens"), "completion_tokens": usage.get("completion_tokens"),
-                         "seconds": round(time.time() - t0, 2), "mode": mode, "model": out.get("model", self.model)}
+                         "seconds": round(time.time() - t0, 2), "mode": mode, "model": out.get("model", self.model),
+                         "text": (choice.get("message") or {}).get("content", ""), "finish_reason": choice.get("finish_reason")}
             self.usage["calls"] += 1
             self.usage["prompt_tokens"] += usage.get("prompt_tokens") or 0
             self.usage["completion_tokens"] += usage.get("completion_tokens") or 0
             self.usage["seconds"] += time.time() - t0
-            return extract_json((choice.get("message") or {}).get("content", ""))
+            if choice.get("finish_reason") == "length":
+                raise LLMError(f"{self.provider}: the answer was cut off at {self.max_tokens} tokens")
+            return extract_json(self.last["text"])
         raise last_error or LLMError(f"{self.provider}: no answer")

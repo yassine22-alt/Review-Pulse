@@ -10,6 +10,7 @@ import urllib.error
 import urllib.request
 from typing import Any
 
+from .openai_compat import APIUnavailable as APIUnavailable
 from .openai_compat import LLMError
 
 
@@ -26,12 +27,6 @@ def decoding_schema(schema: Any) -> Any:
     if isinstance(schema, list):
         return [decoding_schema(value) for value in schema]
     return schema
-
-
-class APIUnavailable(LLMError):
-    def __init__(self, reason: str, status: int | None, attempts: int):
-        self.reason, self.http_status, self.attempts = reason, status, attempts
-        super().__init__(f"API_UNAVAILABLE: {reason}, HTTP {status}, attempts {attempts}")
 
 
 class GeminiClient:
