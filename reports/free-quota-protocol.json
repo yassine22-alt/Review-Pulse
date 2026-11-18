@@ -48,5 +48,8 @@
   },
   "request_accounting": "18/19 worker allowance used on 18 Nov: 9 original and 9 archived structured attempts; 1 left, insufficient to start.",
   "local_progress": "reports/free-quota-declared-eval/progress.json",
-  "archived_progress": "reports/free-quota-eval/progress.json"
+  "archived_progress": "reports/free-quota-eval/progress.json",
+  "status": "STOPPED_BY_PRIORITY_CHANGE",
+  "superseded_by": "docs/scoped-pilot.md",
+  "authorized_current_scope": "Only the twelve development obligations in the first-draft pilot, both arms"
 }

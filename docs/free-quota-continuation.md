@@ -1,3 +1,10 @@
+# Archived: worker stopped
+
+The 46-case worker was stopped by the 18 November priority change. Do not
+resume its old plan. The authorized experiment is now only the paired
+12-obligation first-draft pilot; see [current pilot instructions](scoped-pilot.md).
+The remainder of this file documents the historical worker.
+
 # Continuing the fixed comparison on free quota
 
 The user chose free quota across multiple days on 18 November 2026. The

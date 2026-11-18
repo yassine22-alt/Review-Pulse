@@ -1,3 +1,10 @@
+# Current scope notice
+
+The old multi-day worker and its remaining-46 phase are stopped. Only the
+first 12 obligations are authorized for the current first-draft experiment.
+See [scope-separated pilot](scoped-pilot.md) for its current interfaces,
+request outcomes and resume command. Older results below are not pooled.
+
 # Development pilot before the full run
 
 The order is data in `reports/development-pilot.json`, not a clause-specific

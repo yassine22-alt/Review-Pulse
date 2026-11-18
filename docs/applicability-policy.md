@@ -71,6 +71,9 @@ the active catalogue: M09 isolated step groups; A02 level changes; A03
 sidewalks; A04 curb cuts; A11 and A13 passages; A12 direction changes; A15
 entrances. A proposed fact cannot create those inventories or certify their
 completeness. This round adds no entity detector or plan computation.
+These are catalogue-binding gaps, not proof that the plan lacks the entities
+or that a new detector is necessary. Whether existing representations can be
+linked to them has not been measured.
 
 M11 and A10 remain context/standard dependent (2/46). Per-case diagnostics are
 in `reports/slot-oracle-applicability.json`. The fourth document is untouched.
