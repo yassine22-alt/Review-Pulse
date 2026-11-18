@@ -25,11 +25,14 @@ Bulletin Officiel 6206, 21 November 2013. Its **17 obligations and 48 synthetic
 scenarios** were committed at `41b1ad14b466fb52500b118d69593319da649e23`.
 Interpretations and applicability labels remain separate from drafting input.
 
-Next: complete the paired local run and the remaining **44/46** hosted
-obligations per arm, using daily free-quota resets or a higher-quota project.
-Do not pool different models. Only afterward should the frozen fourth document
-run once. No checker capabilities were added. The observed unit-vocabulary
-generation gap is documented, without a claim that fixing it unlocks checks.
+The user chose free quota across multiple days. A
+[continuation worker](free-quota-continuation.md) is configured for the
+remaining **44/46** hosted obligations per arm, starting after the **08:00 UTC
+18 November** reset. It uses fixed checkouts and at most 19 requests per day.
+The PC must stay awake; saved progress supports explicit resume after restart.
+Do not pool models. Complete the local run too, then review the full comparison
+before the fourth document runs once. No checker capabilities were added. The
+unit-vocabulary gap remains documented without a claim of unlocked checks.
 
 The resumed local snapshot has **24/46** completed, **0/24** retained: generation
 cap **21/24**, absent source subject **3/24**. It remains incomplete, with
@@ -50,6 +53,7 @@ for the whole cache, because interrupted batches can leave completed entries.
 | Hydrogen paired development sample | 2/46 completed per arm, 0/2 retained per arm. Original terminal stages: verifier 2/2. Structured: context/binding 1/2, schema 1/2. Wrong approvable / approvable undefined, 0/0 per arm |
 | Hydrogen request accounting | 0/8 request errors per arm, 0/16 overall. Each arm stopped at its eight-request allowance; the next clause was interrupted by the client budget and 43/46 were not submitted |
 | Request allowance and pacing tests | 7/7 passed: existing retry/cache tests plus new failed-request budget, cross-cycle allowance and request-spacing checks |
+| Multi-day continuation tests | 13 continuation tests plus the 7 transport/budget tests passed 20/20. The current quota window has zero remaining worker allowance, so setup sends no new generation requests |
 | Drafting-redesign non-slow suite | 978 passed, 2 skipped, 45 slow tests deselected; 530.44 seconds at e2d0acf4516d5e3395869f4f470108b0111e1053. The later runner-only allowance changes have the separate 7/7 targeted result above |
 | Secrets scan | 597 working text files; 776 reachable Git blobs, 286 trees, 37 commits, including refs/reflogs; no credential-pattern match in scanned repository content. Exclusions and access failures are documented |
 | Previous complete slow suite | 45/45 passed at the earlier checkpoint; this is historical validation, not a new interpreter result |

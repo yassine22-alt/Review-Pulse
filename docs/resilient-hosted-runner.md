@@ -105,6 +105,12 @@ budget exhaustion fabricates no HTTP failure.
 
 ## Run instructions
 
+The user selected free quota over multiple days. The
+[frozen continuation protocol](free-quota-continuation.md) describes the
+running worker, daily accounting, stop control and reboot recovery. It
+reserves allowance before calls, retains uncertain usage after interruption,
+and does not touch the fourth document or approve interpretations.
+
 Set the rotated key as `GEMINI_API_KEY` in the environment available to the
 process. Do not place its value in a command, report, example, `.env` file or
 chat. Then run:

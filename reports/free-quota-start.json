@@ -1,0 +1,27 @@
+{
+  "model": "gemini-4-hydrogen",
+  "window": "2026-11-17",
+  "heartbeat_utc": "2026-11-18T00:46:46.010534+00:00",
+  "next_reset_utc": "2026-11-18T08:00:00+00:00",
+  "arms": {
+    "original": {
+      "completed": 2,
+      "planned": 46,
+      "retained": 0
+    },
+    "structured": {
+      "completed": 2,
+      "planned": 46,
+      "retained": 0
+    }
+  },
+  "request_allowance_remaining": 0,
+  "status": "WAITING_FOR_QUOTA",
+  "new_generation_requests_during_setup": 0,
+  "worker_script_sha256": "9dc2eb39f7588cb6bc73409127440adcf0a3105ccd31babfd2dc12c8521a0c0e",
+  "setup_tests": {
+    "passed": 20,
+    "failed": 0
+  },
+  "not_measured": "No additional interpreter accuracy or held-out evaluation result; this records execution setup only."
+}
