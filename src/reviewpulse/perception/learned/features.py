@@ -16,6 +16,7 @@ from ...schema import BuildingModel, Primitive
 
 KINDS = ("line", "polyline", "polygon", "arc", "circle")
 CLASSES = ("other", "wall", "door", "window")
+FEATURE_BATCH_SIZE = 128
 
 FEATURES = (
     ["kind_" + k for k in KINDS]
@@ -140,44 +141,48 @@ def sheet_features(model: BuildingModel) -> tuple[list[str], np.ndarray]:
     tree = STRtree(geoms)
     reach = 0.6 / mpu
     lo, hi = np.minimum(P, Q) - reach, np.maximum(P, Q) + reach
-    ii, jj = tree.query(shapely.box(lo[:, 0], lo[:, 1], hi[:, 0], hi[:, 1]))
-    keep = (ii != jj) & (L[ii] > 0) & (L[jj] > 0)
-    ii, jj = ii[keep], jj[keep]
-    cosang = np.abs(np.einsum("ij,ij->i", U[ii], U[jj]))
-    par = cosang >= math.cos(math.radians(3))
-    perp = cosang <= math.cos(math.radians(60))
-    off = np.abs(np.einsum("ij,ij->i", (P[jj] + Q[jj]) / 2 - P[ii], N[ii]))
-    s_p = np.einsum("ij,ij->i", P[jj] - P[ii], U[ii])
-    s_q = np.einsum("ij,ij->i", Q[jj] - P[ii], U[ii])
-    ov = np.minimum(L[ii], np.maximum(s_p, s_q)) - np.maximum(0.0, np.minimum(s_p, s_q))
-    ovr = ov / np.where(L[ii] > 0, L[ii], 1.0)
-    cand = par & (off * mpu >= 0.03) & (off * mpu <= 0.6) & (ovr > 0.3)
-
-    n_par = np.bincount(ii[cand], minlength=len(prims))
-    n_par_long = np.bincount(ii[cand & (ovr > 0.8)], minlength=len(prims))
+    n_par, n_par_long = np.zeros(len(prims)), np.zeros(len(prims))
     par_d = [[] for _ in prims]
-    par_ov1 = np.zeros(len(prims))
-    for i, o, r in zip(ii[cand].tolist(), off[cand].tolist(), ovr[cand].tolist()):
-        par_d[i].append((o * mpu, r))
-    for i, ds in enumerate(par_d):
-        ds.sort()
-        par_d[i] = ds
-        if ds:
-            par_ov1[i] = ds[0][1]
-    # endpoint degrees and perpendicular touches
+    par_ov1, touch_perp = np.zeros(len(prims)), np.zeros(len(prims))
+    crossings, dens = np.zeros(len(prims)), np.zeros(len(prims))
+    # Query and reduce one bounded source batch; never materialize all page pairs.
+    for start in range(0, len(prims), FEATURE_BATCH_SIZE):
+        stop = min(start + FEATURE_BATCH_SIZE, len(prims))
+        ii, jj = tree.query(shapely.box(lo[start:stop, 0], lo[start:stop, 1], hi[start:stop, 0], hi[start:stop, 1]))
+        ii = ii + start
+        keep = (ii != jj) & (L[ii] > 0) & (L[jj] > 0)
+        ii, jj = ii[keep], jj[keep]
+        cosang = np.abs(np.einsum("ij,ij->i", U[ii], U[jj]))
+        par = cosang >= math.cos(math.radians(3))
+        perp = cosang <= math.cos(math.radians(60))
+        off = np.abs(np.einsum("ij,ij->i", (P[jj] + Q[jj]) / 2 - P[ii], N[ii]))
+        s_p = np.einsum("ij,ij->i", P[jj] - P[ii], U[ii])
+        s_q = np.einsum("ij,ij->i", Q[jj] - P[ii], U[ii])
+        ov = np.minimum(L[ii], np.maximum(s_p, s_q)) - np.maximum(0.0, np.minimum(s_p, s_q))
+        ovr = ov / np.where(L[ii] > 0, L[ii], 1.0)
+        cand = par & (off * mpu >= 0.03) & (off * mpu <= 0.6) & (ovr > 0.3)
+        n_par += np.bincount(ii[cand], minlength=len(prims))
+        n_par_long += np.bincount(ii[cand & (ovr > 0.8)], minlength=len(prims))
+        for i, o, r in zip(ii[cand].tolist(), off[cand].tolist(), ovr[cand].tolist()):
+            par_d[i].append((o * mpu, r))
+        for i in range(start, stop):
+            par_d[i].sort()
+            del par_d[i][2:]  # only these two neighbours are features; counts above keep every pair
+            if par_d[i]:
+                par_ov1[i] = par_d[i][0][1]
+        near_perp = perp & (np.minimum.reduce([
+            np.hypot(*(P[jj] - P[ii]).T), np.hypot(*(Q[jj] - P[ii]).T),
+            np.hypot(*(P[jj] - Q[ii]).T), np.hypot(*(Q[jj] - Q[ii]).T)]) <= 0.05 / mpu)
+        np.add.at(touch_perp, ii[near_perp], 1)
+        cr_i, cr_j = tree.query(geoms[start:stop], predicate="crosses")
+        cr_i = cr_i + start
+        crossings += np.bincount(cr_i[cr_i != cr_j], minlength=len(prims))
+        dens += np.bincount(ii[off * mpu <= 1.0], minlength=len(prims))
     tol = 0.01 / mpu
     ends: Counter = Counter()
     for a, b in rep:
         for q in (a, b):
             ends[(round(q[0] / tol), round(q[1] / tol))] += 1
-    touch_perp = np.zeros(len(prims))
-    near_perp = perp & (np.minimum.reduce([
-        np.hypot(*(P[jj] - P[ii]).T), np.hypot(*(Q[jj] - P[ii]).T),
-        np.hypot(*(P[jj] - Q[ii]).T), np.hypot(*(Q[jj] - Q[ii]).T)]) <= 0.05 / mpu)
-    np.add.at(touch_perp, ii[near_perp], 1)
-    cr_i, cr_j = tree.query(geoms, predicate="crosses")
-    crossings = np.bincount(cr_i[cr_i != cr_j], minlength=len(prims))
-    dens = np.bincount(ii[off * mpu <= 1.0], minlength=len(prims))
 
     xs = np.concatenate([P[:, 0], Q[:, 0]])
     ys = np.concatenate([P[:, 1], Q[:, 1]])

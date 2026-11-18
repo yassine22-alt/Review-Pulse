@@ -72,7 +72,8 @@ def main():
         openings.append({**truth, "intersecting_predictions": ids})
     result = {"method": method, "model_sha256": hashlib.sha256(weight.read_bytes()).hexdigest(),
               "annotation_limits": labels["annotation"], "opening_scope": labels["opening_scope"],
-              "rooms_found": [sum(bool(r["matched_id"]) for r in rooms), len(rooms)],
+              "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+              "reference_label_points_covered": [sum(bool(r["matched_id"]) for r in rooms), len(rooms)],
               "bedrooms_found_and_classified": [sum(bool(r["matched_id"]) and r["predicted_type"] == "bedroom"
                     for r in rooms if r["bedroom"]), sum(r["bedroom"] for r in rooms)],
               "raw_predicted_room_count": len(model.rooms),

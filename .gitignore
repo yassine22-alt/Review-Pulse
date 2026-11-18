@@ -122,3 +122,6 @@ data/real_plans/
 
 # cached answers of hosted models (private to the machine)
 data/llm_cache.sqlite*
+
+# Resumable hosted drafting responses (public text, local experiment cache)
+data/llm_cache/
