@@ -1,0 +1,156 @@
+{
+  "source": "local-after-slots-cache-snapshot.json",
+  "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+  "model": "qwen2.5:1.5b",
+  "max_tokens": 4096,
+  "timeout": 600.0,
+  "ids": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08"
+  ],
+  "before": [
+    {
+      "id": "M01",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M02",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M03",
+      "stage": "subject",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M04",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M05",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M06",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M07",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M08",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M09",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M10",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M11",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M12",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M13",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M14",
+      "stage": "subject",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M15",
+      "stage": "subject",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "M16",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A01",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A02",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A03",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A04",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A05",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A06",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A07",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "A08",
+      "stage": "generation_cap",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "historical_raw_capture": "Unavailable: BoundedOllama discarded message.content when raising on done_reason=length."
+}

@@ -38,6 +38,7 @@ class BoundedOllama(OllamaClient):
         self.temperature = 0.0
 
     def complete(self, system: str, user: str, json_schema: dict) -> dict:
+        self.last = {}
         out = self._post("/api/chat", {
             "model": self.model, "stream": False, "format": json_schema,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
@@ -45,7 +46,7 @@ class BoundedOllama(OllamaClient):
                         "num_predict": self.num_predict},
         })
         self.last = {"tokens": out.get("eval_count"), "done": out.get("done_reason"),
-                     "prompt_tokens": out.get("prompt_eval_count")}
+                     "prompt_tokens": out.get("prompt_eval_count"), "text": out.get("message", {}).get("content", "")}
         if out.get("done_reason") == "length":
             raise RuntimeError(f"generation hit the {self.num_predict}-token cap")
         return json.loads(out["message"]["content"])

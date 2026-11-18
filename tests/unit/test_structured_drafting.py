@@ -53,6 +53,13 @@ def test_generation_schema_has_only_fields_relevant_to_each_slot():
     assert schema["$defs"]["FlatSpan"]["properties"]["clause"]["enum"] == ["r"]
 
 
+def test_repeated_node_records_are_rejected_even_if_generation_finishes():
+    context, inputs, raw = case()
+    raw["nodes"].append(copy.deepcopy(raw["nodes"][0]))
+    with pytest.raises(SlotFailure, match="unique|duplicate"):
+        compile_slots(SlotDraft.model_validate(raw), context, catalogue_from(inputs, None))
+
+
 @pytest.mark.parametrize("mutation,stage", [
     ("unused_constraint", "compile"), ("fake_quote", "source_span"), ("incompatible_unit", "types_or_units"),
     ("wrong_number", "verifier"), ("unknown_fact", "binding"), ("unused_condition", "compile")])

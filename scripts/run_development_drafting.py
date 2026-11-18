@@ -6,6 +6,7 @@ import os
 import re
 import sys
 import time
+import uuid
 from pathlib import Path
 
 
@@ -51,6 +52,7 @@ def main():
     parser.add_argument("--original-src", type=Path)
     parser.add_argument("--cache", type=Path, default=Path("runs/drafting-result-cache"))
     parser.add_argument("--case-ids", type=Path, help="Ordered JSON list of development IDs to run")
+    parser.add_argument("--raw-dir", type=Path, help="Local-only response capture for generation diagnosis")
     args = parser.parse_args()
     if min(args.batch_size, args.cycles) < 1:
         parser.error("batch size and cycles must be positive")
@@ -81,6 +83,12 @@ def main():
                 self.events.append({"http_status": None if self.unavailable else 200,
                                     "reason": type(error).__name__})
                 raise
+            finally:
+                if args.raw_dir and self.last.get("text"):
+                    args.raw_dir.mkdir(parents=True, exist_ok=True)
+                    path = args.raw_dir / f"{self.case_id}-{uuid.uuid4().hex}.json"
+                    path.write_text(json.dumps({"case": self.case_id, "model": self.model, **self.last},
+                                               ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             self.events.append({"http_status": 200})
             return result
 
@@ -97,6 +105,8 @@ def main():
     dataset_ids = [case["id"] for case in cases]
     if args.case_ids:
         selected = json.loads(args.case_ids.read_text(encoding="utf-8"))
+        if isinstance(selected, dict):
+            selected = selected.get("ids")
         if (not isinstance(selected, list) or not all(isinstance(key, str) for key in selected)
                 or len(set(selected)) != len(selected) or not selected or set(selected) - set(dataset_ids)):
             parser.error("case selection must be a nonempty, unique list of known development IDs")
@@ -156,6 +166,7 @@ def main():
             unavailable = []
             batch = {"number": start // args.batch_size + 1, "cycle": cycle + 1, "ids": [], "cache_hits": 0}
             for case in pending:
+                client.case_id = case["id"]
                 batch["ids"].append(case["id"])
                 key = caching.fingerprint({
                     "code": code, "model": args.model, "backend": args.backend, "tokens": args.max_tokens,
