@@ -13,6 +13,8 @@
 # error: the wording check is reported as "not verified" and the draft goes to a person.
 
 en:
+  conditions: [if, when, where, whenever, provided that]
+  exceptions: [except, unless, other than]
   decimal: "."
   words: [the, of, and, shall, must, each, every, at, least, with, is, be, in, a, an, to, any, not, than, min, max, minimum, maximum,
           required, wide, width, are, from, which, should, may, provided, where]
@@ -29,6 +31,8 @@ en:
   either: [or]
 
 fr:
+  conditions: [si, lorsque, quand, dans le cas]
+  exceptions: [sauf, à l’exception, à l'exception, à moins que]
   negation_before_comparison: [pas]
   decimal: ","
   words: [le, la, les, des, du, de, et, doit, doivent, chaque, dans, au, moins, une, un, sauf, est, sont, pour]

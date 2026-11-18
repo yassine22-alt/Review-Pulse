@@ -1,0 +1,1270 @@
+{
+  "scope": "Development deterministic quantity extraction only, not fact association, correct drafting or whole-clause accuracy. Includes structural numeric literals in denominator; metadata bounds are reported in evidence but not in this requirement-only reference denominator. Source comparisons can be correct despite primitive compiler being unsupported.",
+  "clauses": [
+    46,
+    46
+  ],
+  "gold_numeric_literals": 44,
+  "matched_typed_quantities": 25,
+  "rows": [
+    {
+      "id": "M01",
+      "source": "| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 20.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            65,
+            67
+          ],
+          "quote": "20",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 50.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            70,
+            72
+          ],
+          "quote": "50",
+          "column_header": ""
+        },
+        {
+          "id": "q2",
+          "value": 2.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            81,
+            82
+          ],
+          "quote": "2",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M02",
+      "source": "| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |\n| de 20 à 50 | RDC : 2 | 1 dégagement de 1 UP ; 1 dégagement accessoire |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 20.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            82,
+            84
+          ],
+          "quote": "20",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 50.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            87,
+            89
+          ],
+          "quote": "50",
+          "column_header": ""
+        },
+        {
+          "id": "q2",
+          "value": 2.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            98,
+            99
+          ],
+          "quote": "2",
+          "column_header": ""
+        },
+        {
+          "id": "q3",
+          "value": 1.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            102,
+            103
+          ],
+          "quote": "1",
+          "column_header": ""
+        },
+        {
+          "id": "q4",
+          "value": 1.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            118,
+            119
+          ],
+          "quote": "1",
+          "column_header": ""
+        },
+        {
+          "id": "q5",
+          "value": 1.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            125,
+            126
+          ],
+          "quote": "1",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M03",
+      "source": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 50.0,
+          "unit": "m",
+          "operator": null,
+          "normalized_span": [
+            18,
+            22
+          ],
+          "quote": "50 m",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 2.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            38,
+            39
+          ],
+          "quote": "2",
+          "column_header": ""
+        },
+        {
+          "id": "q2",
+          "value": 30.0,
+          "unit": "m",
+          "operator": null,
+          "normalized_span": [
+            50,
+            54
+          ],
+          "quote": "30 m",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 4,
+      "matched_typed_quantities": 2,
+      "menu_choices": 10
+    },
+    {
+      "id": "M04",
+      "source": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 10.0,
+          "unit": "m",
+          "operator": "le",
+          "normalized_span": [
+            116,
+            120
+          ],
+          "quote": "10 m",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "M05",
+      "source": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M06",
+      "source": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 20.0,
+          "unit": "m",
+          "operator": "le",
+          "normalized_span": [
+            91,
+            95
+          ],
+          "quote": "20 m",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "M07",
+      "source": "La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 5.0,
+          "unit": "%",
+          "operator": null,
+          "normalized_span": [
+            162,
+            165
+          ],
+          "quote": "5 %",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 3,
+      "matched_typed_quantities": 1,
+      "menu_choices": 0
+    },
+    {
+      "id": "M08",
+      "source": "Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M09",
+      "source": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales.",
+      "evidence": [],
+      "gold_numeric_literals": 2,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M10",
+      "source": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 1.0,
+          "unit": null,
+          "operator": null,
+          "normalized_span": [
+            69,
+            70
+          ],
+          "quote": "1",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 2.0,
+          "unit": "h",
+          "operator": null,
+          "normalized_span": [
+            71,
+            74
+          ],
+          "quote": "2 h",
+          "column_header": ""
+        },
+        {
+          "id": "q2",
+          "value": 1.0,
+          "unit": "h",
+          "operator": null,
+          "normalized_span": [
+            81,
+            84
+          ],
+          "quote": "1 h",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M11",
+      "source": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression).",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M12",
+      "source": "Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M13",
+      "source": "Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M14",
+      "source": "Revêtement des circulations : plafonds : M1",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M15",
+      "source": "Revêtement des circulations : cloisons : M2 ; sols : M4",
+      "evidence": [],
+      "gold_numeric_literals": 2,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "M16",
+      "source": "En présence du public, toutes les portes doivent pouvoir s’ouvrir de l’intérieur par simple poussée ou par la manoeuvre facile d’un seul dispositif par vantail tel que bec-de-cane, poignée tournante, crémone à poignée ou à levier ou de tout autre dispositif conforme aux normes en vigueur.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A01",
+      "source": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A02",
+      "source": "Toute dénivelée importante doit être doublée d'un plan incliné.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A03",
+      "source": "Les trottoirs doivent avoir une largeur allant de 1.50 m à 2.00 m.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 1.5,
+          "unit": "m",
+          "operator": null,
+          "normalized_span": [
+            50,
+            56
+          ],
+          "quote": "1.50 m",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 2.0,
+          "unit": "m",
+          "operator": null,
+          "normalized_span": [
+            59,
+            65
+          ],
+          "quote": "2.00 m",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 2,
+      "matched_typed_quantities": 2,
+      "menu_choices": 4
+    },
+    {
+      "id": "A04",
+      "source": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 5.0,
+          "unit": "%",
+          "operator": "lt",
+          "normalized_span": [
+            55,
+            57
+          ],
+          "quote": "5%",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 5.0,
+          "unit": "%",
+          "operator": null,
+          "normalized_span": [
+            134,
+            136
+          ],
+          "quote": "5%",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 0
+    },
+    {
+      "id": "A05",
+      "source": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A06",
+      "source": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A07",
+      "source": "Lorsque la fonction d'un bâtiment ouvert au public amène les usagers à utiliser des guichets, étagères ou écritoires, un sur dix de ces équipements doit être aménagé pour servir les personnes handicapées.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A08",
+      "source": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A09",
+      "source": "Les équipements au niveau des chambres, salles de bain, cabinets d'aisance dans les bâtiments ouverts au public notamment les hôtels, les hôpitaux et les structures d'accueil doivent être adaptés aux personnes handicapées à hauteur d'un équipement sur dix.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A10",
+      "source": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A11",
+      "source": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur et de passages ayant une largeur minimale de 2.00 m avec le degré de la pente d'une valeur de 12% au maximum en vue de faciliter l'usage et l'accès aux personnes handicapées,",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 2.0,
+          "unit": "m",
+          "operator": "ge",
+          "normalized_span": [
+            372,
+            378
+          ],
+          "quote": "2.00 m",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 12.0,
+          "unit": "%",
+          "operator": null,
+          "normalized_span": [
+            421,
+            424
+          ],
+          "quote": "12%",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 2,
+      "matched_typed_quantities": 2,
+      "menu_choices": 2
+    },
+    {
+      "id": "A12",
+      "source": "Le changement de direction des passages doit être assuré par un palier de repos d'une surface de 1.00 m2 au minimum.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 1.0,
+          "unit": "m2",
+          "operator": null,
+          "normalized_span": [
+            97,
+            104
+          ],
+          "quote": "1.00 m2",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 0
+    },
+    {
+      "id": "A13",
+      "source": "Ces passages doivent être munis de rampes servant de main courante sur les deux côtés.",
+      "evidence": [],
+      "gold_numeric_literals": 0,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "A14",
+      "source": "Pour les constructions ouvertes au public et les immeubles collectifs et à usage d'habitation, les dispositions précitées sont exigées pour l'entrée principale qui doit avoir une pente latérale d'une valeur de 20% au maximum et d'une largeur de 1.00 m au minimum.",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 20.0,
+          "unit": "%",
+          "operator": null,
+          "normalized_span": [
+            210,
+            213
+          ],
+          "quote": "20%",
+          "column_header": ""
+        },
+        {
+          "id": "q1",
+          "value": 1.0,
+          "unit": "m",
+          "operator": null,
+          "normalized_span": [
+            245,
+            251
+          ],
+          "quote": "1.00 m",
+          "column_header": ""
+        }
+      ],
+      "gold_numeric_literals": 2,
+      "matched_typed_quantities": 2,
+      "menu_choices": 2
+    },
+    {
+      "id": "A15",
+      "source": "Le nombre de téléphones fixes pour servir les malvoyants ou malentendants dans les constructions publiques et constructions affectées au logement collectif est fixé à un téléphone par entrée.",
+      "evidence": [],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 0
+    },
+    {
+      "id": "T01",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.65,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,65",
+          "column_header": " U des toitures exposées (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T02",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.7,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,70",
+          "column_header": " U des murs extérieurs (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T03",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 2.6,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "2,60",
+          "column_header": " U des fenêtres (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T04",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.75,
+          "unit": "m²·K/W",
+          "operator": "ge",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,75",
+          "column_header": " R des planchers sur sol (m²·K/W) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 3
+    },
+    {
+      "id": "T05",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.5,
+          "unit": null,
+          "operator": "le",
+          "normalized_span": [
+            78,
+            81
+          ],
+          "quote": "0,5",
+          "column_header": " Facteur solaire FS du vitrage "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 2
+    },
+    {
+      "id": "T06",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.55,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,55",
+          "column_header": " U des toitures exposées (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T07",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.6,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,60",
+          "column_header": " U des murs extérieurs (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T08",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 2.6,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "2,60",
+          "column_header": " U des fenêtres (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T09",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 1.25,
+          "unit": "m²·K/W",
+          "operator": "ge",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "1,25",
+          "column_header": " R des planchers sur sol (m²·K/W) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 3
+    },
+    {
+      "id": "T10",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.6,
+          "unit": null,
+          "operator": "le",
+          "normalized_span": [
+            78,
+            81
+          ],
+          "quote": "0,6",
+          "column_header": " Facteur solaire FS du vitrage "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 2
+    },
+    {
+      "id": "T11",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.55,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,55",
+          "column_header": " U des toitures exposées (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T12",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.6,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "0,60",
+          "column_header": " U des murs extérieurs (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T13",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 2.6,
+          "unit": "W/m²/K",
+          "operator": "le",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "2,60",
+          "column_header": " U des fenêtres (W/m²/K) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 5
+    },
+    {
+      "id": "T14",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 1.0,
+          "unit": "m²·K/W",
+          "operator": "ge",
+          "normalized_span": [
+            69,
+            73
+          ],
+          "quote": "1,00",
+          "column_header": " R des planchers sur sol (m²·K/W) "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 1,
+      "menu_choices": 3
+    },
+    {
+      "id": "T15",
+      "source": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | Autres : ≤ 0,4 |",
+      "evidence": [
+        {
+          "id": "q0",
+          "value": 26.0,
+          "unit": "%",
+          "operator": "ge",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q1",
+          "value": 35.0,
+          "unit": "%",
+          "operator": "le",
+          "normalized_span": [
+            55,
+            64
+          ],
+          "quote": "26 – 35 %",
+          "column_header": " TGBV "
+        },
+        {
+          "id": "q2",
+          "value": 0.4,
+          "unit": null,
+          "operator": "le",
+          "normalized_span": [
+            78,
+            81
+          ],
+          "quote": "0,4",
+          "column_header": " Facteur solaire FS du vitrage "
+        }
+      ],
+      "gold_numeric_literals": 1,
+      "matched_typed_quantities": 0,
+      "menu_choices": 2
+    }
+  ]
+}
