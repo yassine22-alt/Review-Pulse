@@ -1,0 +1,2047 @@
+{
+  "source": {
+    "url": "https://cloud.chiefarchitect.com/1/samples/projects/modern-bungalow/modern-bungalow.pdf",
+    "publisher": "Chief Architect",
+    "title": "Modern Bungalow sample project",
+    "edition": "July 2024",
+    "sheet": "A-7, SECOND FLOOR PLAN",
+    "page_index": 6,
+    "sha256": "5dc11a31b7790dcd6eec92cdf15fa52f2e1e3cb3c65ef39838f09574d57c383f"
+  },
+  "limitations": [
+    "DEVELOPMENT DEMONSTRATION, not held-out. Author interpretations have no independent review.",
+    "Manually authored semantic trees, not model outputs. Source boundaries are reviewer-selected exact text substrings.",
+    "Only one sheet is processed; no complete building inventory is claimed.",
+    "No LLM is called. Nominal-width component is excluded from whole-clause decision counts.",
+    "Reviewer observations cite the real drawing; previous benchmark attestations remain synthetic."
+  ],
+  "vector_baseline": {
+    "primitives": 33286,
+    "text_items": 473,
+    "rooms": 2,
+    "elements": 553,
+    "scale": {
+      "metres_per_unit": 0.012,
+      "method": "title_block",
+      "confidence": 0.5,
+      "n_candidates": 0,
+      "n_inliers": 0
+    },
+    "warnings": [
+      "259 arcs recovered from line chains",
+      "the drawing says it is not to scale ('RENDERINGS ARE NOT TO SCALE; ALL RENDERINGS ARE FOR ARTISTIC DEPICTION ONLY. PLAN UPDATES'): measurements are estimates (tier T3)",
+      "closing of 0.15 m added 17.8% barrier area"
+    ]
+  },
+  "whole_clause_outcomes": {
+    "UNRESOLVED": 4
+  },
+  "requirements": [
+    {
+      "id": "DRAW-EGRESS",
+      "source": "EVERY BEDROOM SHALL BE PROVIDED WITH AN EGRESS WINDOW WITH FINISH SILL HEIGHT NOT GREATER\nTHAN 44\" ABOVE THE FINISH FLOOR HEIGHT AND SHALL HAVE A MINIMUM OPENABLE AREA OF 5.7 SQ. FT.",
+      "interpretation_origin": "benchmark author",
+      "approval_scope": "Four bedroom labels visually reviewed on sheet A-7. Window association and actual openable dimensions are absent; inventory is not a whole-building survey.",
+      "outcome": "UNRESOLVED",
+      "manual_slots": {
+        "id": "DRAW-EGRESS",
+        "title": "DRAW-EGRESS",
+        "subject": "BEDROOM",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "egress_window_provided",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "egress_sill_height",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 44,
+            "unit": "in",
+            "id": "n4"
+          },
+          {
+            "op": "le",
+            "left": "n3",
+            "right": "n4",
+            "id": "n5"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "egress_openable_area",
+            "id": "n6"
+          },
+          {
+            "op": "literal",
+            "value": 5.7,
+            "unit": "ft2",
+            "id": "n7"
+          },
+          {
+            "op": "ge",
+            "left": "n6",
+            "right": "n7",
+            "id": "n8"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n2",
+              "n5",
+              "n8"
+            ],
+            "id": "n9"
+          },
+          {
+            "op": "forall",
+            "collection": "bedrooms",
+            "variable": "$object",
+            "body": "n9",
+            "id": "n10"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n10",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "DRAW-EGRESS",
+            "quote": "EVERY BEDROOM SHALL BE PROVIDED WITH AN EGRESS WINDOW WITH FINISH SILL HEIGHT NOT GREATER\nTHAN 44\" ABOVE THE FINISH FLOOR HEIGHT AND SHALL HAVE A MINIMUM OPENABLE AREA OF 5.7 SQ. FT."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "stage": "checked",
+      "approved_rule": {
+        "schema_version": "1.0",
+        "id": "DRAW-EGRESS",
+        "title": "DRAW-EGRESS",
+        "document": "Modern Bungalow sample project",
+        "status": "approved",
+        "approved_by": "benchmark author (no independent review)",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "bedrooms",
+          "variable": "$object",
+          "where": null,
+          "body": {
+            "node": "all",
+            "args": [
+              {
+                "node": "fact",
+                "entity": "$object",
+                "name": "egress_window_provided"
+              },
+              {
+                "node": "le",
+                "left": {
+                  "node": "fact",
+                  "entity": "$object",
+                  "name": "egress_sill_height"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 44.0,
+                  "unit": "in"
+                }
+              },
+              {
+                "node": "ge",
+                "left": {
+                  "node": "fact",
+                  "entity": "$object",
+                  "name": "egress_openable_area"
+                },
+                "right": {
+                  "node": "literal",
+                  "value": 5.7,
+                  "unit": "ft2"
+                }
+              }
+            ]
+          }
+        },
+        "sources": [
+          {
+            "clause": "DRAW-EGRESS",
+            "start": 3541,
+            "end": 3723,
+            "quote": "EVERY BEDROOM SHALL BE PROVIDED WITH AN EGRESS WINDOW WITH FINISH SILL HEIGHT NOT GREATER\nTHAN 44\" ABOVE THE FINISH FLOOR HEIGHT AND SHALL HAVE A MINIMUM OPENABLE AREA OF 5.7 SQ. FT."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "rule_id": "DRAW-EGRESS",
+      "dependencies": [
+        "adu_bedroom.egress_openable_area",
+        "adu_bedroom.egress_sill_height",
+        "adu_bedroom.egress_window_provided",
+        "bedroom_1.egress_openable_area",
+        "bedroom_1.egress_sill_height",
+        "bedroom_1.egress_window_provided",
+        "bedroom_2.egress_openable_area",
+        "bedroom_2.egress_sill_height",
+        "bedroom_2.egress_window_provided",
+        "inventory:bedrooms",
+        "primary_bedroom.egress_openable_area",
+        "primary_bedroom.egress_sill_height",
+        "primary_bedroom.egress_window_provided"
+      ],
+      "metadata_requests": [],
+      "metadata_provenance": [],
+      "evidence_issues": [
+        {
+          "code": "INCOMPLETE_INVENTORY",
+          "detail": "incomplete collection:bedrooms"
+        }
+      ],
+      "evidence_requests": [
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads openable area of associated egress window for adu_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads finish sill height of associated egress window above finish floor for adu_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads an associated egress window is provided for adu_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads openable area of associated egress window for bedroom_1.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads finish sill height of associated egress window above finish floor for bedroom_1.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads an associated egress window is provided for bedroom_1.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads openable area of associated egress window for bedroom_2.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads finish sill height of associated egress window above finish floor for bedroom_2.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads an associated egress window is provided for bedroom_2.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads openable area of associated egress window for primary_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads finish sill height of associated egress window above finish floor for primary_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-EGRESS reads an associated egress window is provided for primary_bedroom.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-EGRESS"
+        }
+      ],
+      "fact_provenance": [
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "adu_bedroom",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_1",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "bedroom_2",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_openable_area",
+          "unit": "ft2",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_sill_height",
+          "unit": "in",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "primary_bedroom",
+          "fact": "egress_window_provided",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        }
+      ],
+      "fact_declarations": [],
+      "preview": false,
+      "document": "Modern Bungalow sample project",
+      "sources": [
+        {
+          "clause": "DRAW-EGRESS",
+          "start": 3541,
+          "end": 3723,
+          "quote": "EVERY BEDROOM SHALL BE PROVIDED WITH AN EGRESS WINDOW WITH FINISH SILL HEIGHT NOT GREATER\nTHAN 44\" ABOVE THE FINISH FLOOR HEIGHT AND SHALL HAVE A MINIMUM OPENABLE AREA OF 5.7 SQ. FT."
+        }
+      ],
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [
+          "adu_bedroom.egress_openable_area (missing)",
+          "adu_bedroom.egress_sill_height (missing)",
+          "adu_bedroom.egress_window_provided (missing)",
+          "bedroom_1.egress_openable_area (missing)",
+          "bedroom_1.egress_sill_height (missing)",
+          "bedroom_1.egress_window_provided (missing)",
+          "bedroom_2.egress_openable_area (missing)",
+          "bedroom_2.egress_sill_height (missing)",
+          "bedroom_2.egress_window_provided (missing)",
+          "incomplete collection:bedrooms",
+          "primary_bedroom.egress_openable_area (missing)",
+          "primary_bedroom.egress_sill_height (missing)",
+          "primary_bedroom.egress_window_provided (missing)"
+        ],
+        "evidence": [
+          "Not established by the supplied sheet"
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": null,
+            "missing": [
+              "adu_bedroom.egress_openable_area (missing)",
+              "adu_bedroom.egress_sill_height (missing)",
+              "adu_bedroom.egress_window_provided (missing)",
+              "bedroom_1.egress_openable_area (missing)",
+              "bedroom_1.egress_sill_height (missing)",
+              "bedroom_1.egress_window_provided (missing)",
+              "bedroom_2.egress_openable_area (missing)",
+              "bedroom_2.egress_sill_height (missing)",
+              "bedroom_2.egress_window_provided (missing)",
+              "incomplete collection:bedrooms",
+              "primary_bedroom.egress_openable_area (missing)",
+              "primary_bedroom.egress_sill_height (missing)",
+              "primary_bedroom.egress_window_provided (missing)"
+            ],
+            "evidence": [
+              "Not established by the supplied sheet"
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "primary_bedroom.egress_openable_area (missing)",
+                  "primary_bedroom.egress_sill_height (missing)",
+                  "primary_bedroom.egress_window_provided (missing)"
+                ],
+                "evidence": [
+                  "Not established by the supplied sheet"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "all",
+                    "value": null,
+                    "missing": [
+                      "primary_bedroom.egress_openable_area (missing)",
+                      "primary_bedroom.egress_sill_height (missing)",
+                      "primary_bedroom.egress_window_provided (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "primary_bedroom.egress_window_provided (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "le",
+                        "value": null,
+                        "missing": [
+                          "primary_bedroom.egress_sill_height (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "primary_bedroom.egress_sill_height (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 44.0,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": null,
+                        "missing": [
+                          "primary_bedroom.egress_openable_area (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "primary_bedroom.egress_openable_area (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 5.7,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "bedroom_1.egress_openable_area (missing)",
+                  "bedroom_1.egress_sill_height (missing)",
+                  "bedroom_1.egress_window_provided (missing)"
+                ],
+                "evidence": [
+                  "Not established by the supplied sheet"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "all",
+                    "value": null,
+                    "missing": [
+                      "bedroom_1.egress_openable_area (missing)",
+                      "bedroom_1.egress_sill_height (missing)",
+                      "bedroom_1.egress_window_provided (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "bedroom_1.egress_window_provided (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "le",
+                        "value": null,
+                        "missing": [
+                          "bedroom_1.egress_sill_height (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "bedroom_1.egress_sill_height (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 44.0,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": null,
+                        "missing": [
+                          "bedroom_1.egress_openable_area (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "bedroom_1.egress_openable_area (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 5.7,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "bedroom_2.egress_openable_area (missing)",
+                  "bedroom_2.egress_sill_height (missing)",
+                  "bedroom_2.egress_window_provided (missing)"
+                ],
+                "evidence": [
+                  "Not established by the supplied sheet"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "all",
+                    "value": null,
+                    "missing": [
+                      "bedroom_2.egress_openable_area (missing)",
+                      "bedroom_2.egress_sill_height (missing)",
+                      "bedroom_2.egress_window_provided (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "bedroom_2.egress_window_provided (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "le",
+                        "value": null,
+                        "missing": [
+                          "bedroom_2.egress_sill_height (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "bedroom_2.egress_sill_height (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 44.0,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": null,
+                        "missing": [
+                          "bedroom_2.egress_openable_area (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "bedroom_2.egress_openable_area (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 5.7,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "adu_bedroom.egress_openable_area (missing)",
+                  "adu_bedroom.egress_sill_height (missing)",
+                  "adu_bedroom.egress_window_provided (missing)"
+                ],
+                "evidence": [
+                  "Not established by the supplied sheet"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "all",
+                    "value": null,
+                    "missing": [
+                      "adu_bedroom.egress_openable_area (missing)",
+                      "adu_bedroom.egress_sill_height (missing)",
+                      "adu_bedroom.egress_window_provided (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "adu_bedroom.egress_window_provided (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "le",
+                        "value": null,
+                        "missing": [
+                          "adu_bedroom.egress_sill_height (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "adu_bedroom.egress_sill_height (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 44.0,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "ge",
+                        "value": null,
+                        "missing": [
+                          "adu_bedroom.egress_openable_area (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [
+                          {
+                            "node": "fact",
+                            "value": null,
+                            "missing": [
+                              "adu_bedroom.egress_openable_area (missing)"
+                            ],
+                            "evidence": [
+                              "Not established by the supplied sheet"
+                            ],
+                            "children": [],
+                            "count_bounds": null
+                          },
+                          {
+                            "node": "literal",
+                            "value": 5.7,
+                            "missing": [],
+                            "evidence": [],
+                            "children": [],
+                            "count_bounds": null
+                          }
+                        ],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "unknown_members",
+                "value": null,
+                "missing": [
+                  "incomplete collection:bedrooms"
+                ],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "automatic_clause_containers": [],
+      "plan_inputs": {
+        "bindings": {
+          "egress_window_provided": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "an associated egress window is provided",
+            "declaration": null
+          },
+          "egress_sill_height": {
+            "kind": "number",
+            "unit": "in",
+            "description": "finish sill height of associated egress window above finish floor",
+            "declaration": null
+          },
+          "egress_openable_area": {
+            "kind": "number",
+            "unit": "ft2",
+            "description": "openable area of associated egress window",
+            "declaration": null
+          }
+        },
+        "facts": {
+          "primary_bedroom": {
+            "egress_window_provided": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_sill_height": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_openable_area": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          },
+          "bedroom_1": {
+            "egress_window_provided": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_sill_height": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_openable_area": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          },
+          "bedroom_2": {
+            "egress_window_provided": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_sill_height": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_openable_area": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          },
+          "adu_bedroom": {
+            "egress_window_provided": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_sill_height": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "egress_openable_area": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "bedrooms": {
+            "items": [
+              "primary_bedroom",
+              "bedroom_1",
+              "bedroom_2",
+              "adu_bedroom"
+            ],
+            "complete": false,
+            "trusted": true
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {},
+        "project_metadata": {}
+      }
+    },
+    {
+      "id": "DRAW-CORE",
+      "source": "ALL WALK-THRU DOORS SHALL BE SOLID CORE",
+      "interpretation_origin": "benchmark author",
+      "approval_scope": "D06 is a schedule type, not proof of unique instance identity or a complete inventory. The sample member is a reviewer-selected demonstration scope.",
+      "outcome": "UNRESOLVED",
+      "manual_slots": {
+        "id": "DRAW-CORE",
+        "title": "DRAW-CORE",
+        "subject": "WALK-THRU DOORS",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "walk_through",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "solid_core",
+            "id": "n3"
+          },
+          {
+            "op": "forall",
+            "collection": "doors",
+            "variable": "$object",
+            "where": "n2",
+            "body": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "DRAW-CORE",
+            "quote": "ALL WALK-THRU DOORS SHALL BE SOLID CORE"
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "stage": "checked",
+      "approved_rule": {
+        "schema_version": "1.0",
+        "id": "DRAW-CORE",
+        "title": "DRAW-CORE",
+        "document": "Modern Bungalow sample project",
+        "status": "approved",
+        "approved_by": "benchmark author (no independent review)",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "doors",
+          "variable": "$object",
+          "where": {
+            "node": "fact",
+            "entity": "$object",
+            "name": "walk_through"
+          },
+          "body": {
+            "node": "fact",
+            "entity": "$object",
+            "name": "solid_core"
+          }
+        },
+        "sources": [
+          {
+            "clause": "DRAW-CORE",
+            "start": 3803,
+            "end": 3842,
+            "quote": "ALL WALK-THRU DOORS SHALL BE SOLID CORE"
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "rule_id": "DRAW-CORE",
+      "dependencies": [
+        "door_D06.solid_core",
+        "door_D06.walk_through",
+        "inventory:doors"
+      ],
+      "metadata_requests": [],
+      "metadata_provenance": [],
+      "evidence_issues": [
+        {
+          "code": "INCOMPLETE_INVENTORY",
+          "detail": "incomplete collection:doors"
+        }
+      ],
+      "evidence_requests": [
+        {
+          "entity": "door_D06",
+          "fact": "solid_core",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-CORE reads solid core construction for door_D06.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-CORE"
+        },
+        {
+          "entity": "door_D06",
+          "fact": "walk_through",
+          "unit": "1",
+          "reason": "missing",
+          "why": "DRAW-CORE reads walk-through door membership for door_D06.",
+          "where_to_look": "Not established by the supplied sheet",
+          "clause": "DRAW-CORE"
+        }
+      ],
+      "fact_provenance": [
+        {
+          "entity": "door_D06",
+          "fact": "solid_core",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        },
+        {
+          "entity": "door_D06",
+          "fact": "walk_through",
+          "unit": "1",
+          "value": null,
+          "source": "Not established by the supplied sheet",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        }
+      ],
+      "fact_declarations": [],
+      "preview": false,
+      "document": "Modern Bungalow sample project",
+      "sources": [
+        {
+          "clause": "DRAW-CORE",
+          "start": 3803,
+          "end": 3842,
+          "quote": "ALL WALK-THRU DOORS SHALL BE SOLID CORE"
+        }
+      ],
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [
+          "door_D06.solid_core (missing)",
+          "door_D06.walk_through (missing)",
+          "incomplete collection:doors"
+        ],
+        "evidence": [
+          "Not established by the supplied sheet"
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": null,
+            "missing": [
+              "door_D06.solid_core (missing)",
+              "door_D06.walk_through (missing)",
+              "incomplete collection:doors"
+            ],
+            "evidence": [
+              "Not established by the supplied sheet"
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": null,
+                "missing": [
+                  "door_D06.solid_core (missing)",
+                  "door_D06.walk_through (missing)"
+                ],
+                "evidence": [
+                  "Not established by the supplied sheet"
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": null,
+                    "missing": [
+                      "door_D06.walk_through (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": null,
+                        "missing": [
+                          "door_D06.walk_through (missing)"
+                        ],
+                        "evidence": [
+                          "Not established by the supplied sheet"
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "fact",
+                    "value": null,
+                    "missing": [
+                      "door_D06.solid_core (missing)"
+                    ],
+                    "evidence": [
+                      "Not established by the supplied sheet"
+                    ],
+                    "children": [],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              },
+              {
+                "node": "unknown_members",
+                "value": null,
+                "missing": [
+                  "incomplete collection:doors"
+                ],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "automatic_clause_containers": [
+        "P7"
+      ],
+      "plan_inputs": {
+        "bindings": {
+          "walk_through": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "walk-through door membership",
+            "declaration": null
+          },
+          "solid_core": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "solid core construction",
+            "declaration": null
+          }
+        },
+        "facts": {
+          "door_D06": {
+            "walk_through": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "solid_core": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "doors": {
+            "items": [
+              "door_D06"
+            ],
+            "complete": false,
+            "trusted": true
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {},
+        "project_metadata": {}
+      }
+    },
+    {
+      "id": "DRAW-GARAGE",
+      "source": "DOORS BETWEEN GARAGE AND LIVING AREA SHALL BE 1-3/4\" TIGHT FITTING SOLID CORE DOORS WITH A\nRATING OF 60 MINUTES.  DOOR SHALL BE SELF CLOSING",
+      "interpretation_origin": "benchmark author",
+      "approval_scope": "Relational applicability is retained as a required evidence fact, not guessed from a nominal door tag. Rating read literally as 60; a minimum-rating interpretation would require review.",
+      "outcome": "UNRESOLVED",
+      "manual_slots": {
+        "id": "DRAW-GARAGE",
+        "title": "DRAW-GARAGE",
+        "subject": "DOORS",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "between_garage_and_living",
+            "id": "n2"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "thickness",
+            "id": "n3"
+          },
+          {
+            "op": "literal",
+            "value": 1.75,
+            "unit": "in",
+            "id": "n4"
+          },
+          {
+            "op": "eq",
+            "left": "n3",
+            "right": "n4",
+            "id": "n5"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "tight_fitting",
+            "id": "n6"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "solid_core",
+            "id": "n7"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "fire_rating",
+            "id": "n8"
+          },
+          {
+            "op": "literal",
+            "value": 60,
+            "unit": "min",
+            "id": "n9"
+          },
+          {
+            "op": "eq",
+            "left": "n8",
+            "right": "n9",
+            "id": "n10"
+          },
+          {
+            "op": "fact",
+            "entity": "$object",
+            "name": "self_closing",
+            "id": "n11"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n5",
+              "n6",
+              "n7",
+              "n10",
+              "n11"
+            ],
+            "id": "n12"
+          },
+          {
+            "op": "forall",
+            "collection": "doors",
+            "variable": "$object",
+            "where": "n2",
+            "body": "n12",
+            "id": "n13"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n13",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "DRAW-GARAGE",
+            "quote": "DOORS BETWEEN GARAGE AND LIVING AREA SHALL BE 1-3/4\" TIGHT FITTING SOLID CORE DOORS WITH A\nRATING OF 60 MINUTES.  DOOR SHALL BE SELF CLOSING"
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "stage": "verifier",
+      "blocker": "the rule uses 0.04445, which the sentence does not state; the sentence states 0.0254, but the rule never uses it; the sentence states 0.01905, but the rule never uses it",
+      "automatic_clause_containers": [],
+      "plan_inputs": {
+        "bindings": {
+          "between_garage_and_living": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "connects garage and living area directly",
+            "declaration": null
+          },
+          "thickness": {
+            "kind": "number",
+            "unit": "in",
+            "description": "door thickness",
+            "declaration": null
+          },
+          "tight_fitting": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "tight-fitting construction",
+            "declaration": null
+          },
+          "solid_core": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "solid core construction",
+            "declaration": null
+          },
+          "fire_rating": {
+            "kind": "number",
+            "unit": "min",
+            "description": "stated fire rating duration",
+            "declaration": null
+          },
+          "self_closing": {
+            "kind": "boolean",
+            "unit": "1",
+            "description": "self-closing door",
+            "declaration": null
+          }
+        },
+        "facts": {
+          "door_D06": {
+            "between_garage_and_living": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "thickness": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "tight_fitting": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "solid_core": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "fire_rating": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            },
+            "self_closing": {
+              "value": null,
+              "source": "Not established by the supplied sheet",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "doors": {
+            "items": [
+              "door_D06"
+            ],
+            "complete": false,
+            "trusted": true
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {},
+        "project_metadata": {}
+      }
+    },
+    {
+      "id": "DRAW-EXIT",
+      "source": "EXTERIOR EXIT DOORS WILL BE 36\" MIN.  NET CLEAR DOORWAY SHALL BE 32\" MIN.  DOOR SHALL BE\nOPENABLE FROM INSIDE WITHOUT THE USE OF A KEY OR ANY SPECIAL KNOWLEDGE OR EFFORT. GLAZING\nIN DOORS SHALL BE DUAL PANE SAFETY GLASS WITH MIN. U-VALUE OF 0.60 ",
+      "interpretation_origin": "benchmark author",
+      "approval_scope": "NEEDS_REVIEW: U-value unit is not stated; MIN direction must not be silently changed to MAX. Nominal width is not clear width. No full rule is approved.",
+      "outcome": "UNRESOLVED",
+      "stage": "NEEDS_REVIEW",
+      "blocker": "NEEDS_REVIEW: U-value unit is not stated; MIN direction must not be silently changed to MAX. Nominal width is not clear width. No full rule is approved.",
+      "automatic_clause_containers": [],
+      "plan_inputs": {
+        "bindings": {},
+        "facts": {},
+        "collections": {},
+        "graph_complete": false,
+        "evidence_locations": {},
+        "project_metadata": {}
+      }
+    }
+  ],
+  "partial_component_only": {
+    "id": "DRAW-NOMINAL-COMPONENT",
+    "source": "EXTERIOR EXIT DOORS WILL BE 36\" MIN.",
+    "interpretation_origin": "benchmark author",
+    "approval_scope": "Single reviewer-selected schedule type D06. Width fragment only; not a verdict on any complete clause, all exterior doors or legal compliance.",
+    "outcome": "SATISFIED",
+    "manual_slots": {
+      "id": "DRAW-NOMINAL-COMPONENT",
+      "title": "DRAW-NOMINAL-COMPONENT",
+      "subject": "EXTERIOR EXIT DOORS",
+      "nodes": [
+        {
+          "op": "literal",
+          "value": true,
+          "unit": "1",
+          "id": "n0"
+        },
+        {
+          "op": "literal",
+          "value": false,
+          "unit": "1",
+          "id": "n1"
+        },
+        {
+          "op": "fact",
+          "entity": "door_D06",
+          "name": "nominal_width",
+          "id": "n2"
+        },
+        {
+          "op": "literal",
+          "value": 36,
+          "unit": "in",
+          "id": "n3"
+        },
+        {
+          "op": "ge",
+          "left": "n2",
+          "right": "n3",
+          "id": "n4"
+        }
+      ],
+      "applicability": "n0",
+      "exemption": "n1",
+      "requirement": "n4",
+      "metadata_applicability": [],
+      "sources": [
+        {
+          "clause": "DRAW-NOMINAL-COMPONENT",
+          "quote": "EXTERIOR EXIT DOORS WILL BE 36\" MIN."
+        }
+      ],
+      "fact_declarations": [],
+      "unresolved": []
+    },
+    "stage": "checked",
+    "approved_rule": {
+      "schema_version": "1.0",
+      "id": "DRAW-NOMINAL-COMPONENT",
+      "title": "DRAW-NOMINAL-COMPONENT",
+      "document": "Modern Bungalow sample project",
+      "status": "approved",
+      "approved_by": "benchmark author (no independent review)",
+      "applicability": {
+        "node": "literal",
+        "value": true,
+        "unit": "1"
+      },
+      "metadata_applicability": [],
+      "exemption": {
+        "node": "literal",
+        "value": false,
+        "unit": "1"
+      },
+      "requirement": {
+        "node": "ge",
+        "left": {
+          "node": "fact",
+          "entity": "door_D06",
+          "name": "nominal_width"
+        },
+        "right": {
+          "node": "literal",
+          "value": 36.0,
+          "unit": "in"
+        }
+      },
+      "sources": [
+        {
+          "clause": "DRAW-NOMINAL-COMPONENT",
+          "start": 4073,
+          "end": 4109,
+          "quote": "EXTERIOR EXIT DOORS WILL BE 36\" MIN."
+        }
+      ],
+      "unresolved": [],
+      "not_checked": [],
+      "fact_declarations": []
+    },
+    "rule_id": "DRAW-NOMINAL-COMPONENT",
+    "dependencies": [
+      "door_D06.nominal_width"
+    ],
+    "metadata_requests": [],
+    "metadata_provenance": [],
+    "evidence_issues": [],
+    "evidence_requests": [],
+    "fact_provenance": [
+      {
+        "entity": "door_D06",
+        "fact": "nominal_width",
+        "unit": "in",
+        "value": 36.00000000000001,
+        "source": "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only",
+        "trusted": true,
+        "conflicting": false,
+        "origin": "reviewer-attested",
+        "reviewer": "benchmark author (as-drawn reading, no independent review)"
+      }
+    ],
+    "fact_declarations": [],
+    "preview": false,
+    "document": "Modern Bungalow sample project",
+    "sources": [
+      {
+        "clause": "DRAW-NOMINAL-COMPONENT",
+        "start": 4073,
+        "end": 4109,
+        "quote": "EXTERIOR EXIT DOORS WILL BE 36\" MIN."
+      }
+    ],
+    "trace": {
+      "node": "program",
+      "value": null,
+      "missing": [],
+      "evidence": [
+        "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only"
+      ],
+      "children": [
+        {
+          "node": "all",
+          "value": true,
+          "missing": [],
+          "evidence": [],
+          "children": [
+            {
+              "node": "literal",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "project_metadata",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        },
+        {
+          "node": "literal",
+          "value": false,
+          "missing": [],
+          "evidence": [],
+          "children": [],
+          "count_bounds": null
+        },
+        {
+          "node": "ge",
+          "value": true,
+          "missing": [],
+          "evidence": [
+            "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only"
+          ],
+          "children": [
+            {
+              "node": "fact",
+              "value": 36.00000000000001,
+              "missing": [],
+              "evidence": [
+                "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only"
+              ],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": 36.0,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      ],
+      "count_bounds": null
+    },
+    "plan_inputs": {
+      "bindings": {
+        "nominal_width": {
+          "kind": "number",
+          "unit": "in",
+          "description": "schedule nominal width, never net clear width",
+          "declaration": null
+        }
+      },
+      "facts": {
+        "door_D06": {
+          "nominal_width": {
+            "value": 36.00000000000001,
+            "source": "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "benchmark author (as-drawn reading, no independent review)"
+          }
+        }
+      },
+      "collections": {},
+      "graph_complete": false,
+      "evidence_locations": {},
+      "project_metadata": {}
+    }
+  }
+}

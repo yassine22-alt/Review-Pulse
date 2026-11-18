@@ -1,0 +1,276 @@
+{
+  "source": {
+    "url": "https://cloud.chiefarchitect.com/1/samples/projects/modern-bungalow/modern-bungalow.pdf",
+    "publisher": "Chief Architect",
+    "title": "Modern Bungalow sample project",
+    "edition": "July 2024",
+    "sheet": "A-7, SECOND FLOOR PLAN",
+    "page_index": 6,
+    "sha256": "5dc11a31b7790dcd6eec92cdf15fa52f2e1e3cb3c65ef39838f09574d57c383f"
+  },
+  "status": "DEVELOPMENT DEMONSTRATION, not held-out. Author interpretations have no independent review.",
+  "interpretation": "Manually authored semantic trees, not model outputs. Source boundaries are reviewer-selected exact text substrings.",
+  "requirements": [
+    {
+      "id": "DRAW-EGRESS",
+      "quote": "EVERY BEDROOM SHALL BE PROVIDED WITH AN EGRESS WINDOW WITH FINISH SILL HEIGHT NOT GREATER\nTHAN 44\" ABOVE THE FINISH FLOOR HEIGHT AND SHALL HAVE A MINIMUM OPENABLE AREA OF 5.7 SQ. FT.",
+      "subject": "BEDROOM",
+      "requirement": {
+        "node": "forall",
+        "collection": "bedrooms",
+        "variable": "$object",
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "fact",
+              "entity": "$object",
+              "name": "egress_window_provided"
+            },
+            {
+              "node": "le",
+              "left": {
+                "node": "fact",
+                "entity": "$object",
+                "name": "egress_sill_height"
+              },
+              "right": {
+                "node": "literal",
+                "value": 44,
+                "unit": "in"
+              }
+            },
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$object",
+                "name": "egress_openable_area"
+              },
+              "right": {
+                "node": "literal",
+                "value": 5.7,
+                "unit": "ft2"
+              }
+            }
+          ]
+        }
+      },
+      "bindings": {
+        "egress_window_provided": {
+          "kind": "boolean",
+          "description": "an associated egress window is provided"
+        },
+        "egress_sill_height": {
+          "kind": "number",
+          "unit": "in",
+          "description": "finish sill height of associated egress window above finish floor"
+        },
+        "egress_openable_area": {
+          "kind": "number",
+          "unit": "ft2",
+          "description": "openable area of associated egress window"
+        }
+      },
+      "collections": {
+        "bedrooms": {
+          "items": [
+            "primary_bedroom",
+            "bedroom_1",
+            "bedroom_2",
+            "adu_bedroom"
+          ],
+          "complete": false,
+          "trusted": true
+        }
+      },
+      "review_note": "Four bedroom labels visually reviewed on sheet A-7. Window association and actual openable dimensions are absent; inventory is not a whole-building survey."
+    },
+    {
+      "id": "DRAW-CORE",
+      "quote": "ALL WALK-THRU DOORS SHALL BE SOLID CORE",
+      "subject": "WALK-THRU DOORS",
+      "requirement": {
+        "node": "forall",
+        "collection": "doors",
+        "variable": "$object",
+        "where": {
+          "node": "fact",
+          "entity": "$object",
+          "name": "walk_through"
+        },
+        "body": {
+          "node": "fact",
+          "entity": "$object",
+          "name": "solid_core"
+        }
+      },
+      "bindings": {
+        "walk_through": {
+          "kind": "boolean",
+          "description": "walk-through door membership"
+        },
+        "solid_core": {
+          "kind": "boolean",
+          "description": "solid core construction"
+        }
+      },
+      "collections": {
+        "doors": {
+          "items": [
+            "door_D06"
+          ],
+          "complete": false,
+          "trusted": true
+        }
+      },
+      "review_note": "D06 is a schedule type, not proof of unique instance identity or a complete inventory. The sample member is a reviewer-selected demonstration scope."
+    },
+    {
+      "id": "DRAW-GARAGE",
+      "quote": "DOORS BETWEEN GARAGE AND LIVING AREA SHALL BE 1-3/4\" TIGHT FITTING SOLID CORE DOORS WITH A\nRATING OF 60 MINUTES.  DOOR SHALL BE SELF CLOSING",
+      "subject": "DOORS",
+      "requirement": {
+        "node": "forall",
+        "collection": "doors",
+        "variable": "$object",
+        "where": {
+          "node": "fact",
+          "entity": "$object",
+          "name": "between_garage_and_living"
+        },
+        "body": {
+          "node": "all",
+          "args": [
+            {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$object",
+                "name": "thickness"
+              },
+              "right": {
+                "node": "literal",
+                "value": 1.75,
+                "unit": "in"
+              }
+            },
+            {
+              "node": "fact",
+              "entity": "$object",
+              "name": "tight_fitting"
+            },
+            {
+              "node": "fact",
+              "entity": "$object",
+              "name": "solid_core"
+            },
+            {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$object",
+                "name": "fire_rating"
+              },
+              "right": {
+                "node": "literal",
+                "value": 60,
+                "unit": "min"
+              }
+            },
+            {
+              "node": "fact",
+              "entity": "$object",
+              "name": "self_closing"
+            }
+          ]
+        }
+      },
+      "bindings": {
+        "between_garage_and_living": {
+          "kind": "boolean",
+          "description": "connects garage and living area directly"
+        },
+        "thickness": {
+          "kind": "number",
+          "unit": "in",
+          "description": "door thickness"
+        },
+        "tight_fitting": {
+          "kind": "boolean",
+          "description": "tight-fitting construction"
+        },
+        "solid_core": {
+          "kind": "boolean",
+          "description": "solid core construction"
+        },
+        "fire_rating": {
+          "kind": "number",
+          "unit": "min",
+          "description": "stated fire rating duration"
+        },
+        "self_closing": {
+          "kind": "boolean",
+          "description": "self-closing door"
+        }
+      },
+      "collections": {
+        "doors": {
+          "items": [
+            "door_D06"
+          ],
+          "complete": false,
+          "trusted": true
+        }
+      },
+      "review_note": "Relational applicability is retained as a required evidence fact, not guessed from a nominal door tag. Rating read literally as 60; a minimum-rating interpretation would require review."
+    },
+    {
+      "id": "DRAW-EXIT",
+      "quote": "EXTERIOR EXIT DOORS WILL BE 36\" MIN.  NET CLEAR DOORWAY SHALL BE 32\" MIN.  DOOR SHALL BE\nOPENABLE FROM INSIDE WITHOUT THE USE OF A KEY OR ANY SPECIAL KNOWLEDGE OR EFFORT. GLAZING\nIN DOORS SHALL BE DUAL PANE SAFETY GLASS WITH MIN. U-VALUE OF 0.60 ",
+      "subject": "EXTERIOR EXIT DOORS",
+      "requirement": null,
+      "bindings": {},
+      "collections": {},
+      "review_note": "NEEDS_REVIEW: U-value unit is not stated; MIN direction must not be silently changed to MAX. Nominal width is not clear width. No full rule is approved."
+    }
+  ],
+  "observations": [
+    {
+      "entity": "door_D06",
+      "fact": "nominal_width",
+      "value": 3,
+      "unit": "ft",
+      "source": "A-7 door schedule D06, label 3076, EXT. HINGED-GLASS PANEL; reviewer reads nominal width only",
+      "origin": "reviewer-attested",
+      "reviewer": "benchmark author (as-drawn reading, no independent review)"
+    }
+  ],
+  "component": {
+    "id": "DRAW-NOMINAL-COMPONENT",
+    "quote": "EXTERIOR EXIT DOORS WILL BE 36\" MIN.",
+    "subject": "EXTERIOR EXIT DOORS",
+    "entity": "door_D06",
+    "requirement": {
+      "node": "ge",
+      "left": {
+        "node": "fact",
+        "entity": "door_D06",
+        "name": "nominal_width"
+      },
+      "right": {
+        "node": "literal",
+        "value": 36,
+        "unit": "in"
+      }
+    },
+    "bindings": {
+      "nominal_width": {
+        "kind": "number",
+        "unit": "in",
+        "description": "schedule nominal width, never net clear width"
+      }
+    },
+    "scope": "Single reviewer-selected schedule type D06. Width fragment only; not a verdict on any complete clause, all exterior doors or legal compliance."
+  }
+}
