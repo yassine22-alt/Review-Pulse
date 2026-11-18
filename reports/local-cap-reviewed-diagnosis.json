@@ -1,0 +1,285 @@
+{
+  "denominator": 21,
+  "historical_raw_available": [
+    0,
+    21
+  ],
+  "instrumented_replays_complete": [
+    21,
+    21
+  ],
+  "model": "qwen2.5:1.5b",
+  "before_code": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+  "counts": {
+    "repeated_node_records_or_ids": 20,
+    "repeated_prose_in_repair": 1
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M01-1.jsonl",
+        "reports\\local-cap-replay\\M01-2.jsonl"
+      ]
+    },
+    {
+      "id": "M02",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        null,
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M02-1.jsonl",
+        "reports\\local-cap-replay\\M02-2.jsonl",
+        "reports\\local-cap-replay\\M02-3.jsonl"
+      ]
+    },
+    {
+      "id": "M04",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M04-1.jsonl",
+        "reports\\local-cap-replay\\M04-2.jsonl"
+      ]
+    },
+    {
+      "id": "M05",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M05-1.jsonl",
+        "reports\\local-cap-replay\\M05-2.jsonl"
+      ]
+    },
+    {
+      "id": "M06",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M06-1.jsonl",
+        "reports\\local-cap-replay\\M06-2.jsonl"
+      ]
+    },
+    {
+      "id": "M07",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M07-1.jsonl",
+        "reports\\local-cap-replay\\M07-2.jsonl"
+      ]
+    },
+    {
+      "id": "M08",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "cap",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M08-1.jsonl",
+        "reports\\local-cap-replay\\M08-2.jsonl",
+        "reports\\local-cap-replay\\M08-3.jsonl"
+      ]
+    },
+    {
+      "id": "M09",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "completed",
+        "identical_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M09-1.jsonl",
+        "reports\\local-cap-replay\\M09-2.jsonl",
+        "reports\\local-cap-replay\\M09-3.jsonl"
+      ]
+    },
+    {
+      "id": "M10",
+      "reviewed_category": "repeated_prose_in_repair",
+      "call_classifications": [
+        "completed",
+        "completed",
+        "cap"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M10-1.jsonl",
+        "reports\\local-cap-replay\\M10-2.jsonl",
+        "reports\\local-cap-replay\\M10-3.jsonl"
+      ]
+    },
+    {
+      "id": "M11",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M11-1.jsonl",
+        "reports\\local-cap-replay\\M11-2.jsonl"
+      ]
+    },
+    {
+      "id": "M12",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M12-1.jsonl",
+        "reports\\local-cap-replay\\M12-2.jsonl"
+      ]
+    },
+    {
+      "id": "M13",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M13-1.jsonl",
+        "reports\\local-cap-replay\\M13-2.jsonl"
+      ]
+    },
+    {
+      "id": "M16",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\M16-1.jsonl",
+        "reports\\local-cap-replay\\M16-2.jsonl"
+      ]
+    },
+    {
+      "id": "A01",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A01-1.jsonl",
+        "reports\\local-cap-replay\\A01-2.jsonl"
+      ]
+    },
+    {
+      "id": "A02",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A02-1.jsonl",
+        "reports\\local-cap-replay\\A02-2.jsonl"
+      ]
+    },
+    {
+      "id": "A03",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A03-1.jsonl",
+        "reports\\local-cap-replay\\A03-2.jsonl"
+      ]
+    },
+    {
+      "id": "A04",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A04-1.jsonl",
+        "reports\\local-cap-replay\\A04-2.jsonl"
+      ]
+    },
+    {
+      "id": "A05",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A05-1.jsonl",
+        "reports\\local-cap-replay\\A05-2.jsonl"
+      ]
+    },
+    {
+      "id": "A06",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A06-1.jsonl",
+        "reports\\local-cap-replay\\A06-2.jsonl"
+      ]
+    },
+    {
+      "id": "A07",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A07-1.jsonl",
+        "reports\\local-cap-replay\\A07-2.jsonl"
+      ]
+    },
+    {
+      "id": "A08",
+      "reviewed_category": "repeated_node_records_or_ids",
+      "call_classifications": [
+        "completed",
+        "duplicate_node_repetition"
+      ],
+      "traces": [
+        "reports\\local-cap-replay\\A08-1.jsonl",
+        "reports\\local-cap-replay\\A08-2.jsonl"
+      ]
+    }
+  ],
+  "limitations": [
+    "Diagnostic replays, not recovered historical outputs or a paired accuracy result.",
+    "Early loop detection stops some responses before the cap.",
+    "First eight case-level whitespace labels were corrected from captured node records.",
+    "The non-node case was manually inspected: repair repeats its missing-measurement explanation."
+  ]
+}

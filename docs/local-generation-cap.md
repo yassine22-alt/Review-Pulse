@@ -14,9 +14,15 @@ historical responses or a new accuracy benchmark.
 
 The initial captured draft repeated one identical node, with the same ID and
 operands, 58 times. Operands contained source quantities instead of references
-to fact/literal nodes. A larger cap would not repair that graph. Replays of the
-remaining cap cases are captured separately; do not generalize the initial
-example to cases whose output has not been inspected.
+to fact/literal nodes. All 21/21 instrumented replays are now complete:
+20/21 exhibit repeated invalid node records or IDs; 1/21 exhibits a repeated
+prose explanation during repair after an invalid but completed draft. These
+are overlapping call-level symptoms, not mutually exclusive model verdicts.
+The first eight replay case summaries incorrectly called their early stop
+whitespace repetition; their captured call records identify node repetition.
+The reviewed summary corrects that label. Raising the cap is not justified by
+this evidence. Raw JSONL stays local; the shared report retains classifications
+and trace paths.
 
 The minimal fix exposes a schema-derived wire contract in the prompt and
 states that IDs are unique, references contain IDs, and context provides
@@ -33,3 +39,6 @@ responses explicitly with `--raw-dir`; this is opt-in, not a public log.
 The paired rerun must use exactly the same 24 IDs and list terminal stages,
 retained IR and correctness separately. Its results are pending until it
 finishes. Compiler tests do not demonstrate improved local model accuracy.
+The wire-contract fix has already produced another length-finished repetitive
+response in the rerun, so cap failures have not been eliminated. Do not present
+the change as a successful accuracy fix while the cohort is incomplete.
