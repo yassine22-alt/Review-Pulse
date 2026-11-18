@@ -57,6 +57,44 @@ def used_requests(plan, journal, window):
                        if window in item.get("charge_windows", [item["window"]]))
 
 
+def phases(plan):
+    ids = [item["id"] for item in read(plan["case_manifest"])["cases"]]
+    if not plan.get("phase_manifest"):
+        return [{"name": "all", "ids": ids}]
+    result, seen, names = [], set(), set()
+    for phase in read(plan["phase_manifest"])["phases"]:
+        name = phase["name"]
+        selected = [key for key in ids if key not in seen] if phase.get("remaining") else phase["ids"]
+        if (not name.isidentifier() or name in names or not selected or
+                len(set(selected)) != len(selected) or set(selected) - set(ids) or seen & set(selected)):
+            raise GuardFailure("INVALID_PHASE_ORDER")
+        result.append({**phase, "ids": selected})
+        seen.update(selected)
+        names.add(name)
+    if seen != set(ids):
+        raise GuardFailure("INCOMPLETE_PHASE_ORDER")
+    return result
+
+
+def next_phase(plan, summary):
+    for phase in phases(plan):
+        selected = set(phase["ids"])
+        complete = all(selected <= set(arm["completed_ids"]) for arm in summary.values())
+        if not complete:
+            return phase, None
+        if phase.get("pause_if_zero_retained") and not any(
+            selected & set(arm["retained_ids"]) for arm in summary.values()
+        ):
+            checkpoint = Path(plan["run_directory"]) / f"{phase['name']}.diagnosis.json"
+            expected = {"model": plan["model"], "phase": phase["name"],
+                        "code_fingerprints": {name: arm["code_fingerprint"] for name, arm in plan["arms"].items()}}
+            reviewed = read(checkpoint) if checkpoint.exists() else {}
+            if (any(reviewed.get(key) != value for key, value in expected.items()) or
+                    reviewed.get("continue") is not True or not reviewed.get("diagnosis")):
+                return phase, "WAITING_FOR_DIAGNOSIS"
+    return None, None
+
+
 def progress(plan, journal):
     ids = {item["id"] for item in read(plan["case_manifest"])["cases"]}
     found = {arm: {} for arm in plan["arms"]}
@@ -72,9 +110,12 @@ def progress(plan, journal):
             "max_tokens": plan["max_tokens"], "timeout": plan["timeout"],
         }.items()):
             raise GuardFailure("MODEL_CODE_OR_SETTINGS_CHANGED")
+        selected = set(report.get("selected_ids", ids))
+        if not selected <= ids:
+            raise GuardFailure("UNEXPECTED_SELECTION")
         if report.get("status") == "COMPLETE" and {
             row["id"] for row in report.get("results", []) if row["status"] != "API_UNAVAILABLE"
-        } != ids:
+        } != selected:
             raise GuardFailure("INCOMPLETE_COMPLETED_REPORT")
         for row in report.get("results", []):
             if row["id"] not in ids:
@@ -87,7 +128,8 @@ def progress(plan, journal):
                 if previous is not None and previous != meaningful:
                     raise GuardFailure("CONFLICTING_COMPLETED_RESULTS")
                 found[arm][row["id"]] = meaningful
-    return {arm: {"completed": len(rows), "planned": len(ids),
+    return {arm: {"completed": len(rows), "planned": len(ids), "completed_ids": sorted(rows),
+                  "retained_ids": sorted(key for key, row in rows.items() if row.get("program")),
                   "retained": sum(bool(row.get("program")) for row in rows.values())}
             for arm, rows in found.items()}
 
@@ -139,12 +181,14 @@ def exclusive(path):
                 fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
-def invoke(plan, journal, journal_path, arm, window, budget):
+def invoke(plan, journal, journal_path, arm, window, budget, phase=None):
     directory = Path(plan["run_directory"])
     number = len(journal["runs"]) + 1
     output = directory / f"{window}-{number:03d}-{arm}.json"
     entry = {"arm": arm, "window": window, "report": str(output), "reserved": budget,
              "charged": budget, "status": "RESERVED"}
+    if phase is not None:
+        entry["phase"] = phase["name"]
     journal["runs"].append(entry)
     write(journal_path, journal)  # Debit first: interruption cannot create free retries.
     command = [plan["python"], "-u", str(Path(plan["pinned_repo"]) / "scripts/run_development_drafting.py"),
@@ -154,6 +198,10 @@ def invoke(plan, journal, journal_path, arm, window, budget):
                "--min-interval", str(plan["min_interval"]), "--cache", plan["cache"]]
     if arm == "original":
         command += ["--original-src", str(Path(plan["original_repo"]) / "src")]
+    if phase is not None:
+        selection = directory / f"{phase['name']}.selection.json"
+        write(selection, phase["ids"])
+        command += ["--case-ids", str(selection)]
     interrupted = False
     deadline = datetime.fromisoformat(window).replace(hour=plan["reset_utc_hour"], tzinfo=UTC)
     deadline += timedelta(days=1)
@@ -216,6 +264,9 @@ def main():
             try:
                 verify_inputs(plan)
                 summary["arms"] = progress(plan, journal)
+                phase, checkpoint_status = next_phase(plan, summary["arms"]) if plan.get("phase_manifest") else (None, None)
+                if phase is not None:
+                    summary["phase"] = phase["name"]
                 remaining = max(0, plan["daily_budget"] - used_requests(plan, journal, window))
                 summary["request_allowance_remaining"] = remaining
                 if now >= datetime.fromisoformat(plan["expires_utc"]):
@@ -226,16 +277,21 @@ def main():
                     status = "COMPLETE_DRAFTING_REVIEW_PENDING"
                 elif not os.environ.get("GEMINI_API_KEY"):
                     status = "NEEDS_ENV_CREDENTIAL"
+                elif checkpoint_status:
+                    status = checkpoint_status
                 elif (remaining < plan["minimum_start_budget"] or journal.get("defer_until") == window or
                       (next_reset - now).total_seconds() < plan["reset_guard_seconds"]):
                     status = "WAITING_FOR_QUOTA"
                 else:
-                    arm = min((name for name, row in summary["arms"].items() if row["completed"] < row["planned"]),
-                              key=lambda name: summary["arms"][name]["completed"])
+                    eligible = {name: row for name, row in summary["arms"].items()
+                                if (set(phase["ids"]) - set(row["completed_ids"]) if phase
+                                    else row["completed"] < row["planned"])}
+                    arm = min(eligible, key=lambda name: len(set(eligible[name]["completed_ids"]) & set(phase["ids"]))
+                              if phase else eligible[name]["completed"])
                     summary.update(status="RUNNING", arm=arm)
                     write(state_path, summary)
                     status = invoke(plan, journal, journal_path, arm, window,
-                                    min(remaining, plan["per_run_budget"]))
+                                    min(remaining, plan["per_run_budget"]), phase)
                     if status == "WAITING_FOR_QUOTA":
                         journal["defer_until"] = window
                         write(journal_path, journal)
@@ -254,7 +310,7 @@ def main():
             if status != last_state:
                 print(status, window, flush=True)
                 last_state = status
-            if status != "WAITING_FOR_QUOTA" or not args.watch:
+            if status not in ("WAITING_FOR_QUOTA", "WAITING_FOR_DIAGNOSIS") or not args.watch:
                 return
             time.sleep(min(60, max(1, (next_reset - datetime.now(UTC)).total_seconds())))
 

@@ -5,6 +5,17 @@ worker performs the remaining development drafting calls. It does not approve
 rules, grade interpretation accuracy, run the fourth document, enable billing,
 switch models, or automatically commit results.
 
+The requested early-signal pilot replaces sequential order. Its data manifest
+is [development-pilot.json](../reports/development-pilot.json): five thermal
+numeric cases, four fire-safety cases, then three accessibility cases whose
+frozen meanings use existing numeric/range/count primitives. Missing evidence
+or catalogue bindings remain blockers, not proof that a primitive is missing.
+Each phase is completed on both arms before the next starts. If neither arm
+retains any of the five thermal rules, the worker waits for a diagnosis bound
+to that model and both code fingerprints before spending more quota. Remaining
+development cases follow after the twelve-case pilot. The fourth document is
+never selected.
+
 The model identifier stays `gemini-4-hydrogen`. The original interpreter is
 pinned at `3579622d166e64a2d9831c7c9ee95bb3e4ba4fef`; the redesigned interpreter,
 source data and request runner are pinned at
@@ -75,7 +86,8 @@ file before an explicit resume. Stop and restart the worker after changing
 the environment credential.
 
 Thirteen continuation tests and the seven existing transport/budget tests passed
-20/20. They cover window boundaries, prior usage, reservations, crash recovery,
+20/20 before pilot ordering. Three additional pilot-order tests pass, for
+23/23 targeted checks. They cover window boundaries, prior usage, reservations, crash recovery,
 cross-window accounting, changed model/source/runtime, duplicate conflicts,
 zero-quota behavior, atomic state files, single-worker locking and spacing
 between child processes as well as individual requests.

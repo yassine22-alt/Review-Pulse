@@ -50,6 +50,7 @@ def main():
     parser.add_argument("--min-interval", type=float, default=0, help="Minimum seconds between hosted attempts")
     parser.add_argument("--original-src", type=Path)
     parser.add_argument("--cache", type=Path, default=Path("runs/drafting-result-cache"))
+    parser.add_argument("--case-ids", type=Path, help="Ordered JSON list of development IDs to run")
     args = parser.parse_args()
     if min(args.batch_size, args.cycles) < 1:
         parser.error("batch size and cycles must be positive")
@@ -93,10 +94,19 @@ def main():
     })
     transport_code = caching.fingerprint({"source": (repo / "src/reviewpulse/llm/gemini.py").read_text(encoding="utf-8")})
     cases = load_cases(repo, args.access_text)
+    dataset_ids = [case["id"] for case in cases]
+    if args.case_ids:
+        selected = json.loads(args.case_ids.read_text(encoding="utf-8"))
+        if (not isinstance(selected, list) or not all(isinstance(key, str) for key in selected)
+                or len(set(selected)) != len(selected) or not selected or set(selected) - set(dataset_ids)):
+            parser.error("case selection must be a nonempty, unique list of known development IDs")
+        table = {case["id"]: case for case in cases}
+        cases = [table[key] for key in selected]
     report = {"backend": args.backend, "model": args.model, "code_fingerprint": code, "batch_size": args.batch_size,
               "retry_cycles": args.cycles, "http_attempts_per_completion": 3, "concurrency": 1,
               "max_tokens": args.max_tokens, "timeout": args.timeout, "batches": [], "results": [],
               "request_budget": args.request_budget, "min_interval_s": args.min_interval,
+              "dataset_obligations": len(dataset_ids), "selected_ids": [case["id"] for case in cases],
               "configured_key_variables": [name for name in (
                   "GEMINI_API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY",
                   "REVIEWPULSE_LLM_API_KEY", "REVIEWPULSE_FALLBACK_API_KEY") if os.environ.get(name)]}
@@ -105,6 +115,8 @@ def main():
         previous = json.loads(args.output.read_text(encoding="utf-8"))
         if any(previous.get(name) != report[name] for name in ("backend", "model", "code_fingerprint", "max_tokens", "timeout")):
             parser.error("output belongs to different code or settings; choose a new output path")
+        if previous.get("selected_ids", dataset_ids) != report["selected_ids"]:
+            parser.error("output belongs to a different case selection; choose a new output path")
         report = previous
     report["invocation"] = report.get("invocation", 0) + 1
     report.setdefault("invocation_limits", []).append({

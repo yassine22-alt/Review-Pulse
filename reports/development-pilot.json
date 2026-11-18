@@ -1,0 +1,16 @@
+{
+  "scope": "Development data only. Original and redesigned arms use the same model and generation settings. No fourth-document cases.",
+  "phases": [
+    {"name": "thermal", "ids": ["T01", "T04", "T06", "T09", "T13"], "pause_if_zero_retained": true},
+    {"name": "fire", "ids": ["M03", "M04", "M05", "M06"]},
+    {"name": "other", "ids": ["A03", "A05", "A08"]},
+    {"name": "remaining", "remaining": true}
+  ],
+  "other_selection": [
+    {"id": "A03", "basis": "Inclusive numeric range on a supplied sidewalk width. Existing comparison and conjunction operators suffice under the frozen scope; exterior inventory/evidence is still required."},
+    {"id": "A05", "basis": "Reserved-stall count ratio. Existing count, arithmetic and comparison operators suffice under the frozen scope; declared inventory/evidence is still required."},
+    {"id": "A08", "basis": "Adapted-seat count ratio. Existing count, arithmetic and comparison operators suffice under the frozen scope; declared inventory/evidence is still required."}
+  ],
+  "interpretation": "Executable under the frozen manual scope means expressible with existing primitives and supplied evidence. It does not assert that the current extraction catalogue already contains all required bindings.",
+  "thermal_gate": "After both arms complete all five thermal cases, pause before any later phase if neither retains a rule. Diagnose terminal stages and record a reviewed checkpoint before spending more quota."
+}

@@ -38,7 +38,8 @@ def setup_progress(tmp_path):
 
 def test_progress_counts_completed_unresolved_without_calling_it_a_retained_rule(tmp_path):
     plan, _ = setup_progress(tmp_path)
-    assert worker.progress(plan, {"runs": []}) == {"original": {"completed": 1, "planned": 1, "retained": 0}}
+    assert worker.progress(plan, {"runs": []}) == {
+        "original": {"completed": 1, "planned": 1, "retained": 0, "completed_ids": ["sample"], "retained_ids": []}}
 
 
 def test_progress_refuses_a_different_model_or_conflicting_results(tmp_path):
