@@ -1,0 +1,46 @@
+{
+  "source": "User-transcribed AI Studio rate-limit dashboard; not independently verified",
+  "models": {
+    "gemini-3.8-flash": {
+      "rpm_used": 3,
+      "rpm_limit": 5,
+      "tpm_used": 4010,
+      "tpm_limit": 250000,
+      "rpd_used": 22,
+      "rpd_limit": 20
+    },
+    "gemini-4-hydrogen": {
+      "rpm_used": 2,
+      "rpm_limit": 5,
+      "tpm_used": 42,
+      "tpm_limit": 250000,
+      "rpd_used": 3,
+      "rpd_limit": 20
+    },
+    "gemini-3-flash-preview": {
+      "rpm_used": 1,
+      "rpm_limit": 5,
+      "tpm_used": 21,
+      "tpm_limit": 250000,
+      "rpd_used": 1,
+      "rpd_limit": 20
+    },
+    "gemini-2.5-flash": {
+      "rpm_used": 0,
+      "rpm_limit": 5,
+      "tpm_used": 0,
+      "tpm_limit": 250000,
+      "rpd_used": 0,
+      "rpd_limit": 20
+    },
+    "gemini-2.5-flash-lite": {
+      "rpm_used": 0,
+      "rpm_limit": 10,
+      "tpm_used": 0,
+      "tpm_limit": 250000,
+      "rpd_used": 0,
+      "rpd_limit": 20
+    }
+  },
+  "protocol": "Do not pool different models as one ceiling test. Model listing and displayed limits do not prove usable generation. Shared project activity may reduce remaining allowance."
+}

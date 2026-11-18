@@ -28,7 +28,7 @@ and returns its own UNRESOLVED status.
 
 ## Initial offline preflight
 
-No `GEMINI_API_KEY` is present in the environment. The
+At this earlier checkpoint no `GEMINI_API_KEY` was present. The
 [attempt report](../reports/hosted-resilient-attempt.json) records
 MISSING_ENV_CREDENTIAL, 0/0 request attempts, 0/46 semantic evaluations and all
 46 obligations pending. No batch was submitted. No claim about provider
@@ -51,7 +51,8 @@ the run stopped: 0/46 semantic evaluations, all 46 pending. The remaining
 42 obligations were not submitted. Wrong approvable / approvable remains
 undefined, 0/0. The 45-second budget is not a completed model capacity test.
 
-The redesigned hosted comparison and fourth-document run were not submitted.
+At that checkpoint the redesigned hosted comparison and fourth-document run
+had not been submitted.
 [Original-pipeline availability report](../reports/hosted-original-replacement-key.json)
 and [credential preflight](../reports/gemini-replacement-preflight.json) retain
 only non-secret statuses and request counts. The interrupted restricted-process
@@ -60,16 +61,47 @@ reported a Windows TLS identity error under the restricted process; public TLS
 and authenticated model listing succeeded under the normal Windows identity.
 Generation failures still occurred under that normal identity.
 
-No billing setting changed. HTTP 429 establishes a rate/quota rejection; its
-subtype and whether payment is required are unmeasured because provider error
-bodies were discarded. Only the Gemini credential is configured; the other
-provider adapters below were not called. Other listed Flash models include
-3.5, 3.6 and 3.7, but their generation is untested in this round. No further
-provider or model request followed the three-cycle stop.
+No billing setting changed. Error bodies did not identify the quota subtype.
+The user subsequently supplied the AI Studio dashboard: Flash showed 22 used
+against 20 daily, Hydrogen 3/20 and Gemini 3 Flash 1/20. These values are
+user-transcribed, not independently verified. Only the Gemini credential is
+configured. Other providers were not called. The runner stopped after three
+cycles before the new quota information justified a different-model test.
 
 Five automated tests passed. They cover missing credentials, HTTP 429 and
 503 backoff, bounded attempts, circuit behavior, concurrency, structured
 schemas, credential redaction, cache resume and fingerprint invalidation.
+
+## Quota-aware follow-up
+
+`--min-interval 13` spaces actual requests, including retries, to respect the
+reported five-requests-per-minute allowance. `--request-budget 8` caps all
+HTTP attempts across clauses and retry cycles in one invocation. Failed
+attempts consume the local allowance conservatively. Cache hits do not.
+Starting a new cycle resets the circuit, not the allowance. No request is
+sent once it reaches zero. The report records REQUEST_BUDGET_EXHAUSTED as a
+client limit, not a semantic error or an extra failed HTTP request.
+
+Budgets apply per invocation. Before resuming, use the actual remaining
+project allowance; the runner cannot see other applications' usage. It does
+not automatically resume at midnight. Google's daily limits are per project
+and reset at midnight Pacific time. See [official limits](https://aistudio.google.com/docs/rate-limits).
+
+Using the quota the user reported, the strongest listed model,
+`gemini-4-hydrogen`, received eight requests per arm, with 13-second spacing,
+8,192 output tokens and 180-second timeout. Both arms completed 2/46 clauses,
+retained 0/2 and recorded 0/8 request errors. Each stopped during the third
+clause at its budget; the other 43 were not submitted. No fourth-document
+request was made. These are incomplete development results, not a full
+ceiling or an accuracy improvement. Models are not pooled.
+
+[Original run](../reports/hydrogen-original-development.json),
+[structured run](../reports/hydrogen-structured-development.json) and
+[assessment](../reports/hydrogen-development-assessment.json) retain counts
+and per-obligation blockers. Two new budget/pacing tests and the five existing
+runner tests passed 7/7. They check that retry cycles do not replenish the
+budget, timeouts consume allowance, pacing includes elapsed backoff, and
+budget exhaustion fabricates no HTTP failure.
 
 ## Run instructions
 

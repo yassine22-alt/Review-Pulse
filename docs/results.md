@@ -1,6 +1,6 @@
 # Review-Pulse results and current status
 
-Updated 17 November 2026. The 46 fire-safety, accessibility and thermal
+Updated 18 November 2026. The 46 fire-safety, accessibility and thermal
 obligations are DEVELOPMENT data. They cannot support a held-out claim.
 
 The current priority is measuring drafting rather than adding checking
@@ -9,40 +9,33 @@ schema-constrained model slots into the existing rule language. Drafts still
 need source, type, unit and coverage validation and human approval. No new
 plan computation or checking family has been added.
 
-The negative oracle result matters: only **5/46** author-translated gold slot
-inputs survive with the existing catalogue. With author-proposed declarations,
-**17/46** survive; **27/46** still stop at verification and **2/46** remain
-unresolved for context or specialist meaning. This does not measure an LLM.
-Removing expression syntax alone does not solve grounding or applicability.
+The compiler oracle retains **5/46** gold inputs with the active catalogue,
+or **17/46** with author-proposed declarations. This does not measure an LLM.
 
-Hosted comparison is pending. After the Windows restart, GEMINI_API_KEY is
-visible and the replacement key authenticated to Google's model-list endpoint.
-Its value was not displayed or written. Generation remained unavailable:
-the original-pipeline batch stopped after three failed retry cycles, each
-**3/3** request errors (**9/9** total): **7/9 HTTP 429**, **2/9 timeouts**.
-Completed hosted semantic evaluations remain **0/46**. These are availability
-outcomes, excluded from semantic failure counts; they do not measure capacity.
+The key now authenticates, without its value being displayed or stored.
+Gemini 3.8 Flash exhausted its daily quota according to the user's dashboard
+(22 used / 20 limit). Its transport failures are excluded from semantic counts.
+Gemini 4 Hydrogen completed a same-model partial comparison: **2/46** clauses
+per pipeline, **0/2** retained in either. Each arm used **8/8** successful
+requests, then stopped at its configured allowance. These results do not
+establish improved accuracy or separate all model errors from pipeline errors.
 
 The fourth document is frozen and unrun: RPS 2000 version 2011, official French
 Bulletin Officiel 6206, 21 November 2013. Its **17 obligations and 48 synthetic
 scenarios** were committed at `41b1ad14b466fb52500b118d69593319da649e23`.
 Interpretations and applicability labels remain separate from drafting input.
 
-Next: finish the paired local comparison and obtain usable hosted generation,
-then run original and redesigned hosted drafting on the same 46 development
-obligations. The runner stopped at its retry limit. Only after the comparison
-should the frozen fourth document run once, without further tuning. Inspect
-wrong approvable drafts separately from retention. Do not add capabilities to
-improve numbers. HTTP 429 establishes a rate/quota rejection; its subtype and
-whether billing is required were not determined from these discarded bodies.
+Next: complete the paired local run and the remaining **44/46** hosted
+obligations per arm, using daily free-quota resets or a higher-quota project.
+Do not pool different models. Only afterward should the frozen fourth document
+run once. No checker capabilities were added. The observed unit-vocabulary
+generation gap is documented, without a claim that fixing it unlocks checks.
 
-Local comparison checkpoint before the requested restart: **20/46** redesigned
-obligations have completed, with **0/20** retained. Terminal stages are
-generation cap **17/20** and absent source subject **3/20**. Request failures
-were **0/60** in the five completed batches (12 calls per batch, 0/12 errors
-each). This is an incomplete, negative result, not evidence of accuracy or
-improvement. The remaining **26/46** are pending in the saved snapshot.
-See [partial local trace](../reports/local-after-slots-partial.json).
+The resumed local snapshot has **24/46** completed, **0/24** retained: generation
+cap **21/24**, absent source subject **3/24**. It remains incomplete, with
+**22/46** pending. See the [cache snapshot](../reports/local-after-slots-cache-snapshot.json).
+The first 20 recorded 0/60 request errors. Batch HTTP counters are incomplete
+for the whole cache, because interrupted batches can leave completed entries.
 
 ## Measured
 
@@ -54,13 +47,20 @@ See [partial local trace](../reports/local-after-slots-partial.json).
 | Generated behavior | 64 fact worlds per retained oracle input; finite tests, not a proof |
 | Replacement credential | Visible after Windows restart; model-list authentication succeeded. Value never printed or written |
 | Hosted original pipeline, replacement key | First batch: 3/3 errors in each of three cycles; 9/9 overall (7 HTTP 429, 2 timeouts). 4/4 unavailable per cycle; circuit prevented further calls. 0/46 semantic evaluations; all 46 pending |
-| Current non-slow suite | 978 passed, 2 skipped, 45 slow tests deselected; 530.44 seconds. Redesign pushed at e2d0acf4516d5e3395869f4f470108b0111e1053 |
+| Hydrogen paired development sample | 2/46 completed per arm, 0/2 retained per arm. Original terminal stages: verifier 2/2. Structured: context/binding 1/2, schema 1/2. Wrong approvable / approvable undefined, 0/0 per arm |
+| Hydrogen request accounting | 0/8 request errors per arm, 0/16 overall. Each arm stopped at its eight-request allowance; the next clause was interrupted by the client budget and 43/46 were not submitted |
+| Request allowance and pacing tests | 7/7 passed: existing retry/cache tests plus new failed-request budget, cross-cycle allowance and request-spacing checks |
+| Drafting-redesign non-slow suite | 978 passed, 2 skipped, 45 slow tests deselected; 530.44 seconds at e2d0acf4516d5e3395869f4f470108b0111e1053. The later runner-only allowance changes have the separate 7/7 targeted result above |
 | Secrets scan | 597 working text files; 776 reachable Git blobs, 286 trees, 37 commits, including refs/reflogs; no credential-pattern match in scanned repository content. Exclusions and access failures are documented |
 | Previous complete slow suite | 45/45 passed at the earlier checkpoint; this is historical validation, not a new interpreter result |
 | Previous segmentation regression | 0/262,144 changed class pixels on one prepared synthetic plan; unchanged source/checkpoint, not real-plan accuracy |
 
 Per-obligation oracle diagnostics are in
 [slot-oracle-results.json](../reports/slot-oracle-results.json).
+The [Hydrogen assessment](../reports/hydrogen-development-assessment.json)
+lists all 46 obligations, their frozen readings, completed results or explicit
+not-evaluated status. No final rule existed to compare as exact, partial or
+wrong. Author notes retain the differences and request limitations.
 [Structured drafting](structured-drafting.md) describes checks and limits.
 [Secrets audit](secrets-audit.md) states scan exclusions and the chat exposure.
 [Hosted runner](resilient-hosted-runner.md) describes retries, cache, circuit
@@ -69,8 +69,9 @@ records the official edition and source checksum.
 
 ## Not measured
 
-- A completed hosted original-versus-redesigned semantic comparison, or the
-  gap between a hosted frontier model and the local models.
+- A full 46-obligation hosted comparison. Only 2/46 completed per arm on
+  Hydrogen. The hosted-versus-local capacity gap remains unmeasured; the
+  earlier wrong retained local width rule was not reached in the hosted run.
 - Fourth-document drafting, unsupplied applicability discovery, end-to-end
   verdict accuracy, false passes or violation precision. Its model/checker
   evaluations are **0/17** obligations.

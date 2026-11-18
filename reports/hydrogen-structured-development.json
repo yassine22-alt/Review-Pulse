@@ -1,0 +1,302 @@
+{
+  "backend": "gemini",
+  "model": "gemini-4-hydrogen",
+  "code_fingerprint": "9a1b5c41affd70a74ccf958d6f45b4dc23b3572422d5ebbe8c541ab8244f706e",
+  "batch_size": 1,
+  "retry_cycles": 3,
+  "http_attempts_per_completion": 3,
+  "concurrency": 1,
+  "max_tokens": 8192,
+  "timeout": 180.0,
+  "batches": [
+    {
+      "number": 1,
+      "cycle": 1,
+      "ids": [
+        "M01"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        3
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 10.422
+        },
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 23.282
+        },
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 26.172
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "cycle": 1,
+      "ids": [
+        "M02"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        3
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 4.953
+        },
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 38.297
+        },
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 18.844
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "cycle": 1,
+      "ids": [
+        "M03"
+      ],
+      "cache_hits": 0,
+      "http_error_rate": [
+        0,
+        2
+      ],
+      "invocation": 1,
+      "unavailable_rate": [
+        1,
+        1
+      ],
+      "events": [
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 6.094
+        },
+        {
+          "attempt": 1,
+          "http_status": 200,
+          "seconds": 25.328
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "M01",
+      "batch": 1,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "context_or_binding",
+      "reason": "fact binding requires review",
+      "arm": "structured_slots",
+      "model": "gemini-4-hydrogen",
+      "external": true,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "context_or_binding: fact binding requires review",
+        "context_or_binding: fact binding requires review"
+      ],
+      "diagnostics": [
+        {
+          "stage": "context_or_binding",
+          "detail": "fact binding requires review"
+        },
+        {
+          "stage": "context_or_binding",
+          "detail": "fact binding requires review"
+        }
+      ],
+      "evidence_requests": [
+        {
+          "entity": "building",
+          "fact": "effectif",
+          "unit": "1",
+          "reason": "missing",
+          "why": "La règle M01 et la portée du tableau conditionnent le nombre de dégagements à un effectif compris entre 20 et 50 personnes, mais aucune liaison de fait pour l'effectif n'est disponible dans le catalogue.",
+          "where_to_look": "Notice de sécurité incendie, calcul d'effectif ou tableau des effectifs par niveau",
+          "clause": "M01"
+        },
+        {
+          "entity": "exits",
+          "fact": "rdc",
+          "unit": "1",
+          "reason": "missing",
+          "why": "La règle M01 précise 'RDC : 2', mais le catalogue ne fournit aucune liaison indiquant le niveau (rez-de-chaussée) de la zone évaluée ou de chaque dégagement dans 'exits'.",
+          "where_to_look": "Plans du rez-de-chaussée (RDC) et repérage des sorties et escaliers",
+          "clause": "M01"
+        },
+        {
+          "entity": "exits",
+          "fact": "exit_category_normal_or_stair",
+          "unit": "1",
+          "reason": "unverified",
+          "why": "La règle M01 porte sur le nombre de dégagements (sorties ou escaliers), alors que le catalogue ne fournit pour 'exits' que le fait booléen 'eligible' et place 'normal' et 'accessory' sur 'building'.",
+          "where_to_look": "Notice descriptive des dégagements normaux, accessoires et escaliers",
+          "clause": "M01"
+        }
+      ],
+      "needs": "effectif; rdc; exit_category_normal_or_stair",
+      "triage": {
+        "checkable": true,
+        "reason": "Spécifie le nombre de dégagements requis au RDC selon l'effectif.",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M02",
+      "batch": 2,
+      "cycle": 1,
+      "status": "UNRESOLVED",
+      "review_status": "NEEDS_REVIEW",
+      "stage": "schema",
+      "reason": "1 validation error for SlotDraft\nevidence_requests.0.unit\n  Value error, unknown unit 'person' [type=value_error, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+      "arm": "structured_slots",
+      "model": "gemini-4-hydrogen",
+      "external": true,
+      "program": null,
+      "readback": null,
+      "notes": [],
+      "tried": [
+        "context_or_binding: La condition d'applicabilité relative à l'effectif ('de 20 à 50') ne peut pas être encodée car aucun fait d'effectif n'existe dans le catalogue ; les bornes inclusives/exclusives de la plage ne sont pas précisées non plus dans les extraits fournis.; La portée spatiale 'RDC' (rez-de-chaussée) ne dispose d'aucun fait de niveau ou d'étage dans le catalogue.; L'exigence 'RDC : 2' est représentée comme un minimum de 2 dégagements admissibles (ge 2) plutôt qu'une égalité stricte, et il reste à confirmer si le dégagement accessoire est comptabilisé dans la collection 'exits'.; Le catalogue ne fournit que 'door_width' (largeur de passage libre de la porte du dégagement normal) et non la largeur courante sur tout le parcours du dégagement de 1 UP (0,90 m), ni de critère dimensionnel pour le dégagement accessoire.",
+        "schema: 1 validation error for SlotDraft\nevidence_requests.0.unit\n  Value error, unknown unit 'person' [type=value_error, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+      ],
+      "diagnostics": [
+        {
+          "stage": "context_or_binding",
+          "detail": "La condition d'applicabilité relative à l'effectif ('de 20 à 50') ne peut pas être encodée car aucun fait d'effectif n'existe dans le catalogue ; les bornes inclusives/exclusives de la plage ne sont pas précisées non plus dans les extraits fournis.; La portée spatiale 'RDC' (rez-de-chaussée) ne dispose d'aucun fait de niveau ou d'étage dans le catalogue.; L'exigence 'RDC : 2' est représentée comme un minimum de 2 dégagements admissibles (ge 2) plutôt qu'une égalité stricte, et il reste à confirmer si le dégagement accessoire est comptabilisé dans la collection 'exits'.; Le catalogue ne fournit que 'door_width' (largeur de passage libre de la porte du dégagement normal) et non la largeur courante sur tout le parcours du dégagement de 1 UP (0,90 m), ni de critère dimensionnel pour le dégagement accessoire."
+        },
+        {
+          "stage": "schema",
+          "detail": "1 validation error for SlotDraft\nevidence_requests.0.unit\n  Value error, unknown unit 'person' [type=value_error, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+        }
+      ],
+      "evidence_requests": [
+        {
+          "entity": "building",
+          "fact": "effectif",
+          "unit": "1",
+          "reason": "missing",
+          "why": "La règle M02 s'applique pour un effectif de 20 à 50 personnes, mais aucune propriété d'effectif n'est fournie dans le catalogue.",
+          "where_to_look": "Notice de sécurité ou calcul d'effectif des personnes susceptibles d'emprunter les sorties",
+          "clause": "M02"
+        },
+        {
+          "entity": "building",
+          "fact": "level",
+          "unit": "1",
+          "reason": "missing",
+          "why": "La règle M02 vise spécifiquement le rez-de-chaussée ('RDC : 2'), sans fait correspondant dans le catalogue.",
+          "where_to_look": "Plans d'étage et notice de sécurité identifiant le rez-de-chaussée",
+          "clause": "M02"
+        }
+      ],
+      "needs": "effectif; level",
+      "triage": {
+        "checkable": true,
+        "reason": "Nombre et largeur des dégagements vérifiables sur le plan",
+        "advisory": true
+      }
+    },
+    {
+      "id": "M03",
+      "batch": 3,
+      "cycle": 1,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "program": null
+    }
+  ],
+  "request_budget": 8,
+  "min_interval_s": 13.0,
+  "configured_key_variables": [
+    "GEMINI_API_KEY"
+  ],
+  "invocation": 1,
+  "invocation_limits": [
+    {
+      "invocation": 1,
+      "request_budget": 8,
+      "min_interval_s": 13.0
+    }
+  ],
+  "status": "API_UNAVAILABLE",
+  "semantic_evaluated": 2,
+  "pending": [
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "A09",
+    "A10",
+    "A11",
+    "A12",
+    "A13",
+    "A14",
+    "A15",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15"
+  ],
+  "request_budget_remaining": 0,
+  "blocker": "REQUEST_BUDGET_EXHAUSTED"
+}

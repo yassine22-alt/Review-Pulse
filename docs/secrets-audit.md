@@ -56,7 +56,7 @@ reported separately; successful authentication does not establish quota.
 ## Replacement credential follow-up
 
 An exact-value check used the replacement credential only in memory. It
-scanned 621 tracked working files and 829 Git blobs reachable from all local
+scanned 629 tracked working files and 831 Git blobs reachable from all local
 refs and reflogs. There were zero matches and no unreadable tracked paths.
 The credential value and fingerprint were not retained. The
 [follow-up artifact](../reports/replacement-credential-audit.json) records the

@@ -5,7 +5,28 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
+
+
+class RequestGate:
+    """Pace actual attempts and share one invocation's allowance across cycles."""
+
+    def __init__(self, client, unavailable, budget=None, interval=0.0):
+        self.client, self.unavailable = client, unavailable
+        self.send = client._request
+        self.remaining, self.interval, self.last = budget, interval, None
+
+    def __call__(self, payload):
+        if self.remaining == 0:
+            self.client.unavailable = True
+            raise self.unavailable("REQUEST_BUDGET_EXHAUSTED", None, 0)
+        if self.last is not None:
+            time.sleep(max(0.0, self.last + self.interval - time.monotonic()))
+        self.last = time.monotonic()
+        if self.remaining is not None:
+            self.remaining -= 1
+        return self.send(payload)
 
 
 def module_from_current(repo, name):
@@ -25,11 +46,15 @@ def main():
     parser.add_argument("--cycles", type=int, default=3)
     parser.add_argument("--max-tokens", type=int, default=4096)
     parser.add_argument("--timeout", type=float, default=180)
+    parser.add_argument("--request-budget", type=int, help="Maximum hosted HTTP attempts in this invocation")
+    parser.add_argument("--min-interval", type=float, default=0, help="Minimum seconds between hosted attempts")
     parser.add_argument("--original-src", type=Path)
     parser.add_argument("--cache", type=Path, default=Path("runs/drafting-result-cache"))
     args = parser.parse_args()
     if min(args.batch_size, args.cycles) < 1:
         parser.error("batch size and cycles must be positive")
+    if args.min_interval < 0 or (args.request_budget is not None and args.request_budget < 1):
+        parser.error("request budget must be positive and interval nonnegative")
     repo = Path(__file__).resolve().parents[1]
     source = args.original_src or repo / "src"
     sys.path.insert(0, str(source))
@@ -71,6 +96,7 @@ def main():
     report = {"backend": args.backend, "model": args.model, "code_fingerprint": code, "batch_size": args.batch_size,
               "retry_cycles": args.cycles, "http_attempts_per_completion": 3, "concurrency": 1,
               "max_tokens": args.max_tokens, "timeout": args.timeout, "batches": [], "results": [],
+              "request_budget": args.request_budget, "min_interval_s": args.min_interval,
               "configured_key_variables": [name for name in (
                   "GEMINI_API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY",
                   "REVIEWPULSE_LLM_API_KEY", "REVIEWPULSE_FALLBACK_API_KEY") if os.environ.get(name)]}
@@ -81,6 +107,9 @@ def main():
             parser.error("output belongs to different code or settings; choose a new output path")
         report = previous
     report["invocation"] = report.get("invocation", 0) + 1
+    report.setdefault("invocation_limits", []).append({
+        "invocation": report["invocation"], "request_budget": args.request_budget,
+        "min_interval_s": args.min_interval})
 
     def save():
         report["semantic_evaluated"] = sum(row["status"] != "API_UNAVAILABLE" for row in report["results"])
@@ -94,11 +123,23 @@ def main():
         save()
         print("API_UNAVAILABLE: GEMINI_API_KEY is absent. HTTP attempts 0/0. No semantic evaluations.", flush=True)
         return
+    report["status"] = "RUNNING"
+    save()
+    hosted = gate = None
+    if args.backend == "gemini":
+        hosted = transport.GeminiClient(model=args.model, max_tokens=args.max_tokens, timeout_s=args.timeout)
+        gate = RequestGate(hosted, transport.APIUnavailable, args.request_budget, args.min_interval)
+        hosted._request = gate
     for start in range(0, len(cases), args.batch_size):
         pending = cases[start:start + args.batch_size]
         for cycle in range(args.cycles):
-            client = (transport.GeminiClient(model=args.model, max_tokens=args.max_tokens, timeout_s=args.timeout)
-                      if args.backend == "gemini" else TrackedOllama())
+            if gate is not None and gate.remaining == 0:
+                report["status"], report["blocker"] = "API_UNAVAILABLE", "REQUEST_BUDGET_EXHAUSTED"
+                save()
+                print("Stopped at the configured request budget.", flush=True)
+                return
+            client = hosted if hosted is not None else TrackedOllama()
+            client.unavailable = False
             before = len(getattr(client, "events", []))
             unavailable = []
             batch = {"number": start // args.batch_size + 1, "cycle": cycle + 1, "ids": [], "cache_hits": 0}
@@ -132,9 +173,16 @@ def main():
             batch["unavailable_rate"] = [len(unavailable), len(pending)]
             batch["events"] = events
             report["batches"].append(batch)
+            if gate is not None:
+                report["request_budget_remaining"] = gate.remaining
             save()
             print("batch", batch["number"], "cycle", cycle + 1, "HTTP errors", batch["http_error_rate"],
                   "unavailable", batch["unavailable_rate"], flush=True)
+            if gate is not None and gate.remaining == 0 and unavailable:
+                report["status"], report["blocker"] = "API_UNAVAILABLE", "REQUEST_BUDGET_EXHAUSTED"
+                save()
+                print("Stopped at the configured request budget.", flush=True)
+                return
             if not unavailable:
                 break
             pending = unavailable

@@ -1,0 +1,683 @@
+{
+  "model": "gemini-4-hydrogen",
+  "model_revision": "Configured API identifier; deployed patch revision was not retained",
+  "hardware": "Google-hosted inference hardware not disclosed; Windows client only",
+  "comparison_settings": {
+    "max_tokens": 8192,
+    "timeout_seconds": 180,
+    "temperature": 0,
+    "request_budget_per_arm": 8,
+    "min_interval_seconds": 13,
+    "batch_size": 1
+  },
+  "totals": {
+    "original": {
+      "planned": 46,
+      "completed_semantic_evaluations": 2,
+      "retained_rules": 0,
+      "wrong_approvable": [
+        0,
+        0
+      ],
+      "http_errors": [
+        0,
+        8
+      ],
+      "terminal_stages": {
+        "verifier": 2,
+        "request_budget": 1,
+        "not_submitted": 43
+      },
+      "operational_stop": "REQUEST_BUDGET_EXHAUSTED"
+    },
+    "structured": {
+      "planned": 46,
+      "completed_semantic_evaluations": 2,
+      "retained_rules": 0,
+      "wrong_approvable": [
+        0,
+        0
+      ],
+      "http_errors": [
+        0,
+        8
+      ],
+      "terminal_stages": {
+        "context_or_binding": 1,
+        "schema": 1,
+        "request_budget": 1,
+        "not_submitted": 43
+      },
+      "operational_stop": "REQUEST_BUDGET_EXHAUSTED"
+    }
+  },
+  "paired_completed": 2,
+  "cases": [
+    {
+      "id": "M01",
+      "frozen_reading": "At least two eligible ways out. The table separately requires one normal 1-UP exit and one accessory exit.",
+      "original": {
+        "terminal_stage": "verifier",
+        "rating": "NO_DRAFT_NEEDS_REVIEW",
+        "drafted_rule": null,
+        "reason": "needs something the plan does not provide: effectif (de 20 à 50) : aucun fait déclaré pour l'effectif; niveau RDC : aucun fait déclaré pour le niveau (the sentence seems to need: l'effectif et le niveau (RDC))",
+        "evidence_requests": [],
+        "author_note": "The verifier rejects omitted occupancy bounds. The catalogue does not declare occupancy or floor applicability facts. The frozen manual rule assumed project scope externally."
+      },
+      "structured": {
+        "terminal_stage": "context_or_binding",
+        "rating": "NO_DRAFT_NEEDS_REVIEW",
+        "drafted_rule": null,
+        "reason": "fact binding requires review",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "effectif",
+            "unit": "1",
+            "reason": "missing",
+            "why": "La règle M01 et la portée du tableau conditionnent le nombre de dégagements à un effectif compris entre 20 et 50 personnes, mais aucune liaison de fait pour l'effectif n'est disponible dans le catalogue.",
+            "where_to_look": "Notice de sécurité incendie, calcul d'effectif ou tableau des effectifs par niveau",
+            "clause": "M01"
+          },
+          {
+            "entity": "exits",
+            "fact": "rdc",
+            "unit": "1",
+            "reason": "missing",
+            "why": "La règle M01 précise 'RDC : 2', mais le catalogue ne fournit aucune liaison indiquant le niveau (rez-de-chaussée) de la zone évaluée ou de chaque dégagement dans 'exits'.",
+            "where_to_look": "Plans du rez-de-chaussée (RDC) et repérage des sorties et escaliers",
+            "clause": "M01"
+          },
+          {
+            "entity": "exits",
+            "fact": "exit_category_normal_or_stair",
+            "unit": "1",
+            "reason": "unverified",
+            "why": "La règle M01 porte sur le nombre de dégagements (sorties ou escaliers), alors que le catalogue ne fournit pour 'exits' que le fait booléen 'eligible' et place 'normal' et 'accessory' sur 'building'.",
+            "where_to_look": "Notice descriptive des dégagements normaux, accessoires et escaliers",
+            "clause": "M01"
+          }
+        ],
+        "author_note": "The model requests occupancy, floor and exit-category evidence. No rule is retained. These are proposed requests, not approved bindings; the occupancy request uses dimensionless unit 1, and the need for an additional exit-category fact has not been independently established."
+      }
+    },
+    {
+      "id": "M02",
+      "frozen_reading": "One normal 1-UP way out and one accessory way out; clear width is assessed under the door clause.",
+      "original": {
+        "terminal_stage": "verifier",
+        "rating": "NO_DRAFT_NEEDS_REVIEW",
+        "drafted_rule": null,
+        "reason": "needs something the plan does not provide: Effectif (de 20 à 50); Niveau rez-de-chaussée (RDC) (the sentence seems to need: l'effectif (nombre d'occupants))",
+        "evidence_requests": [],
+        "author_note": "Diagnostics reject a width obtained from the definition context and omitted occupancy bounds. The catalogue lacks explicit occupancy and floor scope facts."
+      },
+      "structured": {
+        "terminal_stage": "schema",
+        "rating": "NO_DRAFT_NEEDS_REVIEW",
+        "drafted_rule": null,
+        "reason": "1 validation error for SlotDraft\nevidence_requests.0.unit\n  Value error, unknown unit 'person' [type=value_error, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+        "evidence_requests": [
+          {
+            "entity": "building",
+            "fact": "effectif",
+            "unit": "1",
+            "reason": "missing",
+            "why": "La règle M02 s'applique pour un effectif de 20 à 50 personnes, mais aucune propriété d'effectif n'est fournie dans le catalogue.",
+            "where_to_look": "Notice de sécurité ou calcul d'effectif des personnes susceptibles d'emprunter les sorties",
+            "clause": "M02"
+          },
+          {
+            "entity": "building",
+            "fact": "level",
+            "unit": "1",
+            "reason": "missing",
+            "why": "La règle M02 vise spécifiquement le rez-de-chaussée ('RDC : 2'), sans fait correspondant dans le catalogue.",
+            "where_to_look": "Plans d'étage et notice de sécurité identifiant le rez-de-chaussée",
+            "clause": "M02"
+          }
+        ],
+        "author_note": "The first frame identifies missing applicability facts. The repair uses an unknown evidence-request unit, person, and fails schema validation. Returned evidence requests are from the previous valid frame, not an approved final interpretation. The generation schema does not enumerate the accepted unit vocabulary."
+      }
+    },
+    {
+      "id": "M03",
+      "frozen_reading": "Maximum travel is 50 m with two available exits, or 30 m with one. These plans have one relevant origin and all eligible exits are accessible from it.",
+      "original": {
+        "terminal_stage": "request_budget",
+        "rating": "NOT_EVALUATED",
+        "blocker": "REQUEST_BUDGET_EXHAUSTED"
+      },
+      "structured": {
+        "terminal_stage": "request_budget",
+        "rating": "NOT_EVALUATED",
+        "blocker": "REQUEST_BUDGET_EXHAUSTED"
+      }
+    },
+    {
+      "id": "M04",
+      "frozen_reading": "Walk from the public-room door to the dead-end junction at most 10 m.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M05",
+      "frozen_reading": "The horizontal connector between a stair and exit must offer at least two passage units, 1.40 m.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M06",
+      "frozen_reading": "Protected stair leads directly outdoors or discharges at most 20 m from an exit.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M07",
+      "frozen_reading": "Clear passage for the designated one-UP door must be at least 0.855 m after the permitted 5% below 0.90 m.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M08",
+      "frozen_reading": "Subdivision doors in the horizontal circulation used in both directions toward exits must swing both ways.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M09",
+      "frozen_reading": "No isolated group of one or two steps in the principal circulation.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M10",
+      "frozen_reading": "Horizontal circulation enclosure fire rating meets the rating required for the structure.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M11",
+      "frozen_reading": "Horizontal circulation provides prescribed smoke protection under the general provision.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M12",
+      "frozen_reading": "Door glazing is transparent and is neither red nor orange.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M13",
+      "frozen_reading": "A nonmotorized sliding door cannot close a public evacuation exit.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M14",
+      "frozen_reading": "Horizontal circulation ceiling finish meets M1.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M15",
+      "frozen_reading": "Circulation partition and floor finish meet M2 and M4 respectively.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "M16",
+      "frozen_reading": "With the public present, the exit opens from inside by pushing or by easy use of one device per leaf.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A01",
+      "frozen_reading": "Outdoor circulation surface must be firm, smooth and unobstructed for wheels and canes.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A02",
+      "frozen_reading": "Each substantial change in level needs an inclined path.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A03",
+      "frozen_reading": "Sidewalk width must be within the inclusive 1.50 m to 2.00 m range.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A04",
+      "frozen_reading": "The perpendicular curb-cut incline and both side transitions must each be below 5%.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A05",
+      "frozen_reading": "At least one in twenty stalls in public car parks or open-to-public garages must be reserved.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A06",
+      "frozen_reading": "The listed building classes must be adapted and have a usable accessible approach route.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A07",
+      "frozen_reading": "When customers use counters, shelves or writing surfaces, one in ten of the relevant equipment must be adapted.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A08",
+      "frozen_reading": "One in twenty seats in public rooms must be adapted.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A09",
+      "frozen_reading": "In the specified public buildings, adapt one in ten of the equipment in rooms and sanitary facilities.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A10",
+      "frozen_reading": "Public circulation spaces must be served by lifts that conform to the referenced standards.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A11",
+      "frozen_reading": "Public circulation passages must be at least 2 m wide and no steeper than 12%; both conditions apply.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A12",
+      "frozen_reading": "Each change of direction needs a resting landing of at least 1 m².",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A13",
+      "frozen_reading": "The relevant passages require handrails on both sides.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A14",
+      "frozen_reading": "The principal entrance must be at least 1 m wide with lateral slope no more than 20%.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "A15",
+      "frozen_reading": "Provide a fixed telephone for people with visual or hearing impairments at the rate of one per entrance.",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T01",
+      "frozen_reading": "roof_u le 0.65, within frozen Z3 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T02",
+      "frozen_reading": "wall_u le 0.7, within frozen Z3 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T03",
+      "frozen_reading": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T04",
+      "frozen_reading": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T05",
+      "frozen_reading": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T06",
+      "frozen_reading": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T07",
+      "frozen_reading": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T08",
+      "frozen_reading": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T09",
+      "frozen_reading": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T10",
+      "frozen_reading": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T11",
+      "frozen_reading": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T12",
+      "frozen_reading": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T13",
+      "frozen_reading": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T14",
+      "frozen_reading": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    },
+    {
+      "id": "T15",
+      "frozen_reading": "solar le 0.4, within frozen Z5 residential prescriptive scope",
+      "original": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      },
+      "structured": {
+        "terminal_stage": "not_submitted",
+        "rating": "NOT_EVALUATED"
+      }
+    }
+  ],
+  "limitations": [
+    "No retained candidate exists to score as an exact, partial or wrong executable interpretation.",
+    "No approvable rule exists; wrong approvable / approvable is undefined, 0/0.",
+    "Requests and their units require review; unresolved output is not a demonstration of useful accuracy.",
+    "The original local model's wrong retained width rule was not reached by this hosted sample, so that capacity question remains unanswered.",
+    "These observations do not establish the cause of failures on the other 44 obligations.",
+    "No end-to-end verdicts were evaluated from these drafts. False-pass rate and violation precision are unmeasured.",
+    "No held-out model or checker run was submitted. Do not pool this model with Flash or local outputs."
+  ]
+}

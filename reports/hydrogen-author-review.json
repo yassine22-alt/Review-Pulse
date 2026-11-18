@@ -1,0 +1,25 @@
+{
+  "author": "Benchmark author; no independent review",
+  "scope": "Two completed development obligations only; neither arm retained a rule",
+  "reviews": [
+    {
+      "id": "M01",
+      "original_stage": "verifier",
+      "original_note": "The verifier rejects omitted occupancy bounds. The catalogue does not declare occupancy or floor applicability facts. The frozen manual rule assumed project scope externally.",
+      "structured_note": "The model requests occupancy, floor and exit-category evidence. No rule is retained. These are proposed requests, not approved bindings; the occupancy request uses dimensionless unit 1, and the need for an additional exit-category fact has not been independently established."
+    },
+    {
+      "id": "M02",
+      "original_stage": "verifier",
+      "original_note": "Diagnostics reject a width obtained from the definition context and omitted occupancy bounds. The catalogue lacks explicit occupancy and floor scope facts.",
+      "structured_note": "The first frame identifies missing applicability facts. The repair uses an unknown evidence-request unit, person, and fails schema validation. Returned evidence requests are from the previous valid frame, not an approved final interpretation. The generation schema does not enumerate the accepted unit vocabulary."
+    }
+  ],
+  "limitations": [
+    "No retained candidate exists to score as an exact, partial or wrong executable interpretation.",
+    "No approvable rule exists; wrong approvable / approvable is undefined, 0/0.",
+    "Requests and their units require review; unresolved output is not a demonstration of useful accuracy.",
+    "The original local model's wrong retained width rule was not reached by this hosted sample, so that capacity question remains unanswered.",
+    "These observations do not establish the cause of failures on the other 44 obligations."
+  ]
+}
