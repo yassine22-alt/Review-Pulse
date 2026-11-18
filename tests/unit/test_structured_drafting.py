@@ -119,3 +119,22 @@ def test_dimensionless_multiplier_does_not_become_a_count():
     })
     program = compile_slots(frame, context, catalogue_from(inputs, None))
     assert program.requirement.left.right.unit == "1"
+
+
+def test_wire_schema_excludes_sentences_and_quantities_as_references():
+    import re
+
+    from reviewpulse.interpreter.structured import slot_schema
+
+    context, inputs, _ = case()
+    schema = slot_schema(catalogue_from(inputs, None), context)
+    assert schema["properties"]["nodes"]["maxItems"] == 64
+    pattern = schema["properties"]["requirement"]["pattern"]
+    assert re.fullmatch(pattern, "n12")
+    assert not re.fullmatch(pattern, "1.4 m")
+    assert not re.fullmatch(pattern, "The full source sentence")
+    for form in schema["$defs"]["FlatNode"]["oneOf"]:
+        assert form["properties"]["id"]["pattern"] == pattern
+        for name in ("left", "right", "body", "where", "node_filter", "edge_filter"):
+            if name in form["properties"]:
+                assert form["properties"][name]["pattern"] == pattern

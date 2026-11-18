@@ -19,6 +19,8 @@ from .schema import Binding, DeclarationDescription, FactDeclaration, Program, S
 from .units import compatible, convert, vocabulary
 from .validate import validate_program
 
+WIRE_NODE_LIMIT = 64
+
 
 class ProposedFact(DeclarationDescription):
     source: FlatSpan
@@ -63,6 +65,19 @@ Return JSON matching the schema. The resulting draft requires human approval."""
 def slot_schema(catalogue: dict, context: ContextBundle) -> dict:
     schema = SlotDraft.model_json_schema()
     node = schema["$defs"]["FlatNode"]["properties"]
+    # A reference cannot be a quantity or source sentence. The finite wire
+    # budget bounds pathological lists, independently of regulatory limits.
+    reference = {"type": "string", "pattern": r"^n[0-9]{1,3}$"}
+    for field in ("id", "left", "right", "where", "body", "node_filter", "edge_filter"):
+        node[field] = dict(reference)
+    node["args"] = {"type": "array", "items": reference, "maxItems": WIRE_NODE_LIMIT}
+    node["variable"] = {"type": "string", "pattern": r"^\$[A-Za-z][A-Za-z0-9_]*$"}
+    schema["properties"]["nodes"]["maxItems"] = WIRE_NODE_LIMIT
+    schema["properties"]["unresolved"] = {
+        "type": "array", "items": {"type": "string", "maxLength": 512}, "maxItems": 8}
+    for field in ("requirement", "applicability", "exemption"):
+        schema["properties"][field] = dict(reference) if field == "requirement" else {
+            "anyOf": [dict(reference), {"type": "null"}]}
     node["name"] = {"anyOf": [{"type": "string", "enum": sorted(catalogue["bindings"]) + ["id"]},
                                {"type": "string", "pattern": r"^[A-Za-z_][A-Za-z0-9_]*$"}, {"type": "null"}]}
     units = vocabulary(binding.get("unit", "1") for binding in catalogue["bindings"].values())
@@ -141,7 +156,7 @@ def wire_contract(schema: dict) -> dict:
             "node_forms": [{"ops": choice["properties"]["op"]["enum"],
                             "required_fields": choice["required"]}
                            for choice in schema["$defs"]["FlatNode"]["oneOf"]],
-            "references": "left/right, args, where/body, requirement/applicability/exemption reference unique node ids",
+            "references": "Use unique short node ids n0, n1, etc. left/right, args, where/body and roots reference those ids",
             "sources": "array of objects containing clause and exact quote"}
 
 
