@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-19",
+  "status": "PREREGISTERED_BEFORE_NEW_ASSISTED_EXTRACTION_EVALUATION",
+  "development_documents": [
+    "Morocco fire M01-M16",
+    "accessibility A01-A15",
+    "thermal T01-T15"
+  ],
+  "fourth_document": "Sealed source and labels unchanged; never loaded by development runner.",
+  "candidates": [
+    "deterministic table frame + closed fact-name selection + existing validators + explicit reviewer edits",
+    "production typed-slot assisted draft + same validators and edit rubric"
+  ],
+  "edit_unit": "One semantic correction at one independently meaningful site. Unit addition, fact/entity rebinding, each missing applicability bound, and requirement replacement count separately. Wholesale replacement of the main connective/quantifier structure is rewrite. No edit inferred merely from string inequality.",
+  "eligibility": {
+    "numeric_denominator": "Freeze author-reviewed numeric target-obligation IDs before evaluating. Include unsupported clauses; exclude bare article IDs, zone identifiers, page numbers and quantities only in unrelated context. Report all 46 coverage separately.",
+    "minimum_low_burden_share": 0.5,
+    "low_burden": "Fully source-correct connected rule reached with zero or one semantic edit; missing-context cases cannot be counted as low burden.",
+    "wrong_or_incomplete_source_approvable_maximum": 0,
+    "minimum_source_reviewed_approvable": 10,
+    "independent_review": "Ten blinded rows returned by teammate; report exact agreement and disagreements. No independent-review claim until sheet returned.",
+    "binding_and_scope": "No approvable candidate with wrong ownership, omitted applicability, missing unit or unsupported exception. No model approval bypass."
+  },
+  "choice_order": [
+    "Discard candidates with any source-wrong/incomplete approvable draft, or missing required measurements.",
+    "Require >=50% of frozen numeric development obligations to reach intended rule with <=1 edit.",
+    "Among eligible candidates, choose lower median semantic edit burden; then fewer rewrites; then fewer measured tokens per finished clause.",
+    "If no candidate qualifies, report no pipeline selected and leave fourth document sealed. Do not relax criteria after seeing results."
+  ],
+  "held_out_run": {
+    "precondition": "Selected candidate and code/configuration commit recorded before opening any fourth-document source/labels for inference.",
+    "attempts": 1,
+    "no_tuning": true,
+    "transport_failure": "Report API_UNAVAILABLE separately; cached retry of the identical failed request is allowed, never a changed prompt/model after seeing a semantic response.",
+    "grading": "Same edit rubric, whole source meaning, source-wrong approvable count and denominators. All labels remain author-written without independent review unless returned sheet covers them."
+  }
+}
