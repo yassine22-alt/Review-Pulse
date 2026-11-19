@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-19",
+  "non_slow_tests": {
+    "passed": 1126,
+    "skipped": 2,
+    "slow_deselected": 45,
+    "seconds": 259.54,
+    "command": ".venv/Scripts/python.exe -m pytest -m \"not slow\" -q -p no:cacheprovider"
+  },
+  "initial_invocation": "Console pytest entry point could not import scripts at collection; module invocation includes repository root and completes successfully. No tests were removed.",
+  "ruff": "All changed Python modules/tests passed",
+  "cli_after_suite": "Offline default-protocol dry run: 92 requests planned, monolithic and deterministic only; zero hosted calls.",
+  "secrets": "Exact values of the three accessible provider environment secrets absent from all changed tracked files; values not printed.",
+  "sealed_fourth": "Working-tree and HEAD blobs unchanged against ad7742ce; no tests reference or run fourth document.",
+  "hosted_expression": "Stopped by runner guard; no older drafting processes or scheduled jobs found in read-only inspection.",
+  "new_hosted_status": "Production strict 1/46 completed; closed strict 2/46 completed. Paused at provider rolling daily allowance; no continued retries.",
+  "drawing_evaluation": "Four frozen references evaluated with original local trained weights; models/drawings not uploaded to drafting providers.",
+  "unmeasured": [
+    "Slow tests and general segmentation regression",
+    "Completed strict comparison",
+    "Independent human adjudication",
+    "Eight-rule source-to-LLM-to-review-to-verdict demo",
+    "Actual reviewer edit effort and false passes for proposed eight-rule scope"
+  ]
+}

@@ -33,3 +33,9 @@ def test_only_a_complete_outer_code_fence_is_removed():
     assert trace[0]["operations"] == ["outer_code_fence"]
     incomplete = {"require": "```expression\nbuilding.clear_width <= 1 m"}
     assert normalize_expressions(incomplete, catalogue()) == (incomplete, [])
+
+
+def test_reserved_or_collection_names_are_never_qualified_as_global_facts():
+    cat = {**catalogue(), "building": ["count", "items", "clear_width"]}
+    raw = {"require": "count(items x) >= 1 count"}
+    assert normalize_expressions(raw, cat) == (raw, [])

@@ -961,3 +961,86 @@ Hosted compact-expression generation is stopped. [Thirty assistant-adjudicated d
 Crucially M08 staged is a fixture-predicate match but omits the source applicability restriction. Thus 1/1 source-reviewed approvable drafts is incomplete; the earlier frozen-match-based 0/1 error count did not measure source-correctness. No fully source-correct retained rule was established. A01 frozen firm fact is not explicit in the supplied excerpt; A10 frozen true is an unsupported placeholder. Neither is silently relabelled or used as a correct automated interpretation.
 
 [All 69 parse failures](../reports/expression-parse-audit.md) were directly categorized: naming/operator form 35/69, unsupported constructs 17/69, substantive semantic errors 17/69, outer wrappers/formatting 0/69. These are exclusive primary causes; naming errors can coexist with missing scope/units. Lossless surface replay changed 32/69 outputs, moved 5/69 beyond parsing, and retained 0/69 after full gates (four then fail subject grounding, one verifier). It never invents variables, fact synonyms, metadata, quantities, exceptions or scope. Every change has field before/after/operation logs. Production default gates remain unchanged. Twelve focused tests passed, including negative normalization and comparator/unit cases.
+
+
+## Archived status before the direct audit (19 November)
+
+# ReviewPulse — current status
+
+19 November 2026. **The requested comparison is unfinished; no accuracy improvement
+is established.** Local LLM generation is stopped. With the user’s approval,
+Groq GPT-OSS-120B and Qwen3.8-27B replace unavailable Mistral/Meta-Llama arms.
+Mistral’s current free mode excludes API access; no billing was enabled.
+Keys come only from environment variables. Drawings remain local.
+
+The hosted experiment uses a compact-expression research contract, shared by
+both arms; it does not measure the production node-slot drafter. GPT-OSS resumed to 89/92 drafts, then hit the provider daily token limit. Qwen stopped after three exhausted
+HTTP-429 cycles; project-level limit clarification is pending. API errors and
+budget deferrals are excluded from semantic counts. Caches preserve completed
+stages. The fourth document remains sealed and unrun.
+
+## Headline results
+
+| Model / arm | Complete JSON | Retained | Frozen match | Wrong approvable |
+| --- | --- | --- | --- | --- |
+| GPT-OSS / monolithic | 45/46 | 0/45 | 0/45 | undefined, 0/0 |
+| GPT-OSS / staged | 44/46 | 1/44 | 1/44 | 0/1 |
+| Qwen / monolithic | 4/46 | 0/4 | 0/4 | undefined, 0/0 |
+| Qwen / staged | 4/46 | 0/4 | 0/4 | undefined, 0/0 |
+
+“Frozen match” means normalized fixture IR under its assumed scope, not independent
+legal interpretation. Of 89 GPT drafts, 69 fail expression parsing. Retention
+requires deterministic checks and still needs human approval. Exact field
+agreement, raw lexical diagnostics, per-obligation grades and HTTP-batch counts
+are in the [scored report](../reports/free-drafting-scored.json) and
+[history](results-history.md#18-november-2026-free-hosted-comparison-incomplete).
+Subject/citation agreement can undercredit valid alternative phrases; raw
+mentions do not prove correct binding or scope.
+
+- **Deterministic extraction:** 46/46 clauses assessed; 25/44 typed reference
+  numeric literals matched. Source quantities/operators are locked before closed
+  catalogue choice. Complex composition requires review. Hosted comparison is
+  **not run**, so this is not an interpretation-accuracy result.
+- **Agreement gate:** 4/46 paired outputs per arm; 0/4 candidates and 4/4
+  abstentions per arm. Both single-model validators also retain 0/4 on these
+  same cases. Added benefit is unproven; false-candidate rate is undefined 0/0.
+- **Trained perception, A-7:** both paths classify **0/4 bedrooms** and recover
+  **0/2 schedules**. Raster gives 25 door/19 window candidates and 4/6 annotated-box
+  overlaps; this partial annotation cannot establish global opening accuracy.
+  Wrong view-scale/layout handling also contributes; this does not isolate model quality.
+- **Assisted slice:** **0/5 automatic decisions; 3/5 after author evidence**.
+  It uses an explicitly authored project brief and manual rule interpretations.
+  Two rectangular room readings and corridor links are author-supplied; clear
+  opening and ground-level exit coverage remain unresolved. This is not an
+  automated regulation-to-drawing success. [Data](../reports/plan-answerable-results.json).
+
+## Not measured / do not claim
+
+Full 46-case comparisons, closed-link model quality, actual reviewer edits/time,
+independent label correctness, held-out adaptation and general segmentation
+regression remain unmeasured. Labels have no independent review. Historical
+ledger attestations are synthetic; new author attestations are unverified
+as-drawn interpretations. Finite capabilities, small samples and the provisional
+25% scale bound remain limitations. Zero decisions or zero candidates do not
+establish safety. Do not claim improved accuracy or promote an unmeasured arm.
+
+Next: clarify Qwen project limits, resume the three remaining GPT drafts when the rolling allowance recovers, and
+complete the same-case closed-link comparison before choosing a pipeline or
+unsealing the fourth document. **1,104 tests passed; 2 skipped; 45 slow excluded.**
+Reproduction commands and detailed failure analysis are in the history.
+
+
+## 19 November: strict-slot and drawing continuation
+
+Compact-expression hosting is stopped in the runner. Strict production SlotDraft and numeric closed-link hosting were attempted with the existing approved GPT-OSS model; no drawings were sent. Groq rejected overlapping scalar integer/number alternatives and duplicate string alternatives. Lossless strict-schema canonicalization removes redundant integer branches and merges string enum/pattern unions, preserving field names. There is no fallback to unconstrained output. The two separate diagnostic calls were sanitized before display; raw provider error bodies were not stored. Native strict output then succeeded. A per-report OS lock prevents concurrent resume workers, including after a process crash.
+
+[Token estimate and side-by-side status](../reports/strict-focused-comparison.json): the focused 92-request plan is estimated at 156,649–313,373 input tokens, versus 179,343–358,774 without retrieval; full output caps add 153,088. These are UTF-8 byte heuristics, not model tokenizer measurements, and correspond to roughly two to three 200k-token windows at full caps. Actual first typed request: 3,231 prompt plus 1,295 completion tokens. Two completed closed requests used 1,397 tokens total. The new production arm completed 1/46, retained 0/1, assistant source-correct 0/1; the closed arm completed 2/46, retained 0/2, whole-source-correct 0/2. Its distance/fact choices are partly correct but the review flag is false despite unsupported scope. The deterministic quantity gate rejects both. Source comparison on T01 is possible across both new arms and archived expression arms; no arm ranking follows from one shared case. The next production call hit the rolling daily limit (200,000; used 197,049; requested 4,423). API rejections are not semantic failures. Full comparisons remain unfinished.
+
+[Four-drawing results](../reports/native-label-study.md), using labels frozen at c1c452b3: native name matching 0/17, 4/14, 0/7, 4/5; bedrooms 0/4, 2/3, 0/1, 2/2. Native containment names existing regions and refuses conflicts; it cannot recover missing boundaries. The existing builder already used native labels. No trained room-type classifier exists; the original trained primitive classifier supplies geometry and unknown room types stay unknown. Selected opening box hits are partial annotations, not global detection accuracy. Three additional sources are public planning-CDN copies, not verified official council archives. Review scope selection was supplied by the author; no automatic view discovery or sealed-material tuning was claimed.
+
+[Eight-rule demo scope](eight-rule-demo.md) selects 2021 IRC Chapter 3 and one thin-line metric bungalow style. It is NOT an executed source-to-LLM-to-approval walkthrough. The published-source chapter was indexed but its direct fetch returned 403; paraphrases in the scope file are planning notes, never substituted as original LLM input. No eight-rule edits, decisions or false-pass counts have been measured. This is separate from the older five-rule authored brief.
+
+
+### Final validation for this round
+
+Full non-slow suite: **1,126 passed, two skipped, 45 slow deselected, 259.54 seconds** using `python -m pytest`. An initial console-entry invocation failed collection because the repository root was missing from its import path; no tests were removed. Changed files pass Ruff and diff whitespace checks. The subsequent CLI-only default-arm correction was checked offline: it plans the protocol's 92 intended requests without a hosted call. No old drafting processes or scheduled jobs were found. Exact environment-secret values were absent from changed tracked files, without printing them. Fourth-document blobs remain unchanged from ad7742ce, with no model runs or test references. [Validation record](../reports/nov19-audit-validation.json). Slow tests and general segmentation regression remain unmeasured.

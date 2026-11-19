@@ -61,12 +61,15 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--model", required=True)
     parser.add_argument("--protocol", type=Path)
-    parser.add_argument("--arms", nargs="+", default=["monolithic", "decomposed"])
+    parser.add_argument("--arms", nargs="+", help="Default: the arms declared in the selected protocol")
     parser.add_argument("--budget", type=int, default=200)
     parser.add_argument("--dry-run", action="store_true", help="Estimate bytes/tokens offline; no API or key access")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     protocol = json.loads((args.protocol or repo / "reports/free-drafting-protocol.json").read_text(encoding="utf-8"))
+    args.arms = args.arms or protocol["arms"]
+    if len(set(args.arms)) != len(args.arms) or set(args.arms) - set(protocol["arms"]):
+        raise ValueError("arms must be a unique subset of the declared protocol")
     if args.model not in protocol["models"]:
         raise ValueError("model not approved in frozen protocol")
     if not args.dry_run and protocol.get("contract", "original_expression") == "original_expression" and args.arms != ["deterministic"]:

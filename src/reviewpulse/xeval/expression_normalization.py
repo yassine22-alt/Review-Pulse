@@ -4,7 +4,7 @@ from __future__ import annotations
 import copy
 import re
 
-from .expr_ir import SYMBOL
+from .expr_ir import KEYWORDS, SYMBOL
 
 _PARTS = re.compile(r"('[^']*'|\"[^\"]*\")")
 _IDENT = re.compile(r"(?<![\w.])([A-Za-z_][A-Za-z0-9_]*)(?![\w.])")
@@ -19,7 +19,7 @@ def normalize_expressions(raw: dict, catalogue: dict) -> tuple[dict, list[dict]]
     """
     result, trace = copy.deepcopy(raw), []
     local = {name for spec in catalogue.get("collections", {}).values() for name in spec.get("facts", [])}
-    global_names = set(catalogue.get("building", [])) - local
+    global_names = set(catalogue.get("building", [])) - local - set(catalogue.get("collections", {})) - KEYWORDS
     owner = catalogue.get("whole") or "building"
     for field in ("require", "applies_when", "unless"):
         original = result.get(field)
