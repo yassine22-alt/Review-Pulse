@@ -14,16 +14,16 @@
       "summary": {
         "decomposed": {
           "complete_json_outputs": [
-            33,
+            44,
             46
           ],
           "retained": [
             1,
-            33
+            44
           ],
           "matched_frozen_ir": [
             1,
-            33
+            44
           ],
           "approvable_total": 1,
           "wrong_approvable_reviewed": [
@@ -32,109 +32,110 @@
           ],
           "unadjudicated_approvable": 0,
           "grades": {
-            "NOT_MATCHED": 28,
+            "NOT_MATCHED": 39,
             "MATCHES_FROZEN_IR": 1,
             "CORRECTLY_NEEDS_REVIEW": 2,
             "PARTLY_MATCHES": 2,
             "NOT_SCORED_API_OR_BUDGET": 1,
-            "NOT_SCORED_PENDING": 12
+            "NOT_SCORED_PENDING": 1
           },
           "stages": {
-            "expression_parse": 25,
-            "schema_or_compile": 1,
+            "expression_parse": 34,
+            "schema_or_compile": 2,
             "retained": 1,
             "entity_binding": 6,
-            "budget": 1,
-            "pending": 12
+            "declaration": 1,
+            "transport": 1,
+            "pending": 1
           },
           "slots": {
             "subject": {
               "correct": 0,
-              "denominator": 33,
+              "denominator": 44,
               "accuracy": 0.0,
               "matched_atoms": 0,
-              "gold_atoms": 33,
-              "predicted_atoms": 33
+              "gold_atoms": 44,
+              "predicted_atoms": 44
             },
             "fact": {
               "correct": 1,
-              "denominator": 31,
-              "accuracy": 0.03225806451612903,
-              "matched_atoms": 1,
-              "gold_atoms": 51,
-              "predicted_atoms": 5
+              "denominator": 42,
+              "accuracy": 0.023809523809523808,
+              "matched_atoms": 2,
+              "gold_atoms": 62,
+              "predicted_atoms": 9
             },
             "operator": {
               "correct": 1,
-              "denominator": 30,
-              "accuracy": 0.03333333333333333,
-              "matched_atoms": 6,
-              "gold_atoms": 60,
-              "predicted_atoms": 11
+              "denominator": 41,
+              "accuracy": 0.024390243902439025,
+              "matched_atoms": 7,
+              "gold_atoms": 71,
+              "predicted_atoms": 14
             },
             "value": {
               "correct": 0,
-              "denominator": 21,
+              "denominator": 32,
               "accuracy": 0.0,
-              "matched_atoms": 1,
-              "gold_atoms": 31,
-              "predicted_atoms": 5
+              "matched_atoms": 2,
+              "gold_atoms": 42,
+              "predicted_atoms": 9
             },
             "unit": {
               "correct": 1,
-              "denominator": 21,
-              "accuracy": 0.047619047619047616,
+              "denominator": 32,
+              "accuracy": 0.03125,
               "matched_atoms": 2,
-              "gold_atoms": 25,
-              "predicted_atoms": 3
+              "gold_atoms": 36,
+              "predicted_atoms": 4
             },
             "applicability": {
               "correct": 0,
-              "denominator": 2,
+              "denominator": 13,
               "accuracy": 0.0,
-              "matched_atoms": 2,
-              "gold_atoms": 10,
-              "predicted_atoms": 6
+              "matched_atoms": 14,
+              "gold_atoms": 65,
+              "predicted_atoms": 39
             },
             "clause_span": {
-              "correct": 24,
-              "denominator": 33,
-              "accuracy": 0.7272727272727273,
-              "matched_atoms": 35,
-              "gold_atoms": 45,
-              "predicted_atoms": 39
+              "correct": 29,
+              "denominator": 44,
+              "accuracy": 0.6590909090909091,
+              "matched_atoms": 51,
+              "gold_atoms": 67,
+              "predicted_atoms": 55
             }
           },
           "raw_lexical_agreement": {
             "fact_names": [
-              5,
-              28
+              16,
+              39
             ],
             "number_values": [
-              7,
-              19
+              13,
+              30
             ],
             "comparators": [
-              7,
-              20
+              9,
+              31
             ]
           },
-          "api_failures": 0,
-          "budget_deferred": 1,
-          "not_attempted": 12
+          "api_failures": 1,
+          "budget_deferred": 0,
+          "not_attempted": 1
         },
         "monolithic": {
           "complete_json_outputs": [
-            34,
+            45,
             46
           ],
           "retained": [
             0,
-            34
+            45
           ],
           "matched_frozen_ir": [
             0,
-            34
+            45
           ],
           "approvable_total": 0,
           "wrong_approvable_reviewed": [
@@ -143,93 +144,93 @@
           ],
           "unadjudicated_approvable": 0,
           "grades": {
-            "NOT_MATCHED": 30,
+            "NOT_MATCHED": 41,
             "PARTLY_MATCHES": 3,
             "CORRECTLY_NEEDS_REVIEW": 1,
-            "NOT_SCORED_PENDING": 12
+            "NOT_SCORED_PENDING": 1
           },
           "stages": {
-            "expression_parse": 24,
+            "expression_parse": 35,
             "source_span": 3,
             "subject": 3,
             "entity_binding": 4,
-            "pending": 12
+            "pending": 1
           },
           "slots": {
             "subject": {
               "correct": 0,
-              "denominator": 34,
+              "denominator": 45,
               "accuracy": 0.0,
               "matched_atoms": 0,
-              "gold_atoms": 34,
-              "predicted_atoms": 34
+              "gold_atoms": 45,
+              "predicted_atoms": 45
             },
             "fact": {
               "correct": 0,
-              "denominator": 32,
+              "denominator": 43,
               "accuracy": 0.0,
               "matched_atoms": 0,
-              "gold_atoms": 52,
+              "gold_atoms": 63,
               "predicted_atoms": 6
             },
             "operator": {
               "correct": 1,
-              "denominator": 31,
-              "accuracy": 0.03225806451612903,
+              "denominator": 42,
+              "accuracy": 0.023809523809523808,
               "matched_atoms": 7,
-              "gold_atoms": 61,
+              "gold_atoms": 72,
               "predicted_atoms": 17
             },
             "value": {
               "correct": 2,
-              "denominator": 22,
-              "accuracy": 0.09090909090909091,
+              "denominator": 33,
+              "accuracy": 0.06060606060606061,
               "matched_atoms": 3,
-              "gold_atoms": 32,
+              "gold_atoms": 43,
               "predicted_atoms": 4
             },
             "unit": {
               "correct": 2,
-              "denominator": 22,
-              "accuracy": 0.09090909090909091,
+              "denominator": 33,
+              "accuracy": 0.06060606060606061,
               "matched_atoms": 2,
-              "gold_atoms": 26,
+              "gold_atoms": 37,
               "predicted_atoms": 3
             },
             "applicability": {
               "correct": 0,
-              "denominator": 3,
+              "denominator": 14,
               "accuracy": 0.0,
-              "matched_atoms": 3,
-              "gold_atoms": 15,
-              "predicted_atoms": 12
+              "matched_atoms": 13,
+              "gold_atoms": 70,
+              "predicted_atoms": 40
             },
             "clause_span": {
-              "correct": 26,
-              "denominator": 34,
-              "accuracy": 0.7647058823529411,
-              "matched_atoms": 35,
-              "gold_atoms": 47,
-              "predicted_atoms": 39
+              "correct": 32,
+              "denominator": 45,
+              "accuracy": 0.7111111111111111,
+              "matched_atoms": 51,
+              "gold_atoms": 69,
+              "predicted_atoms": 58
             }
           },
           "raw_lexical_agreement": {
             "fact_names": [
-              6,
-              26
+              14,
+              37
             ],
             "number_values": [
-              8,
-              19
+              12,
+              30
             ],
             "comparators": [
               6,
-              20
+              31
             ]
           },
           "api_failures": 0,
           "budget_deferred": 0,
-          "not_attempted": 12
+          "not_attempted": 1
         }
       },
       "rows": [
@@ -10097,10 +10098,160 @@
           "id": "T03",
           "arm": "decomposed",
           "retained": false,
-          "status": "BUDGET_DEFERRED",
-          "stage": "budget",
-          "reason": "INVOCATION_OR_DAILY_BUDGET",
-          "http_status": null,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "Prescriptive approach for residential buildings",
+            "constraints": [
+              "Climate zone Z3",
+              "Target range 26–35 %",
+              "U-value of windows ≤ 2.60 W/m²·K"
+            ],
+            "applicability": [
+              "Residential buildings"
+            ],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "Interpretation of the 26–35 % figure (e.g., airtightness, energy reduction, etc.)"
+            ]
+          },
+          "raw": {
+            "title": "Maximum window U-value for prescriptive residential buildings in climate zone Z3",
+            "applies_when": "(building_class == \"residential\") and (approach == \"prescriptive\") and (climate_zone == \"Z3\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+            "unless": null,
+            "require": "window_u <= 2.60",
+            "sources": [
+              {
+                "clause": "T03 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+              },
+              {
+                "clause": "T03",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+              }
+            ],
+            "unresolved": [
+              "Interpretation of the 26–35 % glazing ratio figure (e.g., whether it refers to airtightness, solar gain reduction, or another metric)"
+            ],
+            "subject": "Prescriptive approach for residential buildings",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T03",
+                  "quote": "Approche prescriptive, bâtiments résidentiels"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T03",
+                  "quote": "Approche prescriptive"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z3",
+                "source": {
+                  "clause": "T03",
+                  "quote": "Z3"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T03",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T03",
+                  "quote": "26 – 35 %"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 2007,
+            "completion_tokens": 675,
+            "seconds": 4.95,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 5
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
           "model": "openai/gpt-oss-120b",
           "frozen_interpretation": "window_u le 2.6, within frozen Z3 residential prescriptive scope",
           "frozen_requirement": {
@@ -10117,205 +10268,3570 @@
             }
           },
           "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T04",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Minimum floor slab thermal resistance for residential prescriptive approach in climate zone Z3",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z3\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+            "unless": null,
+            "require": "slab_r >= 0.75",
+            "sources": [
+              {
+                "clause": "T04",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "slab_r",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T04",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T04",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z3",
+                "source": {
+                  "clause": "T04",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+                }
+              },
+              {
+                "kind": "number",
+                "unit": "%",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T04",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+                }
+              },
+              {
+                "kind": "number",
+                "unit": "%",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T04",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1921,
+            "completion_tokens": 817,
+            "seconds": 62.41,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 3,
+              "gold_atoms": 5,
+              "predicted_atoms": 5
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.75,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T04",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels",
+            "constraints": [
+              "Approche prescriptive",
+              "Zone climatique Z3",
+              "26 – 35 % (unspecified parameter)",
+              "R des planchers sur sol ≥ 0,75 m²·K/W"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "Interpretation of the 26 – 35 % value"
+            ]
+          },
+          "raw": {
+            "title": "Floor slab thermal resistance requirement",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"résidentiels\" and climate_zone == \"Z3\"",
+            "unless": null,
+            "require": "slab_r >= 0.75",
+            "sources": [
+              {
+                "clause": "T04",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+              }
+            ],
+            "unresolved": [
+              "Interpretation of the 26 – 35 % glazing ratio value"
+            ],
+            "subject": "bâtiments résidentiels",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T04 header",
+                  "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "résidentiels",
+                "source": {
+                  "clause": "T04 header",
+                  "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z3",
+                "source": {
+                  "clause": "T04 header",
+                  "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 2006,
+            "completion_tokens": 488,
+            "seconds": 60.77,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.75,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T05",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Prescriptive residential buildings in climate zone Z3 must have glazing ratio 26‑35% and solar factor ≤0.5",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z3\"",
+            "unless": null,
+            "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and solar_factor <= 0.5",
+            "sources": [
+              {
+                "clause": "T05 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+              },
+              {
+                "clause": "T05",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "building",
+            "metadata_applicability": [],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1920,
+            "completion_tokens": 370,
+            "seconds": 1.17,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 5,
+              "predicted_atoms": 0
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "solar"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.5,
+              "unit": "1"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              false,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T05",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z3",
+              "TGBV 26 % – 35 %",
+              "Autres ≤ 0,5"
+            ],
+            "applicability": [
+              "résidentiels"
+            ],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "interpretation of \"Autres\" field"
+            ]
+          },
+          "raw": {
+            "title": "Prescriptive residential building glazing and solar factor limits",
+            "applies_when": "subject == \"bâtiments résidentiels (approche prescriptive)\"",
+            "unless": null,
+            "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and solar <= 0.5",
+            "sources": [
+              {
+                "clause": "T05",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |"
+              }
+            ],
+            "unresolved": [
+              "interpretation of \"Autres\" field"
+            ],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z3",
+                "source": {
+                  "clause": "T05",
+                  "quote": "Z3"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1997,
+            "completion_tokens": 362,
+            "seconds": 57.58,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 1
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "solar le 0.5, within frozen Z3 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "solar"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.5,
+              "unit": "1"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T06",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Maximum roof U-value for residential buildings in climate zone Z4",
+            "applies_when": "approach == \"prescriptive\" and climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+            "unless": null,
+            "require": "roof_u <= 0.55",
+            "sources": [
+              {
+                "clause": "T06 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+              },
+              {
+                "clause": "T06",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "roof_u",
+            "metadata_applicability": [],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1920,
+            "completion_tokens": 348,
+            "seconds": 21.24,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 5,
+              "predicted_atoms": 0
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "roof_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.55,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T06",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "Prescriptive approach for residential buildings",
+            "constraints": [
+              "Zone climatique = Z4",
+              "TGBV between 26 % and 35 %",
+              "U des toitures exposées ≤ 0.55 W/m²/K"
+            ],
+            "applicability": [
+              "Usage = résidentiel",
+              "Approche = prescriptive"
+            ],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "Interpretation of the 26–35 % value as a TGBV constraint"
+            ]
+          },
+          "raw": {
+            "title": "U des toitures exposées ≤ 0.55 W/m²/K for residential prescriptive approach in climate zone Z4",
+            "applies_when": "(building_class == \"résidentiel\") and (approach == \"prescriptive\") and (climate_zone == \"Z4\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+            "unless": null,
+            "require": "roof_u <= 0.55",
+            "sources": [
+              {
+                "clause": "T06 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+              },
+              {
+                "clause": "T06",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+              }
+            ],
+            "unresolved": [
+              "Interpretation of the 26–35 % value as a TGBV constraint"
+            ],
+            "subject": "Prescriptive approach for residential buildings",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "résidentiel",
+                "source": {
+                  "clause": "T06",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T06",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T06",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T06",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T06",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 2019,
+            "completion_tokens": 938,
+            "seconds": 61.59,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 5
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "roof_u le 0.55, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "roof_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.55,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T07",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Maximum exterior wall U-value for residential buildings in climate zone Z4",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+            "unless": null,
+            "require": "wall_u <= 0.60",
+            "sources": [
+              {
+                "clause": "T07 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+              },
+              {
+                "clause": "T07",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "wall_u",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T07",
+                  "quote": "Approche prescriptive"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T07",
+                  "quote": "bâtiments résidentiels"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T07",
+                  "quote": "Z4"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T07",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T07",
+                  "quote": "26 – 35 %"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1919,
+            "completion_tokens": 574,
+            "seconds": 61.7,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 5
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "wall_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T07",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z4",
+              "TGBV 26–35 %",
+              "U des murs extérieurs ≤ 0,60 W/m²/K"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": []
+          },
+          "raw": {
+            "title": "U-value of exterior walls must not exceed 0.60 W/m²/K for prescriptive residential buildings in climate zone Z4 with glazing ratio 26–35 %",
+            "applies_when": "climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+            "unless": null,
+            "require": "wall_u <= 0.60",
+            "sources": [
+              {
+                "clause": "T07 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+              },
+              {
+                "clause": "T07",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T07",
+                  "quote": "Z4"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T07",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T07",
+                  "quote": "26 – 35 %"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1988,
+            "completion_tokens": 387,
+            "seconds": 60.42,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "wall_u le 0.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "wall_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T08",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Maximum window U-value for prescriptive residential buildings",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+            "unless": null,
+            "require": "window_u <= 2.60",
+            "sources": [
+              {
+                "clause": "T08",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "window_u",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1917,
+            "completion_tokens": 494,
+            "seconds": 23.62,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "window_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T08",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z4",
+              "TGBV 26 – 35 %",
+              "U des fenêtres ≤ 2,60 W/m²/K"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": []
+          },
+          "raw": {
+            "title": "Maximum window U-value for residential prescriptive approach",
+            "applies_when": null,
+            "unless": null,
+            "require": "window_u <= 2.60",
+            "sources": [
+              {
+                "clause": "T08",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              },
+              {
+                "kind": "number",
+                "unit": "%",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              },
+              {
+                "kind": "number",
+                "unit": "%",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T08",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1985,
+            "completion_tokens": 540,
+            "seconds": 61.21,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 3,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "window_u le 2.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "window_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              true,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T09",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Prescriptive approach requirements for residential buildings in climate zone Z4",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+            "unless": null,
+            "require": "floor_R >= 1.25",
+            "sources": [
+              {
+                "clause": "T09",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |"
+              }
+            ],
+            "unresolved": [
+              "Definition of floor_R fact (entity and field) is missing",
+              "Exact fact names for floor thermal resistance are not provided in the catalogue"
+            ],
+            "subject": "building",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T09 header",
+                  "quote": "| Usage et approche |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T09 header",
+                  "quote": "| Usage et approche |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T09",
+                  "quote": "| Z4 |"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T09",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T09",
+                  "quote": "26 – 35 %"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1921,
+            "completion_tokens": 598,
+            "seconds": 21.83,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 5
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.25,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              false,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T09",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels",
+            "constraints": [
+              "approche prescriptive",
+              "zone climatique Z4",
+              "taux 26 – 35 %",
+              "R des planchers sur sol ≥ 1,25 m²·K/W"
+            ],
+            "applicability": [
+              "usage résidentiel"
+            ],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "interpretation of the 26 – 35 % metric"
+            ]
+          },
+          "raw": {
+            "title": "Floor slab thermal resistance requirement for residential prescriptive buildings in climate zone Z4",
+            "applies_when": "building.approach == \"prescriptive\" and building.usage == \"résidentiels\" and building.climate_zone == \"Z4\"",
+            "unless": null,
+            "require": "building.slab_r >= 1.25",
+            "sources": [
+              {
+                "clause": "T09 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+              },
+              {
+                "clause": "T09",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |"
+              }
+            ],
+            "unresolved": [
+              "interpretation of the 26 – 35 % glazing ratio metric"
+            ],
+            "subject": "building",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T09",
+                  "quote": "Approche prescriptive"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T09",
+                  "quote": "Z4"
+                }
+              }
+            ],
+            "fact_declarations": [
+              {
+                "kind": "number",
+                "unit": "m2·K/W",
+                "name": "slab_r",
+                "entity": "building",
+                "definition": "Thermal resistance R of floor slabs on ground",
+                "source": {
+                  "clause": "T09",
+                  "quote": "≥ 1,25"
+                },
+                "status": "proposed"
+              }
+            ]
+          },
+          "call": {
+            "prompt_tokens": 2008,
+            "completion_tokens": 719,
+            "seconds": 61.7,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 1,
+              "predicted_atoms": 4
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 1,
+              "predicted_atoms": 3
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 1,
+              "predicted_atoms": 4
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 2
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "schema_or_compile",
+          "detail": "1 validation error for ExpressionFrame\nfact_declarations.0.unit\n  Value error, cannot read the unit 'm2·K/W' [type=value_error, input_value='m2·K/W', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.25,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T10",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Glazing ratio and solar factor limits for prescriptive residential buildings in climate zone Z4",
+            "applies_when": "(approach == \"prescriptive\") and (building_class == \"residential\")",
+            "unless": null,
+            "require": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (solar_factor <= 0.6)",
+            "sources": [
+              {
+                "clause": "T10",
+                "quote": "Z4"
+              },
+              {
+                "clause": "T10",
+                "quote": "26 – 35 %"
+              },
+              {
+                "clause": "T10",
+                "quote": "≤ 0,6"
+              }
+            ],
+            "unresolved": [],
+            "subject": "building",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z4",
+                "source": {
+                  "clause": "T10",
+                  "quote": "Z4"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1920,
+            "completion_tokens": 448,
+            "seconds": 61.47,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 1
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 2,
+              "predicted_atoms": 3
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "solar"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "1"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              false,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T10",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z4",
+              "TGBV 26 – 35 %",
+              "Autres ≤ 0,6"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "Interpretation of \"Autres\" category"
+            ]
+          },
+          "raw": {
+            "title": "Glazing ratio and solar factor limits for prescriptive residential buildings in climate zone Z4",
+            "applies_when": "climate_zone == \"Z4\"",
+            "unless": null,
+            "require": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (solar <= 0.6)",
+            "sources": [
+              {
+                "clause": "T10 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+              },
+              {
+                "clause": "T10",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |"
+              }
+            ],
+            "unresolved": [
+              "Interpretation of \"Autres\" category"
+            ],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1991,
+            "completion_tokens": 295,
+            "seconds": 60.4,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 5,
+              "predicted_atoms": 0
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "solar le 0.6, within frozen Z4 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "solar"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "1"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T11",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Maximum roof U-value for residential buildings in climate zone Z5",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z5\"",
+            "unless": null,
+            "require": "roof_u <= 0.55",
+            "sources": [
+              {
+                "clause": "T11 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+              },
+              {
+                "clause": "T11",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "roof_u",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T11",
+                  "quote": "Approche prescriptive, bâtiments résidentiels"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T11",
+                  "quote": "bâtiments résidentiels"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T11",
+                  "quote": "Z5"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1920,
+            "completion_tokens": 547,
+            "seconds": 22.74,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "roof_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.55,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T11",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z5",
+              "TGBV 26–35 %",
+              "U des toitures exposées ≤0,55 W/m²/K"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": []
+          },
+          "raw": {
+            "title": "Roof U-value limit for residential buildings in climate zone Z5",
+            "applies_when": null,
+            "unless": null,
+            "require": "roof_u <= 0.55",
+            "sources": [
+              {
+                "clause": "T11",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T11",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T11",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T11",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T11",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1989,
+            "completion_tokens": 599,
+            "seconds": 61.27,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 4
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "roof_u le 0.55, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "roof_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.55,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              true,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T12",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Wall U-value limit for prescriptive residential buildings in climate zone Z5",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z5\"",
+            "unless": null,
+            "require": "wall_u <= 0.60",
+            "sources": [
+              {
+                "clause": "T12",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "wall_u",
+            "metadata_applicability": [],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1919,
+            "completion_tokens": 274,
+            "seconds": 23.19,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 5,
+              "predicted_atoms": 0
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "wall_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T12",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z5",
+              "TGBV 26 % – 35 %",
+              "U des murs extérieurs ≤ 0,60 W/m²·K"
+            ],
+            "applicability": [
+              "usage résidentiel"
+            ],
+            "exceptions": [],
+            "relationships": [
+              "relates to climate zone Z5"
+            ],
+            "references": [],
+            "uncertain": [
+              "interpretation of column headings as TGBV and U values"
+            ]
+          },
+          "raw": {
+            "title": "Maximum exterior wall U-value for residential prescriptive buildings in climate zone Z5",
+            "applies_when": "climate_zone == \"Z5\" and approach == \"prescriptive\" and building_class == \"residential\"",
+            "unless": null,
+            "require": "wall_u <= 0.60",
+            "sources": [
+              {
+                "clause": "T12",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+              }
+            ],
+            "unresolved": [
+              "Interpretation of the column heading \"TGBV\" as glazing ratio"
+            ],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T12",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T12 header",
+                  "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T12 header",
+                  "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+                }
+              }
+            ],
+            "fact_declarations": [
+              {
+                "kind": "number",
+                "unit": "W/m2/K",
+                "name": "wall_u",
+                "entity": "building",
+                "definition": "Exterior wall U-value",
+                "source": {
+                  "clause": "T12",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+                },
+                "status": "proposed"
+              }
+            ]
+          },
+          "call": {
+            "prompt_tokens": 2017,
+            "completion_tokens": 741,
+            "seconds": 61.22,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "declaration",
+          "detail": "a proposal cannot replace an existing binding",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "wall_u le 0.6, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "wall_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 0.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T13",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Maximum window U-value for residential buildings in climate zone Z5",
+            "applies_when": "(climate_zone == \"Z5\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+            "unless": null,
+            "require": "window_u <= 2.60",
+            "sources": [
+              {
+                "clause": "T13 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+              },
+              {
+                "clause": "T13",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "building",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T13",
+                  "quote": "Z5"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T13",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T13",
+                  "quote": "26 – 35 %"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1917,
+            "completion_tokens": 479,
+            "seconds": 61.31,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "window_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T13",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "constraints": [
+              "zone climatique Z5",
+              "TGBV 26 – 35 %",
+              "U des fenêtres ≤ 2,60 W/m²/K"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": []
+          },
+          "raw": {
+            "title": "U-value of windows must not exceed 2.60 W/m²/K for residential prescriptive approach in climate zone Z5 with glazing ratio 26‑35 %",
+            "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+            "unless": null,
+            "require": "window_u <= 2.60",
+            "sources": [
+              {
+                "clause": "T13",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |"
+              }
+            ],
+            "unresolved": [],
+            "subject": "bâtiments résidentiels (approche prescriptive)",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T13",
+                  "quote": "Z5"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "ge",
+                "value": 26,
+                "source": {
+                  "clause": "T13",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "number",
+                "field": "glazing_ratio",
+                "operator": "le",
+                "value": 35,
+                "source": {
+                  "clause": "T13",
+                  "quote": "26 – 35 %"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T13",
+                  "quote": "Approche prescriptive"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1985,
+            "completion_tokens": 438,
+            "seconds": 60.51,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 4
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 2,
+              "predicted_atoms": 1
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '<='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "window_u le 2.6, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "le",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "window_u"
+            },
+            "right": {
+              "node": "literal",
+              "value": 2.6,
+              "unit": "W/m2/K"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              true,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability",
+            "clause_span"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T14",
+          "arm": "monolithic",
+          "retained": false,
+          "representation": "original_expression",
+          "raw": {
+            "title": "Prescriptive residential buildings in climate zone Z5 must meet glazing and slab requirements",
+            "applies_when": "approach == 'prescriptive' and building_class == 'residential' and climate_zone == 'Z5'",
+            "unless": null,
+            "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and slab_r >= 1.00",
+            "sources": [
+              {
+                "clause": "T14 header",
+                "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+              },
+              {
+                "clause": "T14",
+                "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+              }
+            ],
+            "unresolved": [
+              "meaning of building_class value 'residential'"
+            ],
+            "subject": "building",
+            "metadata_applicability": [
+              {
+                "kind": "string",
+                "field": "approach",
+                "operator": "eq",
+                "value": "prescriptive",
+                "source": {
+                  "clause": "T14",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "climate_zone",
+                "operator": "eq",
+                "value": "Z5",
+                "source": {
+                  "clause": "T14",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+                }
+              },
+              {
+                "kind": "string",
+                "field": "building_class",
+                "operator": "eq",
+                "value": "residential",
+                "source": {
+                  "clause": "T14",
+                  "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+                }
+              }
+            ],
+            "fact_declarations": []
+          },
+          "call": {
+            "prompt_tokens": 1921,
+            "completion_tokens": 681,
+            "seconds": 23.24,
+            "mode": "json_object",
+            "model": "openai/gpt-oss-120b",
+            "finish_reason": "stop"
+          },
+          "status": "EVALUATED",
+          "slots": {
+            "subject": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 1
+            },
+            "fact": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "operator": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "value": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "unit": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 0,
+              "gold_atoms": 1,
+              "predicted_atoms": 0
+            },
+            "applicability": {
+              "eligible": true,
+              "exact": false,
+              "matched_atoms": 1,
+              "gold_atoms": 5,
+              "predicted_atoms": 3
+            },
+            "clause_span": {
+              "eligible": true,
+              "exact": true,
+              "matched_atoms": 2,
+              "gold_atoms": 2,
+              "predicted_atoms": 2
+            }
+          },
+          "stage": "expression_parse",
+          "detail": "expected '.' but found '>='",
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.0,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
+          "lexical_diagnostics": {
+            "lexable": true,
+            "fact_names": [
+              true,
+              true
+            ],
+            "number_values": [
+              false,
+              true
+            ],
+            "comparators": [
+              false,
+              true
+            ],
+            "units_explicit": 0,
+            "note": "No ownership, association or applicability correctness is established by these lexical matches."
+          },
+          "edit_family_proxy": [
+            "subject",
+            "fact",
+            "operator",
+            "value",
+            "unit",
+            "applicability"
+          ],
+          "grade": "NOT_MATCHED"
+        },
+        {
+          "id": "T14",
+          "arm": "decomposed",
+          "retained": false,
+          "representation": "original_expression",
+          "reading": {
+            "is_requirement": true,
+            "subject": "bâtiments résidentiels",
+            "constraints": [
+              "Approche prescriptive",
+              "Zone climatique Z5",
+              "26 – 35 %",
+              "R des planchers sur sol ≥ 1,00 m²·K/W"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [
+              "Interpretation of the 26 – 35 % value (e.g., whether it refers to a proportion of floor area, energy savings, or another metric)"
+            ]
+          },
+          "status": "API_UNAVAILABLE",
+          "stage": "transport",
+          "reason": "daily allowance exhausted",
+          "http_status": 429,
+          "model": "openai/gpt-oss-120b",
+          "frozen_interpretation": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope",
+          "frozen_requirement": {
+            "node": "ge",
+            "left": {
+              "node": "fact",
+              "entity": "building",
+              "name": "slab_r"
+            },
+            "right": {
+              "node": "literal",
+              "value": 1.0,
+              "unit": "m2*K/W"
+            }
+          },
+          "scope_annotated": true,
           "grade": "NOT_SCORED_API_OR_BUDGET"
-        },
-        {
-          "id": "T04",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope"
-        },
-        {
-          "id": "T04",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 0.75, within frozen Z3 residential prescriptive scope"
-        },
-        {
-          "id": "T05",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "solar le 0.5, within frozen Z3 residential prescriptive scope"
-        },
-        {
-          "id": "T05",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "solar le 0.5, within frozen Z3 residential prescriptive scope"
-        },
-        {
-          "id": "T06",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "roof_u le 0.55, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T06",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "roof_u le 0.55, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T07",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "wall_u le 0.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T07",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "wall_u le 0.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T08",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "window_u le 2.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T08",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "window_u le 2.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T09",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T09",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 1.25, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T10",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "solar le 0.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T10",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "solar le 0.6, within frozen Z4 residential prescriptive scope"
-        },
-        {
-          "id": "T11",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "roof_u le 0.55, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T11",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "roof_u le 0.55, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T12",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "wall_u le 0.6, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T12",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "wall_u le 0.6, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T13",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "window_u le 2.6, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T13",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "window_u le 2.6, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T14",
-          "arm": "monolithic",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope"
-        },
-        {
-          "id": "T14",
-          "arm": "decomposed",
-          "model": "openai/gpt-oss-120b",
-          "status": "NOT_ATTEMPTED",
-          "stage": "pending",
-          "grade": "NOT_SCORED_PENDING",
-          "frozen_interpretation": "slab_r ge 1.0, within frozen Z5 residential prescriptive scope"
         },
         {
           "id": "T15",
@@ -10337,10 +13853,12 @@
         }
       ],
       "tokens": {
-        "2026-11-18": 191104
+        "2026-11-18": 191104,
+        "2026-11-19": 63223
       },
       "http_attempts": {
-        "200": 100
+        "200": 134,
+        "429": 1
       },
       "batches_of_ten_http_attempts": [
         {
@@ -10382,6 +13900,22 @@
         {
           "attempts": 10,
           "non_200": 0
+        },
+        {
+          "attempts": 10,
+          "non_200": 0
+        },
+        {
+          "attempts": 10,
+          "non_200": 0
+        },
+        {
+          "attempts": 10,
+          "non_200": 0
+        },
+        {
+          "attempts": 5,
+          "non_200": 1
         }
       ]
     },

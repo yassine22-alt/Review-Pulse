@@ -19,11 +19,11 @@ value, the limit and the clause it comes from. A finding it cannot support is re
 
 ## What can be trusted today
 
-Start with **[current measured results](docs/results.md)**. Automated interpretation
-is not yet validated. The recovery sprint records 29/46 compilations from manual
-gold inputs and an assisted real-drawing trace with 0/4 full-clause decisions;
-these are separate from model accuracy. The same page includes reproduction steps
-and the unresolved evidence, segmentation and runtime limits.
+Start with **[current measured results](docs/results.md)**. The free-hosted
+comparison is incomplete; improved automatic interpretation is unproven. Trained
+perception on the publisher drawing classified 0/4 bedrooms. The new five-check
+assisted profile decides 0/5 automatically and 3/5 after author evidence.
+The results page links the per-clause failures, limits and reproduction steps.
 
 See **[docs/SCOPE.md](docs/SCOPE.md)**: what ReviewPulse does well, what it does with caveats, and what it does not do yet, each
 backed by a measurement. You can check the plan reading yourself on real drawings: `python scripts/review_pack.py` writes a report

@@ -681,3 +681,274 @@ Evidence and design details:
 Superseded statuses and earlier measurements are in
 [results history](results-history.md). No billing changes, new checker family
 or fourth-document run were made in this round.
+
+
+## Archived: recovery-sprint status before the free-hosted comparison
+
+# Review-Pulse results and current status
+
+Updated 18 November 2026. **The deterministic compiler improved; improved
+complete automated interpretation has not been demonstrated.** The 46 Morocco
+fire, accessibility and thermal obligations are DEVELOPMENT data. The fourth
+RPS document remains unchanged, sealed and unrun. Labels have no independent
+review. Earlier benchmark plans and ledger attestations remain synthetic.
+
+Gold-input compilation now retains **29/46**, versus the reproduced **28/46**.
+The extra case, A08, was wrongly rejected because the French number vocabulary
+stopped at ten. Whole numeral phrases now ground as a unit; unsupported larger
+phrases cannot license a smaller threshold. A second general fix reads
+construction notation such as `2-1/2"` as one quantity. On a real publisher's
+drawing, this removes one unjustified rejection: **2/4 -> 3/4** manually
+interpreted whole clauses compile. Neither change adds plan computations or
+weakens the verdict policy.
+
+The local-model experiment did not establish a winner. Qwen2.5 7B delivered
+**0/7** complete monolithic responses within the configured 180-second socket
+budget. Attempted compact and decomposed calls also timed out. Partial outputs
+contain visible semantic errors as well as excessive output. They never became
+approvable rules. The model was CPU-only on 15.7 GiB RAM with roughly 0.6 GiB
+available while loaded. One smaller-model download failed for disk space; it
+was not evaluated. No hosted calls, billing changes or 1.5B tuning were made.
+
+A reproducible real-drawing trace now shows exact source clauses, manual slots,
+approval, plan evidence, findings and missing facts. **0/4 whole clauses are
+decided**, before or after the fix. A separately labelled nominal-width
+component passes on a reviewer-read schedule value; this is not a full-clause
+pass. The useful next experiment is a completed paired semantic comparison on
+adequate local resources, before choosing a new default extraction method.
+Free storage and memory first; do not tune on the sealed document.
+
+## Measured
+
+| Measurement | Reproduced before | After | Meaning / denominator |
+| --- | --- | --- | --- |
+| Gold slots, active catalogue | 5/46 retained | 5/46 | Existing fact coverage unchanged |
+| Gold slots, validated fact declarations | 13/46 retained | 14/46 | Author-supplied declarations; no observed values created |
+| Gold slots, separated applicability | 28/46 retained | 29/46 | Manual gold inputs, not LLM outputs |
+| Retained requirement trees / generated behavior | 28/28 | 29/29 | Exact reference trees; 64 synthetic complete-value worlds per case, not a semantic proof |
+| Remaining gold-input rejections | 18/46 | 17/46 | Verifier 7/46, entity binding 8/46, context 2/46 |
+| Local monolithic complete outputs | 0/7 | No completed replacement cohort | Runtime failures; semantic correctness and wrong-approvable rate undefined (0/0) |
+| Real drawing, manually interpreted whole clauses compiled | 2/4 | 3/4 | Same four author interpretations, source and evidence |
+| Real drawing, whole-clause decisions | 0/4 | 0/4 | Missing evidence/inventory and one ambiguous requirement remain |
+| Real drawing, nominal-width component | 1/1 satisfied | 1/1 satisfied | Single reviewer-selected schedule type, not a complete requirement |
+| Existing manual synthetic execution | 9/32 decided initially | 16/32 with reviewer evidence | Same prior fixture: false passes 0/15 gold violations; violation precision 3/3 initially, 8/8 reviewed; not an upgrade gain |
+
+See [before oracle](../reports/recovery-oracle-before.json),
+[after oracle](../reports/recovery-oracle-after.json), and the
+[46-case diagnosis](../reports/recovery-diagnosis.json), which records source,
+expected interpretation, actual rejection, before/after and likely cause.
+Baseline/protocol freeze was committed as
+`55cb6e018d056340e8a429b20a94444b39e56d59`, before the fixes.
+French grounding was committed as `313e018f`.
+
+### Where correctness is lost
+
+- **Document reading:** existing context assembly preserves parents, explicit
+  references and definitions; implicit references remain limited. In the real
+  drawing, the selected multi-line egress and garage notes cross automatic
+  clause boundaries. Reviewer-selected exact spans are therefore explicit in
+  the demonstration; this is not automatic segmentation success.
+- **Semantic generation:** [monolithic results](../reports/recovery-monolithic.json)
+  are 7/7 runtime-limited. The [exploratory alternatives](../reports/recovery-variants.json)
+  attempted T01 reading and three formalizations, then M03 expression control.
+  All four formalizations timed out; five other cases were unattempted. The
+  reading completed in 47.95 seconds but partly misread glazing scope as
+  efficiency and introduced uncertain exceptions. The three T01 formalization
+  prefixes invent extra thresholds, mix scope into requirements or use invalid
+  syntax. These are observed prefix errors, not scored complete interpretations.
+  Wrong approvable / approvable is **0/0**, not a measured 0% error rate.
+  Repair requests issued: **0/0 eligible complete constrained candidates**.
+- **Compiler/verifier:** of 17 remaining development rejections, **8/17** lack
+  entity collections (step groups, level changes, sidewalks, curb cuts,
+  passages, turns, entrances); **3/17** concern quantity/context coverage;
+  **3/17** mistake noun enumeration for logical alternatives; **1/17** treats
+  material-class digits as thresholds; **2/17** require external specialist
+  context. These are likely causes requiring review, not grounds to bypass
+  checks. A05 still rejects after its number is recognized because its
+  alternative semantics remain unresolved.
+- **Plan evidence:** the real sheet's vector-only baseline found two room
+  regions, not a reviewed complete inventory. The drawing visibly labels four
+  bedrooms. Zero schedules were recovered. A warning applies a rendering-only
+  scale disclaimer to the plan. Teammate segmentation models were not evaluated;
+  this is not evidence of their accuracy or regression.
+
+The compact-expression control was added after the baseline timeouts and is
+exploratory, not an originally frozen fifth arm. Reading/formalization token
+budgets were 384/1152, monolithic/control 1536, potential repair 512; raw traces
+include latency and partial output. Some tests ran concurrently, so timings are
+not isolated throughput benchmarks. No decomposed strategy is promoted into
+the application default without a completed correctness comparison.
+
+### Reproduce the real-source trace
+
+Download the first-party [Chief Architect Modern Bungalow sample](https://cloud.chiefarchitect.com/1/samples/projects/modern-bungalow/modern-bungalow.pdf),
+July 2024, sheet A-7 (PDF page 7). This is a published project drawing and its
+notes, not an official building regulation or a claim of legal applicability.
+The publisher's address is not taken as the project's jurisdiction.
+
+After the normal README environment setup:
+
+```powershell
+.venv/Scripts/python.exe scripts/recovery_drawing_demo.py data/real_plans/recovery/modern-bungalow.pdf runs/recovery-demo
+```
+
+The input PDF must match the recorded SHA-256. The script makes no LLM calls.
+It extracts source text and vector geometry, compiles the supplied manual slots
+through the existing validators, records author approval and evaluates against
+explicit evidence. It writes sheet/building JSON, findings, a drawing preview and `report.html`
+with expandable rule/evidence traces. See
+[labels and provenance](../reports/recovery-drawing-labels.json),
+[before findings](../reports/recovery-drawing-before.json) and
+[after findings](../reports/recovery-drawing-after.json).
+
+The garage/living relationship is preserved as a required fact. No connecting
+room, thickness, rating, material or self-closing behavior is inferred from a
+schedule tag. The exterior-exit clause remains NEEDS_REVIEW because its U-value
+unit is absent; its stated MIN direction is not silently corrected. D06's
+`3076` schedule label supplies a reviewer-read nominal width of 36 inches;
+it supplies neither 32-inch clear opening nor operability or glazing evidence.
+All reviewer observations here are author readings of the real sample drawing,
+not independently verified as-built measurements. Whole-clause false-pass and
+violation-precision rates are undefined: **0 labelled decisive cases, 0
+confirmed violations**. No full-clause accuracy or safety claim follows.
+
+The development oracle can be reproduced with
+`python scripts/evaluate_slot_oracle.py <accessibility-source-text> reports/oracle.json`;
+source provenance and extraction expectations are in
+[development source manifest](../reports/morocco-interpreter-source.json).
+
+### Design choice and research
+
+The production change is restricted to generic quantity grounding with
+vocabulary stored as data. It does not silently accept ambiguous alternatives,
+create inventories or convert declarations into observed facts. Small
+research helpers test source-only reading, constrained formalization and
+single-field diagnostic repair against the existing compiler. They remain
+experimental. [Grammar-constrained decoding research](https://aclanthology.org/2023.emnlp-main.674/)
+and [JSONSchemaBench](https://arxiv.org/abs/2501.10868) motivate testing structural
+constraints separately from meaning; they do not establish correctness here.
+The single attempted smaller download was the official non-thinking
+[Qwen3 4B Instruct 2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507).
+It was chosen for lower memory use, but storage prevented installation; no
+performance claim can be made for it.
+
+### Verification
+
+Final non-slow suite: **1,069 passed, 2 skipped, 45 slow tests excluded**
+in 277.05 seconds. The new quantity counterexamples and research-helper tests
+are included. Ruff and diff whitespace checks pass. This is software regression
+verification, not semantic or segmentation accuracy. See
+[validation record](../reports/recovery-validation.json).
+
+## Not measured
+
+- Improved complete model interpretation, model-capacity ceiling, or a fair
+  completed comparison between monolithic, decomposed and repaired drafts.
+- Independent label correctness, held-out improvement or automatic
+  applicability discovery across unfamiliar rule documents. Only 15/46 current
+  scopes have supplemental author annotations. The fourth document is unrun.
+- Real automatic upload-to-verdict accuracy, whole-building perception,
+  confirmed connection inventories or calibrated measurement uncertainty.
+- A reduction in false accepted model rules: there were no complete candidate
+  outputs in the new local formalization experiment.
+- The slow raster/dataset tests and teammate segmentation accuracy in this sprint.
+
+## Do not claim
+
+- A reliable general regulation interpreter, a winning decomposed architecture,
+  improved model accuracy, or adaptation to arbitrary regulations.
+- That 29/46 manual gold compilations are 29 correct automatic interpretations,
+  or that compilation, syntax validity, source matching or approval proves meaning.
+- That 0/4 decisions is useful accuracy or demonstrates safety. A correctly
+  unresolved result diagnoses a blocker; it does not fulfill the checking goal.
+- That the nominal-width component is a full exterior-door pass, that material
+  evidence comes from line geometry, or that a partial inventory is complete.
+- A precision gain from a 0/0 denominator. Existing synthetic tests and the
+  provisional 25% scale bound do not establish real-world accuracy.
+
+Prior statuses are in [results history](results-history.md). The honest result
+is fewer unjustified compiler rejections, with an inspectable assisted real-source
+trace; improved automated understanding and useful whole-clause decision coverage
+remain unproven.
+
+
+## 18 November 2026: free-hosted comparison, incomplete
+
+No billing was enabled. Keys were read from the environment. Regulation text, catalogue type vocabulary and output contracts were sent; drawings were processed locally. ElevenLabs and Gemini were not called. The unavailable Mistral/Meta-Llama request was replaced, with user approval, by GPT-OSS-120B and Qwen3.8-27B on Groq. [Mistral current policy](https://docs.mistral.ai/admin/billing-usage/usage-limits) states free mode has no API access. The user supplied Groq console limits: 30 RPM, 1,000 RPD, 8,000 TPM, 200,000 TPD per model. Authenticated model listing and response headers confirmed model IDs and nominal TPM/RPD. The authenticated console itself required login; account limits were user-transcribed, not read from a logged-in session.
+
+Both arms use the same compact expression research contract and final deterministic gate; the staged arm adds source-only neutral reading. This is **not** a measurement of the production node-slot drafter or a fair historical-baseline/model-capacity ceiling. Formal budget 3,072, reading budget 512, temperature 0, seed omitted, requested low reasoning. JSON-object mode; declared fields are compiler-validated. Requests are sequential, retried with bounded exponential jitter and Retry-After, and cached by model/prompt/schema/settings. Native strict schema is prepared for the closed-link arm, which has not been run against hosted models.
+
+GPT-OSS used 191,104 successfully reported tokens before the precommitted 190,000 safety budget stopped the next stage. This is not proof that all 200,000 provider tokens are exhausted. Qwen used 37,802 reported tokens and stopped after three exhausted HTTP-429 cycles (T01 staged, M07 monolithic, M02 monolithic), despite retries and output-aware pacing. Its last sanitized diagnostics showed Limit 1,000 / Requested 2,080; the limiting dimension was not retained. The discrepancy with the nominal 8,000 TPM is unresolved; project-level limits were requested. Do not keep retrying without a changed condition.
+
+[Raw GPT results](../reports/free-gpt-oss.json), [raw Qwen results](../reports/free-qwen.json), and [authoritative revalidation/grades](../reports/free-drafting-scored.json). The last file includes every planned obligation, frozen reading next to the draft, terminal stage, field mismatch proxy, API/budget gaps and paired proposals. No frozen interpretations were placed in model prompts. API failures are excluded from semantic denominators. A temporary UTF-8 cue-file editing error was caught by tests and corrected; every saved output was revalidated through the final gates without regeneration.
+
+### Exact field agreement before validation
+
+These are exact frozen-field agreement counts, not independent semantic accuracy. Subject labels sometimes accept only the full frozen clause, undercrediting correct noun phrases; shorter valid citations can also fail exact annotation agreement. Expression field extraction requires parseable structure. Separate lexical diagnostics below do not require expression parsing but cannot prove ownership, associations or scope.
+
+| Model / arm | Subject | Fact | Operator | Value | Unit | Applicability | Span |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| openai/gpt-oss-120b / decomposed | 0/33 | 1/31 | 1/30 | 0/21 | 1/21 | 0/2 | 24/33 |
+| openai/gpt-oss-120b / monolithic | 0/34 | 0/32 | 1/31 | 2/22 | 2/22 | 0/3 | 26/34 |
+| qwen/qwen3.8-27b / decomposed | 1/4 | 1/4 | 1/4 | 2/4 | 1/4 | 0/1 | 1/4 |
+| qwen/qwen3.8-27b / monolithic | 0/4 | 1/4 | 1/4 | 1/4 | 1/4 | 0/1 | 2/4 |
+
+### Raw lexical diagnostics, independently of expression parsing
+
+Counts are exact sets of mentioned fact names, numerical values and comparison symbols on eligible lexable outputs. They are not binding accuracy or whole-rule correctness.
+
+| Model / arm | Fact names | Numeric values | Comparators |
+| --- | --- | --- | --- |
+| openai/gpt-oss-120b / decomposed | 5/28 | 7/19 | 7/20 |
+| openai/gpt-oss-120b / monolithic | 6/26 | 8/19 | 6/20 |
+| qwen/qwen3.8-27b / decomposed | 3/4 | 2/4 | 2/4 |
+| qwen/qwen3.8-27b / monolithic | 3/4 | 3/4 | 3/4 |
+
+### Interpretation and transport findings
+
+GPT-OSS completed 67 draft JSON objects: 49 rejected at expression parsing, six at source/subject grounding, ten at entity binding, one at schema/compilation, and one retained. M08 is a frozen-fixture predicate match (`two_way == true` versus the reference boolean fact), under its pre-assumed scope. It is not evidence of general quantified door interpretation. No retained nonmatches remain unadjudicated in this run. Wrong approvable / approvable is 0/1 for that staged sample; other arms have undefined 0/0 ratios. This tiny accepted sample does not establish precision.
+
+GPT: 0/100 non-200 HTTP responses, all ten batches of ten had 0/10 errors. Qwen: 19/31 non-200 responses (17 HTTP 429, two HTTP 400); chronological batches had 6/10, 5/10, 7/10 and 1/1 non-200 responses. These include reading calls and retries. The two request rejections and final availability failure are not semantic errors. No claim is made that provider limits, model capacity or full interpretation accuracy have been isolated.
+
+On four common completed obligations per arm, each single-model gate already retained 0/4; the agreement gate also produced 0/4 candidates and 4/4 abstentions per arm, with 42/46 paired obligations still pending per arm. Wrong-candidate rate is undefined 0/0, not a safety result. Agreement adds no measured protection or coverage on this subset. Both proposals remain visible. Actual reviewer edits/time were not observed; per-clause edit-family mismatches are only a proxy.
+
+### Deterministic extraction, trained drawing and assisted slice
+
+[Source-locked extraction](../reports/deterministic-quantities.json) processed 46/46 development clauses and matched 25/44 typed numeric literals in the frozen requirement trees. This denominator includes structural literals and excludes metadata bounds, so it is not whole-rule accuracy. Comparators, unit/header evidence and all unmatched quantities are recorded. Closed-link choices cannot invent numeric values or units; missing binding or complex composition yields review. This bounded arm handles simple numeric conjunctions, not general table applicability, exceptions, route logic or qualitative requirements. Its hosted comparison is unmeasured.
+
+Trained perception used original local weights. [Reference labels](../reports/chief-a7-perception-labels.json) were frozen at `b35a2b56` before inference. The first vector run failed on an 895-MiB allocation for roughly 58 million neighbour pairs. The batch fix preserves all pre-change fixture features exactly at batch sizes 1, 2 and 128; no thresholds or weights changed. The rerun completes. [Vector results](../reports/trained-a7-vector.json): one raw room region, 0/17 reference-label point matches, 0/4 classified bedrooms, no detected doors/windows and 0/2 schedules. [Raster results](../reports/trained-a7-raster.json): U-Net at 150 dpi with automatically extracted native PDF text (no OCR or LLM labels), four raw regions, 3/17 point matches, 0/4 classified bedrooms, 25 door and 19 window candidates, 4/6 annotated-opening box overlaps, 0/2 schedules. Point containment is not polygon-IoU recall; merged/misclassified regions may cover points. The six-opening subset cannot establish global precision/recall. Some schedule graphics became garage regions. A nominal detail-scale factor and a rendering-only scale disclaimer were applied to the plan: end-to-end failure cannot be attributed to model weights alone. Per-view scale/region grounding needs a separate controlled measurement, not threshold tuning. No general segmentation regression conclusion follows.
+
+[The new five-check slice](../reports/plan-answerable-results.json) is explicitly an author-written project brief with manually authored rule meanings, not an official regulation or a held-out test. Native detections are matched to declared labels/tags where possible; none supplies trusted bedroom evidence. The author supplies two room identities, rectangular interpretations of printed internal dimensions and two corridor connections. Only these selected collections are marked complete after author attestation. Whole-building, stair and final-exit inventories remain incomplete. The source, labels, scope, rule meanings and facts are data, not clause-specific engine branches. The author’s geometry assumptions and attestations have no independent review; they must not be presented as independently measured real-plan truth.
+
+Area, filtered path to HALL and conditional area/width checks pass after author evidence: 3/5, versus 0/5 automatically. Net clear door opening and confirmed final-exit count remain unresolved; nominal `3076` is never substituted for clear width, and an upper-floor sheet cannot establish ground-level exits. These are changes in supplied evidence under a new authored profile, not a paired accuracy improvement over the old egress demonstration. No false-pass or violation-precision estimate exists: there are zero labelled violations and zero confirmed violations. Counterfactual tests from the same fixture exercise incomplete scope, unverified area, an unknown room on the only route, nominal versus clear size and missing final-exit coverage. Wrong trusted attestations themselves are not detected by this policy.
+
+### Reproduction and remaining work
+
+```powershell
+# GPT: resume on a new quota day, using the same report and cache
+.venv/Scripts/python.exe scripts/free_drafting.py <accessibility-source-text> reports/free-gpt-oss.json --model openai/gpt-oss-120b
+# Qwen: only after project limits/availability change
+.venv/Scripts/python.exe scripts/free_drafting.py <accessibility-source-text> reports/free-qwen.json --model qwen/qwen3.8-27b
+# Closed numeric-link arm: only when its shared model budget is available
+.venv/Scripts/python.exe scripts/free_drafting.py <accessibility-source-text> reports/free-det-gpt.json --model openai/gpt-oss-120b --arms deterministic --protocol reports/free-deterministic-protocol.json
+.venv/Scripts/python.exe scripts/trained_drawing.py data/real_plans/recovery/modern-bungalow.pdf runs/trained-a7-raster --mode raster
+.venv/Scripts/python.exe scripts/plan_answerable_slice.py data/real_plans/recovery/modern-bungalow.pdf runs/trained-a7-raster/building.json runs/plan-answerable
+```
+
+The source PDF remains local/ignored and comes from the [first-party Chief Architect sample](https://cloud.chiefarchitect.com/1/samples/projects/modern-bungalow/modern-bungalow.pdf), July 2024. No drawings were sent to hosted models. Do not run the fourth document until all requested development comparisons finish and one pipeline is chosen before looking at it. Its source/label blobs remain unchanged against `ad7742ce`; no tests reference or run it. Final non-slow validation: 1,104 passed, two skipped, 45 slow tests excluded, 255.37 seconds. Slow raster/dataset tests were not rerun.
+
+
+## 19 November 2026: cached GPT continuation
+
+The same model, settings, contract and cached worker resumed; no new capabilities or fourth-document runs were added. GPT completed 89/92 formal drafts: monolithic 45/46, staged 44/46. Only the same M08 staged draft remains retained and matches the frozen predicate: 1/44 staged, 0/45 monolithic. Wrong approvable / approvable remains 0/1 staged, undefined 0/0 monolithic; this is not a precision estimate on a useful accepted sample. Final gates reject 69/89 at expression parsing, 6/89 at subject/source grounding, 10/89 at entity binding, 2/89 at schema/compilation and 1/89 at declaration validation; 1/89 retained. The 22 additional JSON outputs did not add a retained rule.
+
+The next request was rejected for daily tokens: provider-reported limit 200,000, used 198,896, requested 2,840. Reported successful usage in this worker was 63,223 tokens on 19 November and 191,104 on 18 November. These are UTC bookkeeping totals, not the provider rolling-window usage. Changing the calendar date does not guarantee quota recovery. No further exhausted-daily-budget retry was attempted. Cumulative HTTP attempts: 134/135 successful, 1/135 HTTP 429; the first thirteen batches had 0/10 errors, the final partial batch 1/5. Three formal drafts remain (T14 staged and both T15 arms). API unavailability is excluded from semantic grades. Qwen remains paused pending project-limit clarification.
+
+Updated exact slot agreement (counts/eligible outputs):
+
+| GPT arm | Subject | Fact | Operator | Value | Unit | Applicability | Span |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Monolithic | 0/45 | 0/43 | 1/42 | 2/33 | 2/33 | 0/14 | 32/45 |
+| Staged | 0/44 | 1/42 | 1/41 | 0/32 | 1/32 | 0/13 | 29/44 |
+
+These fields remain constrained by expression parseability and exact author annotations, not a fair direct slot-generation measurement. Raw lexical agreement, independent of expression parsing: monolithic fact names 14/37, numerical values 12/30, comparators 6/31; staged 16/39, 13/30, 9/31. They do not establish binding, applicability or whole-rule correctness. Qwen, paired agreement, deterministic extraction, perception and assisted-slice results are unchanged. The production typed-slot and closed-link hosted comparisons are still unrun. No accuracy improvement or general reliable interpretation is established.
