@@ -1,0 +1,419 @@
+{
+  "date": "2026-11-19",
+  "assistant_review_only": true,
+  "development_only": true,
+  "numeric_definition": "assisted-numeric-selection.json, frozen at 278b70d7 before evaluation; no case excluded after seeing failures.",
+  "all_numeric": [
+    36,
+    36
+  ],
+  "thermal": {
+    "fully_correct": [
+      12,
+      15
+    ],
+    "one_edit": [
+      0,
+      15
+    ],
+    "more_or_context": [
+      3,
+      15
+    ],
+    "scope_conditions_exact": [
+      15,
+      15
+    ],
+    "quantity_comparator_extracted": [
+      15,
+      15
+    ],
+    "explicit_column_unit": [
+      12,
+      15
+    ]
+  },
+  "other_numeric": {
+    "fully_correct": [
+      0,
+      21
+    ],
+    "one_edit": [
+      0,
+      21
+    ],
+    "manual_rule_composition": [
+      21,
+      21
+    ]
+  },
+  "all_numeric_burden": {
+    "0_edits": [
+      12,
+      36
+    ],
+    "1_edit": [
+      0,
+      36
+    ],
+    "2_plus_or_context": [
+      3,
+      36
+    ],
+    "rewrite": [
+      21,
+      36
+    ]
+  },
+  "wrong_or_incomplete_source_approvable": [
+    0,
+    12
+  ],
+  "false_passes": "Not measured: rule-interpretation test, not an annotated plan execution comparison.",
+  "observed_model_calls": {
+    "unique_headers": [
+      4,
+      4
+    ],
+    "prompt_tokens": 1376,
+    "completion_tokens": 654,
+    "total_tokens": 2030,
+    "http_non_200": [
+      0,
+      0
+    ]
+  },
+  "limits": [
+    "Twelve meanings source-reviewed by assistant and matched frozen author interpretations; no independent human review.",
+    "21 narrative/complex numeric obligations are deliberately not made unconditional threshold checks. They count in the denominator.",
+    "Three solar rows retain qualifiers and missing units; incomplete meanings are not approved.",
+    "Initial overloaded declaration schema had one completed but invalid dual selection and one 400 rejection; archived separately, not pooled as a matched comparison.",
+    "Header-only linking applies only after deterministic scope/value extraction; no improved general interpreter accuracy or held-out result is claimed."
+  ],
+  "rows": [
+    {
+      "id": "M01",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M02",
+      "suite": "fire",
+      "category": "more_edits_needs_context",
+      "minimum_edits": null,
+      "reason": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M03",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M04",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M05",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M06",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M07",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M09",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M10",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "M16",
+      "suite": "fire",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A03",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A04",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A05",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A07",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A08",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A09",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A11",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A12",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A13",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A14",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "A15",
+      "suite": "access",
+      "category": "full_rule_composition",
+      "minimum_edits": null,
+      "reason": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "T01",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T02",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T03",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T04",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T05",
+      "suite": "thermal",
+      "category": "more_edits_needs_context",
+      "minimum_edits": null,
+      "reason": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "T06",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T07",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T08",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T09",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T10",
+      "suite": "thermal",
+      "category": "more_edits_needs_context",
+      "minimum_edits": null,
+      "reason": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    },
+    {
+      "id": "T11",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T12",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T13",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T14",
+      "suite": "thermal",
+      "category": "fully_correct",
+      "minimum_edits": 0,
+      "reason": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match.",
+      "status": "VALIDATED_CANDIDATE",
+      "retained": true
+    },
+    {
+      "id": "T15",
+      "suite": "thermal",
+      "category": "more_edits_needs_context",
+      "minimum_edits": null,
+      "reason": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing.",
+      "status": "NEEDS_REVIEW",
+      "retained": false
+    }
+  ]
+}

@@ -3,19 +3,29 @@ climate_zone:
   kind: string
   unit: '1'
   description: Climate zone / zone climatique
+  header_aliases: [zone climatique, climate zone]
+  value_cues: []
 glazing_ratio:
   kind: number
   unit: '%'
   description: Glazing percentage / taux global des baies vitrées / TGBV
+  header_aliases: [TGBV, glazing band, glazing ratio, taux global des baies vitrées]
+  value_cues: []
 building_class:
   kind: string
   unit: '1'
   description: Building class or use / usage du bâtiment
+  header_aliases: [usage, building class, occupancy class]
+  value_cues: [bâtiment, bâtiments, building, buildings, résidentiel, résidentiels, residential]
 approach:
   kind: string
   unit: '1'
   description: Regulatory assessment approach / approche
+  header_aliases: [approche, approach]
+  value_cues: [approche, approach]
 occupancy:
   kind: number
   unit: count
   description: Occupant count / effectif
+  header_aliases: [effectif, occupancy, occupants]
+  value_cues: []
