@@ -103,9 +103,9 @@
     {
       "id": "M02",
       "suite": "fire",
-      "category": "more_edits_needs_context",
+      "category": "full_rule_composition",
       "minimum_edits": null,
-      "reason": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing.",
+      "reason": "Normal/accessory exit roles, passage units and cardinality require complete reviewer composition; this is not merely a missing scalar unit.",
       "status": "NEEDS_REVIEW",
       "retained": false
     },
@@ -415,5 +415,6 @@
       "status": "NEEDS_REVIEW",
       "retained": false
     }
-  ]
+  ],
+  "review_revision": "M02 manually categorized as full rule composition from its source; raw extraction unchanged."
 }

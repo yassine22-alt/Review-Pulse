@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-19",
+  "new_header_arm": {
+    "estimated_before_run": {
+      "unique_calls": 4,
+      "input_range": [
+        856,
+        1716
+      ],
+      "output_cap_total": 1024,
+      "overall_range": [
+        1880,
+        2740
+      ]
+    },
+    "measured": [
+      {
+        "header": "U des toitures exposées (W/m²/K)",
+        "prompt_tokens": 358,
+        "completion_tokens": 134,
+        "total": 492
+      },
+      {
+        "header": "U des murs extérieurs (W/m²/K)",
+        "prompt_tokens": 357,
+        "completion_tokens": 157,
+        "total": 514
+      },
+      {
+        "header": "U des fenêtres (W/m²/K)",
+        "prompt_tokens": 355,
+        "completion_tokens": 157,
+        "total": 512
+      },
+      {
+        "header": "R des planchers sur sol (m²·K/W)",
+        "prompt_tokens": 306,
+        "completion_tokens": 206,
+        "total": 512
+      }
+    ],
+    "total_tokens": 2030,
+    "daily_allowance": 200000,
+    "coverage": "46 obligations accounted for; only twelve have complete executable table candidates. This is NOT 46 automatic interpretations for 2030 tokens. Remaining clauses need reviewer composition/context.",
+    "cached_reuse": "Four headers across twelve table rows; same key and settings, no clause threshold/zone/gold in prompt."
+  },
+  "older_production_arm": {
+    "per_first_call_input": 3231,
+    "per_first_call_output": 1295,
+    "full_92_request_estimate_input_range": [
+      156649,
+      313373
+    ],
+    "full_92_request_output_cap": 153088,
+    "limits": "Historical different contract/capability coverage, not a controlled accuracy or cost comparison."
+  },
+  "alternatives_checked": [
+    {
+      "provider": "Cloudflare Workers AI",
+      "docs": [
+        "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+        "https://developers.cloudflare.com/workers-ai/platform/limits/"
+      ],
+      "published_free_allowance": "10000 neurons/day, reset 00:00 UTC",
+      "published_default_text_rate": "300 requests/minute for models not requiring paid plan",
+      "account_verified": false,
+      "key_available": false,
+      "limits_unverified": "Account-specific models, actual limits and schema support unverified. Neurons are not a fixed token allowance; no equivalent token budget claimed.",
+      "action": "No provider added or called. If needed, sign up for Workers Free and configure CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN; do not enable paid plan."
+    },
+    {
+      "provider": "Cerebras",
+      "docs": [
+        "https://inference-docs.cerebras.ai/support/rate-limits"
+      ],
+      "published_limits": "GPT-OSS-120B trial: 5 RPM, 30k uncached TPM, 90k total TPM, 1M TPD",
+      "account_verified": false,
+      "key_available": false,
+      "caveat": "Current docs say no renewing permanently free tier; $5/30-day trial requires verified payment method. Not suitable as an assumed free alternative; no billing enabled or service called."
+    }
+  ],
+  "limits": [
+    "API errors excluded from semantic denominators; JSON generation rejection is not quota exhaustion.",
+    "No keys, plan facts, gold labels or drawings were sent; key is read from environment."
+  ]
+}

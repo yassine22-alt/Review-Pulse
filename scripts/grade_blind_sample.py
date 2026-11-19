@@ -28,7 +28,8 @@ def grade_sheet(path, key):
     pairs, whole, pending, disagreements = [], [], [], []
     for row in rows:
         reference = expected[row["blind_id"]]
-        if row["source_clause"] != reference["source"] or row["model_output"] != reference["model_output"]:
+        if any(row[column].replace("\r\n", "\n").replace("\r", "\n") != reference[key].replace("\r\n", "\n").replace("\r", "\n")
+               for column, key in (("source_clause", "source"), ("model_output", "model_output"))):
             raise ValueError("source or draft changed; review the sheet identity before grading")
         for slot in (*SLOTS, "whole_rule"):
             value = row[slot + "_grade"].strip().lower()

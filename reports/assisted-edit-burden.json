@@ -570,11 +570,11 @@
         36
       ],
       "rewrite": [
-        20,
+        21,
         36
       ],
       "needs_context": [
-        4,
+        3,
         36
       ]
     },
@@ -594,16 +594,12 @@
         "id": "M02",
         "edits": [
           {
-            "operation": "add_unit",
-            "site": "header_unit"
-          },
-          {
-            "operation": "add_scope_condition",
-            "site": "unresolved_cell_qualifier"
+            "operation": "rewrite",
+            "site": "normal_accessory_count_and_UP_logic"
           }
         ],
-        "complete": false,
-        "basis": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing."
+        "complete": true,
+        "basis": "Source requires complete exit-role/count/UP composition; raw extractor unchanged."
       },
       {
         "id": "M03",
