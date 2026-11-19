@@ -1,0 +1,8 @@
+# Linguistic function cues only. Entity and fact meanings come from the catalogue.
+conditions: [if, when, where, unless, except, provided that, si, lorsque, quand, sauf, toutefois, en présence, en fonction]
+connectives: [and, or, et, ou, soit]
+relations: [between, through, from, towards, connects, connected, relie, relient, aboutir, débouché, vers, entre, raccordement, changement de direction]
+references: [tableau, table, article, section, defined above, ci avant, précitées, ces, celles]
+ratio_connectors: [sur, par, per, out of, in]
+universal: [every, each, all, chaque, tous, toutes, les]
+scope_markers: [in, dans, pour, au niveau, according to, selon]
