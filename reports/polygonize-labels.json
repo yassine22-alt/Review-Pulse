@@ -1,0 +1,718 @@
+{
+  "date": "2026-11-19",
+  "status": "FROZEN_BEFORE_POLYGONIZE_RUN",
+  "human_reviewed": false,
+  "scope": "Four different drawings, selected styles and review scopes, not an independent style benchmark. Fourth regulation sealed, unrelated.",
+  "drawings": [
+    {
+      "source_sha256": "5dc11a31b7790dcd6eec92cdf15fa52f2e1e3cb3c65ef39838f09574d57c383f",
+      "source_page": 6,
+      "annotation": "Author-reviewed labels and room label points from the real drawing; approximate manually boxed six-opening subset. No independent review. No model outputs used to author these labels. Development benchmark.",
+      "room_definition": "17 labelled interior spaces incl. closets/steam shower and combined ADU living-kitchen, excluding deck, stair void and title living-area total. Point containment with one-to-one matching; not polygon IoU.",
+      "rooms": [
+        {
+          "id": "author_room_1",
+          "label": "BEDROOM",
+          "bedroom": true,
+          "point_mm": [
+            149.40144271850585,
+            522.6844207551744
+          ]
+        },
+        {
+          "id": "author_room_2",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            230.60100835164388,
+            523.8065394931368
+          ]
+        },
+        {
+          "id": "author_room_3",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            195.9871220058865,
+            517.2642278035481
+          ]
+        },
+        {
+          "id": "author_room_4",
+          "label": "ACCESSORY DWELLING UNIT",
+          "bedroom": false,
+          "point_mm": [
+            165.6297964731852,
+            433.2340855916341
+          ]
+        },
+        {
+          "id": "author_room_5",
+          "label": "HALL",
+          "bedroom": false,
+          "point_mm": [
+            414.7478754679362,
+            136.858442179362
+          ]
+        },
+        {
+          "id": "author_room_6",
+          "label": "PRIMARY BEDROOM",
+          "bedroom": true,
+          "point_mm": [
+            322.05793668958876,
+            187.74310540093313
+          ]
+        },
+        {
+          "id": "author_room_7",
+          "label": "BEDROOM 2",
+          "bedroom": true,
+          "point_mm": [
+            492.7258677164713,
+            187.74310540093313
+          ]
+        },
+        {
+          "id": "author_room_8",
+          "label": "ENSUITE",
+          "bedroom": false,
+          "point_mm": [
+            310.3041967603895,
+            258.2704111735026
+          ]
+        },
+        {
+          "id": "author_room_9",
+          "label": "BEDROOM 1",
+          "bedroom": true,
+          "point_mm": [
+            415.08652835422095,
+            258.2704111735026
+          ]
+        },
+        {
+          "id": "author_room_10",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            503.31232316758894,
+            278.1885429382324
+          ]
+        },
+        {
+          "id": "author_room_11",
+          "label": "WALK-IN CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            350.25921919080946,
+            225.73753475613063
+          ]
+        },
+        {
+          "id": "author_room_12",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            503.35465477837454,
+            250.20620702107746
+          ]
+        },
+        {
+          "id": "author_room_13",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            472.0279924180772,
+            278.1885429382324
+          ]
+        },
+        {
+          "id": "author_room_14",
+          "label": "LAUNDRY",
+          "bedroom": false,
+          "point_mm": [
+            488.3370313856337,
+            136.858442179362
+          ]
+        },
+        {
+          "id": "author_room_15",
+          "label": "STEAM SHOWER",
+          "bedroom": false,
+          "point_mm": [
+            355.08215908474386,
+            274.84421649509
+          ]
+        },
+        {
+          "id": "author_room_16",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            475.04845835367837,
+            248.8285563998752
+          ]
+        },
+        {
+          "id": "author_room_17",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            458.4961095174154,
+            248.8285563998752
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "bedroom_1_door",
+          "kind": "door",
+          "bbox_mm": [
+            382.6282051282051,
+            217.20256410256405,
+            401.6239316239315,
+            234.57008547008547
+          ]
+        },
+        {
+          "id": "bedroom_2_door",
+          "kind": "door",
+          "bbox_mm": [
+            445.58547008547004,
+            158.58717948717953,
+            464.58119658119654,
+            178.12564102564102
+          ]
+        },
+        {
+          "id": "primary_door",
+          "kind": "door",
+          "bbox_mm": [
+            371.2307692307693,
+            132.53589743589748,
+            389.6837606837606,
+            152.07435897435897
+          ]
+        },
+        {
+          "id": "adu_bedroom_window",
+          "kind": "window",
+          "bbox_mm": [
+            107.46153846153844,
+            489.6555555555555,
+            117.23076923076923,
+            515.7068376068376
+          ]
+        },
+        {
+          "id": "bedroom_1_window",
+          "kind": "window",
+          "bbox_mm": [
+            395.6538461538461,
+            301.32649572649575,
+            428.7606837606837,
+            310.01025641025643
+          ]
+        },
+        {
+          "id": "bedroom_2_window",
+          "kind": "window",
+          "bbox_mm": [
+            475.9786324786325,
+            143.39059829059832,
+            504.7435897435897,
+            154.24529914529916
+          ]
+        }
+      ],
+      "opening_scope": "Only six annotated examples; not a complete opening inventory. Global opening precision/recall is not estimable.",
+      "schedules": [
+        {
+          "name": "doors",
+          "type_rows": 16
+        },
+        {
+          "name": "windows",
+          "type_rows": 13
+        }
+      ],
+      "schedule_note": "Window schedule uses D-prefixed labels too; those are type rows, not instance counts. The final window column is partly clipped.",
+      "id": "chief-a7",
+      "path": "data/real_plans/recovery/modern-bungalow.pdf",
+      "style": "Dense imperial construction sheet with schedules, details and numbered bedrooms",
+      "scope_bbox_mm": null,
+      "geometry_model": "runs/native-label-study/chief-a7/building.json",
+      "line_source": "classified_wall_elements"
+    },
+    {
+      "id": "uk-proposed",
+      "path": "data/real_plans/label-study/uk-proposed.pdf",
+      "source_url": "https://docs.planning.org.uk/20241227/121/SOXRODGLKA800/wnn0g264t8ejn7aw.pdf",
+      "source_host_note": "Planning-document CDN; third-party host, not verified against a council archive. No claim of official provenance. Drawings visually inspected before labels frozen.",
+      "source_sha256": "5dd77c157887bfde5b0f996e17309811ecd464b5fd44bf15b60639744b5c6139",
+      "source_page": 0,
+      "style": "Metric thin-line bungalow plan with large open-plan zones, furniture and small labels",
+      "scope_bbox_mm": [
+        45.86111111111111,
+        81.84444444444443,
+        336.90277777777777,
+        240.59444444444443
+      ],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "bed 1",
+          "bedroom": true,
+          "point_mm": [
+            140.119,
+            215.291
+          ]
+        },
+        {
+          "id": "r2",
+          "label": "bed 2",
+          "bedroom": true,
+          "point_mm": [
+            140.119,
+            171.476
+          ]
+        },
+        {
+          "id": "r3",
+          "label": "guest bed",
+          "bedroom": true,
+          "point_mm": [
+            182.187,
+            154.881
+          ]
+        },
+        {
+          "id": "r4",
+          "label": "bathroom",
+          "bedroom": false,
+          "point_mm": [
+            197.16,
+            218.169
+          ]
+        },
+        {
+          "id": "r5",
+          "label": "shower",
+          "bedroom": false,
+          "point_mm": [
+            202.981,
+            158.649
+          ]
+        },
+        {
+          "id": "r6",
+          "label": "utility",
+          "bedroom": false,
+          "point_mm": [
+            185.712,
+            109.161
+          ]
+        },
+        {
+          "id": "r7",
+          "label": "hall",
+          "bedroom": false,
+          "point_mm": [
+            226.416,
+            110.685
+          ]
+        },
+        {
+          "id": "r8",
+          "label": "hall",
+          "bedroom": false,
+          "point_mm": [
+            189.925,
+            195.436
+          ]
+        },
+        {
+          "id": "r9",
+          "label": "kitchen",
+          "bedroom": false,
+          "point_mm": [
+            257.187,
+            113.394
+          ]
+        },
+        {
+          "id": "r10",
+          "label": "dining",
+          "bedroom": false,
+          "point_mm": [
+            251.426,
+            164.067
+          ]
+        },
+        {
+          "id": "r11",
+          "label": "sitting",
+          "bedroom": false,
+          "point_mm": [
+            254.068,
+            207.332
+          ]
+        },
+        {
+          "id": "r12",
+          "label": "orangery",
+          "bedroom": false,
+          "point_mm": [
+            300.096,
+            162.247
+          ]
+        },
+        {
+          "id": "r13",
+          "label": "garage",
+          "bedroom": false,
+          "point_mm": [
+            91.619,
+            191.076
+          ]
+        },
+        {
+          "id": "r14",
+          "label": "workshop",
+          "bedroom": false,
+          "point_mm": [
+            89.594,
+            221.641
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            145.521,
+            187.237,
+            161.837,
+            198.702
+          ]
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            185.208,
+            203.112,
+            196.233,
+            214.136
+          ]
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            270.757,
+            199.143,
+            279.135,
+            220.31
+          ]
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            115.976,
+            155.928,
+            123.913,
+            180.622
+          ]
+        }
+      ],
+      "schedules": [],
+      "annotation": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "geometry_model": "runs/native-label-study/uk-proposed/building.json",
+      "line_source": "classified_wall_elements"
+    },
+    {
+      "id": "uk-existing-single",
+      "path": "data/real_plans/label-study/uk-existing-single.pdf",
+      "source_url": "https://docs.planning.org.uk/20241206/94/SLFSVONHJTZ00/wlc86wyupe5ovt3z.pdf",
+      "source_host_note": "Planning-document CDN; third-party host, not verified against a council archive. No claim of official provenance. Drawings visually inspected before labels frozen.",
+      "source_sha256": "d1d2c29de560cd56c18bc09aecb1a1054b94353bdb636a0ebc3d4c91606b818e",
+      "source_page": 0,
+      "style": "Metric shaded-wall site/house plan with oblique wing, printed room areas, colored openings",
+      "scope_bbox_mm": [
+        82.90277777777777,
+        88.87179328070745,
+        231.06944444444443,
+        210.58012661404078
+      ],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "Living / Dining",
+          "bedroom": false,
+          "point_mm": [
+            179.526,
+            189.294
+          ]
+        },
+        {
+          "id": "r2",
+          "label": "Garage",
+          "bedroom": false,
+          "point_mm": [
+            174.648,
+            114.491
+          ]
+        },
+        {
+          "id": "r3",
+          "label": "Bedroom",
+          "bedroom": true,
+          "point_mm": [
+            114.969,
+            124.312
+          ]
+        },
+        {
+          "id": "r4",
+          "label": "Bath",
+          "bedroom": false,
+          "point_mm": [
+            158.153,
+            111.528
+          ]
+        },
+        {
+          "id": "r5",
+          "label": "Toilet",
+          "bedroom": false,
+          "point_mm": [
+            143.597,
+            109.242
+          ]
+        },
+        {
+          "id": "r6",
+          "label": "Kitchen",
+          "bedroom": false,
+          "point_mm": [
+            162.061,
+            158.327
+          ]
+        },
+        {
+          "id": "r7",
+          "label": "Hallway",
+          "bedroom": false,
+          "point_mm": [
+            198.296,
+            152.823
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            209.903,
+            144.434,
+            217.84,
+            158.104
+          ]
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            175.507,
+            158.986,
+            190.5,
+            170.452
+          ]
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            215.635,
+            170.893,
+            225.778,
+            188.091
+          ]
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            90.399,
+            103.865,
+            101.865,
+            126.354
+          ]
+        }
+      ],
+      "schedules": [],
+      "annotation": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "geometry_model": "runs/native-label-study/uk-existing-single/building.json",
+      "line_source": "classified_wall_elements"
+    },
+    {
+      "id": "uk-existing-pair",
+      "path": "data/real_plans/label-study/uk-existing-pair.pdf",
+      "source_url": "https://docs.planning.org.uk/20220526/28/RC4K4DTYJX200/e1ch7r6o5dv6g6si.pdf",
+      "source_host_note": "Planning-document CDN; third-party host, not verified against a council archive. No claim of official provenance. Drawings visually inspected before labels frozen.",
+      "source_sha256": "11dfb591d5ab8591b20923986c6cee63acf94e56024851f5006555752e87ebd0",
+      "source_page": 0,
+      "style": "Rotated A1 multi-view existing/proposed conversion sheet with hatched walls and elevations",
+      "scope_bbox_mm": [
+        119.94444444444443,
+        396.5222222222222,
+        197.55555555555554,
+        542.925
+      ],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "Bedroom 1",
+          "bedroom": true,
+          "point_mm": [
+            141.447,
+            425.072
+          ]
+        },
+        {
+          "id": "r2",
+          "label": "Bedroom 2",
+          "bedroom": true,
+          "point_mm": [
+            170.445,
+            520.364
+          ]
+        },
+        {
+          "id": "r3",
+          "label": "Ensuite",
+          "bedroom": false,
+          "point_mm": [
+            137.924,
+            437.983
+          ]
+        },
+        {
+          "id": "r4",
+          "label": "Ensuite",
+          "bedroom": false,
+          "point_mm": [
+            177.675,
+            500.467
+          ]
+        },
+        {
+          "id": "r5",
+          "label": "Communal Kitchen",
+          "bedroom": false,
+          "point_mm": [
+            152.691,
+            473.967
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            145.962,
+            404.46,
+            159.191,
+            415.484
+          ]
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            167.128,
+            502.797,
+            175.948,
+            512.939
+          ]
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            154.34,
+            530.137,
+            181.24,
+            536.751
+          ]
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            132.733,
+            406.665,
+            143.316,
+            411.515
+          ]
+        }
+      ],
+      "schedules": [],
+      "annotation": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "geometry_model": "runs/native-label-study/uk-existing-pair/building.json",
+      "line_source": "classified_wall_elements"
+    },
+    {
+      "id": "cad-control",
+      "path": "data/real_plans/label-study/closed-cad-control.dxf",
+      "source_sha256": "be5ea5827d50448586d89499cec610fb12d8553eded38c2e0b5e5565dbc6f580",
+      "line_source": "dxf_layer",
+      "wall_layer": "WALLS",
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "BEDROOM 1",
+          "bedroom": true,
+          "point_mm": [
+            2,
+            2
+          ]
+        },
+        {
+          "id": "r2",
+          "label": "BEDROOM 2",
+          "bedroom": true,
+          "point_mm": [
+            6,
+            2
+          ]
+        },
+        {
+          "id": "r3",
+          "label": null,
+          "bedroom": false,
+          "point_mm": [
+            10,
+            2
+          ]
+        }
+      ],
+      "openings": [],
+      "schedules": [],
+      "annotation": "Synthetic closed-line control, independently specified before extraction. NOT a real CAD or Moroccan permit drawing. One intentionally unlabeled enclosure. Units are drawing metres despite legacy point_mm key reused by scoring helper.",
+      "opening_scope": "No openings in control; 0/0 is undefined accuracy.",
+      "style": "Closed metre-unit CAD control",
+      "source_page": 0
+    }
+  ],
+  "limits": "Four existing real vector-PDF labels unchanged; one newly frozen synthetic DXF control. No real or Moroccan DXF found in the searched project/S9 folders."
+}
