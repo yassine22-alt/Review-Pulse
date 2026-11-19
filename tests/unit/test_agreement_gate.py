@@ -38,3 +38,10 @@ def test_exemption_difference_prevents_agreement():
     right = proposal("second", comparison("width", 3))
     right["program"]["exemption"] = {"node": "literal", "value": True}
     assert semantic_key(Program.model_validate(left["program"])) != semantic_key(Program.model_validate(right["program"]))
+
+
+def test_boolean_fact_and_equality_to_true_have_the_same_meaning():
+    fact = {"node": "fact", "entity": "building", "name": "two_way"}
+    left = proposal("first", fact)
+    right = proposal("second", {"node": "eq", "left": fact, "right": {"node": "literal", "value": True}})
+    assert agreement_gate(left, right)["status"] == "CANDIDATE"

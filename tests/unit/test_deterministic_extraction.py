@@ -30,3 +30,24 @@ def test_ranges_preserve_two_bounds_and_bare_values_do_not_gain_units():
 def test_reference_numbers_do_not_become_measurements():
     result = extract_quantities("See article 3.2. Width shall be ≥ 1.7 m.")
     assert [r["value"] for r in result["evidence"]] == [1.7]
+
+
+def test_closed_linker_cannot_invent_a_value_or_drop_a_quantity():
+    from reviewpulse.interpreter.context import ContextBundle
+    from reviewpulse.interpreter.deterministic import compile_links, link_request
+    from reviewpulse.interpreter.structured import SlotFailure
+    from reviewpulse.rules.clauses import Clause
+
+    text = "Width shall be at least 1.7 m and depth shall be at least 2.9 m."
+    context = ContextBundle(document="test", text=text, clauses=[Clause("x", "", text, 1, 0, len(text))], target="x")
+    catalogue = {"whole": "building", "building": ["width", "depth"], "collections": {},
+                 "bindings": {name: {"kind": "number", "unit": "m"} for name in ("width", "depth")}}
+    _, payload, _ = link_request(context, catalogue)
+    with pytest.raises(SlotFailure, match="every source quantity"):
+        compile_links({"choices": [payload["menu"][0]["id"]], "needs_review": False}, payload, context, catalogue)
+    with pytest.raises(SlotFailure, match="invalid closed-menu"):
+        compile_links({"choices": [], "needs_review": False, "value": 7}, payload, context, catalogue)
+    chosen = [choice["id"] for choice in payload["menu"] if
+              (choice["quantity"], choice["fact"]) in (("q0", "width"), ("q1", "depth"))]
+    program, _ = compile_links({"choices": chosen, "needs_review": False}, payload, context, catalogue)
+    assert [arg.right.value for arg in program.requirement.args] == [1.7, 2.9]

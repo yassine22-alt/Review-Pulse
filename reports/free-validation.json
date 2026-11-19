@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-18",
+  "non_slow_tests": {
+    "passed": 1104,
+    "skipped": 2,
+    "slow_excluded": 45,
+    "seconds": 255.37
+  },
+  "initial_full_run": {
+    "passed": 1102,
+    "failed": 2,
+    "cause": "Legacy exact Retry-After assertion conflicted with jitter; auth error human wording omitted. Both corrected."
+  },
+  "ruff": "passed on changed Python files",
+  "sealed_fourth": "No source/label changes against ad7742ce; no test references or model runs",
+  "real_perception": "Both trained vector and raster paths executed locally, no local LLMs or hosted images",
+  "unmeasured": [
+    "Completed 46-case comparison",
+    "Closed-link hosted comparison",
+    "Actual human edit effort",
+    "Independent label review",
+    "Held-out generalization",
+    "General segmentation regression"
+  ]
+}

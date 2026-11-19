@@ -129,3 +129,19 @@ def test_environment_credentials_and_retry_errors_are_not_recorded(monkeypatch):
     assert error.value.attempts == 3 and len(sleeps) == 2
     assert 2 <= sleeps[0] <= 4 and 4 <= sleeps[1] <= 8
     assert "private-test-value" not in str(error.value) + json.dumps(client.events) + json.dumps(client.usage)
+
+
+def test_pacing_reserves_output_tokens_as_well_as_prompt_tokens(monkeypatch):
+    clock = [110.0]
+    waits = []
+    client = OpenAICompatClient("https://provider/v1", None, "model", tpm=1000, max_tokens=400)
+    client._token_history = [(100.0, 800)]
+    monkeypatch.setattr("reviewpulse.llm.openai_compat.time.monotonic", lambda: clock[0])
+
+    def advance(seconds):
+        waits.append(seconds)
+        clock[0] += seconds
+
+    monkeypatch.setattr("reviewpulse.llm.openai_compat.time.sleep", advance)
+    client._wait_for_tokens(b"{}")
+    assert len(waits) == 1 and 50 <= waits[0] < 51

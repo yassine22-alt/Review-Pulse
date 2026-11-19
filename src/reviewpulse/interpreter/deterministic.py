@@ -84,7 +84,7 @@ def link_request(context, catalogue):
     return system, payload, schema
 
 
-def compile_links(raw, payload, context, catalogue):
+def linked_slots(raw, payload, context, catalogue):
     if set(raw) != {"choices", "needs_review"} or type(raw["needs_review"]) is not bool or not isinstance(raw["choices"], list):
         raise SlotFailure("closed_link_schema", "invalid closed-menu result")
     choices = {choice["id"]: choice for choice in payload["menu"]}
@@ -122,5 +122,9 @@ def compile_links(raw, payload, context, catalogue):
     program = Program.model_validate({"id": target.id, "title": target.heading or target.id, "document": context.document,
         "requirement": expressions[0] if len(expressions) == 1 else {"node": "all", "args": expressions},
         "sources": [{"clause": target.id, "start": target.start, "end": target.end, "quote": target.text}]})
-    slots = slots_from_program(program, target.text)
+    return slots_from_program(program, target.text)
+
+
+def compile_links(raw, payload, context, catalogue):
+    slots = linked_slots(raw, payload, context, catalogue)
     return compile_slots(SlotDraft.model_validate(slots), context, catalogue), slots

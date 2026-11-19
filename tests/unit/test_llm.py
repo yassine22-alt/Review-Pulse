@@ -116,7 +116,8 @@ def test_rate_limit_is_waited_out(server, monkeypatch):
     s = server([(429, {"Retry-After": "3"}, {"error": "slow down"}), ok('{"x": 9}')])
     c = OpenAICompatClient(s.url, "k", "m1", provider="t")
     assert c.complete("a", "b", SCHEMA) == {"x": 9}
-    assert 3.0 in slept
+    # Retry-After is a minimum; exponential jitter may lengthen the wait.
+    assert any(wait >= 3.0 for wait in slept)
 
 
 def test_bad_key_message_never_contains_the_key(server):

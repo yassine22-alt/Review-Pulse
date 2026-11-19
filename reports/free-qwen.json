@@ -1,0 +1,1579 @@
+{
+  "protocol": {
+    "date": "2026-11-18",
+    "development_only": true,
+    "sealed_fourth": "unread and unrun",
+    "models": [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b"
+    ],
+    "substitution": "User explicitly approved both Groq models in place of unavailable Mistral and Llama generative arms.",
+    "console_limits": {
+      "source": "user transcribed account Settings/Limits",
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "order": [
+      "T01",
+      "M03",
+      "A08",
+      "M07",
+      "M01",
+      "M02",
+      "M04",
+      "M05",
+      "M06",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15"
+    ],
+    "arms": [
+      "monolithic",
+      "decomposed"
+    ],
+    "formal_tokens": 3072,
+    "reading_tokens": 512,
+    "daily_token_budget": 190000,
+    "comparison": "Both arms share compact expression output contract, catalogue, source context and deterministic gate. Only decomposed adds source-only reading. This is not the old recursive/node-generation baseline.",
+    "privacy": "Only regulation text, runtime catalogue type vocabulary and output contracts are sent; no drawings, plan images, observed plan measurements or frozen interpretations.",
+    "freeze": {
+      "reports/development-oracle-slots.json": "ff8a8bb19bbf533abaf8ac2cd60ea6790912b60b934dcd8cb3758e82a5eb9bf2",
+      "reports/development-metadata-labels.json": "50303c81a50e271f095c38898ac6e991a181f233d155eb492cb1653421c2625e"
+    },
+    "grading": "Slot scores before validation; separate exact frozen requirement, reviewed meaning and retention. Unannotated scope is not counted as correct; API errors excluded."
+  },
+  "model": "qwen/qwen3.8-27b",
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "retained": false,
+      "raw": {
+        "title": "U des toitures exposées – approche prescriptive, résidentiel, Z3, TGBV 26–35 %",
+        "applies_when": null,
+        "unless": null,
+        "require": "roof_u <= 0.65",
+        "sources": [
+          {
+            "clause": "T01 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T01",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "Coefficient U des toitures exposées",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T01",
+              "quote": "Approche prescriptive"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "résidentiels",
+            "source": {
+              "clause": "T01",
+              "quote": "bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T01",
+              "quote": "Z3"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "unit": "%",
+            "source": {
+              "clause": "T01",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "unit": "%",
+            "source": {
+              "clause": "T01",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "call": {
+        "prompt_tokens": 1881,
+        "completion_tokens": 2576,
+        "seconds": 6.45,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 3,
+          "gold_atoms": 5,
+          "predicted_atoms": 5
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 2,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        }
+      },
+      "stage": "schema_or_compile",
+      "detail": "expected '.' but found '<='"
+    },
+    {
+      "id": "T01",
+      "arm": "decomposed",
+      "retained": false,
+      "reading": {
+        "is_requirement": true,
+        "subject": "U des toitures exposées (W/m²/K)",
+        "constraints": [
+          "U des toitures exposées ≤ 0,65 W/m²/K"
+        ],
+        "applicability": [
+          "Approche prescriptive",
+          "Bâtiments résidentiels",
+          "Zone climatique Z3",
+          "TGBV entre 26 % et 35 %"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "TGBV 26 – 35 % conditionne la valeur maximale de U des toitures exposées"
+        ],
+        "references": [],
+        "uncertain": [
+          "La borne inférieure de TGBV (26 %) est-elle inclusive ou exclusive ?"
+        ]
+      },
+      "raw": {
+        "title": "U des toitures exposées – approche prescriptive, résidentiel, Z3, TGBV 26–35 %",
+        "applies_when": "building.approach == \"prescriptive\" and building.building_class == \"résidentiel\" and building.climate_zone == \"Z3\" and building.glazing_ratio >= 26 and building.glazing_ratio <= 35",
+        "unless": null,
+        "require": "building.roof_u <= 0.65",
+        "sources": [
+          {
+            "clause": "T01",
+            "quote": "Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65"
+          },
+          {
+            "clause": "T01 header",
+            "quote": "U des toitures exposées (W/m²/K)"
+          }
+        ],
+        "unresolved": [
+          "La borne inférieure de TGBV (26 %) est-elle inclusive ou exclusive ?"
+        ],
+        "subject": "U des toitures exposées",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T01",
+              "quote": "Approche prescriptive"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "résidentiel",
+            "source": {
+              "clause": "T01",
+              "quote": "bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T01",
+              "quote": "Z3"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T01",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T01",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "unit": "W/m2/K",
+            "name": "roof_u",
+            "entity": "building",
+            "definition": "Coefficient U des toitures exposées",
+            "source": {
+              "clause": "T01 header",
+              "quote": "U des toitures exposées (W/m²/K)"
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2008,
+        "completion_tokens": 1933,
+        "seconds": 4.58,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 5
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 6
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 3,
+          "gold_atoms": 5,
+          "predicted_atoms": 5
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        }
+      },
+      "stage": "declaration",
+      "detail": "a proposal cannot replace an existing binding"
+    },
+    {
+      "id": "M03",
+      "arm": "monolithic",
+      "retained": false,
+      "status": "REQUEST_REJECTED",
+      "stage": "transport",
+      "reason": "REQUEST_REJECTED",
+      "http_status": 400
+    },
+    {
+      "id": "M03",
+      "arm": "decomposed",
+      "retained": false,
+      "reading": {
+        "is_requirement": true,
+        "subject": "Rez-de-chaussée",
+        "constraints": [
+          "Distance maximale de 50 m si choix entre 2 sorties",
+          "Distance maximale de 30 m s'il existe une seule sortie"
+        ],
+        "applicability": [
+          "Rez-de-chaussée"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "La distance maximale dépend du nombre de sorties disponibles"
+        ],
+        "references": [],
+        "uncertain": [
+          "La nature exacte de la distance (parcours vers une issue, distance entre deux points, etc.) n'est pas explicitement précisée dans le texte"
+        ]
+      },
+      "raw": {
+        "title": "Distance de parcours au rez-de-chaussée selon le nombre de sorties",
+        "applies_when": null,
+        "unless": null,
+        "require": "(count(exits e where e.eligible) >= 2 and building.travel <= 50 m) or (count(exits e where e.eligible) == 1 and building.travel <= 30 m)",
+        "sources": [
+          {
+            "clause": "M03",
+            "quote": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s'il existe une seule sortie."
+          }
+        ],
+        "unresolved": [
+          "La nature exacte de la distance (parcours vers une issue, distance entre deux points, etc.) n'est pas explicitement précisée dans le texte",
+          "Le périmètre d'application 'Rez-de-chaussée' ne correspond à aucun champ du vocabulaire de métadonnées disponible"
+        ],
+        "subject": "Rez-de-chaussée",
+        "metadata_applicability": [],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "travel",
+            "entity": "building",
+            "definition": "Distance de parcours au rez-de-chaussée",
+            "source": {
+              "clause": "M03",
+              "quote": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s'il existe une seule sortie."
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2066,
+        "completion_tokens": 2251,
+        "seconds": 11.48,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 2,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        },
+        "operator": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 6,
+          "gold_atoms": 6,
+          "predicted_atoms": 6
+        },
+        "value": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 4,
+          "gold_atoms": 4,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "source_span",
+      "detail": "quote must identify one exact occurrence in a supplied clause"
+    },
+    {
+      "id": "A08",
+      "arm": "monolithic",
+      "retained": false,
+      "raw": {
+        "title": "Adapted seats for disabled persons in public rooms",
+        "applies_when": "forall rooms r where r.room_type == \"public_room\": true",
+        "unless": null,
+        "require": "forall rooms r where r.room_type == \"public_room\": r.adapted_seats >= r.total_seats / 20",
+        "sources": [
+          {
+            "clause": "A08",
+            "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+          }
+        ],
+        "unresolved": [
+          "The catalogue does not define a fact 'adapted_seats' (number of seats adapted for disabled persons) on the 'rooms' collection.",
+          "The catalogue does not define a fact 'total_seats' (total number of seats) on the 'rooms' collection.",
+          "The room_type value 'public_room' (salles publiques) is not present in the catalogue's kind_labels for room_type; only 'corridor' and 'lobby' are defined."
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "adapted_seats",
+            "entity": "rooms",
+            "definition": "Number of seats adapted for disabled persons in a room",
+            "source": {
+              "clause": "A08",
+              "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+            },
+            "status": "proposed"
+          },
+          {
+            "kind": "number",
+            "name": "total_seats",
+            "entity": "rooms",
+            "definition": "Total number of seats in a room",
+            "source": {
+              "clause": "A08",
+              "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2135,
+        "completion_tokens": 1665,
+        "seconds": 64.07,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 3
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 4
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "unit": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "subject",
+      "detail": "subject phrase is absent from the supplied source"
+    },
+    {
+      "id": "A08",
+      "arm": "decomposed",
+      "retained": false,
+      "reading": {
+        "is_requirement": true,
+        "subject": "sièges adaptés aux personnes handicapées",
+        "constraints": [
+          "Le nombre de sièges adaptés aux personnes handicapées est fixé à un siège sur vingt (ratio 1:20)"
+        ],
+        "applicability": [
+          "salles publiques"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "Le nombre de sièges adaptés aux personnes handicapées est en ratio 1:20 avec le nombre total de sièges dans la salle publique"
+        ],
+        "references": [],
+        "uncertain": [
+          "La définition exacte de « salles publiques » n'est pas précisée dans cet article",
+          "« Fixé à un siège sur vingt » peut être interprété comme un minimum (au moins 1/20) ou un ratio exact",
+          "Le dénominateur « vingt » fait référence au nombre total de sièges de la salle, ce qui est implicite"
+        ]
+      },
+      "raw": {
+        "title": "Ratio of accessible seats in public rooms",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall rooms r: r.accessible_seats >= r.total_seats / 20",
+        "sources": [
+          {
+            "clause": "A08",
+            "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+          }
+        ],
+        "unresolved": [
+          "La définition exacte de « salles publiques » n'est pas précisée dans cet article ; aucune valeur room_type correspondante n'existe dans le catalogue (kinds: corridor, lobby).",
+          "« Fixé à un siège sur vingt » peut être interprété comme un minimum (au moins 1/20) ou un ratio exact ; l'expression utilise >= (minimum) par prudence réglementaire.",
+          "Le dénominateur « vingt » fait référence au nombre total de sièges de la salle, ce qui est implicite et non explicitement défini dans le texte."
+        ],
+        "subject": "sièges adaptés aux personnes handicapées",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "room_type",
+            "operator": "eq",
+            "value": "public_room",
+            "source": {
+              "clause": "A08",
+              "quote": "dans les salles publiques"
+            }
+          }
+        ],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "total_seats",
+            "entity": "room",
+            "definition": "Nombre total de sièges dans une salle publique",
+            "source": {
+              "clause": "A08",
+              "quote": "un siège sur vingt"
+            },
+            "status": "proposed"
+          },
+          {
+            "kind": "number",
+            "name": "accessible_seats",
+            "entity": "room",
+            "definition": "Nombre de sièges adaptés aux personnes handicapées dans une salle publique",
+            "source": {
+              "clause": "A08",
+              "quote": "Le nombre de sièges adaptés aux personnes handicapées"
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2301,
+        "completion_tokens": 2171,
+        "seconds": 32.81,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 3
+        },
+        "value": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "unit": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 1
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "entity_binding",
+      "detail": "proposed fact has no known entity or collection"
+    },
+    {
+      "id": "M07",
+      "arm": "monolithic",
+      "retained": false,
+      "raw": {
+        "title": "Door free passage width minimum with 5 % negative tolerance",
+        "applies_when": null,
+        "unless": null,
+        "require": "building.door_width >= building.required_door_width * 0.95",
+        "sources": [
+          {
+            "clause": "M07",
+            "quote": "La largeur de passage offerte par une porte doit être au moins égale à l'une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %."
+          }
+        ],
+        "unresolved": [
+          "The evacuation table (tableau de dégagement) values are referenced but not fully reproduced in the provided source text; the applicable required width is determined by occupancy per the table-scope clause and the unit clause (UP = 0,60 m with adjustments for 1 or 2 UP)."
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "required_door_width",
+            "entity": "building",
+            "definition": "The minimum door passage width (in metres) required by the evacuation table for the applicable occupancy level of the building",
+            "source": {
+              "clause": "M07",
+              "quote": "l'une de celles définies au tableau de dégagement ci avant"
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2116,
+        "completion_tokens": 2080,
+        "seconds": 4.72,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 2,
+          "gold_atoms": 3,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "source_span",
+      "detail": "quote must identify one exact occurrence in a supplied clause"
+    },
+    {
+      "id": "M07",
+      "arm": "decomposed",
+      "retained": false,
+      "status": "REQUEST_REJECTED",
+      "stage": "transport",
+      "reason": "REQUEST_REJECTED",
+      "http_status": 400
+    },
+    {
+      "id": "M01",
+      "arm": "monolithic",
+      "retained": false,
+      "raw": {
+        "title": "Minimum number of ground-floor exits for occupancy 20–50",
+        "applies_when": null,
+        "unless": null,
+        "require": "count(exits e where e.eligible) >= 2",
+        "sources": [
+          {
+            "clause": "M01",
+            "quote": "| de 20 à 50 | RDC : 2 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "ge",
+            "value": 20,
+            "unit": "count",
+            "source": {
+              "clause": "M01",
+              "quote": "de 20 à 50"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "le",
+            "value": 50,
+            "unit": "count",
+            "source": {
+              "clause": "M01",
+              "quote": "de 20 à 50"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "call": {
+        "prompt_tokens": 2103,
+        "completion_tokens": 2134,
+        "seconds": 51.91,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "operator": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 2,
+          "gold_atoms": 2,
+          "predicted_atoms": 2
+        },
+        "value": {
+          "eligible": true,
+          "exact": true,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 2
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "subject",
+      "detail": "subject phrase is absent from the supplied source"
+    },
+    {
+      "id": "M01",
+      "arm": "decomposed",
+      "retained": false,
+      "reading": {
+        "is_requirement": true,
+        "subject": "dégagements (sorties ou escaliers) au RDC",
+        "constraints": [
+          "Nombre de dégagements (sorties ou escaliers) au RDC : 2"
+        ],
+        "applicability": [
+          "Effectif de 20 à 50"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "Le nombre de dégagements est fonction de l'effectif des personnes susceptibles d'emprunter les sorties"
+        ],
+        "references": [],
+        "uncertain": []
+      },
+      "raw": {
+        "title": "Nombre minimal de dégagements au RDC pour un effectif de 20 à 50",
+        "applies_when": "building.occupancy >= 20 and building.occupancy <= 50",
+        "unless": null,
+        "require": "count(exits e where e.eligible) >= 2",
+        "sources": [
+          {
+            "clause": "M01",
+            "quote": "de 20 à 50 | RDC : 2"
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          }
+        ],
+        "unresolved": [
+          "Le périmètre RDC (rez-de-chaussée) n'est pas capturé par un fait disponible dans le catalogue ; aucune distinction de niveau d'étage n'est possible avec les faits actuels."
+        ],
+        "subject": "dégagements (sorties ou escaliers) au RDC",
+        "metadata_applicability": [
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "ge",
+            "value": 20,
+            "unit": "count",
+            "source": {
+              "clause": "M01",
+              "quote": "de 20 à 50"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "le",
+            "value": 50,
+            "unit": "count",
+            "source": {
+              "clause": "M01",
+              "quote": "de 20 à 50"
+            }
+          }
+        ],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "occupancy",
+            "entity": "building",
+            "definition": "Effectif des personnes susceptibles d'emprunter les sorties",
+            "unit": "count",
+            "source": {
+              "clause": "table-scope",
+              "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "call": {
+        "prompt_tokens": 2192,
+        "completion_tokens": 2961,
+        "seconds": 55.28,
+        "mode": "json_object",
+        "model": "qwen/qwen3.8-27b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 2,
+          "gold_atoms": 2,
+          "predicted_atoms": 4
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 3
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 2
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 3,
+          "predicted_atoms": 2
+        }
+      },
+      "stage": "subject",
+      "detail": "subject phrase is absent from the supplied source"
+    },
+    {
+      "id": "M02",
+      "arm": "monolithic",
+      "retained": false,
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "reason": "RETRY_EXHAUSTED",
+      "http_status": 429
+    }
+  ],
+  "requests": [
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "5883",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "15.877s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1
+    },
+    {
+      "http_status": 429,
+      "attempt": 2
+    },
+    {
+      "http_status": 200,
+      "attempt": 3,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "6605",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "59.22s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1
+    },
+    {
+      "http_status": 429,
+      "attempt": 2
+    },
+    {
+      "http_status": 429,
+      "attempt": 3
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "5788",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "16.59s"
+      }
+    },
+    {
+      "http_status": 400,
+      "attempt": 1
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "7401",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "4.492s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1
+    },
+    {
+      "http_status": 200,
+      "attempt": 2,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "5261",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "40.38s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "5730",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "17.024s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1
+    },
+    {
+      "http_status": 200,
+      "attempt": 2,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "6653",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "59.34s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "994",
+        "x-ratelimit-remaining-tokens": "5022",
+        "x-ratelimit-reset-requests": "8m38.4s",
+        "x-ratelimit-reset-tokens": "40.62s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1
+    },
+    {
+      "http_status": 429,
+      "attempt": 2
+    },
+    {
+      "http_status": 429,
+      "attempt": 3
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "5754",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "16.844s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "used": 997.0,
+        "requested": 164.0
+      }
+    },
+    {
+      "http_status": 400,
+      "attempt": 2,
+      "category": "json_validate_failed",
+      "budget_numbers": {}
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "5617",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "18.025s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "used": 997.0,
+        "requested": 122.0
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 2,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "used": 861.0,
+        "requested": 205.0
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 3,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "5441",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "19.192s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "requested": 2080.0
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 2,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "5341",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "28.02s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "requested": 2961.0
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 2,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "requested": 2080.0
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 3,
+      "category": "rate_limit_exceeded",
+      "budget_numbers": {
+        "limit": 1000.0,
+        "requested": 2080.0
+      }
+    }
+  ],
+  "daily_tokens": {
+    "2026-11-18": 37802
+  },
+  "status": "API_UNAVAILABLE",
+  "summary": {
+    "monolithic": {
+      "complete": [
+        4,
+        46
+      ],
+      "api_unavailable": 1,
+      "retained": [
+        0,
+        4
+      ],
+      "stages": {
+        "schema_or_compile": 1,
+        "transport": 2,
+        "subject": 2,
+        "source_span": 1
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 4,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 4
+        },
+        "fact": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 2,
+          "gold_atoms": 5,
+          "predicted_atoms": 6
+        },
+        "operator": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 5,
+          "gold_atoms": 8,
+          "predicted_atoms": 8
+        },
+        "value": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 2,
+          "gold_atoms": 6,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 2,
+          "gold_atoms": 5,
+          "predicted_atoms": 3
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 3,
+          "gold_atoms": 5,
+          "predicted_atoms": 5
+        },
+        "clause_span": {
+          "correct": 2,
+          "denominator": 4,
+          "accuracy": 0.5,
+          "matched_atoms": 3,
+          "gold_atoms": 9,
+          "predicted_atoms": 5
+        }
+      }
+    },
+    "decomposed": {
+      "complete": [
+        4,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        4
+      ],
+      "stages": {
+        "declaration": 1,
+        "source_span": 1,
+        "entity_binding": 1,
+        "transport": 1,
+        "subject": 1
+      },
+      "slots": {
+        "subject": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 1,
+          "gold_atoms": 4,
+          "predicted_atoms": 4
+        },
+        "fact": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 4,
+          "gold_atoms": 6,
+          "predicted_atoms": 11
+        },
+        "operator": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 10,
+          "gold_atoms": 11,
+          "predicted_atoms": 17
+        },
+        "value": {
+          "correct": 2,
+          "denominator": 4,
+          "accuracy": 0.5,
+          "matched_atoms": 7,
+          "gold_atoms": 7,
+          "predicted_atoms": 14
+        },
+        "unit": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 2,
+          "gold_atoms": 5,
+          "predicted_atoms": 5
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 3,
+          "gold_atoms": 5,
+          "predicted_atoms": 5
+        },
+        "clause_span": {
+          "correct": 1,
+          "denominator": 4,
+          "accuracy": 0.25,
+          "matched_atoms": 2,
+          "gold_atoms": 7,
+          "predicted_atoms": 6
+        }
+      }
+    }
+  },
+  "availability_history": [
+    {
+      "id": "T01",
+      "arm": "decomposed",
+      "http_status": 429,
+      "attempts_in_exhausted_cycle": 3
+    },
+    {
+      "id": "M07",
+      "arm": "monolithic",
+      "http_status": 429,
+      "attempts_in_exhausted_cycle": 3
+    },
+    {
+      "id": "M02",
+      "arm": "monolithic",
+      "http_status": 429,
+      "attempts_in_exhausted_cycle": 3
+    }
+  ],
+  "stop_note": "Stopped after three exhausted HTTP-429 retry cycles. Do not issue further hosted calls until project limits or provider availability change. Error budget diagnostics reported Limit 1000, Requested 2080; limiting dimension was not retained, so its cause is not established."
+}

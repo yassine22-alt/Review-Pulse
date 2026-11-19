@@ -580,7 +580,7 @@
         "title": "Every reviewed bedroom shall have a floor area of at least 9 m2.",
         "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
         "status": "approved",
-        "approved_by": "benchmark author; manual interpretation",
+        "approved_by": "benchmark author; no independent review",
         "applicability": {
           "node": "literal",
           "value": true,
@@ -1589,7 +1589,7 @@
         "title": "Every reviewed bedroom shall have a confirmed path to HALL without passing through a bathroom.",
         "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
         "status": "approved",
-        "approved_by": "benchmark author; manual interpretation",
+        "approved_by": "benchmark author; no independent review",
         "applicability": {
           "node": "literal",
           "value": true,
@@ -2497,7 +2497,7 @@
         "title": "If a reviewed bedroom has an area under 12 m2, it shall have a minimum internal width of 2.5 m.",
         "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
         "status": "approved",
-        "approved_by": "benchmark author; manual interpretation",
+        "approved_by": "benchmark author; no independent review",
         "applicability": {
           "node": "literal",
           "value": true,
@@ -3034,7 +3034,7 @@
         "title": "The reviewed D06 door type shall provide a net clear opening of at least 0.8 m.",
         "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
         "status": "approved",
-        "approved_by": "benchmark author; manual interpretation",
+        "approved_by": "benchmark author; no independent review",
         "applicability": {
           "node": "literal",
           "value": true,
@@ -3427,7 +3427,7 @@
         "title": "The reviewed unit shall have at least one confirmed final exit at ground level.",
         "document": "Author-written demonstration project brief, not an official regulation or a held-out test. Not sent to hosted providers.",
         "status": "approved",
-        "approved_by": "benchmark author; manual interpretation",
+        "approved_by": "benchmark author; no independent review",
         "applicability": {
           "node": "literal",
           "value": true,

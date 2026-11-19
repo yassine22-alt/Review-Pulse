@@ -30,44 +30,29 @@ def main():
     model = BuildingModel.model_validate_json(args.building.read_text(encoding="utf-8"))
     automatic = from_building(model, complete=False)
     initial = to_inputs(automatic).model_dump(mode="json")
-    bindings = {"area_m2": {"kind": "number", "unit": "m2", "description": "Internal floor area"},
-                "min_width_m": {"kind": "number", "unit": "m", "description": "Minimum internal room width"},
-                "clear_width_m": {"kind": "number", "unit": "m", "description": "Net clear opening, not nominal door size"},
-                "room_type": {"kind": "string", "description": "Confirmed room classification"}}
-    initial["bindings"].update(bindings)
-    selected = {name: {"items": [], "complete": False, "trusted": False}
-                for name in ("reviewed_bedrooms", "reviewed_halls", "reviewed_doors", "final_exits")}
-    initial["collections"].update(selected)
+    reviewed = Inputs.model_validate(profile["reviewed_inputs"])
+    initial["bindings"].update(profile["reviewed_inputs"]["bindings"])
+    initial["collections"].update({name: {"items": [], "complete": False, "trusted": False}
+                                   for name in reviewed.collections})
+    detected = model.model_dump(mode="json")
+    for name, selector in profile.get("automatic_scope_selectors", {}).items():
+        allowed = {" ".join(value.casefold().split()) for value in selector["allowed"]}
+        selected = [entity["id"] for entity in detected.get(selector["entity_list"], [])
+                    if " ".join(str(entity.get(selector["field"]) or "").casefold().split()) in allowed
+                    and (not selector.get("class_field") or entity.get(selector["class_field"]) == selector["class_value"])]
+        initial["collections"][name]["items"] = selected
     initial = Inputs.model_validate(initial)
     graph = nx.MultiGraph()
-    facts = {}
-
-    def attested(value, source):
-        return {"value": value, "source": source, "trusted": value is not None,
-                "origin": "reviewer-attested", "reviewer": "benchmark author; no independent review"}
-
+    for node in profile["reviewed_nodes"]:
+        graph.add_node(node["id"], **{key: value for key, value in node.items() if key != "id"})
+    for edge in profile["reviewed_edges"]:
+        graph.add_edge(edge["a"], edge["b"], **{key: value for key, value in edge.items() if key not in ("a", "b")})
     with pymupdf.open(args.pdf) as pdf:
-        source_text = pdf[6].get_text()
-        pdf[6].get_pixmap(matrix=pymupdf.Matrix(0.65, 0.65)).save(args.output / "drawing.png")
-    for room in profile["reviewed_rooms"]:
-        if room["dimension_quote"] not in source_text:
-            raise ValueError("room dimension citation absent from drawing")
-        facts[room["id"]] = {name: attested(room[name], room["source"] + "; " + room["review_note"])
-                             for name in ("area_m2", "min_width_m")}
-        facts[room["id"]]["room_type"] = attested("bedroom", room["source"])
-        graph.add_node(room["id"], kind="room", role="member")
-    facts["hall"] = {"room_type": attested("corridor", "Author identifies HALL circulation on A-7")}
-    facts["D06"] = {"clear_width_m": {"value": None, "source": "A-7 D06 label 3076 is nominal; net clear opening is not specified"}}
-    graph.add_node("hall", kind="room", role="member")
-    for edge in profile["reviewed_paths"]:
-        graph.add_edge(edge["a"], edge["b"], kind="door", trusted=True, via=edge["source"])
-    collections = {**selected,
-        "reviewed_bedrooms": {"items": [r["id"] for r in profile["reviewed_rooms"]], "complete": True, "trusted": True},
-        "reviewed_halls": {"items": ["hall"], "complete": True, "trusted": True},
-        "reviewed_doors": {"items": ["D06"], "complete": True, "trusted": True}}
-    reviewed = Inputs(bindings=bindings, facts=facts, collections=collections, graph_complete=False,
-        evidence_locations={"clear_width_m": "Manufacturer clear-opening data or a dimension explicitly labelled net clear",
-                            "final_exits": "Ground-floor, staircase and site egress drawings"})
+        page = pdf[profile["source_page"]]
+        source_text = page.get_text()
+        page.get_pixmap(matrix=pymupdf.Matrix(0.65, 0.65)).save(args.output / "drawing.png")
+    if any(quote not in source_text for quote in profile["native_dimension_citations"]):
+        raise ValueError("dimension citation absent from drawing")
     text = "\n\n".join(f"{index}. {row['text']}" for index, row in enumerate(profile["requirements"], 1))
     clauses = split_text(text)
     catalogue = catalogue_from(reviewed, None)
@@ -84,7 +69,7 @@ def main():
                   "approval_scope": profile["scope"]}
         try:
             program = compile_slots(SlotDraft.model_validate(frame), context, catalogue)
-            program = program.model_copy(update={"status": "approved", "approved_by": "benchmark author; manual interpretation"})
+            program = program.model_copy(update={"status": "approved", "approved_by": profile["reviewer"]})
             before = run_program(program, initial, graph=to_graph(automatic))
             after = run_program(program, reviewed, graph=graph)
             result.update(before=before, after=after, outcome=after["outcome"], trace=after["trace"],
@@ -92,12 +77,10 @@ def main():
         except ValueError as error:
             result.update(stage=getattr(error, "stage", "compile"), blocker=str(error))
         rows.append(result)
-    report = {"source": {"publisher": "Author demonstration profile applied to Chief Architect drawing",
-                          "sheet": "A-7", "edition": "July 2024 drawing; November 2026 authored profile"},
+    report = {"source": profile["source"],
               "limits": profile["limits"], "requirements": rows,
               "automatic_facts": initial.model_dump(mode="json"), "reviewed_facts": reviewed.model_dump(mode="json"),
-              "inventory_attestation": {"reviewer": "benchmark author; no independent review", "scope": profile["scope"],
-                    "building_inventory_complete": False, "final_exit_inventory_complete": False},
+              "inventory_attestation": profile["inventory_attestation"],
               "automatic_decisions": sum(r.get("before", {}).get("outcome") in ("SATISFIED", "VIOLATED") for r in rows),
               "reviewed_decisions": sum(r["outcome"] in ("SATISFIED", "VIOLATED") for r in rows)}
     args.output.mkdir(parents=True, exist_ok=True)

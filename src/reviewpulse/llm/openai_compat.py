@@ -35,7 +35,8 @@ class LLMError(RuntimeError):
 class APIUnavailable(LLMError):
     def __init__(self, reason: str, status: int | None, attempts: int):
         self.reason, self.http_status, self.attempts = reason, status, attempts
-        super().__init__(f"API_UNAVAILABLE: {reason}, HTTP {status}, attempts {attempts}")
+        explanation = " (API credential rejected)" if status in (401, 403) else ""
+        super().__init__(f"API_UNAVAILABLE: {reason}, HTTP {status}, attempts {attempts}{explanation}")
 
 
 def is_external(base_url: str) -> bool:
@@ -108,7 +109,7 @@ class OpenAICompatClient:
     def __init__(self, base_url: str, api_key: str | None, model: str, *, provider: str = "custom",
                  structured: str = "auto", timeout_s: float = 120.0, max_retries: int = 4, rpm: float | None = None,
                  temperature: float = 0.0, max_tokens: int = 3000, seed: int | None = 42, headers: dict | None = None,
-                 reasoning_effort: str | None = None, concurrency: int = 1):
+                 reasoning_effort: str | None = None, concurrency: int = 1, tpm: int | None = None):
         if not model:
             raise LLMError("a model name is required (set REVIEWPULSE_LLM_MODEL)")
         self.base_url = base_url.rstrip("/")
@@ -129,6 +130,8 @@ class OpenAICompatClient:
         self.usage = {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "seconds": 0.0, "errors": 0, "waited_s": 0.0}
         self._tokens_left: float | None = None             # what the provider says is left of this minute's token allowance
         self._tokens_reset = 0.0                           # when it is full again (monotonic seconds)
+        self._tpm = tpm
+        self._token_history: list[tuple[float, int]] = []
 
     @classmethod
     def from_env(cls, base_url: str, env_var: str, model: str, **kwargs):
@@ -151,9 +154,20 @@ class OpenAICompatClient:
         """Free tiers cap tokens per minute, not only requests. The provider reports what is left in its response headers
         (x-ratelimit-remaining-tokens, x-ratelimit-reset-tokens); a call that would not fit waits for the reset instead of being sent,
         refused with a 429 and retried, which spends the same minute twice."""
+        need = len(data) / 3.0 + self.max_tokens
+        if self._tpm:
+            if need > self._tpm:
+                raise APIUnavailable("REQUEST_BUDGET_EXCEEDS_TPM", None, 0)
+            while True:
+                now = time.monotonic()
+                self._token_history = [(stamp, used) for stamp, used in self._token_history if now - stamp < 60]
+                if sum(used for _, used in self._token_history) + need <= self._tpm:
+                    break
+                wait = min(60.0, max(0.01, 60 - (now - self._token_history[0][0]) + 0.25))
+                time.sleep(wait)
+                self.usage["waited_s"] += wait
         if self._tokens_left is None:
             return
-        need = len(data) / 3.0 + 200
         wait = self._tokens_reset - time.monotonic()
         if self._tokens_left < need and wait > 0:
             time.sleep(min(wait + 0.25, 65.0))
@@ -161,6 +175,8 @@ class OpenAICompatClient:
             self._tokens_left = None
 
     def _learn_limits(self, headers) -> None:
+        if headers is None:
+            return
         try:
             left = headers.get("x-ratelimit-remaining-tokens")
             reset = headers.get("x-ratelimit-reset-tokens")
@@ -189,8 +205,13 @@ class OpenAICompatClient:
                                                    if k.lower().startswith("x-ratelimit-")}})
                     return json.loads(r.read().decode())
             except urllib.error.HTTPError as exc:
+                self._learn_limits(exc.headers)
                 text = exc.read().decode("utf-8", "replace")[:600]
-                self.events.append({"http_status": exc.code, "attempt": attempt + 1})
+                category = next((name for name in ("json_validate_failed", "rate_limit_exceeded", "context_length_exceeded", "model_decommissioned")
+                                 if name in text), "unspecified")
+                self.events.append({"http_status": exc.code, "attempt": attempt + 1, "category": category,
+                    "budget_numbers": {name.lower(): float(number) for name, number in
+                        re.findall(r"\b(Limit|Requested|Used)\s*[:=]?\s*(\d+(?:\.\d+)?)", text, re.I)}})
                 if self._key:
                     text = text.replace(self._key, "[redacted credential]")
                 if exc.code == 400 and "reasoning_effort" in text.lower() and "reasoning_effort" in body:
@@ -209,8 +230,9 @@ class OpenAICompatClient:
                     raise APIUnavailable("daily allowance exhausted", exc.code, attempt + 1) from None
                 if exc.code in (429, 500, 502, 503, 504) and attempt < self.max_retries:
                     retry_after = exc.headers.get("retry-after") if exc.headers else None
-                    time.sleep(min(60.0, float(retry_after)) if retry_after and retry_after.replace(".", "").isdigit()
-                               else min(60.0, delay + random.uniform(0, delay)))
+                    retry_seconds = (float(retry_after) if retry_after and retry_after.replace(".", "", 1).isdigit()
+                                     else _seconds(retry_after or ""))
+                    time.sleep(min(60.0, max(retry_seconds, delay + random.uniform(0, delay))))
                     delay *= 2
                     continue
                 raise APIUnavailable("REQUEST_REJECTED" if exc.code < 500 and exc.code != 429 else "RETRY_EXHAUSTED", exc.code, attempt + 1) from None
@@ -278,6 +300,7 @@ class OpenAICompatClient:
             self.usage["prompt_tokens"] += usage.get("prompt_tokens") or 0
             self.usage["completion_tokens"] += usage.get("completion_tokens") or 0
             self.usage["seconds"] += time.time() - t0
+            self._token_history.append((time.monotonic(), (usage.get("prompt_tokens") or 0) + (usage.get("completion_tokens") or 0)))
             if choice.get("finish_reason") == "length":
                 raise LLMError(f"{self.provider}: the answer was cut off at {self.max_tokens} tokens")
             return extract_json(self.last["text"])

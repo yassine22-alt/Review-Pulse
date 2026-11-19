@@ -151,38 +151,6 @@
       }
     }
   ],
-  "reviewed_rooms": [
-    {
-      "id": "bedroom_1",
-      "label": "BEDROOM 1",
-      "dimension_quote": "12'-1\" X 10'-8\"",
-      "area_m2": 11.9741696,
-      "min_width_m": 3.2512,
-      "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
-      "review_note": "Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
-    },
-    {
-      "id": "bedroom_2",
-      "label": "BEDROOM 2",
-      "dimension_quote": "11'-9\" X 11'-8\"",
-      "area_m2": 12.735458399999999,
-      "min_width_m": 3.556,
-      "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"",
-      "review_note": "Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement."
-    }
-  ],
-  "reviewed_paths": [
-    {
-      "a": "bedroom_1",
-      "b": "hall",
-      "source": "Author confirms a door connection from BEDROOM 1 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
-    },
-    {
-      "a": "bedroom_2",
-      "b": "hall",
-      "source": "Author confirms a door connection from BEDROOM 2 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
-    }
-  ],
   "frozen_expected_after_review": {
     "area": "SATISFIED",
     "route": "SATISFIED",
@@ -195,5 +163,221 @@
     "No synthetic clear-width or exit values are supplied. D06 nominal dimensions do not establish net clear opening.",
     "The final exit inventory cannot be confirmed from a second-floor sheet.",
     "This measures assisted execution after author evidence, not automated source interpretation or perception accuracy."
-  ]
+  ],
+  "reviewed_inputs": {
+    "bindings": {
+      "area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Internal floor area",
+        "declaration": null
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal room width",
+        "declaration": null
+      },
+      "clear_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Net clear opening, not nominal door size",
+        "declaration": null
+      },
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Confirmed room classification",
+        "declaration": null
+      }
+    },
+    "facts": {
+      "bedroom_1": {
+        "area_m2": {
+          "value": 11.9741696,
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "min_width_m": {
+          "value": 3.2512,
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "room_type": {
+          "value": "bedroom",
+          "source": "Chief Architect A-7: BEDROOM 1 printed dimensions 12'-1\" X 10'-8\"",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "bedroom_2": {
+        "area_m2": {
+          "value": 12.735458399999999,
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "min_width_m": {
+          "value": 3.556,
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"; Benchmark author reads these two rooms as rectangles and treats the printed dimensions as internal. This geometrical interpretation has no independent review; derived area is reviewer-supplied, not an automatic segmentation measurement.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        },
+        "room_type": {
+          "value": "bedroom",
+          "source": "Chief Architect A-7: BEDROOM 2 printed dimensions 11'-9\" X 11'-8\"",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "hall": {
+        "room_type": {
+          "value": "corridor",
+          "source": "Author identifies HALL circulation on A-7",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "benchmark author; no independent review"
+        }
+      },
+      "D06": {
+        "clear_width_m": {
+          "value": null,
+          "source": "A-7 D06 label 3076 is nominal; net clear opening is not specified",
+          "trusted": false,
+          "conflicting": false,
+          "origin": null,
+          "reviewer": null
+        }
+      }
+    },
+    "collections": {
+      "reviewed_bedrooms": {
+        "items": [
+          "bedroom_1",
+          "bedroom_2"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "reviewed_halls": {
+        "items": [
+          "hall"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "reviewed_doors": {
+        "items": [
+          "D06"
+        ],
+        "complete": true,
+        "trusted": true
+      },
+      "final_exits": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      }
+    },
+    "graph_complete": false,
+    "evidence_locations": {
+      "clear_width_m": "Manufacturer clear-opening data or a dimension explicitly labelled net clear",
+      "final_exits": "Ground-floor, staircase and site egress drawings"
+    },
+    "project_metadata": {}
+  },
+  "reviewer": "benchmark author; no independent review",
+  "source": {
+    "publisher": "Author demonstration profile applied to Chief Architect drawing",
+    "sheet": "A-7",
+    "edition": "July 2024 drawing; November 2026 authored profile"
+  },
+  "source_page": 6,
+  "native_dimension_citations": [
+    "12'-1\" X 10'-8\"",
+    "11'-9\" X 11'-8\""
+  ],
+  "reviewed_nodes": [
+    {
+      "id": "bedroom_1",
+      "kind": "room",
+      "role": "member"
+    },
+    {
+      "id": "bedroom_2",
+      "kind": "room",
+      "role": "member"
+    },
+    {
+      "id": "hall",
+      "kind": "room",
+      "role": "member"
+    }
+  ],
+  "reviewed_edges": [
+    {
+      "a": "bedroom_1",
+      "b": "hall",
+      "source": "Author confirms a door connection from BEDROOM 1 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader.",
+      "kind": "door",
+      "trusted": true,
+      "via": "Author confirms a door connection from BEDROOM 1 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
+    },
+    {
+      "a": "bedroom_2",
+      "b": "hall",
+      "source": "Author confirms a door connection from BEDROOM 2 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader.",
+      "kind": "door",
+      "trusted": true,
+      "via": "Author confirms a door connection from BEDROOM 2 to the circulation space labelled HALL, including its corridor extensions, without an intervening bathroom. Not established by the automated reader."
+    }
+  ],
+  "inventory_attestation": {
+    "reviewer": "benchmark author; no independent review",
+    "scope": "Only two author-selected bedrooms BEDROOM 1 and BEDROOM 2 and the selected D06 type on A-7. Completeness never extends to all rooms, stairs or exits of the building.",
+    "building_inventory_complete": false,
+    "final_exit_inventory_complete": false
+  },
+  "automatic_scope_selectors": {
+    "reviewed_bedrooms": {
+      "entity_list": "rooms",
+      "field": "label",
+      "allowed": [
+        "BEDROOM 1",
+        "BEDROOM 2"
+      ]
+    },
+    "reviewed_halls": {
+      "entity_list": "rooms",
+      "field": "label",
+      "allowed": [
+        "HALL"
+      ]
+    },
+    "reviewed_doors": {
+      "entity_list": "elements",
+      "field": "tag",
+      "allowed": [
+        "D06"
+      ],
+      "class_field": "cls",
+      "class_value": "door"
+    }
+  },
+  "scope_selection_note": "Native detections are matched to the declared source labels/tags where possible. No detector-based inventory is marked complete or trusted merely because its counts agree."
 }

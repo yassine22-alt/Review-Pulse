@@ -23,6 +23,12 @@ def semantic_key(program: Program) -> str:
             return {"node": "literal", "value": round(value["value"] * unit.factor + unit.offset, 9),
                     "dimensions": unit.dims}
         result = {key: node(child, variables) for key, child in value.items()}
+        if value.get("node") in ("eq", "ne"):
+            for left, right in (("left", "right"), ("right", "left")):
+                literal = result[right]
+                if literal.get("node") == "literal" and type(literal.get("value")) is bool:
+                    positive = literal["value"] == (value["node"] == "eq")
+                    return result[left] if positive else {"node": "not", "args": [result[left]]}
         if value.get("node") in ("all", "any"):
             result["args"] = sorted(result["args"], key=lambda item: json.dumps(item, sort_keys=True))
         return result
