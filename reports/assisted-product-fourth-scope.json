@@ -1,0 +1,91 @@
+{
+  "pipeline_commit": "53ea799a68d1b3061ef28fef49bba85fe54eb31d",
+  "annotation": "Assistant scope classification after pipeline freeze, before any held-out execution. No independent review. S12 counts in scope even when context/vocabulary prevents retention.",
+  "labels": {
+    "S01": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Distance and protection conjunction plus class and fault applicability and specialist site study."
+    },
+    "S02": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "reason": "Soil study and site classification obligation; no scalar predicate."
+    },
+    "S03": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Risk-site permission requires specialist measures."
+    },
+    "S04": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "reason": "Homogeneous and rigid foundations for each block."
+    },
+    "S05": {
+      "family": "relational",
+      "in_scope": false,
+      "reason": "Tie network/equivalence plus rock-anchorage exception."
+    },
+    "S06": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Pile bracing directions with equivalent-restraint exception."
+    },
+    "S07": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Plan configuration triggers joints and structural simplification."
+    },
+    "S08": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Height/mass differences and interlaced-level alternative; known scope ambiguity."
+    },
+    "S09": {
+      "family": "relational",
+      "in_scope": false,
+      "reason": "Movement/contact and force transfer between blocks."
+    },
+    "S10": {
+      "family": "relational",
+      "in_scope": false,
+      "reason": "Joint width versus sum of two deformation measurements, including torsion."
+    },
+    "S11": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Material-dependent multiplier and shorter-height product with justification exception."
+    },
+    "S12": {
+      "family": "simple numeric",
+      "in_scope": true,
+      "reason": "One inclusive 50 mm minimum joint-width threshold. Parent scope and missing catalogue facts still count as blockers in this denominator."
+    },
+    "S13": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Insufficient width triggers alternative stiffening or linking remedies."
+    },
+    "S14": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Interaction absence and unaccounted-force restriction."
+    },
+    "S15": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Interaction condition and structural-resistance obligation."
+    },
+    "S16": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Analysis-method scope, regularity and two thresholds plus cross-reference."
+    },
+    "S17": {
+      "family": "conditional",
+      "in_scope": false,
+      "reason": "Planar/spatial model alternatives with different mode minima."
+    }
+  }
+}

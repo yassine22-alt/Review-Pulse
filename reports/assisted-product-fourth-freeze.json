@@ -1,0 +1,10 @@
+{
+  "pipeline_commit": "53ea799a68d1b3061ef28fef49bba85fe54eb31d",
+  "criteria_commit": "de33375f",
+  "scope_labels": "assisted-product-fourth-scope.json",
+  "source_labels_original_freeze": "ad7742ce",
+  "catalogue": "Unchanged trained uk-proposed BuildingModel -> from_building(complete=False); no gold facts or proposed declarations in fact menus.",
+  "model_if_linking_needed": "openai/gpt-oss-120b, strict JSON schema, temperature 0, max 256 output tokens; fact-name selection only.",
+  "run_count_allowed": 1,
+  "note": "Only file-key/type shape inspected while preparing runner. Clause text and frozen meanings first read after pipeline freeze. No pipeline changes permitted after this annotation."
+}
