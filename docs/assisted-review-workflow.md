@@ -1,8 +1,8 @@
 # Timed assisted review — teammate protocol
 
 Run the app with `rp serve --port 8081` from the repository virtual environment.
-Upload/analyse a plan and a development requirements document, then open Rules
-and the source-document review panel. Read individual clauses or read all;
+Upload/analyse a plan and a development requirements document, then open the Requirements tab
+and its source-document review panel. Read individual clauses or read all;
 these UI actions use `/assisted/interpret`, not archived expression drafting.
 Do not include the fourth document in development reviewer sessions.
 
@@ -30,6 +30,7 @@ by Git). The per-project `/api/projects/<id>/assisted/effort` report separates
 sites, input events, seconds and group medians. Repeated sessions are not claimed
 as independent clauses. Reviewer identity is self-reported; timing is elapsed
 wall time excluding explicit pauses, so idle reading time remains included.
+A root replacement is a rewrite, not one low-burden semantic edit.
 Raw field diffs are not independently graded semantic edit counts. The teammate
 rubric and notes settle whether a semantic edit was needed.
 

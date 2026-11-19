@@ -1,65 +1,62 @@
-# ReviewPulse — current status
+# ReviewPulse — assisted product status
 
-19 November 2026. **A narrow assisted table helper works; a general interpreter
-has not been demonstrated.** Numeric values, units and applicability come from
-source cells; four hosted closed-menu choices select fact names. On development
-data it produces 12 correct thermal rules, but covers only 12/36 numeric
-obligations. This fails our pre-registered 18/36 selection threshold. No pipeline
-is selected; the fourth document remains sealed and unrun. Next: get independent
-grades, then decide whether the narrow table scope is sufficient. Do not broaden
-claims or tune the sealed test. Drawings stay local; no billing was enabled.
+19 November 2026. **The product is an assisted numeric drafter and expert
+formalization workspace, not a general interpreter.** The app now routes the
+Requirements review through the narrow scope gate and closed fact-name menu.
+A reviewer can edit numeric fields or formalize a queued clause, validate, then
+approve separately. Timed sessions retain diffs, pauses and failed attempts.
+Real teammate effort is not yet measured: collect 10–15 completed sessions,
+split between drafts and the rewrite queue, then report edits and seconds.
 
 ## Measured
 
-| Development measurement | Result |
-| --- | --- |
-| Thermal full rules, assistant-source-reviewed | 12/15 correct, zero edits; 3/15 need context/unit |
-| Thermal typed scope and quantity/comparator | 15/15 match frozen references |
-| All numeric obligations, edit burden | 12/36 zero; 0/36 one; 21/36 rewrite; 3/36 missing context |
-| Source-wrong/incomplete approvable table rules | 0/12, assistant review only |
-| Four cached fact-choice calls | 4/4 complete; 2,030 total tokens; 0/4 HTTP errors |
-| Old 30 drafts, estimated repair burden | 0/30 zero; 0/30 one; 19/30 two-plus; 11/30 rewrite |
-| Raw relational declarations | 2/3 type-valid, 0/3 source-correct; 0/4 old wrong bindings automatically repaired |
-| Independent teammate grades | 0/10 returned; agreement unmeasured |
+| Same numeric development obligations | Before | After |
+| --- | --- | --- |
+| Fully correct, zero edits | 12/36 | 12/36 |
+| One edit | 0/36 | 0/36 |
+| More local edits | 0/36 | 0/36 |
+| Rewrite/formalization | 21/36 | 21/36 |
+| Missing context | 3/36 | 3/36 |
 
-Retrospective edit plans estimate executable-rule repairs, not observed human
-effort: 3/30 old drafts had correct intent but still needed binding/formalization.
-Fact declarations do not create values: all 3 manually corrected relational
-measurements remain evidence requests, with 0/3 full clauses decided.
-[Table review](../reports/assisted-numeric-review.md),
-[edit rubric/results](../reports/assisted-edit-burden.json).
+**No executable-coverage improvement.** Thermal rows remain 12/15 correct;
+15/15 preserve typed scope and numeric values. Prose parsing passes synthetic
+French/English comparator tests, but the real clauses need unsupported
+composition or absent catalogue facts. The existing four real fact-name choices
+are reused; no new hosted calls. Source-wrong approvable table rules: **0/12**,
+assistant review only. These use a fixture catalogue, not thermal facts perceived
+from the demo drawing. Full [development results](assisted-product-evaluation.md).
 
-Exact polygonization covers **0/17, 0/14, 0/7 and 1/5** frozen real-PDF room
-points; bedrooms **0/4, 0/3, 0/1 and 0/2**. It is not promoted over the existing
-builder. Synthetic CAD control: **3/3** rooms, **2/2** bedrooms; no real DXF was
-found. These are point hits, not region overlap or global opening recall.
+Scope routing: **28/28** labelled out-of-scope clauses queued, **0/28** wrongly
+drafted; **12/18** labelled in-scope reached a draft and **6/18** queued.
+Diagnostic family names match author labels on **27/46**; this is conservative
+routing, not general semantic understanding.
 
-The [eight-target actual assisted attempt](eight-rule-demo.md) completed **7/8**
-text-only readings; **1/8** provider request rejection is excluded from semantic
-failures. All **7/7** completed readings required full reviewer rewrites:
-**0/8 automatic decisions, 2/8 scenario-assisted decisions, 5/8 validation
-needs-review, 1/8 unavailable**. Validation exposes rounded unit equivalents,
-missing entity-owned facts and angle protocol coverage. The two decisions use
-an assistant-designated entrance scenario; they do not establish legal egress
-compliance. With **0 gold violations**, false-pass rate **0/0** and violation
-precision **0/0** are undefined. This demonstrates assisted execution only.
+Fourth document: RPS 2000 version 2011, BO 6206 (21 November 2013).
+Criteria committed `de33375f`; code frozen `53ea799a`; scope annotation `d1469b61`.
+One run: **0/1** in-scope reached <=1 edit (failed); source-wrong approvable
+**0/0** (unmeasured, sample requirement not met); **16/16** out-of-scope queued
+(met on author labels). **17/17 queued, 0 drafts, 0 model calls.** The simple
+joint-width clause is blocked by parent scope/catalogue grounding. Model accuracy
+was not exercised. The fourth document is now opened/run once; no tuning or
+second inference run. [Full result](assisted-product-fourth-results.md).
 
 ## Not measured
 
-Independent human correctness/edit time, a completed paired general drafting
-comparison, real Moroccan CAD transfer, whole-building inventory completeness,
-general perception regression, and held-out adaptation. A blinded 10-draft CSV
-is ready; agreement waits for its return. See [selection decision](assisted-pipeline-choice.md).
+Real reviewer edits/time, independent correctness/agreement, a successful
+in-scope held-out drafting comparison, real CAD transfer, whole-building inventory
+completeness and general perception regression. The blinded CSV includes column
+rubrics; **0/10** teammate grades returned. The old eight-target attempt remains
+partial and is not a successful automatic regulation-to-plan demonstration.
 
 ## Do not claim
 
-General automated regulation interpretation, improved held-out accuracy,
-zero false passes from an empty violation sample, or safety from abstention.
-Labels lack independent review; historical ledger attestations are synthetic.
-Capabilities are finite; test sets are small; the 25% scale bound is provisional.
-Detailed budgets, negative results and prior runs are in
-[history](results-history.md), [token budget](assisted-token-budget.md), and
-[polygonize report](../reports/polygonize-study.md).
+A general interpreter, improved held-out accuracy, correctness from zero
+candidates, or safety from abstention. All labels lack independent review;
+historical ledger attestations are synthetic. Samples are small, capabilities
+finite and the 25% scale bound provisional. The expert queue is not a finished
+nontechnical rule builder. [Product](assisted-product.md),
+[review protocol](assisted-review-workflow.md), [five-minute script](assisted-demo-5min.md).
 
-Validation: **1,151 passed, 2 skipped; 45 slow excluded**. Changed-file Ruff and
-whitespace checks passed. [Details](../reports/assisted-sprint-validation.json).
+Validation: **1,177 passed, 2 skipped; 45 slow excluded**. Changed Python files
+pass Ruff; app JavaScript passes syntax checking. API tests exercise timed edits,
+stale drafts and approval; no teammate session or full browser test is claimed.

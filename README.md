@@ -2,36 +2,43 @@
 
 **Reviews plans against the requirements that apply to them, and shows its evidence.**
 
-An architect, engineer or reviewer gives ReviewPulse a plan (a vector PDF, DXF, DWG, SVG or a supported scan) and the documents
-that set the requirements (a building code, a brief, a client specification, in PDF, Word, Markdown or text). ReviewPulse reads
-both, proposes the checks, lets a person approve them, runs them, and reports every finding on the drawing itself, with the measured
-value, the limit and the clause it comes from. Missing or conflicting evidence produces an unresolved finding. Interpretation errors can still pass structural checks, so source review is essential; this is an experimental system, not a validated general compliance interpreter.
+ReviewPulse is an **assisted numeric drafting and expert review prototype**.
+It reads plans locally and keeps requirement clauses beside proposed checks.
+Supported numeric rows/prose use deterministic quantities and a closed fact-name
+menu. Other clauses go to expert formalization. Reviewers edit, validate and
+approve; missing evidence keeps verdicts unresolved. It is not a general
+regulation interpreter or a validated compliance service.
+
+[One-page product description](docs/assisted-product.md) ·
+[Current results](docs/results.md) · [Timed review protocol](docs/assisted-review-workflow.md) ·
+[Five-minute demo script](docs/assisted-demo-5min.md)
 
 ## How it works, in three steps
 
 1. **Read the plan.** Scale, walls, doors, windows, stairs and rooms are found from the drawing, and each is marked with how
    sure the tool is. Text drawn as outlines is read by OCR.
 2. **Read the requirements.** The document is split into its clauses (numbered, lettered, in tables, or plain paragraphs). A
-   language model proposes one checkable rule per clause. A set of programs then tests the rule against the sentence (the numbers,
+   narrow scope gate admits supported numeric drafts; the model only selects a catalogue fact. Other clauses enter a reviewer-formalization queue. A set of programs then tests the rule against the sentence (the numbers,
    the direction of the limit, what is measured) and rejects detectable inconsistencies. These checks do not prove meaning. A person reviews and approves each rule before it runs.
 3. **Check and report.** Approved rules run with no model, on the facts found in the plan. The report shows each result on the
    plan, with a coverage page that accounts for every clause: checked, not checkable from a plan (and why), or waiting for a person.
 
 ## What can be trusted today
 
-Start with **[current measured results](docs/results.md)**. The direct assistant
-audit finds 3/30 sampled intended rules correct, 16/30 partial and 11/30 wrong;
-none of those three correct intentions was retained. The sole retained fixture
-match is incomplete against the source. Strict typed-slot and closed-link
-comparisons remain partial. Four drawing scopes show bedroom classification
-of 0/4, 2/3, 0/1 and 2/2; these are small, author-labelled samples. The older
-five-check authored profile decides 0/5 automatically and 3/5 after author facts.
-The new eight-rule regulation walkthrough is scoped but unrun. Improved
-automatic interpretation and end-to-end accuracy are unproven.
+Start with **[current measured results](docs/results.md)**. The numeric
+development result is unchanged: 12/36 fully correct, 21/36 requiring
+formalization and 3/36 missing context. Source-wrong approvable table drafts:
+0/12 on assistant review only. The fourth document was run once with frozen
+code: 0/1 in-scope drafted within one edit; 16/16 out-of-scope queued; no
+approvable candidates and no model calls. This is not evidence of general
+interpretation or model accuracy. Labels lack independent review.
 
-See **[docs/SCOPE.md](docs/SCOPE.md)**: what ReviewPulse does well, what it does with caveats, and what it does not do yet, each
-backed by a measurement. You can check the plan reading yourself on real drawings: `python scripts/review_pack.py` writes a report
-a reviewer can open in a browser (see [docs/RUNBOOK.md](docs/RUNBOOK.md)).
+Timed reviewer controls are implemented and API-tested, but observed human
+edits/time remain unmeasured until teammates complete 10–15 sessions. The
+advanced formalization editor requires expertise. Small samples, finite
+capabilities, the provisional 25% scale bound and uncertain plan inventories
+remain limitations. The historical runs are preserved in
+[results history](docs/results-history.md).
 
 ## Where to start
 

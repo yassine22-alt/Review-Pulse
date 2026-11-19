@@ -68,7 +68,19 @@
       "qualitative/unsupported": 2,
       "simple numeric": 1,
       "table-row": 15
-    }
+    },
+    "family_exact": [
+      27,
+      46
+    ],
+    "in_scope_reaching_draft": [
+      12,
+      18
+    ],
+    "in_scope_sent_to_queue": [
+      6,
+      18
+    ]
   },
   "source_wrong_approvable": [
     0,

@@ -45,3 +45,11 @@ facts or clear ownership can veto an otherwise numeric shape.
 The UI will use this narrow path explicitly. Legacy expression endpoints remain
 for reproducing archived experiments, not as the assisted product or an
 automatic-compliance service.
+
+Final frozen pipeline also refuses unbound non-header parent context. The paired
+36-clause counts remain unchanged. Final diagnostic family exact match is
+**27/46** (earlier, before that guard: 32/46); routing remains 0/28 out-of-scope
+drafts and 6/18 in-scope queued. Full final output:
+`reports/assisted-product-development-final.json`. These family labels are
+weaker than the binary queue result and must not be presented as accurate
+general clause classification.

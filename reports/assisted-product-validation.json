@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-19",
+  "full_non_slow_suite": {
+    "passed": 1177,
+    "skipped": 2,
+    "slow_excluded": 45,
+    "seconds": 306.12
+  },
+  "additional_tests": "Three new CSV normalization/denominator cases passed; eight targeted grader/reviewer tests passed. No runtime change after held-out freeze.",
+  "ruff": "Changed Python files pass",
+  "javascript": "node --check passed; no full browser interaction test",
+  "observed_human_effort": "Not measured; no real teammate sessions supplied. Unit-test clocks are not user effort.",
+  "secret_scan": {
+    "changed_files_scanned": 29,
+    "current_environment_secret_matches": 0,
+    "scope": "Exact available environment API-key/token values in changed files, never printed. Not a full-history audit."
+  },
+  "heldout_pipeline_commit": "53ea799a68d1b3061ef28fef49bba85fe54eb31d",
+  "heldout_runs": 1,
+  "heldout_hosted_calls": 0,
+  "heldout_source_labels_unchanged_from": "ad7742ce"
+}
