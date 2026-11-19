@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-19",
+  "status": "PARTIAL_API_UNAVAILABLE",
+  "adjudicator": "Codex assistant; user-authorized, no independent human review",
+  "protocol": "strict-focused-protocol.json",
+  "no_expression_calls": true,
+  "cost": {
+    "before_input_token_estimate": [
+      179343,
+      358774
+    ],
+    "after_input_token_estimate": [
+      156649,
+      313373
+    ],
+    "completion_cap_sum": 153088,
+    "daily_limit": 200000,
+    "tpm_limit": 8000,
+    "method": "UTF-8 bytes/4 to bytes/2, not a model tokenizer or provider token count. Includes schema; actual usage measured after successful calls.",
+    "measured_first_typed_call": {
+      "prompt_tokens": 3231,
+      "completion_tokens": 1295
+    },
+    "closed_two_successful_calls_total_tokens": 1397,
+    "expected_windows_at_full_output_cap": [
+      2,
+      3
+    ],
+    "note": "Estimates plus caps do not predict actual usage; rolling allowance includes previous runs and other project usage."
+  },
+  "schema_diagnosis": {
+    "initial_rejections": "Provider rejected overlapping integer/number union, then same-primitive string union. Both were strict-schema incompatibilities, not clause interpretation errors.",
+    "fix": "Lossless union canonicalization: number covers integer; string enums/patterns merged as a regex union. Disjoint node oneOf is expressed as anyOf; all validators unchanged. Required output property named title is preserved.",
+    "strict_fallback": false,
+    "diagnostic_calls": 2,
+    "initial_schema_rejected_requests_in_reports": 4,
+    "successful_json_mode": "json_schema"
+  },
+  "transport_stop": {
+    "id": "M03",
+    "arm": "monolithic",
+    "retained": false,
+    "representation": "structured",
+    "retrieval": {
+      "method": "lexical type-vocabulary overlap, no gold or plan values",
+      "top_k": 6,
+      "selected": [
+        "dead_end",
+        "discharge",
+        "travel"
+      ],
+      "omitted": [
+        "accessory",
+        "connector",
+        "door_width",
+        "eligible",
+        "normal",
+        "two_way"
+      ],
+      "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+    },
+    "status": "API_UNAVAILABLE",
+    "stage": "transport",
+    "reason": "daily allowance exhausted",
+    "http_status": 429
+  },
+  "comparison": [
+    {
+      "arm": "archived_expression_monolithic",
+      "completed": [
+        45,
+        46
+      ],
+      "retained": [
+        0,
+        45
+      ],
+      "source_intent_correct_in_adjudicated_subset": [
+        1,
+        15
+      ],
+      "wrong_or_incomplete_approvable": [
+        0,
+        0
+      ]
+    },
+    {
+      "arm": "archived_expression_staged",
+      "completed": [
+        44,
+        46
+      ],
+      "retained": [
+        1,
+        44
+      ],
+      "source_intent_correct_in_adjudicated_subset": [
+        2,
+        15
+      ],
+      "wrong_or_incomplete_approvable": [
+        1,
+        1
+      ]
+    },
+    {
+      "arm": "production_typed_slots_strict",
+      "completed": [
+        1,
+        46
+      ],
+      "retained": [
+        0,
+        1
+      ],
+      "assistant_graded_source_correct": [
+        0,
+        1
+      ],
+      "wrong_or_incomplete_approvable": [
+        0,
+        0
+      ]
+    },
+    {
+      "arm": "closed_link_strict",
+      "completed": [
+        2,
+        46
+      ],
+      "retained": [
+        0,
+        2
+      ],
+      "assistant_graded_whole_rule_correct": [
+        0,
+        2
+      ],
+      "wrong_or_incomplete_approvable": [
+        0,
+        0
+      ]
+    }
+  ],
+  "new_draft_grades": [
+    {
+      "id": "T01",
+      "arm": "production_typed_slots_strict",
+      "slots": {
+        "subject": "wrong",
+        "fact": "partly_correct",
+        "operator": "partly_correct",
+        "value": "correct",
+        "unit": "correct",
+        "scope": "wrong"
+      },
+      "whole_intended_rule": "wrong",
+      "reason": "Right roof U bound and explicit units, but unbound $building, metadata in requirement conjunction, missing assessment-approach scope, inadequate metadata citation; rejected by subject grounding."
+    },
+    {
+      "id": "T01",
+      "arm": "closed_link_strict",
+      "whole_intended_rule": "partly_correct",
+      "reason": "Correct roof-bound menu selection, but glazing scope cannot be represented in this menu and needs_review was incorrectly false. Quantity-coverage gate rejects."
+    },
+    {
+      "id": "M03",
+      "arm": "closed_link_strict",
+      "whole_intended_rule": "partly_correct",
+      "reason": "Correct travel association for both distances, but exit-count conditions/comparators cannot be represented; needs_review was incorrectly false. Quantity-coverage gate rejects."
+    }
+  ],
+  "limits": [
+    "Only T01 is completed on both new arms and both archived expression arms; no arm ranking or accuracy-improvement claim.",
+    "Closed M03 is a cached result from the initial strict contract; its closed schema/payload is unchanged. No failed typed schema results are pooled as semantic outputs.",
+    "Exact/field scoring and independent intended-rule grading remain distinct.",
+    "No drawings or frozen interpretations sent to hosted provider. Fourth document unrun.",
+    "A briefly overlapping resume was stopped; an exclusive per-report OS lock now prevents overlapping workers. No additional completed output from that worker was recovered."
+  ],
+  "provider_docs": [
+    "https://console.groq.com/docs/structured-outputs",
+    "https://console.groq.com/docs/rate-limits"
+  ]
+}

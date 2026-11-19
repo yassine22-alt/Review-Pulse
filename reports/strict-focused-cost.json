@@ -1,0 +1,2368 @@
+{
+  "protocol": {
+    "date": "2026-11-19",
+    "development_only": true,
+    "sealed_fourth": "unread and unrun",
+    "models": [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b"
+    ],
+    "substitution": "User explicitly approved both Groq models in place of unavailable Mistral and Llama generative arms.",
+    "console_limits": {
+      "source": "user transcribed account Settings/Limits",
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "order": [
+      "T01",
+      "M03",
+      "A08",
+      "M07",
+      "M01",
+      "M02",
+      "M04",
+      "M05",
+      "M06",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15"
+    ],
+    "arms": [
+      "monolithic",
+      "deterministic"
+    ],
+    "formal_tokens": 3072,
+    "reading_tokens": 512,
+    "daily_token_budget": 190000,
+    "comparison": "Production typed-node slot contract for both monolithic and source-reading-staged arms. Raw node fields are scored before compilation. Prepared only; not run. The compact-expression pilot is a separate, unpooled experiment.",
+    "privacy": "Only regulation text, runtime catalogue type vocabulary and output contracts are sent; no drawings, plan images, observed plan measurements or frozen interpretations.",
+    "freeze": {
+      "reports/development-oracle-slots.json": "ff8a8bb19bbf533abaf8ac2cd60ea6790912b60b934dcd8cb3758e82a5eb9bf2",
+      "reports/development-metadata-labels.json": "50303c81a50e271f095c38898ac6e991a181f233d155eb492cb1653421c2625e"
+    },
+    "grading": "Slot scores before validation; separate exact frozen requirement, reviewed meaning and retention. Unannotated scope is not counted as correct; API errors excluded.",
+    "contract": "structured",
+    "strict": true,
+    "focused": true,
+    "closed_tokens": 256,
+    "purpose": "Production SlotDraft compiler versus closed numeric linking; no expression generation. All development obligations; strict schema, no silent fallback.",
+    "grades": "Source intent assistant-adjudicated separately from fixture IR; no human/independent review.",
+    "wire_revision": "v4: finite strict schema; merge same-primitive string alternatives losslessly and eliminate redundant integer branch"
+  },
+  "model": "openai/gpt-oss-120b",
+  "status": "OFFLINE_ESTIMATE_ONLY",
+  "method": "UTF-8 bytes/4 to bytes/2, not a model tokenizer or provider token count. Includes schema; actual usage measured after successful calls.",
+  "input_estimate_range": [
+    156649,
+    313373
+  ],
+  "completion_cap_sum": 153088,
+  "rows": [
+    {
+      "id": "M01",
+      "arm": "monolithic",
+      "request_bytes": 13686,
+      "input_token_estimate_range": [
+        3421,
+        6843
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M01",
+      "arm": "deterministic",
+      "request_bytes": 2185,
+      "input_token_estimate_range": [
+        546,
+        1093
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M02",
+      "arm": "monolithic",
+      "request_bytes": 13757,
+      "input_token_estimate_range": [
+        3439,
+        6879
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M02",
+      "arm": "deterministic",
+      "request_bytes": 2720,
+      "input_token_estimate_range": [
+        680,
+        1360
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M03",
+      "arm": "monolithic",
+      "request_bytes": 11491,
+      "input_token_estimate_range": [
+        2872,
+        5746
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M03",
+      "arm": "deterministic",
+      "request_bytes": 2756,
+      "input_token_estimate_range": [
+        689,
+        1378
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M04",
+      "arm": "monolithic",
+      "request_bytes": 11235,
+      "input_token_estimate_range": [
+        2808,
+        5618
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "discharge"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M04",
+      "arm": "deterministic",
+      "request_bytes": 1737,
+      "input_token_estimate_range": [
+        434,
+        869
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "discharge"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M05",
+      "arm": "monolithic",
+      "request_bytes": 13786,
+      "input_token_estimate_range": [
+        3446,
+        6893
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "travel"
+        ],
+        "omitted": [
+          "discharge",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M05",
+      "arm": "deterministic",
+      "request_bytes": 1975,
+      "input_token_estimate_range": [
+        493,
+        988
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "travel"
+        ],
+        "omitted": [
+          "discharge",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M06",
+      "arm": "monolithic",
+      "request_bytes": 11522,
+      "input_token_estimate_range": [
+        2880,
+        5761
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M06",
+      "arm": "deterministic",
+      "request_bytes": 2017,
+      "input_token_estimate_range": [
+        504,
+        1009
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M07",
+      "arm": "monolithic",
+      "request_bytes": 13773,
+      "input_token_estimate_range": [
+        3443,
+        6887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M07",
+      "arm": "deterministic",
+      "request_bytes": 2104,
+      "input_token_estimate_range": [
+        526,
+        1052
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "door_width",
+          "eligible",
+          "normal"
+        ],
+        "omitted": [
+          "discharge",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M08",
+      "arm": "monolithic",
+      "request_bytes": 12933,
+      "input_token_estimate_range": [
+        3233,
+        6467
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "eligible",
+          "two_way"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "normal",
+          "travel"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M08",
+      "arm": "deterministic",
+      "request_bytes": 1464,
+      "input_token_estimate_range": [
+        366,
+        732
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "eligible",
+          "two_way"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "normal",
+          "travel"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M09",
+      "arm": "monolithic",
+      "request_bytes": 12585,
+      "input_token_estimate_range": [
+        3146,
+        6293
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "eligible"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "discharge",
+          "door_width",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M09",
+      "arm": "deterministic",
+      "request_bytes": 1480,
+      "input_token_estimate_range": [
+        370,
+        740
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "eligible"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "discharge",
+          "door_width",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M10",
+      "arm": "monolithic",
+      "request_bytes": 11055,
+      "input_token_estimate_range": [
+        2763,
+        5528
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M10",
+      "arm": "deterministic",
+      "request_bytes": 1812,
+      "input_token_estimate_range": [
+        453,
+        906
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M11",
+      "arm": "monolithic",
+      "request_bytes": 11006,
+      "input_token_estimate_range": [
+        2751,
+        5503
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M11",
+      "arm": "deterministic",
+      "request_bytes": 1322,
+      "input_token_estimate_range": [
+        330,
+        661
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M12",
+      "arm": "monolithic",
+      "request_bytes": 10996,
+      "input_token_estimate_range": [
+        2749,
+        5498
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M12",
+      "arm": "deterministic",
+      "request_bytes": 1302,
+      "input_token_estimate_range": [
+        325,
+        651
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M13",
+      "arm": "monolithic",
+      "request_bytes": 12361,
+      "input_token_estimate_range": [
+        3090,
+        6181
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "eligible"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M13",
+      "arm": "deterministic",
+      "request_bytes": 1382,
+      "input_token_estimate_range": [
+        345,
+        691
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "eligible"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M14",
+      "arm": "monolithic",
+      "request_bytes": 10942,
+      "input_token_estimate_range": [
+        2735,
+        5471
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M14",
+      "arm": "deterministic",
+      "request_bytes": 1194,
+      "input_token_estimate_range": [
+        298,
+        597
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M15",
+      "arm": "monolithic",
+      "request_bytes": 10954,
+      "input_token_estimate_range": [
+        2738,
+        5477
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M15",
+      "arm": "deterministic",
+      "request_bytes": 1218,
+      "input_token_estimate_range": [
+        304,
+        609
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "accessory",
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M16",
+      "arm": "monolithic",
+      "request_bytes": 11354,
+      "input_token_estimate_range": [
+        2838,
+        5677
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory"
+        ],
+        "omitted": [
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "M16",
+      "arm": "deterministic",
+      "request_bytes": 1712,
+      "input_token_estimate_range": [
+        428,
+        856
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "accessory"
+        ],
+        "omitted": [
+          "connector",
+          "dead_end",
+          "discharge",
+          "door_width",
+          "eligible",
+          "normal",
+          "travel",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A01",
+      "arm": "monolithic",
+      "request_bytes": 11110,
+      "input_token_estimate_range": [
+        2777,
+        5555
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A01",
+      "arm": "deterministic",
+      "request_bytes": 1420,
+      "input_token_estimate_range": [
+        355,
+        710
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A02",
+      "arm": "monolithic",
+      "request_bytes": 11021,
+      "input_token_estimate_range": [
+        2755,
+        5511
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A02",
+      "arm": "deterministic",
+      "request_bytes": 1242,
+      "input_token_estimate_range": [
+        310,
+        621
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A03",
+      "arm": "monolithic",
+      "request_bytes": 11020,
+      "input_token_estimate_range": [
+        2755,
+        5510
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A03",
+      "arm": "deterministic",
+      "request_bytes": 1509,
+      "input_token_estimate_range": [
+        377,
+        755
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A04",
+      "arm": "monolithic",
+      "request_bytes": 11128,
+      "input_token_estimate_range": [
+        2782,
+        5564
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A04",
+      "arm": "deterministic",
+      "request_bytes": 1721,
+      "input_token_estimate_range": [
+        430,
+        861
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A05",
+      "arm": "monolithic",
+      "request_bytes": 11161,
+      "input_token_estimate_range": [
+        2790,
+        5581
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A05",
+      "arm": "deterministic",
+      "request_bytes": 1522,
+      "input_token_estimate_range": [
+        380,
+        761
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A06",
+      "arm": "monolithic",
+      "request_bytes": 11184,
+      "input_token_estimate_range": [
+        2796,
+        5592
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A06",
+      "arm": "deterministic",
+      "request_bytes": 1568,
+      "input_token_estimate_range": [
+        392,
+        784
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A07",
+      "arm": "monolithic",
+      "request_bytes": 11168,
+      "input_token_estimate_range": [
+        2792,
+        5584
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A07",
+      "arm": "deterministic",
+      "request_bytes": 1536,
+      "input_token_estimate_range": [
+        384,
+        768
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A08",
+      "arm": "monolithic",
+      "request_bytes": 11069,
+      "input_token_estimate_range": [
+        2767,
+        5535
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A08",
+      "arm": "deterministic",
+      "request_bytes": 1338,
+      "input_token_estimate_range": [
+        334,
+        669
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A09",
+      "arm": "monolithic",
+      "request_bytes": 11218,
+      "input_token_estimate_range": [
+        2804,
+        5609
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A09",
+      "arm": "deterministic",
+      "request_bytes": 1636,
+      "input_token_estimate_range": [
+        409,
+        818
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A10",
+      "arm": "monolithic",
+      "request_bytes": 11285,
+      "input_token_estimate_range": [
+        2821,
+        5643
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A10",
+      "arm": "deterministic",
+      "request_bytes": 1770,
+      "input_token_estimate_range": [
+        442,
+        885
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A11",
+      "arm": "monolithic",
+      "request_bytes": 11463,
+      "input_token_estimate_range": [
+        2865,
+        5732
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A11",
+      "arm": "deterministic",
+      "request_bytes": 2399,
+      "input_token_estimate_range": [
+        599,
+        1200
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A12",
+      "arm": "monolithic",
+      "request_bytes": 12403,
+      "input_token_estimate_range": [
+        3100,
+        6202
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "min_width_m"
+        ],
+        "omitted": [
+          "leads_to_exit",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A12",
+      "arm": "deterministic",
+      "request_bytes": 1479,
+      "input_token_estimate_range": [
+        369,
+        740
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "min_width_m"
+        ],
+        "omitted": [
+          "leads_to_exit",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A13",
+      "arm": "monolithic",
+      "request_bytes": 11648,
+      "input_token_estimate_range": [
+        2912,
+        5824
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A13",
+      "arm": "deterministic",
+      "request_bytes": 1836,
+      "input_token_estimate_range": [
+        459,
+        918
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A14",
+      "arm": "monolithic",
+      "request_bytes": 13160,
+      "input_token_estimate_range": [
+        3290,
+        6580
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "min_width_m"
+        ],
+        "omitted": [
+          "leads_to_exit",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A14",
+      "arm": "deterministic",
+      "request_bytes": 2637,
+      "input_token_estimate_range": [
+        659,
+        1319
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "min_width_m"
+        ],
+        "omitted": [
+          "leads_to_exit",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A15",
+      "arm": "monolithic",
+      "request_bytes": 11152,
+      "input_token_estimate_range": [
+        2788,
+        5576
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "A15",
+      "arm": "deterministic",
+      "request_bytes": 1504,
+      "input_token_estimate_range": [
+        376,
+        752
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [],
+        "omitted": [
+          "leads_to_exit",
+          "min_width_m",
+          "room_type",
+          "width_m"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T01",
+      "arm": "deterministic",
+      "request_bytes": 2328,
+      "input_token_estimate_range": [
+        582,
+        1164
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T02",
+      "arm": "monolithic",
+      "request_bytes": 11772,
+      "input_token_estimate_range": [
+        2943,
+        5886
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T02",
+      "arm": "deterministic",
+      "request_bytes": 2323,
+      "input_token_estimate_range": [
+        580,
+        1162
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T03",
+      "arm": "monolithic",
+      "request_bytes": 11765,
+      "input_token_estimate_range": [
+        2941,
+        5883
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T03",
+      "arm": "deterministic",
+      "request_bytes": 2309,
+      "input_token_estimate_range": [
+        577,
+        1155
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T04",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T04",
+      "arm": "deterministic",
+      "request_bytes": 2023,
+      "input_token_estimate_range": [
+        505,
+        1012
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T05",
+      "arm": "monolithic",
+      "request_bytes": 11285,
+      "input_token_estimate_range": [
+        2821,
+        5643
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T05",
+      "arm": "deterministic",
+      "request_bytes": 2176,
+      "input_token_estimate_range": [
+        544,
+        1088
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T06",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T06",
+      "arm": "deterministic",
+      "request_bytes": 2328,
+      "input_token_estimate_range": [
+        582,
+        1164
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T07",
+      "arm": "monolithic",
+      "request_bytes": 11772,
+      "input_token_estimate_range": [
+        2943,
+        5886
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T07",
+      "arm": "deterministic",
+      "request_bytes": 2323,
+      "input_token_estimate_range": [
+        580,
+        1162
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T08",
+      "arm": "monolithic",
+      "request_bytes": 11765,
+      "input_token_estimate_range": [
+        2941,
+        5883
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T08",
+      "arm": "deterministic",
+      "request_bytes": 2309,
+      "input_token_estimate_range": [
+        577,
+        1155
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T09",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T09",
+      "arm": "deterministic",
+      "request_bytes": 2023,
+      "input_token_estimate_range": [
+        505,
+        1012
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T10",
+      "arm": "monolithic",
+      "request_bytes": 11285,
+      "input_token_estimate_range": [
+        2821,
+        5643
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T10",
+      "arm": "deterministic",
+      "request_bytes": 2176,
+      "input_token_estimate_range": [
+        544,
+        1088
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T11",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T11",
+      "arm": "deterministic",
+      "request_bytes": 2328,
+      "input_token_estimate_range": [
+        582,
+        1164
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T12",
+      "arm": "monolithic",
+      "request_bytes": 11772,
+      "input_token_estimate_range": [
+        2943,
+        5886
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T12",
+      "arm": "deterministic",
+      "request_bytes": 2323,
+      "input_token_estimate_range": [
+        580,
+        1162
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T13",
+      "arm": "monolithic",
+      "request_bytes": 11765,
+      "input_token_estimate_range": [
+        2941,
+        5883
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T13",
+      "arm": "deterministic",
+      "request_bytes": 2309,
+      "input_token_estimate_range": [
+        577,
+        1155
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T14",
+      "arm": "monolithic",
+      "request_bytes": 11774,
+      "input_token_estimate_range": [
+        2943,
+        5887
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T14",
+      "arm": "deterministic",
+      "request_bytes": 2022,
+      "input_token_estimate_range": [
+        505,
+        1011
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T15",
+      "arm": "monolithic",
+      "request_bytes": 11285,
+      "input_token_estimate_range": [
+        2821,
+        5643
+      ],
+      "completion_cap": 3072,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    },
+    {
+      "id": "T15",
+      "arm": "deterministic",
+      "request_bytes": 2176,
+      "input_token_estimate_range": [
+        544,
+        1088
+      ],
+      "completion_cap": 256,
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "solar"
+        ],
+        "omitted": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      }
+    }
+  ]
+}

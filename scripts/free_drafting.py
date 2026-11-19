@@ -17,9 +17,10 @@ from reviewpulse.interpreter.decomposed import (
     schema_contract,
 )
 from reviewpulse.interpreter.deterministic import compile_links, link_request
-from reviewpulse.interpreter.structured import SlotDraft
+from reviewpulse.interpreter.focused_request import finite_strict_schema, focus_catalogue
+from reviewpulse.interpreter.structured import SlotDraft, slot_schema, wire_contract
 from reviewpulse.llm.openai_compat import APIUnavailable, OpenAICompatClient
-from reviewpulse.llm.result_cache import ResultCache, fingerprint
+from reviewpulse.llm.result_cache import ResultCache, exclusive_run, fingerprint
 from reviewpulse.xeval.slot_scoring import score_slots, totals
 
 
@@ -30,6 +31,30 @@ def compact(value):
     return [compact(item) for item in value] if isinstance(value, list) else value
 
 
+def prepare_request(case, arm, protocol):
+    contract = protocol.get("contract", "original_expression")
+    if arm == "deterministic":
+        catalogue = catalogue_from(case["inputs"], case["graph"])
+        focused, retrieval = focus_catalogue(catalogue, case["context"].text) if protocol.get("focused") else (catalogue, {})
+        system, payload, schema = link_request(case["context"], focused)
+    else:
+        system, payload, schema, catalogue = request_for(case, contract)
+        retrieval = {}
+        if protocol.get("focused"):
+            focused, retrieval = focus_catalogue(catalogue, case["context"].text)
+            if contract != "structured":
+                raise ValueError("Focused experimental contract is typed slots only; expression generation is stopped")
+            schema = slot_schema(focused, case["context"])
+            payload = {"catalogue": focused, "wire_contract": wire_contract(schema),
+                       "clauses": [{"id": clause.id, "text": clause.text} for clause in case["context"].clauses
+                                   if clause.id != case["context"].target]}
+        schema = compact(schema_contract(schema))
+    if protocol.get("strict"):
+        schema = finite_strict_schema(schema)
+        system += " All schema fields are explicit. Use null for optional reference filters, never invent a filter."
+    return system, payload, schema, catalogue, retrieval
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("access_text", type=Path)
@@ -38,14 +63,44 @@ def main():
     parser.add_argument("--protocol", type=Path)
     parser.add_argument("--arms", nargs="+", default=["monolithic", "decomposed"])
     parser.add_argument("--budget", type=int, default=200)
+    parser.add_argument("--dry-run", action="store_true", help="Estimate bytes/tokens offline; no API or key access")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     protocol = json.loads((args.protocol or repo / "reports/free-drafting-protocol.json").read_text(encoding="utf-8"))
     if args.model not in protocol["models"]:
         raise ValueError("model not approved in frozen protocol")
+    if not args.dry_run and protocol.get("contract", "original_expression") == "original_expression" and args.arms != ["deterministic"]:
+        raise ValueError("Hosted expression generation is stopped; use the typed-slot or closed-link protocol")
+    if args.dry_run:
+        estimates = []
+        estimator = OpenAICompatClient("https://api.groq.com/openai/v1", None, args.model, seed=None, reasoning_effort="low")
+        for case in load_cases(repo, args.access_text):
+            for arm in args.arms:
+                system, payload, schema, _, retrieval = prepare_request(case, arm, protocol)
+                if arm != "deterministic":
+                    payload = formal_request(case["context"], payload)
+                estimator.max_tokens = protocol.get("closed_tokens", protocol["formal_tokens"]) if arm == "deterministic" else protocol["formal_tokens"]
+                body = estimator._body(system, json.dumps(payload, ensure_ascii=False, separators=(",", ":")), schema,
+                                       "json_schema" if protocol.get("strict") or arm == "deterministic" else "json_object")
+                size = len(json.dumps(body, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+                estimates.append({"id": case["id"], "arm": arm, "request_bytes": size,
+                                  "input_token_estimate_range": [size // 4, (size + 1) // 2],
+                                  "completion_cap": estimator.max_tokens, "retrieval": retrieval})
+        result = {"protocol": protocol, "model": args.model, "status": "OFFLINE_ESTIMATE_ONLY",
+                  "method": "UTF-8 bytes/4 to bytes/2, not a model tokenizer or provider token count. Includes schema; actual usage measured after successful calls.",
+                  "input_estimate_range": [sum(r["input_token_estimate_range"][i] for r in estimates) for i in (0, 1)],
+                  "completion_cap_sum": sum(r["completion_cap"] for r in estimates), "rows": estimates}
+        args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps({key: value for key, value in result.items() if key not in ("protocol", "rows")}))
+        return
     client = OpenAICompatClient.from_env("https://api.groq.com/openai/v1", "GROQ_API_KEY_Reviewpulse",
-        args.model, provider="groq", structured="json_schema" if args.arms == ["deterministic"] else "json_object", max_retries=2, rpm=15,
+        args.model, provider="groq", structured="json_schema" if protocol.get("strict") or args.arms == ["deterministic"] else "json_object", max_retries=2, rpm=15,
         max_tokens=protocol["formal_tokens"], seed=None, reasoning_effort="low", concurrency=1, tpm=protocol["console_limits"]["tpm"])
+    with exclusive_run(args.output):
+        run(args, repo, protocol, client)
+
+
+def run(args, repo, protocol, client):
     cache = ResultCache(repo / "data/llm_cache/free-drafting")
     report = json.loads(args.output.read_text(encoding="utf-8")) if args.output.exists() else {
         "protocol": protocol, "model": args.model, "rows": [], "requests": [], "daily_tokens": {}}
@@ -88,7 +143,7 @@ def main():
     def call(system, payload, schema, tokens):
         nonlocal remaining
         key = fingerprint({"model": args.model, "system": system, "payload": payload,
-                           "schema": schema, "max_tokens": tokens, "temperature": 0, "reasoning": "low"})
+                           "schema": schema, "mode": client.structured, "max_tokens": tokens, "temperature": 0, "reasoning": "low"})
         cached = cache.get(key)
         if cached is not None:
             return cached["raw"]
@@ -117,10 +172,10 @@ def main():
             row = {"id": case["id"], "arm": arm, "retained": False}
             try:
                 if arm == "deterministic":
-                    catalogue = catalogue_from(case["inputs"], case["graph"])
-                    system, payload, schema = link_request(case["context"], catalogue)
+                    system, payload, schema, catalogue, retrieval = prepare_request(case, arm, protocol)
+                    row.update(representation="structured", retrieval=retrieval)
                     row["evidence_frame"] = payload
-                    closed = call(system, payload, schema, protocol["formal_tokens"])
+                    closed = call(system, payload, schema, protocol.get("closed_tokens", protocol["formal_tokens"]))
                     row.update(closed_proposal=closed, status="EVALUATED", raw={})
                     try:
                         program, slots = compile_links(closed, payload, case["context"], catalogue)
@@ -134,8 +189,8 @@ def main():
                     continue
                 contract = protocol.get("contract", "original_expression")
                 row["representation"] = contract
-                system, payload, schema, catalogue = request_for(case, contract)
-                schema = compact(schema_contract(schema))
+                system, payload, schema, catalogue, retrieval = prepare_request(case, arm, protocol)
+                row["retrieval"] = retrieval
                 reading = None
                 if arm == "decomposed":
                     read_system, read_payload, read_schema = reading_request(case["context"])
@@ -163,7 +218,8 @@ def main():
             rejected_in_row = rejected_in_row + 1 if row["status"] == "REQUEST_REJECTED" else 0
             save("RUNNING")
             print(case["id"], arm, row["status"], row["stage"], flush=True)
-            if row["status"] in ("API_UNAVAILABLE", "BUDGET_DEFERRED") or rejected_in_row >= 3:
+            if row["status"] in ("API_UNAVAILABLE", "BUDGET_DEFERRED") or rejected_in_row >= 3 or (
+                    protocol.get("strict") and row["status"] == "REQUEST_REJECTED"):
                 save(row["status"])
                 return
     save("COMPLETE")

@@ -1,0 +1,665 @@
+{
+  "protocol": {
+    "date": "2026-11-19",
+    "development_only": true,
+    "sealed_fourth": "unread and unrun",
+    "models": [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b"
+    ],
+    "substitution": "User explicitly approved both Groq models in place of unavailable Mistral and Llama generative arms.",
+    "console_limits": {
+      "source": "user transcribed account Settings/Limits",
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "order": [
+      "T01",
+      "M03",
+      "A08",
+      "M07",
+      "M01",
+      "M02",
+      "M04",
+      "M05",
+      "M06",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15"
+    ],
+    "arms": [
+      "monolithic",
+      "deterministic"
+    ],
+    "formal_tokens": 3072,
+    "reading_tokens": 512,
+    "daily_token_budget": 190000,
+    "comparison": "Production typed-node slot contract for both monolithic and source-reading-staged arms. Raw node fields are scored before compilation. Prepared only; not run. The compact-expression pilot is a separate, unpooled experiment.",
+    "privacy": "Only regulation text, runtime catalogue type vocabulary and output contracts are sent; no drawings, plan images, observed plan measurements or frozen interpretations.",
+    "freeze": {
+      "reports/development-oracle-slots.json": "ff8a8bb19bbf533abaf8ac2cd60ea6790912b60b934dcd8cb3758e82a5eb9bf2",
+      "reports/development-metadata-labels.json": "50303c81a50e271f095c38898ac6e991a181f233d155eb492cb1653421c2625e"
+    },
+    "grading": "Slot scores before validation; separate exact frozen requirement, reviewed meaning and retention. Unannotated scope is not counted as correct; API errors excluded.",
+    "contract": "structured",
+    "strict": true,
+    "focused": true,
+    "closed_tokens": 256,
+    "purpose": "Production SlotDraft compiler versus closed numeric linking; no expression generation. All development obligations; strict schema, no silent fallback.",
+    "grades": "Source intent assistant-adjudicated separately from fixture IR; no human/independent review."
+  },
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "status": "REQUEST_REJECTED",
+      "stage": "transport",
+      "reason": "REQUEST_REJECTED",
+      "http_status": 400
+    },
+    {
+      "id": "T01",
+      "arm": "deterministic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "evidence_frame": {
+        "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+        "context": [
+          {
+            "id": "T01 header",
+            "text": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          }
+        ],
+        "normalized_source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 26.0,
+            "unit": "%",
+            "operator": "ge",
+            "normalized_span": [
+              55,
+              64
+            ],
+            "quote": "26 – 35 %",
+            "column_header": " TGBV "
+          },
+          {
+            "id": "q1",
+            "value": 35.0,
+            "unit": "%",
+            "operator": "le",
+            "normalized_span": [
+              55,
+              64
+            ],
+            "quote": "26 – 35 %",
+            "column_header": " TGBV "
+          },
+          {
+            "id": "q2",
+            "value": 0.65,
+            "unit": "W/m²/K",
+            "operator": "le",
+            "normalized_span": [
+              69,
+              73
+            ],
+            "quote": "0,65",
+            "column_header": " U des toitures exposées (W/m²/K) "
+          }
+        ],
+        "menu": [
+          {
+            "id": "c0",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "roof_u",
+            "operator": "le",
+            "definition": "Coefficient U des toitures exposées"
+          },
+          {
+            "id": "c1",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "wall_u",
+            "operator": "le",
+            "definition": "Coefficient U des murs extérieurs"
+          },
+          {
+            "id": "c2",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "window_u",
+            "operator": "le",
+            "definition": "Coefficient U des fenêtres"
+          }
+        ]
+      },
+      "closed_proposal": {
+        "choices": [
+          "c0"
+        ],
+        "needs_review": false
+      },
+      "status": "EVALUATED",
+      "raw": {},
+      "stage": "quantity_coverage",
+      "detail": "every source quantity needs exactly one supported binding",
+      "slots": {
+        "subject": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        }
+      }
+    },
+    {
+      "id": "M03",
+      "arm": "monolithic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "status": "REQUEST_REJECTED",
+      "stage": "transport",
+      "reason": "REQUEST_REJECTED",
+      "http_status": 400
+    },
+    {
+      "id": "M03",
+      "arm": "deterministic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "evidence_frame": {
+        "source": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.",
+        "context": [],
+        "normalized_source": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 50.0,
+            "unit": "m",
+            "operator": null,
+            "normalized_span": [
+              18,
+              22
+            ],
+            "quote": "50 m",
+            "column_header": ""
+          },
+          {
+            "id": "q1",
+            "value": 2.0,
+            "unit": null,
+            "operator": null,
+            "normalized_span": [
+              38,
+              39
+            ],
+            "quote": "2",
+            "column_header": ""
+          },
+          {
+            "id": "q2",
+            "value": 30.0,
+            "unit": "m",
+            "operator": null,
+            "normalized_span": [
+              50,
+              54
+            ],
+            "quote": "30 m",
+            "column_header": ""
+          }
+        ],
+        "menu": [
+          {
+            "id": "c0",
+            "quantity": "q0",
+            "subject": "building",
+            "fact": "dead_end",
+            "operator": null,
+            "definition": "Distance entre une porte et le carrefour du couloir sans issue"
+          },
+          {
+            "id": "c1",
+            "quantity": "q0",
+            "subject": "building",
+            "fact": "discharge",
+            "operator": null,
+            "definition": "Distance entre le débouché de l’escalier protégé et la sortie"
+          },
+          {
+            "id": "c2",
+            "quantity": "q0",
+            "subject": "building",
+            "fact": "travel",
+            "operator": null,
+            "definition": "Distance de parcours au rez-de-chaussée"
+          },
+          {
+            "id": "c3",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "dead_end",
+            "operator": null,
+            "definition": "Distance entre une porte et le carrefour du couloir sans issue"
+          },
+          {
+            "id": "c4",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "discharge",
+            "operator": null,
+            "definition": "Distance entre le débouché de l’escalier protégé et la sortie"
+          },
+          {
+            "id": "c5",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "travel",
+            "operator": null,
+            "definition": "Distance de parcours au rez-de-chaussée"
+          }
+        ]
+      },
+      "closed_proposal": {
+        "choices": [
+          "c2",
+          "c5"
+        ],
+        "needs_review": false
+      },
+      "status": "EVALUATED",
+      "raw": {},
+      "stage": "quantity_coverage",
+      "detail": "every source quantity needs exactly one supported binding",
+      "slots": {
+        "subject": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 6,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 4,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        }
+      }
+    }
+  ],
+  "requests": [
+    {
+      "http_status": 400,
+      "attempt": 1,
+      "category": "unspecified",
+      "budget_numbers": {}
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "973",
+        "x-ratelimit-remaining-tokens": "7166",
+        "x-ratelimit-reset-requests": "38m52.8s",
+        "x-ratelimit-reset-tokens": "6.255s"
+      }
+    },
+    {
+      "http_status": 400,
+      "attempt": 1,
+      "category": "unspecified",
+      "budget_numbers": {}
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "972",
+        "x-ratelimit-remaining-tokens": "7087",
+        "x-ratelimit-reset-requests": "40m19.2s",
+        "x-ratelimit-reset-tokens": "6.847s"
+      }
+    }
+  ],
+  "daily_tokens": {
+    "2026-11-19": 1397
+  },
+  "status": "PAUSED_SCHEMA_DIAGNOSTIC",
+  "summary": {
+    "monolithic": {
+      "complete": [
+        0,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        0
+      ],
+      "stages": {
+        "transport": 2
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        }
+      }
+    },
+    "deterministic": {
+      "complete": [
+        2,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        2
+      ],
+      "stages": {
+        "quantity_coverage": 2
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 2,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 2,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 7,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 2,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 2,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 2,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 3,
+          "predicted_atoms": 0
+        }
+      }
+    }
+  },
+  "stop_note": "Stopped after typed-slot strict requests were rejected. No fallback or further model calls until the strict schema incompatibility is diagnosed."
+}

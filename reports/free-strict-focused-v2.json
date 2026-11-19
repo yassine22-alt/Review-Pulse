@@ -1,0 +1,274 @@
+{
+  "protocol": {
+    "date": "2026-11-19",
+    "development_only": true,
+    "sealed_fourth": "unread and unrun",
+    "models": [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b"
+    ],
+    "substitution": "User explicitly approved both Groq models in place of unavailable Mistral and Llama generative arms.",
+    "console_limits": {
+      "source": "user transcribed account Settings/Limits",
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "order": [
+      "T01",
+      "M03",
+      "A08",
+      "M07",
+      "M01",
+      "M02",
+      "M04",
+      "M05",
+      "M06",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15"
+    ],
+    "arms": [
+      "monolithic",
+      "deterministic"
+    ],
+    "formal_tokens": 3072,
+    "reading_tokens": 512,
+    "daily_token_budget": 190000,
+    "comparison": "Production typed-node slot contract for both monolithic and source-reading-staged arms. Raw node fields are scored before compilation. Prepared only; not run. The compact-expression pilot is a separate, unpooled experiment.",
+    "privacy": "Only regulation text, runtime catalogue type vocabulary and output contracts are sent; no drawings, plan images, observed plan measurements or frozen interpretations.",
+    "freeze": {
+      "reports/development-oracle-slots.json": "ff8a8bb19bbf533abaf8ac2cd60ea6790912b60b934dcd8cb3758e82a5eb9bf2",
+      "reports/development-metadata-labels.json": "50303c81a50e271f095c38898ac6e991a181f233d155eb492cb1653421c2625e"
+    },
+    "grading": "Slot scores before validation; separate exact frozen requirement, reviewed meaning and retention. Unannotated scope is not counted as correct; API errors excluded.",
+    "contract": "structured",
+    "strict": true,
+    "focused": true,
+    "closed_tokens": 256,
+    "purpose": "Production SlotDraft compiler versus closed numeric linking; no expression generation. All development obligations; strict schema, no silent fallback.",
+    "grades": "Source intent assistant-adjudicated separately from fixture IR; no human/independent review.",
+    "wire_revision": "v2: explicit title preserved; finite refs inlined; disjoint node oneOf converted losslessly to anyOf; stop on first strict rejection"
+  },
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "status": "REQUEST_REJECTED",
+      "stage": "transport",
+      "reason": "REQUEST_REJECTED",
+      "http_status": 400
+    }
+  ],
+  "requests": [
+    {
+      "http_status": 400,
+      "attempt": 1,
+      "category": "unspecified",
+      "schema_keywords": [
+        "anyOf"
+      ],
+      "budget_numbers": {}
+    }
+  ],
+  "daily_tokens": {
+    "2026-11-19": 0
+  },
+  "status": "REQUEST_REJECTED",
+  "summary": {
+    "monolithic": {
+      "complete": [
+        0,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        0
+      ],
+      "stages": {
+        "transport": 1
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        }
+      }
+    },
+    "deterministic": {
+      "complete": [
+        0,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        0
+      ],
+      "stages": {},
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,665 @@
+{
+  "protocol": {
+    "date": "2026-11-19",
+    "development_only": true,
+    "sealed_fourth": "unread and unrun",
+    "models": [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b"
+    ],
+    "substitution": "User explicitly approved both Groq models in place of unavailable Mistral and Llama generative arms.",
+    "console_limits": {
+      "source": "user transcribed account Settings/Limits",
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "order": [
+      "T01",
+      "M03",
+      "A08",
+      "M07",
+      "M01",
+      "M02",
+      "M04",
+      "M05",
+      "M06",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15"
+    ],
+    "arms": [
+      "monolithic",
+      "deterministic"
+    ],
+    "formal_tokens": 3072,
+    "reading_tokens": 512,
+    "daily_token_budget": 190000,
+    "comparison": "Production typed-node slot contract for both monolithic and source-reading-staged arms. Raw node fields are scored before compilation. Prepared only; not run. The compact-expression pilot is a separate, unpooled experiment.",
+    "privacy": "Only regulation text, runtime catalogue type vocabulary and output contracts are sent; no drawings, plan images, observed plan measurements or frozen interpretations.",
+    "freeze": {
+      "reports/development-oracle-slots.json": "ff8a8bb19bbf533abaf8ac2cd60ea6790912b60b934dcd8cb3758e82a5eb9bf2",
+      "reports/development-metadata-labels.json": "50303c81a50e271f095c38898ac6e991a181f233d155eb492cb1653421c2625e"
+    },
+    "grading": "Slot scores before validation; separate exact frozen requirement, reviewed meaning and retention. Unannotated scope is not counted as correct; API errors excluded.",
+    "contract": "structured",
+    "strict": true,
+    "focused": true,
+    "closed_tokens": 256,
+    "purpose": "Production SlotDraft compiler versus closed numeric linking; no expression generation. All development obligations; strict schema, no silent fallback.",
+    "grades": "Source intent assistant-adjudicated separately from fixture IR; no human/independent review.",
+    "wire_revision": "v4: finite strict schema; merge same-primitive string alternatives losslessly and eliminate redundant integer branch"
+  },
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "raw": {
+        "id": "obligation_1",
+        "title": "Roof U-value limit for prescriptive residential buildings in climate zone Z3",
+        "subject": "U des toitures exposées ≤ 0,65 W/m²/K for residential buildings in zone Z3 with glazing ratio 26–35 %",
+        "requirement": "n11",
+        "sources": [
+          {
+            "clause": "T01",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "n0",
+            "op": "fact",
+            "entity": "$building",
+            "name": "roof_u"
+          },
+          {
+            "id": "n1",
+            "op": "literal",
+            "value": 0.65,
+            "unit": "W/m2/K"
+          },
+          {
+            "id": "n2",
+            "op": "le",
+            "left": "n0",
+            "right": "n1"
+          },
+          {
+            "id": "n3",
+            "op": "fact",
+            "entity": "$building",
+            "name": "climate_zone"
+          },
+          {
+            "id": "n4",
+            "op": "literal",
+            "value": "Z3",
+            "unit": "1"
+          },
+          {
+            "id": "n5",
+            "op": "eq",
+            "left": "n3",
+            "right": "n4"
+          },
+          {
+            "id": "n6",
+            "op": "fact",
+            "entity": "$building",
+            "name": "glazing_ratio"
+          },
+          {
+            "id": "n7",
+            "op": "literal",
+            "value": 26,
+            "unit": "%"
+          },
+          {
+            "id": "n8",
+            "op": "literal",
+            "value": 35,
+            "unit": "%"
+          },
+          {
+            "id": "n9",
+            "op": "ge",
+            "left": "n6",
+            "right": "n7"
+          },
+          {
+            "id": "n10",
+            "op": "le",
+            "left": "n6",
+            "right": "n8"
+          },
+          {
+            "id": "n11",
+            "op": "all",
+            "args": [
+              "n2",
+              "n5",
+              "n9",
+              "n10"
+            ]
+          }
+        ],
+        "applicability": null,
+        "exemption": null,
+        "metadata_applicability": [
+          {
+            "field": "building_class",
+            "kind": "string",
+            "operator": "eq",
+            "value": "residential",
+            "unit": "1",
+            "source": {
+              "clause": "T01 header",
+              "quote": "| Usage et approche |"
+            }
+          }
+        ],
+        "fact_declarations": [
+          {
+            "entity": "$building",
+            "name": "climate_zone",
+            "kind": "string",
+            "unit": "1",
+            "definition": "Climate zone identifier (e.g., Z3)",
+            "source": {
+              "clause": "T01 header",
+              "quote": "Zone climatique"
+            },
+            "status": "proposed"
+          },
+          {
+            "entity": "$building",
+            "name": "glazing_ratio",
+            "kind": "number",
+            "unit": "%",
+            "definition": "Global glazing percentage (Taux global des baies vitrées)",
+            "source": {
+              "clause": "T01 header",
+              "quote": "TGBV"
+            },
+            "status": "proposed"
+          }
+        ],
+        "evidence_requests": [],
+        "unresolved": []
+      },
+      "call": {
+        "prompt_tokens": 3231,
+        "completion_tokens": 1295,
+        "seconds": 3.23,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      },
+      "status": "EVALUATED",
+      "slots": {
+        "subject": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 3
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "applicability": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 1
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        }
+      },
+      "stage": "subject",
+      "detail": "subject phrase is absent from the supplied source"
+    },
+    {
+      "id": "T01",
+      "arm": "deterministic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "roof_u",
+          "slab_r",
+          "wall_u",
+          "window_u"
+        ],
+        "omitted": [
+          "solar"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "evidence_frame": {
+        "source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+        "context": [
+          {
+            "id": "T01 header",
+            "text": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          }
+        ],
+        "normalized_source": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 26.0,
+            "unit": "%",
+            "operator": "ge",
+            "normalized_span": [
+              55,
+              64
+            ],
+            "quote": "26 – 35 %",
+            "column_header": " TGBV "
+          },
+          {
+            "id": "q1",
+            "value": 35.0,
+            "unit": "%",
+            "operator": "le",
+            "normalized_span": [
+              55,
+              64
+            ],
+            "quote": "26 – 35 %",
+            "column_header": " TGBV "
+          },
+          {
+            "id": "q2",
+            "value": 0.65,
+            "unit": "W/m²/K",
+            "operator": "le",
+            "normalized_span": [
+              69,
+              73
+            ],
+            "quote": "0,65",
+            "column_header": " U des toitures exposées (W/m²/K) "
+          }
+        ],
+        "menu": [
+          {
+            "id": "c0",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "roof_u",
+            "operator": "le",
+            "definition": "Coefficient U des toitures exposées"
+          },
+          {
+            "id": "c1",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "wall_u",
+            "operator": "le",
+            "definition": "Coefficient U des murs extérieurs"
+          },
+          {
+            "id": "c2",
+            "quantity": "q2",
+            "subject": "building",
+            "fact": "window_u",
+            "operator": "le",
+            "definition": "Coefficient U des fenêtres"
+          }
+        ]
+      },
+      "closed_proposal": {
+        "choices": [
+          "c0"
+        ],
+        "needs_review": false
+      },
+      "status": "EVALUATED",
+      "raw": {},
+      "stage": "quantity_coverage",
+      "detail": "every source quantity needs exactly one supported binding",
+      "slots": {
+        "subject": {
+          "eligible": false,
+          "exact": null,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "eligible": true,
+          "exact": false,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        }
+      }
+    },
+    {
+      "id": "M03",
+      "arm": "monolithic",
+      "retained": false,
+      "representation": "structured",
+      "retrieval": {
+        "method": "lexical type-vocabulary overlap, no gold or plan values",
+        "top_k": 6,
+        "selected": [
+          "dead_end",
+          "discharge",
+          "travel"
+        ],
+        "omitted": [
+          "accessory",
+          "connector",
+          "door_width",
+          "eligible",
+          "normal",
+          "two_way"
+        ],
+        "risk": "Retrieval can omit relevant facts; declarations or review required on gaps"
+      },
+      "status": "API_UNAVAILABLE",
+      "stage": "transport",
+      "reason": "daily allowance exhausted",
+      "http_status": 429
+    }
+  ],
+  "requests": [
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "973",
+        "x-ratelimit-remaining-tokens": "4652",
+        "x-ratelimit-reset-requests": "38m52.8s",
+        "x-ratelimit-reset-tokens": "25.11s"
+      }
+    },
+    {
+      "http_status": 429,
+      "attempt": 1,
+      "category": "rate_limit_exceeded",
+      "schema_keywords": [],
+      "budget_numbers": {
+        "limit": 200000.0,
+        "used": 197049.0,
+        "requested": 4423.0
+      }
+    }
+  ],
+  "daily_tokens": {
+    "2026-11-19": 4526
+  },
+  "status": "API_UNAVAILABLE",
+  "summary": {
+    "monolithic": {
+      "complete": [
+        1,
+        46
+      ],
+      "api_unavailable": 1,
+      "retained": [
+        0,
+        1
+      ],
+      "stages": {
+        "subject": 1,
+        "transport": 1
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 1
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 3
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 4
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 1,
+          "gold_atoms": 1,
+          "predicted_atoms": 2
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 1
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 1,
+          "gold_atoms": 2,
+          "predicted_atoms": 1
+        }
+      }
+    },
+    "deterministic": {
+      "complete": [
+        1,
+        46
+      ],
+      "api_unavailable": 0,
+      "retained": [
+        0,
+        1
+      ],
+      "stages": {
+        "quantity_coverage": 1
+      },
+      "slots": {
+        "subject": {
+          "correct": 0,
+          "denominator": 0,
+          "accuracy": null,
+          "matched_atoms": 0,
+          "gold_atoms": 0,
+          "predicted_atoms": 0
+        },
+        "fact": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "operator": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "value": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "unit": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 1,
+          "predicted_atoms": 0
+        },
+        "applicability": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 5,
+          "predicted_atoms": 0
+        },
+        "clause_span": {
+          "correct": 0,
+          "denominator": 1,
+          "accuracy": 0.0,
+          "matched_atoms": 0,
+          "gold_atoms": 2,
+          "predicted_atoms": 0
+        }
+      }
+    }
+  }
+}

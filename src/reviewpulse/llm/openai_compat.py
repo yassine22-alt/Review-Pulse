@@ -83,7 +83,8 @@ def _strict(schema: dict) -> dict | None:
         if isinstance(node, dict):
             if "$ref" in node or "anyOf" in node and any(isinstance(a, dict) and "$ref" in a for a in node["anyOf"]):
                 raise ValueError("references are not portable")
-            out = {k: fix(v) for k, v in node.items() if k not in ("title", "default", "description", "examples")}
+            out = {k: ({name: fix(spec) for name, spec in v.items()} if k == "properties" else fix(v))
+                   for k, v in node.items() if k not in ("title", "default", "description", "examples")}
             if out.get("type") == "object" and "properties" in out:
                 out["additionalProperties"] = False
                 out["required"] = list(out["properties"])
@@ -210,6 +211,8 @@ class OpenAICompatClient:
                 category = next((name for name in ("json_validate_failed", "rate_limit_exceeded", "context_length_exceeded", "model_decommissioned")
                                  if name in text), "unspecified")
                 self.events.append({"http_status": exc.code, "attempt": attempt + 1, "category": category,
+                    "schema_keywords": [name for name in ("oneOf", "anyOf", "const", "pattern", "minLength", "maxLength",
+                        "minItems", "maxItems", "additionalProperties", "required") if name in text] if exc.code in (400, 422) else [],
                     "budget_numbers": {name.lower(): float(number) for name, number in
                         re.findall(r"\b(Limit|Requested|Used)\s*[:=]?\s*(\d+(?:\.\d+)?)", text, re.I)}})
                 if self._key:
