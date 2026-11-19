@@ -7,6 +7,7 @@ from collections import Counter
 
 from ..interpreter.units import parse_unit
 from .expr_ir import parse_expression
+from .expression_normalization import normalize_expressions
 
 SLOTS = ("subject", "fact", "operator", "value", "unit", "applicability", "clause_span")
 
@@ -71,6 +72,7 @@ def flat_nodes(raw: dict) -> list[dict]:
 
         def visit(node):
             if isinstance(node, dict):
+                node = canonical_comparison(node)
                 if "node" in node:
                     nodes.append({**node, "op": node["node"]})
                 for value in node.values():
@@ -86,6 +88,19 @@ def flat_nodes(raw: dict) -> list[dict]:
                 continue
         return nodes
     return []
+
+
+def canonical_comparison(node: dict) -> dict:
+    """Normalize equivalent direction/negation without dropping logical scope."""
+    reverse = {"ge": "le", "le": "ge", "gt": "lt", "lt": "gt", "eq": "eq", "ne": "ne"}
+    opposite = {"ge": "lt", "le": "gt", "gt": "le", "lt": "ge", "eq": "ne", "ne": "eq"}
+    if node.get("node") == "not" and len(node.get("args", [])) == 1:
+        child = node["args"][0]
+        if child.get("node") in opposite:
+            node = {**child, "node": opposite[child["node"]]}
+    if node.get("node") in reverse and node.get("left", {}).get("node") == "literal" and node.get("right", {}).get("node") != "literal":
+        node = {**node, "node": reverse[node["node"]], "left": node["right"], "right": node["left"]}
+    return node
 
 
 def quantity(node):
@@ -119,7 +134,9 @@ def fields(raw: dict) -> dict:
                                         for source in raw.get("sources", []) if isinstance(source, dict)))}
 
 
-def score_slots(raw: dict, gold: dict, annotation: dict, *, subject_requested: bool = True) -> dict:
+def score_slots(raw: dict, gold: dict, annotation: dict, *, subject_requested: bool = True, catalogue: dict | None = None) -> dict:
+    if catalogue is not None:
+        raw, _ = normalize_expressions(raw, catalogue)
     expected = {**gold["slots"], "metadata_applicability": annotation["conditions"]}
     a, b = fields(raw), fields(expected)
     result = {}

@@ -54,3 +54,33 @@ def test_categorical_literal_values_are_scored():
     changed = copy.deepcopy(raw)
     changed["nodes"][-1]["value"] = "category_b"
     assert not score_slots(changed, {"slots": raw}, annotation)["value"]["exact"]
+
+
+def test_subject_alternatives_are_explicit_review_data_not_substring_guesses():
+    raw, gold, annotation = sample()
+    raw["subject"] = "the clear access width"
+    assert not score_slots(raw, gold, annotation)["subject"]["exact"]
+    annotation["subject_accept"].append("the clear access width")
+    assert score_slots(raw, gold, annotation)["subject"]["exact"]
+    raw["subject"] = "width"
+    assert not score_slots(raw, gold, annotation)["subject"]["exact"]
+
+
+def test_reversed_and_negated_comparators_score_equivalently_without_dropping_negation():
+    raw = {"subject": "access width", "require": "building.clear_width >= 0.85 m", "sources": []}
+    gold = {"slots": raw}
+    annotation = {"conditions": [], "annotated": False, "subject_accept": ["access width"]}
+    for text in ("0.85 m <= building.clear_width", "not (building.clear_width < 0.85 m)"):
+        assert score_slots({**raw, "require": text}, gold, annotation)["operator"]["exact"]
+    assert not score_slots({**raw, "require": "not (building.clear_width >= 0.85 m)"}, gold, annotation)["operator"]["exact"]
+
+
+def test_unicode_unit_aliases_score_equally_but_missing_units_are_not_invented():
+    raw, gold, annotation = sample()
+    gold = copy.deepcopy(gold)
+    raw["nodes"][1].update(value=0.85, unit="m²")
+    gold["slots"]["nodes"][1].update(value=0.85, unit="m2")
+    assert score_slots(raw, gold, annotation)["unit"]["exact"]
+    changed = copy.deepcopy(raw)
+    changed["nodes"][1].pop("unit")
+    assert not score_slots(changed, gold, annotation)["unit"]["exact"]

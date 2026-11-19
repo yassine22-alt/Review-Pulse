@@ -12,6 +12,7 @@ from reviewpulse.interpreter.decomposed import ExpressionFrame
 from reviewpulse.interpreter.schema import MetadataCondition, Program, Span
 from reviewpulse.interpreter.structured import SlotDraft
 from reviewpulse.xeval.expr_ir import SYMBOL, ExprError, tokenize
+from reviewpulse.xeval.expression_normalization import normalize_expressions
 from reviewpulse.xeval.flat import FlatProgram, compile_flat
 from reviewpulse.xeval.slot_scoring import flat_nodes, quantity, score_slots, totals
 
@@ -56,11 +57,19 @@ def main():
     parser.add_argument("access_text", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("inputs", nargs="+", type=Path)
+    parser.add_argument("--adjudications", type=Path, help="Reviewed subject alternatives, evaluation data only")
+    parser.add_argument("--normalize", action="store_true", help="Replay logged lossless surface normalization through all gates")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     cases = {case["id"]: case for case in load_cases(repo, args.access_text)}
     gold = {row["id"]: row for row in json.loads((repo / "reports/development-oracle-slots.json").read_text(encoding="utf-8"))["cases"]}
     annotations = {row["id"]: row for row in json.loads((repo / "reports/development-metadata-labels.json").read_text(encoding="utf-8"))["cases"]}
+    adjudications = {}
+    if args.adjudications:
+        reviewed = json.loads(args.adjudications.read_text(encoding="utf-8"))
+        adjudications = {(row["id"], row["arm"]): row for row in reviewed["rows"]}
+        for key, alternatives in reviewed["subject_alternatives"].items():
+            annotations[key]["subject_accept"] += alternatives
     output = {"limits": ["Development data only; labels have no independent review.",
         "Matches mean normalized frozen fixture IR, not a claim about legal meaning outside its assumed scope.",
         "31/46 scopes have no supplemental gold annotation and cannot be scored as correct.",
@@ -70,6 +79,9 @@ def main():
         "All retained nonmatches require explicit author adjudication; they are not automatically called wrong or correct.",
         "Saved drafts were revalidated with final UTF-8 cue data after tests caught and corrected a temporary encoding error; no responses were regenerated."],
         "models": {}, "agreement": {}}
+    output["scoring_configuration"] = {"subject_adjudications": str(args.adjudications) if args.adjudications else None,
+                                       "surface_normalization": args.normalize,
+                                       "human_adjudicated": False}
     pairs = {}
     for path in args.inputs:
         run = json.loads(path.read_text(encoding="utf-8"))
@@ -77,23 +89,30 @@ def main():
         for original in run["rows"]:
             row = {**original, "model": run["model"]}
             key = row["id"]
+            review = adjudications.get((key, row["arm"])) if run["model"] == "openai/gpt-oss-120b" else None
+            if review:
+                row["source_adjudication"] = {name: review[name] for name in
+                    ("intended_slot_grades", "whole_intended_rule", "rationale", "human_reviewed")}
             row.update(frozen_interpretation=gold[key]["frozen_reading"], frozen_requirement=gold[key]["reference_expression"],
                        scope_annotated=annotations[key]["annotated"])
             if "raw" not in row:
                 row["grade"] = "NOT_SCORED_API_OR_BUDGET" if row["status"] != "GENERATION_FAILURE" else "INCOMPLETE_OUTPUT"
                 rows.append(row)
                 continue
-            row["slots"] = score_slots(row["raw"], gold[key], annotations[key])
             _, _, _, catalogue = request_for(cases[key], "original_expression")
+            candidate, trace = normalize_expressions(row["raw"], catalogue) if args.normalize else (row["raw"], [])
+            row["original_terminal_stage"] = row.get("stage")
+            row["normalizations"] = trace
+            row["slots"] = score_slots(candidate, gold[key], annotations[key])
             row["lexical_diagnostics"] = lexical_diagnostics(row["raw"], gold[key], catalogue)
             row["edit_family_proxy"] = [name for name, score in row["slots"].items() if score["eligible"] and not score["exact"]]
             row["retained"] = False
             case = cases[key]
             contract = row.get("representation", "original_expression")
             try:
-                (SlotDraft if contract == "structured" else ExpressionFrame).model_validate(row["raw"])
+                (SlotDraft if contract == "structured" else ExpressionFrame).model_validate(candidate)
                 _, _, _, catalogue = request_for(case, contract)
-                program = compile_response(row["raw"], case, catalogue, contract)
+                program = compile_response(candidate, case, catalogue, contract)
                 row.update(retained=True, stage="retained", program=program.model_dump(mode="json"))
                 reference = Program.model_validate(compile_flat(FlatProgram.model_validate({
                     name: value for name, value in gold[key]["slots"].items() if name in FlatProgram.model_fields}), case["context"].document))
@@ -119,9 +138,16 @@ def main():
             complete = [row for row in selected if "raw" in row]
             retained = [row for row in complete if row["retained"]]
             matches = [row for row in retained if row["grade"] == "MATCHES_FROZEN_IR"]
+            reviewed_retained = [row for row in retained if "source_adjudication" in row]
             summary[arm] = {"complete_json_outputs": [len(complete), 46], "retained": [len(retained), len(complete)],
                 "matched_frozen_ir": [len(matches), len(complete)], "approvable_total": len(retained),
-                "wrong_approvable_reviewed": [0, len(matches)], "unadjudicated_approvable": len(retained) - len(matches),
+                "wrong_approvable_reviewed": [sum(row["source_adjudication"]["whole_intended_rule"] != "correct"
+                    for row in reviewed_retained), len(reviewed_retained)],
+                "wrong_approvable_definition": "Source-incorrect or incomplete intent; fixture-predicate match is insufficient",
+                "unadjudicated_approvable": len(retained) - len(reviewed_retained),
+                "source_reviewed_approvable": len(reviewed_retained),
+                "source_incomplete_or_wrong_approvable": [sum(row["source_adjudication"]["whole_intended_rule"] != "correct"
+                    for row in reviewed_retained), len(reviewed_retained)],
                 "grades": dict(Counter(row["grade"] for row in selected)), "stages": dict(Counter(row["stage"] for row in selected)),
                 "slots": totals([row["slots"] for row in complete]),
                 "raw_lexical_agreement": {name: [sum(row["lexical_diagnostics"].get(name, [False, False])[0]
