@@ -22,7 +22,8 @@ claims or tune the sealed test. Drawings stay local; no billing was enabled.
 | Raw relational declarations | 2/3 type-valid, 0/3 source-correct; 0/4 old wrong bindings automatically repaired |
 | Independent teammate grades | 0/10 returned; agreement unmeasured |
 
-Retrospective edit plans are assistant estimates, not observed human effort.
+Retrospective edit plans estimate executable-rule repairs, not observed human
+effort: 3/30 old drafts had correct intent but still needed binding/formalization.
 Fact declarations do not create values: all 3 manually corrected relational
 measurements remain evidence requests, with 0/3 full clauses decided.
 [Table review](../reports/assisted-numeric-review.md),
@@ -59,3 +60,6 @@ Capabilities are finite; test sets are small; the 25% scale bound is provisional
 Detailed budgets, negative results and prior runs are in
 [history](results-history.md), [token budget](assisted-token-budget.md), and
 [polygonize report](../reports/polygonize-study.md).
+
+Validation: **1,151 passed, 2 skipped; 45 slow excluded**. Changed-file Ruff and
+whitespace checks passed. [Details](../reports/assisted-sprint-validation.json).

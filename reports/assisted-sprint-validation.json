@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-19",
+  "branch": "rule-interpreter",
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m pytest -m \"not slow\" -q -p no:cacheprovider",
+    "passed": 1151,
+    "skipped": 2,
+    "slow_deselected": 45,
+    "seconds": 586.85,
+    "limitation": "This is not the complete slow/perception regression suite."
+  },
+  "ruff": "All changed Python implementation/test files passed.",
+  "whitespace": "git diff --check passed.",
+  "old_authored_profile_regression": {
+    "automatic": [
+      0,
+      5
+    ],
+    "assisted": [
+      3,
+      5
+    ],
+    "unchanged": true
+  },
+  "secret_scan": {
+    "scope": "Changed files since e16ed6385f8d0ad337c738167e7309f589408070 checked for exact currently available environment API-key/token values; no values printed. Not a complete historical secrets audit.",
+    "matches": 0
+  },
+  "sealed_document": {
+    "comparison_commit": "ad7742ce",
+    "paths": [
+      "reports/rps-fourth-source.json",
+      "reports/rps-fourth-labels.json"
+    ],
+    "unchanged": true,
+    "model_run": false
+  },
+  "known_incomplete_items": [
+    "Independent 10-draft grades not returned.",
+    "No real Moroccan permit drawing or real DXF found; synthetic CAD is only a control.",
+    "Eight-target attempt has seven completed readings, five validation blocks and one provider-rejected request; not a complete eight-rule decided demo.",
+    "No candidate meets pre-registered selection criteria; fourth document unrun."
+  ]
+}

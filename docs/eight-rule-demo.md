@@ -24,7 +24,9 @@ and expand each evidence/trace section.
 
 Eight attempted obligations: **7/8 complete neutral semantic readings**, **1/8
 HTTP 400 schema/request rejection**. The latter is transport/request failure,
-not a semantic grade. Completed calls consumed **3,548 input + 3,634 output =
+not a semantic grade. The pre-run estimate was 3,466–6,938 input plus a
+6,144-token output cap, against the supplied 200,000 tokens/day and 8,000
+tokens/minute allowance; requests were paced and cached. Completed calls consumed **3,548 input + 3,634 output =
 7,182 tokens**; usage for the rejected call is unavailable.
 
 All **7/7 completed drafts required a full reviewer-authored executable rewrite**.

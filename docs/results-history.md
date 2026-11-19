@@ -1120,3 +1120,15 @@ choosing a pipeline or unsealing the fourth document. Detailed evidence,
 transport counts, tests and [archived runs](results-history.md) remain available.
 
 Validation: **1,126 tests passed; two skipped; 45 slow excluded.**
+
+
+## Assisted sprint validation, 19 November 2026
+
+Non-slow suite: **1,151 passed, 2 skipped, 45 slow deselected**, 586.85 seconds.
+Ruff on changed implementation/test files and `git diff --check` passed.
+The old authored five-rule profile still returns 0/5 automatic and 3/5 assisted
+decisions. The fourth-document files are unchanged against `ad7742ce` and were
+not run through any model. Current environment API-key/token values were absent
+from changed files; this is not a full-history secret audit.
+
+[Validation record](../reports/assisted-sprint-validation.json).
