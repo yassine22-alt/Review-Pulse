@@ -30,3 +30,18 @@ Source-wrong/incomplete approvable rules: **0/12**, reusing the direct assistant
 review of unchanged table frames. This is not independent validation or plan-verdict
 accuracy. Retrospective edit buckets are formalization estimates, not observed
 human actions or elapsed time. Full traces: `assisted-product-development.json`.
+
+## Scope routing on all 46 clauses
+
+Scope references were assistant-authored and committed at `de33375f` before
+classifier execution. Of **28/46** labelled out-of-scope clauses, **0/28** were
+predicted in scope and **0/28** received a validated draft; **28/28** went to
+formalization. Of **18/46** labelled in scope, **12/18** reached a draft and
+**6/18** went to review. This conservative routing loses supported shapes too;
+it does not establish a general semantic scope detector. Lexical family names
+are diagnostics, not a proof of supported semantics. Missing units, catalogue
+facts or clear ownership can veto an otherwise numeric shape.
+
+The UI will use this narrow path explicitly. Legacy expression endpoints remain
+for reproducing archived experiments, not as the assisted product or an
+automatic-compliance service.
