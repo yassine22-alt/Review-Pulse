@@ -1,0 +1,130 @@
+{
+  "date": "2026-11-19",
+  "status": "SCOPE_SELECTED_FLOW_NOT_RUN",
+  "source_document": {
+    "title": "2021 International Residential Code, Chapter 3, first printing",
+    "publisher": "International Code Council",
+    "url": "https://codes.iccsafe.org/content/IRC2021P1/chapter-3-building-planning",
+    "verification": "Primary publisher indexed sections reviewed; direct chapter fetch returned HTTP 403. Text below is assistant paraphrase for planning, NOT original source text and NOT fed to any model. Retrieve authoritative clause text before drafting.",
+    "jurisdiction": "Demonstration of the selected code only. No claim that it legally governs the UK drawing or Moroccan projects."
+  },
+  "drawing": {
+    "path": "data/real_plans/label-study/uk-proposed.pdf",
+    "style": "Metric thin-line bungalow floor plan with printed room dimensions",
+    "reference_labels": "native-label-study-labels.json",
+    "annotation": "Assistant reference, no independent review; functional space points do not prove complete room inventory"
+  },
+  "conditional_case": "Kitchen exceptions in R304.1/R304.2 must remain explicit; unknown room class cannot silently bypass or satisfy them.",
+  "approval": "Every complete meaning must be reviewed/edited before execution. No scalar fact default or automatic completeness attestation.",
+  "requirements": [
+    {
+      "section": "R304.1",
+      "name": "Habitable room usable area",
+      "interpretation_paraphrase": "Habitable rooms need at least 70 square feet; kitchens are excepted.",
+      "family": "area",
+      "needed_facts": "habitable room membership, kitchen exception, usable area; resolve ceiling-related exclusions from R304.3",
+      "evidence_location": "Room labels and interior dimension/area notes; reviewer confirms usable-area basis",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R304.2",
+      "name": "Habitable room minimum dimension",
+      "interpretation_paraphrase": "Each horizontal dimension of a habitable room must reach 7 feet; kitchens are excepted.",
+      "family": "width",
+      "needed_facts": "habitable room membership, kitchen exception, clear internal horizontal dimensions",
+      "evidence_location": "Room dimensions, not door widths or exterior bounding boxes",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.1",
+      "name": "Continuous egress route",
+      "interpretation_paraphrase": "Every dwelling portion needs continuous unobstructed travel to the required egress door, avoiding garages; discharge must reach a public way, directly or through a qualifying yard/court.",
+      "family": "connectivity",
+      "needed_facts": "complete dwelling/level inventory, confirmed traversal, room classes, required exit and discharge endpoint",
+      "evidence_location": "Door relationships and site discharge evidence; unknown-class route remains unresolved",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.2-count",
+      "name": "At least one egress door",
+      "interpretation_paraphrase": "Provide at least one required egress door per dwelling.",
+      "family": "exit_count",
+      "needed_facts": "dwelling boundary, definite egress-door membership, count",
+      "evidence_location": "Door designation plus approved egress plan; do not count all detected openings as exits",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.2-hinge",
+      "name": "Egress door operation",
+      "interpretation_paraphrase": "The required egress door must be side-hinged.",
+      "family": "door_operation",
+      "needed_facts": "required egress-door identity, operation type",
+      "evidence_location": "Door symbol/type schedule or cited reviewer evidence",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.2-width",
+      "name": "Egress door net clear width",
+      "interpretation_paraphrase": "Required-door clear opening must be at least 32 inches, measured between leaf face and stop at 90 degrees.",
+      "family": "door_clear_width",
+      "needed_facts": "required egress-door identity, clear opening measurement basis",
+      "evidence_location": "Explicit clear-width schedule/detail; nominal leaf dimensions are insufficient",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.2-height",
+      "name": "Egress door net clear height",
+      "interpretation_paraphrase": "The clear opening height must reach 78 inches, from threshold top to stop bottom.",
+      "family": "door_clear_height",
+      "needed_facts": "required egress-door identity, net clear height measurement basis",
+      "evidence_location": "Explicit clear-height schedule/detail; never substitute nominal height",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    },
+    {
+      "section": "R311.6",
+      "name": "Hallway width",
+      "interpretation_paraphrase": "Hallways must be at least 3 feet wide.",
+      "family": "hall_width",
+      "needed_facts": "hallway membership and clear width, complete covered scope",
+      "evidence_location": "Internal dimensions or verified-scale geometry; unknown inventory prevents universal pass",
+      "llm_draft_status": "NOT_RUN",
+      "reviewer_edits": null,
+      "verdict": null,
+      "blocker": "Authoritative source text and quota-available typed drafting required"
+    }
+  ],
+  "measurement_plan": {
+    "reviewer": "Assistant edits explicitly identified as assistant/scripted; no human-effort claim.",
+    "edit_measure": "Record before/after connected slots and changed subject, fact, comparator, quantity, unit and applicability per clause; also record additions, deletions and whole rewrites. Do not substitute exact-match mismatches for observed edits.",
+    "verdicts": "Report decided/unresolved/needs-review on the same eight clauses; original model drafts, approved edits, fact origins, inventory assumptions and trace beside each.",
+    "false_passes": "Compare against frozen source/plan truth independently authored before running; unknown truth excluded and counted as unannotated. No false-pass estimate exists yet."
+  },
+  "not_measured": [
+    "No original source-text-to-LLM demo run for these eight.",
+    "No approval edits observed; null edit counts are not zero effort.",
+    "No eight-rule execution or false-pass results.",
+    "Existing five-check authored profile remains a separate manual-interpretation example, not a substitute."
+  ],
+  "sealed_fourth": "Still unchanged and unrun; no final interpreter pipeline has been chosen."
+}
