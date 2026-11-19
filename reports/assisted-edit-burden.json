@@ -1,0 +1,960 @@
+{
+  "rubric": "One independently meaningful correction site is one edit. Each missing bound counts separately. Mechanical logged surface normalization and approval clicks do not count. Missing dimension units count. Wrong scope/ownership cannot be credited for matching numbers. A main quantifier/connective replacement or a missing executable rule requires rewrite. Missing source context is not assigned a finite achieved edit count.",
+  "limits": [
+    "Retrospective thirty-draft repair plans are assistant estimates, not observed human edits or validated timings.",
+    "New table zero-edit counts are real model choices plus deterministic compilation and assistant source review.",
+    "Prose rewrite means this table-only arm provides no executable candidate; it is not a measured human completion time.",
+    "Three missing-context cases have at least two identified correction sites but cannot be claimed repaired.",
+    "Only five distinct thermal source clauses overlap the thirty-draft sample (ten historical outputs). No held-out improvement claim."
+  ],
+  "old_30": {
+    "distribution": {
+      "denominator": 30,
+      "0": [
+        0,
+        30
+      ],
+      "1": [
+        0,
+        30
+      ],
+      "2+": [
+        19,
+        30
+      ],
+      "rewrite": [
+        11,
+        30
+      ],
+      "needs_context": [
+        0,
+        30
+      ]
+    },
+    "rows": [
+      {
+        "id": "T01",
+        "arm": "monolithic",
+        "source_rationale": "Right roof threshold; subject is a property, not a building. Unit omitted and glazing band missing.",
+        "edits": [
+          {
+            "operation": "bind_entity",
+            "site": "subject"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_upper"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T01",
+        "arm": "decomposed",
+        "source_rationale": "Right threshold; band omitted and explicitly misconstrued as air-tightness. Unit implicit only.",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_upper"
+          },
+          {
+            "operation": "clear_unresolved",
+            "site": "misread_band"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T04",
+        "arm": "monolithic",
+        "source_rationale": "Right slab threshold. Global fact is named correctly; bare quantity lacks unit. Percent scope values lack percent units.",
+        "edits": [
+          {
+            "operation": "bind_entity",
+            "site": "subject"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_upper"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T04",
+        "arm": "decomposed",
+        "source_rationale": "Right threshold; glazing band missing, residential spelling differs. Unit omitted.",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_upper"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T06",
+        "arm": "monolithic",
+        "source_rationale": "Right roof threshold; building class missing. Scope numbers lack explicit percent units.",
+        "edits": [
+          {
+            "operation": "bind_entity",
+            "site": "subject"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "building_class"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T06",
+        "arm": "decomposed",
+        "source_rationale": "Right threshold; translated class and percent band not fully normalized. Unit omitted.",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_upper"
+          },
+          {
+            "operation": "clear_unresolved",
+            "site": "band"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T09",
+        "arm": "monolithic",
+        "source_rationale": "floor_R is an undeclared alternative for slab resistance; unit omitted. Scope percent units omitted.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "floor_resistance"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "bind_entity",
+            "site": "declared_owner"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T09",
+        "arm": "decomposed",
+        "source_rationale": "Right slab fact/threshold and declared resistance unit. Building class and glazing band missing from metadata.",
+        "edits": [
+          {
+            "operation": "add_scope_condition",
+            "site": "building_class"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "glazing_upper"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T13",
+        "arm": "monolithic",
+        "source_rationale": "Right window threshold. Generic subject; class and approach missing from applicability.",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "building_class"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "approach"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "T13",
+        "arm": "decomposed",
+        "source_rationale": "Right window threshold; building class missing from metadata, bare percent bounds, unit omitted.",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "building_class"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_lower"
+          },
+          {
+            "operation": "add_unit",
+            "site": "glazing_upper"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M03",
+        "arm": "monolithic",
+        "source_rationale": "Thresholds 50 and 30 retained, but two implications vacuously pass with zero exits; ground-floor scope absent.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "branch_logic"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M03",
+        "arm": "decomposed",
+        "source_rationale": "Only the two-exit/50m branch remains; single-exit/30m branch and eligibility filter lost.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "restore_exit_branches"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M04",
+        "arm": "monolithic",
+        "source_rationale": "travel means overall evacuation travel, not door-to-dead-end junction distance. Subject under-specified.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "distance"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "bind_entity",
+            "site": "door_to_junction_scope"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M04",
+        "arm": "decomposed",
+        "source_rationale": "discharge is stair-to-exit distance, not dead-end distance. Correct number and comparator cannot rescue wrong fact.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "distance"
+          },
+          {
+            "operation": "add_unit",
+            "site": "threshold"
+          },
+          {
+            "operation": "remove_scope_condition",
+            "site": "invented_subject_equality"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M05",
+        "arm": "monolithic",
+        "source_rationale": "Exit-pair distance replaces connector width and 2*0.60 ignores the explicit two-UP exception of 1.40m.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "connector_relationship_and_width"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M05",
+        "arm": "decomposed",
+        "source_rationale": "Two passage units understood, but no binding to connector, UP conversion or required stair/exit links.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "connector_width"
+          },
+          {
+            "operation": "correct_value",
+            "site": "UP_exception"
+          },
+          {
+            "operation": "add_unit",
+            "site": "width"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M06",
+        "arm": "monolithic",
+        "source_rationale": "Both alternatives retained in intent, but travel binds the wrong distance and direct_outside is undeclared.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "discharge_distance"
+          },
+          {
+            "operation": "rename_fact",
+            "site": "direct_outdoors"
+          },
+          {
+            "operation": "add_unit",
+            "site": "distance"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M06",
+        "arm": "decomposed",
+        "source_rationale": "Drops direct-outdoors alternative and uses overall travel instead of stair discharge.",
+        "edits": [
+          {
+            "operation": "rename_fact",
+            "site": "discharge_distance"
+          },
+          {
+            "operation": "replace_requirement",
+            "site": "direct_outdoors_alternative"
+          },
+          {
+            "operation": "add_unit",
+            "site": "distance"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M08",
+        "arm": "monolithic",
+        "source_rationale": "Two-way opening understood; generic door subject loses subdivision/use-in-both-directions restriction.",
+        "edits": [
+          {
+            "operation": "add_scope_condition",
+            "site": "subdivision_doors"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "used_both_directions_toward_exit"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "M08",
+        "arm": "decomposed",
+        "source_rationale": "Matches fixture boolean, but whole source scope is not encoded: subdivision doors used both ways toward exits.",
+        "edits": [
+          {
+            "operation": "add_scope_condition",
+            "site": "used_both_directions"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "toward_exit"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A01",
+        "arm": "monolithic",
+        "source_rationale": "Arbitrary corridor/lobby restriction; smooth/obstacle checks omit no-furnishing constraint.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "remove_invented_scope_restore_furnishing"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A01",
+        "arm": "decomposed",
+        "source_rationale": "Source intent preserved as three negations; unsupported nested facts prevent execution. Frozen firm fact is not explicitly stated by this source.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "bind_nested_properties_and_universal_scope"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A04",
+        "arm": "monolithic",
+        "source_rationale": "No interpretation emitted; unknown subject, missing slopes and two side transitions.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "empty_requirement"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A04",
+        "arm": "decomposed",
+        "source_rationale": "Curb-cut subject retained but empty requirement loses all slopes and geometry.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "empty_requirement"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A08",
+        "arm": "monolithic",
+        "source_rationale": "Intended one-in-twenty ratio and public-room scope preserved; unbound owner prevents execution. Algebra differs harmlessly from frozen multiplication.",
+        "edits": [
+          {
+            "operation": "supply_fact_link",
+            "site": "adapted_count"
+          },
+          {
+            "operation": "supply_fact_link",
+            "site": "total_count"
+          },
+          {
+            "operation": "bind_entity",
+            "site": "public_room_scope"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A08",
+        "arm": "decomposed",
+        "source_rationale": "Ratio retained but public rooms narrowed without source support to corridor/lobby; quoted scope not in source.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "public_room_scope_and_dangling_variables"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A10",
+        "arm": "monolithic",
+        "source_rationale": "Presence alone omits standards compliance; unsupported narrowing to corridor/lobby.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "standards_and_all_circulation_scope"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A10",
+        "arm": "decomposed",
+        "source_rationale": "Lift standards intent retained, but arbitrary corridor/lobby scope excludes other circulation spaces.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "all_circulation_scope"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A13",
+        "arm": "monolithic",
+        "source_rationale": "Both handrails expressed in proposed boolean; singleton owner lacks universal binding and full antecedent scope.",
+        "edits": [
+          {
+            "operation": "bind_entity",
+            "site": "passages_owner"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "all_relevant_passages"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      },
+      {
+        "id": "A13",
+        "arm": "decomposed",
+        "source_rationale": "Prose preserves both-side handrails on referenced passages; not executable DSL. Context supplies passage antecedent.",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "prose_to_bound_predicate"
+          }
+        ],
+        "basis": "Assistant retrospective minimum repair plan; not observed human actions or timing."
+      }
+    ]
+  },
+  "new_numeric_36": {
+    "distribution": {
+      "denominator": 36,
+      "0": [
+        12,
+        36
+      ],
+      "1": [
+        0,
+        36
+      ],
+      "2+": [
+        0,
+        36
+      ],
+      "rewrite": [
+        20,
+        36
+      ],
+      "needs_context": [
+        4,
+        36
+      ]
+    },
+    "rows": [
+      {
+        "id": "M01",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M02",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "header_unit"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "unresolved_cell_qualifier"
+          }
+        ],
+        "complete": false,
+        "basis": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing."
+      },
+      {
+        "id": "M03",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M04",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M05",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M06",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M07",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M09",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M10",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "M16",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A03",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A04",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A05",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A07",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A08",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A09",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A11",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A12",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A13",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A14",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "A15",
+        "edits": [
+          {
+            "operation": "rewrite",
+            "site": "requirement_and_subject"
+          }
+        ],
+        "complete": true,
+        "basis": "No executable rule proposed by this table-only arm; narrative relations, quantifiers or unresolved table context require complete reviewer composition."
+      },
+      {
+        "id": "T01",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T02",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T03",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T04",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T05",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "header_unit"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "unresolved_cell_qualifier"
+          }
+        ],
+        "complete": false,
+        "basis": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing."
+      },
+      {
+        "id": "T06",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T07",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T08",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T09",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T10",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "header_unit"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "unresolved_cell_qualifier"
+          }
+        ],
+        "complete": false,
+        "basis": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing."
+      },
+      {
+        "id": "T11",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T12",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T13",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T14",
+        "edits": [],
+        "complete": true,
+        "basis": "Real header-only model choice, deterministic value/unit/scope, all validators pass and source/frozen scope match."
+      },
+      {
+        "id": "T15",
+        "edits": [
+          {
+            "operation": "add_unit",
+            "site": "header_unit"
+          },
+          {
+            "operation": "add_scope_condition",
+            "site": "unresolved_cell_qualifier"
+          }
+        ],
+        "complete": false,
+        "basis": "Qualifier must be interpreted from document context; no explicit header unit. Missing context cannot be repaired by guessing."
+      }
+    ]
+  },
+  "paired_thermal": {
+    "source_clauses": 5,
+    "old_outputs": 10,
+    "old_with_2_plus_or_rewrite": [
+      10,
+      10
+    ],
+    "new_zero_edits": [
+      5,
+      5
+    ],
+    "note": "Same five clauses; two historical arms per clause, one new cached header interpretation per clause. Assistant grading only."
+  },
+  "false_accepted": {
+    "old_expression_source_reviewed": [
+      1,
+      1
+    ],
+    "new_table_source_reviewed": [
+      0,
+      12
+    ]
+  },
+  "human_edit_burden": "Unmeasured; ten-row independent sheet awaits return."
+}
