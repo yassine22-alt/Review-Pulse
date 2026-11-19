@@ -1,0 +1,235 @@
+{
+  "review": "Assistant-authored, no independent review; development data only",
+  "labels": {
+    "T01": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T02": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T03": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T04": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T05": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T06": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T07": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T08": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T09": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T10": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T11": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T12": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T13": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T14": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "T15": {
+      "family": "table-row",
+      "in_scope": true,
+      "basis": "Numeric threshold row and explicit typed applicability; missing header unit/context still counts in denominator"
+    },
+    "M01": {
+      "family": "table-row",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M02": {
+      "family": "table-row",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M03": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M04": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M05": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M06": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M07": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M08": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M09": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M10": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M11": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M12": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M13": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M14": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M15": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "M16": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A01": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A02": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A03": {
+      "family": "simple numeric",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A04": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A05": {
+      "family": "simple numeric",
+      "in_scope": true,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A06": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A07": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A08": {
+      "family": "simple numeric",
+      "in_scope": true,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A09": {
+      "family": "simple numeric",
+      "in_scope": true,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A10": {
+      "family": "qualitative/unsupported",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A11": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A12": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A13": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A14": {
+      "family": "conditional",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    },
+    "A15": {
+      "family": "relational",
+      "in_scope": false,
+      "basis": "Assistant reference before classifier execution. Single ratio shape may be in scope; missing catalogue facts remain a separate blocker. Ranges, coupled thresholds, entity-to-entity relations and conditions need formalization."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "registered_before_fourth_run": true,
+  "development_only_until_code_freeze": true,
+  "product": "Assisted table and simple numeric drafting, not a general interpreter",
+  "criteria": {
+    "in_scope_low_burden": {
+      "minimum_share": 0.8,
+      "denominator": "All author-labelled in-scope held-out obligations, including missing-context/catalogue cases",
+      "zero_denominator": "not measurable, does not pass"
+    },
+    "source_wrong_reviewed_approvable": {
+      "maximum": 0,
+      "dimensions": [
+        "value",
+        "unit",
+        "applicability",
+        "subject",
+        "operator"
+      ],
+      "minimum_reviewed_approvable": 1,
+      "reviewer": "assistant author, explicitly no independent review"
+    },
+    "out_of_scope_queue_recall": {
+      "minimum_share": 0.9,
+      "denominator": "All author-labelled out-of-scope held-out obligations",
+      "zero_denominator": "not measurable, does not pass"
+    }
+  },
+  "grading": "Report raw counts plus 0/1/2+/rewrite/context; compare whole source meaning, not expression strings. Refused drafts do not count as correct interpretations.",
+  "freeze": "Commit source, vocabularies, prompts and evaluator before opening fourth source/labels. Record hash in output. Run once; no tuning or repair rerun after seeing output.",
+  "effort": "Do not substitute assistant estimates or automated actions for teammate-observed edit/time sessions."
+}
