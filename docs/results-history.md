@@ -1214,3 +1214,10 @@ JavaScript passes syntax checking. No complete browser interaction test or real
 teammate effort is claimed. Runtime code remains at the held-out freeze.
 
 [Validation record](../reports/assisted-product-validation.json).
+
+
+Post-run integration audit found Inputs upload still invoked the archived drafter.
+The new assisted upload endpoint stores and splits source without constructing
+a client; UI uploads and retry buttons use assisted routes. Seventeen targeted
+app/grading tests and JavaScript syntax checks pass afterward. The inference
+core and held-out runner remain unchanged; the fourth document was not rerun.

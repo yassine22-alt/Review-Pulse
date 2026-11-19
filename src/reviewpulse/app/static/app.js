@@ -220,7 +220,7 @@ async function setupTab(pid) {
   });
   const rd = $("#redraft");
   if (rd) rd.addEventListener("click", async () => {
-    try { watchJob(pid, await api(`/api/projects/${pid}/draft`, { method: "POST" }), () => route()); } catch (e) { toast(e.message, true); }
+    try { watchJob(pid, await api(`/api/projects/${pid}/assisted/interpret`, { method: "POST" }), () => route()); } catch (e) { toast(e.message, true); }
   });
   for (const j of p.active_jobs) { renderJob(j); watchJob(pid, j, () => route()); }
 }
@@ -239,7 +239,7 @@ async function upload(pid, kind, file) {
   const fd = new FormData();
   fd.append("file", file);
   try {
-    const job = await api(`/api/projects/${pid}/${kind === "plan" ? "plan" : "requirements"}`, { method: "POST", body: fd });
+    const job = await api(`/api/projects/${pid}/${kind === "plan" ? "plan" : "assisted/requirements"}`, { method: "POST", body: fd });
     toast(`${file.name} uploaded`);
     await route();
     renderJob(job);

@@ -74,3 +74,15 @@ def test_stale_source_cannot_overwrite_draft(env,monkeypatch):
 def test_diff_preserves_added_scope_and_changed_units():
     changes=assisted_review.diff({"unit":"m","scope":[]},{"unit":"mm","scope":[{"zone":"Q"}]})
     assert {c["path"] for c in changes}=={"/unit","/scope"}
+
+
+def test_assisted_upload_never_constructs_a_drafting_client(tmp_path):
+    def forbidden():
+        pytest.fail("source upload must not invoke legacy or hosted drafting")
+    with TestClient(create_app(tmp_path,llm=forbidden)) as client:
+        pid=client.post("/api/projects",json={"name":"Upload test"}).json()["id"]
+        response=client.post(f"/api/projects/{pid}/assisted/requirements",files={"file":("brief.txt",b"Every component must have a minimum height of 4 m.","text/plain")})
+        assert response.status_code==202,response.text
+        document=client.get(f"/api/projects/{pid}/document")
+        assert document.status_code==200
+        assert client.get(f"/api/projects/{pid}/interpreted").json()=={}

@@ -18,5 +18,11 @@
   "heldout_pipeline_commit": "53ea799a68d1b3061ef28fef49bba85fe54eb31d",
   "heldout_runs": 1,
   "heldout_hosted_calls": 0,
-  "heldout_source_labels_unchanged_from": "ad7742ce"
+  "heldout_source_labels_unchanged_from": "ad7742ce",
+  "post_run_integration_fix": {
+    "scope": "App upload route and its UI callers only. Source upload now splits locally without constructing a legacy/hosted drafting client. Interpreter and held-out runner unchanged.",
+    "targeted_tests_passed": 17,
+    "javascript_syntax": "passed",
+    "full_suite_note": "1177 passing non-slow tests precede this boundary fix; targeted app/grading tests validate the final fix. No second held-out run."
+  }
 }

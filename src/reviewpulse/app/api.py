@@ -210,6 +210,16 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(400, str(e)) from None
         return jobs.submit(pid, "draft", lambda job: service.draft(store, pid, job, llm))
 
+    @app.post("/api/projects/{pid}/assisted/requirements", status_code=202)
+    async def upload_assisted_requirements(pid: str, file: UploadFile = File(...)):
+        p = project(pid)
+        try:
+            store.put_input(p, "requirements", file.filename or "requirements", await read_upload(file))
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+        return jobs.submit(pid, "interpret", lambda job: {"clauses": len(interpretation.document(store, pid)["clauses"]),
+                                                          "status": "SOURCE_READY_NO_MODEL_CALLED"})
+
     @app.post("/api/projects/{pid}/draft", status_code=202)
     def redraft(pid: str):
         p = project(pid)

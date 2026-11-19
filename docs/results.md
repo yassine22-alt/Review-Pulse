@@ -57,6 +57,7 @@ finite and the 25% scale bound provisional. The expert queue is not a finished
 nontechnical rule builder. [Product](assisted-product.md),
 [review protocol](assisted-review-workflow.md), [five-minute script](assisted-demo-5min.md).
 
-Validation: **1,177 passed, 2 skipped; 45 slow excluded**. Changed Python files
+Validation: **1,177 passed, 2 skipped; 45 slow excluded** before the final upload
+integration fix; **17 targeted app/grading tests passed afterward**. Changed Python files
 pass Ruff; app JavaScript passes syntax checking. API tests exercise timed edits,
 stale drafts and approval; no teammate session or full browser test is claimed.

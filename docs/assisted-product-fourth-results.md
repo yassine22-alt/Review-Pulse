@@ -3,8 +3,8 @@
 Criteria committed **de33375f** before source review; code/model contract frozen
 **53ea799a68d1b3061ef28fef49bba85fe54eb31d**. Scope annotation committed
 **d1469b61**, after code freeze and before execution. Original source and manual
-interpretation labels remain byte-identical to their original freeze. No code,
-prompt, vocabulary or catalogue changes after viewing the held-out clauses;
+interpretation labels remain byte-identical to their original freeze. No inference-core,
+prompt, vocabulary or catalogue changes between freeze and execution;
 no inference rerun. The four original historical held-out declarations in label
 files are historical metadata, not the current opened/unopened status.
 
@@ -41,3 +41,7 @@ sample. No additional held-out material remains sealed under this fourth-documen
 protocol: it has now been opened and run once. Do not tune on it or present later
 results on it as a fresh held-out test. The general-interpreter claim remains
 unsupported, and a zero-decision run must not be described as safe.
+
+After the recorded run, an app-only upload integration fix removed the old
+automatic drafter from assisted uploads. It does not alter the frozen
+interpreter or held-out runner. No held-out inference was repeated.

@@ -2,7 +2,8 @@
 
 Run the app with `rp serve --port 8081` from the repository virtual environment.
 Upload/analyse a plan and a development requirements document, then open the Requirements tab
-and its source-document review panel. Read individual clauses or read all;
+and its source-document review panel. Assisted uploads store/split the source without calling a model.
+Read individual clauses or read all;
 these UI actions use `/assisted/interpret`, not archived expression drafting.
 Do not include the fourth document in development reviewer sessions.
 
