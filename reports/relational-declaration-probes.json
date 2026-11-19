@@ -1,0 +1,13 @@
+{
+  "cases": [
+    "M04",
+    "M05",
+    "M06"
+  ],
+  "purpose": "Development probes for typed meaning declarations, not full source-clause decision coverage. Model sees original source context only.",
+  "requested_unit": "m",
+  "evidence": "No measured plan value is supplied; declarations remain missing evidence.",
+  "legacy_wrong_fact_bindings": 4,
+  "legacy_drafts_reviewed": 6,
+  "grading_basis": "Two M04 distance substitutions and two M06 travel/discharge substitutions from the prior six assistant-adjudicated drafts. M05 also has structural/conversion errors, not merely a fact rename."
+}

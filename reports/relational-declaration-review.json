@@ -1,0 +1,346 @@
+{
+  "date": "2026-11-19",
+  "model": "openai/gpt-oss-120b",
+  "model_proposals_completed": [
+    3,
+    3
+  ],
+  "typed_unit_span_valid": [
+    2,
+    3
+  ],
+  "assistant_source_correct_model_meanings": [
+    0,
+    3
+  ],
+  "source_wrong_among_typed_valid": [
+    2,
+    2
+  ],
+  "confirmed_without_edits": [
+    0,
+    3
+  ],
+  "wrong_existing_bindings_avoided_automatically": [
+    0,
+    4
+  ],
+  "legacy_wrong_fact_bindings": 4,
+  "after_assistant_replacement": "All four observed wrong existing-fact uses can be replaced by these reviewed measurement meanings; no full regulatory verdict is established. This is not automated accuracy improvement.",
+  "meaning_reviewed_missing_evidence": [
+    3,
+    3
+  ],
+  "full_rules_decided": [
+    0,
+    3
+  ],
+  "rows": [
+    {
+      "id": "M04",
+      "raw_proposal": {
+        "name": "max_exit_distance",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "m",
+        "definition": "Maximum permitted distance between a public-access exit opening onto a cul-de-sac and the cul-de-sac's outlet.",
+        "source": {
+          "clause": "m0",
+          "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+        }
+      },
+      "assistant_source_grade": "wrong",
+      "typed_gate_passed": true,
+      "review_reason": "M05 counts circulations instead of measuring width. M04/M06 describe a permitted maximum rather than an observed measurement, and bind to exits instead of the measured door/stair. Unit and span correctness do not establish meaning.",
+      "reviewer": "Codex assistant, not independent human",
+      "confirmed_meaning": {
+        "kind": "number",
+        "unit": "m",
+        "name": "observed_dead_end_door_distance",
+        "entity": "reviewed_public_dead_end_doors",
+        "definition": "Measured walking distance from each public-room door on a dead-end corridor to the junction ending that dead end. This is an observed distance, not the regulatory maximum.",
+        "source": {
+          "clause": "M04",
+          "start": 0,
+          "end": 150,
+          "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+        },
+        "status": "declared"
+      },
+      "edits": [
+        {
+          "operation": "rename_fact",
+          "site": "name"
+        },
+        {
+          "operation": "bind_entity",
+          "site": "measurement_owner"
+        },
+        {
+          "operation": "replace_requirement",
+          "site": "definition_observation_vs_limit"
+        }
+      ],
+      "ledger_after_meaning_review": {
+        "bindings": {
+          "observed_dead_end_door_distance": {
+            "kind": "number",
+            "unit": "m",
+            "description": "Measured walking distance from each public-room door on a dead-end corridor to the junction ending that dead end. This is an observed distance, not the regulatory maximum.",
+            "declaration": {
+              "kind": "number",
+              "unit": "m",
+              "name": "observed_dead_end_door_distance",
+              "entity": "reviewed_public_dead_end_doors",
+              "definition": "Measured walking distance from each public-room door on a dead-end corridor to the junction ending that dead end. This is an observed distance, not the regulatory maximum.",
+              "source": {
+                "clause": "M04",
+                "start": 0,
+                "end": 150,
+                "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+              },
+              "status": "declared"
+            }
+          }
+        },
+        "facts": {
+          "probe": {
+            "observed_dead_end_door_distance": {
+              "value": null,
+              "source": "Declared; needs reviewer evidence",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "reviewed_public_dead_end_doors": {
+            "items": [
+              "probe"
+            ],
+            "complete": false,
+            "trusted": false
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {
+          "observed_dead_end_door_distance": "Reviewer evidence for M04: Measured walking distance from each public-room door on a dead-end corridor to the junction ending that dead end. This is an observed distance, not the regulatory maximum."
+        },
+        "project_metadata": {}
+      },
+      "physical_value_present": false,
+      "regulatory_verdict": "UNRESOLVED",
+      "full_rule_complete": false,
+      "remaining_blocker": "Quantified inventory and relational applicability must be composed and reviewed; actual evidence is absent. M05 also needs passage-unit interpretation; M06 retains its direct-outdoors alternative."
+    },
+    {
+      "id": "M05",
+      "raw_proposal": {
+        "name": "min_horizontal_circulations",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "1",
+        "definition": "Minimum number of horizontal circulations of at least two passage units that must connect the exits on the ground floor.",
+        "source": {
+          "clause": "m0",
+          "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+        }
+      },
+      "assistant_source_grade": "wrong",
+      "typed_gate_passed": false,
+      "review_reason": "M05 counts circulations instead of measuring width. M04/M06 describe a permitted maximum rather than an observed measurement, and bind to exits instead of the measured door/stair. Unit and span correctness do not establish meaning.",
+      "reviewer": "Codex assistant, not independent human",
+      "confirmed_meaning": {
+        "kind": "number",
+        "unit": "m",
+        "name": "observed_connector_clear_width",
+        "entity": "reviewed_horizontal_connectors",
+        "definition": "Measured minimum clear width along each ground-floor horizontal connector between stairs and exits or between exits. Passage-unit interpretation remains a separate requirement.",
+        "source": {
+          "clause": "M05",
+          "start": 433,
+          "end": 607,
+          "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+        },
+        "status": "declared"
+      },
+      "edits": [
+        {
+          "operation": "rename_fact",
+          "site": "name"
+        },
+        {
+          "operation": "bind_entity",
+          "site": "measurement_owner"
+        },
+        {
+          "operation": "replace_requirement",
+          "site": "definition_observation_vs_limit"
+        },
+        {
+          "operation": "add_unit",
+          "site": "length_unit"
+        }
+      ],
+      "ledger_after_meaning_review": {
+        "bindings": {
+          "observed_connector_clear_width": {
+            "kind": "number",
+            "unit": "m",
+            "description": "Measured minimum clear width along each ground-floor horizontal connector between stairs and exits or between exits. Passage-unit interpretation remains a separate requirement.",
+            "declaration": {
+              "kind": "number",
+              "unit": "m",
+              "name": "observed_connector_clear_width",
+              "entity": "reviewed_horizontal_connectors",
+              "definition": "Measured minimum clear width along each ground-floor horizontal connector between stairs and exits or between exits. Passage-unit interpretation remains a separate requirement.",
+              "source": {
+                "clause": "M05",
+                "start": 433,
+                "end": 607,
+                "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+              },
+              "status": "declared"
+            }
+          }
+        },
+        "facts": {
+          "probe": {
+            "observed_connector_clear_width": {
+              "value": null,
+              "source": "Declared; needs reviewer evidence",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "reviewed_horizontal_connectors": {
+            "items": [
+              "probe"
+            ],
+            "complete": false,
+            "trusted": false
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {
+          "observed_connector_clear_width": "Reviewer evidence for M05: Measured minimum clear width along each ground-floor horizontal connector between stairs and exits or between exits. Passage-unit interpretation remains a separate requirement."
+        },
+        "project_metadata": {}
+      },
+      "physical_value_present": false,
+      "regulatory_verdict": "UNRESOLVED",
+      "full_rule_complete": false,
+      "remaining_blocker": "Quantified inventory and relational applicability must be composed and reviewed; actual evidence is absent. M05 also needs passage-unit interpretation; M06 retains its direct-outdoors alternative."
+    },
+    {
+      "id": "M06",
+      "raw_proposal": {
+        "name": "max_distance_staircase_exit",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "m",
+        "definition": "Maximum allowed distance from a protected staircase to an exit.",
+        "source": {
+          "clause": "m0",
+          "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+        }
+      },
+      "assistant_source_grade": "wrong",
+      "typed_gate_passed": true,
+      "review_reason": "M05 counts circulations instead of measuring width. M04/M06 describe a permitted maximum rather than an observed measurement, and bind to exits instead of the measured door/stair. Unit and span correctness do not establish meaning.",
+      "reviewer": "Codex assistant, not independent human",
+      "confirmed_meaning": {
+        "kind": "number",
+        "unit": "m",
+        "name": "observed_stair_discharge_distance",
+        "entity": "reviewed_protected_stairs",
+        "definition": "Measured route distance from each protected stair termination to a qualifying exit. The direct-outdoors alternative remains separate and is not silently dropped.",
+        "source": {
+          "clause": "M06",
+          "start": 0,
+          "end": 112,
+          "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+        },
+        "status": "declared"
+      },
+      "edits": [
+        {
+          "operation": "rename_fact",
+          "site": "name"
+        },
+        {
+          "operation": "bind_entity",
+          "site": "measurement_owner"
+        },
+        {
+          "operation": "replace_requirement",
+          "site": "definition_observation_vs_limit"
+        }
+      ],
+      "ledger_after_meaning_review": {
+        "bindings": {
+          "observed_stair_discharge_distance": {
+            "kind": "number",
+            "unit": "m",
+            "description": "Measured route distance from each protected stair termination to a qualifying exit. The direct-outdoors alternative remains separate and is not silently dropped.",
+            "declaration": {
+              "kind": "number",
+              "unit": "m",
+              "name": "observed_stair_discharge_distance",
+              "entity": "reviewed_protected_stairs",
+              "definition": "Measured route distance from each protected stair termination to a qualifying exit. The direct-outdoors alternative remains separate and is not silently dropped.",
+              "source": {
+                "clause": "M06",
+                "start": 0,
+                "end": 112,
+                "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+              },
+              "status": "declared"
+            }
+          }
+        },
+        "facts": {
+          "probe": {
+            "observed_stair_discharge_distance": {
+              "value": null,
+              "source": "Declared; needs reviewer evidence",
+              "trusted": false,
+              "conflicting": false,
+              "origin": null,
+              "reviewer": null
+            }
+          }
+        },
+        "collections": {
+          "reviewed_protected_stairs": {
+            "items": [
+              "probe"
+            ],
+            "complete": false,
+            "trusted": false
+          }
+        },
+        "graph_complete": false,
+        "evidence_locations": {
+          "observed_stair_discharge_distance": "Reviewer evidence for M06: Measured route distance from each protected stair termination to a qualifying exit. The direct-outdoors alternative remains separate and is not silently dropped."
+        },
+        "project_metadata": {}
+      },
+      "physical_value_present": false,
+      "regulatory_verdict": "UNRESOLVED",
+      "full_rule_complete": false,
+      "remaining_blocker": "Quantified inventory and relational applicability must be composed and reviewed; actual evidence is absent. M05 also needs passage-unit interpretation; M06 retains its direct-outdoors alternative."
+    }
+  ],
+  "limits": [
+    "Synthetic ledger entity probes, no real-plan evidence or independent human review.",
+    "Typed declaration validity is not semantic correctness. The assistant rejected all three raw meanings.",
+    "No new plan computations or rule families were implemented."
+  ]
+}

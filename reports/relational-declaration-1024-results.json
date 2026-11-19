@@ -1,0 +1,199 @@
+{
+  "manifest": {
+    "cases": [
+      "M04",
+      "M05",
+      "M06"
+    ],
+    "purpose": "Development probes for typed meaning declarations, not full source-clause decision coverage. Model sees original source context only.",
+    "requested_unit": "m",
+    "evidence": "No measured plan value is supplied; declarations remain missing evidence.",
+    "legacy_wrong_fact_bindings": 4,
+    "legacy_drafts_reviewed": 6,
+    "grading_basis": "Two M04 distance substitutions and two M06 travel/discharge substitutions from the prior six assistant-adjudicated drafts. M05 also has structural/conversion errors, not merely a fact rename."
+  },
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "M04",
+      "source": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac.",
+      "status": "TYPED_DECLARATION_VALIDATED_AWAITING_REVIEW",
+      "regulatory_verdict": "UNRESOLVED",
+      "normative_rule_complete": false,
+      "evidence_requests": [
+        {
+          "fact": "max_exit_distance",
+          "entity": "exits",
+          "unit": "m",
+          "reason": "missing",
+          "why": "Maximum permitted distance between a public-access exit opening onto a cul-de-sac and the cul-de-sac's outlet.",
+          "source": {
+            "clause": "M04",
+            "start": 0,
+            "end": 150,
+            "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+          }
+        }
+      ],
+      "approved": false,
+      "raw": {
+        "name": "max_exit_distance",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "m",
+        "definition": "Maximum permitted distance between a public-access exit opening onto a cul-de-sac and the cul-de-sac's outlet.",
+        "source": {
+          "clause": "m0",
+          "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+        }
+      },
+      "usage": {
+        "prompt_tokens": 374,
+        "completion_tokens": 562,
+        "seconds": 1.88,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      },
+      "declaration": {
+        "kind": "number",
+        "unit": "m",
+        "name": "max_exit_distance",
+        "entity": "exits",
+        "definition": "Maximum permitted distance between a public-access exit opening onto a cul-de-sac and the cul-de-sac's outlet.",
+        "source": {
+          "clause": "M04",
+          "start": 0,
+          "end": 150,
+          "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+        },
+        "status": "declared"
+      },
+      "ledger_missing_values": true
+    },
+    {
+      "id": "M05",
+      "source": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m. Toutefois, quand un dégagement ne comporte qu'une ou deux unités de passage, la largeur est respectivement portée de 0,60 m à 0,90 m et de 1,20 m à 1,40 m.\n\nLes sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes.\n\nDes circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles.",
+      "status": "NEEDS_REVIEW",
+      "regulatory_verdict": "UNRESOLVED",
+      "normative_rule_complete": false,
+      "evidence_requests": [],
+      "approved": false,
+      "raw": {
+        "name": "min_horizontal_circulations",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "1",
+        "definition": "Minimum number of horizontal circulations of at least two passage units that must connect the exits on the ground floor.",
+        "source": {
+          "clause": "m0",
+          "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+        }
+      },
+      "usage": {
+        "prompt_tokens": 506,
+        "completion_tokens": 417,
+        "seconds": 5.43,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      },
+      "reason": "declaration must preserve the requested source header and physical dimension"
+    },
+    {
+      "id": "M06",
+      "source": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie.",
+      "status": "TYPED_DECLARATION_VALIDATED_AWAITING_REVIEW",
+      "regulatory_verdict": "UNRESOLVED",
+      "normative_rule_complete": false,
+      "evidence_requests": [
+        {
+          "fact": "max_distance_staircase_exit",
+          "entity": "exits",
+          "unit": "m",
+          "reason": "missing",
+          "why": "Maximum allowed distance from a protected staircase to an exit.",
+          "source": {
+            "clause": "M06",
+            "start": 0,
+            "end": 112,
+            "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+          }
+        }
+      ],
+      "approved": false,
+      "raw": {
+        "name": "max_distance_staircase_exit",
+        "entity": "exits",
+        "kind": "number",
+        "unit": "m",
+        "definition": "Maximum allowed distance from a protected staircase to an exit.",
+        "source": {
+          "clause": "m0",
+          "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+        }
+      },
+      "usage": {
+        "prompt_tokens": 362,
+        "completion_tokens": 474,
+        "seconds": 5.81,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      },
+      "declaration": {
+        "kind": "number",
+        "unit": "m",
+        "name": "max_distance_staircase_exit",
+        "entity": "exits",
+        "definition": "Maximum allowed distance from a protected staircase to an exit.",
+        "source": {
+          "clause": "M06",
+          "start": 0,
+          "end": 112,
+          "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+        },
+        "status": "declared"
+      },
+      "ledger_missing_values": true
+    }
+  ],
+  "http_events": [
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "7359",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "4.807s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "6797",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "9.022s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "7082",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "6.885s"
+      }
+    }
+  ]
+}
