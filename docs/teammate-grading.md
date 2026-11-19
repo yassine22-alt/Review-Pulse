@@ -7,3 +7,8 @@ Leave source and model output unchanged. Fill subject_grade, fact_grade, operato
 No assistant grades or automated suggested answers appear in the sheet. Return the edited CSV. The agreement script then reports exact counts, disagreements and nominal Cohen kappa, excluding cannot_grade and cells where both raters mark not_applicable. Blank cells are pending, never agreement. This is a purposeful ten-row sample, not an independent validation of the whole interpreter.
 
 After return: `python scripts/grade_blind_sample.py <returned.csv> reports/blind-grading-key.json reports/independent-grading-agreement.json`.
+
+The CSV now embeds a per-column correct / partly-correct / wrong rubric in
+`instructions_and_rubric`. Read it before filling grades. The script accepts
+`partly correct` as well as `partly_correct` and reports per-slot agreement
+with explicit denominators. No arm or assistant grade is embedded.

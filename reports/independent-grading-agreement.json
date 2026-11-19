@@ -301,5 +301,49 @@
     ]
   ],
   "disagreements": [],
+  "per_slot_agreement": {
+    "subject": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    },
+    "fact": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    },
+    "operator": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    },
+    "value": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    },
+    "unit": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    },
+    "scope": {
+      "exact": [
+        0,
+        0
+      ],
+      "kappa": null
+    }
+  },
   "limits": "Small purposeful sample. Both not_applicable and cannot_grade excluded. Nominal kappa, no independence or accuracy claim."
 }

@@ -26,13 +26,14 @@ def grade_sheet(path, key):
     if len(rows) != len(expected) or {row["blind_id"] for row in rows} != set(expected):
         raise ValueError("returned sheet must contain each frozen blind ID exactly once")
     pairs, whole, pending, disagreements = [], [], [], []
+    per_slot = {slot: [] for slot in SLOTS}
     for row in rows:
         reference = expected[row["blind_id"]]
         if any(row[column].replace("\r\n", "\n").replace("\r", "\n") != reference[key].replace("\r\n", "\n").replace("\r", "\n")
                for column, key in (("source_clause", "source"), ("model_output", "model_output"))):
             raise ValueError("source or draft changed; review the sheet identity before grading")
         for slot in (*SLOTS, "whole_rule"):
-            value = row[slot + "_grade"].strip().lower()
+            value = "_".join(row[slot + "_grade"].strip().lower().split())
             if not value:
                 pending.append([row["blind_id"], slot])
                 continue
@@ -42,12 +43,15 @@ def grade_sheet(path, key):
             if value == "cannot_grade" or assistant == value == "not_applicable":
                 continue
             (whole if slot == "whole_rule" else pairs).append((assistant, value))
+            if slot != "whole_rule":
+                per_slot[slot].append((assistant, value))
             if assistant != value:
                 disagreements.append({"blind_id": row["blind_id"], "slot": slot, "assistant": assistant,
                                       "teammate": value, "notes": row.get("notes", "")})
     return {"status": "PENDING_INDEPENDENT_GRADES" if pending else "RETURNED_GRADES_COMPARED",
             "completed_cells": [len(rows) * 7 - len(pending), len(rows) * 7], "slot_agreement": agreement(pairs),
             "whole_rule_agreement": agreement(whole), "pending": pending, "disagreements": disagreements,
+            "per_slot_agreement": {slot: agreement(values) for slot, values in per_slot.items()},
             "limits": "Small purposeful sample. Both not_applicable and cannot_grade excluded. Nominal kappa, no independence or accuracy claim."}
 
 
