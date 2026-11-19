@@ -22,3 +22,13 @@ missing measurements. The fourth document stays sealed and unrun.
 The narrow table helper can be used as an assisted development tool; this is
 not selection of a general interpreter or permission to unseal the test.
 See [recorded decision](../reports/assisted-pipeline-choice.json).
+
+## Later assisted-product instruction
+
+The earlier no-selection/seal decision above describes the general-pipeline
+experiment. The user subsequently authorized a separate assisted-product
+criterion and one fourth-document run. It used code freeze `53ea799a` and
+criteria `de33375f`, not a claimed general winner. That run produced no
+candidates; [full limitations and counts](assisted-product-fourth-results.md).
+The fourth document is now opened/run once and must not be reused as fresh
+held-out material. No general pipeline was selected.

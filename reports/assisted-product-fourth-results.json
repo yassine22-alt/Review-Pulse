@@ -1,0 +1,1410 @@
+{
+  "pipeline_commit": "53ea799a68d1b3061ef28fef49bba85fe54eb31d",
+  "status": "COMPLETED",
+  "source_document": "Morocco RPS 2000 version 2011, annex to Decree 2-12-682",
+  "publication": "Bulletin Officiel no. 6206, French official translation, 21 November 2013",
+  "source_url": "https://aute.gov.ma/s/a/library/2023-11-01/cbea8546-d41b-4d12-968b-e5450ce7e7bb.pdf",
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "S01",
+      "source": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [
+              {
+                "id": "m0",
+                "header": {
+                  "clause": "S01",
+                  "start": 9140,
+                  "end": 9576,
+                  "quote": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage."
+                },
+                "source": {
+                  "clause": "S01",
+                  "start": 9140,
+                  "end": 9576,
+                  "quote": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage."
+                },
+                "value": 120.0,
+                "unit": "m",
+                "operator": null,
+                "unit_source": "source_sentence"
+              }
+            ],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S01",
+                  "start": 9140,
+                  "end": 9576,
+                  "quote": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S01",
+                  "start": 9140,
+                  "end": 9576,
+                  "quote": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage."
+                },
+                "result": {
+                  "normalized_source": "a) En présence d’une faille, les ouvrages de classe I et de classe II doivent être implantés en dehors d’une bande de 120 m au minimum de part et d’autre de la faille et faire l’objet d’un niveau de protection une fois et demi plus élevé. Toute construction de bâtiments de classe III (bâtiments ordinaires) ne peut être réalisée au voisinage des failles actives qu’après une étude spéciale du site qui définit les limites du voisinage.",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 120.0,
+                      "unit": "m",
+                      "operator": null,
+                      "normalized_span": [
+                        118,
+                        123
+                      ],
+                      "quote": "120 m",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Fault present and class I/II requires distance at least 120 m AND protection at least 1.5 times. Class III near an active fault needs the special site study.",
+      "frozen_applicability": [
+        "fault_present",
+        "building_class",
+        "near_active_fault"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Distance and protection conjunction plus class and fault applicability and specialist site study."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S02",
+      "source": "b) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S02",
+                  "start": 9140,
+                  "end": 9396,
+                  "quote": "b) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S02",
+                  "start": 9140,
+                  "end": 9396,
+                  "quote": "b) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement."
+                },
+                "result": {
+                  "normalized_source": "b) Les études du sol du site des fondations sont obligatoires et conduites de la même manière que dans le cas des situations non sismiques. Elles doivent notamment permettre le classement du site par rapport aux différents types prescrits par le règlement.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Foundation site requires a soil study that permits the prescribed site classification.",
+      "frozen_applicability": [
+        "covered_by_rps",
+        "foundation_site"
+      ],
+      "reference_scope": {
+        "family": "qualitative/unsupported",
+        "in_scope": false,
+        "reason": "Soil study and site classification obligation; no scalar predicate."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S03",
+      "source": "d) Dans les sites à risques, tels les talus naturels ou artificiels, ou les sols liquéfiables, les constructions ne sont autorisées que si des mesures pour limiter les risques sont prises.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S03",
+                  "start": 9140,
+                  "end": 9328,
+                  "quote": "d) Dans les sites à risques, tels les talus naturels ou artificiels, ou les sols liquéfiables, les constructions ne sont autorisées que si des mesures pour limiter les risques sont prises."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S03",
+                  "start": 9140,
+                  "end": 9328,
+                  "quote": "d) Dans les sites à risques, tels les talus naturels ou artificiels, ou les sols liquéfiables, les constructions ne sont autorisées que si des mesures pour limiter les risques sont prises."
+                },
+                "result": {
+                  "normalized_source": "d) Dans les sites à risques, tels les talus naturels ou artificiels, ou les sols liquéfiables, les constructions ne sont autorisées que si des mesures pour limiter les risques sont prises.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Construction on a risk site is allowed only with risk-limiting measures. The adequacy of the measures requires specialist evidence.",
+      "frozen_applicability": [
+        "risk_site"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Risk-site permission requires specialist measures."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S04",
+      "source": "b) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S04",
+                  "start": 9140,
+                  "end": 9369,
+                  "quote": "b) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S04",
+                  "start": 9140,
+                  "end": 9369,
+                  "quote": "b) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens."
+                },
+                "result": {
+                  "normalized_source": "b) Pour chacun des blocs constituant l’ouvrage, la fondation doit être homogène et rigide tels que les radiers, les semelles filantes croisées dans les deux sens et les semelles isolées liées par des longrines dans les deux sens.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Each building block has a homogeneous AND rigid foundation. Listed foundation types are examples.",
+      "frozen_applicability": [
+        "covered_by_rps",
+        "building_blocks"
+      ],
+      "reference_scope": {
+        "family": "qualitative/unsupported",
+        "in_scope": false,
+        "reason": "Homogeneous and rigid foundations for each block."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S05",
+      "source": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [
+              {
+                "id": "m0",
+                "header": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                },
+                "source": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                },
+                "value": 2601.0,
+                "unit": "1",
+                "operator": null,
+                "unit_source": "source_sentence",
+                "ratio_terms": [
+                  2601.0,
+                  1
+                ]
+              }
+            ],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "additional_quantity_outside_ratio",
+                "source": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                }
+              },
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                },
+                "result": {
+                  "normalized_source": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises N° 6206 – 17 moharrem 1435 (21-11-2013) BULLETIN OFFICIEL 2601 par un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité.",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 6206.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        91,
+                        95
+                      ],
+                      "quote": "6206",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q1",
+                      "value": 17.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        98,
+                        100
+                      ],
+                      "quote": "17",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q2",
+                      "value": 1435.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        110,
+                        114
+                      ],
+                      "quote": "1435",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q3",
+                      "value": 21.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        116,
+                        118
+                      ],
+                      "quote": "21",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q4",
+                      "value": 11.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        119,
+                        121
+                      ],
+                      "quote": "11",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q5",
+                      "value": 2013.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        122,
+                        126
+                      ],
+                      "quote": "2013",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q6",
+                      "value": 2601.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        146,
+                        150
+                      ],
+                      "quote": "2601",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "operation": "explicit_ratio",
+                "source": {
+                  "clause": "S05",
+                  "start": 9140,
+                  "end": 9568,
+                  "quote": "d) Les points d’appuis de chacun des blocs composant l’ouvrage doivent être solidarises\n\nN° 6206 – 17 moharrem 1435 (21-11-2013)\nBULLETIN OFFICIEL\n2601\npar un réseau bidimensionnel de longrines ou tout autre système équivalent tendant à s’opposer à leur déplacement relatif dans le plan horizontal. Cette solidarisation n’est pas exigée si les semelles sont convenablement ancrées dans un sol rocheux non fracturé et non délité."
+                },
+                "result": {
+                  "value": 2601.0,
+                  "unit": "1",
+                  "operator": null,
+                  "ratio_terms": [
+                    2601.0,
+                    1
+                  ],
+                  "quote": "2601\npar un",
+                  "span": [
+                    147,
+                    158
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Tie each block's supports with a bidirectional tie-beam network or equivalent system. Exemption requires suitable anchorage in unfractured and unweathered rock.",
+      "frozen_applicability": [
+        "block_supports",
+        "suitable_rock_anchorage",
+        "rock_fractured",
+        "rock_weathered"
+      ],
+      "reference_scope": {
+        "family": "relational",
+        "in_scope": false,
+        "reason": "Tie network/equivalence plus rock-anchorage exception."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S06",
+      "source": "g) Dans le cas des fondations en pieux, ces derniers doivent être entretoisés dans au moins deux directions pour reprendre les efforts horizontaux appliqués au niveau du chevêtre des pieux sauf s’il est démontré que des moyens de retenue des pieux équivalents sont en place.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S06",
+                  "start": 9140,
+                  "end": 9414,
+                  "quote": "g) Dans le cas des fondations en pieux, ces derniers doivent être entretoisés dans au moins deux directions pour reprendre les efforts horizontaux appliqués au niveau du chevêtre des pieux sauf s’il est démontré que des moyens de retenue des pieux équivalents sont en place."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S06",
+                  "start": 9140,
+                  "end": 9414,
+                  "quote": "g) Dans le cas des fondations en pieux, ces derniers doivent être entretoisés dans au moins deux directions pour reprendre les efforts horizontaux appliqués au niveau du chevêtre des pieux sauf s’il est démontré que des moyens de retenue des pieux équivalents sont en place."
+                },
+                "result": {
+                  "normalized_source": "g) Dans le cas des fondations en pieux, ces derniers doivent être entretoisés dans au moins deux directions pour reprendre les efforts horizontaux appliqués au niveau du chevêtre des pieux sauf s’il est démontré que des moyens de retenue des pieux équivalents sont en place.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Pile foundations need bracing in at least two directions unless equivalent restraint is demonstrated.",
+      "frozen_applicability": [
+        "foundation_type",
+        "equivalent_restraint_demonstrated"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Pile bracing directions with equivalent-restraint exception."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S07",
+      "source": "Dans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. (Figure 4.2)",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S07",
+                  "start": 9140,
+                  "end": 9344,
+                  "quote": "Dans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. (Figure 4.2)"
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S07",
+                  "start": 9140,
+                  "end": 9344,
+                  "quote": "Dans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. (Figure 4.2)"
+                },
+                "result": {
+                  "normalized_source": "Dans le cas de blocs de bâtiments avec configuration en plan peu ordinaire, telle que la forme en H, L, T, U, Z, il faut utiliser des joint sismiques pour simplifier la forme de la structure. ( )",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Unusual plan configuration needs seismic joints to simplify the structure. Shape identification must be established from the project.",
+      "frozen_applicability": [
+        "unusual_plan_configuration"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Plan configuration triggers joints and structural simplification."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S08",
+      "source": "Il faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés (Figure 4.3 et 4.4)",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S08",
+                  "start": 9140,
+                  "end": 9297,
+                  "quote": "Il faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés (Figure 4.3 et 4.4)"
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S08",
+                  "start": 9140,
+                  "end": 9297,
+                  "quote": "Il faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés (Figure 4.3 et 4.4)"
+                },
+                "result": {
+                  "normalized_source": "Il faut séparer par des joints les bâtiments de hauteurs et de masses très différentes (écart supérieur à 15%) ; ou de niveaux intercalés ( et 4.4)",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 15.0,
+                      "unit": "%",
+                      "operator": "gt",
+                      "normalized_span": [
+                        106,
+                        109
+                      ],
+                      "quote": "15%",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q1",
+                      "value": 4.4,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        143,
+                        146
+                      ],
+                      "quote": "4.4",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Interlaced levels require joints. Both height and mass differences over 15% establish the other stated case. The text leaves the AND/OR treatment of a single large difference ambiguous, requiring review.",
+      "frozen_applicability": [
+        "interlaced_levels",
+        "relative_height_difference",
+        "relative_mass_difference"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Height/mass differences and interlaced-level alternative; known scope ambiguity."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S09",
+      "source": "a) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un\n\n2602  BULLETIN OFFICIEL  N° 6206 – 17 moharrem 1435 (21-11-2013)\n\nbloc à l’autre. (Figure 4.3).",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S09",
+                  "start": 9140,
+                  "end": 9435,
+                  "quote": "a) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un\n\n2602  BULLETIN OFFICIEL  N° 6206 – 17 moharrem 1435 (21-11-2013)\n\nbloc à l’autre. (Figure 4.3)."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S09",
+                  "start": 9140,
+                  "end": 9435,
+                  "quote": "a) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un\n\n2602  BULLETIN OFFICIEL  N° 6206 – 17 moharrem 1435 (21-11-2013)\n\nbloc à l’autre. (Figure 4.3)."
+                },
+                "result": {
+                  "normalized_source": "a) Le joint de séparation entre deux blocs adjacents doit assurer le libre déplacement des blocs sans contact préjudiciable. Son matériau de remplissage ne doit pas pouvoir transmettre l’effort d’un 2602 BULLETIN OFFICIEL N° 6206 – 17 moharrem 1435 (21-11-2013) bloc à l’autre. ( ).",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 2602.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        199,
+                        203
+                      ],
+                      "quote": "2602",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q1",
+                      "value": 6206.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        225,
+                        229
+                      ],
+                      "quote": "6206",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q2",
+                      "value": 17.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        232,
+                        234
+                      ],
+                      "quote": "17",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q3",
+                      "value": 1435.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        244,
+                        248
+                      ],
+                      "quote": "1435",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q4",
+                      "value": 21.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        250,
+                        252
+                      ],
+                      "quote": "21",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q5",
+                      "value": 11.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        253,
+                        255
+                      ],
+                      "quote": "11",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q6",
+                      "value": 2013.0,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        256,
+                        260
+                      ],
+                      "quote": "2013",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Adjacent-block separation joints allow movement without harmful contact AND their filler cannot transfer force between blocks.",
+      "frozen_applicability": [
+        "adjacent_blocks"
+      ],
+      "reference_scope": {
+        "family": "relational",
+        "in_scope": false,
+        "reason": "Movement/contact and force transfer between blocks."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S10",
+      "source": "b) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S10",
+                  "start": 9140,
+                  "end": 9305,
+                  "quote": "b) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S10",
+                  "start": 9140,
+                  "end": 9305,
+                  "quote": "b) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion."
+                },
+                "result": {
+                  "normalized_source": "b) La largeur du joint entre deux structures ne doit pas être inférieure à la somme de leurs déformations latérales respectives incluant les déformations de torsion.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Joint width is at least the sum of both lateral deformations, including torsion.",
+      "frozen_applicability": [
+        "two_structures",
+        "lateral_deformation_including_torsion"
+      ],
+      "reference_scope": {
+        "family": "relational",
+        "in_scope": false,
+        "reason": "Joint width versus sum of two deformation measurements, including torsion."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S11",
+      "source": "c) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S11",
+                  "start": 9140,
+                  "end": 9352,
+                  "quote": "c) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S11",
+                  "start": 9140,
+                  "end": 9352,
+                  "quote": "c) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier."
+                },
+                "result": {
+                  "normalized_source": "c) À défaut de justification la largeur du joint entre deux blocs sera supérieure à a×H₂ ; avec H₂ la hauteur du bloc le moins élevé, a = 0.003 pour les structures en béton a = 0.005 pour les structures en acier.",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 0.003,
+                      "unit": null,
+                      "operator": "eq",
+                      "normalized_span": [
+                        138,
+                        143
+                      ],
+                      "quote": "0.003",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q1",
+                      "value": 0.005,
+                      "unit": null,
+                      "operator": "eq",
+                      "normalized_span": [
+                        177,
+                        182
+                      ],
+                      "quote": "0.005",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Without a justification, joint width must be strictly above a times the shorter block height. a is 0.003 for concrete and 0.005 for steel.",
+      "frozen_applicability": [
+        "justification_available",
+        "structure_material",
+        "shorter_block_height"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Material-dependent multiplier and shorter-height product with justification exception."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S12",
+      "source": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [
+              {
+                "id": "m0",
+                "header": {
+                  "clause": "S12",
+                  "start": 9140,
+                  "end": 9212,
+                  "quote": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm."
+                },
+                "source": {
+                  "clause": "S12",
+                  "start": 9140,
+                  "end": 9212,
+                  "quote": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm."
+                },
+                "value": 50.0,
+                "unit": "mm",
+                "operator": "ge",
+                "unit_source": "source_sentence"
+              }
+            ],
+            "metadata_applicability": [],
+            "blockers": [],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S12",
+                  "start": 9140,
+                  "end": 9212,
+                  "quote": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm."
+                },
+                "result": {
+                  "normalized_source": "d) La largeur minimale entre joints ne doit pas être inférieure à 50 mm.",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 50.0,
+                      "unit": "mm",
+                      "operator": "ge",
+                      "normalized_span": [
+                        66,
+                        71
+                      ],
+                      "quote": "50 mm",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "The separation joint minimum width is 50 mm inclusive, read within the joint-width section.",
+      "frozen_applicability": [
+        "separation_joint"
+      ],
+      "reference_scope": {
+        "family": "simple numeric",
+        "in_scope": true,
+        "reason": "One inclusive 50 mm minimum joint-width threshold. Parent scope and missing catalogue facts still count as blockers in this denominator."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S13",
+      "source": "e) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux (Figure 4.4), ou être reliés entre eux.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S13",
+                  "start": 9140,
+                  "end": 9303,
+                  "quote": "e) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux (Figure 4.4), ou être reliés entre eux."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S13",
+                  "start": 9140,
+                  "end": 9303,
+                  "quote": "e) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux (Figure 4.4), ou être reliés entre eux."
+                },
+                "result": {
+                  "normalized_source": "e) Si la largeur du joint entre deux bâtiments est insuffisante, ceux ci doivent être rigidifiés, par voiles ou par poteaux ( ), ou être reliés entre eux.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Insufficient joint width requires stiffening by walls or columns, or linking the buildings.",
+      "frozen_applicability": [
+        "joint_width_insufficient"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Insufficient width triggers alternative stiffening or linking remedies."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S14",
+      "source": "d) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S14",
+                  "start": 9140,
+                  "end": 9384,
+                  "quote": "d) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S14",
+                  "start": 9140,
+                  "end": 9384,
+                  "quote": "d) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul."
+                },
+                "result": {
+                  "normalized_source": "d) En l’absence d’interaction entre le système structural et les éléments non structuraux, ces derniers doivent être disposés de telle sorte à ne pas transmettre au système structurel les efforts qui n’ont pas été pris en compte dans le calcul.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Without structural/nonstructural interaction, nonstructural elements must not transfer forces omitted from the structural calculation.",
+      "frozen_applicability": [
+        "structural_nonstructural_interaction"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Interaction absence and unaccounted-force restriction."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S15",
+      "source": "e) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S15",
+                  "start": 9140,
+                  "end": 9392,
+                  "quote": "e) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S15",
+                  "start": 9140,
+                  "end": 9392,
+                  "quote": "e) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments."
+                },
+                "result": {
+                  "normalized_source": "e) Dans le cas d’interaction entre le système structural et des éléments rigides non structuraux, tels que les murs de remplissage, il faut faire en sorte que la résistance du système ne soit pas diminuée par l’action ou la défaillance de ces éléments.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "When rigid nonstructural elements interact, their action or failure must not reduce structural resistance.",
+      "frozen_applicability": [
+        "rigid_nonstructural_interaction"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Interaction condition and structural-resistance obligation."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S16",
+      "source": "6.2.1.2- CONDITIONS D’APPLICATION\nL’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes :\na) Le bâtiment doit être régulier conformément aux critères définis dans l’article 4.3.\nb) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S16",
+                  "start": 9140,
+                  "end": 9470,
+                  "quote": "6.2.1.2- CONDITIONS D’APPLICATION\nL’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes :\na) Le bâtiment doit être régulier conformément aux critères définis dans l’article 4.3.\nb) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S16",
+                  "start": 9140,
+                  "end": 9470,
+                  "quote": "6.2.1.2- CONDITIONS D’APPLICATION\nL’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes :\na) Le bâtiment doit être régulier conformément aux critères définis dans l’article 4.3.\nb) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes."
+                },
+                "result": {
+                  "normalized_source": "6.2.1.2- CONDITIONS D’APPLICATION L’approche statique équivalente, adoptée par le présent règlement, est requise dans les conditions suivantes : a) Le bâtiment doit être régulier conformément aux critères définis dans l’ . b) La hauteur du bâtiment n’excède pas 60 m et sa période fondamentale ne dépasse pas 2 secondes.",
+                  "evidence": [
+                    {
+                      "id": "q0",
+                      "value": 6.2,
+                      "unit": null,
+                      "operator": null,
+                      "normalized_span": [
+                        0,
+                        3
+                      ],
+                      "quote": "6.2",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q1",
+                      "value": 60.0,
+                      "unit": "m",
+                      "operator": null,
+                      "normalized_span": [
+                        262,
+                        266
+                      ],
+                      "quote": "60 m",
+                      "column_header": ""
+                    },
+                    {
+                      "id": "q2",
+                      "value": 2.0,
+                      "unit": "s",
+                      "operator": "gt",
+                      "normalized_span": [
+                        309,
+                        319
+                      ],
+                      "quote": "2 secondes",
+                      "column_header": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Using the equivalent static method requires a regular building, height at most 60 m AND fundamental period at most 2 s. The printed regularity cross-reference is questionable and must remain visible.",
+      "frozen_applicability": [
+        "analysis_method",
+        "regularity",
+        "height",
+        "fundamental_period"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Analysis-method scope, regularity and two thresholds plus cross-reference."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    },
+    {
+      "id": "S17",
+      "source": "Dans le cas des modèles plans, l’analyse doit prendre en compte un minimum de trois modes de vibration (les trois premiers). Dans le cas d’un modèle spatial, il faut prendre en compte les quatre premiers modes au minimum.",
+      "result": {
+        "scope": {
+          "family": "conditional",
+          "in_scope": false,
+          "reason": "Parent/definition context needs explicit reviewer scope binding",
+          "frame": {
+            "kind": "simple_numeric",
+            "measurements": [],
+            "metadata_applicability": [],
+            "blockers": [
+              {
+                "reason": "requires_one_explicit_comparator_quantity_unit",
+                "source": {
+                  "clause": "S17",
+                  "start": 9140,
+                  "end": 9361,
+                  "quote": "Dans le cas des modèles plans, l’analyse doit prendre en compte un minimum de trois modes de vibration (les trois premiers). Dans le cas d’un modèle spatial, il faut prendre en compte les quatre premiers modes au minimum."
+                }
+              }
+            ],
+            "trace": [
+              {
+                "operation": "source_numeric_scan",
+                "source": {
+                  "clause": "S17",
+                  "start": 9140,
+                  "end": 9361,
+                  "quote": "Dans le cas des modèles plans, l’analyse doit prendre en compte un minimum de trois modes de vibration (les trois premiers). Dans le cas d’un modèle spatial, il faut prendre en compte les quatre premiers modes au minimum."
+                },
+                "result": {
+                  "normalized_source": "Dans le cas des modèles plans, l’analyse doit prendre en compte un minimum de trois modes de vibration (les trois premiers). Dans le cas d’un modèle spatial, il faut prendre en compte les quatre premiers modes au minimum.",
+                  "evidence": []
+                }
+              }
+            ]
+          }
+        },
+        "status": "UNRESOLVED",
+        "program": null,
+        "queue": "reviewer_formalization",
+        "reason": "Parent/definition context needs explicit reviewer scope binding"
+      },
+      "frozen_interpretation": "Modal spectral analysis needs at least three vibration modes for a planar model and four for a spatial model.",
+      "frozen_applicability": [
+        "analysis_method",
+        "model_dimension"
+      ],
+      "reference_scope": {
+        "family": "conditional",
+        "in_scope": false,
+        "reason": "Planar/spatial model alternatives with different mode minima."
+      },
+      "assistant_grade": {
+        "status": "NO_DRAFT_TO_GRADE"
+      }
+    }
+  ],
+  "http_events": [],
+  "actual_calls": 0,
+  "criteria_results": {
+    "in_scope_at_most_one_edit": {
+      "count": [
+        0,
+        1
+      ],
+      "minimum_share": 0.8,
+      "pass": false
+    },
+    "source_wrong_validator_approvable": {
+      "count": [
+        0,
+        0
+      ],
+      "pass": false
+    },
+    "out_of_scope_correctly_queued": {
+      "count": [
+        16,
+        16
+      ],
+      "minimum_share": 0.9,
+      "pass": true
+    }
+  },
+  "grading_limits": "Assistant-authored frozen labels and scope annotation; no independent review. No outputs are not semantic correctness. Zero in-scope/candidate denominators are unmeasured and do not pass. No plan-verdict accuracy or observed human effort is measured here."
+}
