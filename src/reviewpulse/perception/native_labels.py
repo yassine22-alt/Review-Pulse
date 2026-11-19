@@ -8,7 +8,7 @@ from ..schema import Room, TextItem
 
 def anchor_native_labels(rooms: list[Room], texts: list[TextItem]) -> list[dict]:
     labels = [text for text in texts if text.kind == "room_label"
-              and text.prov.source == "vector" and text.prov.stage == "pdf_extract"]
+              and text.prov.source == "vector" and text.prov.stage in ("pdf_extract", "dxf_extract")]
     trace = []
     for room in rooms:
         polygon = Polygon(room.polygon, room.holes)
