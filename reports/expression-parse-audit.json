@@ -1,0 +1,3173 @@
+{
+  "date": "2026-11-19",
+  "adjudicator": "Codex assistant; direct reading of every failed expression and source excerpts, no independent human review",
+  "denominator": 69,
+  "taxonomy": {
+    "wrong_operator_or_fact_naming": 35,
+    "genuine_semantic_error": 17,
+    "unsupported_construct": 17,
+    "wrapper_or_formatting": 0
+  },
+  "normalizations_changed": [
+    32,
+    69
+  ],
+  "past_parse_gate": [
+    5,
+    69
+  ],
+  "retained_after": [
+    0,
+    69
+  ],
+  "terminal_stages_after": {
+    "expression_parse": 64,
+    "subject": 4,
+    "verifier": 1
+  },
+  "limits": [
+    "Primary causes are mutually exclusive; naming and unsupported syntax often coexist with semantic errors. Counts are not semantic accuracy.",
+    "No hosted regeneration, no weakening: no new quantifier, fact synonym, threshold, exception, variable or scope is invented.",
+    "Global qualification applies only to exact facts owned exclusively by the catalogue global entity. Metadata conditions are never moved or dropped.",
+    "Every normalization stores before/after and operations. Full source grounding, units, ownership, compiler round trip and verifier still run.",
+    "Experimental archived-output replay only; production interpretation gates/defaults are unchanged."
+  ],
+  "rows": [
+    {
+      "id": "T01",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum roof U-value for prescriptive residential buildings in climate zone Z3",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z3\"",
+        "unless": null,
+        "require": "roof_u <= 0.65",
+        "sources": [
+          {
+            "clause": "T01 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T01",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "roof_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T01",
+              "quote": "Approche prescriptive"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T01",
+              "quote": "bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T01",
+              "quote": "Z3"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.65",
+          "after": "building.roof_u <= 0.65",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T01",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum roof U-value for prescriptive residential buildings in climate zone Z3",
+        "applies_when": "building_class == \"residential\" and approach == \"prescriptive\" and climate_zone == \"Z3\"",
+        "unless": null,
+        "require": "roof_u <= 0.65",
+        "sources": [
+          {
+            "clause": "T01",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+          }
+        ],
+        "unresolved": [
+          "interpretation of \"26 – 35 %\" as air‑tightness/permeability rate"
+        ],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T01 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T01 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T01",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,65 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.65",
+          "after": "building.roof_u <= 0.65",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M03",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Implications can vacuously satisfy with zero exits, unlike the frozen branch disjunction. Arrow syntax also unsupported; not rewritten.",
+      "raw": {
+        "title": "Ground floor travel distance limit based on number of exits",
+        "applies_when": null,
+        "unless": null,
+        "require": "(count(building.exits where eligible) >= 2) => travel <= 50 and (count(building.exits where eligible) == 1) => travel <= 30",
+        "sources": [
+          {
+            "clause": "M03",
+            "quote": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie."
+          }
+        ],
+        "unresolved": [],
+        "subject": "travel",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' => travel <= 50 and (cou'",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "(count(building.exits where eligible) >= 2) => travel <= 50 and (count(building.exits where eligible) == 1) => travel <= 30",
+          "after": "(count(building.exits where eligible) >= 2) => building.travel <= 50 and (count(building.exits where eligible) == 1) => building.travel <= 30",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M03",
+      "arm": "decomposed",
+      "category": "genuine_semantic_error",
+      "reason": "Single-exit 30m branch dropped; count has no bound variable and eligible filter omitted.",
+      "raw": {
+        "title": "Ground floor evacuation travel distance for two exits",
+        "applies_when": "count(exits) == 2",
+        "unless": null,
+        "require": "travel <= 50",
+        "sources": [
+          {
+            "clause": "M03",
+            "quote": "Rez-de-chaussée : 50 m si choix entre 2 sorties ; 30 m s’il existe une seule sortie."
+          }
+        ],
+        "unresolved": [],
+        "subject": "ground floor evacuation travel distance",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "travel <= 50",
+          "after": "building.travel <= 50",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A08",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Correct intended algebraic ratio, but public_room is an unbound entity. No entity binding invented.",
+      "raw": {
+        "title": "One adapted seat per twenty public seats",
+        "applies_when": null,
+        "unless": null,
+        "require": "public_room.adapted_seats >= public_room.total_seats / 20",
+        "sources": [
+          {
+            "clause": "A08",
+            "quote": "Le nombre de sièges adaptés aux personnes handicapées dans les salles publiques est fixé à un siège sur vingt."
+          }
+        ],
+        "unresolved": [
+          "public_room.adapted_seats (adapted seat count)",
+          "public_room.total_seats (total seat count)"
+        ],
+        "subject": "public rooms",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'public_room' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M07",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare door_width and undeclared table_width. Table lookup and applicability cannot be inferred by normalizer.",
+      "raw": {
+        "title": "M07 requirement on door passage width",
+        "applies_when": null,
+        "unless": null,
+        "require": "door_width >= (table_width * 0.95)",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m."
+          },
+          {
+            "clause": "M07",
+            "quote": "La largeur de passage offerte par une porte doit être au moins égale à l’une de celles définies au tableau de dégagement ci avant, avec une tolérance négative de 5 %."
+          }
+        ],
+        "unresolved": [
+          "meaning of table_width (width values from the evacuation table)"
+        ],
+        "subject": "largeur de passage offerte par une porte",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "door_width >= (table_width * 0.95)",
+          "after": "building.door_width >= (table_width * 0.95)",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M01",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "count collection where predicate lacks a bound variable; bare occupancy also illegal. No variable invented.",
+      "raw": {
+        "title": "Minimum number of egresses for occupancy 20‑50",
+        "applies_when": "occupancy >= 20 and occupancy <= 50",
+        "unless": null,
+        "require": "count(exits where eligible == true) >= 2",
+        "sources": [
+          {
+            "clause": "M01",
+            "quote": "| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |"
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found 'where'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M01",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "count(building.exits) is not a supported collection/binder expression.",
+      "raw": {
+        "title": "Minimum egresses for occupancy 20‑50",
+        "applies_when": "building.occupancy >= 20 and building.occupancy <= 50",
+        "unless": null,
+        "require": "count(building.exits) >= 2",
+        "sources": [
+          {
+            "clause": "M01",
+            "quote": "| Effectif | Nombre de dégagements (sorties ou escaliers) |\n| de 20 à 50 | RDC : 2 |"
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          }
+        ],
+        "unresolved": [],
+        "subject": "Number of egresses required for occupancy 20‑50",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found '.'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M02",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Two count expressions lack bound variables; normal/accessory meanings require linking, not formatting repair.",
+      "raw": {
+        "title": "M02 evacuation degagement requirement",
+        "applies_when": "occupancy >= 20 and occupancy <= 50",
+        "unless": null,
+        "require": "count(exits where normal == true) == 1 and count(exits where accessory == true) == 1",
+        "sources": [
+          {
+            "clause": "M02",
+            "quote": "| Effectif | Nombre de dégagements | Largeur ou nombre d’unités de passage |\n| de 20 à 50 | RDC : 2 | 1 dégagement de 1 UP ; 1 dégagement accessoire |"
+          },
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          }
+        ],
+        "unresolved": [],
+        "subject": "sorties/issues (dégagements)",
+        "metadata_applicability": [
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "ge",
+            "value": 20,
+            "source": {
+              "clause": "M02",
+              "quote": "Effectif de 20 à 50"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "occupancy",
+            "operator": "le",
+            "value": 50,
+            "source": {
+              "clause": "M02",
+              "quote": "Effectif de 20 à 50"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found 'where'",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "count(exits where normal == true) == 1 and count(exits where accessory == true) == 1",
+          "after": "count(exits where building.normal == true) == 1 and count(exits where building.accessory == true) == 1",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M04",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "travel is an existing but wrong measurement: dead-end door-to-junction distance required.",
+      "raw": {
+        "title": "Maximum travel distance to dead-end exit",
+        "applies_when": null,
+        "unless": null,
+        "require": "travel <= 10",
+        "sources": [
+          {
+            "clause": "M04",
+            "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+          }
+        ],
+        "unresolved": [],
+        "subject": "door",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "travel <= 10",
+          "after": "building.travel <= 10",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "subject",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M04",
+      "arm": "decomposed",
+      "category": "genuine_semantic_error",
+      "reason": "discharge is an existing but wrong measurement; source is about a dead end, not a stair.",
+      "raw": {
+        "title": "Maximum distance from door to cul‑de‑sac outlet",
+        "applies_when": "subject == \"portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac\"",
+        "unless": null,
+        "require": "discharge <= 10",
+        "sources": [
+          {
+            "clause": "M04",
+            "quote": "Les portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac ne doivent pas être à plus de 10 m du débouché de ce cul-de-sac."
+          }
+        ],
+        "unresolved": [],
+        "subject": "portes des locaux accessibles au public donnant sur des dégagements en cul-de-sac",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "discharge <= 10",
+          "after": "building.discharge <= 10",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M05",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Exit-pair travel replaces connector width and 1.20 ignores two-UP 1.40 exception. Invalid forall-in syntax also present.",
+      "raw": {
+        "title": "Horizontal circulation connectivity between exits",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall e1 in exits, e2 in exits where e1 != e2: exists p in travel where p >= 2 * 0.60",
+        "sources": [
+          {
+            "clause": "M05",
+            "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+          }
+        ],
+        "unresolved": [],
+        "subject": "exits",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected ':' but found 'exits'",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "forall e1 in exits, e2 in exits where e1 != e2: exists p in travel where p >= 2 * 0.60",
+          "after": "forall e1 in exits, e2 in exits where e1 != e2: exists p in building.travel where p >= 2 * 0.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M05",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Unbound horizontal_circulation and units fact; UP-to-width exception/relationship not compiled.",
+      "raw": {
+        "title": "Horizontal circulations must link egresses with at least two passage units",
+        "applies_when": null,
+        "unless": null,
+        "require": "horizontal_circulation.units >= 2",
+        "sources": [
+          {
+            "clause": "unit",
+            "quote": "La largeur minimale de chaque dégagement doit être calculée en fonction d'une largeur-type appelée « unité de passage » (UP), égale à 0,60 m."
+          },
+          {
+            "clause": "table-scope",
+            "quote": "Les sorties, issues sont calculées en fonction des effectifs des personnes susceptibles de les emprunter selon les règles suivantes."
+          },
+          {
+            "clause": "M05",
+            "quote": "Des circulations horizontales de deux unités de passage au moins relient les dégagements entre eux : au rez-de-chaussée, les escaliers aux sorties et les sorties entre elles."
+          }
+        ],
+        "unresolved": [
+          "Interpretation of “deux unités de passage au moins” (whether it refers to width ≥2 UP or to two distinct passage segments)"
+        ],
+        "subject": "circulations horizontales",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'horizontal_circulation' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M06",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "travel is wrong distance and direct_outside undeclared; cannot replace by discharge/direct_outdoors without semantic edit.",
+      "raw": {
+        "title": "Protected stair exit distance",
+        "applies_when": null,
+        "unless": null,
+        "require": "(travel <= 20) or (direct_outside == true)",
+        "sources": [
+          {
+            "clause": "M06",
+            "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+          }
+        ],
+        "unresolved": [],
+        "subject": "protected_stair",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "(travel <= 20) or (direct_outside == true)",
+          "after": "(building.travel <= 20) or (direct_outside == true)",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M06",
+      "arm": "decomposed",
+      "category": "genuine_semantic_error",
+      "reason": "Wrong travel distance and dropped direct-outdoors alternative.",
+      "raw": {
+        "title": "Protected stair must lead to exterior or exit within 20 m",
+        "applies_when": null,
+        "unless": null,
+        "require": "travel <= 20",
+        "sources": [
+          {
+            "clause": "M06",
+            "quote": "Un escalier protégé doit aboutir directement sur l’extérieur ou à une distance maximale de 20 m vers une sortie."
+          }
+        ],
+        "unresolved": [],
+        "subject": "escalier protégé",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "travel <= 20",
+          "after": "building.travel <= 20",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "verifier",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M08",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare two_way and named eq instead of symbolic comparator; both losslessly canonicalizable. Missing full door scope persists.",
+      "raw": {
+        "title": "Recirculation doors must open bidirectionally",
+        "applies_when": null,
+        "unless": null,
+        "require": "two_way eq true",
+        "sources": [
+          {
+            "clause": "M08",
+            "quote": "Les portes de recoupement des circulations horizontales utilisées dans les deux sens pour gagner une sortie vers l’extérieur doivent obligatoirement s’ouvrir en va-et-vient."
+          }
+        ],
+        "unresolved": [],
+        "subject": "door",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'eq'",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "two_way eq true",
+          "after": "building.two_way == true",
+          "operations": [
+            "named_comparator",
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "subject",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M09",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "exists step where lacks collection and binder; isolated-step inventory not in catalogue.",
+      "raw": {
+        "title": "Prohibit isolated single or double steps in main circulations",
+        "applies_when": null,
+        "unless": null,
+        "require": "not exists step where step.isolated == true and (step.count == 1 or step.count == 2) and step.location == \"main_circulation\"",
+        "sources": [
+          {
+            "clause": "M09",
+            "quote": "Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales."
+          }
+        ],
+        "unresolved": [
+          "meaning of fact step.isolated",
+          "meaning of fact step.count",
+          "meaning of fact step.location"
+        ],
+        "subject": "isolated_steps",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found 'where'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M09",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Natural-language obligation instead of executable expression; no prose-to-code substitution.",
+      "raw": {
+        "title": "Evacuation pathways must allow rapid and safe evacuation and must not contain isolated steps",
+        "applies_when": null,
+        "unless": null,
+        "require": "dégagements must permit a rapid and safe evacuation of the establishment and must not include one or two isolated steps in the main circulation",
+        "sources": [
+          {
+            "clause": "M09",
+            "quote": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales."
+          }
+        ],
+        "unresolved": [],
+        "subject": "dégagements",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "applicability",
+            "operator": "eq",
+            "value": "tous les établissements",
+            "source": {
+              "clause": "M09",
+              "quote": "Les dégagements permettent une évacuation rapide et sûre de l’établissement. Il est interdit en particulier de placer une ou deux marches isolées dans les circulations principales."
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: 'égagements must permit a '",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M10",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "Natural-language fire-resistance alternatives need material/structure facts, not surface rewrite.",
+      "raw": {
+        "title": "Horizontal circulations must be isolated by fire-rated partitions",
+        "applies_when": null,
+        "unless": null,
+        "require": "Horizontal circulations must be isolated by partitions with fire resistance rating CF 1/2 h or CF 1 h, depending on the fire stability degree of the main structure.",
+        "sources": [
+          {
+            "clause": "M10",
+            "quote": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale."
+          }
+        ],
+        "unresolved": [
+          "The specific fire resistance rating facts (e.g., \"CF 1/2 h\", \"CF 1 h\") and the determination of \"degré de stabilité au feu\" are not defined in the provided catalogue."
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'circulations'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M10",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Natural-language alternative resistance requirement, not grammar.",
+      "raw": {
+        "title": "Horizontal circulations must be fire‑isolated",
+        "applies_when": null,
+        "unless": null,
+        "require": "circulations_horizontales must be isolated by walls CF 1/2 h or CF 1 h depending on the fire stability degree of the main structure",
+        "sources": [
+          {
+            "clause": "M10",
+            "quote": "Les circulations horizontales doivent être isolées par des parois CF 1/2 h ou CF 1 h en fonction du degré de stabilité au feu de la structure principale."
+          }
+        ],
+        "unresolved": [
+          "meaning of \"degré de stabilité au feu\""
+        ],
+        "subject": "circulations horizontales",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'must'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M11",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "Prose smoke extraction/protection predicate; unsupported facts and unresolved antecedent.",
+      "raw": {
+        "title": "Smoke extraction and pressurisation requirement for evacuation routes",
+        "applies_when": null,
+        "unless": null,
+        "require": "evacuation routes must be smoke‑extracted and protected against smoke (pressurised)",
+        "sources": [
+          {
+            "clause": "M11",
+            "quote": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression)."
+          }
+        ],
+        "unresolved": [],
+        "subject": "evacuation route",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: '‑extracted and protected '",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M11",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Prose must syntax with undeclared evacuation-route properties.",
+      "raw": {
+        "title": "Evacuation routes must be smoke‑proof and protected against smoke (pressurisation)",
+        "applies_when": null,
+        "unless": null,
+        "require": "evacuation_routes must be smoke_proof and smoke_protected (pressurisation)",
+        "sources": [
+          {
+            "clause": "M11",
+            "quote": "En règle générale, ils doivent être désenfumés et protégés contre les fumées (mise en surpression)."
+          }
+        ],
+        "unresolved": [
+          "referent of \"ils\" is unspecified"
+        ],
+        "subject": "evacuation routes",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'must'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M12",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Color exclusions retained but transparency obligation omitted; door also unbound.",
+      "raw": {
+        "title": "Door glazing must be transparent and not red or orange",
+        "applies_when": null,
+        "unless": null,
+        "require": "door.glazing_color != \"red\" and door.glazing_color != \"orange\"",
+        "sources": [
+          {
+            "clause": "M12",
+            "quote": "Les vitrages des portes doivent être transparents ; les couleurs rouge et orange sont interdites."
+          }
+        ],
+        "unresolved": [
+          "Missing fact definition for door.glazing_color (string) representing the color of door glazing"
+        ],
+        "subject": "door",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'door' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M13",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare entity/fact/closes placeholders instead of declared domain facts. Cannot bind text labels as facts.",
+      "raw": {
+        "title": "M13",
+        "applies_when": null,
+        "unless": null,
+        "require": "not (entity == \"porte\" and fact == \"sliding_non_motorized\" and closes == \"public_exit_used_for_evacuation\")",
+        "sources": [
+          {
+            "clause": "M13",
+            "quote": "Les portes coulissantes non motorisées sont interdites pour fermer les issues empruntées par le public pour évacuer l’établissement."
+          }
+        ],
+        "unresolved": [],
+        "subject": "portes coulissantes non motorisées",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '=='",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M14",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Specified-standard prose drops the explicit M1 class entirely.",
+      "raw": {
+        "title": "M14 ceiling coating requirement",
+        "applies_when": null,
+        "unless": null,
+        "require": "The ceiling coating in circulation spaces must comply with the specified standard.",
+        "sources": [
+          {
+            "clause": "M14",
+            "quote": "Revêtement des circulations : plafonds : M1"
+          }
+        ],
+        "unresolved": [
+          "The specific standard or performance criteria for the ceiling coating (e.g., fire resistance class) is not defined in the provided source."
+        ],
+        "subject": "Ceiling coating in circulation spaces",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'ceiling'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M14",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Empty requirement; no parseable or substantive expression to normalize.",
+      "raw": {
+        "title": "Revêtement des circulations : plafonds requirement",
+        "applies_when": null,
+        "unless": null,
+        "require": "",
+        "sources": [
+          {
+            "clause": "M14",
+            "quote": "Revêtement des circulations : plafonds : M1"
+          }
+        ],
+        "unresolved": [
+          "Meaning of \"M1\" is unclear"
+        ],
+        "subject": "Revêtement des circulations : plafonds",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "require is empty",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M15",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Unbound walls/floors with coating facts not declared; material values retained.",
+      "raw": {
+        "title": "Coating requirements for circulations",
+        "applies_when": null,
+        "unless": null,
+        "require": "walls.coating == \"M2\" and floors.coating == \"M4\"",
+        "sources": [
+          {
+            "clause": "M15",
+            "quote": "Revêtement des circulations : cloisons : M2 ; sols : M4"
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'walls' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "M15",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare cloisons/sols names not catalogue facts; material values retained.",
+      "raw": {
+        "title": "Circulation finish requirements",
+        "applies_when": null,
+        "unless": null,
+        "require": "cloisons == \"M2\" and sols == \"M4\"",
+        "sources": [
+          {
+            "clause": "M15",
+            "quote": "Revêtement des circulations : cloisons : M2 ; sols : M4"
+          }
+        ],
+        "unresolved": [
+          "cloisons",
+          "sols"
+        ],
+        "subject": "Revêtement des circulations",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '=='",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A01",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Invented corridor/lobby restriction and omitted no-furnishing constraint; list-membership syntax also unsupported.",
+      "raw": {
+        "title": "Floor of pathways must be smooth and unobstructed",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall room where room.room_type in [\"corridor\",\"lobby\"]: room.floor_surface == \"smooth\" and not exists obstacle where obstacle.location == room",
+        "sources": [
+          {
+            "clause": "A01",
+            "quote": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes."
+          }
+        ],
+        "unresolved": [
+          "Definition of fact \"floor_surface\" and entity \"obstacle\" are missing"
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' [\"corridor\",\"lobby\"]: ro'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A01",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Semantically plausible nested pathway.floor.* negations use unbound owner and unsupported property chain.",
+      "raw": {
+        "title": "Le sol des cheminements créés ou aménagés must be smooth and unobstructed",
+        "applies_when": null,
+        "unless": null,
+        "require": "not (pathway.floor.is_furnished) and not (pathway.floor.has_non_smooth_cover) and not (pathway.floor.has_obstacles)",
+        "sources": [
+          {
+            "clause": "A01",
+            "quote": "Le sol des cheminements créés ou aménagés, ne doit pas être meublé, ni recouvert de revêtement non lisse, sans obstacles pour les roues et les cannes."
+          }
+        ],
+        "unresolved": [
+          "pathway.floor.is_furnished",
+          "pathway.floor.has_non_smooth_cover",
+          "pathway.floor.has_obstacles"
+        ],
+        "subject": "Le sol des cheminements créés ou aménagés",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'pathway' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A02",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Invented slope threshold and door entity for a ramp requirement; unsupported implication also present.",
+      "raw": {
+        "title": "Significant slope must be accompanied by an inclined plane",
+        "applies_when": null,
+        "unless": null,
+        "require": "significant_slope >= threshold => exists doors d where d.inclined_plane == true",
+        "sources": [
+          {
+            "clause": "A02",
+            "quote": "Toute dénivelée importante doit être doublée d'un plan incliné."
+          }
+        ],
+        "unresolved": [
+          "meaning of fact 'significant_slope'"
+        ],
+        "subject": "inclined_plane",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' => exists doors d where '",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A02",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Angle-bracket entity placeholders and unbound nested exists cannot be resolved by formatting.",
+      "raw": {
+        "title": "Inclined plane required for significant slope",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall <building> s where s.dénivelée_importante == true: exists <building> p where p.type == \"plan incliné\" and p.associated_with == s",
+        "sources": [
+          {
+            "clause": "A02",
+            "quote": "Toute dénivelée importante doit être doublée d'un plan incliné."
+          }
+        ],
+        "unresolved": [
+          "Meaning of fact \"dénivelée_importante\" is not declared in catalogue",
+          "Meaning of entity/type \"plan incliné\" is not declared in catalogue"
+        ],
+        "subject": "dénivelée importante",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: 'énivelée_importante == tr'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A03",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Sidewalk owner unbound; correct intended two-bound width interval. No collection invented.",
+      "raw": {
+        "title": "Sidewalk width requirement",
+        "applies_when": null,
+        "unless": null,
+        "require": "sidewalk.width_m >= 1.5 and sidewalk.width_m <= 2.0",
+        "sources": [
+          {
+            "clause": "A03",
+            "quote": "Les trottoirs doivent avoir une largeur allant de 1.50 m à 2.00 m."
+          }
+        ],
+        "unresolved": [
+          "Meaning of fact width_m for sidewalk entities is not declared in the catalogue"
+        ],
+        "subject": "Les trottoirs",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'sidewalk' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A04",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "Empty output with explicit unresolved declaration; no constraint emitted.",
+      "raw": {
+        "title": "Unresolved requirement for clause A04",
+        "applies_when": null,
+        "unless": null,
+        "require": "",
+        "sources": [
+          {
+            "clause": "A04",
+            "quote": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir."
+          }
+        ],
+        "unresolved": [
+          "No applicable regulation found in provided catalogue for clause A04"
+        ],
+        "subject": "unknown",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "require is empty",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A04",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Empty requirement despite source slopes; no surface fix can recover omitted meaning.",
+      "raw": {
+        "title": "A04",
+        "applies_when": null,
+        "unless": null,
+        "require": "",
+        "sources": [
+          {
+            "clause": "A04",
+            "quote": "Ce bateau est constitué d'un plan incliné (inférieur à 5%) perpendiculaire à la chaussée et de deux surfaces inclinées (inférieures à 5%) de raccordement au trottoir."
+          }
+        ],
+        "unresolved": [],
+        "subject": "bateau",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "require is empty",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A05",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Parking total divided by disabled population is not reserved spaces / all parking spaces.",
+      "raw": {
+        "title": "Minimum disabled parking provision",
+        "applies_when": null,
+        "unless": null,
+        "require": "parking_spaces_total / disabled_population >= 0.05",
+        "sources": [
+          {
+            "clause": "A05",
+            "quote": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt."
+          }
+        ],
+        "unresolved": [
+          "parking_spaces_total",
+          "disabled_population"
+        ],
+        "subject": "parking provision",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '/'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A05",
+      "arm": "decomposed",
+      "category": "genuine_semantic_error",
+      "reason": "Total >= 5% of itself is tautological and omits reserved-space numerator.",
+      "raw": {
+        "title": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt",
+        "applies_when": null,
+        "unless": null,
+        "require": "count(building.parking_spaces) >= (1/20) * count(building.parking_spaces)",
+        "sources": [
+          {
+            "clause": "A05",
+            "quote": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt."
+          }
+        ],
+        "unresolved": [],
+        "subject": "places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées",
+        "metadata_applicability": [],
+        "fact_declarations": [
+          {
+            "kind": "number",
+            "name": "parking_spaces",
+            "entity": "building",
+            "definition": "Total number of automobile parking places for disabled persons in public parks or garages",
+            "source": {
+              "clause": "A05",
+              "quote": "Le nombre de places de stationnement automobile au niveau des parcs publics ou des garages des constructions ouvertes au public réservés aux personnes handicapées est fixé au moins à une place sur vingt."
+            },
+            "status": "proposed"
+          }
+        ]
+      },
+      "original_error": "expected a variable name but found '.'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A06",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Invented corridor/lobby scope and 0.9m door threshold absent from source.",
+      "raw": {
+        "title": "Accessibility paths must be practicable for persons with disabilities",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall rooms r where r.room_type in [\"corridor\",\"lobby\"]: exists door d where d.leads_to_exit == true and d.width_m >= 0.9",
+        "sources": [
+          {
+            "clause": "A06",
+            "quote": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable."
+          }
+        ],
+        "unresolved": [
+          "Fact \"practicable_path\" meaning not defined"
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' [\"corridor\",\"lobby\"]: ex'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A06",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Natural-language practicable-route requirement instead of formal expression.",
+      "raw": {
+        "title": "Accessibility of public and collective use buildings",
+        "applies_when": null,
+        "unless": null,
+        "require": "must be accessible by a practicable route for persons with disabilities",
+        "sources": [
+          {
+            "clause": "A06",
+            "quote": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives doivent être aménagés et adaptés à l'utilisation des personnes handicapées et accessibles par un cheminement praticable."
+          }
+        ],
+        "unresolved": [
+          "No specific measurable fact or metric is provided to assess compliance with the requirement for a practicable route."
+        ],
+        "subject": "Les constructions ouvertes au public et d'habitat collectif et les bâtiments d'utilisations collectives",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'be'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A07",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Missing count binders and unsupported includes syntax; scope precedence also requires review.",
+      "raw": {
+        "title": "A07 Requirement - Accessible Equipment Ratio",
+        "applies_when": "building_type == \"public\" and building_function includes \"guichets\" or \"étagères\" or \"écritoires\"",
+        "unless": null,
+        "require": "count(equipment where equipment.accessible == true) >= 0.1 * count(equipment)",
+        "sources": [
+          {
+            "clause": "A07",
+            "quote": "Lorsque la fonction d'un bâtiment ouvert au public amène les usagers à utiliser des guichets, étagères ou écritoires, un sur dix de ces équipements doit être aménagé pour servir les personnes handicapées."
+          }
+        ],
+        "unresolved": [
+          "accessible"
+        ],
+        "subject": "équipements (guichets, étagères ou écritoires) d'un bâtiment ouvert au public",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found 'where'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A10",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Presence-only lift predicate omits standards and arbitrarily narrows circulation spaces.",
+      "raw": {
+        "title": "Elevator provision in circulation spaces",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall rooms where room_type in [\"corridor\",\"lobby\"]: elevator_present == true",
+        "sources": [
+          {
+            "clause": "A10",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur"
+          }
+        ],
+        "unresolved": [
+          "Missing fact definition for \"elevator_present\""
+        ],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' [\"corridor\",\"lobby\"]: el'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A10",
+      "arm": "decomposed",
+      "category": "genuine_semantic_error",
+      "reason": "Arbitrary corridor/lobby restriction; malformed forall/exists-in binders cannot justify narrowed scope.",
+      "raw": {
+        "title": "Elevator provision in all circulation spaces of public buildings",
+        "applies_when": null,
+        "unless": null,
+        "require": "forall space in rooms where space.room_type == \"corridor\" or space.room_type == \"lobby\": exists elevator in space where elevator.complies_with_norms == true",
+        "sources": [
+          {
+            "clause": "A10",
+            "quote": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation, doivent être munis au niveau de tous les espaces de circulation des ascenseurs obéissant aux normes en vigueur"
+          }
+        ],
+        "unresolved": [
+          "space.room_type (needs classification of room as circulation)",
+          "elevator.complies_with_norms (needs fact about elevator conformity)"
+        ],
+        "subject": "Les dispositions architecturales et les aménagements des bâtiments publics ou à usage du public, notamment les administrations, les centres hospitaliers, les établissements scolaires, universitaires et de formation",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_type",
+            "operator": "eq",
+            "value": "public",
+            "source": {
+              "clause": "A10",
+              "quote": "bâtiments publics ou à usage du public"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected ':' but found 'rooms'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A12",
+      "arm": "monolithic",
+      "category": "genuine_semantic_error",
+      "reason": "Changes universal direction-change landing obligation to one existential arbitrary corridor/lobby rest area.",
+      "raw": {
+        "title": "Resting area required for direction change in passages",
+        "applies_when": null,
+        "unless": null,
+        "require": "exists rooms r where r.room_type in {\"corridor\",\"lobby\"} and exists rest_areas a where a.location == r and a.area_m2 >= 1.00",
+        "sources": [
+          {
+            "clause": "A12",
+            "quote": "Le changement de direction des passages doit être assuré par un palier de repos d'une surface de 1.00 m2 au minimum."
+          }
+        ],
+        "unresolved": [
+          "Fact \"rest_areas\" with fields \"location\" and \"area_m2\" is not defined in the catalogue"
+        ],
+        "subject": "building passages",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "cannot read the expression at: ' {\"corridor\",\"lobby\"} and'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A13",
+      "arm": "decomposed",
+      "category": "unsupported_construct",
+      "reason": "Prose handrail requirement preserves intent but no executable structure.",
+      "raw": {
+        "title": "Handrails on both sides of passages",
+        "applies_when": null,
+        "unless": null,
+        "require": "passages must be equipped with ramps serving as handrails on both sides",
+        "sources": [
+          {
+            "clause": "A13",
+            "quote": "Ces passages doivent être munis de rampes servant de main courante sur les deux côtés."
+          }
+        ],
+        "unresolved": [
+          "interpretation of \"ramps serving as handrail\" may require clarification"
+        ],
+        "subject": "passages",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found 'must'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A14",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Unbound entrance_main and translated property names; percentages lack explicit units. No owner translation guessed.",
+      "raw": {
+        "title": "Entrée principale des constructions ouvertes au public et des immeubles collectifs à usage d'habitation",
+        "applies_when": "construction_type == \"ouvert_au_public\" or building_use == \"immeuble_collectif_habitation\"",
+        "unless": null,
+        "require": "entrance_main.pente <= 20 and entrance_main.largeur >= 1.00",
+        "sources": [
+          {
+            "clause": "A14",
+            "quote": "Pour les constructions ouvertes au public et les immeubles collectifs et à usage d'habitation, les dispositions précitées sont exigées pour l'entrée principale qui doit avoir une pente latérale d'une valeur de 20% au maximum et d'une largeur de 1.00 m au minimum."
+          }
+        ],
+        "unresolved": [
+          "interprétation exacte de « constructions ouvertes au public » par rapport aux « bâtiments publics » du contexte"
+        ],
+        "subject": "entrée principale des constructions ouvertes au public et des immeubles collectifs à usage d'habitation",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "'entrance_main' is not a variable of an enclosing forall/exists/aggregate or one of ['building']",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "A15",
+      "arm": "monolithic",
+      "category": "unsupported_construct",
+      "reason": "Counts lack bound variables; phones/entries collections unavailable. Scope values are not linked.",
+      "raw": {
+        "title": "One telephone per entry for visually or hearing impaired",
+        "applies_when": "building_type == \"public\" or building_type == \"collective_housing\"",
+        "unless": null,
+        "require": "count(phones) >= count(entries)",
+        "sources": [
+          {
+            "clause": "A15",
+            "quote": "Le nombre de téléphones fixes pour servir les malvoyants ou malentendants dans les constructions publiques et constructions affectées au logement collectif est fixé à un téléphone par entrée."
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected a variable name but found ')'",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T02",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum wall U-value for residential buildings in climate zone Z3",
+        "applies_when": "building_class == \"residential\" and climate_zone == \"Z3\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+        "unless": null,
+        "require": "wall_u <= 0.70",
+        "sources": [
+          {
+            "clause": "T02 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T02",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "wall_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T02 header",
+              "quote": "Usage et approche"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T02",
+              "quote": "Z3"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T02",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T02",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "wall_u <= 0.70",
+          "after": "building.wall_u <= 0.70",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T02",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum exterior wall U-value for residential prescriptive buildings in climate zone Z3",
+        "applies_when": "building_class == \"residential\" and approach == \"prescriptive\" and climate_zone == \"Z3\"",
+        "unless": null,
+        "require": "wall_u <= 0.70",
+        "sources": [
+          {
+            "clause": "T02",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 0,70 |"
+          }
+        ],
+        "unresolved": [
+          "Exact meaning of the \"26 – 35 %\" column (TGBV) is uncertain"
+        ],
+        "subject": "U des murs extérieurs (W/m²/K) pour bâtiments résidentiels en approche prescriptive",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T02 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T02 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T02 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "wall_u <= 0.70",
+          "after": "building.wall_u <= 0.70",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T03",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum window U‑value for prescriptive residential buildings in climate zone Z3",
+        "applies_when": "building_class == \"residential\" and approach == \"prescriptive\"",
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T03",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "window_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T03",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T03",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T03",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T03",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T03",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T03",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum window U-value for prescriptive residential buildings in climate zone Z3",
+        "applies_when": "(building_class == \"residential\") and (approach == \"prescriptive\") and (climate_zone == \"Z3\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T03 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+          },
+          {
+            "clause": "T03",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [
+          "Interpretation of the 26–35 % glazing ratio figure (e.g., whether it refers to airtightness, solar gain reduction, or another metric)"
+        ],
+        "subject": "Prescriptive approach for residential buildings",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T03",
+              "quote": "Approche prescriptive, bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T03",
+              "quote": "Approche prescriptive"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T03",
+              "quote": "Z3"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T03",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T03",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T04",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Minimum floor slab thermal resistance for residential prescriptive approach in climate zone Z3",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z3\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+        "unless": null,
+        "require": "slab_r >= 0.75",
+        "sources": [
+          {
+            "clause": "T04",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "slab_r",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T04",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T04",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T04",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T04",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T04",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "slab_r >= 0.75",
+          "after": "building.slab_r >= 0.75",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T04",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Floor slab thermal resistance requirement",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"résidentiels\" and climate_zone == \"Z3\"",
+        "unless": null,
+        "require": "slab_r >= 0.75",
+        "sources": [
+          {
+            "clause": "T04",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | ≥ 0,75 |"
+          }
+        ],
+        "unresolved": [
+          "Interpretation of the 26 – 35 % glazing ratio value"
+        ],
+        "subject": "bâtiments résidentiels",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T04 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "résidentiels",
+            "source": {
+              "clause": "T04 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T04 header",
+              "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "slab_r >= 0.75",
+          "after": "building.slab_r >= 0.75",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T05",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Prescriptive residential buildings in climate zone Z3 must have glazing ratio 26‑35% and solar factor ≤0.5",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z3\"",
+        "unless": null,
+        "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and solar_factor <= 0.5",
+        "sources": [
+          {
+            "clause": "T05 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+          },
+          {
+            "clause": "T05",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T05",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Prescriptive residential building glazing and solar factor limits",
+        "applies_when": "subject == \"bâtiments résidentiels (approche prescriptive)\"",
+        "unless": null,
+        "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and solar <= 0.5",
+        "sources": [
+          {
+            "clause": "T05",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z3 | 26 – 35 % | Autres : ≤ 0,5 |"
+          }
+        ],
+        "unresolved": [
+          "interpretation of \"Autres\" field"
+        ],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z3",
+            "source": {
+              "clause": "T05",
+              "quote": "Z3"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "glazing_ratio >= 26 and glazing_ratio <= 35 and solar <= 0.5",
+          "after": "glazing_ratio >= 26 and glazing_ratio <= 35 and building.solar <= 0.5",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T06",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum roof U-value for residential buildings in climate zone Z4",
+        "applies_when": "approach == \"prescriptive\" and climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+        "unless": null,
+        "require": "roof_u <= 0.55",
+        "sources": [
+          {
+            "clause": "T06 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T06",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "roof_u",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.55",
+          "after": "building.roof_u <= 0.55",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T06",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "U des toitures exposées ≤ 0.55 W/m²/K for residential prescriptive approach in climate zone Z4",
+        "applies_when": "(building_class == \"résidentiel\") and (approach == \"prescriptive\") and (climate_zone == \"Z4\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+        "unless": null,
+        "require": "roof_u <= 0.55",
+        "sources": [
+          {
+            "clause": "T06 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T06",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": [
+          "Interpretation of the 26–35 % value as a TGBV constraint"
+        ],
+        "subject": "Prescriptive approach for residential buildings",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "résidentiel",
+            "source": {
+              "clause": "T06",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T06",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T06",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T06",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T06",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,55 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.55",
+          "after": "building.roof_u <= 0.55",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T07",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum exterior wall U-value for residential buildings in climate zone Z4",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+        "unless": null,
+        "require": "wall_u <= 0.60",
+        "sources": [
+          {
+            "clause": "T07 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T07",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "wall_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T07",
+              "quote": "Approche prescriptive"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T07",
+              "quote": "bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T07",
+              "quote": "Z4"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T07",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T07",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "wall_u <= 0.60",
+          "after": "building.wall_u <= 0.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T07",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "U-value of exterior walls must not exceed 0.60 W/m²/K for prescriptive residential buildings in climate zone Z4 with glazing ratio 26–35 %",
+        "applies_when": "climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+        "unless": null,
+        "require": "wall_u <= 0.60",
+        "sources": [
+          {
+            "clause": "T07 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des murs extérieurs (W/m²/K) |"
+          },
+          {
+            "clause": "T07",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 0,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T07",
+              "quote": "Z4"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T07",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T07",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "wall_u <= 0.60",
+          "after": "building.wall_u <= 0.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T08",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum window U-value for prescriptive residential buildings",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T08",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "window_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T08",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum window U-value for residential prescriptive approach",
+        "applies_when": null,
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T08",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          },
+          {
+            "kind": "number",
+            "unit": "%",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T08",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≤ 2,60 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "subject",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T09",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Prescriptive approach requirements for residential buildings in climate zone Z4",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z4\" and glazing_ratio >= 26 and glazing_ratio <= 35",
+        "unless": null,
+        "require": "floor_R >= 1.25",
+        "sources": [
+          {
+            "clause": "T09",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | ≥ 1,25 |"
+          }
+        ],
+        "unresolved": [
+          "Definition of floor_R fact (entity and field) is missing",
+          "Exact fact names for floor thermal resistance are not provided in the catalogue"
+        ],
+        "subject": "building",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T09 header",
+              "quote": "| Usage et approche |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T09 header",
+              "quote": "| Usage et approche |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T09",
+              "quote": "| Z4 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T09",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T09",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T10",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Glazing ratio and solar factor limits for prescriptive residential buildings in climate zone Z4",
+        "applies_when": "(approach == \"prescriptive\") and (building_class == \"residential\")",
+        "unless": null,
+        "require": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (solar_factor <= 0.6)",
+        "sources": [
+          {
+            "clause": "T10",
+            "quote": "Z4"
+          },
+          {
+            "clause": "T10",
+            "quote": "26 – 35 %"
+          },
+          {
+            "clause": "T10",
+            "quote": "≤ 0,6"
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z4",
+            "source": {
+              "clause": "T10",
+              "quote": "Z4"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T10",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Glazing ratio and solar factor limits for prescriptive residential buildings in climate zone Z4",
+        "applies_when": "climate_zone == \"Z4\"",
+        "unless": null,
+        "require": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (solar <= 0.6)",
+        "sources": [
+          {
+            "clause": "T10 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | Facteur solaire FS du vitrage |"
+          },
+          {
+            "clause": "T10",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z4 | 26 – 35 % | Autres : ≤ 0,6 |"
+          }
+        ],
+        "unresolved": [
+          "Interpretation of \"Autres\" category"
+        ],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (solar <= 0.6)",
+          "after": "(glazing_ratio >= 26) and (glazing_ratio <= 35) and (building.solar <= 0.6)",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T11",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum roof U-value for residential buildings in climate zone Z5",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z5\"",
+        "unless": null,
+        "require": "roof_u <= 0.55",
+        "sources": [
+          {
+            "clause": "T11 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des toitures exposées (W/m²/K) |"
+          },
+          {
+            "clause": "T11",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "roof_u",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T11",
+              "quote": "Approche prescriptive, bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T11",
+              "quote": "bâtiments résidentiels"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z5",
+            "source": {
+              "clause": "T11",
+              "quote": "Z5"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.55",
+          "after": "building.roof_u <= 0.55",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T11",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Roof U-value limit for residential buildings in climate zone Z5",
+        "applies_when": null,
+        "unless": null,
+        "require": "roof_u <= 0.55",
+        "sources": [
+          {
+            "clause": "T11",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z5",
+            "source": {
+              "clause": "T11",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T11",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T11",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T11",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,55 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "roof_u <= 0.55",
+          "after": "building.roof_u <= 0.55",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "subject",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T12",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Wall U-value limit for prescriptive residential buildings in climate zone Z5",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\" and climate_zone == \"Z5\"",
+        "unless": null,
+        "require": "wall_u <= 0.60",
+        "sources": [
+          {
+            "clause": "T12",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 0,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "wall_u",
+        "metadata_applicability": [],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "wall_u <= 0.60",
+          "after": "building.wall_u <= 0.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T13",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Maximum window U-value for residential buildings in climate zone Z5",
+        "applies_when": "(climate_zone == \"Z5\") and (glazing_ratio >= 26) and (glazing_ratio <= 35)",
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T13 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | U des fenêtres (W/m²/K) |"
+          },
+          {
+            "clause": "T13",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "building",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z5",
+            "source": {
+              "clause": "T13",
+              "quote": "Z5"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T13",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T13",
+              "quote": "26 – 35 %"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T13",
+      "arm": "decomposed",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "U-value of windows must not exceed 2.60 W/m²/K for residential prescriptive approach in climate zone Z5 with glazing ratio 26‑35 %",
+        "applies_when": "approach == \"prescriptive\" and building_class == \"residential\"",
+        "unless": null,
+        "require": "window_u <= 2.60",
+        "sources": [
+          {
+            "clause": "T13",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≤ 2,60 |"
+          }
+        ],
+        "unresolved": [],
+        "subject": "bâtiments résidentiels (approche prescriptive)",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z5",
+            "source": {
+              "clause": "T13",
+              "quote": "Z5"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "ge",
+            "value": 26,
+            "source": {
+              "clause": "T13",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "number",
+            "field": "glazing_ratio",
+            "operator": "le",
+            "value": 35,
+            "source": {
+              "clause": "T13",
+              "quote": "26 – 35 %"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T13",
+              "quote": "Approche prescriptive"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '<='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "window_u <= 2.60",
+          "after": "building.window_u <= 2.60",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    },
+    {
+      "id": "T14",
+      "arm": "monolithic",
+      "category": "wrong_operator_or_fact_naming",
+      "reason": "Bare global fact and/or bare metadata identifiers violate qualified-fact grammar; some use undeclared floor_R or solar_factor. Scope omissions and percent-unit errors may coexist. Only exact unambiguous catalogue ownership is normalized; no synonyms or metadata migration.",
+      "raw": {
+        "title": "Prescriptive residential buildings in climate zone Z5 must meet glazing and slab requirements",
+        "applies_when": "approach == 'prescriptive' and building_class == 'residential' and climate_zone == 'Z5'",
+        "unless": null,
+        "require": "glazing_ratio >= 26 and glazing_ratio <= 35 and slab_r >= 1.00",
+        "sources": [
+          {
+            "clause": "T14 header",
+            "quote": "| Usage et approche | Zone climatique | TGBV | R des planchers sur sol (m²·K/W) |"
+          },
+          {
+            "clause": "T14",
+            "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+          }
+        ],
+        "unresolved": [
+          "meaning of building_class value 'residential'"
+        ],
+        "subject": "building",
+        "metadata_applicability": [
+          {
+            "kind": "string",
+            "field": "approach",
+            "operator": "eq",
+            "value": "prescriptive",
+            "source": {
+              "clause": "T14",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "climate_zone",
+            "operator": "eq",
+            "value": "Z5",
+            "source": {
+              "clause": "T14",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+            }
+          },
+          {
+            "kind": "string",
+            "field": "building_class",
+            "operator": "eq",
+            "value": "residential",
+            "source": {
+              "clause": "T14",
+              "quote": "| Approche prescriptive, bâtiments résidentiels | Z5 | 26 – 35 % | ≥ 1,00 |"
+            }
+          }
+        ],
+        "fact_declarations": []
+      },
+      "original_error": "expected '.' but found '>='",
+      "normalizations": [
+        {
+          "field": "require",
+          "before": "glazing_ratio >= 26 and glazing_ratio <= 35 and slab_r >= 1.00",
+          "after": "glazing_ratio >= 26 and glazing_ratio <= 35 and building.slab_r >= 1.00",
+          "operations": [
+            "unique_global_fact_qualification"
+          ]
+        }
+      ],
+      "terminal_stage_after": "expression_parse",
+      "retained_after": false,
+      "note": "Primary classification is assistant-reviewed, not human/independent. Normalization never fixes identified semantic defects."
+    }
+  ]
+}
