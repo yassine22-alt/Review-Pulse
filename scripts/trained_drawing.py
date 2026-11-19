@@ -21,6 +21,40 @@ from reviewpulse.pipeline import build_model
 from reviewpulse.schema import save
 
 
+def score_model(model, labels):
+    graph = nx.Graph()
+    polygons = {room.id: Polygon(room.polygon, room.holes) for room in model.rooms}
+    for truth in labels["rooms"]:
+        graph.add_node(truth["id"], bipartite=0)
+        for predicted, polygon in polygons.items():
+            if polygon.covers(Point(truth["point_mm"])):
+                graph.add_edge(truth["id"], predicted)
+    matched = nx.algorithms.bipartite.maximum_matching(graph, top_nodes={r["id"] for r in labels["rooms"]})
+    predicted_by_id = {r.id: r for r in model.rooms}
+    rooms = [{**truth, "matched_id": matched.get(truth["id"]),
+              "predicted_type": predicted_by_id[matched[truth["id"]]].type if truth["id"] in matched else None,
+              "predicted_label": predicted_by_id[matched[truth["id"]]].label if truth["id"] in matched else None}
+             for truth in labels["rooms"]]
+    openings = []
+    for truth in labels["openings"]:
+        roi = box(*truth["bbox_mm"])
+        ids = [element.id for element in model.elements if element.cls == truth["kind"]
+               and len(element.geom) >= 3 and Polygon(element.geom).intersects(roi)]
+        openings.append({**truth, "intersecting_predictions": ids})
+    result = {"annotation_limits": labels["annotation"], "opening_scope": labels["opening_scope"],
+              "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+              "reference_label_points_covered": [sum(bool(r["matched_id"]) for r in rooms), len(rooms)],
+              "bedrooms_found_and_classified": [sum(bool(r["matched_id"]) and r["predicted_type"] == "bedroom"
+                    for r in rooms if r["bedroom"]), sum(r["bedroom"] for r in rooms)],
+              "raw_predicted_room_count": len(model.rooms),
+              "raw_elements": dict(Counter(e.cls for e in model.elements)),
+              "annotated_opening_hits": [sum(bool(o["intersecting_predictions"]) for o in openings), len(openings)],
+              "schedules_found": [len(model.schedules), len(labels["schedules"])],
+              "schedule_rows": [len(s.get("rows", [])) for s in model.schedules],
+              "rooms": rooms, "openings": openings, "warnings": model.sheet.warnings}
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pdf", type=Path)
@@ -52,36 +86,8 @@ def main():
         weight = Path("data/models/raster_seg/best.pt")
         method = "Trained U-Net raster segmentation at 150 dpi plus automatically extracted native PDF text; no OCR or LLM labels"
     save(model, args.output / "building.json")
-    graph = nx.Graph()
-    polygons = {room.id: Polygon(room.polygon, room.holes) for room in model.rooms}
-    for truth in labels["rooms"]:
-        graph.add_node(truth["id"], bipartite=0)
-        for predicted, polygon in polygons.items():
-            if polygon.covers(Point(truth["point_mm"])):
-                graph.add_edge(truth["id"], predicted)
-    matched = nx.algorithms.bipartite.maximum_matching(graph, top_nodes={r["id"] for r in labels["rooms"]})
-    predicted_by_id = {r.id: r for r in model.rooms}
-    rooms = [{**truth, "matched_id": matched.get(truth["id"]),
-              "predicted_type": predicted_by_id[matched[truth["id"]]].type if truth["id"] in matched else None}
-             for truth in labels["rooms"]]
-    openings = []
-    for truth in labels["openings"]:
-        roi = box(*truth["bbox_mm"])
-        ids = [element.id for element in model.elements if element.cls == truth["kind"]
-               and len(element.geom) >= 3 and Polygon(element.geom).intersects(roi)]
-        openings.append({**truth, "intersecting_predictions": ids})
-    result = {"method": method, "model_sha256": hashlib.sha256(weight.read_bytes()).hexdigest(),
-              "annotation_limits": labels["annotation"], "opening_scope": labels["opening_scope"],
-              "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
-              "reference_label_points_covered": [sum(bool(r["matched_id"]) for r in rooms), len(rooms)],
-              "bedrooms_found_and_classified": [sum(bool(r["matched_id"]) and r["predicted_type"] == "bedroom"
-                    for r in rooms if r["bedroom"]), sum(r["bedroom"] for r in rooms)],
-              "raw_predicted_room_count": len(model.rooms),
-              "raw_elements": dict(Counter(e.cls for e in model.elements)),
-              "annotated_opening_hits": [sum(bool(o["intersecting_predictions"]) for o in openings), len(openings)],
-              "schedules_found": [len(model.schedules), len(labels["schedules"])],
-              "schedule_rows": [len(s.get("rows", [])) for s in model.schedules],
-              "rooms": rooms, "openings": openings, "warnings": model.sheet.warnings}
+    result = score_model(model, labels)
+    result.update(method=method, model_sha256=hashlib.sha256(weight.read_bytes()).hexdigest())
     (args.output / "score.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({key: value for key, value in result.items() if key not in ("rooms", "openings", "warnings")}))
 

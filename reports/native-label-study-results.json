@@ -1,0 +1,1226 @@
+{
+  "labels_sha256": "e8e3551e96004740754df56d3771d98d7c2bb5787b33dd109f2a583f0aa2d4c0",
+  "method": "Native text contained in existing regions; original trained LightGBM supplies primitive geometry. No hosted calls, no LLM or new weights.",
+  "fallback_limit": "No trained room-use classifier is available; unknown or conflicting names stay unknown. Existing room construction already uses native labels; this pass adds conservative containment/conflict provenance, not a new enclosure algorithm.",
+  "limitations": [
+    "Assistant annotations have no independent review.",
+    "Selected visible label points/opening boxes, not complete inventories or polygon-IoU accuracy.",
+    "Review scopes are supplied explicitly, not discovered automatically.",
+    "Inferred label-split boundaries are not confirmed geometry or a basis for confirmed completeness."
+  ],
+  "drawings": [
+    {
+      "annotation_limits": "Author-reviewed labels and room label points from the real drawing; approximate manually boxed six-opening subset. No independent review. No model outputs used to author these labels. Development benchmark.",
+      "opening_scope": "Only six annotated examples; not a complete opening inventory. Global opening precision/recall is not estimable.",
+      "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+      "reference_label_points_covered": [
+        0,
+        17
+      ],
+      "bedrooms_found_and_classified": [
+        0,
+        4
+      ],
+      "raw_predicted_room_count": 1,
+      "raw_elements": {
+        "wall": 14,
+        "other": 30,
+        "column": 266
+      },
+      "annotated_opening_hits": [
+        0,
+        6
+      ],
+      "schedules_found": [
+        0,
+        2
+      ],
+      "schedule_rows": [],
+      "rooms": [
+        {
+          "id": "author_room_1",
+          "label": "BEDROOM",
+          "bedroom": true,
+          "point_mm": [
+            149.40144271850585,
+            522.6844207551744
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_2",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            230.60100835164388,
+            523.8065394931368
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_3",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            195.9871220058865,
+            517.2642278035481
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_4",
+          "label": "ACCESSORY DWELLING UNIT",
+          "bedroom": false,
+          "point_mm": [
+            165.6297964731852,
+            433.2340855916341
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_5",
+          "label": "HALL",
+          "bedroom": false,
+          "point_mm": [
+            414.7478754679362,
+            136.858442179362
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_6",
+          "label": "PRIMARY BEDROOM",
+          "bedroom": true,
+          "point_mm": [
+            322.05793668958876,
+            187.74310540093313
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_7",
+          "label": "BEDROOM 2",
+          "bedroom": true,
+          "point_mm": [
+            492.7258677164713,
+            187.74310540093313
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_8",
+          "label": "ENSUITE",
+          "bedroom": false,
+          "point_mm": [
+            310.3041967603895,
+            258.2704111735026
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_9",
+          "label": "BEDROOM 1",
+          "bedroom": true,
+          "point_mm": [
+            415.08652835422095,
+            258.2704111735026
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_10",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            503.31232316758894,
+            278.1885429382324
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_11",
+          "label": "WALK-IN CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            350.25921919080946,
+            225.73753475613063
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_12",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            503.35465477837454,
+            250.20620702107746
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_13",
+          "label": "BATH",
+          "bedroom": false,
+          "point_mm": [
+            472.0279924180772,
+            278.1885429382324
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_14",
+          "label": "LAUNDRY",
+          "bedroom": false,
+          "point_mm": [
+            488.3370313856337,
+            136.858442179362
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_15",
+          "label": "STEAM SHOWER",
+          "bedroom": false,
+          "point_mm": [
+            355.08215908474386,
+            274.84421649509
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_16",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            475.04845835367837,
+            248.8285563998752
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "author_room_17",
+          "label": "CLOSET",
+          "bedroom": false,
+          "point_mm": [
+            458.4961095174154,
+            248.8285563998752
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        }
+      ],
+      "openings": [
+        {
+          "id": "bedroom_1_door",
+          "kind": "door",
+          "bbox_mm": [
+            382.6282051282051,
+            217.20256410256405,
+            401.6239316239315,
+            234.57008547008547
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "bedroom_2_door",
+          "kind": "door",
+          "bbox_mm": [
+            445.58547008547004,
+            158.58717948717953,
+            464.58119658119654,
+            178.12564102564102
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "primary_door",
+          "kind": "door",
+          "bbox_mm": [
+            371.2307692307693,
+            132.53589743589748,
+            389.6837606837606,
+            152.07435897435897
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "adu_bedroom_window",
+          "kind": "window",
+          "bbox_mm": [
+            107.46153846153844,
+            489.6555555555555,
+            117.23076923076923,
+            515.7068376068376
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "bedroom_1_window",
+          "kind": "window",
+          "bbox_mm": [
+            395.6538461538461,
+            301.32649572649575,
+            428.7606837606837,
+            310.01025641025643
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "bedroom_2_window",
+          "kind": "window",
+          "bbox_mm": [
+            475.9786324786325,
+            143.39059829059832,
+            504.7435897435897,
+            154.24529914529916
+          ],
+          "intersecting_predictions": []
+        }
+      ],
+      "warnings": [
+        "259 arcs recovered from line chains",
+        "the drawing says it is not to scale ('RENDERINGS ARE NOT TO SCALE; ALL RENDERINGS ARE FOR ARTISTIC DEPICTION ONLY. PLAN UPDATES'): measurements are estimates (tier T3)",
+        "tag D10 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D7 matched no door or window",
+        "tag D7 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D16 matched no door or window",
+        "tag D16 matched no door or window",
+        "tag D1 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D4 matched no door or window",
+        "tag D4 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D6 matched no door or window",
+        "tag D6 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D15 matched no door or window",
+        "tag D15 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D13 matched no door or window",
+        "tag D13 matched no door or window",
+        "tag D2 matched no door or window",
+        "tag D2 matched no door or window",
+        "tag P4 matched no door or window",
+        "tag P4 matched no door or window",
+        "tag D1 matched no door or window",
+        "tag D2 matched no door or window",
+        "tag D3 matched no door or window",
+        "tag D4 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D6 matched no door or window",
+        "tag D7 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D13 matched no door or window",
+        "tag D14 matched no door or window",
+        "tag D15 matched no door or window",
+        "tag D16 matched no door or window",
+        "tag D1 matched no door or window",
+        "tag D2 matched no door or window",
+        "tag D3 matched no door or window",
+        "tag D4 matched no door or window",
+        "tag D5 matched no door or window",
+        "tag D6 matched no door or window",
+        "tag D7 matched no door or window",
+        "tag D8 matched no door or window",
+        "tag D9 matched no door or window",
+        "tag D10 matched no door or window",
+        "tag D11 matched no door or window",
+        "tag D12 matched no door or window",
+        "tag D1 matched no door or window",
+        "learned classifier: 29 rule wall(s) rejected, 12 added",
+        "learned primitive classifier applied (second pass)",
+        "closing of 0.15 m added 42.9% barrier area",
+        "1 room(s) lie in space joined to the outside through gaps no opening explains: they were separated from the outside using their labels (inferred boundaries)"
+      ],
+      "rooms_named_correctly": [
+        0,
+        17
+      ],
+      "id": "chief-a7",
+      "geometry": "Original trained-vector inference on explicitly reviewed scope",
+      "native_anchor_trace": [
+        {
+          "room": "room_7ea3b0e7e9",
+          "native_anchor_status": "conflicting_labels",
+          "native_anchor_ids": [
+            "text_3f783ebb0f",
+            "text_575ac771c1",
+            "text_f9fa0dcba7"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        }
+      ],
+      "source_sha256": "5dc11a31b7790dcd6eec92cdf15fa52f2e1e3cb3c65ef39838f09574d57c383f",
+      "style": "Dense imperial construction sheet with schedules, details and numbered bedrooms",
+      "detected_room_label_texts": 26,
+      "scale": {
+        "metres_per_unit": 0.012,
+        "method": "title_block",
+        "confidence": 0.5,
+        "n_candidates": 14,
+        "n_inliers": 2
+      },
+      "complete_inventory": false
+    },
+    {
+      "annotation_limits": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+      "reference_label_points_covered": [
+        7,
+        14
+      ],
+      "bedrooms_found_and_classified": [
+        2,
+        3
+      ],
+      "raw_predicted_room_count": 7,
+      "raw_elements": {
+        "wall": 64,
+        "other": 22,
+        "window": 33,
+        "opening": 7,
+        "door": 2
+      },
+      "annotated_opening_hits": [
+        1,
+        4
+      ],
+      "schedules_found": [
+        0,
+        0
+      ],
+      "schedule_rows": [],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "bed 1",
+          "bedroom": true,
+          "point_mm": [
+            140.119,
+            215.291
+          ],
+          "matched_id": "room_1f53a93d06",
+          "predicted_type": "bedroom",
+          "predicted_label": "bed 1"
+        },
+        {
+          "id": "r2",
+          "label": "bed 2",
+          "bedroom": true,
+          "point_mm": [
+            140.119,
+            171.476
+          ],
+          "matched_id": "room_1ff93f595c",
+          "predicted_type": "bedroom",
+          "predicted_label": "bed 2"
+        },
+        {
+          "id": "r3",
+          "label": "guest bed",
+          "bedroom": true,
+          "point_mm": [
+            182.187,
+            154.881
+          ],
+          "matched_id": "room_c0b1185996",
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r4",
+          "label": "bathroom",
+          "bedroom": false,
+          "point_mm": [
+            197.16,
+            218.169
+          ],
+          "matched_id": "room_01f12a9464",
+          "predicted_type": "bathroom",
+          "predicted_label": "bathroom"
+        },
+        {
+          "id": "r5",
+          "label": "shower",
+          "bedroom": false,
+          "point_mm": [
+            202.981,
+            158.649
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r6",
+          "label": "utility",
+          "bedroom": false,
+          "point_mm": [
+            185.712,
+            109.161
+          ],
+          "matched_id": "room_9fc6ed26c8",
+          "predicted_type": "storage",
+          "predicted_label": "utility"
+        },
+        {
+          "id": "r7",
+          "label": "hall",
+          "bedroom": false,
+          "point_mm": [
+            226.416,
+            110.685
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r8",
+          "label": "hall",
+          "bedroom": false,
+          "point_mm": [
+            189.925,
+            195.436
+          ],
+          "matched_id": "room_1fdb673ecb",
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r9",
+          "label": "kitchen",
+          "bedroom": false,
+          "point_mm": [
+            257.187,
+            113.394
+          ],
+          "matched_id": "room_adc7eb46a0",
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r10",
+          "label": "dining",
+          "bedroom": false,
+          "point_mm": [
+            251.426,
+            164.067
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r11",
+          "label": "sitting",
+          "bedroom": false,
+          "point_mm": [
+            254.068,
+            207.332
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r12",
+          "label": "orangery",
+          "bedroom": false,
+          "point_mm": [
+            300.096,
+            162.247
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r13",
+          "label": "garage",
+          "bedroom": false,
+          "point_mm": [
+            91.619,
+            191.076
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r14",
+          "label": "workshop",
+          "bedroom": false,
+          "point_mm": [
+            89.594,
+            221.641
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            145.521,
+            187.237,
+            161.837,
+            198.702
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            185.208,
+            203.112,
+            196.233,
+            214.136
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            270.757,
+            199.143,
+            279.135,
+            220.31
+          ],
+          "intersecting_predictions": [
+            "window_e1e2d0b53b"
+          ]
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            115.976,
+            155.928,
+            123.913,
+            180.622
+          ],
+          "intersecting_predictions": []
+        }
+      ],
+      "warnings": [
+        "17 arcs recovered from line chains",
+        "scale unknown: thresholds assume 0.1 m per unit; confidences x0.7",
+        "learned classifier: 12 rule wall(s) rejected, 10 added",
+        "learned primitive classifier applied (second pass)",
+        "5 room(s) lie in space joined to the outside through gaps no opening explains: they were separated from the outside using their labels (inferred boundaries)",
+        "1 merged space(s) were separated using the room labels: those boundaries are inferred from the names on the drawing, not from drawn walls"
+      ],
+      "rooms_named_correctly": [
+        4,
+        14
+      ],
+      "id": "uk-proposed",
+      "geometry": "Original trained-vector inference on explicitly reviewed scope",
+      "native_anchor_trace": [
+        {
+          "room": "room_01f12a9464",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_10a22ecbac"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_1f53a93d06",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_176b7ef8d2"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_1ff93f595c",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_c8ae3aecf9"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_1fdb673ecb",
+          "native_anchor_status": "conflicting_labels",
+          "native_anchor_ids": [
+            "text_6567e014db",
+            "text_69434d2d43",
+            "text_f10f4f45de"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_c0b1185996",
+          "native_anchor_status": "missing_label",
+          "native_anchor_ids": [],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_9fc6ed26c8",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_9943d88ac1"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_adc7eb46a0",
+          "native_anchor_status": "conflicting_labels",
+          "native_anchor_ids": [
+            "text_ce6262cde4",
+            "text_f773028cdd"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        }
+      ],
+      "source_sha256": "5dd77c157887bfde5b0f996e17309811ecd464b5fd44bf15b60639744b5c6139",
+      "style": "Metric thin-line bungalow plan with large open-plan zones, furniture and small labels",
+      "detected_room_label_texts": 11,
+      "scale": {
+        "metres_per_unit": null,
+        "method": "none",
+        "confidence": 0.0,
+        "n_candidates": 0,
+        "n_inliers": 0
+      },
+      "complete_inventory": false
+    },
+    {
+      "annotation_limits": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+      "reference_label_points_covered": [
+        0,
+        7
+      ],
+      "bedrooms_found_and_classified": [
+        0,
+        1
+      ],
+      "raw_predicted_room_count": 0,
+      "raw_elements": {
+        "wall": 7,
+        "column": 8
+      },
+      "annotated_opening_hits": [
+        0,
+        4
+      ],
+      "schedules_found": [
+        0,
+        0
+      ],
+      "schedule_rows": [],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "Living / Dining",
+          "bedroom": false,
+          "point_mm": [
+            179.526,
+            189.294
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r2",
+          "label": "Garage",
+          "bedroom": false,
+          "point_mm": [
+            174.648,
+            114.491
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r3",
+          "label": "Bedroom",
+          "bedroom": true,
+          "point_mm": [
+            114.969,
+            124.312
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r4",
+          "label": "Bath",
+          "bedroom": false,
+          "point_mm": [
+            158.153,
+            111.528
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r5",
+          "label": "Toilet",
+          "bedroom": false,
+          "point_mm": [
+            143.597,
+            109.242
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r6",
+          "label": "Kitchen",
+          "bedroom": false,
+          "point_mm": [
+            162.061,
+            158.327
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        },
+        {
+          "id": "r7",
+          "label": "Hallway",
+          "bedroom": false,
+          "point_mm": [
+            198.296,
+            152.823
+          ],
+          "matched_id": null,
+          "predicted_type": null,
+          "predicted_label": null
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            209.903,
+            144.434,
+            217.84,
+            158.104
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            175.507,
+            158.986,
+            190.5,
+            170.452
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            215.635,
+            170.893,
+            225.778,
+            188.091
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            90.399,
+            103.865,
+            101.865,
+            126.354
+          ],
+          "intersecting_predictions": []
+        }
+      ],
+      "warnings": [
+        "1 arcs recovered from line chains",
+        "scale unknown: thresholds assume 0.1 m per unit; confidences x0.7",
+        "learned classifier: 0 rule wall(s) rejected, 4 added",
+        "learned primitive classifier applied (second pass)"
+      ],
+      "rooms_named_correctly": [
+        0,
+        7
+      ],
+      "id": "uk-existing-single",
+      "geometry": "Original trained-vector inference on explicitly reviewed scope",
+      "native_anchor_trace": [],
+      "source_sha256": "d1d2c29de560cd56c18bc09aecb1a1054b94353bdb636a0ebc3d4c91606b818e",
+      "style": "Metric shaded-wall site/house plan with oblique wing, printed room areas, colored openings",
+      "detected_room_label_texts": 7,
+      "scale": {
+        "metres_per_unit": null,
+        "method": "none",
+        "confidence": 0.0,
+        "n_candidates": 0,
+        "n_inliers": 0
+      },
+      "complete_inventory": false
+    },
+    {
+      "annotation_limits": "Assistant source reading, no independent review. Native text supplies coordinate anchors only; no checker or perception output was used. Functional space labels can share open-plan regions; point matching is not geometric room recall.",
+      "opening_scope": "Four selected visible opening boxes, two doors and two windows; not a complete opening inventory. Global precision/recall unmeasured.",
+      "point_metric_limit": "Point containment is not polygon-IoU room recall; merged or misclassified regions may cover reference points.",
+      "reference_label_points_covered": [
+        5,
+        5
+      ],
+      "bedrooms_found_and_classified": [
+        2,
+        2
+      ],
+      "raw_predicted_room_count": 7,
+      "raw_elements": {
+        "wall": 58,
+        "other": 12,
+        "opening": 2,
+        "door": 8,
+        "window": 1
+      },
+      "annotated_opening_hits": [
+        2,
+        4
+      ],
+      "schedules_found": [
+        0,
+        0
+      ],
+      "schedule_rows": [],
+      "rooms": [
+        {
+          "id": "r1",
+          "label": "Bedroom 1",
+          "bedroom": true,
+          "point_mm": [
+            141.447,
+            425.072
+          ],
+          "matched_id": "room_38b0733008",
+          "predicted_type": "bedroom",
+          "predicted_label": "Bedroom 1"
+        },
+        {
+          "id": "r2",
+          "label": "Bedroom 2",
+          "bedroom": true,
+          "point_mm": [
+            170.445,
+            520.364
+          ],
+          "matched_id": "room_83214e0906",
+          "predicted_type": "bedroom",
+          "predicted_label": "Bedroom 2"
+        },
+        {
+          "id": "r3",
+          "label": "Ensuite",
+          "bedroom": false,
+          "point_mm": [
+            137.924,
+            437.983
+          ],
+          "matched_id": "room_05a564947c",
+          "predicted_type": "bathroom",
+          "predicted_label": "Ensuite"
+        },
+        {
+          "id": "r4",
+          "label": "Ensuite",
+          "bedroom": false,
+          "point_mm": [
+            177.675,
+            500.467
+          ],
+          "matched_id": "room_ecf999b71d",
+          "predicted_type": "bathroom",
+          "predicted_label": "Ensuite"
+        },
+        {
+          "id": "r5",
+          "label": "Communal Kitchen",
+          "bedroom": false,
+          "point_mm": [
+            152.691,
+            473.967
+          ],
+          "matched_id": "room_8459f5b69e",
+          "predicted_type": null,
+          "predicted_label": null
+        }
+      ],
+      "openings": [
+        {
+          "id": "o1",
+          "kind": "door",
+          "bbox_mm": [
+            145.962,
+            404.46,
+            159.191,
+            415.484
+          ],
+          "intersecting_predictions": [
+            "door_81ab5b264a"
+          ]
+        },
+        {
+          "id": "o2",
+          "kind": "door",
+          "bbox_mm": [
+            167.128,
+            502.797,
+            175.948,
+            512.939
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o3",
+          "kind": "window",
+          "bbox_mm": [
+            154.34,
+            530.137,
+            181.24,
+            536.751
+          ],
+          "intersecting_predictions": []
+        },
+        {
+          "id": "o4",
+          "kind": "window",
+          "bbox_mm": [
+            132.733,
+            406.665,
+            143.316,
+            411.515
+          ],
+          "intersecting_predictions": [
+            "window_4774a229f5"
+          ]
+        }
+      ],
+      "warnings": [
+        "8 arcs recovered from line chains",
+        "scale unknown: thresholds assume 0.1 m per unit; confidences x0.7",
+        "learned classifier: 11 rule wall(s) rejected, 24 added",
+        "learned primitive classifier applied (second pass)",
+        "closing of 0.15 m added 3.3% barrier area",
+        "2 room(s) lie in space joined to the outside through gaps no opening explains: they were separated from the outside using their labels (inferred boundaries)",
+        "1 merged space(s) were separated using the room labels: those boundaries are inferred from the names on the drawing, not from drawn walls"
+      ],
+      "rooms_named_correctly": [
+        4,
+        5
+      ],
+      "id": "uk-existing-pair",
+      "geometry": "Original trained-vector inference on explicitly reviewed scope",
+      "native_anchor_trace": [
+        {
+          "room": "room_83214e0906",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_067f9bb4d6"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_ecf999b71d",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_738c889bea"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_8459f5b69e",
+          "native_anchor_status": "conflicting_labels",
+          "native_anchor_ids": [
+            "text_353d9afa7d",
+            "text_d9213dc5e5"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false,
+          "boundary_issue": "inferred_from_labels; enclosure not established by this naming step"
+        },
+        {
+          "room": "room_05a564947c",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_77bb98e6f0"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_d148dd3648",
+          "native_anchor_status": "missing_label",
+          "native_anchor_ids": [],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_74e2f0237b",
+          "native_anchor_status": "missing_label",
+          "native_anchor_ids": [],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        },
+        {
+          "room": "room_38b0733008",
+          "native_anchor_status": "anchored",
+          "native_anchor_ids": [
+            "text_385314e577"
+          ],
+          "geometry_changed": false,
+          "classification_confirmed": false
+        }
+      ],
+      "source_sha256": "11dfb591d5ab8591b20923986c6cee63acf94e56024851f5006555752e87ebd0",
+      "style": "Rotated A1 multi-view existing/proposed conversion sheet with hatched walls and elevations",
+      "detected_room_label_texts": 7,
+      "scale": {
+        "metres_per_unit": null,
+        "method": "none",
+        "confidence": 0.0,
+        "n_candidates": 0,
+        "n_inliers": 0
+      },
+      "complete_inventory": false
+    }
+  ],
+  "status": "COMPLETED_FOUR_FROZEN_DRAWINGS",
+  "reference_freeze_commit": "c1c452b3",
+  "weights_sha256": "f13a5f34636db60a66ba80162ea0d276b7bbcd99bda13d532bd3538cd25ceb26"
+}
