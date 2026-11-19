@@ -1,70 +1,61 @@
 # ReviewPulse — current status
 
-19 November 2026. **The scorer overstated failure, but reliable automatic
-interpretation is still unproven.** Compact-expression hosting is stopped.
-Typed-slot and closed-link requests now use strict JSON schema with focused
-catalogue retrieval. The first production draft completed, then the daily
-allowance blocked continuation. API failures are excluded from semantic counts.
-Drawings stay local; keys come only from the environment. No billing was enabled.
-The fourth document remains sealed; no final pipeline has been chosen.
+19 November 2026. **A narrow assisted table helper works; a general interpreter
+has not been demonstrated.** Numeric values, units and applicability come from
+source cells; four hosted closed-menu choices select fact names. On development
+data it produces 12 correct thermal rules, but covers only 12/36 numeric
+obligations. This fails our pre-registered 18/36 selection threshold. No pipeline
+is selected; the fourth document remains sealed and unrun. Next: get independent
+grades, then decide whether the narrow table scope is sufficient. Do not broaden
+claims or tune the sealed test. Drawings stay local; no billing was enabled.
 
 ## Measured
 
-Thirty saved GPT drafts were directly **assistant-adjudicated**, with user
-approval of that limitation: **3/30 correct intended meanings, 16/30 partial,
-11/30 wrong**. None of the three correct intentions became retained rules.
-The old scorer undercredits **73/95** eligible decisive slot judgments; revised
-scoring undercredits **26/95**, with **0/95 overcredits**. Partial judgments and
-unannotated scopes are excluded. This is development resubstitution, not a
-held-out scorer validation. [Review table](../reports/draft-adjudication-30.md).
+| Development measurement | Result |
+| --- | --- |
+| Thermal full rules, assistant-source-reviewed | 12/15 correct, zero edits; 3/15 need context/unit |
+| Thermal typed scope and quantity/comparator | 15/15 match frozen references |
+| All numeric obligations, edit burden | 12/36 zero; 0/36 one; 21/36 rewrite; 3/36 missing context |
+| Source-wrong/incomplete approvable table rules | 0/12, assistant review only |
+| Four cached fact-choice calls | 4/4 complete; 2,030 total tokens; 0/4 HTTP errors |
+| Old 30 drafts, estimated repair burden | 0/30 zero; 0/30 one; 19/30 two-plus; 11/30 rewrite |
+| Raw relational declarations | 2/3 type-valid, 0/3 source-correct; 0/4 old wrong bindings automatically repaired |
+| Independent teammate grades | 0/10 returned; agreement unmeasured |
 
-| Arm | Complete | Retained | Source correctness reviewed |
-| --- | --- | --- | --- |
-| Archived GPT expression, monolithic | 45/46 | 0/45 | 1/15 sampled intentions correct |
-| Archived GPT expression, staged | 44/46 | 1/44 | 2/15 sampled intentions correct |
-| Production typed slots, strict | 1/46 | 0/1 | 0/1 correct |
-| Closed numeric linking, strict | 2/46 | 0/2 | 0/2 whole rules correct |
+Retrospective edit plans are assistant estimates, not observed human effort.
+Fact declarations do not create values: all 3 manually corrected relational
+measurements remain evidence requests, with 0/3 full clauses decided.
+[Table review](../reports/assisted-numeric-review.md),
+[edit rubric/results](../reports/assisted-edit-burden.json).
 
-The sole retained expression is **incomplete against its source: 1/1 reviewed
-approvable candidates**. Its fixture predicate match did not establish correct
-scope. The former fixture-based 0/1 error count must not be used as precision.
+Exact polygonization covers **0/17, 0/14, 0/7 and 1/5** frozen real-PDF room
+points; bedrooms **0/4, 0/3, 0/1 and 0/2**. It is not promoted over the existing
+builder. Synthetic CAD control: **3/3** rooms, **2/2** bedrooms; no real DXF was
+found. These are point hits, not region overlap or global opening recall.
 
-All **69/69 parse failures** were categorized: naming/operator form **35/69**,
-unsupported constructs **17/69**, semantic errors **17/69**, wrappers **0/69**.
-Logged surface normalization moves **5/69** beyond parsing, retains **0/69**
-after the remaining gates, and never invents scope or omitted constraints.
-
-| Frozen drawing scope | Named space points | Bedrooms classified |
-| --- | --- | --- |
-| A-7 | 0/17 | 0/4 |
-| Thin-line bungalow | 4/14 | 2/3 |
-| Shaded-wall plan | 0/7 | 0/1 |
-| Proposed conversion | 4/5 | 2/2 |
-
-Native naming cannot repair missing enclosures. The existing builder already
-used native labels; this pass adds conflict checks/provenance. Trained models
-classify primitives, not room use. Opening annotations are partial; global
-opening precision/recall is unmeasured. A-7 schedules remain **0/2**.
+The [eight-target actual assisted attempt](eight-rule-demo.md) completed **7/8**
+text-only readings; **1/8** provider request rejection is excluded from semantic
+failures. All **7/7** completed readings required full reviewer rewrites:
+**0/8 automatic decisions, 2/8 scenario-assisted decisions, 5/8 validation
+needs-review, 1/8 unavailable**. Validation exposes rounded unit equivalents,
+missing entity-owned facts and angle protocol coverage. The two decisions use
+an assistant-designated entrance scenario; they do not establish legal egress
+compliance. With **0 gold violations**, false-pass rate **0/0** and violation
+precision **0/0** are undefined. This demonstrates assisted execution only.
 
 ## Not measured
 
-Full paired strict-arm comparison, independent human grading, actual reviewer
-edit effort, whole-drawing completeness, general segmentation regression and
-held-out adaptation. An [eight-rule single-code demo](eight-rule-demo.md) is
-selected but **unrun**; original source text and quota-available drafting remain
-blockers. Its edit, decision and false-pass counts are unknown, not zero.
+Independent human correctness/edit time, a completed paired general drafting
+comparison, real Moroccan CAD transfer, whole-building inventory completeness,
+general perception regression, and held-out adaptation. A blinded 10-draft CSV
+is ready; agreement waits for its return. See [selection decision](assisted-pipeline-choice.md).
 
 ## Do not claim
 
-Improved interpretation accuracy, a winning architecture, reliable general
-adaptation or safety from abstention. All labels lack independent review;
-historical ledger attestations are synthetic. The older five-rule authored
-brief achieved 0/5 automatic and 3/5 author-assisted decisions; it is not an
-automated regulation-to-plan demonstration. Finite capabilities, small samples
-and the provisional 25% scale bound remain limitations.
-
-Next: finish the strict development comparison and record actual edits before
-choosing a pipeline or unsealing the fourth document. Detailed evidence,
-transport counts, tests and [archived runs](results-history.md) remain available.
-
-Validation: **1,126 tests passed; two skipped; 45 slow excluded.**
+General automated regulation interpretation, improved held-out accuracy,
+zero false passes from an empty violation sample, or safety from abstention.
+Labels lack independent review; historical ledger attestations are synthetic.
+Capabilities are finite; test sets are small; the 25% scale bound is provisional.
+Detailed budgets, negative results and prior runs are in
+[history](results-history.md), [token budget](assisted-token-budget.md), and
+[polygonize report](../reports/polygonize-study.md).

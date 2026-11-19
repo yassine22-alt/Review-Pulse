@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-19",
+  "registration_commit": "b2fcec8f",
+  "numeric_membership_commit": "278b70d7",
+  "status": "NO_CANDIDATE_QUALIFIES",
+  "candidate": "deterministic table frame + closed fact-name selection",
+  "low_burden": [
+    12,
+    36
+  ],
+  "required_share": 0.5,
+  "source_wrong_approvable": [
+    0,
+    12
+  ],
+  "required_reviewed_approvable": 10,
+  "independent_grades_returned": [
+    0,
+    10
+  ],
+  "other_candidate": "Production typed-slot comparison incomplete; not eligible for ranking.",
+  "decision": "Select none. Do not run the fourth document. Do not change criteria to fit results.",
+  "source_review": "Assistant/benchmark author, no independent review. No held-out improvement claim."
+}
