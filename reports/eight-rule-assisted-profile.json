@@ -1,0 +1,459 @@
+{
+  "source_kind": "2021 IRC Chapter 3 first printing, official indexed text",
+  "source": {
+    "publisher": "International Code Council; original indexed publisher text, direct fetch HTTP 403",
+    "sheet": "UK PL101 H, illustrative only",
+    "edition": "2021 IRC Chapter 3 first printing",
+    "url": "https://codes.iccsafe.org/content/IRC2021P1/chapter-3-building-planning",
+    "jurisdiction": "IRC is an illustrative selected code, not claimed to govern this UK drawing."
+  },
+  "scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+  "reviewer": "assistant benchmark author; no independent review",
+  "requirements": [
+    {
+      "id": "R304.1",
+      "text": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens.",
+      "subject": "habitable room",
+      "requirement": {
+        "node": "forall",
+        "collection": "habitable_rooms",
+        "variable": "$r",
+        "body": {
+          "node": "any",
+          "args": [
+            {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "room_type"
+              },
+              "right": {
+                "node": "literal",
+                "value": "kitchen",
+                "unit": "1"
+              }
+            },
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "eligible_area_m2"
+              },
+              "right": {
+                "node": "literal",
+                "value": 70,
+                "unit": "ft2"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "R304.3": "Portions of a room with a sloping ceiling measuring less than 5 feet (1524 mm) or a furred ceiling measuring less than 7 feet (2134 mm) from the finished floor to the finished ceiling shall not be considered as contributing to the minimum required habitable area for that room."
+      }
+    },
+    {
+      "id": "R304.2",
+      "text": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens.",
+      "subject": "habitable room",
+      "requirement": {
+        "node": "forall",
+        "collection": "habitable_rooms",
+        "variable": "$r",
+        "body": {
+          "node": "any",
+          "args": [
+            {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "room_type"
+              },
+              "right": {
+                "node": "literal",
+                "value": "kitchen",
+                "unit": "1"
+              }
+            },
+            {
+              "node": "ge",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "min_width_m"
+              },
+              "right": {
+                "node": "literal",
+                "value": 7,
+                "unit": "ft"
+              }
+            }
+          ]
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "R311.1",
+      "text": "Dwellings shall be provided with a means of egress in accordance with this section. The means of egress shall provide a continuous and unobstructed path of vertical and horizontal egress travel from all portions of the dwelling to the required egress door without requiring travel through a garage. The required egress door shall open directly into a public way or to a yard or court that opens to a public way.",
+      "subject": "dwelling",
+      "requirement": {
+        "node": "all",
+        "args": [
+          {
+            "node": "forall",
+            "collection": "dwelling_portions",
+            "variable": "$r",
+            "body": {
+              "node": "exists",
+              "collection": "required_egress_doors",
+              "variable": "$d",
+              "body": {
+                "node": "path_exists",
+                "origin": "$r",
+                "destination": "$d",
+                "node_filter": {
+                  "node": "not",
+                  "args": [
+                    {
+                      "node": "eq",
+                      "left": {
+                        "node": "fact",
+                        "entity": "$node",
+                        "name": "room_type"
+                      },
+                      "right": {
+                        "node": "literal",
+                        "value": "garage",
+                        "unit": "1"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "node": "forall",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "body": {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "qualifying_public_discharge"
+              },
+              "right": {
+                "node": "literal",
+                "value": true,
+                "unit": "1"
+              }
+            }
+          },
+          {
+            "node": "forall",
+            "collection": "dwelling_portions",
+            "variable": "$r",
+            "body": {
+              "node": "eq",
+              "left": {
+                "node": "fact",
+                "entity": "$r",
+                "name": "continuous_unobstructed_egress"
+              },
+              "right": {
+                "node": "literal",
+                "value": true,
+                "unit": "1"
+              }
+            }
+          }
+        ]
+      },
+      "context": {}
+    },
+    {
+      "id": "R311.2-count",
+      "text": "Not less than one egress door shall be provided for each dwelling unit.",
+      "subject": "dwelling",
+      "requirement": {
+        "node": "ge",
+        "left": {
+          "node": "count",
+          "collection": "required_egress_doors",
+          "variable": "$r"
+        },
+        "right": {
+          "node": "literal",
+          "value": 1,
+          "unit": "count"
+        }
+      },
+      "context": {
+        "R311.2-parent": "Not less than one egress door shall be provided for each dwelling unit. The egress door shall be side-hinged, and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad). The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop. Other doors shall not be required to comply with these minimum dimensions. Egress doors shall be readily openable from inside the dwelling without the use of a key or special knowledge or effort."
+      }
+    },
+    {
+      "id": "R311.2-hinge",
+      "text": "The egress door shall be side-hinged,",
+      "subject": "egress door",
+      "requirement": {
+        "node": "forall",
+        "collection": "required_egress_doors",
+        "variable": "$r",
+        "body": {
+          "node": "eq",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "side_hinged"
+          },
+          "right": {
+            "node": "literal",
+            "value": true,
+            "unit": "1"
+          }
+        }
+      },
+      "context": {
+        "R311.2-parent": "Not less than one egress door shall be provided for each dwelling unit. The egress door shall be side-hinged, and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad). The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop. Other doors shall not be required to comply with these minimum dimensions. Egress doors shall be readily openable from inside the dwelling without the use of a key or special knowledge or effort."
+      }
+    },
+    {
+      "id": "R311.2-width",
+      "text": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad).",
+      "subject": "egress door",
+      "requirement": {
+        "node": "forall",
+        "collection": "required_egress_doors",
+        "variable": "$r",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "clear_width_at_90_m"
+          },
+          "right": {
+            "node": "literal",
+            "value": 32,
+            "unit": "in"
+          }
+        }
+      },
+      "context": {
+        "R311.2-parent": "Not less than one egress door shall be provided for each dwelling unit. The egress door shall be side-hinged, and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad). The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop. Other doors shall not be required to comply with these minimum dimensions. Egress doors shall be readily openable from inside the dwelling without the use of a key or special knowledge or effort."
+      }
+    },
+    {
+      "id": "R311.2-height",
+      "text": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop.",
+      "subject": "egress door",
+      "requirement": {
+        "node": "forall",
+        "collection": "required_egress_doors",
+        "variable": "$r",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "clear_height_m"
+          },
+          "right": {
+            "node": "literal",
+            "value": 78,
+            "unit": "in"
+          }
+        }
+      },
+      "context": {
+        "R311.2-parent": "Not less than one egress door shall be provided for each dwelling unit. The egress door shall be side-hinged, and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad). The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop. Other doors shall not be required to comply with these minimum dimensions. Egress doors shall be readily openable from inside the dwelling without the use of a key or special knowledge or effort."
+      }
+    },
+    {
+      "id": "R311.6",
+      "text": "The width of a hallway shall be not less than 3 feet (914 mm).",
+      "subject": "hallway",
+      "requirement": {
+        "node": "forall",
+        "collection": "hallways",
+        "variable": "$r",
+        "body": {
+          "node": "ge",
+          "left": {
+            "node": "fact",
+            "entity": "$r",
+            "name": "min_width_m"
+          },
+          "right": {
+            "node": "literal",
+            "value": 3,
+            "unit": "ft"
+          }
+        }
+      },
+      "context": {}
+    }
+  ],
+  "source_page": 0,
+  "native_dimension_citations": [
+    "bed 1",
+    "hall"
+  ],
+  "reviewed_inputs": {
+    "bindings": {
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Reviewer-confirmed space classification"
+      },
+      "eligible_area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Floor area after ceiling exclusions in R304.3; not gross detected area"
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal horizontal dimension"
+      },
+      "qualifying_public_discharge": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Required door opens to public way or qualifying yard/court"
+      },
+      "continuous_unobstructed_egress": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Confirmed continuous unobstructed egress through all required levels"
+      },
+      "side_hinged": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Side-hinged operation of designated door"
+      },
+      "clear_width_at_90_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Face-to-stop net clear width with door open 90 degrees"
+      },
+      "clear_height_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Top-of-threshold to bottom-of-stop clear height"
+      }
+    },
+    "facts": {
+      "front_door": {
+        "side_hinged": {
+          "trusted": true,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review",
+          "source": "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan.",
+          "value": true
+        }
+      },
+      "bed_1": {
+        "room_type": {
+          "trusted": true,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review",
+          "source": "PL101 H native label bed 1",
+          "value": "bedroom"
+        }
+      },
+      "hall": {
+        "room_type": {
+          "trusted": true,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review",
+          "source": "PL101 H native hall label",
+          "value": "corridor"
+        }
+      }
+    },
+    "collections": {
+      "habitable_rooms": {
+        "items": [
+          "bed_1"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "dwelling_portions": {
+        "items": [
+          "bed_1",
+          "hall"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "hallways": {
+        "items": [
+          "hall"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "required_egress_doors": {
+        "items": [
+          "front_door"
+        ],
+        "complete": true,
+        "trusted": true
+      }
+    },
+    "graph_complete": false,
+    "project_metadata": {},
+    "evidence_locations": {
+      "eligible_area_m2": "Internal dimension survey and ceiling sections",
+      "clear_width_at_90_m": "Clear opening schedule or measured face-to-stop opening at 90 degrees",
+      "clear_height_m": "Threshold-to-stop clear height survey",
+      "qualifying_public_discharge": "Site egress drawing and approval"
+    }
+  },
+  "reviewed_nodes": [
+    {
+      "id": "front_door",
+      "kind": "door"
+    },
+    {
+      "id": "bed_1",
+      "kind": "room"
+    },
+    {
+      "id": "hall",
+      "kind": "room"
+    }
+  ],
+  "reviewed_edges": [],
+  "inventory_attestation": {
+    "building_inventory_complete": false,
+    "graph_complete": false,
+    "required_egress_doors": "Complete only within the explicitly reviewer-designated one-door scenario, not an automatic or legally verified inventory"
+  },
+  "expected_outcomes": {
+    "R304.1": "UNRESOLVED",
+    "R304.2": "UNRESOLVED",
+    "R311.1": "UNRESOLVED",
+    "R311.2-count": "SATISFIED",
+    "R311.2-hinge": "SATISFIED",
+    "R311.2-width": "UNRESOLVED",
+    "R311.2-height": "UNRESOLVED",
+    "R311.6": "UNRESOLVED"
+  },
+  "truth_limits": "Author scenario labels frozen before drafting/evaluation, no independent review, no violated examples: false-pass denominator zero. Reviewer designation is hypothetical, not confirmed regulatory applicability.",
+  "limits": [
+    "LLM receives original regulation text only; drawings never sent.",
+    "Eight full formalizations are reviewer rewrites; neutral semantic reading is not executable drafting.",
+    "No dimensional values inferred from nominal sizes or pixel geometry.",
+    "Printed dimensions are approximate and subject to site survey. No confirmed whole-building inventories.",
+    "UK drawing is not claimed governed by IRC. Atomic requirements are not whole-section compliance."
+  ],
+  "automatic_scope_selectors": {}
+}

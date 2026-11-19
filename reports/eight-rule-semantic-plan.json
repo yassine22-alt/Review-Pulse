@@ -1,0 +1,19 @@
+{
+  "source": {
+    "publisher": "International Code Council; original indexed publisher text, direct fetch HTTP 403",
+    "sheet": "UK PL101 H, illustrative only",
+    "edition": "2021 IRC Chapter 3 first printing",
+    "url": "https://codes.iccsafe.org/content/IRC2021P1/chapter-3-building-planning",
+    "jurisdiction": "IRC is an illustrative selected code, not claimed to govern this UK drawing."
+  },
+  "contract": "Source-only neutral semantic reading, not executable slots",
+  "model": "openai/gpt-oss-120b",
+  "rows": [],
+  "http_events": [],
+  "estimated_input_tokens": [
+    3466,
+    6938
+  ],
+  "output_cap_total": 6144,
+  "status": "OFFLINE_PLAN"
+}
