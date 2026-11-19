@@ -1,0 +1,336 @@
+{
+  "source": {
+    "publisher": "International Code Council; original indexed publisher text, direct fetch HTTP 403",
+    "sheet": "UK PL101 H, illustrative only",
+    "edition": "2021 IRC Chapter 3 first printing",
+    "url": "https://codes.iccsafe.org/content/IRC2021P1/chapter-3-building-planning",
+    "jurisdiction": "IRC is an illustrative selected code, not claimed to govern this UK drawing."
+  },
+  "contract": "Source-only neutral semantic reading, not executable slots",
+  "model": "openai/gpt-oss-120b",
+  "rows": [
+    {
+      "id": "R304.1",
+      "status": "DRAFTED",
+      "raw": {
+        "is_requirement": true,
+        "subject": "Habitable rooms",
+        "constraints": [
+          "floor area >= 70 square feet (6.5 m2)"
+        ],
+        "applicability": [
+          "habitable rooms"
+        ],
+        "exceptions": [
+          "Kitchens"
+        ],
+        "relationships": [
+          "R304.3"
+        ],
+        "references": [
+          "R304.3"
+        ],
+        "uncertain": [
+          "Interpretation of exception scope (whether entire kitchen spaces are excluded)"
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 486,
+        "completion_tokens": 540,
+        "seconds": 1.69,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R304.2",
+      "status": "DRAFTED",
+      "raw": {
+        "is_requirement": true,
+        "subject": "Habitable rooms",
+        "constraints": [
+          "must have any horizontal dimension not less than 7 feet (2134 mm)"
+        ],
+        "applicability": [
+          "habitable rooms"
+        ],
+        "exceptions": [
+          "Kitchens"
+        ],
+        "relationships": [],
+        "references": [],
+        "uncertain": []
+      },
+      "usage": {
+        "prompt_tokens": 404,
+        "completion_tokens": 403,
+        "seconds": 5.52,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R311.1",
+      "status": "REQUEST_REJECTED",
+      "reason": "REQUEST_REJECTED"
+    },
+    {
+      "id": "R311.2-count",
+      "status": "DRAFTED",
+      "raw": {
+        "subject": "egress door",
+        "constraints": [
+          "Not less than one egress door shall be provided for each dwelling unit."
+        ],
+        "applicability": [
+          "each dwelling unit"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "R311.2-parent"
+        ],
+        "references": [
+          "R311.2-parent"
+        ],
+        "uncertain": [],
+        "is_requirement": true
+      },
+      "usage": {
+        "prompt_tokens": 554,
+        "completion_tokens": 472,
+        "seconds": 5.45,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R311.2-hinge",
+      "status": "DRAFTED",
+      "raw": {
+        "subject": "egress door",
+        "constraints": [
+          "shall be side-hinged"
+        ],
+        "applicability": [
+          "egress doors of each dwelling unit"
+        ],
+        "exceptions": [],
+        "relationships": [
+          "parent article R311.2-parent"
+        ],
+        "references": [
+          "R311.2-parent"
+        ],
+        "uncertain": [
+          "whether side-hinge applies to all egress doors or only the required one per dwelling unit",
+          "whether interior doors are included in the side-hinge requirement"
+        ],
+        "is_requirement": true
+      },
+      "usage": {
+        "prompt_tokens": 551,
+        "completion_tokens": 640,
+        "seconds": 6.21,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R311.2-width",
+      "status": "DRAFTED",
+      "raw": {
+        "is_requirement": true,
+        "subject": "clear width of egress door",
+        "constraints": [
+          "clear width >= 32 inches (813 mm)",
+          "measurement taken between face of door and stop",
+          "door must be open 90 degrees (1.57 rad) during measurement"
+        ],
+        "applicability": [
+          "egress doors of each dwelling unit"
+        ],
+        "exceptions": [
+          "non‑egress doors are not required to meet this dimension"
+        ],
+        "relationships": [
+          "parent article R311.2-parent"
+        ],
+        "references": [
+          "R311.2-width",
+          "R311.2-parent"
+        ],
+        "uncertain": [
+          "exact point on stop used for measurement may be ambiguous",
+          "whether the measurement includes any door frame components"
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 582,
+        "completion_tokens": 742,
+        "seconds": 6.24,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R311.2-height",
+      "status": "DRAFTED",
+      "raw": {
+        "subject": "clear height of the door opening",
+        "constraints": [
+          "shall be not less than 78 inches (1981 mm) measured from the top of the threshold to the bottom of the stop"
+        ],
+        "applicability": [
+          "egress doors of each dwelling unit"
+        ],
+        "exceptions": [
+          "other doors are not required to comply with these minimum dimensions"
+        ],
+        "relationships": [
+          "parent article R311.2-parent"
+        ],
+        "references": [
+          "R311.2-parent"
+        ],
+        "uncertain": [],
+        "is_requirement": true
+      },
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 512,
+        "seconds": 5.34,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": "R311.6",
+      "status": "DRAFTED",
+      "raw": {
+        "subject": "hallway width",
+        "constraints": [
+          "width >= 3 feet (914 mm)"
+        ],
+        "applicability": [],
+        "exceptions": [],
+        "relationships": [],
+        "references": [],
+        "uncertain": [],
+        "is_requirement": true
+      },
+      "usage": {
+        "prompt_tokens": 396,
+        "completion_tokens": 325,
+        "seconds": 5.58,
+        "mode": "json_schema",
+        "model": "openai/gpt-oss-120b",
+        "finish_reason": "stop"
+      }
+    }
+  ],
+  "http_events": [
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "7203",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "5.977s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "6816",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "8.879s"
+      }
+    },
+    {
+      "http_status": 400,
+      "attempt": 1,
+      "category": "json_validate_failed",
+      "schema_keywords": [],
+      "budget_numbers": {}
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "6732",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "9.51s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "6233",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "13.252s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "994",
+        "x-ratelimit-remaining-tokens": "6109",
+        "x-ratelimit-reset-requests": "8m38.4s",
+        "x-ratelimit-reset-tokens": "14.182s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "993",
+        "x-ratelimit-remaining-tokens": "5088",
+        "x-ratelimit-reset-requests": "10m4.8s",
+        "x-ratelimit-reset-tokens": "21.84s"
+      }
+    },
+    {
+      "http_status": 200,
+      "attempt": 1,
+      "limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "992",
+        "x-ratelimit-remaining-tokens": "4984",
+        "x-ratelimit-reset-requests": "11m31.2s",
+        "x-ratelimit-reset-tokens": "22.62s"
+      }
+    }
+  ],
+  "estimated_input_tokens": [
+    3466,
+    6938
+  ],
+  "output_cap_total": 6144,
+  "status": "COMPLETE"
+}

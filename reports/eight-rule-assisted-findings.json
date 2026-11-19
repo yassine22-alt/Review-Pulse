@@ -1,0 +1,3854 @@
+{
+  "source": {
+    "publisher": "International Code Council; original indexed publisher text, direct fetch HTTP 403",
+    "sheet": "UK PL101 H, illustrative only",
+    "edition": "2021 IRC Chapter 3 first printing",
+    "url": "https://codes.iccsafe.org/content/IRC2021P1/chapter-3-building-planning",
+    "jurisdiction": "IRC is an illustrative selected code, not claimed to govern this UK drawing."
+  },
+  "limits": [
+    "LLM receives original regulation text only; drawings never sent.",
+    "Eight full formalizations are reviewer rewrites; neutral semantic reading is not executable drafting.",
+    "No dimensional values inferred from nominal sizes or pixel geometry.",
+    "Printed dimensions are approximate and subject to site survey. No confirmed whole-building inventories.",
+    "UK drawing is not claimed governed by IRC. Atomic requirements are not whole-section compliance."
+  ],
+  "requirements": [
+    {
+      "id": "R304.1",
+      "source": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens.",
+      "manual_slots": {
+        "id": "R304.1",
+        "title": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens.",
+        "subject": "habitable room",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "room_type",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": "kitchen",
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "eq",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "eligible_area_m2",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 70,
+            "unit": "ft2",
+            "id": "n6"
+          },
+          {
+            "op": "ge",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          },
+          {
+            "op": "forall",
+            "collection": "habitable_rooms",
+            "variable": "$r",
+            "body": "n8",
+            "id": "n9"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n9",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R304.1",
+            "quote": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Habitable rooms shall have a floor area of not less than 6.5 m2. Exception: Kitchens.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 6.5,
+            "unit": "m2",
+            "operator": "ge",
+            "normalized_span": [
+              57,
+              63
+            ],
+            "quote": "6.5 m2",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R304.1",
+        "status": "DRAFTED",
+        "raw": {
+          "is_requirement": true,
+          "subject": "Habitable rooms",
+          "constraints": [
+            "floor area >= 70 square feet (6.5 m2)"
+          ],
+          "applicability": [
+            "habitable rooms"
+          ],
+          "exceptions": [
+            "Kitchens"
+          ],
+          "relationships": [
+            "R304.3"
+          ],
+          "references": [
+            "R304.3"
+          ],
+          "uncertain": [
+            "Interpretation of exception scope (whether entire kitchen spaces are excluded)"
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 486,
+          "completion_tokens": 540,
+          "seconds": 1.69,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "is_requirement": true,
+            "subject": "Habitable rooms",
+            "constraints": [
+              "floor area >= 70 square feet (6.5 m2)"
+            ],
+            "applicability": [
+              "habitable rooms"
+            ],
+            "exceptions": [
+              "Kitchens"
+            ],
+            "relationships": [
+              "R304.3"
+            ],
+            "references": [
+              "R304.3"
+            ],
+            "uncertain": [
+              "Interpretation of exception scope (whether entire kitchen spaces are excluded)"
+            ]
+          },
+          "after": {
+            "id": "R304.1",
+            "title": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens.",
+            "subject": "habitable room",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "room_type",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": "kitchen",
+                "unit": "1",
+                "id": "n3"
+              },
+              {
+                "op": "eq",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "eligible_area_m2",
+                "id": "n5"
+              },
+              {
+                "op": "literal",
+                "value": 70,
+                "unit": "ft2",
+                "id": "n6"
+              },
+              {
+                "op": "ge",
+                "left": "n5",
+                "right": "n6",
+                "id": "n7"
+              },
+              {
+                "op": "any",
+                "args": [
+                  "n4",
+                  "n7"
+                ],
+                "id": "n8"
+              },
+              {
+                "op": "forall",
+                "collection": "habitable_rooms",
+                "variable": "$r",
+                "body": "n8",
+                "id": "n9"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n9",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R304.1",
+                "quote": "Habitable rooms shall have a floor area of not less than 70 square feet (6.5 m2).\nException: Kitchens."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "stage": "entity_binding",
+      "blocker": "the rule uses 6.50321, which the sentence does not state; the sentence states 6.5, but the rule never uses it; 'eligible_area_m2' is not a fact of it, but it is read from a member of habitable_rooms; use building.eligible_area_m2 or one of ['room_type']; the rule measures 'Reviewer-confirmed space classification', but the sentence never mentions it (no shared word): the sentence may be about something this plan does not provide"
+    },
+    {
+      "id": "R304.2",
+      "source": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens.",
+      "manual_slots": {
+        "id": "R304.2",
+        "title": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens.",
+        "subject": "habitable room",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "room_type",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": "kitchen",
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "eq",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "min_width_m",
+            "id": "n5"
+          },
+          {
+            "op": "literal",
+            "value": 7,
+            "unit": "ft",
+            "id": "n6"
+          },
+          {
+            "op": "ge",
+            "left": "n5",
+            "right": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "any",
+            "args": [
+              "n4",
+              "n7"
+            ],
+            "id": "n8"
+          },
+          {
+            "op": "forall",
+            "collection": "habitable_rooms",
+            "variable": "$r",
+            "body": "n8",
+            "id": "n9"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n9",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R304.2",
+            "quote": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Habitable rooms shall be not less than 2134 mm in any horizontal dimension. Exception: Kitchens.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 2134.0,
+            "unit": "mm",
+            "operator": "ge",
+            "normalized_span": [
+              39,
+              46
+            ],
+            "quote": "2134 mm",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R304.2",
+        "status": "DRAFTED",
+        "raw": {
+          "is_requirement": true,
+          "subject": "Habitable rooms",
+          "constraints": [
+            "must have any horizontal dimension not less than 7 feet (2134 mm)"
+          ],
+          "applicability": [
+            "habitable rooms"
+          ],
+          "exceptions": [
+            "Kitchens"
+          ],
+          "relationships": [],
+          "references": [],
+          "uncertain": []
+        },
+        "usage": {
+          "prompt_tokens": 404,
+          "completion_tokens": 403,
+          "seconds": 5.52,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "is_requirement": true,
+            "subject": "Habitable rooms",
+            "constraints": [
+              "must have any horizontal dimension not less than 7 feet (2134 mm)"
+            ],
+            "applicability": [
+              "habitable rooms"
+            ],
+            "exceptions": [
+              "Kitchens"
+            ],
+            "relationships": [],
+            "references": [],
+            "uncertain": []
+          },
+          "after": {
+            "id": "R304.2",
+            "title": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens.",
+            "subject": "habitable room",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "room_type",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": "kitchen",
+                "unit": "1",
+                "id": "n3"
+              },
+              {
+                "op": "eq",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "min_width_m",
+                "id": "n5"
+              },
+              {
+                "op": "literal",
+                "value": 7,
+                "unit": "ft",
+                "id": "n6"
+              },
+              {
+                "op": "ge",
+                "left": "n5",
+                "right": "n6",
+                "id": "n7"
+              },
+              {
+                "op": "any",
+                "args": [
+                  "n4",
+                  "n7"
+                ],
+                "id": "n8"
+              },
+              {
+                "op": "forall",
+                "collection": "habitable_rooms",
+                "variable": "$r",
+                "body": "n8",
+                "id": "n9"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n9",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R304.2",
+                "quote": "Habitable rooms shall be not less than 7 feet (2134 mm) in any horizontal dimension.\nException: Kitchens."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "stage": "entity_binding",
+      "blocker": "the rule uses 2.1336, which the sentence does not state; the sentence states 2.134, but the rule never uses it; 'min_width_m' is not a fact of it, but it is read from a member of habitable_rooms; use building.min_width_m or one of ['room_type']; the rule measures 'Reviewer-confirmed space classification', but the sentence never mentions it (no shared word): the sentence may be about something this plan does not provide"
+    },
+    {
+      "id": "R311.1",
+      "source": "Dwellings shall be provided with a means of egress in accordance with this section. The means of egress shall provide a continuous and unobstructed path of vertical and horizontal egress travel from all portions of the dwelling to the required egress door without requiring travel through a garage. The required egress door shall open directly into a public way or to a yard or court that opens to a public way.",
+      "manual_slots": {
+        "id": "R311.1",
+        "title": "Dwellings shall be provided with a means of egress in accordance with this section. The means of egress shall provide a continuous and unobstructed path of vertical and horizontal egress travel from all portions of the dwelling to the required egress door without requiring travel through a garage. The required egress door shall open directly into a public way or to a yard or court that opens to a public way.",
+        "subject": "dwelling",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$node",
+            "name": "room_type",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": "garage",
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "eq",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "not",
+            "args": [
+              "n4"
+            ],
+            "id": "n5"
+          },
+          {
+            "op": "path_exists",
+            "origin": "$r",
+            "destination": "$d",
+            "via_edges": [
+              "door",
+              "opening"
+            ],
+            "node_filter": "n5",
+            "id": "n6"
+          },
+          {
+            "op": "exists",
+            "collection": "required_egress_doors",
+            "variable": "$d",
+            "body": "n6",
+            "id": "n7"
+          },
+          {
+            "op": "forall",
+            "collection": "dwelling_portions",
+            "variable": "$r",
+            "body": "n7",
+            "id": "n8"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "qualifying_public_discharge",
+            "id": "n9"
+          },
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n10"
+          },
+          {
+            "op": "eq",
+            "left": "n9",
+            "right": "n10",
+            "id": "n11"
+          },
+          {
+            "op": "forall",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "body": "n11",
+            "id": "n12"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "continuous_unobstructed_egress",
+            "id": "n13"
+          },
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n14"
+          },
+          {
+            "op": "eq",
+            "left": "n13",
+            "right": "n14",
+            "id": "n15"
+          },
+          {
+            "op": "forall",
+            "collection": "dwelling_portions",
+            "variable": "$r",
+            "body": "n15",
+            "id": "n16"
+          },
+          {
+            "op": "all",
+            "args": [
+              "n8",
+              "n12",
+              "n16"
+            ],
+            "id": "n17"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n17",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.1",
+            "quote": "Dwellings shall be provided with a means of egress in accordance with this section. The means of egress shall provide a continuous and unobstructed path of vertical and horizontal egress travel from all portions of the dwelling to the required egress door without requiring travel through a garage. The required egress door shall open directly into a public way or to a yard or court that opens to a public way."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Dwellings shall be provided with a means of egress in accordance with this section. The means of egress shall provide a continuous and unobstructed path of vertical and horizontal egress travel from all portions of the dwelling to the required egress door without requiring travel through a garage. The required egress door shall open directly into a public way or to a yard or court that opens to a public way.",
+        "evidence": []
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.1",
+        "status": "REQUEST_REJECTED",
+        "reason": "REQUEST_REJECTED"
+      },
+      "stage": "draft_unavailable",
+      "blocker": "No completed model draft; not counted as a semantic failure"
+    },
+    {
+      "id": "R311.2-count",
+      "source": "Not less than one egress door shall be provided for each dwelling unit.",
+      "manual_slots": {
+        "id": "R311.2-count",
+        "title": "Not less than one egress door shall be provided for each dwelling unit.",
+        "subject": "dwelling",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "count",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 1,
+            "unit": "count",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n4",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.2-count",
+            "quote": "Not less than one egress door shall be provided for each dwelling unit."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "Not less than one egress door shall be provided for each dwelling unit.",
+        "evidence": []
+      },
+      "outcome": "SATISFIED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.2-count",
+        "status": "DRAFTED",
+        "raw": {
+          "subject": "egress door",
+          "constraints": [
+            "Not less than one egress door shall be provided for each dwelling unit."
+          ],
+          "applicability": [
+            "each dwelling unit"
+          ],
+          "exceptions": [],
+          "relationships": [
+            "R311.2-parent"
+          ],
+          "references": [
+            "R311.2-parent"
+          ],
+          "uncertain": [],
+          "is_requirement": true
+        },
+        "usage": {
+          "prompt_tokens": 554,
+          "completion_tokens": 472,
+          "seconds": 5.45,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "subject": "egress door",
+            "constraints": [
+              "Not less than one egress door shall be provided for each dwelling unit."
+            ],
+            "applicability": [
+              "each dwelling unit"
+            ],
+            "exceptions": [],
+            "relationships": [
+              "R311.2-parent"
+            ],
+            "references": [
+              "R311.2-parent"
+            ],
+            "uncertain": [],
+            "is_requirement": true
+          },
+          "after": {
+            "id": "R311.2-count",
+            "title": "Not less than one egress door shall be provided for each dwelling unit.",
+            "subject": "dwelling",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "count",
+                "collection": "required_egress_doors",
+                "variable": "$r",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": 1,
+                "unit": "count",
+                "id": "n3"
+              },
+              {
+                "op": "ge",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n4",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R311.2-count",
+                "quote": "Not less than one egress door shall be provided for each dwelling unit."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "before": {
+        "rule_id": "R311.2-count",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:required_egress_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:required_egress_doors"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "sources": [
+          {
+            "clause": "R311.2-count",
+            "start": 631,
+            "end": 702,
+            "quote": "Not less than one egress door shall be provided for each dwelling unit."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "incomplete collection:required_egress_doors"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "ge",
+              "value": null,
+              "missing": [
+                "incomplete collection:required_egress_doors"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "count",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:required_egress_doors"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": [
+                    0,
+                    null
+                  ]
+                },
+                {
+                  "node": "literal",
+                  "value": 1,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "R311.2-count",
+        "outcome": "SATISFIED",
+        "dependencies": [
+          "inventory:required_egress_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "sources": [
+          {
+            "clause": "R311.2-count",
+            "start": 631,
+            "end": 702,
+            "quote": "Not less than one egress door shall be provided for each dwelling unit."
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "ge",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "count",
+                  "value": 1,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [
+                    {
+                      "node": "literal",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": [
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "node": "literal",
+                  "value": 1,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [],
+        "evidence": [],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "ge",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "count",
+                "value": 1,
+                "missing": [],
+                "evidence": [],
+                "children": [
+                  {
+                    "node": "literal",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "node": "literal",
+                "value": 1,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "R311.2-count",
+        "title": "Not less than one egress door shall be provided for each dwelling unit.",
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "status": "approved",
+        "approved_by": "assistant benchmark author; no independent review",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "ge",
+          "left": {
+            "node": "count",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "where": null,
+            "body": null
+          },
+          "right": {
+            "node": "literal",
+            "value": 1,
+            "unit": "count"
+          }
+        },
+        "sources": [
+          {
+            "clause": "R311.2-count",
+            "start": 631,
+            "end": 702,
+            "quote": "Not less than one egress door shall be provided for each dwelling unit."
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "R311.2-hinge",
+      "source": "The egress door shall be side-hinged,",
+      "manual_slots": {
+        "id": "R311.2-hinge",
+        "title": "The egress door shall be side-hinged,",
+        "subject": "egress door",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "side_hinged",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n3"
+          },
+          {
+            "op": "eq",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.2-hinge",
+            "quote": "The egress door shall be side-hinged,"
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "The egress door shall be side-hinged,",
+        "evidence": []
+      },
+      "outcome": "SATISFIED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.2-hinge",
+        "status": "DRAFTED",
+        "raw": {
+          "subject": "egress door",
+          "constraints": [
+            "shall be side-hinged"
+          ],
+          "applicability": [
+            "egress doors of each dwelling unit"
+          ],
+          "exceptions": [],
+          "relationships": [
+            "parent article R311.2-parent"
+          ],
+          "references": [
+            "R311.2-parent"
+          ],
+          "uncertain": [
+            "whether side-hinge applies to all egress doors or only the required one per dwelling unit",
+            "whether interior doors are included in the side-hinge requirement"
+          ],
+          "is_requirement": true
+        },
+        "usage": {
+          "prompt_tokens": 551,
+          "completion_tokens": 640,
+          "seconds": 6.21,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "subject": "egress door",
+            "constraints": [
+              "shall be side-hinged"
+            ],
+            "applicability": [
+              "egress doors of each dwelling unit"
+            ],
+            "exceptions": [],
+            "relationships": [
+              "parent article R311.2-parent"
+            ],
+            "references": [
+              "R311.2-parent"
+            ],
+            "uncertain": [
+              "whether side-hinge applies to all egress doors or only the required one per dwelling unit",
+              "whether interior doors are included in the side-hinge requirement"
+            ],
+            "is_requirement": true
+          },
+          "after": {
+            "id": "R311.2-hinge",
+            "title": "The egress door shall be side-hinged,",
+            "subject": "egress door",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "side_hinged",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n3"
+              },
+              {
+                "op": "eq",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "forall",
+                "collection": "required_egress_doors",
+                "variable": "$r",
+                "body": "n4",
+                "id": "n5"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n5",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R311.2-hinge",
+                "quote": "The egress door shall be side-hinged,"
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "before": {
+        "rule_id": "R311.2-hinge",
+        "outcome": "UNRESOLVED",
+        "dependencies": [
+          "inventory:required_egress_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [
+          {
+            "code": "INCOMPLETE_INVENTORY",
+            "detail": "incomplete collection:required_egress_doors"
+          }
+        ],
+        "evidence_requests": [],
+        "fact_provenance": [],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "sources": [
+          {
+            "clause": "R311.2-hinge",
+            "start": 631,
+            "end": 668,
+            "quote": "The egress door shall be side-hinged,"
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [
+            "empty scope:required_egress_doors",
+            "incomplete collection:required_egress_doors"
+          ],
+          "evidence": [],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": null,
+              "missing": [
+                "empty scope:required_egress_doors",
+                "incomplete collection:required_egress_doors"
+              ],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "unknown_members",
+                  "value": null,
+                  "missing": [
+                    "incomplete collection:required_egress_doors"
+                  ],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "after": {
+        "rule_id": "R311.2-hinge",
+        "outcome": "SATISFIED",
+        "dependencies": [
+          "front_door.side_hinged",
+          "inventory:required_egress_doors"
+        ],
+        "metadata_requests": [],
+        "metadata_provenance": [],
+        "evidence_issues": [],
+        "evidence_requests": [],
+        "fact_provenance": [
+          {
+            "entity": "front_door",
+            "fact": "side_hinged",
+            "unit": "1",
+            "value": true,
+            "source": "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan.",
+            "trusted": true,
+            "conflicting": false,
+            "origin": "reviewer-attested",
+            "reviewer": "assistant visual reading; no independent review"
+          }
+        ],
+        "fact_declarations": [],
+        "preview": false,
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "sources": [
+          {
+            "clause": "R311.2-hinge",
+            "start": 631,
+            "end": 668,
+            "quote": "The egress door shall be side-hinged,"
+          }
+        ],
+        "trace": {
+          "node": "program",
+          "value": null,
+          "missing": [],
+          "evidence": [
+            "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+          ],
+          "children": [
+            {
+              "node": "all",
+              "value": true,
+              "missing": [],
+              "evidence": [],
+              "children": [
+                {
+                  "node": "literal",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                },
+                {
+                  "node": "project_metadata",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [],
+                  "children": [],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            },
+            {
+              "node": "literal",
+              "value": false,
+              "missing": [],
+              "evidence": [],
+              "children": [],
+              "count_bounds": null
+            },
+            {
+              "node": "forall",
+              "value": true,
+              "missing": [],
+              "evidence": [
+                "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+              ],
+              "children": [
+                {
+                  "node": "any",
+                  "value": true,
+                  "missing": [],
+                  "evidence": [
+                    "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                  ],
+                  "children": [
+                    {
+                      "node": "not",
+                      "value": false,
+                      "missing": [],
+                      "evidence": [],
+                      "children": [
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    },
+                    {
+                      "node": "eq",
+                      "value": true,
+                      "missing": [],
+                      "evidence": [
+                        "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                      ],
+                      "children": [
+                        {
+                          "node": "fact",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [
+                            "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                          ],
+                          "children": [],
+                          "count_bounds": null
+                        },
+                        {
+                          "node": "literal",
+                          "value": true,
+                          "missing": [],
+                          "evidence": [],
+                          "children": [],
+                          "count_bounds": null
+                        }
+                      ],
+                      "count_bounds": null
+                    }
+                  ],
+                  "count_bounds": null
+                }
+              ],
+              "count_bounds": null
+            }
+          ],
+          "count_bounds": null
+        }
+      },
+      "trace": {
+        "node": "program",
+        "value": null,
+        "missing": [],
+        "evidence": [
+          "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+        ],
+        "children": [
+          {
+            "node": "all",
+            "value": true,
+            "missing": [],
+            "evidence": [],
+            "children": [
+              {
+                "node": "literal",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              },
+              {
+                "node": "project_metadata",
+                "value": true,
+                "missing": [],
+                "evidence": [],
+                "children": [],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          },
+          {
+            "node": "literal",
+            "value": false,
+            "missing": [],
+            "evidence": [],
+            "children": [],
+            "count_bounds": null
+          },
+          {
+            "node": "forall",
+            "value": true,
+            "missing": [],
+            "evidence": [
+              "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+            ],
+            "children": [
+              {
+                "node": "any",
+                "value": true,
+                "missing": [],
+                "evidence": [
+                  "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                ],
+                "children": [
+                  {
+                    "node": "not",
+                    "value": false,
+                    "missing": [],
+                    "evidence": [],
+                    "children": [
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  },
+                  {
+                    "node": "eq",
+                    "value": true,
+                    "missing": [],
+                    "evidence": [
+                      "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                    ],
+                    "children": [
+                      {
+                        "node": "fact",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [
+                          "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan."
+                        ],
+                        "children": [],
+                        "count_bounds": null
+                      },
+                      {
+                        "node": "literal",
+                        "value": true,
+                        "missing": [],
+                        "evidence": [],
+                        "children": [],
+                        "count_bounds": null
+                      }
+                    ],
+                    "count_bounds": null
+                  }
+                ],
+                "count_bounds": null
+              }
+            ],
+            "count_bounds": null
+          }
+        ],
+        "count_bounds": null
+      },
+      "rule": {
+        "schema_version": "1.0",
+        "id": "R311.2-hinge",
+        "title": "The egress door shall be side-hinged,",
+        "document": "2021 IRC Chapter 3 first printing, official indexed text",
+        "status": "approved",
+        "approved_by": "assistant benchmark author; no independent review",
+        "applicability": {
+          "node": "literal",
+          "value": true,
+          "unit": "1"
+        },
+        "metadata_applicability": [],
+        "exemption": {
+          "node": "literal",
+          "value": false,
+          "unit": "1"
+        },
+        "requirement": {
+          "node": "forall",
+          "collection": "required_egress_doors",
+          "variable": "$r",
+          "where": null,
+          "body": {
+            "node": "eq",
+            "left": {
+              "node": "fact",
+              "entity": "$r",
+              "name": "side_hinged"
+            },
+            "right": {
+              "node": "literal",
+              "value": true,
+              "unit": "1"
+            }
+          }
+        },
+        "sources": [
+          {
+            "clause": "R311.2-hinge",
+            "start": 631,
+            "end": 668,
+            "quote": "The egress door shall be side-hinged,"
+          }
+        ],
+        "unresolved": [],
+        "not_checked": [],
+        "fact_declarations": []
+      },
+      "stage": "checked"
+    },
+    {
+      "id": "R311.2-width",
+      "source": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad).",
+      "manual_slots": {
+        "id": "R311.2-width",
+        "title": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad).",
+        "subject": "egress door",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "clear_width_at_90_m",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 32,
+            "unit": "in",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.2-width",
+            "quote": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad)."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "and shall provide a clear width of not less than 813 mm where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad).",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 813.0,
+            "unit": "mm",
+            "operator": "ge",
+            "normalized_span": [
+              49,
+              55
+            ],
+            "quote": "813 mm",
+            "column_header": ""
+          },
+          {
+            "id": "q1",
+            "value": 90.0,
+            "unit": "deg",
+            "operator": null,
+            "normalized_span": [
+              133,
+              143
+            ],
+            "quote": "90 degrees",
+            "column_header": ""
+          },
+          {
+            "id": "q2",
+            "value": 1.57,
+            "unit": "rad",
+            "operator": null,
+            "normalized_span": [
+              145,
+              153
+            ],
+            "quote": "1.57 rad",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.2-width",
+        "status": "DRAFTED",
+        "raw": {
+          "is_requirement": true,
+          "subject": "clear width of egress door",
+          "constraints": [
+            "clear width >= 32 inches (813 mm)",
+            "measurement taken between face of door and stop",
+            "door must be open 90 degrees (1.57 rad) during measurement"
+          ],
+          "applicability": [
+            "egress doors of each dwelling unit"
+          ],
+          "exceptions": [
+            "non\u2011egress doors are not required to meet this dimension"
+          ],
+          "relationships": [
+            "parent article R311.2-parent"
+          ],
+          "references": [
+            "R311.2-width",
+            "R311.2-parent"
+          ],
+          "uncertain": [
+            "exact point on stop used for measurement may be ambiguous",
+            "whether the measurement includes any door frame components"
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 582,
+          "completion_tokens": 742,
+          "seconds": 6.24,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "is_requirement": true,
+            "subject": "clear width of egress door",
+            "constraints": [
+              "clear width >= 32 inches (813 mm)",
+              "measurement taken between face of door and stop",
+              "door must be open 90 degrees (1.57 rad) during measurement"
+            ],
+            "applicability": [
+              "egress doors of each dwelling unit"
+            ],
+            "exceptions": [
+              "non\u2011egress doors are not required to meet this dimension"
+            ],
+            "relationships": [
+              "parent article R311.2-parent"
+            ],
+            "references": [
+              "R311.2-width",
+              "R311.2-parent"
+            ],
+            "uncertain": [
+              "exact point on stop used for measurement may be ambiguous",
+              "whether the measurement includes any door frame components"
+            ]
+          },
+          "after": {
+            "id": "R311.2-width",
+            "title": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad).",
+            "subject": "egress door",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "clear_width_at_90_m",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": 32,
+                "unit": "in",
+                "id": "n3"
+              },
+              {
+                "op": "ge",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "forall",
+                "collection": "required_egress_doors",
+                "variable": "$r",
+                "body": "n4",
+                "id": "n5"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n5",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R311.2-width",
+                "quote": "and shall provide a clear width of not less than 32 inches (813 mm) where measured between the face of the door and the stop, with the door open 90 degrees (1.57 rad)."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "stage": "entity_binding",
+      "blocker": "the rule uses 0.8128, which the sentence does not state; the sentence states 0.813, but the rule never uses it; the sentence states 1.5708, but the rule never uses it; the sentence states 1.57, but the rule never uses it; 'clear_width_at_90_m' is not a fact of it, but it is read from a member of required_egress_doors; use building.clear_width_at_90_m or one of ['side_hinged']"
+    },
+    {
+      "id": "R311.2-height",
+      "source": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop.",
+      "manual_slots": {
+        "id": "R311.2-height",
+        "title": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop.",
+        "subject": "egress door",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "clear_height_m",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 78,
+            "unit": "in",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "required_egress_doors",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.2-height",
+            "quote": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "The clear height of the door opening shall be not less than 1981 mm in height measured from the top of the threshold to the bottom of the stop.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 1981.0,
+            "unit": "mm",
+            "operator": "ge",
+            "normalized_span": [
+              60,
+              67
+            ],
+            "quote": "1981 mm",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.2-height",
+        "status": "DRAFTED",
+        "raw": {
+          "subject": "clear height of the door opening",
+          "constraints": [
+            "shall be not less than 78 inches (1981 mm) measured from the top of the threshold to the bottom of the stop"
+          ],
+          "applicability": [
+            "egress doors of each dwelling unit"
+          ],
+          "exceptions": [
+            "other doors are not required to comply with these minimum dimensions"
+          ],
+          "relationships": [
+            "parent article R311.2-parent"
+          ],
+          "references": [
+            "R311.2-parent"
+          ],
+          "uncertain": [],
+          "is_requirement": true
+        },
+        "usage": {
+          "prompt_tokens": 575,
+          "completion_tokens": 512,
+          "seconds": 5.34,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "subject": "clear height of the door opening",
+            "constraints": [
+              "shall be not less than 78 inches (1981 mm) measured from the top of the threshold to the bottom of the stop"
+            ],
+            "applicability": [
+              "egress doors of each dwelling unit"
+            ],
+            "exceptions": [
+              "other doors are not required to comply with these minimum dimensions"
+            ],
+            "relationships": [
+              "parent article R311.2-parent"
+            ],
+            "references": [
+              "R311.2-parent"
+            ],
+            "uncertain": [],
+            "is_requirement": true
+          },
+          "after": {
+            "id": "R311.2-height",
+            "title": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop.",
+            "subject": "egress door",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "clear_height_m",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": 78,
+                "unit": "in",
+                "id": "n3"
+              },
+              {
+                "op": "ge",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "forall",
+                "collection": "required_egress_doors",
+                "variable": "$r",
+                "body": "n4",
+                "id": "n5"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n5",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R311.2-height",
+                "quote": "The clear height of the door opening shall be not less than 78 inches (1981 mm) in height measured from the top of the threshold to the bottom of the stop."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "stage": "entity_binding",
+      "blocker": "the rule uses 1.9812, which the sentence does not state; the sentence states 1.981, but the rule never uses it; 'clear_height_m' is not a fact of it, but it is read from a member of required_egress_doors; use building.clear_height_m or one of ['side_hinged']"
+    },
+    {
+      "id": "R311.6",
+      "source": "The width of a hallway shall be not less than 3 feet (914 mm).",
+      "manual_slots": {
+        "id": "R311.6",
+        "title": "The width of a hallway shall be not less than 3 feet (914 mm).",
+        "subject": "hallway",
+        "nodes": [
+          {
+            "op": "literal",
+            "value": true,
+            "unit": "1",
+            "id": "n0"
+          },
+          {
+            "op": "literal",
+            "value": false,
+            "unit": "1",
+            "id": "n1"
+          },
+          {
+            "op": "fact",
+            "entity": "$r",
+            "name": "min_width_m",
+            "id": "n2"
+          },
+          {
+            "op": "literal",
+            "value": 3,
+            "unit": "ft",
+            "id": "n3"
+          },
+          {
+            "op": "ge",
+            "left": "n2",
+            "right": "n3",
+            "id": "n4"
+          },
+          {
+            "op": "forall",
+            "collection": "hallways",
+            "variable": "$r",
+            "body": "n4",
+            "id": "n5"
+          }
+        ],
+        "applicability": "n0",
+        "exemption": "n1",
+        "requirement": "n5",
+        "metadata_applicability": [],
+        "sources": [
+          {
+            "clause": "R311.6",
+            "quote": "The width of a hallway shall be not less than 3 feet (914 mm)."
+          }
+        ],
+        "fact_declarations": [],
+        "unresolved": []
+      },
+      "quantity_extraction": {
+        "normalized_source": "The width of a hallway shall be not less than 914 mm.",
+        "evidence": [
+          {
+            "id": "q0",
+            "value": 914.0,
+            "unit": "mm",
+            "operator": "ge",
+            "normalized_span": [
+              46,
+              52
+            ],
+            "quote": "914 mm",
+            "column_header": ""
+          }
+        ]
+      },
+      "outcome": "UNRESOLVED",
+      "approval_scope": "Hypothetical IRC illustration on PL101 H. Egress designation is a reviewer scenario assumption. Habitable, hall and route inventories remain incomplete. R311.2 split into four explicitly atomic obligations; no whole-section compliance claim.",
+      "llm_draft": {
+        "id": "R311.6",
+        "status": "DRAFTED",
+        "raw": {
+          "subject": "hallway width",
+          "constraints": [
+            "width >= 3 feet (914 mm)"
+          ],
+          "applicability": [],
+          "exceptions": [],
+          "relationships": [],
+          "references": [],
+          "uncertain": [],
+          "is_requirement": true
+        },
+        "usage": {
+          "prompt_tokens": 396,
+          "completion_tokens": 325,
+          "seconds": 5.58,
+          "mode": "json_schema",
+          "model": "openai/gpt-oss-120b",
+          "finish_reason": "stop"
+        }
+      },
+      "review_edits": [
+        {
+          "operation": "rewrite",
+          "site": "formal_rule",
+          "before": {
+            "subject": "hallway width",
+            "constraints": [
+              "width >= 3 feet (914 mm)"
+            ],
+            "applicability": [],
+            "exceptions": [],
+            "relationships": [],
+            "references": [],
+            "uncertain": [],
+            "is_requirement": true
+          },
+          "after": {
+            "id": "R311.6",
+            "title": "The width of a hallway shall be not less than 3 feet (914 mm).",
+            "subject": "hallway",
+            "nodes": [
+              {
+                "op": "literal",
+                "value": true,
+                "unit": "1",
+                "id": "n0"
+              },
+              {
+                "op": "literal",
+                "value": false,
+                "unit": "1",
+                "id": "n1"
+              },
+              {
+                "op": "fact",
+                "entity": "$r",
+                "name": "min_width_m",
+                "id": "n2"
+              },
+              {
+                "op": "literal",
+                "value": 3,
+                "unit": "ft",
+                "id": "n3"
+              },
+              {
+                "op": "ge",
+                "left": "n2",
+                "right": "n3",
+                "id": "n4"
+              },
+              {
+                "op": "forall",
+                "collection": "hallways",
+                "variable": "$r",
+                "body": "n4",
+                "id": "n5"
+              }
+            ],
+            "applicability": "n0",
+            "exemption": "n1",
+            "requirement": "n5",
+            "metadata_applicability": [],
+            "sources": [
+              {
+                "clause": "R311.6",
+                "quote": "The width of a hallway shall be not less than 3 feet (914 mm)."
+              }
+            ],
+            "fact_declarations": [],
+            "unresolved": []
+          },
+          "reviewer": "assistant benchmark author; no independent review",
+          "reason": "Semantic reading requires complete reviewer-authored executable formalization; not zero edit burden"
+        }
+      ],
+      "stage": "entity_binding",
+      "blocker": "the rule uses 0.9144, which the sentence does not state; the sentence states 0.914, but the rule never uses it; 'min_width_m' is not a fact of it, but it is read from a member of hallways; use building.min_width_m or one of ['room_type']"
+    }
+  ],
+  "automatic_facts": {
+    "bindings": {
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Reviewer-confirmed space classification",
+        "declaration": null
+      },
+      "area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Measured net floor area",
+        "declaration": null
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal horizontal dimension",
+        "declaration": null
+      },
+      "width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Clear width of a door or window opening, never of a room",
+        "declaration": null
+      },
+      "has_window": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room has a window",
+        "declaration": null
+      },
+      "has_label": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room is named on the drawing (its use is shown)",
+        "declaration": null
+      },
+      "scale_stated": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The sheet states its scale, or its scale could be found (the drawing is to scale)",
+        "declaration": null
+      },
+      "is_dimensioned": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The drawing carries dimension annotations (it is dimensioned)",
+        "declaration": null
+      },
+      "dimension_count": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of dimension annotations on the sheet",
+        "declaration": null
+      },
+      "leads_to_exit": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The door leads to the outside of the building (an exit door)",
+        "declaration": null
+      },
+      "links_adjacent": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of adjacent connections of the room",
+        "declaration": null
+      },
+      "links_door": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of door connections of the room",
+        "declaration": null
+      },
+      "links_opening": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of opening connections of the room",
+        "declaration": null
+      },
+      "links_window": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of window connections of the room",
+        "declaration": null
+      },
+      "links_passable": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of connections of the room that a route can follow",
+        "declaration": null
+      },
+      "reaches_exit": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "The room has a route to the exit",
+        "declaration": null
+      },
+      "links_to_exit": {
+        "kind": "number",
+        "unit": "count",
+        "description": "Number of direct connections to the exit",
+        "declaration": null
+      },
+      "eligible_area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Floor area after ceiling exclusions in R304.3; not gross detected area",
+        "declaration": null
+      },
+      "qualifying_public_discharge": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Required door opens to public way or qualifying yard/court",
+        "declaration": null
+      },
+      "continuous_unobstructed_egress": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Confirmed continuous unobstructed egress through all required levels",
+        "declaration": null
+      },
+      "side_hinged": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Side-hinged operation of designated door",
+        "declaration": null
+      },
+      "clear_width_at_90_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Face-to-stop net clear width with door open 90 degrees",
+        "declaration": null
+      },
+      "clear_height_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Top-of-threshold to bottom-of-stop clear height",
+        "declaration": null
+      }
+    },
+    "facts": {
+      "room_01f12a9464": {
+        "room_type": {
+          "value": "bathroom",
+          "source": "uk-proposed:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 14.5299,
+          "source": "uk-proposed:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.5003,
+          "source": "uk-proposed:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "uk-proposed:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 0,
+          "source": "derived:room_01f12a9464",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_01f12a9464",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 1,
+          "source": "derived:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 4,
+          "source": "derived:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 1,
+          "source": "derived:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_01f12a9464",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_1f53a93d06": {
+        "room_type": {
+          "value": "bedroom",
+          "source": "uk-proposed:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 16.2521,
+          "source": "uk-proposed:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 3.928,
+          "source": "uk-proposed:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "uk-proposed:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 1,
+          "source": "derived:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_1f53a93d06",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 0,
+          "source": "derived:room_1f53a93d06",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 8,
+          "source": "derived:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 0,
+          "source": "derived:room_1f53a93d06",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": false,
+          "source": "derived:room_1f53a93d06",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_1ff93f595c": {
+        "room_type": {
+          "value": "bedroom",
+          "source": "uk-proposed:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 14.6001,
+          "source": "uk-proposed:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 3.528,
+          "source": "uk-proposed:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "uk-proposed:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 1,
+          "source": "derived:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_1ff93f595c",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 0,
+          "source": "derived:room_1ff93f595c",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 5,
+          "source": "derived:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 0,
+          "source": "derived:room_1ff93f595c",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": false,
+          "source": "derived:room_1ff93f595c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_1fdb673ecb": {
+        "area_m2": {
+          "value": 74.4809,
+          "source": "uk-proposed:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.0118,
+          "source": "uk-proposed:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": false,
+          "source": "uk-proposed:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 3,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 2,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 4,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 6,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 6,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_1fdb673ecb",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_c0b1185996": {
+        "area_m2": {
+          "value": 13.7078,
+          "source": "uk-proposed:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 3.1792,
+          "source": "uk-proposed:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": false,
+          "source": "uk-proposed:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 1,
+          "source": "derived:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_c0b1185996",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 1,
+          "source": "derived:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 4,
+          "source": "derived:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 1,
+          "source": "derived:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_c0b1185996",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_9fc6ed26c8": {
+        "room_type": {
+          "value": "storage",
+          "source": "uk-proposed:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "extracted",
+          "reviewer": null
+        },
+        "area_m2": {
+          "value": 16.219,
+          "source": "uk-proposed:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 0.889,
+          "source": "uk-proposed:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": true,
+          "source": "uk-proposed:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 2,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 1,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 2,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 1,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_9fc6ed26c8",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "room_adc7eb46a0": {
+        "area_m2": {
+          "value": 15.2564,
+          "source": "uk-proposed:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "min_width_m": {
+          "value": 1.7387,
+          "source": "uk-proposed:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_window": {
+          "value": true,
+          "source": "uk-proposed:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "has_label": {
+          "value": false,
+          "source": "uk-proposed:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_adjacent": {
+          "value": 0,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_door": {
+          "value": 0,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_opening": {
+          "value": 1,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_window": {
+          "value": 5,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_passable": {
+          "value": 1,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "reaches_exit": {
+          "value": true,
+          "source": "derived:room_adc7eb46a0",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_b6683b9b53": {
+        "width_m": {
+          "value": 1.8034,
+          "source": "uk-proposed:window_b6683b9b53",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_ae3f714c88": {
+        "width_m": {
+          "value": 1.8034,
+          "source": "uk-proposed:window_ae3f714c88",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_dfc332fe1d": {
+        "width_m": {
+          "value": 1.6594,
+          "source": "uk-proposed:opening_dfc332fe1d",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_9803587fac": {
+        "width_m": {
+          "value": 0.8297,
+          "source": "uk-proposed:opening_9803587fac",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_d9971fe10b": {
+        "width_m": {
+          "value": 1.7992,
+          "source": "uk-proposed:window_d9971fe10b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_6036d0ad90": {
+        "width_m": {
+          "value": 0.9101,
+          "source": "uk-proposed:opening_6036d0ad90",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_bcd7f7b4fc": {
+        "width_m": {
+          "value": 3.5475,
+          "source": "uk-proposed:window_bcd7f7b4fc",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_2c4acdce5e": {
+        "width_m": {
+          "value": 3.5475,
+          "source": "uk-proposed:window_2c4acdce5e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_3a5357fadf": {
+        "width_m": {
+          "value": 1.4013,
+          "source": "uk-proposed:window_3a5357fadf",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_64336ba547": {
+        "width_m": {
+          "value": 2.6077,
+          "source": "uk-proposed:window_64336ba547",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_26db537008": {
+        "width_m": {
+          "value": 2.6077,
+          "source": "uk-proposed:window_26db537008",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_8fe048b5a6": {
+        "width_m": {
+          "value": 1.778,
+          "source": "uk-proposed:opening_8fe048b5a6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_4844a10a4e": {
+        "width_m": {
+          "value": 0.9017,
+          "source": "uk-proposed:window_4844a10a4e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_1ba920a318": {
+        "width_m": {
+          "value": 0.9102,
+          "source": "uk-proposed:opening_1ba920a318",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_7b148e7939": {
+        "width_m": {
+          "value": 0.9102,
+          "source": "uk-proposed:opening_7b148e7939",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "opening_f0691227f3": {
+        "width_m": {
+          "value": 2.1082,
+          "source": "uk-proposed:opening_f0691227f3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_c43e6f9268": {
+        "width_m": {
+          "value": 0.7493,
+          "source": "uk-proposed:door_c43e6f9268",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "uk-proposed:door_c43e6f9268",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "door_7d90a4035e": {
+        "width_m": {
+          "value": 0.9979,
+          "source": "uk-proposed:door_7d90a4035e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "leads_to_exit": {
+          "value": true,
+          "source": "uk-proposed:door_7d90a4035e",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_cdadb26849": {
+        "width_m": {
+          "value": 0.4027,
+          "source": "uk-proposed:window_cdadb26849",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_f8e7aad4f3": {
+        "width_m": {
+          "value": 0.4025,
+          "source": "uk-proposed:window_f8e7aad4f3",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_9154293b99": {
+        "width_m": {
+          "value": 0.6396,
+          "source": "uk-proposed:window_9154293b99",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_301fe9c433": {
+        "width_m": {
+          "value": 0.6396,
+          "source": "uk-proposed:window_301fe9c433",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_971b2d846b": {
+        "width_m": {
+          "value": 3.0014,
+          "source": "uk-proposed:window_971b2d846b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_689ebfe44a": {
+        "width_m": {
+          "value": 2.2013,
+          "source": "uk-proposed:window_689ebfe44a",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_9816f7290f": {
+        "width_m": {
+          "value": 0.3725,
+          "source": "uk-proposed:window_9816f7290f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_83e3e824f6": {
+        "width_m": {
+          "value": 0.5969,
+          "source": "uk-proposed:window_83e3e824f6",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_efc2e07291": {
+        "width_m": {
+          "value": 3.0014,
+          "source": "uk-proposed:window_efc2e07291",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_62d68ae032": {
+        "width_m": {
+          "value": 0.8975,
+          "source": "uk-proposed:window_62d68ae032",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_ea2d397815": {
+        "width_m": {
+          "value": 2.54,
+          "source": "uk-proposed:window_ea2d397815",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_91855e97f1": {
+        "width_m": {
+          "value": 0.4234,
+          "source": "uk-proposed:window_91855e97f1",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_c06137b124": {
+        "width_m": {
+          "value": 4.8598,
+          "source": "uk-proposed:window_c06137b124",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_e1e2d0b53b": {
+        "width_m": {
+          "value": 1.3377,
+          "source": "uk-proposed:window_e1e2d0b53b",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_292aa43334": {
+        "width_m": {
+          "value": 1.2451,
+          "source": "uk-proposed:window_292aa43334",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_c7018e1130": {
+        "width_m": {
+          "value": 1.3038,
+          "source": "uk-proposed:window_c7018e1130",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_cdf8efcf2f": {
+        "width_m": {
+          "value": 1.1007,
+          "source": "uk-proposed:window_cdf8efcf2f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_da32f1a0ec": {
+        "width_m": {
+          "value": 0.3979,
+          "source": "uk-proposed:window_da32f1a0ec",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_66dd9eb5c5": {
+        "width_m": {
+          "value": 0.8255,
+          "source": "uk-proposed:window_66dd9eb5c5",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_0cb2f7ce1c": {
+        "width_m": {
+          "value": 0.6434,
+          "source": "uk-proposed:window_0cb2f7ce1c",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_1b5bc7a746": {
+        "width_m": {
+          "value": 0.8255,
+          "source": "uk-proposed:window_1b5bc7a746",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_b611a4a04f": {
+        "width_m": {
+          "value": 0.8255,
+          "source": "uk-proposed:window_b611a4a04f",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_e8e7a19311": {
+        "width_m": {
+          "value": 0.4953,
+          "source": "uk-proposed:window_e8e7a19311",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "window_dc9e49a4d2": {
+        "width_m": {
+          "value": 3.683,
+          "source": "uk-proposed:window_dc9e49a4d2",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      },
+      "building": {
+        "scale_stated": {
+          "value": false,
+          "source": "uk-proposed:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "dimension_count": {
+          "value": 0.0,
+          "source": "uk-proposed:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "is_dimensioned": {
+          "value": false,
+          "source": "uk-proposed:building",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        },
+        "links_to_exit": {
+          "value": 2,
+          "source": "derived:EXIT",
+          "trusted": false,
+          "conflicting": false,
+          "origin": "computed",
+          "reviewer": null
+        }
+      }
+    },
+    "collections": {
+      "doors": {
+        "items": [
+          "door_c43e6f9268",
+          "door_7d90a4035e"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "openings": {
+        "items": [
+          "opening_dfc332fe1d",
+          "opening_9803587fac",
+          "opening_6036d0ad90",
+          "opening_8fe048b5a6",
+          "opening_1ba920a318",
+          "opening_7b148e7939",
+          "opening_f0691227f3"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "rooms": {
+        "items": [
+          "room_01f12a9464",
+          "room_1f53a93d06",
+          "room_1ff93f595c",
+          "room_1fdb673ecb",
+          "room_c0b1185996",
+          "room_9fc6ed26c8",
+          "room_adc7eb46a0"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "stairs": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "windows": {
+        "items": [
+          "window_b6683b9b53",
+          "window_ae3f714c88",
+          "window_d9971fe10b",
+          "window_bcd7f7b4fc",
+          "window_2c4acdce5e",
+          "window_3a5357fadf",
+          "window_64336ba547",
+          "window_26db537008",
+          "window_4844a10a4e",
+          "window_cdadb26849",
+          "window_f8e7aad4f3",
+          "window_9154293b99",
+          "window_301fe9c433",
+          "window_971b2d846b",
+          "window_689ebfe44a",
+          "window_9816f7290f",
+          "window_83e3e824f6",
+          "window_efc2e07291",
+          "window_62d68ae032",
+          "window_ea2d397815",
+          "window_91855e97f1",
+          "window_c06137b124",
+          "window_e1e2d0b53b",
+          "window_292aa43334",
+          "window_c7018e1130",
+          "window_cdf8efcf2f",
+          "window_da32f1a0ec",
+          "window_66dd9eb5c5",
+          "window_0cb2f7ce1c",
+          "window_1b5bc7a746",
+          "window_b611a4a04f",
+          "window_e8e7a19311",
+          "window_dc9e49a4d2"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "habitable_rooms": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "dwelling_portions": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "hallways": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      },
+      "required_egress_doors": {
+        "items": [],
+        "complete": false,
+        "trusted": false
+      }
+    },
+    "graph_complete": false,
+    "evidence_locations": {},
+    "project_metadata": {}
+  },
+  "reviewed_facts": {
+    "bindings": {
+      "room_type": {
+        "kind": "string",
+        "unit": "1",
+        "description": "Reviewer-confirmed space classification",
+        "declaration": null
+      },
+      "eligible_area_m2": {
+        "kind": "number",
+        "unit": "m2",
+        "description": "Floor area after ceiling exclusions in R304.3; not gross detected area",
+        "declaration": null
+      },
+      "min_width_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Minimum internal horizontal dimension",
+        "declaration": null
+      },
+      "qualifying_public_discharge": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Required door opens to public way or qualifying yard/court",
+        "declaration": null
+      },
+      "continuous_unobstructed_egress": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Confirmed continuous unobstructed egress through all required levels",
+        "declaration": null
+      },
+      "side_hinged": {
+        "kind": "boolean",
+        "unit": "1",
+        "description": "Side-hinged operation of designated door",
+        "declaration": null
+      },
+      "clear_width_at_90_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Face-to-stop net clear width with door open 90 degrees",
+        "declaration": null
+      },
+      "clear_height_m": {
+        "kind": "number",
+        "unit": "m",
+        "description": "Top-of-threshold to bottom-of-stop clear height",
+        "declaration": null
+      }
+    },
+    "facts": {
+      "front_door": {
+        "side_hinged": {
+          "value": true,
+          "source": "PL101 H bottom entrance to hall: visible side-hinged swing. Designated required door for this hypothetical demo, not an approved egress plan.",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review"
+        }
+      },
+      "bed_1": {
+        "room_type": {
+          "value": "bedroom",
+          "source": "PL101 H native label bed 1",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review"
+        }
+      },
+      "hall": {
+        "room_type": {
+          "value": "corridor",
+          "source": "PL101 H native hall label",
+          "trusted": true,
+          "conflicting": false,
+          "origin": "reviewer-attested",
+          "reviewer": "assistant visual reading; no independent review"
+        }
+      }
+    },
+    "collections": {
+      "habitable_rooms": {
+        "items": [
+          "bed_1"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "dwelling_portions": {
+        "items": [
+          "bed_1",
+          "hall"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "hallways": {
+        "items": [
+          "hall"
+        ],
+        "complete": false,
+        "trusted": false
+      },
+      "required_egress_doors": {
+        "items": [
+          "front_door"
+        ],
+        "complete": true,
+        "trusted": true
+      }
+    },
+    "graph_complete": false,
+    "evidence_locations": {
+      "eligible_area_m2": "Internal dimension survey and ceiling sections",
+      "clear_width_at_90_m": "Clear opening schedule or measured face-to-stop opening at 90 degrees",
+      "clear_height_m": "Threshold-to-stop clear height survey",
+      "qualifying_public_discharge": "Site egress drawing and approval"
+    },
+    "project_metadata": {}
+  },
+  "inventory_attestation": {
+    "building_inventory_complete": false,
+    "graph_complete": false,
+    "required_egress_doors": "Complete only within the explicitly reviewer-designated one-door scenario, not an automatic or legally verified inventory"
+  },
+  "automatic_decisions": 0,
+  "reviewed_decisions": 2,
+  "needs_review": 5,
+  "ground_truth_limits": "Author scenario labels frozen before drafting/evaluation, no independent review, no violated examples: false-pass denominator zero. Reviewer designation is hypothetical, not confirmed regulatory applicability.",
+  "false_passes": [
+    0,
+    0
+  ],
+  "measurement": {
+    "attempted": 8,
+    "complete_model_readings": 7,
+    "request_rejected": 1,
+    "reviewer_rewrites": 7,
+    "rewrite_denominator": 7,
+    "checked": 2,
+    "validation_needs_review": 5,
+    "api_not_semantically_scored": 1,
+    "false_passes": [
+      0,
+      0
+    ],
+    "violation_precision": [
+      0,
+      0
+    ],
+    "unsupported_passes_against_author_scenario": [
+      0,
+      2
+    ],
+    "note": "Zero gold violations means false-pass rate and violation precision are undefined; 0/0 is not proof of correctness. Outcomes are atomic obligations, not whole-section compliance. All seven readings need full formalization/rewrite, not observed independent-human effort.",
+    "token_usage_completed": {
+      "input": 3548,
+      "output": 3634
+    }
+  },
+  "counted_units": "Reviewer-selected atomic target obligations",
+  "unavailable": 1,
+  "unresolved_evaluated": 0,
+  "reviewer_rewrites": 7
+}

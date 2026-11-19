@@ -1,6 +1,7 @@
 import pytest
 
 from reviewpulse.interpreter.context import ContextBundle
+from reviewpulse.interpreter.structured import ProposedFact
 from reviewpulse.interpreter.table_rows import compile_table, parse_table_row
 from reviewpulse.rules.clauses import Clause
 
@@ -80,3 +81,21 @@ def test_narrative_quantities_are_not_presented_as_a_complete_rule():
         Clause(id="r", heading="", page=0, text=text, start=0, end=len(text))])
     frame = parse_table_row(ctx, catalogue())
     assert frame["kind"] == "numeric_prose" and frame["blockers"]
+
+
+def test_proposed_fact_requires_meaning_review_and_still_has_no_observed_value():
+    from reviewpulse.interpreter.runtime import run_program
+    from reviewpulse.interpreter.schema import Inputs
+
+    ctx = context("| Heat transfer (W/m2/K) |", "| ≤ 0.8 |")
+    cat = catalogue()
+    frame = parse_table_row(ctx, cat)
+    proposal = {"name": "observed_transfer", "entity": "building", "kind": "number", "unit": "W/m2/K",
+                "definition": "Measured heat transfer", "source": {"clause": "m0", "quote": "Heat transfer (W/m2/K)"}}
+    choices = {"choices": [{"measurement": "m0", "fact": "NO_MATCH", "declaration": proposal}]}
+    with pytest.raises(ValueError, match="reviewer confirmation"):
+        compile_table(frame, choices, ctx, cat)
+    program, _ = compile_table(frame, choices, ctx, cat,
+        approved_declarations=[ProposedFact.model_validate(proposal).model_dump(mode="json")])
+    inputs = Inputs(bindings=cat["bindings"], facts={"building": {}})
+    assert run_program(program, inputs, include_drafts=True)["outcome"] == "UNRESOLVED"

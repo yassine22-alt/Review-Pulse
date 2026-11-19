@@ -1,24 +1,67 @@
-# Eight-rule demo scope (not an executed result)
+# Eight-rule assisted run — 19 November 2026
 
-**One document:** 2021 IRC Chapter 3, first printing. **One style:** the thin-line metric bungalow drawing in the four-drawing study. This selects an eight-rule target; it does not claim jurisdictional compliance.
+The frozen source/scenario is `reports/eight-rule-assisted-profile.json`, committed
+as `ed02b2ed` before generation. Original indexed publisher text is from the
+2021 IRC, Chapter 3, first printing. Direct publisher fetch returned HTTP 403;
+indexed publisher sections supplied the passages. The UK PL101 H drawing is an
+illustration: there is no claim that this code governs that property.
 
-The primary publisher sections were inspected through indexed results; direct chapter access returned HTTP 403. The JSON contains planning paraphrases, not source clauses. They must not be used as surrogate original text in an interpreter evaluation.
+## Reproduce locally
 
-| Section | Rule | Evidence needed |
+```powershell
+.venv/Scripts/python.exe scripts/demo_semantic_drafts.py reports/eight-rule-assisted-profile.json reports/eight-rule-semantic-drafts.json
+.venv/Scripts/python.exe scripts/plan_answerable_slice.py data/real_plans/label-study/uk-proposed.pdf runs/native-label-study/uk-proposed/building.json runs/eight-rule-assisted --profile reports/eight-rule-assisted-profile.json --drafts reports/eight-rule-semantic-drafts.json
+```
+
+The first command resumes cached text-only GPT-OSS-120B requests. It may retry
+previously rejected requests and therefore will not reproduce the exact archived
+attempt count; use the saved drafts for the frozen run. Drawings never leave the
+machine. The second command uses the trained pipeline's saved building model,
+not vector-only synthetic plan facts. Open `runs/eight-rule-assisted/report.html`
+and expand each evidence/trace section.
+
+## Actual run
+
+Eight attempted obligations: **7/8 complete neutral semantic readings**, **1/8
+HTTP 400 schema/request rejection**. The latter is transport/request failure,
+not a semantic grade. Completed calls consumed **3,548 input + 3,634 output =
+7,182 tokens**; usage for the rejected call is unavailable.
+
+All **7/7 completed drafts required a full reviewer-authored executable rewrite**.
+This is an assisted reading plus formalization workflow, not a completed typed
+LLM compiler. These are assistant actions, not independently observed human
+edit effort. See the before/after frames in `eight-rule-assisted-findings.json`.
+
+| Target | Final stage | Outcome |
 | --- | --- | --- |
-| R304.1 | Habitable room usable area | Room labels and interior dimension/area notes; reviewer confirms usable-area basis |
-| R304.2 | Habitable room minimum dimension | Room dimensions, not door widths or exterior bounding boxes |
-| R311.1 | Continuous egress route | Door relationships and site discharge evidence; unknown-class route remains unresolved |
-| R311.2-count | At least one egress door | Door designation plus approved egress plan; do not count all detected openings as exits |
-| R311.2-hinge | Egress door operation | Door symbol/type schedule or cited reviewer evidence |
-| R311.2-width | Egress door net clear width | Explicit clear-width schedule/detail; nominal leaf dimensions are insufficient |
-| R311.2-height | Egress door net clear height | Explicit clear-height schedule/detail; never substitute nominal height |
-| R311.6 | Hallway width | Internal dimensions or verified-scale geometry; unknown inventory prevents universal pass |
+| R304.1 eligible area, kitchen exception | validation / entity binding | needs review |
+| R304.2 horizontal dimension, kitchen exception | validation / entity binding | needs review |
+| R311.1 continuous route, garage exclusion, public discharge | request rejected | unavailable |
+| R311.2 minimum egress-door count | checked | satisfied in reviewer scenario |
+| R311.2 side-hinged operation | checked | satisfied in reviewer scenario |
+| R311.2 face-to-stop width at 90 degrees | validation / entity binding | needs review |
+| R311.2 threshold-to-stop clear height | validation / entity binding | needs review |
+| R311.6 hallway width | validation / entity binding | needs review |
 
-Kitchen exceptions supply the conditional case. Egress connectivity includes the no-garage traversal restriction and the qualifying discharge destination. Usable area cannot ignore ceiling exclusions. A nominal door schedule does not establish clear width/height. Membership and complete inventories must be explicitly verified.
+The five validation failures include missing entity-owned fact declarations and
+rounded imperial/metric equivalents; the width also includes uncovered angle
+protocol quantities. Exact diagnostics remain in the report. No validators were
+bypassed to obtain decisions. **0/8 automatic decisions; 2/8 after scenario
+attestation; 5/8 validation needs review; 1/8 API request unavailable.**
 
-**Run status:** no eight-clause LLM/approval/checker walkthrough has been executed. The hosted production pilot reached the daily allowance; original clause text must also be acquired. Reviewer edit counts, decided/unresolved counts and false passes for this proposed slice are unmeasured, not zero. The older five-rule authored brief does not satisfy this eight-rule regulation request.
+Automatic facts come from `from_building` on the saved trained extraction output.
+The model's detected inventory is never certified complete. The assistant
+visually read the bottom entrance swing and native room labels, and explicitly
+designated that door for the hypothetical scenario. Only that designated set is
+complete. No clear dimensions, usable area, all-level traversal or public-way
+connection were supplied. Nominal dimensions are never treated as clear opening.
+The drawing itself says dimensions are approximate and subject to site survey.
 
-Once source text and model availability are present: freeze source interpretations and plan labels; estimate tokens; draft the eight using strict typed slots; retain raw output; make recorded assistant/reviewer edits; approve only complete meanings; run the same rules on extracted facts, then on cited reviewer evidence; export verdict traces and compare against labels. A missing fact or conflict stays unresolved. No new computation is assumed.
+Two scenario-labelled passes match 2/2 scenario expectations; this is **not**
+regulatory accuracy. There are **0 gold violations**, so false passes **0/0**
+and violation precision **0/0** are undefined. R311.2 is decomposed into atomic
+obligations; passing count/hinge does not pass that section or establish egress
+compliance. All references lack independent review.
 
-[Machine-readable scope and per-rule blockers](eight-rule-demo-scope.json). Fourth document remains sealed.
+The old authored five-rule profile still reproduces **0/5 automatic, 3/5 assisted**.
+The new run is deliberately reported separately.

@@ -29,6 +29,7 @@ def implementation_hashes():
 
 
 def write_report(report, output):
+    counted_units = escape(report.get("counted_units", "Whole clauses"))
     def section(row):
         missing = row.get("blocker") or "; ".join(row.get("trace", {}).get("missing", []))
         return (f'<section><h3>{escape(row["id"])}: {escape(row["outcome"])}</h3>'
@@ -44,10 +45,10 @@ def write_report(report, output):
             'img{width:100%;height:auto}section{border-top:1px solid #bbb;margin-top:2rem}'
             'pre,blockquote{white-space:pre-wrap;overflow-wrap:anywhere}pre{font-size:12px}</style>'
             '<h1>Assisted real-drawing trace</h1><p>Manual interpretations and author-reviewed drawing evidence; '
-            'no automated-interpretation or legal-compliance claim. Whole-clause outcomes are listed below.</p>'
+            'no automated-interpretation or legal-compliance claim. Counted outcomes are listed below.</p>'
             f'<p>Source: {escape(report["source"]["publisher"])} — {escape(report["source"]["sheet"])}, '
-            f'{escape(report["source"]["edition"])}.</p><img src="drawing.png" alt="Publisher second-floor drawing">'
-            '<h2>Whole clauses</h2>' + content + fragment + '</html>')
+            f'{escape(report["source"]["edition"])}.</p><img src="drawing.png" alt="Source drawing">'
+            f'<h2>{counted_units}</h2>' + content + fragment + '</html>')
     (output / "report.html").write_text(html, encoding="utf-8")
 
 
