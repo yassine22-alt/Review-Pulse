@@ -79,3 +79,10 @@ def test_wrong_unit_and_unknown_subject_cannot_be_approvable():
     ctx = context("The object height must be at least 4 m.")
     with pytest.raises(ValueError, match="subject"):
         compile_assisted(classify_scope(ctx, catalogue()), {"choices": [{"measurement": "m0", "fact": "height"}]}, ctx, catalogue())
+
+
+def test_parent_scope_is_never_lost_from_an_otherwise_simple_threshold():
+    ctx = context("The building height must be at least 4 m.")
+    ctx.clauses.append(Clause(id="parent",heading="",page=0,text="Only applies to the declared project class.",start=len(ctx.text)+1,end=len(ctx.text)+43))
+    result=assisted_draft(ctx,catalogue())
+    assert result["program"] is None and not result["scope"]["in_scope"]

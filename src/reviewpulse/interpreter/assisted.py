@@ -6,6 +6,7 @@ from pathlib import Path
 
 import yaml
 
+from ..llm.openai_compat import APIUnavailable, LLMError
 from ..xeval.verify import wording
 from .deterministic import extract_quantities
 from .schema import Program, Span
@@ -70,6 +71,9 @@ def numeric_frame(context):
 def classify_scope(context, catalogue):
     target = next(c for c in context.clauses if c.id == context.target)
     text = target.text
+    dependencies = [c for c in context.clauses if c.id != target.id and c.kind != "table_header"]
+    if dependencies:
+        return {"family":"conditional", "in_scope":False, "reason":"Parent/definition context needs explicit reviewer scope binding", "frame":numeric_frame(context)}
     if target.kind == "table_row" or "|" in text:
         try:
             frame = parse_table_row(context, catalogue)
@@ -144,6 +148,10 @@ def assisted_draft(context, catalogue, client=None):
         program, slots = compile_assisted(scope, choice, context, catalogue)
         result.update(status="DRAFTED", queue="in_scope_draft", program=program.model_dump(mode="json"),
                       slots=slots, reason="Pending named reviewer approval")
+    except APIUnavailable as error:
+        result.update(reason=error.reason, stage="REQUEST_REJECTED" if error.http_status in (400, 422) else "API_UNAVAILABLE")
+    except LLMError as error:
+        result.update(reason=type(error).__name__, stage="generation")
     except ValueError as error:
         result.update(reason=str(error), stage=getattr(error, "stage", "validation"))
     return result

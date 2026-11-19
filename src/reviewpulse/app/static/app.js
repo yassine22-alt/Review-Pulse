@@ -190,7 +190,7 @@ async function setupTab(pid) {
         ${p.requirements ? `<div class="file"><span class="badge">document</span><span class="name">${esc(p.requirements)}</span>
           <span class="spacer"></span><button class="btn sm" id="redraft">Draft again</button></div>` : ""}
         <div data-job-kind="draft"></div>
-        ${health.llm.available ? "" : `<p class="notice" style="margin-top:12px">The drafting model (${esc(health.llm.model)}) is offline. Clauses are still extracted and you can write rules by hand; start it with <span class="mono">ollama serve</span> to draft automatically.</p>`}
+        ${health.llm.available ? "" : `<p class="notice" style="margin-top:12px">No drafting provider is available. Clauses can still be reviewed and formalized by a reviewer; no local model is required.</p>`}
       </div>
     </div>
     <div class="card pad" style="margin-top:16px">
@@ -444,15 +444,16 @@ async function requirementsTab(pid) {
     refreshReq(pid);
   });
   $("#readall").addEventListener("click", async () => {
-    try { const j = await api(`/api/projects/${pid}/interpret`, { method: "POST" }); toast("Reading started"); watchJob(pid, j, () => route()); } catch (e) { toast(e.message, true); }
+    try { const j = await api(`/api/projects/${pid}/assisted/interpret`, { method: "POST" }); toast("Reading started"); watchJob(pid, j, () => route()); } catch (e) { toast(e.message, true); }
   });
   for (const b of $$("[data-read]")) b.addEventListener("click", async () => {
     if ((got[b.dataset.read] || {}).decision && !confirm("Reading again replaces the rule and removes its approval.")) return;
     b.disabled = true; b.textContent = "Reading…";
-    try { await api(`/api/projects/${pid}/interpret/${encodeURIComponent(b.dataset.read)}`, { method: "POST" }); } catch (e) { toast(e.message, true); }
+    try { await api(`/api/projects/${pid}/assisted/interpret/${encodeURIComponent(b.dataset.read)}`, { method: "POST" }); } catch (e) { toast(e.message, true); }
     refreshReq(pid);
   });
   for (const card of $$("[data-appr]")) wireApproval(pid, card);
+  for (const card of $$("[data-assisted]")) wireAssisted(pid, card);
   if (job) {
     renderJob(job); watchJob(pid, job, () => route());
     // rules appear while the document is being read: look again every few seconds and redraw when one is new
@@ -535,9 +536,94 @@ function clauseCard(c, r) {
     ? `<div class="flag" style="color:var(--pass)"><b>Rule written. In words:</b> ${esc(r.plain || r.readback)}${r.plain_applies_when ? `<br>Applies when: ${esc(r.plain_applies_when)}` : ""}${r.plain_unless ? `<br>Unless: ${esc(r.plain_unless)}` : ""}<br><span class="muted">Exact form: <code>${esc(r.readback)}</code></span></div>
        <div class="muted">On this plan (${appr ? "preview" : "preview, not approved"}): <b>${esc(OUTCOME_TEXT[r.preview?.outcome] || r.preview?.outcome || "")}</b>${(r.preview?.missing || []).length ? ` · needs: ${esc(r.preview.missing.join(", "))}` : ""}</div>
        ${(r.notes || []).map((x) => `<div class="flag">${esc(x)}</div>`).join("")}
-       ${approvalBlock(c, r)}`
+       ${r.arm === "assisted" ? "" : approvalBlock(c, r)}`
     : `<div class="flag">Not checked yet: ${esc(r.reason)}</div>`;
-  return `<div class="draft">${head}<div>${body}<div class="row" style="margin-top:10px"><button class="btn" data-read="${esc(c.id)}">Read again</button></div></div></div>`;
+  return `<div class="draft">${head}<div>${body}${r.arm === "assisted" ? assistedEditor(c, r) : ""}<div class="row" style="margin-top:10px"><button class="btn" data-read="${esc(c.id)}">Read again</button></div></div></div>`;
+}
+
+function assistedEditor(c, r) {
+  return `<div data-assisted="${esc(c.id)}" class="card">
+    <p><b>${r.queue === "in_scope_draft" ? "Review numeric draft" : "Reviewer formalization queue"}</b>
+    · ${esc(r.scope?.family || "review required")}</p>
+    <p class="muted">Start the timer before reading/editing. Pause during interruptions.
+    Saving validates the rule; approval is a separate source-meaning confirmation.</p>
+    <label>Reviewer <input data-r="reviewer" value="${esc(localStorage.getItem("rp_reviewer") || "")}"></label>
+    <button class="btn sm" data-r="start">Start timed review</button>
+    <div data-r="work" class="hide"><span data-r="timer">Timer running</span>
+      <button class="btn sm" data-r="pause">Pause</button><div data-r="fields"></div>
+      <details data-r="advanced"><summary>Formal rule and source context (expert editor)</summary>
+      <p>Queue clauses need explicit formalization. No suggested meaning is filled in.</p>
+      <textarea data-r="text" rows="16" style="width:100%" aria-label="Formal rule"></textarea>
+      <details><summary>Allowed rule structure and catalogue</summary><pre data-r="schema"></pre></details></details>
+      <button class="btn primary" data-r="save">Validate and save draft</button>
+      <p data-r="feedback" role="status"></p></div>
+    ${r.program ? `<label><input type="checkbox" data-r="ack"> I checked the source meaning, quantities, units, entities and all applicability/exception conditions.</label>
+    <button class="btn sm" data-r="approve">Approve this rule</button>` : ""}
+    <p class="muted">Observed effort report: <a target="_blank" href="/api/projects/${state.project.id}/assisted/effort">sessions and edit diffs</a>.
+    Unfinished sessions do not count as completed reviews.</p></div>`;
+}
+
+function wireAssisted(pid, box) {
+  const field = (name) => $(`[data-r="${name}"]`, box);
+  const endpoint = (part) => `/api/projects/${pid}/assisted/${part}`;
+  let session = null, paused = false, events = 0;
+  const reviewer = () => field("reviewer").value.trim();
+  field("start").addEventListener("click", async () => {
+    if (!reviewer()) { toast("Enter your reviewer name", true); return; }
+    try {
+      session = await api(endpoint("session"), { method:"POST", json:{clause:box.dataset.assisted, reviewer:reviewer(), actor_type:"human"} });
+      localStorage.setItem("rp_reviewer", reviewer());
+      field("start").disabled = true; field("work").classList.remove("hide");
+      field("text").value = session.before ? JSON.stringify(session.before, null, 2) : "";
+      field("advanced").open = !session.before;
+      field("schema").textContent = JSON.stringify({source:session.context, catalogue:session.catalogue, schema:session.editor_schema}, null, 2);
+      if (session.before) {
+        const frame = session.before;
+        const edits = [];
+        frame.nodes.forEach((node, i) => {
+          for (const key of ["name", "value", "unit"]) if (key in node && typeof node.value !== "boolean")
+            edits.push({path:["nodes",i,key], label:`${node.id}: ${key}`, value:node[key]});
+          if (["ge","le","gt","lt","eq","ne"].includes(node.op)) edits.push({path:["nodes",i,"op"],label:`${node.id}: comparison`,value:node.op});
+        });
+        frame.metadata_applicability.forEach((condition,i) => {
+          for (const key of ["value","unit","operator"]) edits.push({path:["metadata_applicability",i,key],label:`Scope ${condition.field}: ${key}`,value:condition[key]});
+        });
+        field("fields").innerHTML = edits.map((edit,i) => `<label class="field">${esc(edit.label)}<input data-edit="${i}" value="${esc(edit.value)}"></label>`).join("");
+        $$("[data-edit]",box).forEach(input => input.addEventListener("input", () => {
+          events++;
+          try {
+            const current=JSON.parse(field("text").value), edit=edits[+input.dataset.edit];
+            let owner=current; edit.path.slice(0,-1).forEach(key => {owner=owner[key];});
+            owner[edit.path.at(-1)] = typeof edit.value === "number" ? Number(input.value) : input.value;
+            field("text").value=JSON.stringify(current,null,2);
+          } catch { field("feedback").textContent="Correct the formal rule JSON before using quick fields."; }
+        }));
+      }
+    } catch(e) {toast(e.message,true);}
+  });
+  field("text").addEventListener("input",()=>{events++;});
+  field("pause").addEventListener("click",async()=>{
+    try {
+      await api(endpoint("session/pause"),{method:"POST",json:{session_id:session.id,paused:!paused}});
+      paused=!paused; field("pause").textContent=paused ? "Resume" : "Pause";
+      field("timer").textContent=paused ? "Timer paused" : "Timer running";
+      field("text").disabled=paused; field("save").disabled=paused;
+      $$("[data-edit]",box).forEach(input=>{input.disabled=paused;});
+    } catch(e) {toast(e.message,true);}
+  });
+  field("save").addEventListener("click",async()=>{
+    try {
+      const result=await api(endpoint("session/save"),{method:"POST",json:{session_id:session.id,text:field("text").value,input_events:events}});
+      field("feedback").textContent=result.saved ? `Saved after ${result.session.elapsed_seconds.toFixed(1)} seconds. Approval is still required.` : `Needs correction: ${result.reason}`;
+      if(result.saved) {toast("Validated draft saved; approve after checking source meaning"); refreshReq(pid);}
+    } catch(e) {toast(e.message,true);}
+  });
+  if(field("approve")) field("approve").addEventListener("click",async()=>{
+    try {
+      await api(endpoint("approve"),{method:"POST",json:{clause:box.dataset.assisted,action:"approve",reviewer:reviewer(),acknowledge:field("ack").checked}});
+      toast("Reviewer-approved rule; run the check to see evidence and unresolved facts"); refreshReq(pid);
+    } catch(e) {toast(e.message,true);}
+  });
 }
 
 /* ---------------------------------------------------------------- results tab */

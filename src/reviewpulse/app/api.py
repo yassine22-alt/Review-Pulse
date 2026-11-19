@@ -10,7 +10,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from ..interpreter.api import interpreter_router
 from . import interpret as interpretation
@@ -23,6 +23,23 @@ MAX_UPLOAD_MB = 200
 LLM_STATUS_TTL_S = 30
 DOWNLOADS = {"report.pdf": "application/pdf", "report.html": "text/html", "findings.json": "application/json",
              "findings.csv": "text/csv", "triage.json": "application/json"}
+
+
+class ReviewSession(BaseModel):
+    clause: str
+    reviewer: str
+    actor_type: str = "human"
+
+
+class ReviewSave(BaseModel):
+    session_id: str
+    text: str = Field(max_length=200000)
+    input_events: int = Field(default=0, ge=0)
+
+
+class ReviewPause(BaseModel):
+    session_id: str
+    paused: bool
 
 
 class NewProject(BaseModel):
@@ -270,6 +287,51 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
                                                 body.acknowledge, llm)
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/assisted/interpret/{clause_id:path}")
+    def assisted_one(pid: str, clause_id: str):
+        project(pid)
+        try:
+            return interpretation.interpret_clause(store, pid, clause_id, llm, assisted=True)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/assisted/interpret", status_code=202)
+    def assisted_all(pid: str):
+        project(pid)
+        return jobs.submit(pid, "interpret", lambda job: interpretation.interpret_all(store, pid, job, llm, assisted=True))
+
+    def review_action(pid, operation, *args):
+        project(pid)
+        try:
+            return operation(store, pid, *args)
+        except (ValueError, KeyError) as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.post("/api/projects/{pid}/assisted/session")
+    def assisted_start(pid: str, body: ReviewSession):
+        from .assisted_review import start
+        return review_action(pid, start, body.clause, body.reviewer, body.actor_type)
+
+    @app.post("/api/projects/{pid}/assisted/session/pause")
+    def assisted_pause(pid: str, body: ReviewPause):
+        from .assisted_review import pause
+        return review_action(pid, pause, body.session_id, body.paused)
+
+    @app.post("/api/projects/{pid}/assisted/session/save")
+    def assisted_save(pid: str, body: ReviewSave):
+        from .assisted_review import save
+        return review_action(pid, save, body.session_id, body.text, body.input_events)
+
+    @app.post("/api/projects/{pid}/assisted/approve")
+    def assisted_approve(pid: str, body: Decision):
+        from .assisted_review import approve
+        return review_action(pid, approve, body.clause, body.reviewer, body.acknowledge)
+
+    @app.get("/api/projects/{pid}/assisted/effort")
+    def assisted_effort(pid: str):
+        from .assisted_review import report
+        return review_action(pid, report)
 
     @app.get("/api/projects/{pid}/coverage")
     def get_coverage(pid: str):

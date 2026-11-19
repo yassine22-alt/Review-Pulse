@@ -79,7 +79,10 @@ def main():
         "scope": {"out_of_scope_wrongly_drafted": [sum(r["retained"] for r in outscope),len(outscope)],
                   "out_of_scope_predicted_in_scope": [sum(r["scope"]["in_scope"] for r in outscope),len(outscope)],
                   "out_of_scope_sent_to_queue": [sum(not r["retained"] for r in outscope),len(outscope)],
-                  "families": dict(Counter(r["scope"]["family"] for r in rows))},
+                  "families": dict(Counter(r["scope"]["family"] for r in rows)),
+                  "family_exact": [sum(r["scope"]["family"]==r["reference_scope"]["family"] for r in rows),len(rows)],
+                  "in_scope_reaching_draft": [sum(r["retained"] for r in rows if r["reference_scope"]["in_scope"]),sum(r["reference_scope"]["in_scope"] for r in rows)],
+                  "in_scope_sent_to_queue": [sum(not r["retained"] for r in rows if r["reference_scope"]["in_scope"]),sum(r["reference_scope"]["in_scope"] for r in rows)]},
         "source_wrong_approvable": [sum(r["retained"] and r["edit_bucket"] != "0" for r in rows), sum(r["retained"] for r in rows)],
         "new_hosted_calls": len(client.events) if client else 0, "rows": rows,
         "limits": ["Assistant labels and source reviews, no independent review.","No accuracy gain if whole source correctness has not been reviewed.","No test of plan verdict accuracy; missing evidence remains unresolved."]}

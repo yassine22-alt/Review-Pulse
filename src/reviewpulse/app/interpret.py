@@ -98,13 +98,13 @@ def _plan(store: Store, pid: str):
 
 
 def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callable[[], object | None],
-                     fallback_factory: Callable[[], object | None] | None = None, triage: bool = False) -> dict:
+                     fallback_factory: Callable[[], object | None] | None = None, triage: bool = False, assisted: bool = False) -> dict:
     p = store.get(pid)
     path = store.req_path(p)
     if path is None or not path.exists():
         raise ValueError("upload a requirement document first")
     client = llm_factory()
-    if client is None:
+    if client is None and not assisted:
         raise ValueError("the drafting model is not available")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
     source_hash = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -112,7 +112,20 @@ def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callab
     graph, inputs, route_graph = _plan(store, pid)
     # a hosted model is asked only for a clause the local one could not read, and only when the reviewer allowed it
     fallback = fallback_factory() if fallback_factory is not None and p.external_consent else None
-    out = checked_draft(context, inputs, graph, client, fallback=fallback, triage=triage)
+    if assisted:
+        from ..interpreter.assisted import assisted_draft
+        from ..interpreter.checked import catalogue_from
+        from ..xeval.readback import plain
+
+        if getattr(client, "external", False) and not p.external_consent:
+            client = None
+        catalogue = catalogue_from(inputs, graph)
+        out = assisted_draft(context, catalogue, client)
+        out.update(arm="assisted", model=getattr(client, "model", None), notes=[])
+        if out["program"]:
+            out["readback"] = plain(out["program"]["requirement"], catalogue["bindings"])
+    else:
+        out = checked_draft(context, inputs, graph, client, fallback=fallback, triage=triage)
     out["clause"] = clause_id
     if out["program"] is not None:
         out["program"]["id"] = rule_id(clause_id)
@@ -143,7 +156,7 @@ def draft_workers(client) -> int:
 
 
 def interpret_all(store: Store, pid: str, job, llm_factory: Callable[[], object | None],
-                  fallback_factory: Callable[[], object | None] | None = None) -> dict:
+                  fallback_factory: Callable[[], object | None] | None = None, assisted: bool = False) -> dict:
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
     doc = document(store, pid)
@@ -155,7 +168,7 @@ def interpret_all(store: Store, pid: str, job, llm_factory: Callable[[], object 
 
     def one(cid: str) -> str:
         try:
-            return interpret_clause(store, pid, cid, llm_factory, fallback_factory, triage=True)["status"]
+            return interpret_clause(store, pid, cid, llm_factory, fallback_factory, triage=True, assisted=assisted)["status"]
         except ValueError:
             return "failed"
 
