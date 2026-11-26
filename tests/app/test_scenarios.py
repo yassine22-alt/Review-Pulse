@@ -75,7 +75,7 @@ def wait(c, pid, job):
 
 def run_scenario(tmp_path, kind, kw):
     paths = make_plan(tmp_path / "plan", png=False, **kw) if kind == "make" else random_plan(tmp_path / "plan", **kw)
-    with TestClient(create_app(tmp_path / "data", llm=lambda: Scripted(), workers=1)) as c:
+    with TestClient(create_app(tmp_path / "data", llm=lambda: Scripted(), workers=1, auth=False)) as c:
         pid = c.post("/api/projects", json={"name": "s", "curator": "t", "base_pack": "starter"}).json()["id"]
         with open(paths["dxf"], "rb") as f:
             wait(c, pid, c.post(f"/api/projects/{pid}/plan", files={"file": ("plan.dxf", f)}).json())

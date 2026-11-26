@@ -30,7 +30,7 @@ def scenario(name):
 
 def flow(tmp_path, kw, plan_kind="pdf"):
     paths = make_plan(tmp_path / "plan", png=False, **kw)
-    c = TestClient(create_app(tmp_path / "data", llm=lambda: Scripted(), workers=1))
+    c = TestClient(create_app(tmp_path / "data", llm=lambda: Scripted(), workers=1, auth=False))
     c.__enter__()
     pid = c.post("/api/projects", json={"name": "demo", "curator": "Test Reviewer", "base_pack": "starter"}).json()["id"]
     with open(paths[plan_kind], "rb") as f:

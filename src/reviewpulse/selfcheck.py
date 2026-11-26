@@ -159,7 +159,7 @@ def check_app(work: Path) -> bool:
     paths = _plan(work)
     exp = _expected(paths)
     try:
-        with TestClient(create_app(work / "app")) as c:
+        with TestClient(create_app(work / "app", auth=False)) as c:
             assert c.get("/api/health").json()["ok"]
             assert c.get("/").status_code == 200
             pid = c.post("/api/projects", json={"name": "doctor", "curator": "doctor", "base_pack": "starter"}).json()["id"]

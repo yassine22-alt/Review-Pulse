@@ -31,7 +31,7 @@ def start_server(data: Path, port: int) -> str:
 
     from reviewpulse.app.api import create_app
 
-    server = uvicorn.Server(uvicorn.Config(create_app(data), host="127.0.0.1", port=port, log_level="warning"))
+    server = uvicorn.Server(uvicorn.Config(create_app(data, auth=False), host="127.0.0.1", port=port, log_level="warning"))
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{port}"
     for _ in range(100):

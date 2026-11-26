@@ -72,7 +72,7 @@ def plan(tmp_path_factory):
 @pytest.fixture()
 def env(tmp_path):
     model = ScriptedModel()
-    app = create_app(tmp_path / "data", llm=lambda: model, workers=1)
+    app = create_app(tmp_path / "data", llm=lambda: model, workers=1, auth=False)
     with TestClient(app) as client:
         yield client, model
 

@@ -21,7 +21,7 @@ class _NoModel:
 
 
 def _client(tmp_path):
-    return TestClient(create_app(tmp_path / "data", llm=lambda: _NoModel(), workers=1))
+    return TestClient(create_app(tmp_path / "data", llm=lambda: _NoModel(), workers=1, auth=False))
 
 
 def _upload(c, pid, name, data):

@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 import time
 from collections.abc import Callable
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -19,6 +20,9 @@ from .jobs import JobRunner
 from .store import PLAN_TYPES, REQ_TYPES, Store
 
 STATIC = Path(__file__).parent / "static"
+WEB = Path(__file__).parent / "web"          # the product front end, built from frontend/ (npm run build)
+WEB_CSP = ("default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; "
+           "object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
 MAX_UPLOAD_MB = 200
 LLM_STATUS_TTL_S = 30
 DOWNLOADS = {"report.pdf": "application/pdf", "report.html": "text/html", "findings.json": "application/json",
@@ -95,7 +99,8 @@ class Triage(BaseModel):
 
 
 def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | None] | None = None,
-               workers: int = 2, fallback: Callable[[], object | None] | None = None) -> FastAPI:
+               workers: int = 2, fallback: Callable[[], object | None] | None = None, auth: bool = True) -> FastAPI:
+    """``auth=False`` is for scripts and tests that drive the app inside their own process; a served app has accounts."""
     store = Store(data_dir)
     jobs = JobRunner(store, workers)
     llm = llm or service.default_llm
@@ -109,6 +114,17 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
                   description="Automated review of architectural plans against requirement documents")
     app.state.store, app.state.jobs = store, jobs
     app.include_router(interpreter_router(llm))
+    if auth:
+        from .auth import Accounts
+        from .auth.http import install
+
+        app.state.accounts = Accounts(Path(data_dir) / "accounts.sqlite")
+        install(app, app.state.accounts, store)
+
+    def who(request: Request, typed: str) -> str:
+        """The name that goes on a decision: the signed in account's, never one typed into the request."""
+        user = getattr(request.state, "user", None)
+        return user.name if user else typed
 
     def project(pid: str):
         try:
@@ -158,26 +174,32 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
 
     # -- projects -------------------------------------------------------------
     @app.get("/api/projects")
-    def list_projects():
-        return [payload(p) for p in store.list()]
+    def list_projects(request: Request):
+        user = getattr(request.state, "user", None)
+        return [payload(p) for p in store.list() if not user or p.org == user.org]
 
     @app.post("/api/projects", status_code=201)
-    def create_project(body: NewProject):
+    def create_project(body: NewProject, request: Request):
         if body.base_pack and body.base_pack not in {p["name"] for p in service.base_packs()}:
             raise HTTPException(400, f"unknown base pack {body.base_pack!r}")
-        return payload(store.create(body.name, body.base_pack, body.curator))
+        user = getattr(request.state, "user", None)
+        return payload(store.create(body.name, body.base_pack, who(request, body.curator), user.org if user else ""))
 
     @app.get("/api/projects/{pid}")
     def get_project(pid: str):
         return payload(project(pid))
 
     @app.patch("/api/projects/{pid}")
-    def update_project(pid: str, body: Settings):
+    def update_project(pid: str, body: Settings, request: Request):
         p = project(pid)
+        user = getattr(request.state, "user", None)
+        reviewers_only = body.inventory_reviewed is not None or body.external_consent is not None
+        if user and reviewers_only and "reviewer" not in user.roles:
+            raise HTTPException(403, "only a reviewer can confirm the inventory or allow a hosted model")
         if body.name is not None:
             p.name = body.name.strip() or p.name
         if body.curator is not None:
-            p.curator = body.curator.strip()
+            p.curator = who(request, body.curator.strip())
         if body.inventory_reviewed is not None:
             p.inventory_reviewed = body.inventory_reviewed
         if body.external_consent is not None:
@@ -284,8 +306,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(409, str(e)) from None
 
     @app.post("/api/projects/{pid}/decision")
-    def decide_one(pid: str, body: Decision):
+    def decide_one(pid: str, body: Decision, request: Request):
         project(pid)
+        body.reviewer = who(request, body.reviewer)
         try:
             out = interpretation.decide_clause(store, pid, body.clause, body.action, body.reviewer, body.note,
                                                body.acknowledge, llm)
@@ -306,8 +329,6 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
 
     @app.get("/api/projects/{pid}/coverage.html", include_in_schema=False)
     def get_coverage_html(pid: str):
-        from fastapi.responses import HTMLResponse
-
         from ..report.coverage import render_html
 
         project(pid)
@@ -327,8 +348,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         return service.drafts(store, pid)
 
     @app.post("/api/projects/{pid}/drafts/{index}/approve")
-    def approve(pid: str, index: int, body: Approve):
+    def approve(pid: str, index: int, body: Approve, request: Request):
         project(pid)
+        body.curator = who(request, body.curator)
         try:
             return service.approve_draft(store, pid, index, body.curator, body.rule_yaml)
         except KeyError:
@@ -337,16 +359,18 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(400, str(e)) from None
 
     @app.post("/api/projects/{pid}/drafts/{index}/reject")
-    def reject(pid: str, index: int, body: Decide):
+    def reject(pid: str, index: int, body: Decide, request: Request):
         project(pid)
+        body.curator = who(request, body.curator)
         try:
             return service.reject_draft(store, pid, index, body.curator)
         except KeyError:
             raise HTTPException(404, f"no draft {index}") from None
 
     @app.post("/api/projects/{pid}/drafts/{index}/reset")
-    def reset(pid: str, index: int, body: Decide):
+    def reset(pid: str, index: int, body: Decide, request: Request):
         project(pid)
+        body.curator = who(request, body.curator)
         try:
             return service.reject_draft(store, pid, index, body.curator, reset=True)
         except KeyError:
@@ -408,7 +432,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     @app.get("/api/projects/{pid}/correction-list")
     def get_correction_list(pid: str, format: str = "json", cycle: int | None = None, file: bool = False):
         """format: json (the list itself; ``file=true`` gives the exchange file), html, txt, pdf, bcf or csv."""
-        from fastapi.responses import HTMLResponse, PlainTextResponse
+        from fastapi.responses import PlainTextResponse
 
         from ..report import correction_list as cl
 
@@ -436,8 +460,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         return get_correction_list(pid, "pdf", cycle)
 
     @app.put("/api/projects/{pid}/correction-list/items/{key:path}")
-    def put_item(pid: str, key: str, body: ItemAction):
+    def put_item(pid: str, key: str, body: ItemAction, request: Request):
         data = current_list(pid)
+        body.reviewer = who(request, body.reviewer)
         if body.action != "reset" and not any(i["key"] == key for i in data["items"]):
             raise HTTPException(404, f"no correction item {key}")
         try:
@@ -452,8 +477,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         return workflow.clause_states(store, pid)
 
     @app.put("/api/projects/{pid}/clause-states")
-    def put_clause_state(pid: str, body: ClauseState):
+    def put_clause_state(pid: str, body: ClauseState, request: Request):
         project(pid)
+        body.reviewer = who(request, body.reviewer)
         try:
             return workflow.set_clause_state(store, pid, body.clause, body.state, body.reviewer, body.note)
         except ValueError as e:
@@ -465,10 +491,11 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         return workflow.signoffs(store, pid)
 
     @app.post("/api/projects/{pid}/signoffs", status_code=201)
-    def post_signoff(pid: str, body: SignOff):
+    def post_signoff(pid: str, body: SignOff, request: Request):
         from ..report import disciplines
 
         project(pid)
+        body.reviewer = who(request, body.reviewer)
         try:
             return workflow.sign_off(store, pid, body.reviewer, body.discipline, body.result, body.cycle, body.note,
                                      known_disciplines=set(disciplines.order()))
@@ -496,12 +523,22 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     # -- UI ------------------------------------------------------------------------
     @app.exception_handler(Exception)
     async def unexpected(_req, exc):  # pragma: no cover - last-resort JSON error
+        if auth:                           # a served product does not show its internals
+            logging.getLogger("reviewpulse").error("unhandled error", exc_info=exc)
+            return JSONResponse({"detail": "something went wrong on the server; the error was logged"}, status_code=500)
         return JSONResponse({"detail": f"{type(exc).__name__}: {exc}"}, status_code=500)
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
+    if auth and (WEB / "assets").is_dir():
+        app.mount("/assets", StaticFiles(directory=WEB / "assets"), name="assets")
 
     @app.get("/", include_in_schema=False)
     def index():
-        return FileResponse(STATIC / "index.html")
+        if not auth:                       # the single user pages cannot sign in: only for a server without accounts
+            return FileResponse(STATIC / "index.html")
+        if not (WEB / "index.html").exists():
+            return HTMLResponse("<h1>ReviewPulse</h1><p>The web pages are not built. Run: cd frontend, npm ci, "
+                                "npm run build.</p>", status_code=503)
+        return FileResponse(WEB / "index.html", headers={"Content-Security-Policy": WEB_CSP, "Cache-Control": "no-cache"})
 
     return app

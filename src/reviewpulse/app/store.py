@@ -63,6 +63,7 @@ class Project:
     external_consent: bool = False      # the reviewer allowed clause text (never plans) to go to a hosted model for hard clauses
     inventory_reviewed: bool = False    # a person confirmed every room, door and window was found: passes may be reported
     updated: str = ""
+    org: str = ""                       # the organisation that owns the project (empty: made without accounts)
     notes: dict = field(default_factory=dict)
 
 
@@ -94,9 +95,9 @@ class Store:
         return self.dir(p.id) / "inputs" / "req" / p.requirements if p.requirements else None
 
     # -- projects ------------------------------------------------------------
-    def create(self, name: str, base_pack: str | None = None, curator: str = "") -> Project:
+    def create(self, name: str, base_pack: str | None = None, curator: str = "", org: str = "") -> Project:
         p = Project(id=uuid.uuid4().hex[:12], name=name.strip() or "Untitled project", created=now(),
-                    base_pack=base_pack, curator=curator)
+                    base_pack=base_pack, curator=curator, org=org)
         self._ensure_folders(p.id)
         self.save(p)
         return p

@@ -62,7 +62,7 @@ def wait(c, pid, job):
 def main(n: int):
     llm = Hybrid()
     rows = []
-    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1)) as c:
+    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1, auth=False)) as c:
         for k in range(n):
             errors = SETS[k % len(SETS)]
             paths = make_plan(Path(tmp) / f"p{k}", seed=100 + k, errors=errors, png=False)

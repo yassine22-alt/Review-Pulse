@@ -28,3 +28,7 @@ reports
 tests
 envs
 *.egg-info
+
+# front end packages and build output: the image builds its own
+frontend/node_modules
+src/reviewpulse/app/web

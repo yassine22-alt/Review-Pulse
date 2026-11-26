@@ -42,7 +42,7 @@ def main() -> None:
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     rows = []
-    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: None, workers=1)) as c:
+    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: None, workers=1, auth=False)) as c:
         for pdf in map(Path, args.pdfs):
             doc = pymupdf.open(pdf)
             pages = list(range(min(len(doc), args.max_pages)))

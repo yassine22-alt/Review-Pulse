@@ -29,7 +29,7 @@ llm  = ["anthropic"]   # optional hosted backend for I4; the default backend (Ol
 # process, so mismatched versions fail with "cudnn_cnn64_9.dll: procedure could not be found".
 # product service and web UI (rp serve)
 evidence = ["tokenizers"]   # the cross-encoder that reranks retrieved notes (model file: see docs/RUNBOOK.md)
-app = ["fastapi", "uvicorn[standard]", "python-multipart", "jinja2", "httpx", "python-docx", "openpyxl", "lxml", "rapidocr-onnxruntime", "tokenizers"]
+app = ["argon2-cffi>=23.1", "fastapi", "uvicorn[standard]", "python-multipart", "jinja2", "httpx", "python-docx", "openpyxl", "lxml", "rapidocr-onnxruntime", "tokenizers"]
 raster = ["torch", "torchvision", "segmentation-models-pytorch", "paddleocr", "easyocr"]
 data = ["huggingface_hub", "gdown"]          # scripts/fetch_datasets.py (public datasets for training and evaluation)
 figures = ["matplotlib", "playwright"]       # progress-report figures and app screenshots
@@ -41,7 +41,7 @@ rp = "reviewpulse.cli:app"
 where = ["src"]
 
 [tool.setuptools.package-data]
-reviewpulse = ["rules/*.yaml", "rules/packs/**/*.yaml", "app/static/*", "xeval/cues.yaml", "annotate/lexicon/*.yaml", "interpreter/units.yaml", "perception/stairs_calibration.json", "drawingset/vocab.yaml", "regs/cues.yaml", "schedules/vocabulary.yaml", "report/*.yaml"]
+reviewpulse = ["rules/*.yaml", "rules/packs/**/*.yaml", "app/static/*", "app/web/*", "app/web/assets/*", "xeval/cues.yaml", "annotate/lexicon/*.yaml", "interpreter/units.yaml", "perception/stairs_calibration.json", "drawingset/vocab.yaml", "regs/cues.yaml", "schedules/vocabulary.yaml", "report/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

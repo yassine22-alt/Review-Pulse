@@ -2,6 +2,13 @@
 #   docker build -t reviewpulse .                          vector plans (PDF, DXF, SVG)
 #   docker build -t reviewpulse --build-arg WITH_RASTER=1 .  + scans (torch CPU, PaddleOCR)
 # The drafting model runs in its own container (Ollama); see docker-compose.yml.
+FROM node:22-bookworm-slim AS web
+WORKDIR /build/frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend ./
+RUN npm run build
+
 FROM python:3.11.9-slim-bookworm
 
 ARG WITH_RASTER=0
@@ -14,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 li
 WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
+COPY --from=web /build/src/reviewpulse/app/web ./src/reviewpulse/app/web
 COPY docs ./docs
 # trained models (data/models/*) are optional: present ones are copied, absent ones disable their path
 COPY data ./data

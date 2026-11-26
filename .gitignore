@@ -96,6 +96,10 @@ reports/*
 /legacy/deepfloorplan/outputs/*
 !/legacy/deepfloorplan/outputs/.gitkeep
 
+# Built web pages (made from frontend/ by npm run build) and its packages
+src/reviewpulse/app/web/
+frontend/node_modules/
+
 # Application data written by the running app (uploads, runs, drafts)
 data/app/
 

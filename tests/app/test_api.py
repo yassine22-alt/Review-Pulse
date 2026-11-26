@@ -48,7 +48,7 @@ def plan(tmp_path_factory):
 
 @pytest.fixture()
 def client(tmp_path):
-    app = create_app(tmp_path / "data", llm=lambda: FakeLLM(), workers=1)
+    app = create_app(tmp_path / "data", llm=lambda: FakeLLM(), workers=1, auth=False)
     with TestClient(app) as c:
         yield c
 
@@ -209,7 +209,7 @@ def test_errors(client, tmp_path):
 
 
 def test_drafting_without_llm(tmp_path):
-    app = create_app(tmp_path / "data", llm=lambda: None, workers=1)
+    app = create_app(tmp_path / "data", llm=lambda: None, workers=1, auth=False)
     with TestClient(app) as c:
         assert c.get("/api/health").json()["llm"]["available"] is False
         pid = new_project(c, base_pack=None)

@@ -51,18 +51,27 @@ Install and run everything from the repository root.
 ## Quickstart: the web app
 
 ```
-pip install -e ".[app]"          # FastAPI service and web UI
-ollama pull qwen2.5:7b           # optional: the local model that drafts rules from the requirements
-rp serve                         # http://127.0.0.1:8000  (projects stored in data/app)
+pip install -e ".[app]"                  # the web service
+cd frontend && npm ci && npm run build   # the web pages (needs Node 22)
+cd ..
+ollama pull qwen2.5:7b                   # optional: the local model that drafts rules from the requirements
+rp create-admin                          # once: your office and the first account (there is no default account)
+rp serve                                 # http://127.0.0.1:8000  (projects stored in data/app)
 ```
 
 or, with Docker (the app and the drafting model in two containers):
 
 ```
 docker compose up --build        # http://localhost:8000 ; first start downloads qwen2.5:7b (~4.7 GB)
+docker compose exec app rp create-admin --data /data
 ```
 
-In the app: create a project, drop the plan (PDF, DXF, SVG, PNG/JPG scan) and the source documents to
+The app has accounts, roles and a review desk; see
+[docs/progress/M28_product_app_foundation.md](docs/progress/M28_product_app_foundation.md) for its screens, security design and
+limits. I have not built or run the Docker image since adding them.
+
+**The older single user pages** run with `rp serve --no-accounts` (this machine only). They still hold some things the new app
+does not: confirming single rooms and doors on the drawing, and dismissing findings. In those pages: create a project, drop the plan (PDF, DXF, SVG, PNG/JPG scan) and the source documents to
 review (PDF, scanned PDF or photo of a page, Word, Excel or csv checklist, web page, Markdown, text). New projects do not apply a built-in rule pack by default: the
 user-supplied documents define the review criteria. The Requirements tab reads clauses into checked
 interpretations; a reviewer approves or rejects each interpretation before it runs. Built-in packs remain
@@ -72,7 +81,7 @@ findings with a reason; every change re-runs the check. Annotated PDF, HTML, CSV
 download from the same page.
 
 `python scripts/demo.py` runs that whole flow through the HTTP API on a generated plan with planted
-errors and prints what was found. The API is documented at `/docs` on a running server.
+errors and prints what was found. The API is documented at `/docs` on a running server (with accounts, an administrator only).
 
 ## How it works
 

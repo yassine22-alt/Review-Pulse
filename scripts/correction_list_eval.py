@@ -166,7 +166,7 @@ def cmd_run(args) -> None:
     items = {i["id"]: i for i in map(json.loads, (out / "items.jsonl").read_text(encoding="utf-8").splitlines())}
     llm = Real()
     name, kind, kw, _ = next(s for s in SCENARIOS if s[0].startswith(args.scenario))
-    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1)) as c:
+    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1, auth=False)) as c:
         store = c.app.state.store
         paths = make_plan(Path(tmp) / name, png=False, **kw) if kind == "make" else random_plan(Path(tmp) / name, **kw)
         add_general_notes(paths["dxf"])

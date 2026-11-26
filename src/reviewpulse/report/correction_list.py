@@ -160,7 +160,8 @@ def _wording(status: str, quote: str, citation: str, facts: list[dict], question
     if status == "revision_required":
         for fact in facts[:3]:
             if fact["statement"].startswith("detected"):
-                line += f" {fact['subject']}: {fact['statement']}." if fact["subject"] else f" {fact['statement'].capitalize()}."
+                said = fact["statement"].replace(">=", "at least").replace("<=", "at most")      # words, for the applicant
+                line += f" {fact['subject']}: {said}." if fact["subject"] else f" {said.capitalize()}."
     else:
         line += f" {t['question_prefix']} {question}"
         if not located:

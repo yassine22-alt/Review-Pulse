@@ -38,7 +38,7 @@ def wait(c, pid, job):
 
 def main(plan: Path, doc: Path, out: Path) -> None:
     out.mkdir(parents=True, exist_ok=True)
-    with TestClient(create_app(Path(tempfile.mkdtemp()), llm=lambda: Declines(), workers=1)) as c:
+    with TestClient(create_app(Path(tempfile.mkdtemp()), llm=lambda: Declines(), workers=1, auth=False)) as c:
         pid = c.post("/api/projects", json={"name": "demo", "curator": "Demo Reviewer"}).json()["id"]
         wait(c, pid, c.post(f"/api/projects/{pid}/plan", files={"file": (plan.name, plan.read_bytes())}).json())
         wait(c, pid, c.post(f"/api/projects/{pid}/requirements", files={"file": (doc.name, doc.read_bytes())}).json())
