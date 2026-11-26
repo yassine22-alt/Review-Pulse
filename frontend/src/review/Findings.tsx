@@ -97,7 +97,7 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
       </button>
       {open && (
         <div className="body">
-          <h4>The requirement, as written</h4>
+          <h4>{item.from_document ? "The requirement, as written" : "A built-in rule, not from your document"}</h4>
           <blockquote>{item.quote}</blockquote>
 
           <h4>What the drawings show</h4>

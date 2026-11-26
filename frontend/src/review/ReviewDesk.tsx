@@ -6,10 +6,10 @@ import { Findings, toneOf, type ItemActions } from "./Findings";
 import { Requirements } from "./Requirements";
 import { SheetCanvas, type Mark } from "./SheetCanvas";
 import { SignOffDrawer } from "./SignOff";
-import { shapesOf, type Clause, type CorrectionList, type RawFinding, type Reading, type View } from "./types";
+import { shapesOf, type Clause, type CorrectionList, type Reading, type View } from "./types";
 
 interface Data {
-  project: Project; view: View | null; findings: RawFinding[]; list: CorrectionList;
+  project: Project; view: View | null; list: CorrectionList;
   clauses: Clause[]; readings: Record<string, Reading>; jobs: Job[];
 }
 
@@ -29,16 +29,15 @@ export function ReviewDesk({ user }: { user: User }) {
   const load = useCallback(async () => {
     const url = `/api/projects/${id}`;
     try {
-      const [project, view, found, list, doc, readings, jobs] = await Promise.all([
+      const [project, view, list, doc, readings, jobs] = await Promise.all([
         api<Project>(url),
         api<View>(`${url}/view`).catch(() => null),
-        api<{ findings: RawFinding[] }>(`${url}/findings`),
         api<CorrectionList>(`${url}/correction-list`),
         api<{ clauses: Clause[] }>(`${url}/document`).catch(() => ({ clauses: [] as Clause[] })),
         api<Record<string, Reading>>(`${url}/interpreted`),
         api<Job[]>(`${url}/jobs`),
       ]);
-      setData({ project, view, findings: found.findings, list, clauses: doc.clauses, readings, jobs });
+      setData({ project, view, list, clauses: doc.clauses, readings, jobs });
       setTab((t) => t ?? (list.items.length ? "corrections" : "requirements"));
     } catch (e) { setProblem((e as Error).message); }
   }, [id]);
@@ -52,7 +51,7 @@ export function ReviewDesk({ user }: { user: User }) {
   }, [running.length, load]);
 
   const places = useMemo(() => new Map((data?.list.items ?? []).map((i) =>
-    [i.key, shapesOf(i, data!.view, data!.findings)])), [data]);
+    [i.key, shapesOf(i, data!.view)])), [data]);
   const located = useMemo(() => new Set([...places].filter(([, p]) => p.length).map(([k]) => k)), [places]);
 
   const select = useCallback((key: string | null) => {

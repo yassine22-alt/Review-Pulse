@@ -336,6 +336,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     import shutil
 
     from .engine.run import run, summarise
+    from .engine.setwide import combine, leads_elsewhere
     from .report.csv_out import write_csv
     from .rules.programme import attach_programme
     from .schema import save_findings
@@ -361,6 +362,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     from .factgraph.from_building import set_notes
 
     notes = set_notes(loaded)                   # general notes sit on their own sheets: every sheet of the set is searched
+    titles = {r.id: r.title for r in rules}
     for bp in paths:
         model = load(BuildingModel, bp)
         if briefs and n_sheets == 1:
@@ -376,6 +378,8 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
             models.append(model)
             continue
         findings = run(model, rules, confirmed)
+        for f in findings:
+            f.evidence["title"] = titles.get(f.rule_id, "")
         if programs:
             findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1,
                                       notes=notes, attestations=attestations)
@@ -387,6 +391,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
                 f.evidence["dismissed"] = dismissed[key]
         all_findings += findings
         models.append(model)
+    all_findings = combine(all_findings, rules, n_plans, {m.sheet.id for m in models if _is_plan(m) and leads_elsewhere(m)})
     save_findings(all_findings, run_dir / "findings.json")
     (run_dir / "interpreted_results.json").write_text(json.dumps(interpreted_results, indent=1), encoding="utf-8")
     write_csv(all_findings, models, run_dir / "findings.csv")

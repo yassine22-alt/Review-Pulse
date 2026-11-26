@@ -40,6 +40,12 @@ def citation_of(clause_id: str, clause_text: str) -> str:
     return f"[{clause_id}]" if clause_id else ""
 
 
+def _from_elsewhere(source: dict, document: dict) -> bool:
+    """A finding whose rule names a source document other than the one uploaded here. Its words must not be shown as quoted."""
+    named, uploaded = str(source.get("doc") or ""), str(document.get("name") or "")
+    return bool(named and uploaded) and Path(named).name != Path(uploaded).name
+
+
 def _quote(clause_id: str, clause_text: str, interpreted: dict) -> str:
     """The words of the requirement: the sentence the rule cites when there is one, else the clause, without its citation."""
     program = (interpreted.get(clause_id) or {}).get("approved_program") or (interpreted.get(clause_id) or {}).get("program") or {}
@@ -181,9 +187,15 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
     scopes = {c.get("scope", "") for _, c in clauses.values() if c.get("scope")}
     use_scope = len(scopes) >= 2                           # one heading above everything (the document's title) groups nothing
     groups: dict[str, list[dict]] = {}
+    foreign: set[str] = set()        # groups of rules that do not come from the uploaded document (a built in pack)
     for f in findings:
-        clause_id = (f.get("source") or {}).get("clause") or ""
-        key = clause_id if clause_id and (clause_id in clauses or len(clause_id) <= 40) else f["rule_id"]
+        source = f.get("source") or {}
+        clause_id = source.get("clause") or ""
+        if _from_elsewhere(source, document):          # its clause numbers are another document's: never matched to this one
+            key = f["rule_id"]
+            foreign.add(key)
+        else:
+            key = clause_id if clause_id and (clause_id in clauses or len(clause_id) <= 40) else f["rule_id"]
         groups.setdefault(key, []).append(f)
 
     records, dismissed = [], []
@@ -193,10 +205,13 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
             dismissed.append({"key": clause_id, "reasons": sorted({str(f["evidence"]["dismissed"]) for f in group})})
             continue
         rule_id = clause_id
-        order, clause = clauses.get(clause_id, (len(clauses) + 1, {}))
+        own = clause_id not in foreign
+        order, clause = clauses.get(clause_id, (len(clauses) + 1, {})) if own else (len(clauses) + 1, {})
         title0 = next((f["evidence"].get("title") for f in live if f.get("evidence", {}).get("title")), "") or ""
         text = clause.get("text") or title0 or live[0].get("message", "")
-        quote = _quote(clause_id, text, interpreted)
+        if not own:
+            text = title0 or clause_id
+        quote = _quote(clause_id, text, interpreted) if own else _norm(text)
         worst = max(live, key=lambda f: _severity_key(f["verdict"]))["verdict"]
         status = rs.status_of_verdict(worst)
         title = next((f["evidence"].get("title") for f in live if f.get("evidence", {}).get("title")), "") or ""
@@ -204,7 +219,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
         discipline = disc.discipline_of(f"{title} {text}")
         chapter_key, chapter_label = disc.chapter_of(clause_id, clause.get("scope", "") if use_scope else "")
         records.append({"key": rule_id, "clause": clause_id, "status": status, "findings": shown, "order": order,
-                        "text": text, "quote": quote, "citation": citation_of(clause_id, text), "title": title,
+                        "from_document": own, "text": text, "quote": quote,
+                        "citation": citation_of(clause_id, text) if own else f"[built-in rule {clause_id}]", "title": title,
                         "discipline": discipline, "chapter": chapter_key, "chapter_label": chapter_label,
                         "doc": (shown[0].get("source") or {}).get("doc")})
 
@@ -259,6 +275,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
                       "verdicts": sorted({f["verdict"] for f in r["findings"]}),
                       "wording_default": default, "question": question, "facts": facts,
                       "locations": locations[:MAX_LOCATIONS], "more_locations": more,
+                      "from_document": r["from_document"],
+                      "finding_ids": [f["evidence"]["finding_id"] for f in r["findings"] if f.get("evidence", {}).get("finding_id")],
                       "count": len(r["findings"]), "_order": r["order"]})
 
     d_order = disc.order()

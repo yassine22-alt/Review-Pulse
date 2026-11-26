@@ -46,17 +46,38 @@ Fixed after this run (tests in `tests/unit/test_real_set_fixes.py` and `tests/ap
 
 The first opening of the desk on this set still takes about 15 s.
 
-## Not fixed, found in this run
+## Fixed in a second pass
 
-1. **A violation that should not be trusted.** "At least one exit door: detected 0, revision required" was measured on sheet 22,
-   which I believe from the set's index is not a floor plan sheet. I have not traced why the pack's check ran there. This is the
-   most serious open item: a false violation is worse than a miss.
-2. **A quote that is not a quote.** For findings from a built in pack, whose clauses are not in the uploaded document, the desk
-   heads the engine's own sentence "The requirement, as written" ("... not evaluated, missing room_graph"), and the comment to
-   the applicant quotes it. If a pack's clause number matched one in the uploaded document, the wrong clause would be quoted
-   (from the code; not seen). The product app offers no packs, but the server still accepts one.
-3. **Rooms that are not rooms.** A block of kitchen and cabinet notes was read as a room with no way out.
-4. **Internal words** still reach comments: "room_graph", "path to EXIT", unnamed rooms as "room 8469".
+**A shortfall on one sheet read as a violation.** "At least one exit door: detected 0" was found on one sheet of the set. The
+older rule path judged a rule about the whole dwelling from one sheet. What changed (`engine/setwide.py`, with the rules that
+depend on the whole building declared in `rules/registry.py`):
+
+* a count with a minimum is read across the set: if one sheet reaches it, it is met (sheets are not added up, since two may draw
+  the same door); otherwise there is one undecided result naming the sheets read;
+* a route that was not found is undecided on a sheet a route can leave: one with no exit to the outside, or with a stair, a
+  stair room or an UP or DN mark. A sheet with its own exit and no way to another level keeps its violation. My first version
+  made every route in a multi sheet set undecided, and the existing two plan test caught that it lost a planted violation;
+* a maximum that is exceeded, and findings about one element, are unchanged.
+
+On the real set: 0 items "revision required" (before: 1, the false one). **Limit:** a partial sheet that shows its own exit and
+no stair or level mark is still judged alone. Stairs the reader misses and are not marked in words have the same effect.
+
+**An engine sentence shown as a quote.** Only rules whose source is the uploaded document are matched to its clauses and quoted.
+Others are headed "A built-in rule, not from your document", cited as built in, and never take a clause number of the upload. An
+item now lists the findings behind it, which is also what places its pins.
+
+**A check that could not be approved.** The second reader (the model) raised a concern and quoted words that are not in the
+clause as given; the app then threw away the whole second reading. Quotes are now located by their words, since a model cannot
+count character positions. A concern whose quote is nowhere is kept, tied to the whole clause, and says so. The refused check
+now approves. The second reader's concerns on it were repetitive and of little use: that is not fixed.
+
+## Still open
+
+1. **A number that should not be shown.** "BEDROOM 3 measures 247 m2" on a sheet whose title block says no scale. The item says
+   the scale is unverified, but the figure is plainly wrong and should not be printed.
+2. **Rooms that are not rooms.** A block of kitchen and cabinet notes was read as a room with no way out.
+3. **Internal words** still reach comments: "room_graph", "path to EXIT", unnamed rooms as "room 8469".
+4. **A second reader that adds noise.**
 5. **Speed.** About 10 minutes for the drawings, and about a minute for each requirement the model reads.
 
 ## What this means
