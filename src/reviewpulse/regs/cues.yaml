@@ -1,0 +1,367 @@
+# Cue words of the regulation graph. Everything that depends on a language lives here, none of it in the code.
+# Words are written without accents or with them (both are folded the same way); matching is case blind, on word boundaries.
+# To read a new language, add its words to the lists below: no code changes.
+
+# Words that name a part of a document, grouped by what the part is. The same word may stand for more than one language.
+kinds:
+  article:   [article, articles, art, artikel, articulo, articulos, articolo, artigo]
+  section:   [section, sections, sec, subsection, chapter, chapters, chapitre, chapitres, titre, kapitel, abschnitt, abschnitte,
+              seccion, secciones, capitulo, capitulos, sezione, capitolo]
+  regulation: [regulation, regulations, rule, rules, regle, regles, requirement, requirements, exigence, exigences, anforderung,
+               anforderungen, requisito, requisitos, verordnung]
+  paragraph: [paragraph, paragraphs, para, paras, clause, clauses, subparagraph, paragraphe, paragraphes, alinea, alineas, absatz,
+              absaetze, absatze, parrafo, parrafos, paragrafo, item, items, point, points, ziffer, nummer, numero, punto, "§", "§§"]
+  table:     [table, tables, tableau, tableaux, tabelle, tabellen, tabla, tablas, tabella, tabelas]
+  figure:    [figure, figures, fig, diagram, diagrams, schema, schemas, abbildung, abbildungen, abb, figura, figuras, croquis, illustration]
+  appendix:  [appendix, appendices, annex, annexe, annexes, anhang, anlage, anexo, anexos, apendice, allegato, schedule, part, partie, teil]
+
+# Kinds whose label may be a single capital letter ("Appendix C", "Annexe B"); other kinds need a number.
+letter_label_kinds: [appendix]
+
+# A word written before a label in a clause's own first line that says what the clause is ("Advisory 206.2.8 ...").
+# The clause is then an annotation of that label, not the clause that carries it.
+annotation_prefixes: [advisory, commentary, note, notes, remarque, hinweis, nota, comment]
+
+# Words in front of a number that mean "number" and are skipped.
+number_words: ["no", nr, num, n°, numero, nummer]
+
+# Words that join or span items of one list ("paragraphs 3.6 to 3.23", "articles 5 et 6").
+conjunctions: [and, or, et, ou, und, oder, "y", o, e, "&", "and/or", "et/ou", "und/oder"]
+range_words: [to, through, thru, a, au, bis, hasta, al, "-"]
+
+# A reference that is introduced by one of these words and carries no part word ("see 3.4", "voir 5.2", "siehe 3.1").
+reference_cues:
+  - see
+  - see also
+  - refer to
+  - refers to
+  - referred to in
+  - in accordance with
+  - according to
+  - as provided in
+  - as specified in
+  - as required by
+  - as required in
+  - as described in
+  - as set out in
+  - as given in
+  - as shown in
+  - comply with
+  - complying with
+  - complies with
+  - meet the requirements of
+  - pursuant to
+  - voir
+  - cf
+  - conformement a
+  - conformement aux
+  - selon
+  - tel que prevu a
+  - prevu a
+  - siehe
+  - vgl
+  - gemass
+  - gemaess
+  - nach
+  - entsprechend
+  - veanse
+  - vease
+  - segun
+  - de conformidad con
+  - conforme a
+
+# Reference cues that also begin conditions ("Wenn die Bedingungen nach 3.4 erfuellt sind"): after one of these a citation may
+# still be the condition itself, so a condition cue earlier in the sentence is kept.
+weak_reference_cues: [nach, selon, entsprechend, according to, segun, conforme a, de conformidad con, gemass, gemaess, comply with, complying with, complies with]
+
+# Exception: the cited text, or the words that follow, say when the clause does NOT apply or applies differently.
+exception_cues:
+  - except as provided in
+  - except as otherwise provided in
+  - except as permitted by
+  - except as permitted in
+  - except as required by
+  - except for
+  - except where
+  - except when
+  - except that
+  - except in
+  - except
+  - excepting
+  - excluding
+  - exclusive of
+  - other than
+  - unless
+  - save that
+  - save where
+  - provided that the exception
+  - this does not apply to
+  - does not apply to
+  - do not apply to
+  - need not
+  - is exempt
+  - are exempt
+  - exempt from
+  - exempted from
+  - sous reserve que
+  - a l exception de
+  - a l exception des
+  - a l exception du
+  - a moins que
+  - a moins qu
+  - sauf si
+  - sauf dans
+  - sauf lorsque
+  - sauf
+  - hormis
+  - ne s appliquent pas
+  - ne s applique pas
+  - est dispense
+  - sont dispenses
+  - dispense de
+  - ausgenommen
+  - ausser wenn
+  - ausser
+  - ausnahme
+  - es sei denn
+  - sofern nicht
+  - soweit nicht
+  - mit ausnahme
+  - gilt nicht fur
+  - gilt nicht fuer
+  - nicht anzuwenden
+  - salvo que
+  - salvo
+  - excepto
+  - a menos que
+  - a excepcion de
+  - no sera de aplicacion
+  - no se aplica
+  - quedan exentos
+  - queda exento
+
+# Cues that make a CITED clause an exception ("subject to 4.2", "sous reserve de l'article 5") but that, with nothing cited, say
+# nothing ("entities subject to this section" is a scope, not an exception).
+exception_ref_cues:
+  - subject to
+  - subject to the provisions of
+  - sous reserve de
+  - sous reserve des
+  - sous reserve du
+  - sous reserve de l
+  - vorbehaltlich
+  - sin perjuicio de
+
+# The clause overrides the cited one ("notwithstanding 3.4"): the exception runs from this clause to the cited one.
+override_cues:
+  - notwithstanding
+  - despite
+  - regardless of
+  - in spite of
+  - nonobstant
+  - malgre
+  - independamment de
+  - ungeachtet
+  - unbeschadet
+  - trotz
+  - no obstante
+  - a pesar de
+  - independientemente de
+
+# A clause that BEGINS with one of these words is an exception to the clause before it ("Exception 1. ...", "Ausnahme: ...").
+exception_starts: [exception, exceptions, exemption, exemptions, derogation, derogations, ausnahme, ausnahmen, excepcion, excepciones, eccezione]
+
+# The cited text is a condition on which the clause depends ("where the conditions of 4.2 are met").
+condition_cues:
+  - if
+  - where
+  - when
+  - provided that
+  - in case
+  - in the event
+  - as long as
+  - wherever
+  - si
+  - lorsque
+  - lorsqu
+  - quand
+  - des lors que
+  - dans le cas
+  - en cas de
+  - pour autant que
+  - wenn
+  - falls
+  - sofern
+  - soweit
+  - sobald
+  - im fall
+  - si
+  - cuando
+  - siempre que
+  - en caso de
+  - en el caso de
+
+# Words that make a condition into a requirement: when one lies between a condition cue and a reference, the reference is
+# something the clause obeys, not a condition on it.
+modals:
+  - shall
+  - should
+  - must
+  - may
+  - will
+  - need
+  - needs
+  - doit
+  - doivent
+  - doivent etre
+  - peut
+  - peuvent
+  - devra
+  - devront
+  - sollen
+  - soll
+  - muss
+  - mussen
+  - darf
+  - durfen
+  - hat
+  - deben
+  - debe
+  - debera
+  - puede
+  - pueden
+
+# The cited text defines a term used here ("as defined in 2.1").
+definition_ref_cues:
+  - as defined in
+  - defined in
+  - as defined by
+  - as defined under
+  - as per the definition in
+  - definition in
+  - au sens de
+  - au sens des
+  - tel que defini a
+  - tels que definis a
+  - defini a
+  - definie a
+  - definies a
+  - definis a
+  - definie au
+  - definis au
+  - definis aux
+  - definies aux
+  - definis dans
+  - definies dans
+  - defini dans
+  - defini par
+  - im sinne von
+  - im sinne des
+  - im sinne der
+  - wie in
+  - definiert in
+  - definiert nach
+  - tal como se define en
+  - segun la definicion de
+  - definido en
+  - definida en
+
+# A term is defined by a clause that says "<term> means ...".
+definition_cues:
+  - means
+  - shall mean
+  - shall be taken to mean
+  - refers to
+  - is defined as
+  - are defined as
+  - is the
+  - signifie
+  - s entend de
+  - s entend
+  - designe
+  - desigent
+  - correspond a
+  - bedeutet
+  - ist
+  - sind
+  - versteht man
+  - wird verstanden als
+  - significa
+  - se entiende por
+  - se entiende
+  - se define como
+  - designa
+# the weakest cues ("is the", "ist", "sind") only count where the clause sits under a definitions heading
+weak_definition_cues: [is the, ist, sind]
+
+# A heading (or the first line of a clause) that opens a list of definitions.
+definition_headings:
+  - definitions
+  - defined terms
+  - key terms
+  - glossary
+  - terminology
+  - terms and definitions
+  - interpretation
+  - definitions
+  - definitions
+  - begriffe
+  - begriffsbestimmungen
+  - definiciones
+  - terminos
+  - vocabulaire
+  - lexique
+  - glossaire
+
+# Terms that cannot be defined terms (pronouns and the like): "this means that" is not a definition.
+term_stop: [this, that, which, it, there, what, who, these, those, they, he, she, ce, cela, ceci, qui, ca, il, elle, ils, es, das, dies, dieses, esto, eso, ello]
+
+# A reference followed by one of these nouns names a part of ANOTHER document ("Regulation 7 of the Building Regulations 2010").
+external_nouns:
+  - act
+  - acts
+  - code
+  - codes
+  - regulations
+  - directive
+  - standard
+  - standards
+  - law
+  - decree
+  - order
+  - volume
+  - approved document
+  - schedule
+  - edition
+  - building regulations
+  - cfr
+  - u s c
+  - code de la construction
+  - code de l urbanisme
+  - code civil
+  - code du travail
+  - loi
+  - lois
+  - decret
+  - arrete
+  - ordonnance
+  - directive
+  - norme
+  - gesetz
+  - gesetzes
+  - verordnung
+  - bauordnung
+  - richtlinie
+  - norm
+  - ley
+  - real decreto
+  - reglamento
+  - decreto
+  - normas
+# connectors between the reference and that noun
+external_connectors: [of, in, from, under, du, de, des, de la, de l, d, von, vom, im, nach, del, de los, de las, en, der, dem, des, zu, zum, to]
+# Prefixes of the names of standards and of other documents ("BS 9991", "ISO 7010", "NF C 15-100", "DIN 18040")
+standard_prefixes: [BS, EN, ISO, IEC, DIN, NF, NFPA, ANSI, ASTM, ASME, ICC, CFR, UNE, CEN, EC, ADA, IBC, IRC, AWS, SAE, UL, OSHA]
+
+# Units that follow a number ("see 3.5 m" is a length, not a reference).
+unit_words: [mm, cm, m, km, m2, m3, ft, feet, foot, in, inch, inches, sq, "%", percent, "°", degrees, deg, kg, lb, lbs, hours, hour, h, min, minutes, s, seconds, kn, "n", pa, kpa, lux, db, mètres, metres, metre, centimetres, centimetres, centimètres, millimetres, millimètres, minuten, stunden, grad, prozent, por, ciento]

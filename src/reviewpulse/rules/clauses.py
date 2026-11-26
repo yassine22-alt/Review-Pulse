@@ -13,13 +13,12 @@ from __future__ import annotations
 
 import json
 import re
-import time
 import warnings
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
 ARTICLE_RE = re.compile(r"^\s*(?:#+\s*)?(Article|Art\.?)\s*(\d+(?:[.\-]\d+)*)\b", re.I)
-NUMBERED_RE = re.compile(r"^\s*(?:#+\s*)?(\d+(?:\.\d+){0,3})[.)]?\s+(?=[A-ZÀ-Ýa-zà-ý])")
+NUMBERED_RE = re.compile(r"^\s*(?:#+\s*)?(\d+(?:\.\d+){0,3})[.)]?\s+(?=[A-ZÀ-Ýa-zà-ý☐(])")
 SUBITEM_RE = re.compile(r"^\s*([a-z])\)\s+")
 HEADING_RE = re.compile(r"^\s*(?:#+\s*)?(Chapitre|Chapter|Section|Titre|Title|Part|Partie)\b.*$", re.I)
 
@@ -66,7 +65,14 @@ def _unhyphenate(t: str) -> str:
     return re.sub(r"(?<=[a-zà-ÿ])-\n(?=[a-zà-ÿ])", "", t)
 
 
-TABLE_BUDGET_S = 150.0     # table detection is the slow step of a PDF; a very large document must not stall an upload
+# Table detection is the slow step of a PDF. Its limit is a number of pages, not a number of seconds: a time limit read more
+# of the same document on a fast machine than on a slow or busy one, so two people saw different clauses. Every ruled page up
+# to this count is read on every machine; the clock is only a guard against a reader that hangs.
+TABLE_PAGE_BUDGET = 600
+TABLE_BUDGET_S = 3600.0
+TABLE_WORD = r"(?:Table|Tableau|Tabelle|Tabla|Tabella|Tabela)"
+CAPTION = re.compile(rf"^\s*({TABLE_WORD})\s+([A-Z]{{0,2}}\d+(?:\.\d+)*[a-z]?)\b[\s.:\x07–-]*(.*)", re.I | re.S)
+CONTINUED = re.compile(r"^\(?\s*(?:continued|cont\.?|cont.d|suite|fortsetzung|continuaci[óo]n|continua)\b", re.I)
 
 
 def _has_ruling(page) -> bool:
@@ -91,8 +97,86 @@ def _is_layout_frame(tab, page_rect) -> bool:
         return False
 
 
-def _tables_for_pages(path: str, pages: list[int]) -> list[tuple[int, int, int, str]]:
-    """Table rows of the given pages as (page, table, row, text). A top-level function so a worker process can run it."""
+def _captions(page) -> list[tuple[float, float, str, bool]]:
+    """Table captions on a page as (top, bottom, "Table B4", continued), top to bottom. A caption is a block that STARTS with the
+    table's name followed by its title ("Table B4 Minimum periods of fire resistance") or by "continued"; a sentence that merely
+    begins with a reference ("Table B4 gives ...", "Table 0.1, 12") or an index entry is not one."""
+    out = []
+    for b in page.get_text("blocks"):
+        m = CAPTION.match(b[4]) if len(b) > 4 and isinstance(b[4], str) else None
+        if not m:
+            continue
+        first = m.group(3).strip().split("\n")[0].strip()
+        continued = bool(CONTINUED.match(first))
+        words = first.split()
+        is_title = (bool(words) and words[0][:1].isupper() and not re.match(r"[\d,;)]", first)
+                    and not first.rstrip().endswith(".") and len(words) <= 25)
+        if continued or is_title:
+            out.append((b[1], b[3], f"Table {m.group(2)}", continued))
+    return sorted(out)
+
+
+def _rows_of(tab) -> list[str]:
+    rows = []
+    for cells in tab.extract():
+        cells = [re.sub(r"\s+", " ", c).strip() for c in cells if c and c.strip()]
+        if cells:
+            rows.append(" | ".join(cells))
+    return rows
+
+
+TABLE_NOTES = re.compile(r"^(?:notes?|remarques?|anmerkung(?:en)?|notas?)\b\s*[:.]?", re.I)
+
+
+LIST_MARK = re.compile(r"^(?:[a-z]|[ivx]{1,4}|\d{1,2})[.)]\s")          # "b. Detached swimming pool" starts an item, not a wrapped line
+
+
+def _whitespace_rows(page, clip) -> list[str]:
+    """Rows of a table that has no vertical rules: its columns are separated by white space only. Words on one visual line are a
+    row, and a gap wider than the line is high starts a new cell. A line whose cells all start in lower case is the rest of a
+    wrapped cell ("loading bay with ..." under "a. Balcony, verandah, carport, covered way or"): it is joined to the row above,
+    cell by cell, by where each cell starts, so a sentence is not cut in two. Reading stops at the notes under the table. Returns
+    nothing unless at least two lines have two cells or more, so a paragraph of prose is not taken for a table."""
+    words = sorted(page.get_text("words", clip=clip), key=lambda w: ((w[1] + w[3]) / 2, w[0]))
+    lines: list[list] = []
+    for w in words:
+        mid, height = (w[1] + w[3]) / 2, max(w[3] - w[1], 1.0)
+        if lines and abs(mid - lines[-1][0]) <= 0.5 * height:
+            lines[-1][1].append(w)
+        else:
+            lines.append([mid, [w]])
+    rows: list[list[list]] = []                          # a row is a list of cells [x of its left edge, text]
+    wide = 0
+    for _mid, ws in lines:
+        ws.sort(key=lambda w: w[0])
+        height = max(w[3] - w[1] for w in ws)
+        cells, cur = [], [ws[0][0], ws[0][4]]
+        for prev, w in zip(ws, ws[1:]):
+            if w[0] - prev[2] > 1.2 * height:
+                cells.append(cur)
+                cur = [w[0], w[4]]
+            else:
+                cur[1] += " " + w[4]
+        cells.append(cur)
+        if TABLE_NOTES.match(cells[0][1]):
+            break
+        wide += len(cells) >= 2
+        wrapped = rows and all((c[1][:1].islower() or c[1][:1] in ")],") and not LIST_MARK.match(c[1]) for c in cells)
+        if wrapped:
+            for x, text in cells:                        # each piece goes to the cell of the row above that starts nearest to it
+                target = min(rows[-1], key=lambda c: abs(c[0] - x))
+                target[1] += " " + text
+        else:
+            rows.append(cells)
+    if wide < 2:
+        return []
+    return [" | ".join(text for _x, text in r) for r in rows]
+
+
+def _tables_for_pages(path: str, pages: list[int]) -> list[tuple[int, int, int, str, str | None]]:
+    """Table rows of the given pages as (page, table, row, text, name). `name` is the caption the table sits under ("Table B4"),
+    which is how the text refers to it; None for a table with no caption. A caption with no ruled table under it (a table drawn
+    without lines) is read from the layout of its text. A top-level function so a worker process can run it."""
     import pymupdf
 
     doc = pymupdf.open(path)
@@ -100,13 +184,28 @@ def _tables_for_pages(path: str, pages: list[int]) -> list[tuple[int, int, int, 
     for i in pages:
         try:
             page = doc[i]
-            for t, tab in enumerate(page.find_tables().tables):
-                if _is_layout_frame(tab, page.rect):
+            caps = _captions(page)
+            tabs = [tab for tab in page.find_tables().tables if not _is_layout_frame(tab, page.rect)]
+            named: dict[int, str] = {}
+            loose: list[tuple[str, list[str]]] = []
+            for k, (top, bottom, name, _continued) in enumerate(caps):
+                limit = caps[k + 1][0] if k + 1 < len(caps) else page.rect.height
+                # the table of a caption is the first one that starts below it and before the next caption
+                below = sorted((tab.bbox[1], t) for t, tab in enumerate(tabs) if t not in named and top - 2 <= tab.bbox[1] < limit)
+                if below:
+                    named[below[0][1]] = name
                     continue
-                for r, cells in enumerate(tab.extract()):
-                    cells = [c.strip() for c in cells if c and c.strip()]
-                    if cells:
-                        out.append((i, t, r, " | ".join(cells)))
+                # no ruled table under the caption: a table drawn with horizontal rules only, read from the gaps between its words
+                clip = pymupdf.Rect(page.rect.x0, bottom, page.rect.x1, limit)
+                loose_rows = _whitespace_rows(page, clip)
+                if loose_rows:
+                    loose.append((name, loose_rows))
+            for t, tab in enumerate(tabs):
+                for r, row in enumerate(_rows_of(tab)):
+                    out.append((i, t, r, row, named.get(t)))
+            for k, (name, loose_rows) in enumerate(loose, len(tabs)):
+                for r, row in enumerate(loose_rows):
+                    out.append((i, k, r, row, name))
         except Exception:  # noqa: BLE001 - table finder is best effort
             pass
     return out
@@ -125,11 +224,11 @@ def _table_workers() -> int:
     return max(1, min(8, (os.cpu_count() or 2) - 1))
 
 
-def _find_tables(path: Path, ruled: list[int]) -> tuple[list[tuple[int, int, int, str]], list[int]]:
-    """(rows, pages not scanned). Pages are read in worker processes when there are many; the time budget is a wall clock cap
-    in both cases, and a failure to start workers falls back to reading in this process."""
+def _find_tables(path: Path, ruled: list[int]) -> tuple[list[tuple], list[int]]:
+    """(rows, pages not scanned). Pages are read in worker processes when there are many. The first TABLE_PAGE_BUDGET ruled pages
+    are read whatever the machine; a failure to start workers falls back to reading in this process."""
     workers = _table_workers()
-    started = time.monotonic()
+    ruled, beyond = ruled[:TABLE_PAGE_BUDGET], [i + 1 for i in ruled[TABLE_PAGE_BUDGET:]]
     if len(ruled) >= PARALLEL_MIN_PAGES and workers > 1:
         try:
             from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -148,16 +247,13 @@ def _find_tables(path: Path, ruled: list[int]) -> tuple[list[tuple[int, int, int
                     pass
             finally:
                 pool.shutdown(wait=False, cancel_futures=True)
-            return sorted(rows), [i + 1 for k, ch in enumerate(chunks) if k not in done for i in ch]
+            late = [i + 1 for k, ch in enumerate(chunks) if k not in done for i in ch]
+            return sorted(rows, key=lambda r: r[:3]), late + beyond
         except Exception:  # noqa: BLE001 - no workers (a restricted host, an unguarded script): read here, as before
             pass
-    rows, unscanned = [], []
-    for i in ruled:
-        if time.monotonic() - started < TABLE_BUDGET_S:
-            rows += _tables_for_pages(str(path), [i])
-        else:
-            unscanned.append(i + 1)
-    return rows, unscanned
+    # read in this process, page after page, with no clock: a clock here skipped pages after the machine had slept, and a reader
+    # that hangs inside one page could not be interrupted from here anyway
+    return _tables_for_pages(str(path), ruled), beyond
 
 
 def _mark_indented_items(blocks: list) -> list[str]:
@@ -255,8 +351,8 @@ def _pdf_text(path: Path) -> tuple[str, list[tuple[int, int]], list[str]]:
             ruled.append(i)
     rows, unscanned = _find_tables(path, ruled)
     if unscanned:
-        warnings.warn(f"{path.name}: tables on pages {unscanned[0]}-{unscanned[-1]} were not scanned (time budget "
-                      f"{TABLE_BUDGET_S:.0f} s); their text is still read as ordinary text", stacklevel=2)
+        warnings.warn(f"{path.name}: tables on pages {unscanned[0]}-{unscanned[-1]} were not scanned (the limit is "
+                      f"{TABLE_PAGE_BUDGET} pages with ruling lines, or a table reader did not answer); their text is still read as ordinary text", stacklevel=2)
     return "".join(parts), pages, rows
 
 
@@ -275,6 +371,8 @@ def _page_of(offset: int, pages: list[tuple[int, int]]) -> int:
 # real numbering does and prose does not. Text no marker covers is cut into paragraphs and sentences so nothing is lost.
 WORD_NUM_RE = re.compile(r"^\s*(?:#+\s*)?([A-ZÀ-Ý][A-Za-zÀ-ÿ]{2,})\.?\s+(\d+(?:\.\d+)*|[IVXL]{1,6})\s*[.:)\-–]?(?=\s|$)")
 CODE_RE = re.compile(r"^\s*(?:#+\s*)?([A-Z][A-Z0-9]{1,9}[-_.]\d+[\w.\-]*)[:.)]?\s+(?=\S)")
+# an item id of a canned correction list ("A1.", "C17.", "H3."): a letter or two and a number, so it is told from a sentence by being a series
+ITEM_ID_RE = re.compile(r"^\s*(?:#+\s*)?([A-Z]{1,2})(\d{1,3})\.\s*(?=[A-Z\"“(\[☐])")
 PAREN_NUM_RE = re.compile(r"^\s*\((\d{1,3})\)\s+(?=\S)")
 LETTER_RE = re.compile(r"^\s*\(?([a-z])\)\s+(?=\S)")
 ROMAN_RE = re.compile(r"^\s*\(([ivx]{2,6})\)\s+(?=\S)")
@@ -294,7 +392,7 @@ MODALS = re.compile(
     r"\b(shall|must|should|need|needs|require[sd]?|required|may not|may|at least|no less|no more|not exceed|minimum|maximum|"
     r"doit|doivent|devra|devront|faut|exig|minimal|maximal|muss|müssen|soll|sollen|mindestens|höchstens|debe|deben|deberá|"
     r"mínimo|máximo|deve|devem|devono|dovrà|minimo|massimo|moet|moeten|zal|minstens|ten minste)\b", re.I)
-DEFINITION_RE = re.compile(r"\b(means|shall mean|refers to|is defined as|are defined as|signifie|désigne|bedeutet|significa|"
+DEFINITION_RE = re.compile(r"\b((?<!other )(?<!by )(?<!any )(?<!such )means(?! of\b)|shall mean|refers to|is defined as|are defined as|signifie|désigne|bedeutet|significa|"
                            r"si intende|betekent|se entiende)\b", re.I)
 ABBREVIATIONS = {"art", "no", "nos", "e.g", "i.e", "etc", "approx", "max", "min", "vs", "fig", "tab", "cf", "al", "sec", "par",
                  "para", "ref", "vol", "dr", "st", "mr", "mrs"}
@@ -310,6 +408,9 @@ def _word_counts(lines: list[str]) -> dict[str, int]:
         m = WORD_NUM_RE.match(ln)
         if m and m.group(1).lower() not in NOT_STRUCTURE_WORDS:
             counts[m.group(1).lower()] = counts.get(m.group(1).lower(), 0) + 1
+        m = ITEM_ID_RE.match(ln)
+        if m:
+            counts["#" + m.group(1)] = counts.get("#" + m.group(1), 0) + 1
     return counts
 
 
@@ -331,12 +432,20 @@ def _classify(ln: str, prev_blank: bool, words: dict[str, int], wrapped: bool = 
     m = WORD_NUM_RE.match(ln)
     if m and (words.get(m.group(1).lower(), 0) >= 2) and m.group(1).lower() not in NOT_STRUCTURE_WORDS:
         return 1, "article", f"{m.group(1)} {m.group(2)}", None
+    m = ITEM_ID_RE.match(ln)
+    if m and words.get("#" + m.group(1), 0) >= 3:           # "A1.", "C17.": the letter starts a series of items, as numbering does
+        return 1, "numbered", m.group(1) + m.group(2), None
     m = CODE_RE.match(ln)
     if m:
+        tail = ln[m.end(1):].lstrip(".:) 	 ")
+        if wrapped and (tail[:1] in ("[", "(") or tail[:1].islower()):
+            return None                                    # "... in accordance with CRC / R302.2.3. [CRC R302.2.2]": a section reference wrapped to a new line
         return 1, "article", m.group(1), None
     m = NUMBERED_RE.match(ln)
     if m and len(s) > len(m.group(1)) + 3:
         label = m.group(1)
+        if ln[m.end():m.end() + 1] == "(" and s[len(label):len(label) + 1] not in (".", ")"):
+            return None                                    # "12 (units) ...": a number and a parenthesis is a clause only after a full stop ("13. (Continuous ...)")
         rest = s[len(label):].lstrip(".) \t")
         first = rest.split(" ", 1)[0] if rest else ""
         in_sequence = "." not in label and int(label) == next_number and (next_number > 1 or not wrapped)      # "1. ... 2. ... 3. ..." is a list, whatever the case
@@ -344,6 +453,8 @@ def _classify(ln: str, prev_blank: bool, words: dict[str, int], wrapped: bool = 
             return None                                    # "30 m to reach a stair": a wrapped line, not a clause number
         if wrapped and first[:1].islower():
             return None                                    # "206.7 to use a platform lift": a reference inside a sentence
+        if wrapped and label.startswith("0.") and s[len(label):len(label) + 1] == ".":
+            return None                                    # "ratio of / 0.45. No special ...": a decimal, and no clause number starts with 0
         return 1, "numbered", label, None
     m = PAREN_NUM_RE.match(ln)
     if m:
@@ -407,6 +518,44 @@ def _sentences(text: str, base: int):
     return [(base + a, base + b) for a, b in cuts if text[a:b].strip()]
 
 
+LINE_ITEM = re.compile(r"^[^\S\n]*([A-Z]{1,2}|)(\d{1,3})\.[^\S\n]+(?=[A-Z(☐])", re.M)
+INLINE_ITEM = re.compile(r"(?<=[a-z.\]\)\"”])(?:[^\S\n]*(?=[A-Z]{1,2}\d)|[^\S\n]{2,}(?=\d))([A-Z]{1,2}|)(\d{1,3})\.[^\S\n]+(?=[A-Z(☐])")
+LONE_NUMBER = re.compile(r"^[^\S\n]*(?:\d{1,3}|[IVX]{1,4})\.[^\S\n]*\n(?=[^\S\n]*[A-Za-z])", re.M)
+
+
+def prepare_items(full: str, pages: list[tuple[int, int]]) -> tuple[str, list[tuple[int, int]]]:
+    """Two layout accidents of PDF text that hide the item ids of a numbered list or of a canned correction list. A number alone on its
+    line ("1." then the sentence on the next line) is joined to the sentence (same length, so offsets do not move). An item that follows
+    the end of the one before on the same line ("... at recheck.A20. Complete ...", "... for (____).   13. (Continuous ...") starts a
+    line of its own, when its id is the next in the series it belongs to (A19 came before A20; 12 before 13). The page ranges are
+    shifted by the line breaks inserted."""
+    full = LONE_NUMBER.sub(lambda m: m.group(0)[:-1] + " ", full)
+    starts = [(m.start(), m.group(1), int(m.group(2)), False) for m in LINE_ITEM.finditer(full)]
+    series = {k for k in {s[1] for s in starts} if sum(1 for s in starts if s[1] == k) >= 3}
+    inline = [(m.start(), m.group(1), int(m.group(2)), True) for m in INLINE_ITEM.finditer(full) if m.group(1) in series]
+    if not inline:
+        return full, pages
+    last: dict[str, int] = {}
+    cuts: list[tuple[int, int]] = []                       # (offset where the line break goes, offset of the id)
+    for at, letters, n, is_inline in sorted(s for s in starts + inline if s[1] in series):
+        if is_inline:
+            if n != last.get(letters, 0) + 1:
+                continue
+            cuts.append((at, INLINE_ITEM.match(full, at).start(1)))
+        last[letters] = n
+    out, pos = [], 0
+    for at, id_at in cuts:
+        out += [full[pos:at], "\n"]
+        pos = id_at
+    out.append(full[pos:])
+
+    def moved(off: int) -> int:
+        shift = sum(1 for at, _ in cuts if at < off)
+        return off + shift - sum(id_at - at for at, id_at in cuts if id_at <= off)
+
+    return "".join(out), [(moved(a), moved(b)) for a, b in pages]
+
+
 def split_text(full: str, pages: list[tuple[int, int]] | None = None) -> list[Clause]:
     pages = pages or [(0, 0)]
     lines = full.splitlines(keepends=True)
@@ -420,7 +569,7 @@ def split_text(full: str, pages: list[tuple[int, int]] | None = None) -> list[Cl
     used: set[str] = set()
     scope, counters = "", {}                           # the last heading, and bullet counters per parent
     table_n, i, after_heading = 0, 0, -1
-    prev_blank, prev_line, last_number = True, "", 0
+    prev_blank, prev_line, last_number, open_cite = True, "", 0, False
     while i < len(lines):
         ln = lines[i]
         if not ln.strip():
@@ -444,7 +593,13 @@ def split_text(full: str, pages: list[tuple[int, int]] | None = None) -> list[Cl
                 i, prev_blank = j, False
                 continue
         wrapped = not prev_blank and bool(prev_line) and not prev_line.rstrip().endswith((".", ":", ";", "!", "?"))
+        if prev_blank:
+            open_cite = False
         c = _classify(ln, prev_blank, words, wrapped, last_number + 1)
+        if c is not None and open_cite:
+            c = None                                       # "[CRC / R302.2.3. ...": the rest of a bracketed citation is not a clause
+        if "[" in ln or "]" in ln or open_cite:
+            open_cite = (open_cite and "]" not in ln) or ln.count("[") > ln.count("]")
         if c is not None and c[1] == "numbered" and c[2].isdigit():
             last_number = int(c[2])
         if c is None and (prev_blank or after_heading == i) and (_is_loud_heading(ln) or _is_quiet_heading(lines, i, words)):
@@ -578,14 +733,31 @@ def split_document(path: str | Path) -> tuple[str, list[Clause]]:
     path = Path(path)
     if path.suffix.lower() == ".pdf":
         full, pages, rows = _pdf_text(path)
+        full, pages = prepare_items(full, pages)
         clauses = split_text(full, pages)
-        for pg, t, r, row in rows:                      # a table: its first row is the header, the others keep it as parent
+        used = {c.id for c in clauses}
+        header_of: dict[str, str] = {}                  # table id -> the text of its header row
+        count: dict[str, int] = {}                      # table id -> rows written so far
+        tid = ""
+        for pg, t, r, row, name in rows:
             start = len(full)
+            if r == 0:
+                if name and name in header_of:          # the same table going on over the page: its rows join the first part
+                    tid = name
+                    if row == header_of[tid]:           # the header printed again on the new page is not a row
+                        continue
+                else:
+                    tid = name if name and name not in used else f"table p{pg + 1}.{t + 1}"
+                    used.add(tid)
+                    header_of[tid], count[tid] = row, 0
+                    full += row + "\n"
+                    clauses.append(Clause(id=tid, heading=row[:120], text=row, page=pg, start=start, end=start + len(row),
+                                          parent=None, kind="table_header"))
+                    continue
+            count[tid] += 1
             full += row + "\n"
-            tid = f"table p{pg + 1}.{t + 1}"
-            clauses.append(Clause(id=tid if r == 0 else f"{tid} row {r}", heading=row[:120], text=row, page=pg, start=start,
-                                  end=start + len(row), parent=None if r == 0 else tid,
-                                  kind="table_header" if r == 0 else "table_row"))
+            clauses.append(Clause(id=f"{tid} row {count[tid]}", heading=row[:120], text=row, page=pg, start=start,
+                                  end=start + len(row), parent=tid, kind="table_row"))
         return full, clauses
     from . import readers
 
@@ -703,7 +875,7 @@ def _numbered_label(fmt: str, level: int, n: int, counters: dict, num_id: str) -
     return ".".join(str(x) for x in parts)
 
 
-SPLITTER_VERSION = "9"      # change it whenever the splitting rules change: cached splits are then ignored
+SPLITTER_VERSION = "13"     # change it whenever the splitting rules change: cached splits are then ignored
 
 
 def split_cached(path: str | Path, cache_dir: str | Path) -> tuple[str, list[Clause]]:

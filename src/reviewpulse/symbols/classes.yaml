@@ -1,0 +1,22 @@
+# Words that name a kind of countable symbol, in the words of a legend entry or of a note. Used to cross check a symbol count
+# against a count a note or a schedule states. Add a kind (or a language) here; no code changes.
+classes:
+  smoke_alarm:
+    legend: ['\bsmoke\b', '\bsmoke\s*(?:alarm|detector)', '\bsd\b']
+    note: ['smoke\s*(?:alarm|detector)s?']
+  co_alarm:
+    legend: ['carbon\s*monoxide', '\bco\s*(?:alarm|detector)']
+    note: ['carbon\s*monoxide\s*(?:alarm|detector)s?', '\bco\s*(?:alarm|detector)s?']
+  exhaust_fan:
+    legend: ['exhaust', '\bfan\b(?!\s*light)']
+    note: ['exhaust\s*fans?']
+  outlet:
+    legend: ['outlet', 'receptacle']
+    note: ['outlets?', 'receptacles?']
+  light:
+    legend: ['light', 'sconce', 'pendant', 'recessed', 'can\b']
+    note: ['light\s*fixtures?', 'recessed\s*lights?']
+count_words:
+  # a number written before the noun: "(6) smoke alarms", "six smoke detectors", "6 SMOKE DETECTORS"
+  digits: '\(?(\d{1,3})\)?\s*(?:x\s*)?'
+  words: {one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12}

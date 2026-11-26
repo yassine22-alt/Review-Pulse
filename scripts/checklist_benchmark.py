@@ -14,6 +14,8 @@ What is reported:
   recall      of the rule_now lines, the share that became a rule that uses the right numbers and facts
   wrong       rule_now lines that became a rule with the wrong numbers or facts (the worst outcome)
   unsupported a rule written for a line that should not produce one (it must be read: is it faithful, or invented?)
+  mention     a rule that only checks that the drawing set mentions the thing the line is about (smoke alarms, a fire rating). It
+              is counted apart: it is not a rule about measured facts, it never passes on its own, and each one is listed to be read
   refusals    why each other line was declined, and which missing facts would unlock the most lines
 The labels hold only document names, clause ids and these labels, never document text. Documents and reports are never committed.
 """
@@ -91,7 +93,14 @@ def main() -> None:
     ap.add_argument("--out", default="reports/benchmark")
     ap.add_argument("--only", default="", help="part of a document name")
     ap.add_argument("--labels", default="", help="comma separated labels to read (e.g. rule_now,needs_fact): saves a hosted model's quota")
+    ap.add_argument("--plan-notes", action="store_true",
+                    help="the plan carries a block of general notes (smoke alarms, fire rating, handrail ...), as permit drawings do")
+    ap.add_argument("--resummarise", action="store_true", help="write the summary again from the rows already in --out")
     args = ap.parse_args()
+    if args.resummarise:
+        rows = [json.loads(line) for line in (Path(args.out) / "rows.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+        summary(rows, Path(args.out))
+        return
     labels = json.loads(LABELS.read_text(encoding="utf-8"))
     name, kind, kw, _ = next(s for s in SCENARIOS if s[0].startswith(args.scenario))
     out = Path(args.out)
@@ -99,6 +108,10 @@ def main() -> None:
     rows, llm, stop = [], Real(), False
     with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1)) as c:
         paths = make_plan(Path(tmp) / name, png=False, **kw) if kind == "make" else random_plan(Path(tmp) / name, **kw)
+        if args.plan_notes:
+            from reviewpulse.synth.notes_block import add_general_notes
+
+            add_general_notes(paths["dxf"])
         for docname, spec in labels.items():
             if stop:
                 break
@@ -153,12 +166,19 @@ def main() -> None:
     summary(rows, out)
 
 
+def is_mention(row: dict) -> bool:
+    """A rule of the mention arm: every fact it uses is a count of mentions (its name ends in _notes)."""
+    facts = re.findall(r"\.(\w+)\s*(?:>=|<=|==|!=|>|<)", row.get("readback") or "")
+    return bool(facts) and all(f.endswith("_notes") for f in facts)
+
+
 def summary(rows: list[dict], out: Path) -> None:
     now = [r for r in rows if r["label"] == "rule_now"]
     right = [r for r in now if r["outcome"] == "correct"]
     wrong = [r for r in now if r["outcome"] == "wrong"]
     other = [r for r in rows if r["label"] != "rule_now"]
-    unsupported = [r for r in other if r["outcome"] == "unsupported"]
+    mentions = [r for r in other if r["outcome"] == "unsupported" and is_mention(r)]
+    unsupported = [r for r in other if r["outcome"] == "unsupported" and not is_mention(r)]
     lines = ["# Checklist benchmark", "", f"Lines read: {len(rows)}. Decidable with today's plan facts: {len(now)}.", "",
              f"- recall: {len(right)} of {len(now)} decidable lines became a rule with the right numbers and facts",
              f"- wrong rules: {len(wrong)} (a rule for a decidable line with the wrong numbers or facts)",
@@ -167,6 +187,11 @@ def summary(rows: list[dict], out: Path) -> None:
     lines += [f"| {r['doc'][:28]} | {r['id']} | {r['outcome']} | {r['detail']} |" for r in now]
     lines += ["", "## Rules written where none was expected (read each: faithful, or invented?)", ""]
     lines += [f"- {r['doc'][:28]} {r['id']} ({r['label']}): {r['text'][:140]} => {r['readback']}" for r in unsupported] or ["- none"]
+    by_label = Counter(r["label"] for r in mentions)
+    lines += ["", f"## Mention rules ({len(mentions)}: " + ", ".join(f"{n} on {k} lines" for k, n in by_label.most_common()) + ")", "",
+              "Each checks only that the drawing set mentions the thing. Read each: is the thing mentioned what the line is about?", ""]
+    lines += [f"- {r['doc'][:28]} {r['id']} ({r['label']}; need: {r.get('need') or '-'}): {r['text'][:140]} => {r['readback']}"
+              for r in mentions] or ["- none"]
     needs = Counter(r["need"] for r in rows if r["label"] == "needs_fact")
     lines += ["", "## Facts that would unlock the most lines", ""] + [f"- {n}: {k} line(s)" for n, k in needs.most_common()]
     reasons = Counter(r["detail"] for r in rows if r["outcome"] == "declined")
@@ -177,7 +202,8 @@ def summary(rows: list[dict], out: Path) -> None:
     lines += ["", "## Why lines were declined", ""] + [f"- {n}: {k}" for n, k in reasons.most_common()]
     (out / "benchmark.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (out / "summary.json").write_text(json.dumps({"lines": len(rows), "decidable": len(now), "correct": len(right), "wrong": len(wrong),
-                                                 "unsupported": len(unsupported), "other": len(other)}), encoding="utf-8")
+                                                 "unsupported": len(unsupported), "other": len(other), "mentions": len(mentions),
+                                                 "mentions_by_label": dict(by_label)}), encoding="utf-8")
     print("\n".join(lines[:8]), flush=True)
 
 

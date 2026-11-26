@@ -14,7 +14,7 @@ from pydantic import BaseModel
 
 from ..interpreter.api import interpreter_router
 from . import interpret as interpretation
-from . import service
+from . import service, workflow
 from .jobs import JobRunner
 from .store import PLAN_TYPES, REQ_TYPES, Store
 
@@ -49,6 +49,27 @@ class Decision(ClauseRef):
     reviewer: str = ""
     note: str = ""
     acknowledge: bool = False         # the reviewer read the second reader's notes and approves anyway
+
+
+class ItemAction(BaseModel):
+    action: str                       # accept | edit | drop | reset
+    reviewer: str = ""
+    wording: str | None = None
+
+
+class ClauseState(BaseModel):
+    clause: str
+    state: str                        # deferred | not_applicable | reset
+    reviewer: str = ""
+    note: str = ""
+
+
+class SignOff(BaseModel):
+    reviewer: str = ""
+    discipline: str
+    result: str
+    cycle: int = 1
+    note: str = ""
 
 
 class Approve(BaseModel):
@@ -266,10 +287,14 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     def decide_one(pid: str, body: Decision):
         project(pid)
         try:
-            return interpretation.decide_clause(store, pid, body.clause, body.action, body.reviewer, body.note,
-                                                body.acknowledge, llm)
+            out = interpretation.decide_clause(store, pid, body.clause, body.action, body.reviewer, body.note,
+                                               body.acknowledge, llm)
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
+        if body.reviewer.strip():
+            workflow.log(store, pid, body.reviewer, f"rule for clause {body.clause}: {body.action}",
+                         {"clause": body.clause, "action": body.action, "note": body.note})
+        return out
 
     @app.get("/api/projects/{pid}/coverage")
     def get_coverage(pid: str):
@@ -358,6 +383,102 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(400, str(e)) from None
         job = jobs.submit(pid, "check", lambda job: service.check(store, pid, job)) if body.recheck else None
         return {"triage": t, "job": job}
+
+    # -- the correction list, reviewer states, sign off and audit trail ------------------------------------------
+    def current_list(pid: str, cycle: int | None = None) -> dict:
+        project(pid)
+        try:
+            return service.correction_list(store, pid, cycle)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/reviewer-states")
+    def reviewer_states():
+        from ..report import disciplines
+        from ..report import reviewer_states as rstates
+
+        cfg = rstates.config()
+        return {"statuses": {k: v["label"] for k, v in cfg["statuses"].items()}, "results": cfg["results"],
+                "signoff_results": cfg["signoff_results"], "reviewer_settable": cfg["reviewer_settable"],
+                "disciplines": {k: disciplines.label(k) for k in disciplines.order()}}
+
+    EXPORT_TYPES = {"pdf": ("application/pdf", "correction_markup.pdf"), "bcf": ("application/octet-stream", "correction_list.bcf"),
+                    "csv": ("text/csv", "correction_list.csv"), "json": ("application/json", "correction_list.comments.json")}
+
+    @app.get("/api/projects/{pid}/correction-list")
+    def get_correction_list(pid: str, format: str = "json", cycle: int | None = None, file: bool = False):
+        """format: json (the list itself; ``file=true`` gives the exchange file), html, txt, pdf, bcf or csv."""
+        from fastapi.responses import HTMLResponse, PlainTextResponse
+
+        from ..report import correction_list as cl
+
+        if format not in {"json", "html", "txt", "text", "pdf", "bcf", "csv"}:
+            raise HTTPException(400, "format must be json, html, txt, pdf, bcf or csv")
+        data = current_list(pid, cycle)
+        if format == "html":
+            return HTMLResponse(cl.render_html(data))
+        if format in ("txt", "text"):
+            return PlainTextResponse(cl.render_text(data))
+        if format == "json" and not file:
+            return data
+        if not any(store.run_dir(pid).glob("building_*.json")) and format in ("pdf", "bcf"):
+            raise HTTPException(409, "the plan has not been analysed yet")
+        try:
+            path = service.correction_export(store, pid, format, cycle)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+        mime, name = EXPORT_TYPES[format]
+        return FileResponse(path, media_type=mime, filename=f"{pid}_{name}",
+                            content_disposition_type="inline" if format == "pdf" else "attachment")
+
+    @app.get("/api/projects/{pid}/correction-list.pdf")
+    def get_correction_pdf(pid: str, cycle: int | None = None):
+        return get_correction_list(pid, "pdf", cycle)
+
+    @app.put("/api/projects/{pid}/correction-list/items/{key:path}")
+    def put_item(pid: str, key: str, body: ItemAction):
+        data = current_list(pid)
+        if body.action != "reset" and not any(i["key"] == key for i in data["items"]):
+            raise HTTPException(404, f"no correction item {key}")
+        try:
+            workflow.set_item(store, pid, key, body.action, body.reviewer, body.wording)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+        return service.correction_list(store, pid)
+
+    @app.get("/api/projects/{pid}/clause-states")
+    def get_clause_states(pid: str):
+        project(pid)
+        return workflow.clause_states(store, pid)
+
+    @app.put("/api/projects/{pid}/clause-states")
+    def put_clause_state(pid: str, body: ClauseState):
+        project(pid)
+        try:
+            return workflow.set_clause_state(store, pid, body.clause, body.state, body.reviewer, body.note)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+
+    @app.get("/api/projects/{pid}/signoffs")
+    def get_signoffs(pid: str):
+        project(pid)
+        return workflow.signoffs(store, pid)
+
+    @app.post("/api/projects/{pid}/signoffs", status_code=201)
+    def post_signoff(pid: str, body: SignOff):
+        from ..report import disciplines
+
+        project(pid)
+        try:
+            return workflow.sign_off(store, pid, body.reviewer, body.discipline, body.result, body.cycle, body.note,
+                                     known_disciplines=set(disciplines.order()))
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+
+    @app.get("/api/projects/{pid}/audit")
+    def get_audit(pid: str):
+        project(pid)
+        return workflow.audit(store, pid)
 
     @app.get("/api/projects/{pid}/files/{name}")
     def download(pid: str, name: str):

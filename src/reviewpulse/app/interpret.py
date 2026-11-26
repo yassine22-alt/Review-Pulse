@@ -14,13 +14,16 @@ import threading
 from collections.abc import Callable
 from datetime import datetime
 
-from ..factgraph.convert import to_graph, to_inputs
-from ..factgraph.from_building import from_building
+from ..factgraph.convert import to_graph
+from ..factgraph.from_building import from_building, set_notes
 from ..interpreter.checked import checked_draft
 from ..interpreter.context import assemble_context
 from ..interpreter.review import ReviewArtifact, approve_program, review_program
 from ..interpreter.runtime import run_program
 from ..interpreter.schema import Program
+from ..ledger.wiring import attest as _attest
+from ..ledger.wiring import build_inputs, load_attestations
+from ..regs.context import with_resolved_context
 from ..rules.clauses import split_cached
 from ..schema import BuildingModel
 from .store import Store, replace
@@ -69,7 +72,8 @@ def document(store: Store, pid: str) -> dict:
         raise ValueError("upload a requirement document first")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
     return {"name": path.name, "text": full,
-            "clauses": [{"id": c.id, "heading": c.heading, "text": c.text, "kind": c.kind, "start": c.start, "end": c.end}
+            "clauses": [{"id": c.id, "heading": c.heading, "text": c.text, "kind": c.kind, "start": c.start, "end": c.end,
+                         "scope": c.scope}
                         for c in clauses if c.kind not in SKIP_KINDS and len(c.text.strip()) > 15 and not _is_title(c)]}
 
 
@@ -93,8 +97,20 @@ def _plan(store: Store, pid: str):
         raise ValueError("no floor plan was found in this upload (the sheets show: " + ", ".join(kinds).replace("_", " ") + ")")
     model = max(plans, key=lambda m: (any(e.a in ("EXIT", "EXTERIOR") or e.b in ("EXIT", "EXTERIOR") for e in m.edges),
                                       len(m.rooms)))
-    graph = from_building(model, complete=False)
-    return graph, to_inputs(graph), to_graph(graph)
+    graph = from_building(model, complete=False, part_of_set=len(plans) > 1, notes=set_notes(models))
+    inputs, _ = build_inputs(graph, load_attestations(store.drafts_dir(pid)), model)      # REVIEWPULSE_LEDGER=off: plain conversion
+    return graph, inputs, to_graph(graph)
+
+
+def attestations(store: Store, pid: str):
+    """What reviewers confirmed for this project (kept in the project's drafts folder, so a reload restores it)."""
+    return load_attestations(store.drafts_dir(pid))
+
+
+def attest(store: Store, pid: str, entity: str, fact: str, value, reviewer: str, source: str, unit: str = "1"):
+    """A reviewer states one value for one fact of one entity. A name and a source are required; nothing is written otherwise."""
+    with _lock(pid):
+        return _attest(store.drafts_dir(pid), entity, fact, value, reviewer=reviewer, source=source, unit=unit)
 
 
 def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callable[[], object | None],
@@ -108,12 +124,13 @@ def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callab
         raise ValueError("the drafting model is not available")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
     source_hash = hashlib.sha256(path.read_bytes()).hexdigest()
-    context = assemble_context(path.name, full, clauses, clause_id, p.context_links)
+    context = with_resolved_context(assemble_context(path.name, full, clauses, clause_id, p.context_links), clauses)
     graph, inputs, route_graph = _plan(store, pid)
     # a hosted model is asked only for a clause the local one could not read, and only when the reviewer allowed it
     fallback = fallback_factory() if fallback_factory is not None and p.external_consent else None
     out = checked_draft(context, inputs, graph, client, fallback=fallback, triage=triage)
     out["clause"] = clause_id
+    _attach_evidence(store, pid, context, client, out)
     if out["program"] is not None:
         out["program"]["id"] = rule_id(clause_id)
         result = run_program(Program.model_validate(out["program"]), inputs, include_drafts=True, graph=route_graph)
@@ -129,6 +146,39 @@ def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callab
         results[clause_id] = out            # a new reading replaces the old rule, its review and its decision
         _save(store, pid, results)
     return out
+
+
+_EMBEDDER: list = []                     # the embedding model, looked for once per process ([None] when it is not installed)
+_RERANKER: list = []                     # the cross-encoder, the same way
+
+
+def _attach_evidence(store: Store, pid: str, context, client, out: dict) -> None:
+    """For a clause no measured rule was written for: what the drawings say about it (the note, its sheet, its figure against the
+    requirement's). It explains and points; the clause keeps its status and no verdict depends on it. Any failure leaves the
+    reading exactly as it was."""
+    import os
+
+    measured = out.get("status") == "DRAFTED" and out.get("arm") != "expr_mention"
+    if measured or out.get("arm") == "label" or "could not be reached" in (out.get("reason") or "") \
+            or os.environ.get("REVIEWPULSE_EVIDENCE", "on") == "off":
+        return
+    try:
+        from ..annotate.passages import set_passages
+        from ..interpreter.checked import clause_body
+        from ..interpreter.drawing_evidence import default_embedder, default_reranker, find_evidence
+
+        models = [BuildingModel.model_validate_json(f.read_text(encoding="utf-8"))
+                  for f in sorted(store.run_dir(pid).glob("building_*.json"))]
+        if not _EMBEDDER:
+            _EMBEDDER.append(default_embedder())
+        if not _RERANKER:
+            _RERANKER.append(default_reranker())
+        found = find_evidence(clause_body(context), set_passages(models), client, _EMBEDDER[0], _RERANKER[0])
+    except Exception:  # noqa: BLE001 - evidence is an explanation; without it the reading stands
+        return
+    out["evidence"] = found.as_dict()
+    if found.chosen:
+        out["notes"] = [*(out.get("notes") or []), "In the drawings: " + found.summary]
 
 
 def draft_workers(client) -> int:
@@ -181,7 +231,7 @@ def _context(store: Store, pid: str, clause_id: str):
     if path is None or not path.exists():
         raise ValueError("upload a requirement document first")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
-    return assemble_context(path.name, full, clauses, clause_id, project.context_links)
+    return with_resolved_context(assemble_context(path.name, full, clauses, clause_id, project.context_links), clauses)
 
 
 def set_context_links(store: Store, pid: str, links: dict[str, list[str]]) -> dict:
@@ -280,5 +330,11 @@ def coverage(store: Store, pid: str) -> dict:
     findings = findings.get("findings", []) if isinstance(findings, dict) else findings
     from ..factgraph.from_building import LOOKED_FOR
 
-    return build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings,
+    data = build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings,
                  looked_for=list(LOOKED_FOR))
+    from ..drawingset.summary import enabled, summary_for_pdf
+
+    plan = store.plan_path(store.get(pid))
+    if enabled() and plan is not None and plan.exists():          # off by default: it reads every page of the PDF
+        data["drawing_set"] = summary_for_pdf(plan)
+    return data

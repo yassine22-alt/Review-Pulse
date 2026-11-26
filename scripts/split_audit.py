@@ -15,11 +15,11 @@ Usage: python scripts/split_audit.py [folder] [--json out.json]
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
 
-import os
 sys.path.insert(0, os.environ.get("SPLIT_SRC") or str(Path(__file__).resolve().parents[1] / "src"))
 from reviewpulse.rules.clauses import MODALS, split_cached  # noqa: E402
 
@@ -49,7 +49,7 @@ def audit(path: Path, cache: Path) -> dict:
     full, clauses = split_cached(path, cache / path.stem)
     body = [c for c in clauses if c.kind != "heading"]
     sents = [(a, b) for a, b in sentences(full) if obligation(full[a:b])]
-    covered = fragments = 0
+    covered = fragments = in_tables = 0
     for a, b in sents:
         owners = [c for c in body if c.start < b and c.end > a]
         inside = [c for c in owners if c.start <= a + 3 and c.end >= b - 3]
@@ -57,6 +57,9 @@ def audit(path: Path, cache: Path) -> dict:
             covered += 1
         elif len(owners) >= 2:
             fragments += 1
+            # rows of a table carry no full stop, so a "sentence" found there runs over several rows: that is how a table is
+            # written, not a requirement cut in two. Counted apart so that reading more tables is not mistaken for worse splitting
+            in_tables += all(c.kind in ("table_row", "table_header") for c in owners)
     bundles = []
     for c in body:
         if c.kind in ("table_row", "table_header", "definition"):
@@ -76,7 +79,7 @@ def audit(path: Path, cache: Path) -> dict:
                 resolved += 1
     rows = [c for c in body if c.kind == "table_row"]
     return {"doc": path.name, "chars": len(full), "clauses": len(body), "obligation_sentences": len(sents), "covered": covered,
-            "fragmented": fragments, "bundle_clauses": len(bundles), "ragged_start": len(ragged), "refs": refs,
+            "fragmented": fragments, "fragmented_in_tables": in_tables, "fragmented_in_prose": fragments - in_tables, "bundle_clauses": len(bundles), "ragged_start": len(ragged), "refs": refs,
             "refs_resolved": resolved, "table_rows": len(rows), "rows_with_parent": sum(1 for r in rows if r.parent)}
 
 
@@ -87,7 +90,7 @@ def main():
     cache = Path(os.environ.get("SPLIT_CACHE", "reports/split_cache"))
     cache.mkdir(parents=True, exist_ok=True)
     rows = [audit(p, cache) for p in sorted(folder.iterdir()) if p.suffix.lower() in (".pdf", ".md", ".txt", ".docx")]
-    cols = ["doc", "clauses", "obligation_sentences", "covered", "fragmented", "bundle_clauses", "ragged_start", "refs", "refs_resolved"]
+    cols = ["doc", "clauses", "obligation_sentences", "covered", "fragmented", "fragmented_in_prose", "fragmented_in_tables", "bundle_clauses", "ragged_start", "refs", "refs_resolved"]
     print(" | ".join(cols))
     for r in rows:
         print(" | ".join(str(r[c]) for c in cols))

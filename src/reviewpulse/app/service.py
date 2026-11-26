@@ -131,7 +131,8 @@ def check(store: Store, pid: str, job: Job | None = None) -> dict:
     programs = interpret.approved_programs(store, p.id)
     if not packs and not programs:
         raise ValueError("no rules: approve drafted rules or choose a base pack")
-    summary = pipeline.check(run, packs, programs=programs, inventory_complete=p.inventory_reviewed)
+    summary = pipeline.check(run, packs, programs=programs, inventory_complete=p.inventory_reviewed,
+                              attestations=interpret.attestations(store, p.id))
     if job:
         job.progress(0.95, "preparing the viewer")
     write_view(run)
@@ -342,3 +343,80 @@ def write_view(run: Path) -> Path:
                                                             "dismissed": tri["dismissed"]}}),
                    encoding="utf-8")
     return out
+
+
+# -- correction list and reviewer workflow --------------------------------------------------------------------------------
+def _models(store: Store, pid: str) -> list[BuildingModel]:
+    return [load(BuildingModel, b) for b in sorted(store.run_dir(pid).glob("building_*.json"))]
+
+
+def _sheet_rows(models: list[BuildingModel]) -> list[dict]:
+    from ..report.disciplines import sheet_discipline
+
+    rows = []
+    for m in models:
+        titles = " ".join(t.text for t in m.sheet.texts if t.kind == "title_block")[:300]
+        rows.append({"id": m.sheet.id, "page": m.sheet.page, "width": m.sheet.width, "height": m.sheet.height,
+                     "scale_method": m.sheet.scale.method, "sheet_type": m.sheet.sheet_type,
+                     "discipline": sheet_discipline(m.sheet.id, titles, m.sheet.sheet_type)})
+    return rows
+
+
+def _note_locator(models: list[BuildingModel]):
+    """Where a note sits on its sheet: the bounding box of the text runs that make up the note's words."""
+    by_id = {m.sheet.id: m for m in models}
+
+    def locate(sheet_id: str, text: str) -> list[float] | None:
+        m = by_id.get(sheet_id)
+        if m is None:
+            return None
+        words = {w for w in " ".join(text.split()).casefold().split() if len(w) > 3}
+        if not words:
+            return None
+        hit = [t for t in m.sheet.texts if t.text.strip() and {w for w in t.text.casefold().split() if len(w) > 3} & words
+               and t.text.strip().casefold()[:20] in " ".join(text.split()).casefold()]
+        if not hit:
+            return None
+        return [min(t.bbox[0] for t in hit), min(t.bbox[1] for t in hit), max(t.bbox[2] for t in hit), max(t.bbox[3] for t in hit)]
+
+    return locate
+
+
+def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
+    """The project's correction list (see report/correction_list.py), with the reviewer's edits, states and sign offs applied."""
+    from ..report import correction_list as cl
+    from . import interpret, workflow
+
+    p = store.get(pid)
+    f = store.run_dir(pid) / "findings.json"
+    findings = [x.model_dump() for x in load_findings(f)] if f.exists() else []
+    try:
+        document = interpret.document(store, pid)
+    except ValueError:
+        document = {"name": p.requirements, "clauses": []}
+    interpreted = interpret.load_results(store, pid)
+    models = _models(store, pid)
+    uncovered = 0
+    if document["clauses"]:
+        try:
+            counts = interpret.coverage(store, pid)["summary"]["counts"]
+            uncovered = sum(counts.get(k, 0) for k in ("awaiting_approval", "not_run", "rejected", "not_checked", "not_read"))
+        except ValueError:
+            pass
+    records = workflow.signoffs(store, pid)
+    if cycle is None:
+        cycle = max([r["cycle"] for r in records], default=1)
+    return cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
+                    states=workflow.clause_states(store, pid), edits=workflow.item_edits(store, pid), signoffs=records,
+                    uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
+
+
+def correction_export(store: Store, pid: str, fmt: str, cycle: int | None = None) -> Path:
+    """The correction list as pdf (the submitted PDF with annotations), bcf, json or csv, written under the run folder."""
+    from ..report.correction_list import export
+
+    p = store.get(pid)
+    plan = store.plan_path(p)
+    data = correction_list(store, pid, cycle)
+    return export(data, fmt, store.run_dir(pid) / "exports", _models(store, pid),
+                  plan if plan is not None and plan.suffix.lower() == ".pdf" else None)

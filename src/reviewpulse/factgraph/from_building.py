@@ -9,12 +9,18 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from ..annotate.notes import DESCRIPTIONS, note_counts
 from ..annotate.text_classify import tag_key
 from ..interpreter.schema import Binding, Fact
 from ..schema import BuildingModel
 from .schema import Edge, FactGraph, Inventory, Node, Provenance
 
-BINDINGS = {
+NOTE_BINDINGS = {name: Binding(
+    kind="number", unit="count",
+    description=f"How many times the sheet's text mentions {what} (notes, legend entries, callouts). A mention, not a measurement: "
+                "it does not say where the item is or that it is of the right kind")
+    for name, what in DESCRIPTIONS.items()}
+BINDINGS = {**NOTE_BINDINGS,
     "room_type": Binding(kind="string", description="Room classification from its label"),
     "area_m2": Binding(kind="number", unit="m2", description="Measured net floor area"),
     "min_width_m": Binding(kind="number", unit="m", description="Measured minimum width of a room, hallway or other space"),
@@ -35,6 +41,7 @@ BINDINGS = {
     "stair_width_m": Binding(kind="number", unit="m", description="Stair flight width (length of the tread lines)"),
     "exit_distance_m": Binding(kind="number", unit="m",
                                description="Travel distance from the farthest point of the room to the outside"),
+    "fire_rating_min": Binding(kind="number", unit="min", description="Fire resistance rating of the door, in minutes, from the door schedule"),
     "tread_lines": Binding(kind="number", unit="count", description="Number of tread lines drawn in the stair flight"),
 }
 STAIR_TRUST = 0.8                                   # calibrated probability a detected flight must reach to be trusted
@@ -67,6 +74,8 @@ def schedule_rows(model) -> dict:
         for row in sched.get("rows", []):
             if row.get("tag"):
                 rows[tag_key(str(row["tag"]))] = row
+        for tag, minutes in (sched.get("fire_rows") or {}).items():      # door fire ratings of the general sheet table reader
+            rows.setdefault(tag_key(str(tag)), {"tag": tag}).setdefault("fire_rating_min", minutes)
     return rows
 
 
@@ -92,8 +101,28 @@ def window_area(model, room_id: str, areas: dict) -> float | None:
     return sum(areas[e.via] for e in windows)
 
 
-def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: bool = False) -> FactGraph:
-    """`part_of_set`: the sheet is one of several floor plans of one building. A level with no door to the outside leaves the
+def set_notes(models) -> tuple[dict[str, int], bool] | None:
+    """Mentions of safety provisions over every sheet of one submission (floor plans, general notes, schedules, details), and
+    whether the text of every sheet was read. General notes usually sit on their own sheet, so a floor plan alone would say
+    "no smoke alarm is mentioned" about a set that mentions it four times. None when no sheet had any text."""
+    total: dict[str, int] = {}
+    read_all, any_read = True, False
+    for m in models:
+        counts = note_counts(m.sheet.texts)
+        if counts is None:
+            read_all = False
+            continue
+        any_read = True
+        for name, n in counts.items():
+            total[name] = total.get(name, 0) + n
+    return (total, read_all) if any_read else None
+
+
+def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: bool = False,
+                  notes: tuple[dict[str, int], bool] | None = None) -> FactGraph:
+    """`notes`: the result of `set_notes` over the whole submission; without it only this sheet's own text is counted.
+
+    `part_of_set`: the sheet is one of several floor plans of one building. A level with no door to the outside leaves the
     building by stairs this sheet does not show, so "no route to the exit" is not proven there even when every room, door
     and window was found (the rooms are still complete; the routes are not)."""
     t1 = model.tier == "T1"
@@ -169,13 +198,25 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
             "sill_height_m": fact("sill_height_m", sill if el.cls == "window" else None, src, t1 or el.confirmed),
             "opening_area_m2": fact("opening_area_m2", opening_area.get(el.id), src, trusted),
             "tag": fact("tag", el.tag, src, t1 or el.confirmed),
+            "fire_rating_min": fact("fire_rating_min", (row or {}).get("fire_rating_min") if el.cls == "door" else None, src,
+                                    t1 or el.confirmed),
             # an exit door (egress door, entrance) is one whose far side is the outside; only a door has the property
             "leads_to_exit": fact("leads_to_exit", el.id in exit_openings, src, t1 or el.confirmed) if el.cls == "door" else None,
         }.items() if v is not None}
         nodes.append(Node(id=el.id, kind=el.cls, label=el.tag, attrs=attrs))
     # what the sheet itself says about the drawing: plan reviewers ask whether it is to scale and whether it is dimensioned
     whole = f"{model.sheet.id}:building"
+    if not notes_enabled():
+        counts, zero_ok = {}, False
+    elif notes is not None:
+        counts, zero_ok = notes                   # the whole set was searched: a zero counts when every sheet's text was read
+    else:
+        # words found are evidence wherever they sit; no words found is evidence only when this sheet is the whole submission
+        # (a note on another sheet of the set would be missed), so a zero on a sheet that is part of a set stays untrusted
+        counts, zero_ok = note_counts(model.sheet.texts) or {}, not part_of_set
+    note_facts = {name: fact(name, float(n), whole, t1 and (n > 0 or zero_ok)) for name, n in counts.items()}
     nodes.append(Node(id="building", kind="building", role="whole", attrs={k: v for k, v in {
+        **note_facts,
         "scale_stated": fact("scale_stated", model.sheet.scale.method != "none", whole, t1),
         "dimension_count": fact("dimension_count", float(len(model.sheet.dimensions)), whole, t1),
         "is_dimensioned": fact("is_dimensioned", len(model.sheet.dimensions) > 0, whole, t1),
@@ -210,6 +251,13 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         value_labels={"room_type": room_labels(_room_vocabulary() | {n.attrs["room_type"].value for n in nodes
                                                                      if "room_type" in n.attrs})},
         passable=["door", "opening"], route_targets=["EXIT"]))
+
+
+def notes_enabled() -> bool:
+    """REVIEWPULSE_NOTES=0 leaves the note facts out (used to measure what they change)."""
+    import os
+
+    return os.environ.get("REVIEWPULSE_NOTES", "1") != "0"
 
 
 def _exit_distances(model: BuildingModel) -> dict[str, float]:

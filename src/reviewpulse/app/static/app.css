@@ -223,3 +223,12 @@ label.field input, label.field select { color: var(--fg); }
 .apprform .field { flex: 1; min-width: 160px; }
 .ack { display: flex; gap: 8px; align-items: center; font-size: 13px; }
 .covline { font-size: 12.5px; padding: 2px; }
+
+/* corrections tab */
+.cl-disc { margin: 26px 0 4px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+.cl-chap { margin: 14px 0 6px; color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; }
+.clitem { margin: 8px 0; display: grid; gap: 6px; }
+.clitem textarea { font-family: inherit; font-size: 14px; min-height: 64px; }
+.clitem.dropped { opacity: .55; }
+.signs { display: grid; gap: 6px; margin-top: 10px; }
+.signrow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }

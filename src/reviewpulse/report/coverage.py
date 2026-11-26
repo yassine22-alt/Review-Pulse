@@ -60,6 +60,8 @@ def _status(entry: dict | None, result: dict | None, looked_for: str = "every me
     if result is None:
         return "not_run", "run the check to apply the approved rule to the plan"
     outcome = result["outcome"]
+    if outcome == "VIOLATED" and (entry.get("program") or {}).get("advisory"):
+        return "undecided", "the drawings never mention it: check whether this requirement applies to this building"
     if outcome == "VIOLATED":
         return "violated", ""
     if outcome == "SATISFIED":
@@ -152,6 +154,13 @@ def _e(x) -> str:
     return html.escape("" if x is None else str(x))
 
 
+def _drawing_set(data: dict) -> str:
+    """The drawing set summary when the project asked for one (REVIEWPULSE_DRAWINGSET=on); information only."""
+    from ..drawingset.summary import html_block
+
+    return html_block(data.get("drawing_set"), _e)
+
+
 def render_html(data: dict) -> str:
     s = data["summary"]
     cards = "".join(
@@ -194,7 +203,7 @@ def render_html(data: dict) -> str:
 <div class="meta"><span>Project <b>{_e(data["project"])}</b></span><span>Plan <b>{_e(data["plan"])}</b></span>
 <span>Document <b>{_e(data["document"])}</b></span><span>Generated <b>{_e(data["generated"])}</b></span></div>
 <p><b>{s["decided"]}</b> of <b>{s["clauses"]}</b> clauses were decided on this plan ({round(100 * s["decided_share"])}%). The others are listed below with the reason.</p>
-<div class="cards">{cards}</div>{note}
+<div class="cards">{cards}</div>{note}{_drawing_set(data)}
 <h2>Clauses</h2>{"".join(parts)}
 <footer>A rule counts only after a named reviewer approves it. A clause that could not be decided is never counted as a pass.</footer>
 </main></body></html>"""

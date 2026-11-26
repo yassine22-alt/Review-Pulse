@@ -24,6 +24,7 @@ HEADER_VOCAB = {
     "type": r"^(type|nature|materiau|designation)$",
     "qty": r"^(nb|nbre|qte|quantite|qty)\.?$",
     "sill": r"^(allege|sill)(\s*\((m|cm|mm)\))?$",
+    "fire": r"^(fire(\s*rat(ing|ed))?|rating|fr|rf|resistance au feu|feuerwiderstand|brandschutz)\.?$",
 }
 TAG_ASSOC_M = 1.5
 TAG_PREFIX_CLS = {"P": "door", "D": "door", "F": "window", "W": "window", "V": "window"}
@@ -133,6 +134,13 @@ def find_schedules(sheet: Sheet) -> tuple[list[dict], list[tuple]]:
                     row[f + "_m"] = round(_to_m(_num(r[f]), units.get(f), units[f + "_max"]), 4)
             if r.get("type"):
                 row["type"] = r["type"]
+            if r.get("fire"):
+                from ..schedules.reader import is_unstated
+                from .notes import parse_fire_minutes
+
+                minutes = None if is_unstated(r["fire"]) else parse_fire_minutes(r["fire"])   # a dash is unknown, not 0 min
+                if minutes is not None:
+                    row["fire_rating_min"] = minutes
             if r.get("qty") and _num(r["qty"]) is not None:
                 row["qty"] = int(_num(r["qty"]))
             out_rows.append(row)
@@ -147,6 +155,10 @@ def find_schedules(sheet: Sheet) -> tuple[list[dict], list[tuple]]:
             "windows" if all(r["tag"].startswith(("F", "W", "V")) for r in out_rows) else "openings"
         schedules.append({"name": name, "rows": out_rows, "bbox": bx})
         boxes.append(bx)
+    # the general table reader adds the door fire ratings the fixed pattern above cannot find (REVIEWPULSE_SHEET_TABLES=off: none)
+    from ..schedules.legacy import merge_door_fire
+
+    merge_door_fire(sheet, schedules)
     # texts inside a table box belong to the table
     for t in sheet.texts:
         c = _centre(t)

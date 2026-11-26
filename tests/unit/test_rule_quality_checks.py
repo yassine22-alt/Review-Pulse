@@ -213,3 +213,24 @@ def test_a_long_sentence_about_the_sheet_says_what_the_rule_does_not_check():
     short = item_for("All drawings shall be completely dimensioned.")
     d = draft_relation("expr_relation", short, _Sheet(["is_dimensioned"]))
     assert d.program is not None and not d.program.not_checked
+
+
+def test_a_list_item_under_a_sheet_level_lead_is_not_a_sheet_requirement():
+    from test_relation_arm import item_for
+
+    from reviewpulse.interpreter.checked import clause_body
+    from reviewpulse.interpreter.context import assemble_context
+    from reviewpulse.rules.clauses import split_text
+
+    text = ("A11. Provide a completely dimensioned plot plan showing:\na) Location of the sewer line.\n\nb) North arrow.\n\n"
+            "A12. Show the address.\n\nA13. Show the scale.\n")
+    clauses = split_text(text)
+    parent = next(c for c in clauses if c.id == "A11")
+    sub = next(c for c in clauses if c.kind == "subitem")
+    assert sub.parent == parent.id
+    item = item_for("x")
+    for target, expect in ((parent.id, True), (sub.id, False)):
+        ctx = assemble_context("d", text, clauses, target)
+        item.ctx, item.text = ctx, clause_body(ctx)
+        d = draft_relation("expr_relation", item, _Sheet(["is_dimensioned"]))
+        assert (d.program is not None) == expect, (target, d.detail)

@@ -1,0 +1,78 @@
+# Kinds of written note a drawing can carry, and the words that announce them.
+#
+# Each kind becomes one counted fact of the drawing set: "<name>" = how many times its text mentions the thing. Nothing in the
+# program knows these kinds: add a kind here (any discipline, any language) and it is counted, offered to the rule drafter and
+# shown in reports. `describes` is the plain phrase used in the fact's description; `patterns` are regular expressions matched
+# without regard to case over the sheet text in reading order. Keep patterns specific: a mention must mean the thing.
+kinds:
+  smoke_alarm_notes:
+    describes: smoke alarms or detectors
+    patterns:
+      - 'smoke\s*(?:alarm|detector)s?'
+      - '\bS\.D\.'
+      - 'rauch(?:warn)?melder'
+      - 'd[ée]tecteurs?\s+(?:de\s+)?fum[ée]e'
+      - '\bDAAF\b'
+  co_alarm_notes:
+    describes: carbon monoxide alarms or detectors
+    patterns:
+      - 'carbon\s*monoxide'
+      - '\bC\.?O\.?\s*(?:alarm|detector)s?'
+      - 'monoxyde\s+de\s+carbone'
+      - 'kohlenmonoxid'
+  fire_rating_notes:
+    describes: fire resistance ratings of walls, doors or assemblies
+    patterns:
+      - 'fire[\s-]*rat(?:ed|ing)'
+      - '\b\d+\s*[- ]?\s*(?:hr|hour|minute|min)s?\.?\s*(?:fire|rated|rating|door|wall|assembly)'
+      - '\brating\s+of\s+\d+\s*(?:min|hour|hr)'
+      - '\b(?:REI|EI)\s?\d{2,3}\b'
+      - 'coupe[\s-]*feu'
+      - 'pare[\s-]*flammes?'
+      - 'feuerhemmend'
+      - 'feuerbest[äa]ndig'
+      - '\bF\s?(?:30|60|90)\b'
+      - 'r[ée]sistance\s+au\s+feu'
+  safety_glazing_notes:
+    describes: safety (tempered or laminated) glazing
+    patterns:
+      - 'safety\s*glaz\w*'
+      - 'tempered(?:\s+glass)?'
+      - 'verbundsicherheitsglas'
+      - 'einscheibensicherheitsglas'
+      - 'verre\s+tremp[ée]'
+      - 'verre\s+feuillet[ée]'
+  handrail_notes:
+    describes: handrails
+    patterns:
+      - 'hand[\s-]*rails?'
+      - 'main\s+courante'
+      - 'handl[äa]ufe?r?'
+  guard_notes:
+    describes: guards or guardrails
+    patterns:
+      - 'guard[\s-]*rails?'
+      - 'guards?\s+(?:shall|at|min)'
+      - 'garde[\s-]*corps'
+      - 'gel[äa]nder'
+      - 'absturzsicherung'
+  sprinkler_notes:
+    describes: fire sprinklers
+    patterns:
+      - 'sprinkl\w*'
+      - 'extincteurs?\s+automatiques?'
+  egress_notes:
+    describes: egress or emergency escape openings
+    patterns:
+      - 'egress'
+      - 'emergency\s+escape(?:\s+and\s+rescue)?(?:\s+openings?)?'
+      - 'rescue\s+opening'
+      - 'issue\s+de\s+secours'
+      - 'fluchtweg'
+      - 'rettungsweg'
+  landing_notes:
+    describes: stair landings
+    patterns:
+      - '\blandings?\b'
+      - '\bpalier\b'
+      - '\bpodest\b'

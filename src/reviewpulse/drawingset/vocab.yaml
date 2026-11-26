@@ -1,0 +1,204 @@
+# Vocabularies for the drawing set model. Everything language and discipline specific lives here, not in code.
+# Text is folded before matching: lower case, accents removed, "ss" for the German sharp s. Write entries folded.
+# To support a new language or trade, add words here; no code changes are needed.
+
+# Kinds of view and the words a view title uses. When a title holds words of several kinds the kind earlier in
+# `kind_priority` wins ("floor plan notes" is a notes block, "wall section" is a section).
+kind_priority: [index, legend, schedule, notes, section, elevation, detail, site, plan]
+view_kinds:
+  index:
+    - sheet index
+    - drawing index
+    - index of drawings
+    - drawing list
+    - sheet list
+    - list of drawings
+    - table of contents
+    - plan index
+    - planverzeichnis
+    - planliste
+    - inhaltsverzeichnis
+    - liste des plans
+    - liste des planches
+    - sommaire
+    - indice de planos
+    - listado de planos
+    - indice de laminas
+  legend:
+    - legend
+    - legends
+    - symbols
+    - symbol legend
+    - abbreviations
+    - symbol key
+    - key
+    - legende
+    - zeichenerklarung
+    - zeichenerklaerung
+    - leyenda
+    - simbologia
+    - abreviaturas
+    - abkurzungen
+  schedule:
+    - schedule
+    - schedules
+    - table
+    - tableau
+    - liste
+    - tabelle
+    - raumbuch
+    - raumliste
+    - fensterliste
+    - turliste
+    - cuadro
+    - tabla
+    - planilla
+    - cedula
+  notes:
+    - notes
+    - note
+    - keynotes
+    - key notes
+    - remarks
+    - specifications
+    - remarques
+    - anmerkungen
+    - hinweise
+    - bemerkungen
+    - notas
+    - observaciones
+  section:
+    - section
+    - sections
+    - coupe
+    - coupes
+    - schnitt
+    - schnitte
+    - seccion
+    - secciones
+    - corte
+    - cortes
+  elevation:
+    - elevation
+    - elevations
+    - facade
+    - facades
+    - ansicht
+    - ansichten
+    - alzado
+    - alzados
+    - fachada
+  detail:
+    - detail
+    - details
+    - einzelheit
+    - detailzeichnung
+    - detalle
+    - detalles
+  site:
+    - site plan
+    - site
+    - lageplan
+    - plan de situation
+    - plan de masse
+    - plan de situacion
+    - plano de situacion
+    - plano de emplazamiento
+  plan:
+    - plan
+    - plans
+    - grundriss
+    - grundrisse
+    - dachaufsicht
+    - draufsicht
+    - planta
+    - plantas
+    - plano
+    - planos
+    - layout
+    - floor
+    - level
+    - niveau
+    - geschoss
+    - etage
+    - nivel
+
+# Words that put a plan view on a level. `rank` orders storeys bottom to top. Ordinals ("2nd floor", "2. obergeschoss",
+# "etage 2", "planta 2") are read by the patterns in `level_ordinals`; the number is the storey above ground (1 = first
+# above ground) and becomes the rank.
+levels:
+  - {label: basement, rank: -1, words: [basement, cellar, untergeschoss, keller, kellergeschoss, sous sol, subsuelo, sotano, lower level, ug]}
+  - {label: ground, rank: 0, words: [ground floor, ground level, main floor, main level, erdgeschoss, rez de chaussee, planta baja, eg, rdc]}
+  - {label: attic, rank: 90, words: [attic, loft, dachgeschoss, combles, buhardilla, desvan, dg]}
+  - {label: roof, rank: 99, words: [roof, dach, toiture, toit, cubierta, techo]}
+level_ordinals:
+  - '(\d+)\s*(?:st|nd|rd|th)\s+(?:floor|level|storey|story)'
+  - '(?:floor|level|storey|story)\s*(\d+)'
+  - '(\d+)\.?\s*(?:obergeschoss|og|stock|etage|geschoss)'
+  - '(?:obergeschoss|etage|geschoss|niveau|planta|nivel)\s*(\d+)'
+  - '(\d+)\s*(?:er|e|eme|ere)\s*(?:etage|niveau)'
+  - '(first|second|third|fourth)\s+(?:floor|level|storey|story)'
+  - '(premier|deuxieme|troisieme|quatrieme)\s+(?:etage|niveau)'
+  - '(erstes?|zweites?|drittes?|viertes?)\s+(?:obergeschoss|geschoss|stock)'
+  - '(primera|segunda|tercera|cuarta)\s+planta'
+ordinal_words: {first: 1, second: 2, third: 3, fourth: 4, premier: 1, deuxieme: 2, troisieme: 3, quatrieme: 4,
+  erste: 1, erstes: 1, zweite: 2, zweites: 2, dritte: 3, drittes: 3, vierte: 4, viertes: 4,
+  primera: 1, segunda: 2, tercera: 3, cuarta: 4}
+
+# Scales. Each pattern gives the real length for one unit of paper (a ratio) or a no-scale mark.
+scale:
+  labels: [scale, scales, massstab, echelle, escala, sc]
+  no_scale: [nts, n t s, not to scale, ohne massstab, sans echelle, sin escala, no scale]
+  patterns:
+    # 1/4" = 1'-0"   3" = 1'   1 1/2" = 1'-0"   1" = 20'
+    - name: imperial
+      regex: '(?P<n>\d+(?:[ -]\d+/\d+|/\d+|\.\d+)?)\s*(?:"|in\.?|inch(?:es)?)?\s*=\s*(?P<d>\d+(?:\.\d+)?)\s*(?:''|ft\.?|foot|feet)'
+      system: imperial
+    # 1:100  1 : 50  M 1:200
+    - name: ratio
+      regex: '(?<![\d.:/])1\s*:\s*(?P<d>\d+(?:[.,]\d+)?)(?![\d:])'
+      system: metric
+  # 1/100 is a scale only when a scale label word stands in front of it
+  ratio_slash: '(?<![\d.:/])1\s*/\s*(?P<d>\d{2,4})(?![\d/])'
+
+# Sheet number shapes. `letter_id` has a letter prefix and is safe anywhere; `number_id` is a plain number and is only
+# trusted next to a sheet word or inside a title block.
+sheet_id:
+  letter_id: '[A-Z]{1,3}[-. ]?\d{1,3}(?:[.-]\d{1,2})?[A-Z]?'
+  number_id: '\d{1,3}'
+
+# Words of the title block: the label that sits next to a value. At least two kinds mark a title block.
+title_block_labels:
+  sheet_number: [sheet number, sheet no, sheet, sht no, dwg no, drawing no, drawing number, blatt, blatt nr, plan nr, planbezeichnung, planche, feuille, numero de plan, hoja, lamina, numero de hoja]
+  scale: [scale, scales, massstab, echelle, escala]
+  date: [date, datum, fecha, issue date, issued]
+  drawn_by: [drawn by, drawn, designer, checked by, gezeichnet, gez, dessine par, dibujado, bearbeiter]
+  project: [project, projekt, bauvorhaben, bauherr, projet, maitre d ouvrage, proyecto, owner, client, address, adresse]
+  revision: [revision, revisions, rev, revisiones, aenderung, anderung, modification, modificacion]
+
+# Callout grammars. A callout is a view label and, if given, a sheet. Placeholders are replaced by the lists above:
+#   {view} view label, {view_num} a number, {sheet} sheet id with letters, {sheet_any} letters or plain number,
+#   {kinds} words that name a detail, section or elevation, {sheetwords} words for "sheet", {refwords} words for "see".
+view_label: '[A-Z]?\d{1,2}|[A-Z]{1,2}(?:\s*-\s*[A-Z]{1,2})?'
+sheet_words: [sheet, sheets, sht, shts, dwg, drawing, drg, feuille, planche, plan n, plan nr, blatt, bl, hoja, lamina, plano]
+ref_words: [see, refer to, refer, ref, per, as per, as shown on, voir, cf, selon, suivant, siehe, vgl, laut, gemass, ver, segun, vease, consultar]
+callout_kind_words:
+  detail: [detail, details, dtl, det, einzelheit, detalle]
+  section: [section, sect, sec, coupe, schnitt, seccion, corte]
+  elevation: [elevation, elev, ansicht, alzado, vue]
+grammars:
+  # 3/A-501  6/S3  4 / A101
+  - name: view_slash_sheet
+    template: '(?<![\w/.])(?P<view>{view_num})\s*/\s*(?P<sheet>{sheet})(?![\w/])'
+  # DETAIL 6-S3   DETAIL 4/A-501   SECTION A-A / A-301
+  - name: kind_view_dash_sheet
+    template: '(?P<kind>{kinds})\s*(?P<view>{view})\s*[-/]\s*(?P<sheet>{sheet})(?![\w])'
+  # Detail 2 / Sheet 5   detail 4 on sheet A-501   detail 3, feuille A3   Detail 4 auf Blatt 7
+  - name: kind_view_sheetword_sheet
+    template: '(?P<kind>{kinds})\s*(?P<view>{view})\s*(?:/|,|-|;|\bon\b|\bof\b|\bsur\b|\ben\b|\bdans\b|\bauf\b|\bin\b|\bdel?\b)?\s*(?:{sheetwords})\.?\s*(?P<sheet>{sheet_any})(?![\w])'
+  # SEE SHEET A-501   voir feuille 5
+  - name: ref_sheet
+    template: '(?:{refwords})\s*(?:{sheetwords})\.?\s*(?P<sheet>{sheet_any})(?![\w])'
+  # SEE DETAIL 4    voir detail 4    siehe Schnitt A-A   (no sheet: same sheet)
+  - name: ref_kind_view_local
+    template: '(?:{refwords})\s+(?P<kind>{kinds})\s*(?P<view>{view})(?![\w/]|\s*[-/]\s*[A-Z]{{1,3}}[-.]?\d)'

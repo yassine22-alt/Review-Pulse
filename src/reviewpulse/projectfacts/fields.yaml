@@ -1,0 +1,169 @@
+# Project facts are DATA. A field has a kind (number, bool, category), a unit, the words a label uses in each language
+# (cues), words that may stand beside a cue in a label (qualifiers), and for categories the words a value uses.
+# Field names mirror origin/rule-interpreter metadata.yaml where the idea is the same: building_class (use) and
+# occupant_load (metadata calls it occupancy). climate_zone is not a drawing fact and is left out.
+# Matching is on folded text (no accents, ss for sharp s, lower case, apostrophes become spaces).
+
+qualifiers: [total, gross, net, overall, approx, approximate, ca, circa, proposed, new, existing, project, building,
+             of, the, "no", number, nb, nombre, anzahl, de, des, du, der, die, das, la, le, les, d, l, in, im, ihr]
+
+units:                                   # symbol -> written forms
+  m2: [m2, "m²", qm, sqm, sq m, sq. m, mq]
+  ft2: [sf, sq ft, sq. ft., sqft, ft2, "ft²", s.f., sq.ft., square feet]
+  m: [m, meter, meters, metre, metres]
+  ft: [ft, feet, foot, ft.]
+
+area_factor_to_m2: {m2: 1.0, ft2: 0.09290304}
+length_factor_to_m: {m: 1.0, ft: 0.3048}
+
+bool_words:
+  positive: ["yes", "y", oui, ja, "true", vrai, wahr, provided, required, installed, present, available, fully, full, equipped, vorhanden, erforderlich, fourni, requis, avec, mit, x, included]
+  negative: ["no", "n", non, nein, "false", faux, falsch, none, aucun, aucune, keine, kein, not provided, not required, not installed, not present, absent, nicht vorhanden, ohne, sans]
+unstated_words: [tbd, t.b.d., n/a, na, "-", "--", tba, to be determined, a definir, noch offen, offen, unknown, inconnu, unbekannt, see notes, "?"]
+
+number_words:                            # counts written in words
+  en: {one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10}
+  fr: {un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10}
+  de: {ein: 1, eins: 1, eine: 1, zwei: 2, drei: 3, vier: 4, fuenf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10}
+
+fields:
+  building_class:
+    kind: category
+    description: Use and occupancy of the building (single family dwelling, office, R-3)
+    cues:
+      en: [use, use group, occupancy, occupancy classification, occupancy group, occupancy type, use and occupancy, building use, building class, use classification, type of occupancy, group, building type, proposed use]
+      fr: [usage, usage du batiment, classe du batiment, type d occupation, destination, affectation]
+      de: [nutzung, gebaeudenutzung, gebaeudeklasse, nutzungsart, art der nutzung, hauptnutzung]
+    patterns: ['^[abefhimrsu]-?\d(?:\.\d)?$']      # IBC occupancy groups (R-3, B, A-2)
+    values:
+      single_family_dwelling: [single family, single-family, one family, one-family, detached house, detached dwelling, einfamilienhaus, einfamilienwohnhaus, maison individuelle, maison unifamiliale, sfr, sfd]
+      two_family_dwelling: [two family, two-family, duplex, zweifamilienhaus, maison bifamiliale]
+      multi_family_dwelling: [multi family, multi-family, multifamily, apartment, apartments, apartment building, mehrfamilienhaus, immeuble collectif, logement collectif, wohnanlage]
+      townhouse: [townhouse, townhome, town house, row house, reihenhaus, maison en bande, maison de ville]
+      residential: [residential, dwelling, wohnen, wohngebaeude, habitation, logement, residence]
+      office: [office, offices, business, buero, bureau, bureaux, verwaltung]
+      retail: [retail, mercantile, shop, store, laden, commerce, magasin, verkauf]
+      assembly: [assembly, restaurant, theater, theatre, versammlung, versammlungsstaette, erp]
+      educational: [school, educational, education, schule, ecole]
+      institutional: [hospital, care home, institutional, krankenhaus, hopital, pflegeheim]
+      industrial: [industrial, factory, manufacturing, industrie, gewerbe, usine]
+      storage: [storage, warehouse, lager, entrepot]
+      hotel: [hotel, hotels, lodging, hotellerie]
+      garage: [garage, parking, parkhaus]
+  construction_type:
+    kind: category
+    description: Construction type (IBC Type V-B, wood frame, masonry)
+    cues:
+      en: [construction type, type of construction, construction class, building construction, construction, framing type, structure type]
+      fr: [type de construction, mode de construction, type de structure]
+      de: [bauart, bauweise, konstruktion, konstruktionsart, tragwerk]
+    patterns: ['^(?:type\s*)?(?:i|ii|iii|iv|v)[- ]?(?:a|b|ht|c)?$']
+    values:
+      wood_frame: [wood frame, wood-frame, timber frame, light frame, stick built, wood, holzbau, holzrahmenbau, holzbauweise, ossature bois, structure bois]
+      masonry: [masonry, brick, mauerwerk, massivbau, maconnerie]
+      concrete: [concrete, reinforced concrete, stahlbeton, beton, beton arme]
+      steel: [steel, steel frame, stahlbau, stahl, acier, charpente metallique]
+  work_type:
+    kind: category
+    description: Kind of work (new construction, addition, alteration, change of use)
+    cues:
+      en: [type of work, scope of work, work type, project type, work description, scope]
+      fr: [type de travaux, nature des travaux, objet des travaux]
+      de: [art der arbeiten, art des vorhabens, massnahme]
+    values:
+      new_construction: [new construction, new building, new build, neubau, construction neuve, neuf]
+      addition: [addition, extension, anbau, erweiterung, agrandissement, surelevation, aufstockung]
+      alteration: [alteration, remodel, renovation, interior remodel, tenant improvement, umbau, sanierung, renovierung, transformation, amenagement]
+      change_of_use: [change of use, change of occupancy, nutzungsaenderung, changement d usage, changement de destination]
+  project_title:
+    kind: category
+    free: true
+    description: Project name or description line of the title block; its words are scanned for a use and a kind of work
+    cues:
+      en: [project, project name, project title, project description, description of project]
+      fr: [projet, objet, designation, nom du projet]
+      de: [bauvorhaben, projekt, projektbezeichnung, bauobjekt, vorhaben]
+    scan_into: [building_class, work_type]
+  number_of_storeys:
+    kind: number
+    unit: "1"
+    description: Number of storeys of the building
+    cues:
+      en: [number of stories, number of storeys, stories, storeys, no. of stories, no. of storeys, floors, number of floors, building stories, building storeys, stories above grade, storeys above grade, height in stories, height in storeys]
+      fr: [nombre d etages, nombre de niveaux, niveaux, etages, nb de niveaux, nombre d etage]
+      de: [anzahl geschosse, geschosse, vollgeschosse, anzahl vollgeschosse, geschosszahl, zahl der vollgeschosse, anzahl der geschosse]
+    storey_words: [story, stories, storey, storeys, floor, floors, geschoss, geschosse, geschossig, etage, etages, niveau, niveaux]
+  sprinklered:
+    kind: bool
+    description: The building has an automatic sprinkler system
+    cues:
+      en: [sprinklers, sprinkler, sprinkler system, fire sprinklers, fire sprinkler system, automatic sprinkler system, automatic sprinklers, sprinklered, fire suppression]
+      fr: [sprinklers, extinction automatique, installation sprinkler, sprinkleur, systeme sprinkler, extinction automatique a eau]
+      de: [sprinkler, sprinkleranlage, loeschanlage, sprinklerung, automatische loeschanlage, gesprinklert]
+    true_phrases: [fully sprinklered, sprinklered building, building is sprinklered, voll gesprinklert, mit sprinkleranlage, entierement sprinkle]
+    false_phrases: [not sprinklered, non sprinklered, non-sprinklered, unsprinklered, ohne sprinkleranlage, nicht gesprinklert, non sprinkle, sans sprinkleur]
+  fire_alarm:
+    kind: bool
+    description: The building has a fire alarm system
+    cues:
+      en: [fire alarm, fire alarm system, smoke alarm system, alarm system]
+      fr: [alarme incendie, systeme d alarme incendie, detection incendie]
+      de: [brandmeldeanlage, brandmelder, feueralarm]
+  occupant_load:
+    kind: number
+    unit: "1"
+    description: Occupant load (number of occupants)
+    cues:
+      en: [occupant load, occupancy load, occupants, number of occupants, calculated occupant load, design occupant load]
+      fr: [effectif, effectif maximal, nombre d occupants, capacite d accueil]
+      de: [personenzahl, personenbelegung, anzahl personen, belegung, maximale personenzahl, nutzerzahl]
+  gross_floor_area:
+    kind: number
+    unit: m2
+    description: Gross floor area of the whole building, or of one level when the label names a level
+    cues:
+      en: [gross area, gross floor area, total area, total floor area, building area, new building area, area, floor area, gfa, total sf, total square footage, square footage, area of building, gross]
+      fr: [surface de plancher, surface totale, surface brute, surface hors oeuvre brute, shob, surface plancher totale, surface]
+      de: [bruttogeschossflaeche, bgf, gesamtflaeche, geschossflaeche gesamt, bruttoflaeche, gesamte geschossflaeche, flaeche, geschossflaeche]
+    by_level: true                       # a level word in the label puts the area on entity level:<label>
+  conditioned_area:
+    kind: number
+    unit: m2
+    description: Conditioned (heated) floor area
+    cues:
+      en: [conditioned, conditioned area, conditioned floor area, heated area, heated floor area, conditioned sf]
+      fr: [surface chauffee, surface conditionnee]
+      de: [beheizte flaeche, beheizte nutzflaeche, konditionierte flaeche]
+  living_area:
+    kind: number
+    unit: m2
+    description: Living area (habitable floor area)
+    cues:
+      en: [living area, livable, livable area, livable sf, living sf, living space, habitable area, habitable floor area, heated living area]
+      fr: [surface habitable, surface de vie, shab]
+      de: [wohnflaeche, nutzflaeche wohnen]
+  building_height:
+    kind: number
+    unit: m
+    description: Height of the building
+    cues:
+      en: [building height, height of building, overall height, mean roof height, height above grade, max building height]
+      fr: [hauteur du batiment, hauteur totale, hauteur maximale, hauteur au faitage]
+      de: [gebaeudehoehe, firsthoehe, gesamthoehe, hoehe des gebaeudes, traufhoehe]
+  code_edition:
+    kind: category
+    free: true
+    description: Code and edition the design follows (2023 Florida Building Code, IBC 2018)
+    cues:
+      en: [applicable code, applicable codes, code, codes, governing code, building code, code edition, edition, code reference, adopted code, code year, code of record]
+      fr: [code applicable, reglementation, reglementation applicable, edition du code, norme applicable, textes applicables]
+      de: [anwendbare vorschriften, vorschriften, baurecht, geltende norm, norm, bauordnung, rechtsgrundlage, gesetzliche grundlage]
+    value_patterns: ['(?:19|20)\d\d', '\b(?:ibc|irc|ifc|imc|ipc|nfpa|nec|ada|ashrae|iecc|din|sia|eurocodes?|erp|lbo|obc|nbc|ncc|adb)\b', 'building code', 'residential code', 'bauordnung', 'code de la construction']
+  jurisdiction:
+    kind: category
+    free: true
+    description: Authority or place whose rules apply
+    cues:
+      en: [jurisdiction, authority having jurisdiction, ahj, municipality, county, local authority, building department, governing jurisdiction, planning authority]
+      fr: [commune, juridiction, autorite competente, municipalite, mairie]
+      de: [gemeinde, baubehoerde, zustaendige behoerde, kommune, stadt, baurechtsbehoerde, bauamt, baugenehmigungsbehoerde]

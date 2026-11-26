@@ -326,12 +326,13 @@ def apply_rejection(model: BuildingModel, rejected: set) -> None:
 
 def check(run_dir: str | Path, pack, confirmed: set | None = None,
           dismissed: dict | None = None, reports: bool = True, brief: str | Path | None = None,
-          programs: list | None = None, inventory_complete: bool = False) -> dict:
+          programs: list | None = None, inventory_complete: bool = False, attestations=None) -> dict:
     """Run the rules on every sheet of a run. ``brief``: the project's brief (programme) table; it is
     kept in the run folder so later checks use it too. ``programs``: rules approved by a reviewer from the requirement
     document (interpreter programs); they run on the same plan and their findings join the others, with the full
     outcome of each saved in ``interpreted_results.json``. ``inventory_complete``: a person confirmed that every room,
-    door and window was found, which is what allows a rule over "every" member to be reported as satisfied."""
+    door and window was found, which is what allows a rule over "every" member to be reported as satisfied.
+    ``attestations``: what reviewers confirmed (ledger `Attestations`); they outrank every producer for the facts they cover."""
     import shutil
 
     from .engine.run import run, summarise
@@ -355,7 +356,11 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     models = []
     interpreted_results: list[dict] = []
     paths = sorted(run_dir.glob("building_*.json"))
-    n_plans = sum(1 for bp in paths if _is_plan(load(BuildingModel, bp)))
+    loaded = [load(BuildingModel, bp) for bp in paths]
+    n_plans = sum(1 for m in loaded if _is_plan(m))
+    from .factgraph.from_building import set_notes
+
+    notes = set_notes(loaded)                   # general notes sit on their own sheets: every sheet of the set is searched
     for bp in paths:
         model = load(BuildingModel, bp)
         if briefs and n_sheets == 1:
@@ -372,7 +377,8 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
             continue
         findings = run(model, rules, confirmed)
         if programs:
-            findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1)
+            findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1,
+                                      notes=notes, attestations=attestations)
         for f in findings:
             key = finding_key(f)
             f.evidence["finding_id"] = key
@@ -398,17 +404,20 @@ def _is_plan(model) -> bool:
     return not model.sheet.sheet_kind or model.sheet.sheet_kind == "floor_plan"
 
 
-def _run_programs(model, programs, inventory_complete: bool, results: list[dict], part_of_set: bool = False) -> list:
+def _run_programs(model, programs, inventory_complete: bool, results: list[dict], part_of_set: bool = False,
+                  notes=None, attestations=None) -> list:
     """Approved interpreter programs on one sheet: findings for the viewer and one outcome record per program."""
-    from .factgraph.convert import to_graph, to_inputs
+    from .factgraph.convert import to_graph
     from .factgraph.from_building import from_building
     from .interpreter.findings import to_findings
+    from .ledger.wiring import build_inputs
 
-    graph_facts = from_building(model, complete=inventory_complete, part_of_set=part_of_set)
-    inputs, graph = to_inputs(graph_facts), to_graph(graph_facts)
+    graph_facts = from_building(model, complete=inventory_complete, part_of_set=part_of_set, notes=notes)
+    inputs, resolutions = build_inputs(graph_facts, attestations, model)       # REVIEWPULSE_LEDGER=off: the plain conversion
+    graph = to_graph(graph_facts)
     out = []
     for program in programs:
-        found, explained = to_findings(program, inputs, graph, model, model.tier)
+        found, explained = to_findings(program, inputs, graph, model, model.tier, resolutions=resolutions)
         out += found
         clause = program.sources[0].clause if program.sources else None
         results.append({

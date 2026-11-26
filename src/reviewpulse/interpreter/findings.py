@@ -166,9 +166,10 @@ def _source(program: Program) -> dict:
 
 
 def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | None = None, tier: str = "T1",
-                locate=None) -> tuple[list[Finding], Explained]:
+                locate=None, resolutions=None) -> tuple[list[Finding], Explained]:
     """`locate(entity) -> {polygons, label_at, name}` says where a member is drawn. The building plan reader's locator is
-    used when `model` is given; any other producer passes its own, or none (findings then carry no outline)."""
+    used when `model` is given; any other producer passes its own, or none (findings then carry no outline). `resolutions` (the ledger's, when the inputs came through it) let an undecided
+    finding name the unsettled facts, both sources of a conflict, and the question that would settle it."""
     if locate is None:
         if model is not None:
             def locate(entity):
@@ -184,7 +185,12 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | 
     meta = {"outcome": explained.outcome, "program_id": program.id, "interpreted": True,
             "approved_by": program.approved_by, "title": program.title}
     findings: list[Finding] = []
-    if explained.outcome == "VIOLATED":
+    if explained.outcome == "VIOLATED" and program.advisory:
+        # a pointer, not a verdict: the rule checks less than the sentence says, so a miss asks a person to look
+        findings.append(Finding(**base, verdict="WARNING", subject_ids=[],
+                                message=f"{program.title}: not found. Check whether this requirement applies to this building.",
+                                evidence={**meta, "advisory": True}))
+    elif explained.outcome == "VIOLATED":
         violated = [m for m in explained.members if m.state == "violated"]
         for m in violated:
             geo = locate(m.entity)
@@ -214,7 +220,26 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | 
                 evidence={**meta, "checked": explained.selected}))
         else:
             reason = ", ".join(explained.missing[:FACT_LIMIT]) or "facts the plan does not provide"
-            findings.append(Finding(**base, verdict="NOT_EVALUATED", subject_ids=[m.entity for m in unknown],
-                                    message=f"{program.title}: not decided, missing {reason}.",
-                                    evidence={**meta, "missing": explained.missing[:10]}))
+            subjects = [m.entity for m in unknown]
+            asked = _unsettled(program, resolutions, inputs, subjects)
+            extra = ({"unsettled": asked} if asked else {})
+            findings.append(Finding(**base, verdict="NOT_EVALUATED", subject_ids=subjects,
+                                    message=f"{program.title}: not decided, missing {reason}." + _asked_words(asked),
+                                    evidence={**meta, "missing": explained.missing[:10], **extra}))
     return findings, explained
+
+
+def _unsettled(program: Program, resolutions, inputs: Inputs, subjects: list[str]) -> list[dict]:
+    if not resolutions:
+        return []
+    from ..ledger.wiring import unresolved_for
+
+    return unresolved_for(program, resolutions, inputs, subjects)
+
+
+def _asked_words(asked: list[dict]) -> str:
+    """What the ledger knows about the unsettled facts (both sources of a conflict) and the question for the reviewer."""
+    if not asked:
+        return ""
+    shown = asked[:2]
+    return " Unsettled: " + " ".join(a["explain"] + "." for a in shown) + " Reviewer question: " + shown[0]["question"]

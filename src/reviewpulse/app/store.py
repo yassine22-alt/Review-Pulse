@@ -25,6 +25,7 @@ from pathlib import Path
 
 PLAN_TYPES = {".pdf", ".dxf", ".dwg", ".svg", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
 REQ_TYPES = {".pdf", ".md", ".txt", ".docx", ".xlsx", ".xlsm", ".csv", ".tsv", ".html", ".htm", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
+PROJECT_FOLDERS = ("inputs/plan", "inputs/req", "drafts", "pack", "jobs")
 
 
 def now() -> str:
@@ -96,11 +97,14 @@ class Store:
     def create(self, name: str, base_pack: str | None = None, curator: str = "") -> Project:
         p = Project(id=uuid.uuid4().hex[:12], name=name.strip() or "Untitled project", created=now(),
                     base_pack=base_pack, curator=curator)
-        d = self.dir(p.id)
-        for sub in ("inputs/plan", "inputs/req", "drafts", "pack", "jobs"):
-            (d / sub).mkdir(parents=True, exist_ok=True)
+        self._ensure_folders(p.id)
         self.save(p)
         return p
+
+    def _ensure_folders(self, pid: str) -> None:
+        """Empty folders can vanish (temp cleaners, zip copies, git); a project must still work without them."""
+        for sub in PROJECT_FOLDERS:
+            (self.dir(pid) / sub).mkdir(parents=True, exist_ok=True)
 
     def save(self, p: Project) -> Project:
         p.updated = now()
@@ -115,6 +119,7 @@ class Store:
         if not f.exists():
             raise KeyError(pid)
         data = json.loads(f.read_text(encoding="utf-8"))
+        self._ensure_folders(pid)
         known = Project.__dataclass_fields__
         return Project(**{k: v for k, v in data.items() if k in known})
 
@@ -137,6 +142,7 @@ class Store:
         if Path(name).suffix.lower() not in types:
             raise ValueError(f"unsupported {kind} file type {Path(name).suffix or '(none)'}; "
                              f"expected one of {', '.join(sorted(types))}")
+        self._ensure_folders(p.id)             # they may have vanished since the project was read (a long analysis)
         folder = self.dir(p.id) / "inputs" / ("plan" if kind == "plan" else "req")
         for old in folder.iterdir():          # one current file per kind
             old.unlink()
