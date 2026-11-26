@@ -45,8 +45,12 @@ export interface Reading {
 export function shapesOf(item: Item, view: View | null, findings: RawFinding[]) {
   const mine = new Set(findings.map((f, n) => ((f.source?.clause === item.clause || f.rule_id === item.key) ? n : -1))
     .filter((n) => n >= 0));
-  return (view?.sheets ?? []).flatMap((s) => s.findings.filter((g) => mine.has(g.n)).map((shape) => ({ sheet: s.index, shape })));
+  return (view?.sheets ?? []).flatMap((s) => s.findings.filter((g) => mine.has(g.n) && drawable(g))
+    .map((shape) => ({ sheet: s.index, shape })));
 }
+
+/** Whether something of this shape appears on the sheet: a pin, an outline, a line or a point. */
+const drawable = (g: FindingShape) => !!g.anchor || g.polygons.length + g.polylines.length + g.points.length > 0;
 
 export type Box = [number, number, number, number];
 

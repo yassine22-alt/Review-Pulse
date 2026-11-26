@@ -1,5 +1,7 @@
 """Accounts: nothing is open by accident, organisations never see each other, roles hold, and decisions carry real names."""
 
+import time
+
 import pytest
 
 pytest.importorskip("fastapi")
@@ -173,3 +175,30 @@ def test_weak_passwords_and_bad_roles_are_refused(tmp_path):
     for roles in (["owner"], [], ["applicant", "reviewer"]):
         with pytest.raises(AuthError):
             accounts.invite(admin, "c@o.test", roles)
+
+
+def test_uploading_requirements_does_not_ask_the_model(tmp_path):
+    """The review desk reads a clause when asked; drafting every clause at upload cost 18 minutes on a real checklist."""
+    asked = []
+
+    class Model:
+        model = "counting"
+
+        def complete(self, *args):
+            asked.append(args)
+            return {}
+
+    app = create_app(tmp_path / "data", llm=lambda: Model(), workers=1)
+    app.state.accounts.create_organisation("Office", "r@o.test", "Rae Reviewer", PW)
+    with client(app, "r@o.test") as c:
+        pid = c.post("/api/projects", json={"name": "p"}).json()["id"]
+        job = c.post(f"/api/projects/{pid}/requirements",
+                     files={"file": ("rules.md", b"# Rules\n\n6.1 Every door shall be at least 0.80 m wide.\n")}).json()
+        for _ in range(300):
+            record = c.get(f"/api/projects/{pid}/jobs/{job['id']}").json()
+            if record["status"] in ("done", "failed"):
+                break
+            time.sleep(0.1)
+        assert record["status"] == "done", record.get("error")
+        assert c.get(f"/api/projects/{pid}/document").json()["clauses"]
+    assert asked == []

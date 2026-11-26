@@ -234,7 +234,8 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             store.put_input(p, "requirements", file.filename or "requirements", await read_upload(file))
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
-        return jobs.submit(pid, "draft", lambda job: service.draft(store, pid, job, llm))
+        # the product reads clauses on demand from the review desk; the older pages still list drafts made at upload
+        return jobs.submit(pid, "draft", lambda job: service.draft(store, pid, job, llm, split_only=auth))
 
     @app.post("/api/projects/{pid}/draft", status_code=202)
     def redraft(pid: str):

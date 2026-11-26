@@ -52,7 +52,11 @@ def render_message(template: str, raw: Raw, detected: str | None, required: str 
     try:
         return string.Formatter().vformat(template, (), values)
     except (KeyError, AttributeError, IndexError, ValueError):
-        return template
+        # The template words a violation ("X is reached only through Y"). Without what it names (no Y was found) the sentence
+        # does not apply: say what was read, never show the template and never claim the violation.
+        room = raw.vars.get("room")
+        who = f"{room['label']}: " if isinstance(room, dict) and room.get("label") else ""
+        return f"{who}read {detected or 'nothing'}; required {required or 'not stated'}."
 
 
 def not_evaluated(rule: Rule, missing: list[str], tier: str) -> Finding:

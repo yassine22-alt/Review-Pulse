@@ -139,8 +139,9 @@ def check(store: Store, pid: str, job: Job | None = None) -> dict:
     return {"summary": summary, "rules": rules_summary(store, p)}
 
 
-def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | None]) -> dict:
-    """Requirement upload -> clauses (I3) -> drafted rules (I4) with the local model."""
+def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | None], split_only: bool = False) -> dict:
+    """Requirement upload -> clauses (I3) -> drafted rules (I4) with the local model. ``split_only`` stops after the clauses: the
+    review desk reads each clause when the reviewer asks, so drafting all of them at upload would be work nobody sees."""
     from ..rules.clauses import write_clauses
     from ..rules.draft import draft_document
 
@@ -153,6 +154,8 @@ def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | N
     job.progress(0.02, "splitting the document into clauses")
     cl = write_clauses(doc, d / "clauses.json")
     n = len(json.loads(cl.read_text(encoding="utf-8"))["clauses"])
+    if split_only:
+        return {"clauses": n, "drafted": 0, "note": "each requirement is read when a reviewer asks"}
     client = llm_factory()
     if client is None:
         return {"clauses": n, "drafted": 0, "llm": "unavailable",
@@ -284,7 +287,7 @@ def write_view(run: Path) -> Path:
     tri = pipeline.load_triage(run)
     confirmed, rejected = set(tri["confirmed"]), set(tri["rejected"])
     sheets = []
-    for bp in sorted(run.glob("building_*.json")):
+    for bp in _sheet_files(run):
         idx = int(bp.stem.split("_")[1])
         model = load(BuildingModel, bp)
         png, w, h, to_px = _backdrop(model)
@@ -346,8 +349,29 @@ def write_view(run: Path) -> Path:
 
 
 # -- correction list and reviewer workflow --------------------------------------------------------------------------------
+def _sheet_files(run: Path) -> list[Path]:
+    """The sheet files in page order (by name, sheet 11 would come before sheet 2)."""
+    return sorted(run.glob("building_*.json"), key=lambda f: int(f.stem.split("_")[1]))
+
+
+_MODELS: dict[Path, tuple[tuple, list[BuildingModel]]] = {}     # run folder -> (what its files were, the models)
+_MODELS_KEPT = 3
+
+
 def _models(store: Store, pid: str) -> list[BuildingModel]:
-    return [load(BuildingModel, b) for b in sorted(store.run_dir(pid).glob("building_*.json"))]
+    """The project's sheet models, for reading only. Loading a 22 sheet set took 9 seconds, on every correction list request, so
+    they are kept until a file changes (a new plan or a new analysis)."""
+    run = store.run_dir(pid)
+    files = _sheet_files(run)
+    seen = tuple((f.name, s.st_mtime_ns, s.st_size) for f in files for s in [f.stat()])
+    kept = _MODELS.get(run)
+    if kept is None or kept[0] != seen:
+        kept = (seen, [load(BuildingModel, f) for f in files])
+        _MODELS.pop(run, None)
+        while len(_MODELS) >= _MODELS_KEPT:
+            _MODELS.pop(next(iter(_MODELS)), None)
+        _MODELS[run] = kept
+    return list(kept[1])
 
 
 def _sheet_rows(models: list[BuildingModel]) -> list[dict]:
