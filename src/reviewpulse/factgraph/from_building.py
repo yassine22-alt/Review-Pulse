@@ -10,6 +10,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from ..annotate.notes import DESCRIPTIONS, note_counts
+from ..annotate.scale import unmeasurable
 from ..annotate.text_classify import tag_key
 from ..interpreter.schema import Binding, Fact
 from ..schema import BuildingModel
@@ -44,6 +45,7 @@ BINDINGS = {**NOTE_BINDINGS,
     "fire_rating_min": Binding(kind="number", unit="min", description="Fire resistance rating of the door, in minutes, from the door schedule"),
     "tread_lines": Binding(kind="number", unit="count", description="Number of tread lines drawn in the stair flight"),
 }
+MEASURED_FACTS = {"area_m2", "min_width_m", "width_m", "tread_depth_m", "stair_width_m", "opening_area_m2"}   # read from lines
 STAIR_TRUST = 0.8                                   # calibrated probability a detected flight must reach to be trusted
 SCALE_METHODS = ("dxf_units", "dimension_consensus", "user", "scale_bar")
 BOUNDARY = {"EXIT": "exit", "EXTERIOR": "exterior"}
@@ -126,20 +128,21 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
     building by stairs this sheet does not show, so "no route to the exit" is not proven there even when every room, door
     and window was found (the rooms are still complete; the routes are not)."""
     t1 = model.tier == "T1"
+    unscaled = unmeasurable(model.sheet) is not None      # the sheet disowns its only ratio: no size is read from its lines
     scale_known = model.sheet.scale.method in SCALE_METHODS
     measured = t1 and scale_known
     nodes: list[Node] = []
     used: set[str] = set()
 
     def fact(name, value, source, trusted):
-        if value is None:
+        if value is None or (unscaled and name in MEASURED_FACTS):
             return None
         used.add(name)
         return Fact(value=value, source=source, trusted=trusted)
 
     distances = _exit_distances(model)
     rows = schedule_rows(model)
-    opening_area = opening_areas(model, rows)
+    opening_area = {} if unscaled else opening_areas(model, rows)
     labels_read = any(r.label for r in model.rooms)
     exit_openings = {e.via for e in model.edges if e.via and (e.a in BOUNDARY or e.b in BOUNDARY)}
     for room in model.rooms:
@@ -158,14 +161,14 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
             "has_label": fact("has_label", bool(room.label), src, label_ok and labels_read),
             # a walked distance needs the geometry and the scale; how rooms connect is derived from the graph below
         }.items() if v is not None}
-        glazing = window_area(model, room.id, opening_area)
+        glazing = None if unscaled else window_area(model, room.id, opening_area)
         if glazing is not None:
             used.update(("window_area_m2",))
             attrs["window_area_m2"] = Fact(value=round(glazing, 4), source=src, trusted=measured)
             if room.area_m2:
                 used.add("window_area_ratio")
                 attrs["window_area_ratio"] = Fact(value=round(glazing / room.area_m2, 4), source=src, trusted=sure)
-        if model.sheet.scale.metres_per_unit:
+        if model.sheet.scale.metres_per_unit and not unscaled:
             # with a scale the distance is a fact of every room; where no route reaches the outside its value is unknown
             # (not absent), so a rule about it is undecided instead of impossible to write
             used.add("exit_distance_m")
@@ -229,7 +232,7 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
     edges = []
     for i, e in enumerate(model.edges):
         attrs = {}
-        if e.width_m is not None:
+        if e.width_m is not None and not unscaled:
             used.add("width_m")
             attrs["width_m"] = Fact(value=e.width_m, source=f"{model.sheet.id}:{e.via or i}", trusted=measured)
         inferred = bool(e.prov.evidence.get("inferred"))          # joined by label-seeded splitting, not by a drawn opening

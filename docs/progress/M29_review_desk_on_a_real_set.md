@@ -116,10 +116,18 @@ waits out the moment Windows refuses to replace an open file), sent from bytes r
 own. After this, five walkthroughs in a row logged no server error. The older full reports (PDF, HTML) are still written in
 place by a running check.
 
+**A size from a sheet that says it has no scale.** "BEDROOM 3 measures 247 m2" came from a sheet marked "FOR ILLUSTRATION ONLY,
+NO SCALE". The not to scale detector did not know the words "no scale", and sizes were printed from the title block ratio the sheet
+disowns. Now: when a sheet says it is not to scale and nothing but its title block gives a ratio, no size is read from its lines,
+on both check paths (`annotate/scale.py` `unmeasurable`). Sheets whose written dimensions confirm the ratio are still measured, and
+values written in a schedule are kept. On this set two of the six plan sheets now give no sizes (222 warnings became 164, not
+evaluated 94 became 146) and the 247 m2 figure is gone. **Loss:** plausible sizes on those two sheets are no longer shown. If
+"no scale" belongs to one detail of a sheet whose other views are to scale, the whole sheet is still held back. The cause of the
+huge room itself, outlines that spill into empty parts of a sheet, is not fixed.
+
 ## Still open
 
-1. **A number that should not be shown.** "BEDROOM 3 measures 247 m2" on a sheet whose title block says no scale. The item says
-   the scale is unverified, but the figure is plainly wrong and should not be printed.
+1. **Room outlines that spill** into empty parts of a sheet (a 28 by 20 m "storage" room in a house).
 2. **Rooms that are not rooms.** A block of kitchen and cabinet notes was read as a room with no way out.
 3. **Internal words** still reach comments: "room_graph", "path to EXIT", unnamed rooms as "room 8469".
 4. **A second reader that adds noise.**

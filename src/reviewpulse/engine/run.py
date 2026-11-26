@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import string
 
+from ..annotate.scale import unmeasurable
 from ..outcomes import Assessment, EvidenceIssue, IssueCode
 from ..rules.registry import resolve
 from ..rules.schema import Rule
@@ -68,6 +69,7 @@ def not_evaluated(rule: Rule, missing: list[str], tier: str) -> Finding:
                                          dependencies=missing))
 
 
+NO_SIZE = "the sheet says it is not drawn to scale and no written dimension confirms the ratio in its title"
 OCR_ABSENCE = "verify on the drawing (text read by OCR may be missed)"
 OCR_GROUP_MIN = 4
 
@@ -127,12 +129,20 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
                    r.prov.evidence.get("label_source") in ("llm", "vlm") for i in deciding):
                 raw.evidence_issues.append(EvidenceIssue(code=IssueCode.UNKNOWN_CLASS,
                                                         detail="verify room type (label read by a language model)"))
+            disowned = unmeasurable(model.sheet) if raw.metric else None
+            if disowned:                      # no figure is stated, so none can be quoted to an applicant
+                raw.missing = [NO_SIZE]
+                raw.detected, raw.measurement = None, None
             dec = decide(raw, ctx.tier, guidance=rule.is_guidance,
                          max_verdict=rule.params.get("max_verdict", "FAIL"),
                          all_confirmed=all_conf, scale_verified=scale_verified,
                          relative_uncertainty=relative_uncertainty)
             msg = render_message(rule.message, raw, raw.detected, raw.required)
-            if dec.reason and dec.verdict != "PASS":
+            if disowned:
+                room = raw.vars.get("room")
+                who = f"{room['label']}: " if isinstance(room, dict) and room.get("label") else f"{rule.title}: "
+                msg = f"{who}not measured, {NO_SIZE}."
+            elif dec.reason and dec.verdict != "PASS":
                 msg += f" [{dec.reason}]"
             ev = dict(raw.evidence)
             if raw.note:
