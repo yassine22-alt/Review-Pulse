@@ -40,6 +40,9 @@ def citation_of(clause_id: str, clause_text: str) -> str:
     return f"[{clause_id}]" if clause_id else ""
 
 
+PRIVATE_USE = re.compile(f"[{chr(0xE000)}-{chr(0xF8FF)}]")      # a symbol font's bullets and tick boxes
+
+
 def _from_elsewhere(source: dict, document: dict) -> bool:
     """A finding whose rule names a source document other than the one uploaded here. Its words must not be shown as quoted."""
     named, uploaded = str(source.get("doc") or ""), str(document.get("name") or "")
@@ -51,7 +54,7 @@ def _quote(clause_id: str, clause_text: str, interpreted: dict) -> str:
     program = (interpreted.get(clause_id) or {}).get("approved_program") or (interpreted.get(clause_id) or {}).get("program") or {}
     quote = _norm(next((s.get("quote") for s in program.get("sources", []) if s.get("quote")), ""))
     text = quote if quote and quote in _norm(clause_text) else _norm(clause_text)
-    return _norm(CITATION.sub("", text)).rstrip()
+    return _norm(CITATION.sub("", PRIVATE_USE.sub(" ", text))).rstrip()
 
 
 def _bbox(evidence: dict) -> list[float] | None:
@@ -259,7 +262,7 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
         chosen = (entry.get("evidence") or {}).get("chosen") or {}
         if chosen.get("text") and chosen.get("sheet") is not None:
             sid = chosen["sheet"]
-            box = locate_note(sid, chosen["text"]) if locate_note else None
+            box = chosen.get("box") or (locate_note(sid, chosen["text"]) if locate_note else None)    # older readings: no box
             sheet = sheet_by_id.get(sid)
             locations.append({"sheet": sid, "page": (sheet["page"] + 1) if sheet else None, "bbox": box,
                               "where": f"sheet {sid}" + (f", {_place(box, sheet)} of the sheet" if box else "") + ", note: " + _norm(chosen["text"])[:140],

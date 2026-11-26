@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import uuid
 from collections.abc import Callable
 from pathlib import Path
 
@@ -14,7 +15,7 @@ from .. import pipeline
 from ..rules.draft import OllamaClient, load_drafts, make_client
 from ..schema import BuildingModel, load, load_findings
 from .jobs import Job
-from .store import Project, Store, now
+from .store import Project, Store, now, publish
 
 PACKS_ROOT = Path(__file__).resolve().parents[1] / "rules" / "packs"
 
@@ -112,6 +113,13 @@ def analyse(store: Store, pid: str, job: Job, then_check: bool = True) -> dict:
            "tiers": [m.tier for m in models],
            "not_floor_plans": [{"sheet": m.sheet.id, "kind": m.sheet.sheet_kind} for m in models
                                 if m.sheet.sheet_kind and m.sheet.sheet_kind != "floor_plan"]}
+    job.progress(0.75, "indexing the notes written on the drawings")
+    try:
+        from . import interpret
+
+        out["notes_indexed"] = interpret.index_notes(store, pid, models)
+    except Exception as e:  # noqa: BLE001 - the search then indexes on first use; reading the drawings must not fail for it
+        out["notes_indexed"], out["notes_index_problem"] = 0, f"{type(e).__name__}: {e}"
     if then_check and packs_for(store, p):
         job.progress(0.80, "checking the rules")
         out["findings"] = check(store, pid, job)["summary"]
@@ -291,7 +299,7 @@ def write_view(run: Path) -> Path:
         idx = int(bp.stem.split("_")[1])
         model = load(BuildingModel, bp)
         png, w, h, to_px = _backdrop(model)
-        (run / f"backdrop_{idx}.png").write_bytes(png)
+        publish(run / f"backdrop_{idx}.png", png)
         a, b, c, d, e, f = _affine(to_px)
         k = (abs(a * e - b * d)) ** 0.5           # sheet unit -> px
 
@@ -334,6 +342,7 @@ def write_view(run: Path) -> Path:
                        "anchor": px(anc) if anc else None,
                        "subjects": fd.subject_ids, "deciding": ev.get("deciding_ids", [])})
         sheets.append({"index": idx, "id": model.sheet.id, "width": w, "height": h, "tier": model.tier,
+                       "affine": [a, b, c, d, e, f],     # sheet space -> pixels of the backdrop: x = a x + b y + c, y = d x + e y + f
                        "mode": model.sheet.mode, "sheet_type": model.sheet.sheet_type,
                        "scale": {"method": model.sheet.scale.method,
                                  "metres_per_unit": model.sheet.scale.metres_per_unit,
@@ -341,10 +350,9 @@ def write_view(run: Path) -> Path:
                        "warnings": model.sheet.warnings[:20], "elements": elements, "rooms": rooms,
                        "findings": fs})
     out = run / "view.json"
-    out.write_text(json.dumps({"sheets": sheets, "triage": {"confirmed": sorted(confirmed),
+    publish(out, json.dumps({"sheets": sheets, "triage": {"confirmed": sorted(confirmed),
                                                             "rejected": sorted(rejected),
-                                                            "dismissed": tri["dismissed"]}}),
-                   encoding="utf-8")
+                                                            "dismissed": tri["dismissed"]}}).encode("utf-8"))
     return out
 
 
@@ -442,5 +450,6 @@ def correction_export(store: Store, pid: str, fmt: str, cycle: int | None = None
     p = store.get(pid)
     plan = store.plan_path(p)
     data = correction_list(store, pid, cycle)
-    return export(data, fmt, store.run_dir(pid) / "exports", _models(store, pid),
+    own = store.run_dir(pid) / "exports" / uuid.uuid4().hex[:12]     # one folder a request: two exports never share a file
+    return export(data, fmt, own, _models(store, pid),
                   plan if plan is not None and plan.suffix.lower() == ".pdf" else None)

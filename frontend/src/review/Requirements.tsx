@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { api, type Project } from "../api";
-import { plainNeed, plainOutcome } from "./plain";
-import type { Clause, Reading } from "./types";
+import { Notes } from "./Notes";
+import { plainClause, plainNeed, plainOutcome } from "./plain";
+import type { Clause, NoteRef, Reading, SheetView } from "./types";
 
 const GROUPS = [
   { key: "approve", title: "Waiting for your approval" },
@@ -17,8 +18,8 @@ function groupOf(r?: Reading) {
   return "manual";
 }
 
-export function Requirements({ project, clauses, readings, canDecide, busy, reload, onError, startJob }: {
-  project: Project; clauses: Clause[]; readings: Record<string, Reading>; canDecide: boolean; busy: boolean;
+export function Requirements({ sheets, onShowNote, project, clauses, readings, canDecide, busy, reload, onError, startJob }: {
+  sheets: SheetView[]; onShowNote: (n: NoteRef) => void; project: Project; clauses: Clause[]; readings: Record<string, Reading>; canDecide: boolean; busy: boolean;
   reload: () => Promise<void>; onError: (m: string) => void; startJob: (path: string) => Promise<void>;
 }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -61,7 +62,7 @@ export function Requirements({ project, clauses, readings, canDecide, busy, relo
             <h4>{g.title} <span className="count">{rows.length}</span></h4>
             <ol className="cards">
               {rows.map((c) => (
-                <ClauseCard key={c.id} url={url} clause={c} reading={readings[c.id]} open={open === c.id}
+                <ClauseCard key={c.id} sheets={sheets} onShowNote={onShowNote} url={url} clause={c} reading={readings[c.id]} open={open === c.id}
                   toggle={() => setOpen(open === c.id ? null : c.id)} canDecide={canDecide} reload={reload} onError={onError} />
               ))}
             </ol>
@@ -72,8 +73,8 @@ export function Requirements({ project, clauses, readings, canDecide, busy, relo
   );
 }
 
-function ClauseCard({ url, clause, reading, open, toggle, canDecide, reload, onError }: {
-  url: string; clause: Clause; reading?: Reading; open: boolean; toggle: () => void; canDecide: boolean;
+function ClauseCard({ sheets, onShowNote, url, clause, reading, open, toggle, canDecide, reload, onError }: {
+  sheets: SheetView[]; onShowNote: (n: NoteRef) => void; url: string; clause: Clause; reading?: Reading; open: boolean; toggle: () => void; canDecide: boolean;
   reload: () => Promise<void>; onError: (m: string) => void;
 }) {
   const [working, setWorking] = useState("");
@@ -93,11 +94,11 @@ function ClauseCard({ url, clause, reading, open, toggle, canDecide, reload, onE
     <li className={`item clause ${groupOf(reading)} ${open ? "open" : ""}`}>
       <button className="head" aria-expanded={open} onClick={toggle}>
         <span className="cid">{clause.id}</span>
-        <span className="sum"><span className="quote-short">{clause.text}</span></span>
+        <span className="sum"><span className="quote-short">{plainClause(clause.text)}</span></span>
       </button>
       {open && (
         <div className="body">
-          <blockquote>{clause.text}</blockquote>
+          <blockquote>{plainClause(clause.text)}</blockquote>
           {reading?.status === "DRAFTED" && (
             <>
               <h4>The check that would run</h4>
@@ -113,7 +114,8 @@ function ClauseCard({ url, clause, reading, open, toggle, canDecide, reload, onE
             </>
           )}
           {reading?.status === "UNRESOLVED" && <div className="question"><h4>Why there is no check</h4><p>{reading.reason}</p></div>}
-          {reading?.notes?.map((n, i) => <p key={i} className="muted">{n}</p>)}
+          {reading?.notes?.filter((n) => !n.startsWith("In the drawings:")).map((n, i) => <p key={i} className="muted">{n}</p>)}
+          {reading?.evidence && <Notes evidence={reading.evidence} sheets={sheets} onShow={onShowNote} />}
           {reading?.review && (
             <div className={notes.length ? "question" : ""}>
               <h4>Second reading of the check</h4>

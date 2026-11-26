@@ -71,6 +71,51 @@ clause as given; the app then threw away the whole second reading. Quotes are no
 count character positions. A concern whose quote is nowhere is kept, tied to the whole clause, and says so. The refused check
 now approves. The second reader's concerns on it were repetitive and of little use: that is not fixed.
 
+## Third pass: taking the reviewer to the note
+
+Many checklist items ask for something to be shown, which no measured check answers. The desk now shows, under a requirement
+read without a measured check, what the written notes of the drawing set say, and a button that flies the drawing to the words.
+A note the model picked is headed "a note that seems to be about this" and says it is not a finding; when none is picked, the
+three closest notes are listed as not confirmed.
+
+**A layout defect found by looking at the highlights.** Text at one height was merged into one line across the whole sheet, so a
+door schedule beside the door notes cut "4. Doors between garage and living..." after its first line (losing the 60 minute
+rating), stretched highlight boxes into the schedule and mixed title block words into other notes. A line is now split at a
+column gap, each column grows its own note, and every note keeps the box of its own lines from the moment it is read. On this
+set 657 fragments became 530 notes; the six notes I checked read whole.
+
+**The same 14 items, graded by me (one grader, who also built this):**
+
+| | Before the layout fix | After |
+| --- | --- | --- |
+| Picked note right | 0 | 2 (safety glazing, smoke and CO detectors) |
+| Picked note partly right | 2 | 3 (handrails; exhaust fan venting; the schedule's heading) |
+| Picked note wrong | 0 | 1 (attic access: it picked an escape window dimension) |
+| Nothing picked, a right or related note among the three listed | 5 | 3 |
+| Items with a right or related note put in front of the reviewer | 7 | 8 |
+
+The gain is that notes are whole and readable; the loss is one wrong pick. The model still did not pick the garage door note
+although the whole note, with its rating, was listed second. Fourteen items of one checklist on one set are too few to claim a
+rate, and I did not tune anything against them. The figures of M15 for note search on other lines were measured before the
+layout change and have **not** been measured again. I did not check whether the other six items have any answering note.
+
+**Note vectors** are now made while the drawings are read (88 s for 530 notes here) and saved with the project (2 MB).
+
+**An answer that never ended.** The first requirement read with note search took 611 to 734 s in three runs. I first blamed the
+note vectors; timing each stage showed note search cost about 22 s and the time went into rule writing. The model server's log
+showed three requests that failed after exactly 10 minutes, one of them past 11 000 generated tokens: under schema constrained
+decoding the model looped, and the app set no limit on an answer (the evaluation scripts did). Every request is now limited to
+2048 tokens, a cut off answer is reported as such, and a failing server is no longer called unreachable. After a cold start the
+first item took 140 s, 107 s of it in rule writing, which fits one looping answer being cut off; later items take about a
+minute. I have not removed the cause of the looping itself.
+
+**A file rewritten while it was being sent.** One walkthrough in three logged "Response content longer than Content-Length":
+the app rewrote drawing pictures and data files in place while requests for them were being answered, so a browser could get a
+broken picture or half a data file. Files the app remakes are now written whole and put in place in one step (`files.py`, which
+waits out the moment Windows refuses to replace an open file), sent from bytes read at once, and every export has a folder of its
+own. After this, five walkthroughs in a row logged no server error. The older full reports (PDF, HTML) are still written in
+place by a running check.
+
 ## Still open
 
 1. **A number that should not be shown.** "BEDROOM 3 measures 247 m2" on a sheet whose title block says no scale. The item says
@@ -78,7 +123,9 @@ now approves. The second reader's concerns on it were repetitive and of little u
 2. **Rooms that are not rooms.** A block of kitchen and cabinet notes was read as a room with no way out.
 3. **Internal words** still reach comments: "room_graph", "path to EXIT", unnamed rooms as "room 8469".
 4. **A second reader that adds noise.**
-5. **Speed.** About 10 minutes for the drawings, and about a minute for each requirement the model reads.
+5. **Speed.** About 10 minutes for the drawings (plus about 90 s to index their notes), and about a minute for each
+   requirement the model reads, more when it loops and is cut off.
+6. **The model still loops** on some requirements; the limit only bounds the cost.
 
 ## What this means
 

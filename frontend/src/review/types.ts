@@ -5,7 +5,7 @@ export interface FindingShape {
   polygons: Point[][]; polylines: Point[][]; points: Point[]; subjects: string[]; deciding: string[];
 }
 export interface SheetView {
-  index: number; id: string; width: number; height: number;
+  index: number; id: string; width: number; height: number; affine?: number[];
   elements: { id: string; cls: string; line?: Point[]; poly?: Point[] }[];
   rooms: { id: string; label: string | null; poly: Point[] }[];
   findings: FindingShape[];
@@ -32,6 +32,11 @@ export interface CorrectionList {
   edit_burden: { items: number; accepted: number; edited: number; dropped: number; unreviewed: number };
 }
 
+export interface NoteRef { sheet: string; text: string; box?: number[] | null }
+export interface Evidence {
+  chosen?: NoteRef | null; candidates?: NoteRef[];
+  checks?: { required: string; stated: string | null; result: string }[];
+}
 export interface Clause { id: string; heading: string; text: string }
 export interface Reading {
   status: "DRAFTED" | "UNRESOLVED"; reason?: string; plain?: string; readback?: string;
@@ -39,6 +44,7 @@ export interface Reading {
   preview?: { outcome: string; missing?: string[] };
   review?: { review?: { issues?: { message: string }[]; limitations?: string[] } };
   decision?: { state: "approved" | "rejected"; by: string; at: string } | null;
+  evidence?: Evidence;
 }
 
 /** The places on the sheets that carry the evidence of one correction item: one shape per finding behind it. */
@@ -52,6 +58,20 @@ export function shapesOf(item: Item, view: View | null) {
 const drawable = (g: FindingShape) => !!g.anchor || g.polygons.length + g.polylines.length + g.points.length > 0;
 
 export type Box = [number, number, number, number];
+
+/** The outline of a note, from sheet space to the pixels of the sheet's picture, with a little air around the words. */
+export function noteShape(sheet: SheetView, box: number[]): FindingShape | null {
+  if (!sheet.affine) return null;
+  const [a, b, c, d, e, f] = sheet.affine;
+  const px = (x: number, y: number): Point => [a * x + b * y + c, d * x + e * y + f];
+  const corners = [px(box[0], box[1]), px(box[2], box[1]), px(box[2], box[3]), px(box[0], box[3])];
+  const xs = corners.map((p) => p[0]);
+  const ys = corners.map((p) => p[1]);
+  const air = 6;
+  const [x0, y0, x1, y1] = [Math.min(...xs) - air, Math.min(...ys) - air, Math.max(...xs) + air, Math.max(...ys) + air];
+  return { n: -1, id: null, anchor: null, polygons: [[[x0, y0], [x1, y0], [x1, y1], [x0, y1]]], polylines: [], points: [],
+    subjects: [], deciding: [] };
+}
 
 /** The box around a shape and the elements it is about, in the sheet's pixels. */
 export function boundsOf(sheet: SheetView, shapes: FindingShape[]): Box | null {

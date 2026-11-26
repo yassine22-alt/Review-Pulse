@@ -24,6 +24,7 @@ drawings state a figure the requirement does not allow.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import os
@@ -111,6 +112,30 @@ class OllamaEmbedder:
         except Exception:  # noqa: BLE001 - no server, no embeddings
             return False
         return any(n == self.model or n.split(":")[0] == self.model for n in names)
+
+    def _key(self, text: str) -> str:
+        return hashlib.sha256(f"{self.model}\n{text}".encode()).hexdigest()
+
+    def save(self, path, texts: list[str]) -> None:
+        """Keep the vectors of these texts beside a project, so no reviewer waits for them again, also after a restart."""
+        import numpy as np
+
+        got = self(list(dict.fromkeys(texts)))
+        if got:
+            np.savez_compressed(path, keys=np.array([self._key(t) for t in dict.fromkeys(texts)]),
+                                vectors=np.array(got, dtype=np.float32))
+
+    def load(self, path, texts: list[str]) -> int:
+        """Take back saved vectors for these texts. Vectors of another model or of changed text have other keys: ignored."""
+        import numpy as np
+
+        if not os.path.exists(path):
+            return 0
+        with np.load(path, allow_pickle=False) as kept:
+            saved = dict(zip(kept["keys"].tolist(), kept["vectors"]))
+        found = {t: saved[k].tolist() for t in texts if (k := self._key(t)) in saved}
+        self._cache.update(found)
+        return len(found)
 
     def __call__(self, texts: list[str]) -> list[list[float]]:
         missing = [t for t in dict.fromkeys(texts) if t not in self._cache]
@@ -384,12 +409,17 @@ class Evidence:
         return asdict(self)
 
 
+def _placed(p: Passage) -> dict:
+    """A note with the place it was read from, so a person can be taken to it."""
+    return {"sheet": p.sheet, "text": p.text, **({"box": [round(v, 2) for v in p.box]} if p.box else {})}
+
+
 def find_evidence(clause: str, passages: list[Passage], client, embedder=None, reranker=None) -> Evidence:
     """Evidence in the drawings for one clause. `passages`: annotate.passages.set_passages over the whole submission."""
     if not passages:
         return Evidence(summary="the drawings carry no written notes that could be read")
     found = retrieve(clause, passages, embedder, top=SHOWN_AFTER_RERANK if reranker is not None else TOP_K, reranker=reranker)
-    ev = Evidence(candidates=[{"sheet": p.sheet, "text": p.text} for p in found])
+    ev = Evidence(candidates=[_placed(p) for p in found])
     if not found:
         ev.summary = "no note of the drawings shares a word or a meaning with this requirement"
         return ev
@@ -399,7 +429,7 @@ def find_evidence(clause: str, passages: list[Passage], client, embedder=None, r
         ev.summary = "notes were found near this requirement, but none was chosen as being about it"
         return ev
     note = found[int(got[1:])]
-    ev.chosen = {"sheet": note.sheet, "text": note.text}
+    ev.chosen = _placed(note)
     checks = compare(clause, note.text, client)
     ev.checks = [asdict(c) for c in checks]
     where = f"sheet {note.sheet}" if note.sheet else "the drawings"

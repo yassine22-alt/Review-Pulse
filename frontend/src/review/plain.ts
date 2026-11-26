@@ -15,6 +15,9 @@ export function plainEvidence(text: string, sheets: SheetView[]): string {
     .replace(/^(\w)/, (c) => c.toUpperCase());
 }
 
+/** Bullets and tick boxes drawn by a symbol font mean nothing outside it. The stored text is not changed. */
+export const plainClause = (text: string) => text.replace(/[\uE000-\uF8FF]/g, "").trim();
+
 const OUTCOMES: Record<string, string> = {
   SATISFIED: "this check would be met", VIOLATED: "this check would find a violation",
   UNKNOWN: "this check cannot be decided yet", NOT_APPLICABLE: "this check would not apply", NOTAPPLICABLE: "this check would not apply",

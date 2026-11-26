@@ -190,6 +190,11 @@ tr.off td { color: #98a2b3; }
 .mark { --c: var(--bad-solid); }
 .mark.ask { --c: var(--ask-solid); }
 .mark.ok { --c: var(--ok-solid); }
+.mark.note { --c: #2563eb; }
+.notes-found details { margin-top: 10px; }
+.notes-found summary { cursor: pointer; font-size: 12.5px; color: var(--text-2); }
+.notes-found details ul { margin-top: 8px; }
+.notes-found small button.link { margin-left: 10px; font-size: 12px; }
 .mark polygon { fill: var(--c); fill-opacity: 0.1; stroke: var(--c); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .mark polyline { fill: none; stroke: var(--c); stroke-width: 4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .mark .spot { fill: var(--c); }

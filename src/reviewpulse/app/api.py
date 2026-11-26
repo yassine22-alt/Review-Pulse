@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import logging
+import shutil
 import time
 from collections.abc import Callable
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, HTTPException, Request, Response, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -17,7 +18,7 @@ from ..interpreter.api import interpreter_router
 from . import interpret as interpretation
 from . import service, workflow
 from .jobs import JobRunner
-from .store import PLAN_TYPES, REQ_TYPES, Store
+from .store import PLAN_TYPES, REQ_TYPES, Store, read_whole
 
 STATIC = Path(__file__).parent / "static"
 WEB = Path(__file__).parent / "web"          # the product front end, built from frontend/ (npm run build)
@@ -27,6 +28,15 @@ MAX_UPLOAD_MB = 200
 LLM_STATUS_TTL_S = 30
 DOWNLOADS = {"report.pdf": "application/pdf", "report.html": "text/html", "findings.json": "application/json",
              "findings.csv": "text/csv", "triage.json": "application/json"}
+
+
+def served(path: Path, media_type: str, filename: str | None = None, inline: bool = True) -> Response:
+    """A file the app makes and remakes, sent from bytes read at once. Streaming it from disk announces one length and may send
+    another when a job rewrites the file meanwhile."""
+    headers = {}
+    if filename:
+        headers["Content-Disposition"] = f'{"inline" if inline else "attachment"}; filename="{filename}"'
+    return Response(read_whole(path), media_type=media_type, headers=headers)
 
 
 class NewProject(BaseModel):
@@ -389,7 +399,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         f = store.run_dir(pid) / "view.json"
         if not f.exists():
             raise HTTPException(404, "not analysed yet")
-        return FileResponse(f, media_type="application/json")
+        return served(f, "application/json")
 
     @app.get("/api/projects/{pid}/sheets/{index}/backdrop.png")
     def backdrop(pid: str, index: int):
@@ -397,7 +407,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         f = store.run_dir(pid) / f"backdrop_{index}.png"
         if not f.exists():
             raise HTTPException(404, "no such sheet")
-        return FileResponse(f, media_type="image/png")
+        return served(f, "image/png")
 
     @app.post("/api/projects/{pid}/triage")
     def post_triage(pid: str, body: Triage):
@@ -453,8 +463,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
         mime, name = EXPORT_TYPES[format]
-        return FileResponse(path, media_type=mime, filename=f"{pid}_{name}",
-                            content_disposition_type="inline" if format == "pdf" else "attachment")
+        response = served(path, mime, f"{pid}_{name}", inline=format == "pdf")
+        shutil.rmtree(path.parent, ignore_errors=True)
+        return response
 
     @app.get("/api/projects/{pid}/correction-list.pdf")
     def get_correction_pdf(pid: str, cycle: int | None = None):
@@ -518,8 +529,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(404, "not produced yet: run a check")
         # reports open in the browser tab; data files download
         inline = name.endswith((".pdf", ".html"))
-        return FileResponse(f, media_type=DOWNLOADS[name], filename=f"{pid}_{name}",
-                            content_disposition_type="inline" if inline else "attachment")
+        return served(f, DOWNLOADS[name], f"{pid}_{name}", inline=inline)
 
     # -- UI ------------------------------------------------------------------------
     @app.exception_handler(Exception)

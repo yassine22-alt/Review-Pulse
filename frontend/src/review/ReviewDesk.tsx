@@ -6,7 +6,7 @@ import { Findings, toneOf, type ItemActions } from "./Findings";
 import { Requirements } from "./Requirements";
 import { SheetCanvas, type Mark } from "./SheetCanvas";
 import { SignOffDrawer } from "./SignOff";
-import { shapesOf, type Clause, type CorrectionList, type Reading, type View } from "./types";
+import { noteShape, shapesOf, type Clause, type CorrectionList, type NoteRef, type Reading, type View } from "./types";
 
 interface Data {
   project: Project; view: View | null; list: CorrectionList;
@@ -24,6 +24,7 @@ export function ReviewDesk({ user }: { user: User }) {
   const [focus, setFocus] = useState(0);
   const [editing, setEditing] = useState(false);
   const [signing, setSigning] = useState(false);
+  const [note, setNote] = useState<{ sheet: number; mark: Mark } | null>(null);
   const canDecide = user.roles.includes("reviewer");
 
   const load = useCallback(async () => {
@@ -57,6 +58,7 @@ export function ReviewDesk({ user }: { user: User }) {
   const select = useCallback((key: string | null) => {
     setSelected(key);
     setEditing(false);
+    setNote(null);
     if (!key) return;
     setTab("corrections");
     setOpened((o) => new Set(o).add(key));
@@ -115,6 +117,17 @@ export function ReviewDesk({ user }: { user: User }) {
     shapes: (places.get(i.key) ?? []).filter((p) => p.sheet === current?.index).map((p) => p.shape),
   })).filter((m) => m.shapes.length);
   const reviewed = list.edit_burden.items - list.edit_burden.unreviewed;
+  if (note && note.sheet === current?.index) marks.push(note.mark);
+
+  function showNote(ref: NoteRef) {
+    const target = view?.sheets.find((s) => s.id === ref.sheet);
+    const shape = target && ref.box ? noteShape(target, ref.box) : null;
+    if (!target || !shape) return;
+    setSelected(null);
+    setNote({ sheet: target.index, mark: { key: "note", label: "", tone: "note", shapes: [shape] } });
+    setSheet(target.index);
+    setFocus((f) => f + 1);
+  }
 
   async function startJob(path: string) {
     try { await api(`/api/projects/${id}/${path}`, { method: "POST" }); setProblem(""); await load(); }
@@ -135,7 +148,8 @@ export function ReviewDesk({ user }: { user: User }) {
       </header>
       <div className="stagearea">
         {current ? (
-          <SheetCanvas key={current.index} project={project.id} sheet={current} marks={marks} selected={selected}
+          <SheetCanvas key={current.index} project={project.id} sheet={current} marks={marks}
+            selected={selected ?? (note && note.sheet === current.index ? "note" : null)}
             focus={focus} onSelect={select} />
         ) : <div className="canvas none"><p>The drawings have not been read yet.</p></div>}
         {view && view.sheets.length > 1 && (
@@ -171,7 +185,7 @@ export function ReviewDesk({ user }: { user: User }) {
               editing={editing} setEditing={setEditing} onSelect={(k) => select(selected === k ? null : k)}
               onZoom={() => selected && select(selected)} actions={actions} />
           ) : (
-            <Requirements project={project} clauses={data.clauses} readings={data.readings} canDecide={canDecide}
+            <Requirements sheets={view?.sheets ?? []} onShowNote={showNote} project={project} clauses={data.clauses} readings={data.readings} canDecide={canDecide}
               busy={running.length > 0} reload={load} onError={setProblem} startJob={startJob} />
           )}
         </div>

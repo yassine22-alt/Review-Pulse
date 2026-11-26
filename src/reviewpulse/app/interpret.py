@@ -165,20 +165,48 @@ def _attach_evidence(store: Store, pid: str, context, client, out: dict) -> None
     try:
         from ..annotate.passages import set_passages
         from ..interpreter.checked import clause_body
-        from ..interpreter.drawing_evidence import default_embedder, default_reranker, find_evidence
+        from ..interpreter.drawing_evidence import default_reranker, find_evidence
 
         models = [BuildingModel.model_validate_json(f.read_text(encoding="utf-8"))
                   for f in sorted(store.run_dir(pid).glob("building_*.json"))]
-        if not _EMBEDDER:
-            _EMBEDDER.append(default_embedder())
+        passages = set_passages(models)
+        embedder = _embedder()
+        if embedder is not None and hasattr(embedder, "load"):
+            embedder.load(store.run_dir(pid) / NOTE_VECTORS, [p.text for p in passages])
         if not _RERANKER:
             _RERANKER.append(default_reranker())
-        found = find_evidence(clause_body(context), set_passages(models), client, _EMBEDDER[0], _RERANKER[0])
+        found = find_evidence(clause_body(context), passages, client, embedder, _RERANKER[0])
     except Exception:  # noqa: BLE001 - evidence is an explanation; without it the reading stands
         return
     out["evidence"] = found.as_dict()
     if found.chosen:
         out["notes"] = [*(out.get("notes") or []), "In the drawings: " + found.summary]
+
+
+NOTE_VECTORS = "note_vectors.npz"        # in the run folder: made again whenever the drawings are read again
+
+
+def _embedder():
+    from ..interpreter.drawing_evidence import default_embedder
+
+    if not _EMBEDDER:
+        _EMBEDDER.append(default_embedder())
+    return _EMBEDDER[0]
+
+
+def index_notes(store: Store, pid: str, models: list) -> int:
+    """Prepare the meaning search over the drawing notes while the drawings are being read, not when a reviewer first asks.
+    Returns the number of notes indexed; 0 when note search is off or no embedding model is installed."""
+    import os
+
+    from ..annotate.passages import set_passages
+
+    if os.environ.get("REVIEWPULSE_EVIDENCE", "on") == "off" or (embedder := _embedder()) is None:
+        return 0
+    texts = [p.text for p in set_passages(models)]
+    if texts:
+        embedder.save(store.run_dir(pid) / NOTE_VECTORS, texts)
+    return len(texts)
 
 
 def draft_workers(client) -> int:

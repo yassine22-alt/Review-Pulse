@@ -35,6 +35,11 @@ class LLMClient(Protocol):
     def complete(self, system: str, user: str, json_schema: dict) -> dict: ...
 
 
+# Under schema constrained decoding a small model can fall into a loop that never closes the answer. Without a limit one such
+# answer ran past 11 000 tokens for ten minutes, until the request timed out. Real answers here are a few hundred tokens.
+MAX_ANSWER_TOKENS = 2048
+
+
 class OllamaClient:
     """Local open-source model served by Ollama (default; free, offline, nothing leaves the machine).
 
@@ -43,7 +48,8 @@ class OllamaClient:
     Install: https://ollama.com, then ``ollama pull qwen2.5:7b``."""
 
     def __init__(self, model: str = "qwen2.5:7b", host: str | None = None, seed: int = 42,
-                 timeout_s: float = 600.0, num_ctx: int = 8192):
+                 timeout_s: float = 600.0, num_ctx: int = 8192, max_tokens: int = MAX_ANSWER_TOKENS):
+        self.max_tokens = max_tokens
         self.model = model
         self.host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
         if not self.host.startswith("http"):
@@ -59,6 +65,8 @@ class OllamaClient:
         try:
             with urllib.request.urlopen(req, timeout=self.timeout_s) as r:
                 return json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:               # it answered, so it is running: say that its request failed
+            raise RuntimeError(f"the model server at {self.host} failed on this request ({e})") from e
         except urllib.error.URLError as e:
             raise RuntimeError(f"Ollama not reachable at {self.host} ({e}); start it with `ollama serve`") from e
 
@@ -83,8 +91,10 @@ class OllamaClient:
         out = self._post("/api/chat", {
             "model": self.model, "stream": False, "format": json_schema,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-            "options": {"temperature": 0, "seed": self.seed, "num_ctx": self.num_ctx},
+            "options": {"temperature": 0, "seed": self.seed, "num_ctx": self.num_ctx, "num_predict": self.max_tokens},
         })
+        if out.get("done_reason") == "length":
+            raise RuntimeError(f"the model's answer did not end: it was cut off at {self.max_tokens} tokens")
         return json.loads(out["message"]["content"])
 
 
