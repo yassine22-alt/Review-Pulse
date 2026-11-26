@@ -71,6 +71,12 @@ def _matches(ctx: Context, node: str, avoid: dict) -> bool:
     return r.type in types
 
 
+def _wanted(target: str, avoid: dict | None = None) -> str:
+    goal = {EXIT: "an exit", EXTERIOR: "the outside"}.get(target, str(target))
+    through = (avoid or {}).get("room_type") or []
+    return f"a route to {goal}" + (f" that does not cross: {', '.join(through)}" if through else "")
+
+
 def fn_exists_path(rule: Rule, ctx: Context) -> list[Raw]:
     via = rule.check.via_edges or ["door", "opening"]
     target = rule.check.to or EXIT
@@ -86,7 +92,7 @@ def fn_exists_path(rule: Rule, ctx: Context) -> list[Raw]:
             path = nx.shortest_path(h, room.id, target)
             pts, doors = _path_polyline(ctx, g, path)
             out.append(Raw([room.id], False, deciding_ids=doors, vars=vars_,
-                           detected="reachable", required=f"path to {target}",
+                           detected="a route was found", required=_wanted(target),
                            evidence={"polylines": [pts], "path": path}))
             continue
         if nx.has_path(g, room.id, target):
@@ -99,7 +105,7 @@ def fn_exists_path(rule: Rule, ctx: Context) -> list[Raw]:
                   "polygons": [ctx.room(b).polygon for b in blockers if ctx.room(b)],
                   "labels": [{"at": ctx.centroid(b), "text": "blocks"} for b in blockers]}
             out.append(Raw([room.id] + blockers, True, deciding_ids=doors, vars=vars_,
-                           detected=f"only via {names}", required=f"path to {target} avoiding {avoid.get('room_type')}",
+                           detected=f"only via {names}", required=_wanted(target, avoid),
                            evidence=ev))
         else:
             reach = sorted(nx.node_connected_component(g, room.id))
@@ -109,7 +115,7 @@ def fn_exists_path(rule: Rule, ctx: Context) -> list[Raw]:
             doors = [d.get("via") for a, b, d in ctx.graph.edges(data=True)
                      if (a in reach or b in reach) and d.get("via")]
             out.append(Raw([room.id], True, deciding_ids=doors, vars=vars_, detected="no route",
-                           required=f"path to {target}", evidence=ev))
+                           required=_wanted(target), evidence=ev))
     return out
 
 

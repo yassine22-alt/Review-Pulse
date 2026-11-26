@@ -139,7 +139,7 @@ def decide(raw: Raw, tier: str, *, guidance: bool, max_verdict: str = "FAIL",
         issues.append(EvidenceIssue(code=IssueCode.TOLERANCE_BAND, detail="within regulatory review tolerance"))
     if tier != "T1" and not all_confirmed:
         issues.append(EvidenceIssue(code=IssueCode.UNVERIFIED_GEOMETRY if raw.metric else IssueCode.MISSING_CONNECTION,
-                                    detail="deciding geometry or connections need confirmation"))
+                                    detail="the walls, doors or room links this depends on are not confirmed yet"))
         outcome = "UNRESOLVED"
     if raw.evidence_issues:
         outcome = "UNRESOLVED"

@@ -60,9 +60,17 @@ def render_message(template: str, raw: Raw, detected: str | None, required: str 
         return f"{who}read {detected or 'nothing'}; required {required or 'not stated'}."
 
 
+# what a rule needs, in the words of a reviewer; the codes stay in the finding's evidence for the program
+NEEDS = {"room_graph": "how the rooms connect (no connecting doors or openings were read)", "rooms": "rooms read from the plan",
+         "scale": "a scale for the drawing", "schedule": "a door or window schedule", "programme": "the project brief (programme)",
+         "doors": "doors read from the plan", "windows": "windows read from the plan",
+         "swing_polygons": "door swings read from the plan", "dimensions": "written dimensions"}
+
+
 def not_evaluated(rule: Rule, missing: list[str], tier: str) -> Finding:
+    needed = "; ".join(NEEDS.get(m, m.replace("_", " ")) for m in missing)
     return Finding(rule_id=rule.id, verdict="NOT_EVALUATED", severity=rule.severity, subject_ids=[],
-                   message=f"{rule.title}: not evaluated, missing {', '.join(missing)}", tier=tier,
+                   message=f"{rule.title}: not evaluated. It needs {needed}", tier=tier,
                    source=rule.source.model_dump(), evidence={"missing": missing},
                    assessment=assessment(rule, issues=[EvidenceIssue(code=IssueCode.MISSING_INPUT,
                                                                      detail=", ".join(missing))],

@@ -1,9 +1,11 @@
 """Defects a real 22 sheet set showed that the one sheet demo plans did not."""
 
 from reviewpulse.app import service
+from reviewpulse.app.service import PACKS_ROOT
 from reviewpulse.app.store import Store
 from reviewpulse.engine.policy import Raw
-from reviewpulse.engine.run import render_message
+from reviewpulse.engine.run import not_evaluated, render_message
+from reviewpulse.pipeline import load_packs
 
 
 def test_a_violation_sentence_is_not_shown_without_what_it_names():
@@ -32,3 +34,10 @@ def test_sheet_models_are_loaded_once_and_again_when_a_file_changes(tmp_path, mo
     assert service._models(store, pid) == first and len(loads) == 1
     (run / "building_0.json").write_text('{"changed": true}')
     assert service._models(store, pid) != first and len(loads) == 2
+
+
+def test_messages_use_a_reviewers_words_and_keep_the_codes_for_the_program():
+    rule = next(r for r in load_packs(PACKS_ROOT / "starter") if r.id == "C-C1")
+    finding = not_evaluated(rule, ["room_graph", "scale"], "T3")
+    assert "room_graph" not in finding.message and "how the rooms connect" in finding.message
+    assert finding.evidence["missing"] == ["room_graph", "scale"]

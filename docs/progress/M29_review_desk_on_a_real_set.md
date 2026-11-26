@@ -129,7 +129,8 @@ huge room itself, outlines that spill into empty parts of a sheet, is not fixed.
 
 1. **Room outlines that spill** into empty parts of a sheet (a 28 by 20 m "storage" room in a house).
 2. **Rooms that are not rooms.** A block of kitchen and cabinet notes was read as a room with no way out.
-3. **Internal words** still reach comments: "room_graph", "path to EXIT", unnamed rooms as "room 8469".
+3. **Wording.** "room_graph", "path to EXIT", "(unlabelled)" and "deciding geometry" no longer appear in the correction list of
+   this set; messages say what is needed in words, and the codes stay in the finding data. I only checked those four.
 4. **A second reader that adds noise.**
 5. **Speed.** About 10 minutes for the drawings (plus about 90 s to index their notes), and about a minute for each
    requirement the model reads, more when it loops and is cut off.
