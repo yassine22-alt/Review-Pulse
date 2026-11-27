@@ -93,8 +93,42 @@ qwen2.5vl:7b on the 6 GB laptop (about 1 s a question, 4 to 6 s with tiles):
   checklist line such as "all receptacles that need protection"; two sets and 87 questions are small; a zero on 47 does not mean
   a rate of zero. **Nothing from vision is in the app.** If it is added, it may only suggest places to look, never confirm.
 
-A larger model (Qwen3-VL-32B-Instruct, Apache 2.0) is to be measured with the same questions on one H100, to tell the limits of
-the small model from the limits of the task. **Not yet run when this was written.**
+### The same questions with a larger model on one H100
+
+Qwen3-VL-32B-Instruct (Apache 2.0), served by vLLM on one H100, same questions, same grid, same code. The whole job took 786 s
+including loading the model.
+
+| | 7B whole | 7B tiles | 32B whole | 32B tiles |
+| --- | --- | --- | --- | --- |
+| There: yes (of 40) | 31 | 33 | 37 | 37 |
+| Named on the drawing (of 17) | 16 | 16 | 17 | 17 |
+| Drawn only (of 23) | 15 | 17 | 20 | 20 |
+| Yes and pointing at it | 22 | 27 | 34 | **35** |
+| Not there: yes (of 47) | **0** | 3 | 2 | 6 |
+
+* **The larger model finds more and points far better.** So many of the small model's misses and wrong places were the model's
+  limit, not the task's.
+* **It is more sure and not safer.** On tiles it said yes to 6 things that are not there. It never answered "unsure" on tiles (43 yes, 44 no).
+* **Its mistakes look like guesses from drawings it has seen:** a smoke detector on both Millcreek areas, which show none (that
+  sheet draws lights as small circles); a bathtub twice on the Austin set; a ceiling fan; a staircase on parallel lines. None of
+  these areas came with the sheet's legend, and giving the model the legend is untried.
+* Two things were missed by all four ways of asking: a light switch and a door swing in the bedroom area.
+
+**Two models that must agree.** Combinations of the four runs, a yes only when both say yes:
+
+| Rule | There: yes (of 40) | Yes and pointing at it | Not there: yes (of 47) |
+| --- | --- | --- | --- |
+| 7B whole and 32B tiles (place from the 32B) | 31 | **30** | **0** |
+| 7B whole and 32B whole | 31 | 28 | 0 |
+| 7B tiles and 32B tiles | 33 | 31 | 1 |
+| 32B whole and 32B tiles | 36 | 34 | 2 |
+| 7B whole and 7B tiles | 30 | 26 | 0 |
+
+The first rule keeps what the small model found, no more, loses 6 things the 32B alone would have found, and where it says yes
+it points at the thing 30 times of 31. **I picked it after looking at these numbers, among the combinations I tried, so these
+87 questions cannot show that it works.** Its zero is on 47 questions, which does not mean a rate of zero. What would show it:
+the rule frozen as written here, and new areas from drawing sets not used above, with the key written before any model runs.
+It also needs a card that holds the 32B model, which an office's own computer may not have.
 
 ## What a reviewer waits for, and two faults found while measuring it
 
