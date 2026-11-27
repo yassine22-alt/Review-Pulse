@@ -267,6 +267,26 @@ NOTES_PER_PART, WRITTEN_PER_PART, NOTES_FOR_WHOLE = 2, 3, 5
 FOUND = "found"                          # in the run folder: what each search showed, kept until the drawings are read again
 
 
+def _drawings_stamp(store: Store, pid: str) -> list:
+    """Which analysis of which drawings: the sheet files of the run, by name, time and size."""
+    return [(f.name, s.st_mtime_ns, s.st_size) for f in sorted(store.run_dir(pid).glob("building_*.json")) for s in [f.stat()]]
+
+
+def search_stamp(store: Store, pid: str) -> str | None:
+    """What a prepared search was made from, or None when there are no analysed drawings or no requirement document yet."""
+    drawings = _drawings_stamp(store, pid)
+    project = store.get(pid)
+    document_file = store.req_path(project)
+    if not drawings or document_file is None or not document_file.exists():
+        return None
+    stat = document_file.stat()
+    return json.dumps([drawings, document_file.name, stat.st_mtime_ns, stat.st_size, project.context_links], sort_keys=True)
+
+
+def searchable_clauses(store: Store, pid: str) -> list[str]:
+    return [c["id"] for c in document(store, pid)["clauses"]]
+
+
 def _split(store: Store, pid: str, context, body: str, llm_factory: Callable[[], object | None]):
     """The parts of a requirement: kept once a model has answered (also when it left the line whole), asked again when its
     words change. Without an answer the line stands whole and nothing is kept, so it is cut when a model is there."""
@@ -315,12 +335,15 @@ def find_parts(store: Store, pid: str, clause_id: str, llm_factory: Callable[[],
     from .service import _models
 
     context = _context(store, pid, clause_id)
-    if not sorted(store.run_dir(pid).glob("building_*.json")):
+    # taken before anything is read: a search that is still running when new drawings are analysed is kept under the old
+    # drawings' name, so it can never be shown as what the new ones say
+    drawings = _drawings_stamp(store, pid)
+    if not drawings:
         raise ValueError("upload and analyse a plan first")
     body = clause_body(context)
     split = _split(store, pid, context, body, llm_factory)
     on = os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off"
-    asked = json.dumps([body, list(split.parts), on], ensure_ascii=False)
+    asked = json.dumps([drawings, body, list(split.parts), on], ensure_ascii=False)
     kept = store.run_dir(pid) / FOUND / f"{hashlib.sha256(asked.encode()).hexdigest()[:24]}.json"
     if kept.exists():
         return json.loads(kept.read_text(encoding="utf-8"))

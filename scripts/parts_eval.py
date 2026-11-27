@@ -6,13 +6,15 @@
 ``run`` uses the app's own code (app.interpret.find_parts) with the local reading model, and today's search (five notes for
 the whole line) beside it, then writes a pool per part with the two mixed and shuffled, so that whoever judges a piece does
 not know which search showed it. The judgement is one question: opened on the sheet, would this piece let a reviewer see the
-thing the part asks about, or does it state it? ``judgements.json`` maps a part ("48.1") to the pool numbers that would.
-``score`` then counts, for each search, the parts with at least one such piece among what it showed.
+thing the part asks about, or does it state it? ``judgements.json`` holds, per part, the fingerprints of the pieces judged
+yes and no, so it carries over to later runs; ``score`` stops if a run showed a piece nobody has judged. It counts, for each
+search, the parts with at least one useful piece among what it showed.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import sys
@@ -21,6 +23,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+
+
+def fingerprint(piece_key: str) -> str:
+    return hashlib.sha256(piece_key.encode()).hexdigest()[:12]
 
 
 def key(piece: dict) -> str:
@@ -63,41 +69,38 @@ def run(args) -> None:
 
 def score(args) -> None:
     rows = json.loads((args.out / "rows.json").read_text(encoding="utf-8"))
+    judged = json.loads(args.judgements.read_text(encoding="utf-8"))
     pools = {p["part"]: p["pool"] for p in json.loads((args.out / "pools.json").read_text(encoding="utf-8"))}
-    judged = json.loads(args.judgements.read_text(encoding="utf-8"))["relevant"]
-    missing = sorted(set(pools) - set(judged))
-    if missing:
-        sys.exit(f"{len(missing)} parts are not judged yet, e.g. {missing[:5]}")
-    totals = {"items": len(rows), "parts": len(pools), "parts_today": 0, "parts_new": 0, "parts_notes_by_part": 0,
-              "parts_only_written": 0, "parts_lost": [], "parts_gained": [], "parts_nothing_either": [],
-              "items_all_parts_today": 0, "items_all_parts_new": 0, "items_no_part_today": 0, "items_no_part_new": 0,
-              "pieces_shown_today": 0, "pieces_shown_new": 0}
-    for row in rows:
-        old_hits, new_hits = [], []
-        shown_new = set()
-        for part in row["parts"]:
-            good = {pools[part["id"]][k] for k in judged[part["id"]]}
-            old = bool(good & set(row["today"]))
-            by_note, by_written = bool(good & set(part["notes"])), bool(good & set(part["written"]))
-            new = by_note or by_written
-            shown_new |= {*part["notes"], *part["written"]}
-            old_hits.append(old)
-            new_hits.append(new)
-            totals["parts_notes_by_part"] += by_note
-            totals["parts_only_written"] += by_written and not by_note
-            if new and not old:
-                totals["parts_gained"].append(part["id"])
-            if old and not new:
-                totals["parts_lost"].append(part["id"])
-            if not old and not new:
-                totals["parts_nothing_either"].append(part["id"])
-        totals["parts_today"] += sum(old_hits)
-        totals["parts_new"] += sum(new_hits)
-        for name, hits in (("today", old_hits), ("new", new_hits)):
-            totals[f"items_all_parts_{name}"] += all(hits)
-            totals[f"items_no_part_{name}"] += not any(hits)
-        totals["pieces_shown_today"] += len(row["today"])
-        totals["pieces_shown_new"] += len(shown_new)
+    unjudged = [(part, x) for part, pool in pools.items() for x in pool
+                if fingerprint(x) not in {*judged["yes"].get(part, []), *judged["no"].get(part, [])}]
+    if unjudged:
+        sys.exit(f"{len(unjudged)} pieces are not judged yet, e.g. {unjudged[:3]}")
+    layouts = {
+        "today: five notes for the line": lambda row, part: row["today"],
+        "parts only: two notes and three drawing texts each": lambda row, part: part["notes"] + part["written"],
+        "app: five notes, and each part's notes and drawing texts": lambda row, part: row["today"] + part["notes"] + part["written"],
+    }
+    totals = {"items": len(rows), "parts": len(pools)}
+    got = {}
+    for name, shows in layouts.items():
+        hits, whole, none, pieces = set(), 0, 0, 0
+        for row in rows:
+            found, shown = [], set()
+            for part in row["parts"]:
+                mine = set(shows(row, part))
+                shown |= mine
+                useful = any(fingerprint(x) in judged["yes"][part["id"]] for x in mine)
+                found.append(useful)
+                if useful:
+                    hits.add(part["id"])
+            whole += all(found)
+            none += not any(found)
+            pieces += len(shown)
+        got[name] = hits
+        totals[name] = {"parts_with_a_useful_piece": len(hits), "items_all_parts": whole, "items_no_part": none,
+                        "pieces_shown": pieces}
+    today, app = got["today: five notes for the line"], got["app: five notes, and each part's notes and drawing texts"]
+    totals["app_gains"], totals["app_loses"] = sorted(app - today), sorted(today - app)
     totals["split_by_model"] = sum(r["split_by_model"] for r in rows)
     totals["seconds_first_opening"] = round(sum(r["seconds"] for r in rows))
     (args.out / "score.json").write_text(json.dumps(totals, indent=1), encoding="utf-8")

@@ -1,146 +1,154 @@
 {
- "what": "One person judged each pooled piece: opened on the sheet, would it let a reviewer see what the part asks, or does it state it? Pieces of both searches mixed and shuffled; the wording of labels can still hint at the search.",
- "relevant": {
+ "what": "One person judged each pooled piece: opened on the sheet, would it let a reviewer see what the part asks, or does it state it? Pieces of the searches compared were mixed and shuffled; the wording of a label can still hint at the search. Pieces are named by a fingerprint of their sheet and words, so no drawing text is stored.",
+ "yes": {
   "item 47.1": [
-   5
+   "b9260d4340b5"
   ],
   "item 47.2": [
-   1
+   "b9260d4340b5"
   ],
   "item 48.1": [],
   "item 49.1": [
-   0
+   "fbcc78f40e20"
   ],
   "item 49.2": [],
   "item 50.1": [
-   7
+   "c81fc0b0f825"
   ],
   "item 51.1": [
-   0,
-   5,
-   6
+   "216af46e2a59",
+   "2554824f4a8f",
+   "8b6467921efa",
+   "8e604c7003a3",
+   "e319e2bcbcc6"
   ],
   "item 53.1": [
-   0,
-   4,
-   6,
-   7
+   "1390227683fa",
+   "498550a1b78e",
+   "658ebb888deb",
+   "77da3e43d915"
   ],
   "item 55.1": [
-   3,
-   5,
-   6
+   "1fd77f4de533",
+   "282cc86cb565",
+   "64749ece600e"
   ],
   "item 55.2": [
-   0,
-   3,
-   8
+   "110fff9de215",
+   "7f88e79fc852",
+   "b4e30d448555"
   ],
   "item 55.3": [
-   2,
-   5,
-   7
+   "110fff9de215",
+   "7f88e79fc852",
+   "ea4bb3cd9197"
   ],
   "item 55.4": [
-   4,
-   7
+   "a9c9eae61a71",
+   "b18276af3e4a"
   ],
   "item 56.1": [
-   0,
-   3,
-   4,
-   6
+   "1c261b5ecf54",
+   "6b49db3098f7",
+   "6d9779963173",
+   "85f6dcb2594d"
   ],
   "item 57.1": [],
   "item 60.1": [],
   "item 61.1": [],
   "item 62.1": [
-   2
+   "258dd46fcc02"
   ],
   "item 63.1": [
-   7
+   "16b94f26efbf"
   ],
   "item 63.2": [
-   2
+   "16b94f26efbf"
   ],
   "item 64.1": [],
   "item 64.2": [],
   "item 64.3": [],
   "item 66.1": [
-   0,
-   1,
-   2,
-   4,
-   5
+   "10ddd2c5c470",
+   "161562c9279c",
+   "2eb81c8b9190",
+   "77da3e43d915",
+   "9b00bc5e2811",
+   "c250b05f8776",
+   "d2b273ce27db",
+   "e5fee8b31ec5"
   ],
   "item 66.2": [
-   0,
-   2,
-   3,
-   4,
-   5,
-   6,
-   8
+   "37857da36a78",
+   "618476f6f1d5",
+   "77da3e43d915",
+   "a1d1d55f4038",
+   "ad9c75884882",
+   "b387768cf59c",
+   "f57922428ce1"
   ],
   "item 66.3": [],
   "item 66.4": [
-   4
+   "ae49386cf2f1"
   ],
   "item 66.5": [
-   8,
-   9
+   "ae7cdfc4b2c2",
+   "b1c573ff7516",
+   "c94154522eb1"
   ],
   "item 66.6": [],
   "item 67.1": [
-   7
+   "ae49386cf2f1"
   ],
   "item 69.1": [
-   6
+   "f75f987bafd6"
   ],
   "item 70.1": [],
   "item 73.1": [
-   7
+   "c2765b6dbd32"
   ],
   "item 73.2": [],
   "item 74.1": [],
   "item 76.1": [],
   "item 77.1": [
-   0
+   "6cd2a45f35b8"
   ],
   "item 78.1": [],
   "item 78.2": [],
   "item 80.1": [],
   "item 87.1": [
-   0,
-   1,
-   2,
-   3,
-   4,
-   5,
-   7
+   "0b57d052627a",
+   "224e19f7260b",
+   "4f4de210b89d",
+   "98b171b6453e",
+   "cf1eb28df817",
+   "fb24328ad054",
+   "ff62f190e947"
   ],
   "item 92.1": [
-   0
+   "775ae2c69d62"
   ],
   "item 93.1": [
-   0,
-   1,
-   3,
-   4,
-   5,
-   6
+   "2d9fea8c029a",
+   "43072e3225c4",
+   "4f0298591dbb",
+   "7b0afa8ca326",
+   "d86b2f631c6c",
+   "f45a68e279ce",
+   "fcd4fed5eab8"
   ],
   "item 93.2": [],
   "item 94.1": [
-   1,
-   2,
-   3,
-   6
+   "0e7d6f92df6b",
+   "1d1306706661",
+   "530a480e04c0",
+   "74616c27ae99",
+   "d236394b2b58"
   ],
   "item 95.1": [],
   "item 96.1": [
-   5,
-   7
+   "aaba9cbfdf2e",
+   "b1cabd60b62b"
   ],
   "item 97.1": [],
   "item 98.1": [],
@@ -152,5 +160,599 @@
   "item 102.1": [],
   "item 118.1": [],
   "7.1": []
+ },
+ "no": {
+  "item 47.1": [
+   "0371a48d03da",
+   "1ce6de4215dc",
+   "37d72cf40b95",
+   "8ca80d853019",
+   "a6f60ab647bd",
+   "aa863a36594b",
+   "abd20eb50f6b",
+   "e353cf401c8d"
+  ],
+  "item 47.2": [
+   "37d72cf40b95",
+   "5be42f715efd",
+   "6909da0babf1",
+   "8ca80d853019",
+   "a6f60ab647bd",
+   "abd20eb50f6b",
+   "b1c9388c13dc",
+   "e353cf401c8d"
+  ],
+  "item 48.1": [
+   "2479e53ebfdb",
+   "2a6695c808cc",
+   "46f3dc374257",
+   "644dc56fff83",
+   "85f6dcb2594d",
+   "a6f60ab647bd",
+   "abd20eb50f6b",
+   "b311784125bf"
+  ],
+  "item 49.1": [
+   "09d6e4954fe6",
+   "161562c9279c",
+   "644dc56fff83",
+   "669d4ab7e07a",
+   "7ccb7fdecc7b",
+   "819dccd3b0e6",
+   "864668b054a0",
+   "cbc614eba899",
+   "e861bd076f60",
+   "f8fcd76e2bf2"
+  ],
+  "item 49.2": [
+   "09d6e4954fe6",
+   "14ab3fd12c35",
+   "161562c9279c",
+   "669d4ab7e07a",
+   "70d690bf6df4",
+   "7ccb7fdecc7b",
+   "864668b054a0",
+   "de6665d6c1e2",
+   "e861bd076f60",
+   "ed6ecc60d1cc"
+  ],
+  "item 50.1": [
+   "0a6a27debf89",
+   "6721221580e2",
+   "71f7c2d8062e",
+   "aa3f0f4061bf",
+   "aad93c3d51e1",
+   "bef0ef8b0532",
+   "c7f468ed2068",
+   "dd3de27d27e8"
+  ],
+  "item 51.1": [
+   "096d0c528f07",
+   "0a6a27debf89",
+   "6721221580e2",
+   "71f7c2d8062e",
+   "dd3de27d27e8"
+  ],
+  "item 53.1": [
+   "09d6e4954fe6",
+   "6d9779963173",
+   "85f6dcb2594d",
+   "a7918a4f536f",
+   "cd64ccb5b927"
+  ],
+  "item 55.1": [
+   "110fff9de215",
+   "552175665851",
+   "5be42f715efd",
+   "a9c9eae61a71",
+   "adaea38eb0ea",
+   "b18276af3e4a",
+   "b8fa959d4330",
+   "ce0b98cb4a31"
+  ],
+  "item 55.2": [
+   "0a6a27debf89",
+   "2a82d1430f68",
+   "64749ece600e",
+   "a9c9eae61a71",
+   "b18276af3e4a",
+   "b8fa959d4330",
+   "d4a3ed33fc20"
+  ],
+  "item 55.3": [
+   "1fd77f4de533",
+   "64749ece600e",
+   "a9c9eae61a71",
+   "b18276af3e4a",
+   "b8fa959d4330",
+   "d772bc1ae00b"
+  ],
+  "item 55.4": [
+   "110fff9de215",
+   "64749ece600e",
+   "7aae706741a6",
+   "93f05598189e",
+   "b8fa959d4330",
+   "f3e07702633d"
+  ],
+  "item 56.1": [
+   "0a6a27debf89",
+   "10ddd2c5c470",
+   "229f8d619116",
+   "a77a7c8257b2",
+   "c03f9bec3681",
+   "e9a77ebe14f8"
+  ],
+  "item 57.1": [
+   "09d6e4954fe6",
+   "3b5e5e0260bf",
+   "3c73447d222b",
+   "46f3dc374257",
+   "6114241c0cd0",
+   "819dccd3b0e6",
+   "ad9c75884882",
+   "b387768cf59c",
+   "c3841420d77b"
+  ],
+  "item 60.1": [
+   "023eb7d6eeb6",
+   "02fa52e3980a",
+   "0a6a27debf89",
+   "229f8d619116",
+   "6721221580e2",
+   "71f7c2d8062e",
+   "ad9c75884882",
+   "c8c3a6a6720b",
+   "dc7f39c6011e"
+  ],
+  "item 61.1": [
+   "0a6a27debf89",
+   "46dd7935ff7a",
+   "8ca80d853019",
+   "ad9c75884882",
+   "b4f01c18aa7c",
+   "c9c0e85dc4d9",
+   "d0ad3f9ccff2",
+   "ef1cbd992448"
+  ],
+  "item 62.1": [
+   "0a6a27debf89",
+   "0b96eabbcd08",
+   "16bdbf948093",
+   "229f8d619116",
+   "43637c8f6ac7",
+   "46dd7935ff7a",
+   "4fe38b7e1546",
+   "71f7c2d8062e",
+   "88de5a87a829"
+  ],
+  "item 63.1": [
+   "19d88aa95cea",
+   "2a6695c808cc",
+   "30ba9d9a2395",
+   "37d72cf40b95",
+   "61f0e70a44a4",
+   "6b87674cb1c7",
+   "ad9c75884882",
+   "c2765b6dbd32",
+   "c2e385aecac0",
+   "ee3c4a60e1c6"
+  ],
+  "item 63.2": [
+   "19d88aa95cea",
+   "37d72cf40b95",
+   "61f0e70a44a4",
+   "a66285a3eb50",
+   "c2765b6dbd32",
+   "c2e385aecac0",
+   "ee3c4a60e1c6",
+   "f09bbce15869"
+  ],
+  "item 64.1": [
+   "0a6a27debf89",
+   "11491685eddf",
+   "11dff8c9159d",
+   "6721221580e2",
+   "71f7c2d8062e",
+   "7e9f557b210c",
+   "86a1b220a96d",
+   "95b95cfd9801",
+   "ce0b98cb4a31",
+   "e619f7b9ac75",
+   "f81573130fc6"
+  ],
+  "item 64.2": [
+   "053404e1691e",
+   "11dff8c9159d",
+   "7e9f557b210c",
+   "8602905fae42",
+   "95b95cfd9801",
+   "9b7a1f3b5df5",
+   "ce0b98cb4a31",
+   "e619f7b9ac75",
+   "f09b0b33b340"
+  ],
+  "item 64.3": [
+   "11dff8c9159d",
+   "1c261b5ecf54",
+   "2faa72e52e62",
+   "53627cfcea9b",
+   "5e7191558388",
+   "7e9f557b210c",
+   "95b95cfd9801",
+   "b3390f3fed5d",
+   "c8cf92df11a7",
+   "ce0b98cb4a31",
+   "d8ea783814cd",
+   "e619f7b9ac75"
+  ],
+  "item 66.1": [
+   "37857da36a78",
+   "5c9d317a14dd",
+   "ad9c75884882",
+   "dd3de27d27e8"
+  ],
+  "item 66.2": [
+   "5c9d317a14dd",
+   "dd3de27d27e8",
+   "ddad3b47c944",
+   "e5fee8b31ec5"
+  ],
+  "item 66.3": [
+   "1c7464d118cd",
+   "37857da36a78",
+   "5c9d317a14dd",
+   "65b0f20a45bc",
+   "77da3e43d915",
+   "7e9f557b210c",
+   "8ead1295a863",
+   "967ba8ae1aab",
+   "ad9c75884882",
+   "dd3de27d27e8",
+   "e5fee8b31ec5",
+   "e619f7b9ac75"
+  ],
+  "item 66.4": [
+   "003673e2f035",
+   "2799c9936102",
+   "37857da36a78",
+   "5c9d317a14dd",
+   "77da3e43d915",
+   "7e44cd1e28ac",
+   "ad9c75884882",
+   "dd3de27d27e8",
+   "e5fee8b31ec5"
+  ],
+  "item 66.5": [
+   "1875b40b0b77",
+   "37857da36a78",
+   "5c9d317a14dd",
+   "77da3e43d915",
+   "7a5dd109fb23",
+   "86f7adc8e3eb",
+   "aa5c4daea495",
+   "ad9c75884882",
+   "dd3de27d27e8",
+   "e5fee8b31ec5"
+  ],
+  "item 66.6": [
+   "37857da36a78",
+   "5802650de0e9",
+   "5c9d317a14dd",
+   "6da615fe1a95",
+   "77da3e43d915",
+   "8ead1295a863",
+   "ad9c75884882",
+   "b402717273ac",
+   "cf7f80537b50",
+   "dd3de27d27e8",
+   "e5fee8b31ec5"
+  ],
+  "item 67.1": [
+   "003673e2f035",
+   "48dfd1f82cd8",
+   "5a256a4ff4b7",
+   "745177f72e42",
+   "8928bdecf695",
+   "aaba9cbfdf2e",
+   "ad9c75884882",
+   "c9909155dac0",
+   "f039288fdd96"
+  ],
+  "item 69.1": [
+   "75d9ced51313",
+   "997a215aa4ab",
+   "a0f3fd02662b",
+   "ae7cdfc4b2c2",
+   "c3841420d77b",
+   "c94154522eb1",
+   "e619f7b9ac75"
+  ],
+  "item 70.1": [
+   "09d6e4954fe6",
+   "46f3dc374257",
+   "5947e5d340e1",
+   "75d9ced51313",
+   "7737b5386ac3",
+   "7ccb7fdecc7b",
+   "997a215aa4ab",
+   "9b947d0b3049",
+   "e619f7b9ac75"
+  ],
+  "item 73.1": [
+   "37b755eb2bef",
+   "5c9d317a14dd",
+   "64005baf19f3",
+   "745177f72e42",
+   "8ead1295a863",
+   "94867af3af29",
+   "a0f3fd02662b",
+   "d0c8c92d9aaf",
+   "f039288fdd96"
+  ],
+  "item 73.2": [
+   "165abc3012b5",
+   "1fd77f4de533",
+   "37b755eb2bef",
+   "5802650de0e9",
+   "588c4c9d2b23",
+   "5c9d317a14dd",
+   "64005baf19f3",
+   "a0f3fd02662b",
+   "c2765b6dbd32",
+   "f81573130fc6"
+  ],
+  "item 74.1": [
+   "09d6e4954fe6",
+   "149bd51e58e3",
+   "474d1fe562a5",
+   "5802650de0e9",
+   "5a256a4ff4b7",
+   "5c9d317a14dd",
+   "6cd2a45f35b8",
+   "88d969b6342f",
+   "b8a8e299815f",
+   "c65071a84e51"
+  ],
+  "item 76.1": [
+   "19036f4096bf",
+   "39fdeebf5c2f",
+   "45d57600059b",
+   "5d68eb1b49c0",
+   "6bf2b8791496",
+   "7737b5386ac3",
+   "967061c0c993",
+   "b1c573ff7516",
+   "c657698ac3b9",
+   "de8bffd2bb52"
+  ],
+  "item 77.1": [
+   "0a6a27debf89",
+   "18cf59cc0390",
+   "229f8d619116",
+   "5c9d317a14dd",
+   "71f7c2d8062e",
+   "93419035edc1",
+   "b3390f3fed5d",
+   "f4f20816b0a0"
+  ],
+  "item 78.1": [
+   "189584f040d9",
+   "5c9d317a14dd",
+   "85f6dcb2594d",
+   "880fad5cb873",
+   "8928bdecf695",
+   "b8a8e299815f",
+   "c2765b6dbd32",
+   "cd64ccb5b927",
+   "cf7f80537b50",
+   "ddad3b47c944",
+   "e45f39fb38b3",
+   "f272c32fa965"
+  ],
+  "item 78.2": [
+   "44cefad640f8",
+   "5c9d317a14dd",
+   "85f6dcb2594d",
+   "9b00bc5e2811",
+   "c2765b6dbd32",
+   "cd64ccb5b927",
+   "e45f39fb38b3",
+   "f272c32fa965",
+   "f57922428ce1",
+   "f6595262315f"
+  ],
+  "item 80.1": [
+   "0cc60dab82a6",
+   "294f68f42835",
+   "5c1f6700ffcc",
+   "644dc56fff83",
+   "6f265299492f",
+   "819dccd3b0e6",
+   "98b171b6453e",
+   "e5faaff698cf",
+   "fd66b87c7703"
+  ],
+  "item 87.1": [
+   "605f00545feb"
+  ],
+  "item 92.1": [
+   "5a256a4ff4b7",
+   "94867af3af29",
+   "aaba9cbfdf2e",
+   "af329e564584",
+   "b8a8e299815f",
+   "c8cf92df11a7",
+   "e622565612b9",
+   "f039288fdd96"
+  ],
+  "item 93.1": [
+   "3c1022599772",
+   "6942ca362e62",
+   "b6710564aa1c"
+  ],
+  "item 93.2": [
+   "43072e3225c4",
+   "4d6e28ad7a37",
+   "4f0298591dbb",
+   "7b0afa8ca326",
+   "a6f60ab647bd",
+   "c9909155dac0",
+   "d86b2f631c6c",
+   "d9c519d82953",
+   "f45a68e279ce",
+   "f4f20816b0a0"
+  ],
+  "item 94.1": [
+   "0c601bf2fd93",
+   "46f3dc374257",
+   "6cdaa35e10ce",
+   "af329e564584",
+   "d89b066d9cc3"
+  ],
+  "item 95.1": [
+   "165abc3012b5",
+   "618476f6f1d5",
+   "658ebb888deb",
+   "77da3e43d915",
+   "88445c6088a0",
+   "9c2be3b428fa",
+   "9f1857a66359",
+   "a752f4adf8f9",
+   "d33008d4962a",
+   "e71886bacbb9",
+   "f57922428ce1"
+  ],
+  "item 96.1": [
+   "5a256a4ff4b7",
+   "5c9d317a14dd",
+   "65b0f20a45bc",
+   "967ba8ae1aab",
+   "af329e564584",
+   "afbaf19c4062",
+   "cf7f80537b50"
+  ],
+  "item 97.1": [
+   "16e7ce607923",
+   "282cc86cb565",
+   "4d8312ac98c3",
+   "5c9d317a14dd",
+   "605f00545feb",
+   "6cd2a45f35b8",
+   "8e95b89eb0e3",
+   "d54caf00b026",
+   "e28dd543fb35",
+   "e49f142cad22"
+  ],
+  "item 98.1": [
+   "16e7ce607923",
+   "20432cc46e1e",
+   "48dfd1f82cd8",
+   "56d5c7a1634d",
+   "5802650de0e9",
+   "8e95b89eb0e3",
+   "914266ebe330",
+   "9b1d92a065c0",
+   "d8c5f162898d"
+  ],
+  "item 99.1": [
+   "053404e1691e",
+   "09d6e4954fe6",
+   "5802650de0e9",
+   "65efd96ead28",
+   "6d03d2d70743",
+   "6da615fe1a95",
+   "7e9f557b210c",
+   "95b95cfd9801",
+   "bcd5b2c97ed9",
+   "d926611a1d41"
+  ],
+  "item 99.2": [
+   "053404e1691e",
+   "05f8007ed38d",
+   "09d6e4954fe6",
+   "64005baf19f3",
+   "65efd96ead28",
+   "6d03d2d70743",
+   "703409841767",
+   "88471e16122a",
+   "95b95cfd9801",
+   "c2be97f83aa5",
+   "d926611a1d41",
+   "e8318bd45e69"
+  ],
+  "item 99.3": [
+   "053404e1691e",
+   "09d6e4954fe6",
+   "2799c9936102",
+   "43637c8f6ac7",
+   "65efd96ead28",
+   "6b49db3098f7",
+   "6d03d2d70743",
+   "765951176348",
+   "95b95cfd9801",
+   "9c2be3b428fa",
+   "b35883e345c5",
+   "d926611a1d41",
+   "da7256f2d4e0"
+  ],
+  "item 101.1": [
+   "1dbe2b0fefd9",
+   "5b093a1e5448",
+   "6d03d2d70743",
+   "6da615fe1a95",
+   "7e9f557b210c",
+   "a6f60ab647bd",
+   "bcd5b2c97ed9",
+   "c5a9acf31fcd",
+   "c9c0e85dc4d9",
+   "d926611a1d41"
+  ],
+  "item 101.2": [
+   "4640453d0823",
+   "5947e5d340e1",
+   "6909da0babf1",
+   "6d03d2d70743",
+   "7fcc7cd216bc",
+   "a6f60ab647bd",
+   "c5a9acf31fcd",
+   "c9c0e85dc4d9",
+   "d926611a1d41",
+   "ffc782b3728d"
+  ],
+  "item 102.1": [
+   "6da615fe1a95",
+   "71ed063eeeee",
+   "7e9f557b210c",
+   "b8a8e299815f",
+   "b9ba1831f44b",
+   "bcd5b2c97ed9",
+   "c4e3b3feaab4",
+   "c5a9acf31fcd",
+   "d926611a1d41"
+  ],
+  "item 118.1": [
+   "06ea6fdc470c",
+   "0b57d052627a",
+   "0d30c10dd6a6",
+   "294f68f42835",
+   "48dfd1f82cd8",
+   "6f265299492f",
+   "71f7c2d8062e",
+   "819dccd3b0e6",
+   "98b171b6453e",
+   "e5faaff698cf"
+  ],
+  "7.1": [
+   "1875b40b0b77",
+   "2db6cc3bcfa7",
+   "6f515aad141a",
+   "94867af3af29",
+   "a752f4adf8f9",
+   "ad0decef8c94",
+   "c109642eb234",
+   "c7f468ed2068",
+   "e64e7c160bc1"
+  ]
  }
 }

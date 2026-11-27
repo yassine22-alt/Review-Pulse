@@ -34,6 +34,7 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 
 from ..annotate.passages import Passage
+from ..llm.local import ollama_host
 from .grounding import NONE
 
 TOP_K = 5                    # passages shown to the model when nothing has reordered them
@@ -91,9 +92,7 @@ class OllamaEmbedder:
 
     def __init__(self, model: str | None = None, host: str | None = None, timeout_s: float = 600.0):
         self.model = model or os.environ.get("REVIEWPULSE_EMBED_MODEL") or "bge-m3"
-        self.host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
-        if not self.host.startswith("http"):
-            self.host = "http://" + self.host
+        self.host = ollama_host(host)
         self.timeout_s = timeout_s
         self.num_gpu = int(os.environ.get("REVIEWPULSE_EMBED_GPU_LAYERS", "0"))
         self._cache: dict[str, list[float]] = {}
@@ -199,7 +198,11 @@ class CrossEncoder:
         self.session = ort.InferenceSession(str(folder / "model_quantized.onnx"), opts, providers=["CPUExecutionProvider"])
         self.names = {i.name for i in self.session.get_inputs()}
 
-    def scores(self, query: str, docs: list[str], batch: int = 8) -> list[float]:
+    def scores(self, query: str, docs: list[str], batch: int = 1) -> list[float]:
+        """One pair at a time. The model is quantised to whole numbers with a scale worked out from everything in the batch,
+        so in a batch a pair's score depends on its neighbours: the same eight pieces in another order changed which five
+        came first in 18 of 32 real reorderings. Alone, a pair always scores the same, and it is also faster on a processor
+        because nothing is padded to the longest piece (measured, docs/progress/M32)."""
         import numpy as np
 
         out: list[float] = []

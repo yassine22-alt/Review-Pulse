@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import shutil
 import time
 from collections.abc import Callable
@@ -18,6 +19,7 @@ from ..interpreter.api import interpreter_router
 from . import interpret as interpretation
 from . import service, workflow
 from .jobs import JobRunner
+from .prepare import Preparer
 from .store import PLAN_TYPES, REQ_TYPES, Store, read_whole
 
 STATIC = Path(__file__).parent / "static"
@@ -128,14 +130,25 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     jobs = JobRunner(store, workers)
     llm = llm or service.default_llm
     fallback = fallback if fallback is not None else service.default_fallback
+    preparer = Preparer(store, llm, enabled=os.environ.get("REVIEWPULSE_PREPARE", "on") != "off", busy=jobs.any_active)
+
+    def then_prepare(pid: str, work):
+        """A job that, once done, lets the requirements be searched ahead of the reviewer."""
+        def run(job):
+            result = work(job)
+            preparer.ensure(pid)
+            return result
+        return run
+
     @asynccontextmanager
     async def lifespan(_app):
         yield
+        preparer.close()
         jobs.shutdown()
 
     app = FastAPI(title="ReviewPulse", version="0.1.0", lifespan=lifespan,
                   description="Automated review of architectural plans against requirement documents")
-    app.state.store, app.state.jobs = store, jobs
+    app.state.store, app.state.jobs, app.state.preparer = store, jobs, preparer
     app.include_router(interpreter_router(llm))
     if auth:
         from .auth import Accounts
@@ -248,7 +261,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             store.put_input(p, "plan", file.filename or "plan", await read_upload(file))
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
-        return jobs.submit(pid, "analyse", lambda job: service.analyse(store, pid, job))
+        return jobs.submit(pid, "analyse", then_prepare(pid, lambda job: service.analyse(store, pid, job)))
 
     @app.post("/api/projects/{pid}/requirements", status_code=202)
     async def upload_requirements(pid: str, file: UploadFile = File(...)):
@@ -258,7 +271,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
         # the product reads clauses on demand from the review desk; the older pages still list drafts made at upload
-        return jobs.submit(pid, "draft", lambda job: service.draft(store, pid, job, llm, split_only=auth))
+        return jobs.submit(pid, "draft", then_prepare(pid, lambda job: service.draft(store, pid, job, llm, split_only=auth)))
 
     @app.post("/api/projects/{pid}/draft", status_code=202)
     def redraft(pid: str):
@@ -273,7 +286,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         if not p.plan:
             raise HTTPException(400, "upload a plan first")
         if not (store.run_dir(pid) / "view.json").exists():
-            return jobs.submit(pid, "analyse", lambda job: service.analyse(store, pid, job))
+            return jobs.submit(pid, "analyse", then_prepare(pid, lambda job: service.analyse(store, pid, job)))
         return jobs.submit(pid, "check", lambda job: service.check(store, pid, job))
 
     @app.get("/api/projects/{pid}/jobs")
@@ -323,9 +336,17 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         requirement's words go to the reading model."""
         project(pid)
         try:
-            return interpretation.find_parts(store, pid, clause, llm)
+            with preparer.person_waiting():
+                return interpretation.find_parts(store, pid, clause, llm)
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/prepared")
+    def get_prepared(pid: str):
+        """How far the requirements have been searched ahead. Asking also starts it, after a restart for instance."""
+        project(pid)
+        preparer.ensure(pid)
+        return preparer.status(pid)
 
     @app.get("/api/projects/{pid}/interpreted")
     def get_interpreted(pid: str):

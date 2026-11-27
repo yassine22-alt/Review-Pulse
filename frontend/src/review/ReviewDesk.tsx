@@ -30,14 +30,16 @@ export function ReviewDesk({ user }: { user: User }) {
   const load = useCallback(async () => {
     const url = `/api/projects/${id}`;
     try {
-      const [project, view, list, doc, readings, decisions, jobs] = await Promise.all([
+      // the jobs are asked for first, on their own: asked beside the rest, a job that ended between two answers left the list
+      // new and the drawing old, with no job running to make the desk ask again (a correction with no pin on the sheet)
+      const jobs = await api<Job[]>(`${url}/jobs`);
+      const [project, view, list, doc, readings, decisions] = await Promise.all([
         api<Project>(url),
         api<View>(`${url}/view`).catch(() => null),
         api<CorrectionList>(`${url}/correction-list`),
         api<{ clauses: Clause[] }>(`${url}/document`).catch(() => ({ clauses: [] as Clause[] })),
         api<Record<string, Reading>>(`${url}/interpreted`),
         api<Record<string, Determination>>(`${url}/clause-states`),
-        api<Job[]>(`${url}/jobs`),
       ]);
       setData({ project, view, list, clauses: doc.clauses, readings, decisions, jobs });
       setTab((t) => t ?? (list.items.length ? "corrections" : "requirements"));

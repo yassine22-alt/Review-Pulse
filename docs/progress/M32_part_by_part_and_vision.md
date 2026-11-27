@@ -41,7 +41,9 @@ found it, so the judging is not fully blind (`scripts/parts_eval.py`, `benchmark
   rest, which I have not measured with a person.
 * **The layout was chosen after seeing these results.** It needs a checklist and a drawing set not used here before the gain
   can be claimed.
-* The gain is small: **4 parts**. The larger value I expect is the part list, the ticks and the drafted comment, and only a
+* These rows were measured with the reordering model scoring in batches. It now scores one pair at a time (below), and this
+  layout gives **26** of 56 against 23 for today's.
+* The gain is small: **3 to 4 parts**. The larger value I expect is the part list, the ticks and the drafted comment, and only a
   reviewer can confirm that.
 
 ## Why 29 parts have nothing from either search
@@ -94,19 +96,56 @@ qwen2.5vl:7b on the 6 GB laptop (about 1 s a question, 4 to 6 s with tiles):
 A larger model (Qwen3-VL-32B-Instruct, Apache 2.0) is to be measured with the same questions on one H100, to tell the limits of
 the small model from the limits of the task. **Not yet run when this was written.**
 
-## What a reviewer waits for
+## What a reviewer waits for, and two faults found while measuring it
 
-On the 22 sheet set on the 6 GB laptop, with the splitting model local (six lines, a fresh copy of the project):
+The first version of this screen made a reviewer wait: about 90 s for the first item and 6 to 29 s for a later one. Timing every
+step showed two faults that were older than this screen.
 
-| | Wait |
-| --- | --- |
-| The first item of a session (models load) | about 90 s |
-| A later item opened for the first time | 6 to 29 s, longer with more parts (1 to 6 parts) |
-| An item already prepared | 0.01 s |
+1. **Every call to the local model server waited about 2 s for nothing.** The app addressed it as "localhost". Windows tries the
+   IPv6 address first and the server listens on the IPv4 one: 2.10 s a call by name, 0.05 s by address, for work the server did
+   in 0.05 s. Every part of the app that asks a local model paid this: reading, search and sheet recognition. The name is now
+   replaced by the address in one place (`llm/local.py`). Any timing of local model work measured before this on Windows
+   includes it.
+2. **The order of search results depended on which texts were scored together.** The reordering model is stored in whole numbers
+   with a scale worked out from the whole batch. On 32 real reorderings, the same texts in another order changed which five came
+   first in 18. Scored one at a time, the order of the texts changed nothing (32 of 32, scores identical), and it was faster
+   (18.7 s against 32.3 s in that run) because short texts are no longer padded to the longest. Grouping texts by length was also
+   tried: faster, but it changed the first five in 20 of 32, so it was not used.
 
-The desk prepares the next undecided item while the reviewer reads the current one, and results are kept until the drawings are
-read again. **A reviewer who jumps elsewhere in the list still waits, and 90 s for the first item is too long for real use.**
-Preparing every line right after upload is the next step if reviewers confirm the part list is useful.
+Effect of scoring one at a time on the same judged parts (72 new pieces judged by the same rule):
+
+| | Batches of 8 (before) | One at a time (now) |
+| --- | --- | --- |
+| Today's layout: parts with a useful piece | 23 of 56 | 23 of 56, the same parts |
+| This screen: parts with a useful piece | 27 of 56 | **26 of 56** |
+| Items whose five notes are the same set under both | 17 of 37 | |
+
+**I adopt it and record the loss:** one part ("room dimensions") no longer shows the room label with its area. In return the same
+search gives the same pieces every time, which a review record needs.
+
+First openings of the 37 items took 824 s in all before the two fixes and 256 s after (about 7 s each, including loading).
+
+**Searching ahead.** After the drawings and the requirement document are uploaded, the server now searches every requirement in
+the background (`app/prepare.py`), stops while a person is waiting for a search of their own, starts over when the drawings or the
+document change, and does not run with a hosted reading model. The desk shows how many are ready. A prepared item opens in
+0.01 s. How long preparing a whole real checklist takes is not measured yet.
+
+A fault this would have made worse is fixed too: a search still running while new drawings were analysed could have been saved as
+the result for the new drawings. Saved results are now named after the exact analysis they were read from.
+
+**A race older than these changes, found by the browser walkthrough.** The desk and the submission page asked for the job list
+beside the data. A job that ended between the two answers left old data on screen with no job running to ask again: a correction
+in the list with no pin on the drawing. The walkthrough failed 4 times in 10 runs this way (2 of 6 with searching ahead switched
+off). Both screens now ask for the jobs first; 10 of 10 runs passed.
+
+## Tried: finding legend symbols by their exact strokes
+
+The vision model missed small symbols, and this set is a vector PDF with an electrical legend, so I tried finding each legend
+symbol's exact strokes on the sheet (59,450 strokes; quarter turns and mirrors). **It does not work here:** none of the five
+switch shapes was found although the plan shows many switches. In this file a legend symbol is hundreds of strokes 0.2 to 0.5
+points long; on the plan the same symbol is drawn smaller and cut into different strokes, and the file has no reusable symbol
+objects. A few very small shapes matched dozens of times and appear to be pieces of other things. Not in the app. Matching
+pictures at several sizes, or a model trained to spot symbols on vector drawings, are the untried options.
 
 ## Known limits
 

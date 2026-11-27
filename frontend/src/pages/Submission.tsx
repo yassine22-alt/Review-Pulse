@@ -19,7 +19,9 @@ export function Submission({ user }: { user: User }) {
 
   const load = useCallback(async () => {
     try {
-      const [p, j] = await Promise.all([api<Project>(`/api/projects/${id}`), api<Job[]>(`/api/projects/${id}/jobs`)]);
+      // jobs first: asked beside the project, a job ending between the two answers left the page showing the old state for good
+      const j = await api<Job[]>(`/api/projects/${id}/jobs`);
+      const p = await api<Project>(`/api/projects/${id}`);
       setProject(p);
       setJobs(j);
     } catch (e) { setProblem((e as Error).message); }

@@ -23,6 +23,7 @@ from typing import Any, Protocol
 
 import yaml
 
+from ..llm.local import ollama_host
 from .clauses import Clause, split_document
 from .schema import Rule, vocab
 
@@ -51,9 +52,7 @@ class OllamaClient:
                  timeout_s: float = 600.0, num_ctx: int = 8192, max_tokens: int = MAX_ANSWER_TOKENS):
         self.max_tokens = max_tokens
         self.model = model
-        self.host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
-        if not self.host.startswith("http"):
-            self.host = "http://" + self.host
+        self.host = ollama_host(host)
         self.seed, self.timeout_s, self.num_ctx = seed, timeout_s, num_ctx
 
     def _post(self, path: str, body: dict) -> dict:

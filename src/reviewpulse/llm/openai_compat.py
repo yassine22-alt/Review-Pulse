@@ -26,6 +26,8 @@ import urllib.error
 import urllib.request
 from urllib.parse import urlparse
 
+from .local import direct
+
 
 class LLMError(RuntimeError):
     """A failure with a message that is safe to show a user (never contains the API key)."""
@@ -111,7 +113,7 @@ class OpenAICompatClient:
                  reasoning_effort: str | None = None):
         if not model:
             raise LLMError("a model name is required (set REVIEWPULSE_LLM_MODEL)")
-        self.base_url = base_url.rstrip("/")
+        self.base_url = direct(base_url.rstrip("/"))
         self.model, self.provider = model, provider
         self.external = is_external(self.base_url)
         self.structured = structured                       # auto | json_schema | json_object | text

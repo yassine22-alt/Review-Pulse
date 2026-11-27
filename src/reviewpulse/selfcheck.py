@@ -20,6 +20,8 @@ import tempfile
 import time
 from pathlib import Path
 
+from .llm.local import ollama_host
+
 OK, OPTIONAL, BROKEN = "ok", "optional, not installed", "BROKEN"
 
 REQUIRED = {
@@ -86,9 +88,7 @@ def check_install() -> bool:
 def _check_drafting_model() -> None:
     import urllib.request
 
-    host = (os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
-    if "://" not in host:
-        host = "http://" + host
+    host = ollama_host()
     want = os.environ.get("REVIEWPULSE_LLM_MODEL") or "qwen2.5:7b"
     try:
         with urllib.request.urlopen(host + "/api/tags", timeout=3) as r:

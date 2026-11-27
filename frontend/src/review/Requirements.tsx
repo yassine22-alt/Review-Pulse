@@ -39,6 +39,7 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
   const [search, setSearch] = useState("");
   const [ticks, setTicks] = useState<Record<string, Marks>>({});   // kept while moving between requirements
   const url = `/api/projects/${project.id}`;
+  const ready = usePrepared(url);
   const group = (c: Clause) => groupOf(readings[c.id], decisions[c.id]);
   const left = undecided(clauses, readings, decisions).length;
   const checks = clauses.filter((c) => group(c) === "approved").length;
@@ -70,6 +71,10 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
       <div className="runbar">
         <p><strong>{clauses.length - left}</strong> of {clauses.length} requirements decided or covered, <strong>{left}</strong> left.</p>
         <progress max={clauses.length || 1} value={clauses.length - left} />
+        {ready?.running && ready.total > 0 && (
+          <p className="muted small" role="status">Searching the drawings ahead of you: {ready.done} of {ready.total} requirements
+            ready. You can start now.</p>
+        )}
         {canDecide && (
           <details className="auto">
             <summary>Let the tool propose measured checks ({checks} approved)</summary>
@@ -259,6 +264,21 @@ function ClauseCard({ url, clause, reading, mine, earlier, group, open, toggle, 
       )}
     </li>
   );
+}
+
+/** How far the server has searched ahead; asked again every few seconds while it is still at it. */
+function usePrepared(url: string) {
+  const [state, setState] = useState<{ done: number; total: number; running: boolean } | null>(null);
+  useEffect(() => {
+    let gone = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const ask = () => api<{ done: number; total: number; running: boolean }>(`${url}/prepared`)
+      .then((r) => { if (gone) return; setState(r); if (r.running) timer = setTimeout(ask, 5000); })
+      .catch(() => {});
+    ask();
+    return () => { gone = true; clearTimeout(timer); };
+  }, [url]);
+  return state;
 }
 
 /** Keeps the card the desk moved to in view. */

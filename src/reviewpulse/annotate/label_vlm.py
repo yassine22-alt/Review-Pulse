@@ -24,6 +24,8 @@ from pathlib import Path
 
 import numpy as np
 
+from ..llm.local import ollama_host
+
 MODEL = "qwen2.5vl:7b"
 PAD_PX = 6
 CACHE = Path(os.environ.get("REVIEWPULSE_CACHE", Path.home() / ".cache" / "reviewpulse")) / "label_vlm"
@@ -62,7 +64,7 @@ def transcribe(crop: np.ndarray, host: str | None = None, model: str = MODEL, ti
     f = CACHE / f"{key}.json"
     if f.exists():
         return json.loads(f.read_text(encoding="utf-8"))["text"]
-    host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
+    host = ollama_host(host)
     body = {"model": model, "prompt": PROMPT, "images": [base64.b64encode(png).decode()], "stream": False,
             # a label is a few words; on blank or unreadable crops the model otherwise loops until the
             # server aborts ("token repeat limit reached")

@@ -24,6 +24,8 @@ import os
 import re
 from pathlib import Path
 
+from ..llm.local import ollama_host
+
 MODEL = "qwen2.5vl:7b"
 CACHE = Path(os.environ.get("REVIEWPULSE_CACHE", Path.home() / ".cache" / "reviewpulse")) / "sheet_kind"
 
@@ -75,7 +77,7 @@ def mode() -> str:
 def vlm_available(host: str | None = None) -> bool:
     import urllib.request
 
-    host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
+    host = ollama_host(host)
     try:
         with urllib.request.urlopen(host + "/api/tags", timeout=3) as r:
             return any(m.get("name", "").startswith(MODEL.split(":")[0]) for m in json.loads(r.read()).get("models", []))
@@ -104,7 +106,7 @@ def ask_vlm(png_path: Path, host: str | None = None, model: str = MODEL, timeout
     f = CACHE / f"{key}.json"
     if f.exists():
         return json.loads(f.read_text(encoding="utf-8"))
-    host = (host or os.environ.get("OLLAMA_HOST") or "http://localhost:11434").rstrip("/")
+    host = ollama_host(host)
     body = {"model": model, "stream": False, "format": SCHEMA,
             "messages": [{"role": "user", "content": PROMPT, "images": [base64.b64encode(png).decode()]}],
             "options": {"temperature": 0, "seed": 42, "num_predict": 60}}
