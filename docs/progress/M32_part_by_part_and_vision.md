@@ -128,7 +128,8 @@ First openings of the 37 items took 824 s in all before the two fixes and 256 s 
 **Searching ahead.** After the drawings and the requirement document are uploaded, the server now searches every requirement in
 the background (`app/prepare.py`), stops while a person is waiting for a search of their own, starts over when the drawings or the
 document change, and does not run with a hosted reading model. The desk shows how many are ready. A prepared item opens in
-0.01 s. How long preparing a whole real checklist takes is not measured yet.
+0.01 s. Preparing all 130 lines of the real checklist took **575 s** (about 10 minutes, the first 10 of them 83 s with the models
+loading), after which opening 20 prepared lines took 0.42 s together.
 
 A fault this would have made worse is fixed too: a search still running while new drawings were analysed could have been saved as
 the result for the new drawings. Saved results are now named after the exact analysis they were read from.
@@ -144,8 +145,21 @@ The vision model missed small symbols, and this set is a vector PDF with an elec
 symbol's exact strokes on the sheet (59,450 strokes; quarter turns and mirrors). **It does not work here:** none of the five
 switch shapes was found although the plan shows many switches. In this file a legend symbol is hundreds of strokes 0.2 to 0.5
 points long; on the plan the same symbol is drawn smaller and cut into different strokes, and the file has no reusable symbol
-objects. A few very small shapes matched dozens of times and appear to be pieces of other things. Not in the app. Matching
-pictures at several sizes, or a model trained to spot symbols on vector drawings, are the untried options.
+objects. A few very small shapes matched dozens of times and appear to be pieces of other things.
+
+Two picture based ways were then tried on one area, with templates cut from the legend automatically (sizes, quarter turns,
+mirrors). I estimate by eye about 35 switch signs in it; this is a rough count, not a graded key.
+
+| Way | Switch signs found | Wrong places |
+| --- | --- | --- |
+| Exact strokes | 0 | |
+| Picture correlation, score at least 0.6 (a threshold read off this same area) | about 8 | 3 |
+| Shape only (both thinned to one pixel, distance between lines both ways) | not counted | at least 164: 199 places at the strictest distance listed |
+
+The legend sign is drawn with thin lines for its size and the plan signs are small and bold, which I think is why correlation
+scores are low; thinning removes that difference and with it most of what tells the sign from other lines. **None of this is
+in the app, and I stop here rather than tune to one drawing.** The untried option is a model trained to spot symbols on
+drawings, which has to be shown to carry over to sets it was not trained on.
 
 ## Known limits
 
