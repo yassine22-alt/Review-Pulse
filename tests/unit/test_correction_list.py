@@ -235,3 +235,13 @@ def test_markup_pdf_with_no_items_is_still_a_copy(tmp_path):
     out = tmp_path / "e.pdf"
     stats = cl.write_markup_pdf(empty, [], out, src)
     assert stats["annotations"] == 0 and len(pymupdf.open(out)) == 1
+
+
+def test_a_reviewers_reading_replaces_the_tools_and_says_what_it_replaced():
+    before = sample()
+    failing = next(i for i in before["items"] if i["status"] == "revision_required")
+    state = {failing["clause"]: {"state": "shown", "by": "A. Reviewer", "at": "t", "note": "sheet detail 4"}}
+    after = sample(states=state)
+    assert failing["clause"] not in [i["clause"] for i in after["items"]]
+    [record] = after["shown"]
+    assert record["overrode"] == "Revision required" and record["by"] == "A. Reviewer"

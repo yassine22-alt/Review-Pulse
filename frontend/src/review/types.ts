@@ -17,7 +17,8 @@ export interface Item {
   key: string; clause: string; n: number | null; citation: string; quote: string; title: string;
   discipline: string; discipline_label: string; status: string; status_label: string; outcome: string;
   wording: string; wording_default: string; question: string; facts: Fact[];
-  locations: { sheet: string; where: string }[]; more_locations: number; dropped: boolean;
+  locations: { sheet: string; where: string; bbox?: number[] | null }[]; more_locations: number; dropped: boolean;
+  decided_by?: string; overrode?: string | null;
   review: { action: "pending" | "accept" | "edit" | "drop"; by: string | null };
   from_document: boolean; finding_ids: string[];
 }
@@ -29,6 +30,7 @@ export interface CorrectionList {
     signed: { reviewer: string; result: string; at: string } | null;
   }>;
   deferred: { clause: string; quote: string; citation: string; by: string }[];
+  shown: { clause: string; citation: string; by: string; overrode: string | null }[];
   edit_burden: { items: number; accepted: number; edited: number; dropped: number; unreviewed: number };
 }
 
@@ -36,6 +38,10 @@ export interface NoteRef { sheet: string; text: string; box?: number[] | null }
 export interface Evidence {
   chosen?: NoteRef | null; candidates?: NoteRef[];
   checks?: { required: string; stated: string | null; result: string }[];
+}
+export interface Determination {
+  state: "shown" | "correction" | "not_applicable" | "deferred"; by: string; at: string; note: string;
+  evidence?: (NoteRef & { page?: number }) | null; stale?: string | null;
 }
 export interface Clause { id: string; heading: string; text: string }
 export interface Reading {
@@ -48,7 +54,15 @@ export interface Reading {
 }
 
 /** The places on the sheets that carry the evidence of one correction item: one shape per finding behind it. */
-export function shapesOf(item: Item, view: View | null) {
+export function shapesOf(item: Item, view: View | null): { sheet: number; shape: FindingShape }[] {
+  if (item.decided_by) {            // written by a reviewer: the place they pointed at
+    return (view?.sheets ?? []).flatMap((s) => item.locations.filter((l) => l.sheet === s.id && l.bbox).flatMap((l) => {
+      const shape = noteShape(s, l.bbox!);
+      if (!shape) return [];
+      const [a, b] = shape.polygons[0];
+      return [{ sheet: s.index, shape: { ...shape, anchor: [(a[0] + b[0]) / 2, a[1]] as Point } }];
+    }));
+  }
   const mine = new Set(item.finding_ids);
   return (view?.sheets ?? []).flatMap((s) => s.findings.filter((g) => g.id !== null && mine.has(g.id) && drawable(g))
     .map((shape) => ({ sheet: s.index, shape })));

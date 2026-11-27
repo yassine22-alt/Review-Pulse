@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import shutil
 import uuid
@@ -414,6 +415,38 @@ def _note_locator(models: list[BuildingModel]):
     return locate
 
 
+def checked_place(store: Store, pid: str, place: dict) -> dict:
+    """The place a reviewer points at, if it exists in this project: a decision never rests on a sheet or a spot that is not
+    there."""
+    model = next((m for m in _models(store, pid) if m.sheet.id == place.get("sheet")), None)
+    if model is None:
+        raise ValueError("that sheet is not part of this submission")
+    box = place.get("box")
+    if box is not None:
+        slack = 0.02 * max(model.sheet.width, model.sheet.height)
+        ok = (len(box) == 4 and all(math.isfinite(v) for v in box) and box[0] <= box[2] and box[1] <= box[3]
+              and box[0] >= -slack and box[1] >= -slack and box[2] <= model.sheet.width + slack and box[3] <= model.sheet.height + slack)
+        if not ok:
+            raise ValueError("that spot is not on the sheet")
+    return {"sheet": model.sheet.id, "page": model.sheet.page, "box": [round(float(v), 2) for v in box] if box else None,
+            "text": " ".join(str(place.get("text") or "").split())[:600]}
+
+
+def clause_texts(store: Store, pid: str) -> dict[str, str]:
+    """The words of every requirement of the current document; empty without one."""
+    from . import interpret
+
+    try:
+        return {c["id"]: c["text"] for c in interpret.document(store, pid)["clauses"]}
+    except ValueError:
+        return {}
+
+
+def known_clause(store: Store, pid: str, clause: str) -> None:
+    if clause not in clause_texts(store, pid):
+        raise ValueError(f"the requirement document has no clause {clause}")
+
+
 def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
     """The project's correction list (see report/correction_list.py), with the reviewer's edits, states and sign offs applied."""
     from ..report import correction_list as cl
@@ -428,10 +461,11 @@ def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
         document = {"name": p.requirements, "clauses": []}
     interpreted = interpret.load_results(store, pid)
     models = _models(store, pid)
+    decided = workflow.holding(store, pid, {c["id"]: c["text"] for c in document["clauses"]})
     uncovered = 0
     if document["clauses"]:
         try:
-            counts = interpret.coverage(store, pid)["summary"]["counts"]
+            counts = interpret.coverage(store, pid)["summary"]["counts"]        # clauses a person decided are not counted here
             uncovered = sum(counts.get(k, 0) for k in ("awaiting_approval", "not_run", "rejected", "not_checked", "not_read"))
         except ValueError:
             pass
@@ -439,7 +473,7 @@ def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
     if cycle is None:
         cycle = max([r["cycle"] for r in records], default=1)
     return cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
-                    states=workflow.clause_states(store, pid), edits=workflow.item_edits(store, pid), signoffs=records,
+                    states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
                     uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
 
 

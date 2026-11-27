@@ -191,6 +191,25 @@ tr.off td { color: #98a2b3; }
 .mark.ask { --c: var(--ask-solid); }
 .mark.ok { --c: var(--ok-solid); }
 .mark.note { --c: #2563eb; }
+.runbar progress { margin: 4px 0 2px; }
+.auto summary, .why-not summary { cursor: pointer; font-size: 12.5px; color: var(--text-2); }
+.auto .row { margin-top: 10px; }
+.why-not { margin-top: 12px; }
+.find { margin-top: 12px; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.choices button { box-shadow: none; }
+.choices button[aria-pressed="true"] { background: var(--ink-900); border-color: var(--ink-900); color: #fff; }
+.why label { display: grid; gap: 4px; font-weight: 560; }
+.why label small { font-weight: 400; }
+.picked { display: flex; gap: 10px; justify-content: space-between; align-items: flex-start; background: var(--info-soft);
+  border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+.facts li.is-picked { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb; }
+.item.clause.mine.shown { border-left: 3px solid var(--ok-solid); }
+.item.clause.mine.correction { border-left: 3px solid var(--bad-solid); }
+.item.clause.mine.not_applicable, .item.clause.mine.deferred { border-left: 3px solid var(--line-2); }
+.decided.correction { background: var(--bad-soft); color: var(--bad); }
+.decided.not_applicable, .decided.deferred { background: #eef0f4; color: var(--muted); }
+.item.clause .head .decided { white-space: nowrap; }
 .notes-found details { margin-top: 10px; }
 .notes-found summary { cursor: pointer; font-size: 12.5px; color: var(--text-2); }
 .notes-found details ul { margin-top: 8px; }

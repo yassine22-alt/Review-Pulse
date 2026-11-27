@@ -87,9 +87,11 @@ def check_policy() -> list[str]:
             problems.append(f"outcome {outcome} maps to {sid}, which can pass")
     if cfg["tool_max_result"] == "Rejected":
         problems.append("the tool may not reject")
-    for sid in cfg["reviewer_settable"]:
-        if sid not in statuses():
-            problems.append(f"unknown settable status {sid}")
+    for name, d in cfg["reviewer_decisions"].items():
+        if d["status"] not in statuses():
+            problems.append(f"decision {name} has the unknown status {d['status']}")
+        if order.index(statuses()[d["status"]]["rollup"]) <= approved and name == "shown" and d["needs"] != "evidence":
+            problems.append("a requirement may only be passed by hand with evidence")
     for result in cfg["signoff_results"] + [cfg["tool_max_result"], cfg["uncovered_floor"]]:
         if result not in order:
             problems.append(f"unknown result {result}")

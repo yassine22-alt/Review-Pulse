@@ -182,8 +182,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
           states: dict | None = None, edits: dict | None = None, signoffs: list[dict] | None = None,
           uncovered: int = 0, cycle: int = 1, locate_note: Callable[[str, str], list[float] | None] | None = None) -> dict:
     """One dictionary with everything an export needs. ``findings``: findings.json dicts. ``document``: {name, clauses:[{id, text,
-    scope}]}. ``sheets``: [{id, page, width, height, scale_method, discipline}]. ``states``: reviewer set clause states {clause: {state,
-    by, at, note}}. ``edits``: {item key: {action, wording, by, at}}. ``signoffs``: [{reviewer, cycle, discipline, result, note, at}]."""
+    scope}]}. ``sheets``: [{id, page, width, height, scale_method, discipline}]. ``states``: what reviewers decided per clause {clause:
+    {state, by, at, note, evidence}}; a decision replaces the tool's result for that clause. ``edits``: {item key: {action, wording, by, at}}. ``signoffs``: [{reviewer, cycle, discipline, result, note, at}]."""
     states, edits, signoffs = states or {}, edits or {}, signoffs or []
     sheet_by_id = {s["id"]: s for s in sheets}
     clauses = {c["id"]: (i, c) for i, c in enumerate(document.get("clauses", []))}
@@ -229,8 +229,13 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
 
     cover = {"deferred": [], "not_applicable": []}
     open_records = []
+    tool_said: dict[str, str] = {}      # what the tool had concluded on clauses a person then decided
     for r in records:
         st = states.get(r["clause"]) or states.get(r["key"])
+        if st and st.get("state") in ("shown", "correction"):
+            if r["from_document"]:
+                tool_said[r["clause"]] = r["status"]
+                continue
         if st and st.get("state") in ("deferred", "not_applicable"):
             c = clauses.get(r["clause"], (0, {}))[1]
             cover[st["state"]].append({"clause": r["clause"], "citation": r["citation"], "quote": r["quote"],
@@ -282,6 +287,40 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
                       "finding_ids": [f["evidence"]["finding_id"] for f in r["findings"] if f.get("evidence", {}).get("finding_id")],
                       "count": len(r["findings"]), "_order": r["order"]})
 
+    shown_by_hand: list[dict] = []
+    for clause_id, st in states.items():
+        if st.get("state") not in ("shown", "correction") or clause_id not in clauses:
+            continue
+        order, clause = clauses[clause_id]
+        quote = _quote(clause_id, clause["text"], interpreted)
+        citation = citation_of(clause_id, clause["text"])
+        discipline = disc.discipline_of(clause["text"])
+        chapter_key, chapter_label = disc.chapter_of(clause_id, clause.get("scope", "") if use_scope else "")
+        place = st.get("evidence") or {}
+        sid = place.get("sheet")
+        sheet = sheet_by_id.get(sid)
+        overrode = tool_said.get(clause_id)
+        if st["state"] == "shown":
+            shown_by_hand.append({"clause": clause_id, "citation": citation, "quote": quote, "discipline": discipline, "by": st.get("by"),
+                                  "at": st.get("at"), "note": st.get("note", ""), "evidence": place or None,
+                                  "overrode": rs.label(overrode) if overrode and overrode != "approved" else None})
+            continue
+        locations = []
+        if sid is not None:
+            where = f"sheet {sid}" + (f", {_place(place.get('box'), sheet)} of the sheet" if place.get("box") and sheet else "")
+            locations.append({"sheet": sid, "page": (sheet["page"] + 1) if sheet else None, "bbox": place.get("box"),
+                              "where": where, "subjects": [], "note": place.get("text") or None})
+        comment = _norm(st.get("note", ""))
+        wording = rs.config()["templates"]["reviewer_correction"].format(
+            comment=comment if comment.endswith((".", "?", "!")) else comment + ".", quote=quote, citation=citation)
+        facts = [{"subject": "", "statement": place["text"], "source": f"pointed at by {st.get('by')}"}] if place.get("text") else []
+        items.append({"key": clause_id, "clause": clause_id, "citation": citation, "quote": quote, "title": "",
+                      "discipline": discipline, "discipline_label": disc.label(discipline), "chapter": chapter_key,
+                      "chapter_label": chapter_label, "status": "revision_required", "status_label": rs.label("revision_required"),
+                      "outcome": "Found by the reviewer", "verdicts": [], "wording_default": _norm(wording), "question": "",
+                      "facts": facts, "locations": locations, "more_locations": 0, "from_document": True, "finding_ids": [],
+                      "decided_by": st.get("by"), "overrode": rs.label(overrode) if overrode else None, "count": 1, "_order": order})
+
     d_order = disc.order()
     first: dict[tuple, int] = {}
     for it in items:
@@ -292,6 +331,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
     n = 0
     for it in items:
         e = edits.get(it["key"]) or {}
+        if not e and it.get("decided_by"):          # the reviewer wrote it: it already has their decision
+            e = {"action": "accept", "by": it["decided_by"], "at": states[it["clause"]].get("at")}
         action = e.get("action", "pending")
         it["review"] = {"action": action, "by": e.get("by"), "at": e.get("at")}
         it["wording"] = _norm(e["wording"]) if action == "edit" and e.get("wording") else it["wording_default"]
@@ -304,7 +345,7 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
         it.pop("_order")
 
     live_items = [i for i in items if not i["dropped"]]
-    approved = [r for r in open_records if r["status"] == "approved"]
+    approved = [r for r in open_records if r["status"] == "approved"] + shown_by_hand
     by_disc: dict[str, dict] = {}
     for did in {i["discipline"] for i in live_items} | {r["discipline"] for r in approved}:
         stat_ids = [i["status"] for i in live_items if i["discipline"] == did] + ["approved" for r in approved if r["discipline"] == did]
@@ -328,19 +369,21 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
     signed_results = [d["signed"]["result"] for d in by_disc.values() if d["signed"]]
     final = rs.most_severe(signed_results) if by_disc and not unsigned else None
 
-    edited = [i for i in items if i["review"]["action"] == "edit"]
+    proposed = [i for i in items if not i.get("decided_by")]           # the edit burden is about what the tool proposed
+    edited = [i for i in proposed if i["review"]["action"] == "edit"]
     distance = [1 - difflib.SequenceMatcher(None, i["wording_default"], i["wording"]).ratio() for i in edited]
-    burden = {"items": len(items), "accepted": sum(i["review"]["action"] == "accept" for i in items), "edited": len(edited),
-              "dropped": sum(i["dropped"] for i in items), "unreviewed": sum(i["review"]["action"] == "pending" for i in items)}
+    burden = {"items": len(proposed), "accepted": sum(i["review"]["action"] == "accept" for i in proposed), "edited": len(edited),
+              "dropped": sum(i["dropped"] for i in proposed), "unreviewed": sum(i["review"]["action"] == "pending" for i in proposed),
+              "written_by_reviewer": len(items) - len(proposed)}
     burden["edit_count"] = burden["edited"] + burden["dropped"]
-    burden["edit_share"] = round(burden["edit_count"] / len(items), 3) if items else 0.0
+    burden["edit_share"] = round(burden["edit_count"] / len(proposed), 3) if proposed else 0.0
     burden["mean_text_change"] = round(sum(distance) / len(distance), 3) if distance else 0.0
 
     return {"generated": datetime.now().isoformat(timespec="seconds"), "project": project.get("name"), "plan": project.get("plan"),
             "document": document.get("name"), "cycle": cycle,
             "overall": {**overall, "signed": final, "unsigned_disciplines": [disc.label(d) for d in unsigned]},
             "disciplines": by_disc, "items": items, "deferred": cover["deferred"], "not_applicable": cover["not_applicable"],
-            "dismissed": dismissed, "approved_count": len(approved), "uncovered_clauses": uncovered,
+            "dismissed": dismissed, "approved_count": len(approved), "uncovered_clauses": uncovered, "shown": shown_by_hand,
             "edit_burden": burden, "signoffs": list(latest.values())}
 
 

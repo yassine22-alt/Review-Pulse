@@ -44,9 +44,14 @@ outcomes:
   NOT_APPLICABLE: not_applicable
   EXEMPT: not_applicable
 
-# Statuses a reviewer may set by hand on a clause, with their name. Deferred submittals are listed on the cover of the
-# correction list: they are neither missing nor failing, and a deferral is not a waiver of review.
-reviewer_settable: [deferred, not_applicable]
+# What a reviewer may decide by hand on any clause, under their name, and the status each decision is. "shown" and
+# "correction" are the reviewer's own reading of the plans: the tool never makes them. Deferred submittals are listed on the
+# cover of the correction list: they are neither missing nor failing, and a deferral is not a waiver of review.
+reviewer_decisions:
+  shown:          {status: approved,          needs: evidence}   # where the plans show it: a note, a sheet, or words
+  correction:     {status: revision_required, needs: note}       # the comment to the applicant
+  not_applicable: {status: not_applicable,    needs: ""}
+  deferred:       {status: deferred,          needs: ""}
 
 # Result a person may record at sign off.
 signoff_results: ["Approved", "Approved with comments", "Revision required", "Rejected", "Not required"]
@@ -56,5 +61,6 @@ templates:
   revision_required: 'Revise the plans to comply with this requirement: "{quote}" {citation}'
   information_requested: 'Show on the plans, or provide, the information that settles this requirement: "{quote}" {citation}'
   measured: "Detected {detected}; required {required}."
+  reviewer_correction: '{comment} Requirement: "{quote}" {citation}'
   question_prefix: "To settle it:"
   not_shown: "No sheet shows this: say where the plans address it."

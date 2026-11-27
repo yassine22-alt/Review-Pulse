@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import threading
 from collections.abc import Callable
@@ -209,6 +210,31 @@ def index_notes(store: Store, pid: str, models: list) -> int:
     return len(texts)
 
 
+def find_notes(store: Store, pid: str, clause_id: str, top: int = 5) -> dict:
+    """The written notes closest to one requirement, each with its place. Retrieval only (words, meaning, reordering): no
+    reading model is asked, so it answers in seconds and works for any clause, read or not."""
+    from ..annotate.passages import set_passages
+    from ..interpreter.checked import clause_body
+    from ..interpreter.drawing_evidence import _placed, default_reranker, retrieve
+
+    context = _context(store, pid, clause_id)
+    files = sorted(store.run_dir(pid).glob("building_*.json"))
+    if not files:
+        raise ValueError("upload and analyse a plan first")
+    from .service import _models
+
+    passages = set_passages(_models(store, pid))
+    embedder = None
+    if os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off":
+        embedder = _embedder()
+        if embedder is not None and hasattr(embedder, "load"):
+            embedder.load(store.run_dir(pid) / NOTE_VECTORS, [p.text for p in passages])
+    if not _RERANKER:
+        _RERANKER.append(default_reranker() if os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off" else None)
+    found = retrieve(clause_body(context), passages, embedder, top=top, reranker=_RERANKER[0]) if passages else []
+    return {"candidates": [_placed(p) for p in found], "notes_on_drawings": len(passages)}
+
+
 def draft_workers(client) -> int:
     """How many clauses are read at once. A local model serves one question at a time, so one; a hosted model (already paced
     to its provider's rate limit) takes several. REVIEWPULSE_DRAFT_WORKERS overrides."""
@@ -357,9 +383,11 @@ def coverage(store: Store, pid: str) -> dict:
     findings = read("findings.json", {})
     findings = findings.get("findings", []) if isinstance(findings, dict) else findings
     from ..factgraph.from_building import LOOKED_FOR
+    from . import workflow
 
-    data = build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings,
-                 looked_for=list(LOOKED_FOR))
+    doc = document(store, pid)
+    data = build(project, doc, load_results(store, pid), read("interpreted_results.json", []), findings,
+                 looked_for=list(LOOKED_FOR), decisions=workflow.holding(store, pid, {c["id"]: c["text"] for c in doc["clauses"]}))
     from ..drawingset.summary import enabled, summary_for_pdf
 
     plan = store.plan_path(store.get(pid))

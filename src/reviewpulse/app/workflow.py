@@ -10,6 +10,7 @@ plain audit trail: who, what, when. A name is required for every change; nothing
 
 from __future__ import annotations
 
+import hashlib
 import json
 import threading
 from pathlib import Path
@@ -83,22 +84,78 @@ def clause_states(store: Store, pid: str) -> dict:
     return _read(_dir(store, pid) / "clause_states.json", {})
 
 
-def set_clause_state(store: Store, pid: str, clause: str, state: str, reviewer: str, note: str = "") -> dict:
-    """Set a clause to a reviewer state (``deferred`` or ``not_applicable``), or ``reset`` to take the tool's reading back."""
+_HASHES: dict[tuple, str] = {}        # (file, size, time) -> its digest: a drawing set is large and read once
+
+
+def _file_digest(path: Path | None) -> str:
+    if path is None or not path.is_file():
+        return ""
+    st = path.stat()
+    key = (str(path), st.st_size, st.st_mtime_ns)
+    if key not in _HASHES:
+        _HASHES[key] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return _HASHES[key]
+
+
+def _words_digest(text: str) -> str:
+    return hashlib.sha256(" ".join(text.split()).encode("utf-8")).hexdigest()
+
+
+def basis(store: Store, pid: str, clause_text: str | None) -> dict:
+    """What a decision rests on: the drawings file and the words of the requirement, as they are now."""
+    plan = _file_digest(store.plan_path(store.get(pid)))
+    return {**({"plan": plan} if plan else {}), **({"clause": _words_digest(clause_text)} if clause_text else {})}
+
+
+def decisions(store: Store, pid: str, clause_texts: dict[str, str]) -> dict:
+    """Every decision, with ``stale`` saying why one no longer holds: made on other drawings, or on other words. A deferral
+    speaks of a submittal, not of the drawings, so it holds as long as the words do."""
+    out, plan = {}, None
+    for clause, st in clause_states(store, pid).items():
+        was, why = st.get("basis") or {}, []
+        if "clause" in was:
+            text = clause_texts.get(clause)
+            if text is None or _words_digest(text) != was["clause"]:
+                why.append("the requirement's words changed")
+        if "plan" in was and st.get("state") != "deferred":
+            plan = _file_digest(store.plan_path(store.get(pid))) if plan is None else plan
+            if plan != was["plan"]:
+                why.append("the drawings were replaced")
+        out[clause] = {**st, "stale": " and ".join(why) or None}
+    return out
+
+
+def holding(store: Store, pid: str, clause_texts: dict[str, str]) -> dict:
+    """The decisions that still hold. Only these count: a pass never rests on drawings or words that are gone."""
+    return {k: v for k, v in decisions(store, pid, clause_texts).items() if not v["stale"]}
+
+
+def set_clause_state(store: Store, pid: str, clause: str, state: str, reviewer: str, note: str = "",
+                     evidence: dict | None = None, clause_text: str | None = None) -> dict:
+    """A reviewer decides a clause by hand (``reviewer_decisions`` in reviewer_states.yaml), or ``reset`` takes it back.
+    ``evidence``: where on the plans {sheet, box, text}; the caller has checked that the place exists."""
     who = need_name(reviewer)
-    allowed = rs.config()["reviewer_settable"]
+    allowed = list(rs.config()["reviewer_decisions"])
     if state != "reset" and state not in allowed:
         raise ValueError(f"unknown state {state!r}; a reviewer may set {', '.join(allowed)}, or reset")
     if not (clause or "").strip():
         raise ValueError("a clause is required")
+    needs = (rs.config()["reviewer_decisions"].get(state) or {}).get("needs")
+    if needs == "note" and not _is_text(note):
+        raise ValueError("write the comment to the applicant")
+    if needs == "evidence" and not evidence and not _is_text(note):
+        raise ValueError("say where the plans show it: pick a note or a sheet, or write what you relied on")
     with _lock(pid):
         states = clause_states(store, pid)
         if state == "reset":
             states.pop(clause, None)
         else:
-            states[clause] = {"state": state, "by": who, "at": now(), "note": (note or "").strip()}
+            states[clause] = {"state": state, "by": who, "at": now(), "note": (note or "").strip(),
+                              "basis": basis(store, pid, clause_text),
+                              **({"evidence": evidence} if evidence else {})}
         _write(_dir(store, pid) / "clause_states.json", states)
-        log(store, pid, who, f"clause {clause} set to {state}", {"clause": clause, "state": state, "note": (note or "").strip()})
+        log(store, pid, who, f"clause {clause} set to {state}", {"clause": clause, "state": state, "note": (note or "").strip(),
+                                                              **({"evidence": evidence} if evidence else {})})
     return states.get(clause) or {"state": "reset"}
 
 

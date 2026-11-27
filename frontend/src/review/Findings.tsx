@@ -26,7 +26,7 @@ export function Findings({ sheets, list, located, selected, opened, canDecide, e
       <div className="blank">
         <h3>No corrections to show</h3>
         <p>{list.uncovered_clauses > 0
-          ? `${list.uncovered_clauses} requirements have not been checked yet. Approve checks in the Requirements tab, then run them. An empty list does not mean the plans comply.`
+          ? `${list.uncovered_clauses} requirements are still undecided. Decide them in the Requirements tab. An empty list does not mean the plans comply.`
           : "The checks that ran raised no correction. This covers only the requirements that were checked."}</p>
       </div>
     );
@@ -52,7 +52,7 @@ export function Findings({ sheets, list, located, selected, opened, canDecide, e
           })}
         </div>
         <p>{left === 0 ? "Every item has your decision." : `${left} of ${list.items.length} still need your decision.`}
-          {list.uncovered_clauses > 0 && ` ${list.uncovered_clauses} requirements were not checked.`}</p>
+          {list.uncovered_clauses > 0 && ` ${list.uncovered_clauses} requirements are still undecided.`}</p>
       </div>
       <ol className="cards">
         {shown.map((item) => (
@@ -91,7 +91,7 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
         <span className="num">{item.n ?? "x"}</span>
         <span className="sum">
           <span className="line"><strong>{item.status_label}</strong><em>{item.citation}</em></span>
-          <span className="quote-short">{item.quote}</span>
+          <span className="quote-short">{item.decided_by ? item.wording : item.quote}</span>
         </span>
         {state !== "pending" && <span className={`decided ${state}`}>{DONE[state]}</span>}
       </button>
@@ -100,8 +100,11 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
           <h4>{item.from_document ? "The requirement, as written" : "A built-in rule, not from your document"}</h4>
           <blockquote>{item.quote}</blockquote>
 
-          <h4>What the drawings show</h4>
-          {item.facts.length === 0 && <p className="muted">No value could be read for this requirement.</p>}
+          <h4>{item.decided_by ? `What ${item.decided_by} pointed at` : "What the drawings show"}</h4>
+          {item.overrode && <p className="notice-line">The tool had concluded: {item.overrode}. The reviewer's decision replaces it.</p>}
+          {item.facts.length === 0 && (
+            <p className="muted">{item.decided_by ? "No note was pointed at." : "No value could be read for this requirement."}</p>
+          )}
           <ul className="facts">
             {item.facts.map((f, i) => (
               <li key={i}>
@@ -142,12 +145,14 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
                 </>
               ) : (
                 <>
-                  <span className="muted">{DONE[state]} by {item.review.by}</span>
+                  <span className="muted">{item.decided_by && state === "accept" ? "Written" : DONE[state]} by {item.review.by}</span>
                   <button onClick={() => setEditing(true)}>Edit</button>
-                  <button onClick={() => actions.decide(item, "reset")}>Undo</button>
+                  {item.decided_by
+                    ? <button onClick={() => actions.restore(item.clause)}>Take this correction back</button>
+                    : <button onClick={() => actions.decide(item, "reset")}>Undo</button>}
                 </>
               )}
-              {!aside && (
+              {!aside && !item.decided_by && (
                 <span className="more">
                   <button className="link" onClick={() => setAside("deferred")}>Deferred submittal</button>
                   <button className="link" onClick={() => setAside("not_applicable")}>Does not apply</button>

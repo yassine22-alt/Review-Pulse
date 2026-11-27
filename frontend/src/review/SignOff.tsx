@@ -5,6 +5,7 @@ import type { CorrectionList } from "./types";
 const EXPORTS = [
   { format: "html", label: "Correction letter", hint: "Opens in the browser, ready to print", open: true },
   { format: "pdf", label: "Marked up drawings", hint: "PDF with a numbered cloud at each place", open: true },
+  { format: "coverage", label: "Review record", hint: "Every requirement, with who decided it and why", open: true },
   { format: "csv", label: "Spreadsheet", hint: "CSV, one line per comment", open: false },
   { format: "bcf", label: "BCF issues", hint: "For design tools that read BCF", open: false },
 ];
@@ -39,8 +40,9 @@ export function SignOffDrawer({ project, list, canSign, close, reload }: {
         {problem && <p className="problem" role="alert">{problem}</p>}
         {left > 0 && <p className="notice-line">{left} comments have no decision from you yet. They are exported as proposed.</p>}
         {list.uncovered_clauses > 0 && (
-          <p className="notice-line">{list.uncovered_clauses} requirements were not checked by the tool. They are yours to check.</p>
+          <p className="notice-line">{list.uncovered_clauses} requirements are still undecided. No check or reviewer has covered them.</p>
         )}
+        {(list.shown?.length ?? 0) > 0 && <p className="muted">{list.shown.length} requirements recorded as shown on the plans by a reviewer.</p>}
         <h3>By discipline</h3>
         {Object.keys(list.disciplines).length === 0 && <p className="muted">There is nothing to sign yet.</p>}
         {Object.entries(list.disciplines).map(([id, d]) => (
@@ -62,7 +64,8 @@ export function SignOffDrawer({ project, list, canSign, close, reload }: {
         <h3>Export</h3>
         <div className="exports">
           {EXPORTS.map((x) => (
-            <a key={x.format} href={`/api/projects/${project}/correction-list?format=${x.format}`}
+            <a key={x.format} href={x.format === "coverage" ? `/api/projects/${project}/coverage.html`
+              : `/api/projects/${project}/correction-list?format=${x.format}`}
               {...(x.open ? { target: "_blank", rel: "noreferrer" } : {})}>
               <strong>{x.label}</strong><small>{x.hint}</small>
             </a>

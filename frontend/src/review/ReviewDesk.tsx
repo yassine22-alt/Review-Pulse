@@ -3,14 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { api, type Job, type Project, type User } from "../api";
 import { Logo, Problem, Spinner } from "../ui";
 import { Findings, toneOf, type ItemActions } from "./Findings";
-import { Requirements } from "./Requirements";
+import { Requirements, undecided } from "./Requirements";
 import { SheetCanvas, type Mark } from "./SheetCanvas";
 import { SignOffDrawer } from "./SignOff";
-import { noteShape, shapesOf, type Clause, type CorrectionList, type NoteRef, type Reading, type View } from "./types";
+import { noteShape, shapesOf, type Clause, type CorrectionList, type Determination, type NoteRef, type Reading, type View } from "./types";
 
 interface Data {
   project: Project; view: View | null; list: CorrectionList;
-  clauses: Clause[]; readings: Record<string, Reading>; jobs: Job[];
+  clauses: Clause[]; readings: Record<string, Reading>; decisions: Record<string, Determination>; jobs: Job[];
 }
 
 export function ReviewDesk({ user }: { user: User }) {
@@ -30,15 +30,16 @@ export function ReviewDesk({ user }: { user: User }) {
   const load = useCallback(async () => {
     const url = `/api/projects/${id}`;
     try {
-      const [project, view, list, doc, readings, jobs] = await Promise.all([
+      const [project, view, list, doc, readings, decisions, jobs] = await Promise.all([
         api<Project>(url),
         api<View>(`${url}/view`).catch(() => null),
         api<CorrectionList>(`${url}/correction-list`),
         api<{ clauses: Clause[] }>(`${url}/document`).catch(() => ({ clauses: [] as Clause[] })),
         api<Record<string, Reading>>(`${url}/interpreted`),
+        api<Record<string, Determination>>(`${url}/clause-states`),
         api<Job[]>(`${url}/jobs`),
       ]);
-      setData({ project, view, list, clauses: doc.clauses, readings, jobs });
+      setData({ project, view, list, clauses: doc.clauses, readings, decisions, jobs });
       setTab((t) => t ?? (list.items.length ? "corrections" : "requirements"));
     } catch (e) { setProblem((e as Error).message); }
   }, [id]);
@@ -116,7 +117,9 @@ export function ReviewDesk({ user }: { user: User }) {
     key: i.key, label: String(i.n ?? ""), tone: toneOf(i),
     shapes: (places.get(i.key) ?? []).filter((p) => p.sheet === current?.index).map((p) => p.shape),
   })).filter((m) => m.shapes.length);
-  const reviewed = list.edit_burden.items - list.edit_burden.unreviewed;
+  const total = data.clauses.length;
+  const done = total - undecided(data.clauses, data.readings, data.decisions).length;
+  const waiting = list.items.filter((i) => i.review.action === "pending").length;
   if (note && note.sheet === current?.index) marks.push(note.mark);
 
   function showNote(ref: NoteRef) {
@@ -140,8 +143,8 @@ export function ReviewDesk({ user }: { user: User }) {
         <Link to={`/submissions/${project.id}`} className="back" aria-label="Back to the submission"><Logo /></Link>
         <div className="what"><strong>{project.name}</strong><small>{project.plan} · round {list.cycle}</small></div>
         <div className="progressline">
-          {list.items.length > 0 && <><progress max={list.items.length} value={reviewed} />
-            <span>{reviewed} of {list.items.length} decided</span></>}
+          {total > 0 && <><progress max={total} value={done} />
+            <span>{done} of {total} requirements{waiting > 0 && `, ${waiting} comments to review`}</span></>}
         </div>
         <Link to="/">My work</Link>
         <button className="primary" onClick={() => setSigning(true)}>Sign off and export</button>
@@ -185,8 +188,9 @@ export function ReviewDesk({ user }: { user: User }) {
               editing={editing} setEditing={setEditing} onSelect={(k) => select(selected === k ? null : k)}
               onZoom={() => selected && select(selected)} actions={actions} />
           ) : (
-            <Requirements sheets={view?.sheets ?? []} onShowNote={showNote} project={project} clauses={data.clauses} readings={data.readings} canDecide={canDecide}
-              busy={running.length > 0} reload={load} onError={setProblem} startJob={startJob} />
+            <Requirements sheets={view?.sheets ?? []} viewing={current} onShowNote={showNote} project={project} clauses={data.clauses}
+              readings={data.readings} decisions={data.decisions} canDecide={canDecide} busy={running.length > 0} reload={load}
+              onError={setProblem} startJob={startJob} />
           )}
         </div>
         {tab === "corrections" && list.items.length > 0 && (

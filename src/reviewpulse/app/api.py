@@ -71,11 +71,18 @@ class ItemAction(BaseModel):
     wording: str | None = None
 
 
+class Place(BaseModel):
+    sheet: str                        # the sheet's id
+    box: list[float] | None = None    # in sheet space; none means the sheet as a whole
+    text: str = ""                    # the words relied on
+
+
 class ClauseState(BaseModel):
     clause: str
-    state: str                        # deferred | not_applicable | reset
+    state: str                        # shown | correction | not_applicable | deferred | reset
     reviewer: str = ""
     note: str = ""
+    evidence: Place | None = None
 
 
 class SignOff(BaseModel):
@@ -295,6 +302,15 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         project(pid)
         return {"links": interpretation.set_context_links(store, pid, body.links)}
 
+    @app.get("/api/projects/{pid}/notes")
+    def get_notes(pid: str, clause: str):
+        """The notes of the drawing set closest to a requirement. A search only: no rule is written and nothing is decided."""
+        project(pid)
+        try:
+            return interpretation.find_notes(store, pid, clause)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
     @app.get("/api/projects/{pid}/interpreted")
     def get_interpreted(pid: str):
         project(pid)
@@ -434,7 +450,7 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
 
         cfg = rstates.config()
         return {"statuses": {k: v["label"] for k, v in cfg["statuses"].items()}, "results": cfg["results"],
-                "signoff_results": cfg["signoff_results"], "reviewer_settable": cfg["reviewer_settable"],
+                "signoff_results": cfg["signoff_results"], "reviewer_settable": list(cfg["reviewer_decisions"]),
                 "disciplines": {k: disciplines.label(k) for k in disciplines.order()}}
 
     EXPORT_TYPES = {"pdf": ("application/pdf", "correction_markup.pdf"), "bcf": ("application/octet-stream", "correction_list.bcf"),
@@ -486,14 +502,18 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     @app.get("/api/projects/{pid}/clause-states")
     def get_clause_states(pid: str):
         project(pid)
-        return workflow.clause_states(store, pid)
+        return workflow.decisions(store, pid, service.clause_texts(store, pid))
 
     @app.put("/api/projects/{pid}/clause-states")
     def put_clause_state(pid: str, body: ClauseState, request: Request):
         project(pid)
         body.reviewer = who(request, body.reviewer)
         try:
-            return workflow.set_clause_state(store, pid, body.clause, body.state, body.reviewer, body.note)
+            evidence = service.checked_place(store, pid, body.evidence.model_dump()) if body.evidence else None
+            if body.state in ("shown", "correction"):
+                service.known_clause(store, pid, body.clause)
+            return workflow.set_clause_state(store, pid, body.clause, body.state, body.reviewer, body.note, evidence,
+                                             service.clause_texts(store, pid).get(body.clause))
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
 
