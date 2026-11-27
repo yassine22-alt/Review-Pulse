@@ -1,0 +1,1080 @@
+{
+ "what": "Narrow presence questions on drawing areas chosen by hand, to test a vision model without blaming a search. One person wrote the key by eye before any model was run; no plan reviewer has confirmed it. Areas are fractions of the page, object boxes fractions of the area. The drawings are not in the repository.",
+ "areas": [
+  {
+   "id": "utility",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 20,
+   "box": [
+    0.68,
+    0.5,
+    0.93,
+    0.76
+   ],
+   "questions": [
+    {
+     "what": "a water heater",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.17,
+       0.11,
+       0.25,
+       0.21
+      ],
+      [
+       0.17,
+       0.22,
+       0.25,
+       0.32
+      ]
+     ],
+     "id": "utility.1"
+    },
+    {
+     "what": "a gas furnace",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.17,
+       0.34,
+       0.24,
+       0.44
+      ]
+     ],
+     "id": "utility.2"
+    },
+    {
+     "what": "a washing machine",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.83,
+       0.61,
+       0.89,
+       0.71
+      ]
+     ],
+     "id": "utility.3"
+    },
+    {
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.85,
+       0.85,
+       0.92,
+       0.93
+      ]
+     ],
+     "id": "utility.4"
+    },
+    {
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.27,
+       0.48,
+       0.56,
+       0.8
+      ]
+     ],
+     "id": "utility.5"
+    },
+    {
+     "what": "a bathtub",
+     "present": false,
+     "id": "utility.6"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": false,
+     "id": "utility.7"
+    },
+    {
+     "what": "a fireplace",
+     "present": false,
+     "id": "utility.8"
+    },
+    {
+     "what": "a swimming pool",
+     "present": false,
+     "id": "utility.9"
+    }
+   ]
+  },
+  {
+   "id": "upstairs",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 20,
+   "box": [
+    0.32,
+    0.1,
+    0.69,
+    0.45
+   ],
+   "questions": [
+    {
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.25,
+       0.3,
+       0.29,
+       0.39
+      ],
+      [
+       0.35,
+       0.56,
+       0.39,
+       0.65
+      ],
+      [
+       0.51,
+       0.49,
+       0.57,
+       0.55
+      ]
+     ],
+     "id": "upstairs.1"
+    },
+    {
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.05,
+       0.32,
+       0.09,
+       0.42
+      ],
+      [
+       0.3,
+       0.59,
+       0.35,
+       0.66
+      ],
+      [
+       0.53,
+       0.56,
+       0.57,
+       0.64
+      ]
+     ],
+     "id": "upstairs.2"
+    },
+    {
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.59,
+       0.06,
+       0.89,
+       0.36
+      ]
+     ],
+     "id": "upstairs.3"
+    },
+    {
+     "what": "a shower",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.18,
+       0.46,
+       0.3,
+       0.56
+      ],
+      [
+       0.43,
+       0.52,
+       0.47,
+       0.66
+      ]
+     ],
+     "id": "upstairs.4"
+    },
+    {
+     "what": "a bathtub",
+     "present": false,
+     "id": "upstairs.5"
+    },
+    {
+     "what": "a water heater",
+     "present": false,
+     "id": "upstairs.6"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": false,
+     "id": "upstairs.7"
+    },
+    {
+     "what": "a washing machine",
+     "present": false,
+     "id": "upstairs.8"
+    },
+    {
+     "what": "a fireplace",
+     "present": false,
+     "id": "upstairs.9"
+    }
+   ]
+  },
+  {
+   "id": "bedroom",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 19,
+   "box": [
+    0.26,
+    0.68,
+    0.405,
+    0.83
+   ],
+   "questions": [
+    {
+     "what": "a ceiling fan",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.41,
+       0.22,
+       0.62,
+       0.53
+      ]
+     ],
+     "id": "bedroom.1"
+    },
+    {
+     "what": "a skylight",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.32,
+       0.28,
+       0.42,
+       0.7
+      ],
+      [
+       0.61,
+       0.28,
+       0.71,
+       0.7
+      ]
+     ],
+     "id": "bedroom.2"
+    },
+    {
+     "what": "an electrical light switch",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.05,
+       0.03,
+       0.09,
+       0.06
+      ],
+      [
+       0.95,
+       0.39,
+       1.0,
+       0.49
+      ],
+      [
+       0.25,
+       0.0,
+       0.29,
+       0.03
+      ],
+      [
+       0.77,
+       0.0,
+       0.81,
+       0.03
+      ]
+     ],
+     "id": "bedroom.3"
+    },
+    {
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.85,
+       0.52,
+       1.0,
+       0.73
+      ]
+     ],
+     "id": "bedroom.4"
+    },
+    {
+     "what": "a toilet",
+     "present": false,
+     "id": "bedroom.5"
+    },
+    {
+     "what": "a staircase",
+     "present": false,
+     "id": "bedroom.6"
+    },
+    {
+     "what": "a bathtub",
+     "present": false,
+     "id": "bedroom.7"
+    },
+    {
+     "what": "a fireplace",
+     "present": false,
+     "id": "bedroom.8"
+    },
+    {
+     "what": "a water heater",
+     "present": false,
+     "id": "bedroom.9"
+    }
+   ]
+  },
+  {
+   "id": "garage_elec",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 19,
+   "box": [
+    0.71,
+    0.19,
+    0.91,
+    0.62
+   ],
+   "questions": [
+    {
+     "what": "an electrical panel",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.36,
+       0.92,
+       0.6,
+       0.99
+      ]
+     ],
+     "id": "garage_elec.1"
+    },
+    {
+     "what": "a charging point for an electric vehicle",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.73,
+       0.08,
+       0.83,
+       0.12
+      ]
+     ],
+     "id": "garage_elec.2"
+    },
+    {
+     "what": "electricity and gas meters",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.76,
+       0.0,
+       0.95,
+       0.06
+      ]
+     ],
+     "id": "garage_elec.3"
+    },
+    {
+     "what": "an irrigation control",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.11,
+       0.71,
+       0.26,
+       0.75
+      ]
+     ],
+     "id": "garage_elec.4"
+    },
+    {
+     "what": "a toilet",
+     "present": false,
+     "id": "garage_elec.5"
+    },
+    {
+     "what": "a staircase",
+     "present": false,
+     "id": "garage_elec.6"
+    },
+    {
+     "what": "a ceiling fan",
+     "present": false,
+     "id": "garage_elec.7"
+    },
+    {
+     "what": "a bathtub",
+     "present": false,
+     "id": "garage_elec.8"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": false,
+     "id": "garage_elec.9"
+    }
+   ]
+  },
+  {
+   "id": "section_stairs",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 13,
+   "box": [
+    0.08,
+    0.03,
+    0.91,
+    0.44
+   ],
+   "questions": [
+    {
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.49,
+       0.52,
+       0.62,
+       0.72
+      ],
+      [
+       0.66,
+       0.81,
+       0.76,
+       0.94
+      ]
+     ],
+     "id": "section_stairs.1"
+    },
+    {
+     "what": "a written room height dimension",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.47,
+       0.45,
+       0.5,
+       0.7
+      ],
+      [
+       0.74,
+       0.74,
+       0.76,
+       0.93
+      ]
+     ],
+     "id": "section_stairs.2"
+    },
+    {
+     "what": "a roof slope symbol",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.66,
+       0.32,
+       0.72,
+       0.38
+      ]
+     ],
+     "id": "section_stairs.3"
+    },
+    {
+     "what": "a note about skylights",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.16,
+       0.33,
+       0.23,
+       0.4
+      ],
+      [
+       0.46,
+       0.0,
+       0.51,
+       0.06
+      ]
+     ],
+     "id": "section_stairs.4"
+    },
+    {
+     "what": "a toilet",
+     "present": false,
+     "id": "section_stairs.5"
+    },
+    {
+     "what": "a car",
+     "present": false,
+     "id": "section_stairs.6"
+    },
+    {
+     "what": "a fireplace",
+     "present": false,
+     "id": "section_stairs.7"
+    },
+    {
+     "what": "a person",
+     "present": false,
+     "id": "section_stairs.8"
+    }
+   ]
+  },
+  {
+   "id": "stair_detail",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 13,
+   "box": [
+    0.29,
+    0.8,
+    0.41,
+    0.96
+   ],
+   "questions": [
+    {
+     "what": "a handrail with its height written",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.4,
+       0.3,
+       0.86,
+       0.6
+      ]
+     ],
+     "id": "stair_detail.1"
+    },
+    {
+     "what": "a written minimum headroom height",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.33,
+       0.1,
+       0.66,
+       0.22
+      ]
+     ],
+     "id": "stair_detail.2"
+    },
+    {
+     "what": "a written maximum riser height",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.7,
+       0.66,
+       0.87,
+       0.76
+      ]
+     ],
+     "id": "stair_detail.3"
+    },
+    {
+     "what": "vertical balusters (posts under a guard rail)",
+     "present": false,
+     "id": "stair_detail.4"
+    },
+    {
+     "what": "a window",
+     "present": false,
+     "id": "stair_detail.5"
+    },
+    {
+     "what": "a door",
+     "present": false,
+     "id": "stair_detail.6"
+    },
+    {
+     "what": "a written handrail grip diameter",
+     "present": false,
+     "id": "stair_detail.7"
+    }
+   ]
+  },
+  {
+   "id": "entry_office",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 5,
+   "box": [
+    0.31,
+    0.7,
+    0.52,
+    0.88
+   ],
+   "questions": [
+    {
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.0,
+       0.0,
+       0.21,
+       0.29
+      ],
+      [
+       0.48,
+       0.25,
+       0.6,
+       0.38
+      ],
+      [
+       0.55,
+       0.49,
+       0.64,
+       0.68
+      ],
+      [
+       0.75,
+       0.51,
+       0.89,
+       0.71
+      ]
+     ],
+     "id": "entry_office.1"
+    },
+    {
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.0,
+       0.48,
+       0.1,
+       0.75
+      ],
+      [
+       0.18,
+       0.88,
+       0.43,
+       0.94
+      ]
+     ],
+     "id": "entry_office.2"
+    },
+    {
+     "what": "the floor area of a room written in square feet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.25,
+       0.42,
+       0.39,
+       0.47
+      ],
+      [
+       0.74,
+       0.49,
+       0.87,
+       0.54
+      ]
+     ],
+     "id": "entry_office.3"
+    },
+    {
+     "what": "a toilet",
+     "present": false,
+     "id": "entry_office.4"
+    },
+    {
+     "what": "a bathtub",
+     "present": false,
+     "id": "entry_office.5"
+    },
+    {
+     "what": "a staircase",
+     "present": false,
+     "id": "entry_office.6"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": false,
+     "id": "entry_office.7"
+    },
+    {
+     "what": "a smoke detector",
+     "present": false,
+     "id": "entry_office.8"
+    }
+   ]
+  },
+  {
+   "id": "elevation",
+   "pdf": "chief_architect_austin.pdf",
+   "page": 3,
+   "box": [
+    0.0,
+    0.0,
+    0.92,
+    0.5
+   ],
+   "questions": [
+    {
+     "what": "a front entrance door",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.49,
+       0.49,
+       0.56,
+       0.69
+      ]
+     ],
+     "id": "elevation.1"
+    },
+    {
+     "what": "windows",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.26,
+       0.44,
+       0.34,
+       0.64
+      ],
+      [
+       0.38,
+       0.24,
+       0.47,
+       0.39
+      ],
+      [
+       0.58,
+       0.18,
+       0.73,
+       0.39
+      ],
+      [
+       0.83,
+       0.43,
+       0.9,
+       0.62
+      ]
+     ],
+     "id": "elevation.2"
+    },
+    {
+     "what": "written heights of roof ridges or floor levels",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.06,
+       0.07,
+       0.19,
+       0.76
+      ]
+     ],
+     "id": "elevation.3"
+    },
+    {
+     "what": "a car",
+     "present": false,
+     "id": "elevation.4"
+    },
+    {
+     "what": "solar panels",
+     "present": false,
+     "id": "elevation.5"
+    },
+    {
+     "what": "a chimney",
+     "present": false,
+     "id": "elevation.6"
+    },
+    {
+     "what": "a person",
+     "present": false,
+     "id": "elevation.7"
+    }
+   ]
+  },
+  {
+   "id": "mill_existing",
+   "pdf": "millcreek_existing_proposed.pdf",
+   "page": 1,
+   "box": [
+    0.0,
+    0.0,
+    0.72,
+    0.5
+   ],
+   "questions": [
+    {
+     "what": "a furnace",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.5,
+       0.79,
+       0.62,
+       0.88
+      ]
+     ],
+     "id": "mill_existing.1"
+    },
+    {
+     "what": "a washer and a dryer",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.66,
+       0.66,
+       0.75,
+       0.82
+      ]
+     ],
+     "id": "mill_existing.2"
+    },
+    {
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.27,
+       0.78,
+       0.39,
+       0.91
+      ]
+     ],
+     "id": "mill_existing.3"
+    },
+    {
+     "what": "an electrical light switch",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.93,
+       0.68,
+       0.98,
+       0.73
+      ],
+      [
+       0.38,
+       0.79,
+       0.42,
+       0.84
+      ],
+      [
+       0.26,
+       0.78,
+       0.29,
+       0.84
+      ]
+     ],
+     "id": "mill_existing.4"
+    },
+    {
+     "what": "a toilet",
+     "present": false,
+     "id": "mill_existing.5"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": false,
+     "id": "mill_existing.6"
+    },
+    {
+     "what": "an electrical panel",
+     "present": false,
+     "id": "mill_existing.7"
+    },
+    {
+     "what": "a smoke detector",
+     "present": false,
+     "id": "mill_existing.8"
+    },
+    {
+     "what": "a refrigerator",
+     "present": false,
+     "id": "mill_existing.9"
+    },
+    {
+     "what": "a written ceiling height",
+     "present": false,
+     "id": "mill_existing.10"
+    }
+   ]
+  },
+  {
+   "id": "mill_proposed",
+   "pdf": "millcreek_existing_proposed.pdf",
+   "page": 1,
+   "box": [
+    0.0,
+    0.49,
+    0.72,
+    0.92
+   ],
+   "questions": [
+    {
+     "what": "an electrical panel",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.95,
+       0.43,
+       1.0,
+       0.59
+      ]
+     ],
+     "id": "mill_proposed.1"
+    },
+    {
+     "what": "a refrigerator",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.69,
+       0.04,
+       0.78,
+       0.14
+      ]
+     ],
+     "id": "mill_proposed.2"
+    },
+    {
+     "what": "a kitchen cooktop or range",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.89,
+       0.29,
+       0.97,
+       0.4
+      ]
+     ],
+     "id": "mill_proposed.3"
+    },
+    {
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.88,
+       0.71,
+       0.95,
+       0.82
+      ]
+     ],
+     "id": "mill_proposed.4"
+    },
+    {
+     "what": "a bathroom exhaust fan",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.84,
+       0.78,
+       0.89,
+       0.84
+      ]
+     ],
+     "id": "mill_proposed.5"
+    },
+    {
+     "what": "a written ceiling height",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.34,
+       0.2,
+       0.41,
+       0.24
+      ],
+      [
+       0.74,
+       0.29,
+       0.8,
+       0.33
+      ],
+      [
+       0.55,
+       0.18,
+       0.62,
+       0.27
+      ]
+     ],
+     "id": "mill_proposed.6"
+    },
+    {
+     "what": "a smoke detector",
+     "present": false,
+     "id": "mill_proposed.7"
+    },
+    {
+     "what": "a fireplace",
+     "present": false,
+     "id": "mill_proposed.8"
+    },
+    {
+     "what": "a ceiling fan",
+     "present": false,
+     "id": "mill_proposed.9"
+    },
+    {
+     "what": "a swimming pool",
+     "present": false,
+     "id": "mill_proposed.10"
+    },
+    {
+     "what": "a skylight",
+     "present": false,
+     "id": "mill_proposed.11"
+    }
+   ]
+  }
+ ]
+}

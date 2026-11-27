@@ -157,3 +157,22 @@ def test_a_decision_stops_counting_when_the_drawings_or_the_words_change(review,
     assert listing(c, pid)["deferred"] == []
     assert put(c, pid, clause=one, state="shown", note="confirmed on the new set").status_code == 200          # deciding again works
     assert c.get(f"/api/projects/{pid}/clause-states").json()[one]["stale"] is None
+
+
+def test_each_part_is_searched_and_only_a_shown_part_can_be_ticked(review):
+    c, pid, _sheet, clauses = review
+    two = clause(clauses, "1.2")
+    got = c.get(f"/api/projects/{pid}/parts", params={"clause": two})
+    assert got.status_code == 200, got.text
+    body = got.json()
+    # the test model refuses every question, so the requirement stands whole: searching still works without a model
+    assert not body["split_by_model"] and len(body["parts"]) == 1
+    part = body["parts"][0]["text"]
+    assert {"notes", "written"} <= set(body["parts"][0])
+    assert put(c, pid, clause=two, state="correction", note="x", parts=[{"text": "a guard rail", "mark": "missing"}]).status_code == 400
+    assert put(c, pid, clause=two, state="correction", note="x", parts=[{"text": part, "mark": "maybe"}]).status_code == 400
+    assert put(c, pid, clause=two, state="shown", note="x", parts=[{"text": part, "mark": "missing"}]).status_code == 400
+    ok = put(c, pid, clause=two, state="correction", note="Show it.", parts=[{"text": part, "mark": "missing"}])
+    assert ok.status_code == 200, ok.text
+    assert c.get(f"/api/projects/{pid}/clause-states").json()[two]["parts"] == [{"text": part, "mark": "missing"}]
+    assert put(c, pid, clause=two, state="reset").status_code == 200

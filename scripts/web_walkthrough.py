@@ -141,8 +141,16 @@ def main(out: Path) -> None:
         card = page.locator(".item.clause.open")
         first = page.locator(".item.clause").filter(has=page.locator(".cid", has_text=re.compile(r"^Art\. 1$")))
         first.locator(".head").click()
+        # each part of the requirement is searched; ticking one as missing starts the comment from the requirement's words
+        missing = card.get_by_role("button", name="It is missing").first
+        expect(missing).to_be_visible(timeout=120000)
+        missing.click()
+        expect(card.get_by_role("button", name="Shown on the plans")).to_be_disabled()   # not while a part is missing
         card.get_by_role("button", name="Needs correction").click()
         record = card.get_by_role("button", name="Record my decision")
+        expect(card.get_by_label("Comment to the applicant")).to_have_value(re.compile("^Show on the plans: .+[.]$"))
+        shot("7a_parts_ticked")
+        card.get_by_label("Comment to the applicant").fill("")
         expect(record).to_be_disabled()                       # a correction needs its comment
         card.get_by_label("Sheet that shows it").select_option(index=1)
         card.get_by_label("Comment to the applicant").fill("Show the exit door on the ground floor plan")

@@ -77,12 +77,18 @@ class Place(BaseModel):
     text: str = ""                    # the words relied on
 
 
+class PartMark(BaseModel):
+    text: str
+    mark: str                         # seen | missing
+
+
 class ClauseState(BaseModel):
     clause: str
     state: str                        # shown | correction | not_applicable | deferred | reset
     reviewer: str = ""
     note: str = ""
     evidence: Place | None = None
+    parts: list[PartMark] = []        # what the reviewer ticked, part by part
 
 
 class SignOff(BaseModel):
@@ -311,6 +317,16 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
 
+    @app.get("/api/projects/{pid}/parts")
+    def get_parts(pid: str, clause: str):
+        """The things one requirement asks for, each with the notes and the drawing text closest to it. Only the
+        requirement's words go to the reading model."""
+        project(pid)
+        try:
+            return interpretation.find_parts(store, pid, clause, llm)
+        except ValueError as e:
+            raise HTTPException(409, str(e)) from None
+
     @app.get("/api/projects/{pid}/interpreted")
     def get_interpreted(pid: str):
         project(pid)
@@ -513,7 +529,9 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             if body.state in ("shown", "correction"):
                 service.known_clause(store, pid, body.clause)
             return workflow.set_clause_state(store, pid, body.clause, body.state, body.reviewer, body.note, evidence,
-                                             service.clause_texts(store, pid).get(body.clause))
+                                             service.clause_texts(store, pid).get(body.clause),
+                                             [m.model_dump() for m in body.parts],
+                                             interpretation.offered_parts(store, pid, body.clause) if body.parts else [])
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
 

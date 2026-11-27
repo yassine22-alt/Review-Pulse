@@ -35,13 +35,17 @@ export interface CorrectionList {
 }
 
 export interface NoteRef { sheet: string; text: string; box?: number[] | null }
+export interface Found extends NoteRef { kind?: string; times?: number }
+export interface PartSearch {
+  parts: { text: string; notes: Found[]; written: Found[] }[]; whole_line?: Found[]; split_by_model: boolean; left_out: string[];
+}
 export interface Evidence {
   chosen?: NoteRef | null; candidates?: NoteRef[];
   checks?: { required: string; stated: string | null; result: string }[];
 }
 export interface Determination {
   state: "shown" | "correction" | "not_applicable" | "deferred"; by: string; at: string; note: string;
-  evidence?: (NoteRef & { page?: number }) | null; stale?: string | null;
+  evidence?: (NoteRef & { page?: number }) | null; stale?: string | null; parts?: { text: string; mark: "seen" | "missing" }[];
 }
 export interface Clause { id: string; heading: string; text: string }
 export interface Reading {

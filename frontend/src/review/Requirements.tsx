@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { api, type Project } from "../api";
 import { CHOICES, Decision, type Choice } from "./Decision";
 import { Notes } from "./Notes";
+import { Parts, type Marks } from "./Parts";
 import { plainClause, plainNeed, plainOutcome } from "./plain";
-import type { Clause, Determination, Evidence, NoteRef, Reading, SheetView } from "./types";
+import type { Clause, Determination, NoteRef, PartSearch, Reading, SheetView } from "./types";
 
 const GROUPS = [
   { key: "approve", title: "A check is waiting for your approval" },
@@ -36,6 +37,7 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
   const { canDecide, reload, onError } = shared;
   const [open, setOpen] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [ticks, setTicks] = useState<Record<string, Marks>>({});   // kept while moving between requirements
   const url = `/api/projects/${project.id}`;
   const group = (c: Clause) => groupOf(readings[c.id], decisions[c.id]);
   const left = undecided(clauses, readings, decisions).length;
@@ -44,12 +46,17 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
   const wanted = search.trim().toLowerCase();
   const shown = clauses.filter((c) => !wanted || `${c.id} ${c.text}`.toLowerCase().includes(wanted));
 
-  /** After a decision, open the next requirement still to decide, in the document's order. */
-  function advance(from: string) {
+  const nextAfter = (from: string) => {
     const at = clauses.findIndex((c) => c.id === from);
-    const next = [...clauses.slice(at + 1), ...clauses.slice(0, at)].find((c) => ["todo", "approve"].includes(group(c)));
-    setOpen(next?.id ?? null);
-  }
+    return [...clauses.slice(at + 1), ...clauses.slice(0, at)].find((c) => ["todo", "approve"].includes(group(c)));
+  };
+  /** After a decision, open the next requirement still to decide, in the document's order. */
+  const advance = (from: string) => setOpen(nextAfter(from)?.id ?? null);
+  /** The next one is searched while the reviewer reads this one; the server keeps what it found. A failure waits for its turn. */
+  const prepare = (from: string) => {
+    const next = nextAfter(from);
+    if (next) api(`${url}/parts?clause=${encodeURIComponent(next.id)}`).catch(() => {});
+  };
 
   async function confirmInventory(value: boolean) {
     try {
@@ -93,8 +100,10 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
             <ol className="cards">
               {rows.map((c) => (
                 <ClauseCard key={c.id} url={url} clause={c} reading={readings[c.id]} group={g.key}
+                  marks={ticks[c.id] ?? {}} setMarks={(m) => setTicks((all) => ({ ...all, [c.id]: m }))}
                   mine={decisions[c.id]?.stale ? undefined : decisions[c.id]} earlier={decisions[c.id]?.stale ? decisions[c.id] : undefined}
-                  open={open === c.id} toggle={() => setOpen(open === c.id ? null : c.id)} advance={() => advance(c.id)} {...shared} />
+                  open={open === c.id} toggle={() => setOpen(open === c.id ? null : c.id)} advance={() => advance(c.id)}
+                  prepare={() => prepare(c.id)} {...shared} />
               ))}
             </ol>
           </section>
@@ -105,31 +114,35 @@ export function Requirements({ project, clauses, readings, decisions, busy, star
   );
 }
 
-function ClauseCard({ url, clause, reading, mine, earlier, group, open, toggle, advance, sheets, viewing, onShowNote, canDecide, reload, onError }:
+function ClauseCard({ url, clause, reading, mine, earlier, group, open, toggle, advance, prepare, marks, setMarks, sheets, viewing,
+  onShowNote, canDecide, reload, onError }:
   Shared & { url: string; clause: Clause; reading?: Reading; mine?: Determination; earlier?: Determination; group: Group; open: boolean;
-    toggle: () => void; advance: () => void }) {
+    toggle: () => void; advance: () => void; prepare: () => void; marks: Marks; setMarks: (m: Marks) => void }) {
   const ref = useCardScroll(open);
   const [working, setWorking] = useState("");
   const [read, setRead] = useState(false);
   const [picked, setPicked] = useState<NoteRef | null>(null);
-  const [found, setFound] = useState<Evidence | null>(null);
+  const [found, setFound] = useState<PartSearch | null>(null);
   const [searching, setSearching] = useState(false);
   const notes = [...(reading?.review?.review?.issues ?? []).map((i) => i.message),
     ...(reading?.review?.review?.limitations ?? [])];
-  const evidence = reading?.evidence ?? found;
+  const picks = reading?.evidence?.chosen ? { chosen: reading.evidence.chosen, checks: reading.evidence.checks } : null;
+  const ticked = (found?.parts ?? []).filter((p) => marks[p.text]).map((p) => ({ text: p.text, mark: marks[p.text] }));
 
-  // the closest notes are searched when the card opens: seconds, and no reading model is asked
-  const search = open && !reading?.evidence && !found && !mine;
+  // each part is searched when the card opens; the first time, a model also cuts the requirement into its parts
+  const search = open && !found && !mine;
   useEffect(() => {
     if (!search) return;
     let gone = false;
     setSearching(true);
-    api<Evidence>(`${url}/notes?clause=${encodeURIComponent(clause.id)}`)
-      .then((r) => { if (!gone) setFound(r); })
-      .catch(() => { if (!gone) setFound({ candidates: [] }); })
+    api<PartSearch>(`${url}/parts?clause=${encodeURIComponent(clause.id)}`)
+      .then((r) => { if (!gone) { setFound(r); prepare(); } })
+      .catch((e) => { if (!gone) { setFound({ parts: [], split_by_model: false, left_out: [] }); onError((e as Error).message); } })
       .finally(() => { if (!gone) setSearching(false); });
     return () => { gone = true; };
-  }, [search, url, clause.id]);
+    // prepare is made anew on every render; only the card opening should start a search
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, url, clause.id, onError]);
 
   async function call(label: string, path: string, json?: unknown) {
     setWorking(label);
@@ -142,6 +155,7 @@ function ClauseCard({ url, clause, reading, mine, earlier, group, open, toggle, 
   async function record(state: Choice | "reset", note: string, place: NoteRef | null) {
     try {
       await api(`${url}/clause-states`, { method: "PUT", json: { clause: clause.id, state, note,
+        parts: state === "reset" ? [] : ticked,
         evidence: place ? { sheet: place.sheet, box: place.box ?? null, text: place.text } : null } });
       onError("");
       if (state !== "reset") advance();
@@ -167,14 +181,23 @@ function ClauseCard({ url, clause, reading, mine, earlier, group, open, toggle, 
               {earlier.note && `: ${earlier.note}`}. It no longer counts because {earlier.stale}. Look again and decide.</p>
           )}
 
-          {evidence && !mine && (
-            <Notes evidence={evidence} sheets={sheets} onShow={onShowNote} onUse={canDecide ? setPicked : undefined}
+          {picks && !mine && (
+            <Notes evidence={picks} sheets={sheets} onShow={onShowNote} onUse={canDecide ? setPicked : undefined}
               picked={picked} />
           )}
-          {searching && <p className="muted" role="status">Searching the notes on the drawings</p>}
+          {found && found.parts.length > 0 && !mine && (
+            <Parts search={found} sheets={sheets} marks={marks} onShow={onShowNote} onUse={canDecide ? setPicked : undefined}
+              picked={picked} setMark={canDecide ? (part, mark) => {
+                const next = { ...marks };
+                if (mark) next[part] = mark; else delete next[part];
+                setMarks(next);
+              } : undefined} />
+          )}
+          {searching && <p className="muted" role="status">Searching the drawings for each part</p>}
 
           <Decision decided={mine} sheets={sheets} viewing={viewing} picked={picked} clearPicked={() => setPicked(null)}
-            canDecide={canDecide} save={record} takeBack={() => record("reset", "", null)} />
+            canDecide={canDecide} save={record} takeBack={() => record("reset", "", null)}
+            missing={ticked.filter((t) => t.mark === "missing").map((t) => t.text)} />
 
           {!mine && reading?.status === "DRAFTED" && (
             <>

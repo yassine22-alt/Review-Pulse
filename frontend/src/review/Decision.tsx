@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { draftComment } from "./Parts";
 import type { Determination, NoteRef, SheetView } from "./types";
 
 export const CHOICES = [
@@ -20,14 +21,16 @@ const sheetLabel = (sheets: SheetView[], id: string) => {
 };
 
 /** The reviewer's own decision on one requirement. It works whether or not the tool could read it. */
-export function Decision({ decided, sheets, viewing, picked, clearPicked, canDecide, save, takeBack }: {
+export function Decision({ decided, sheets, viewing, picked, clearPicked, canDecide, save, takeBack, missing = [] }: {
   decided?: Determination; sheets: SheetView[]; viewing?: SheetView; picked: NoteRef | null; clearPicked: () => void;
   canDecide: boolean; save: (state: Choice, note: string, evidence: NoteRef | null) => Promise<boolean>; takeBack: () => void;
+  missing?: string[];                 // parts the reviewer ticked as missing
 }) {
   const [choice, setChoice] = useState<Choice | null>(null);
   const [note, setNote] = useState("");
   const [sheet, setSheet] = useState("");
   const [saving, setSaving] = useState(false);
+  const [lastDraft, setLastDraft] = useState("");
 
   if (decided) {
     const c = CHOICES.find((x) => x.key === decided.state);
@@ -39,6 +42,11 @@ export function Decision({ decided, sheets, viewing, picked, clearPicked, canDec
           <p className="where">{sheetLabel(sheets, decided.evidence.sheet)}{decided.evidence.text && `: ${decided.evidence.text}`}</p>
         )}
         {decided.note && <p className="wording">{decided.note}</p>}
+        {decided.parts && (
+          <ul className="ticked">{decided.parts.map((p) => (
+            <li key={p.text} className={p.mark}>{p.mark === "seen" ? "Seen" : "Missing"}: {p.text}</li>
+          ))}</ul>
+        )}
         {canDecide && <button onClick={takeBack}>Take this decision back</button>}
       </div>
     );
@@ -48,6 +56,14 @@ export function Decision({ decided, sheets, viewing, picked, clearPicked, canDec
   const current = CHOICES.find((x) => x.key === choice);
   const place: NoteRef | null = current?.place ? picked ?? (sheet ? { sheet, text: "", box: null } : null) : null;
   const ready = !!current && (current.required ? !!note.trim() : current.key !== "shown" || !!place || !!note.trim());
+
+  /** Opening "Needs correction" starts from the parts ticked as missing; words the reviewer typed are never replaced. */
+  function choose(key: Choice | null) {
+    const drafted = draftComment(missing);
+    if (key === "correction" && drafted && (!note.trim() || note === lastDraft)) { setNote(drafted); setLastDraft(drafted); }
+    else if (key !== "correction" && note === lastDraft) setNote("");
+    setChoice(key);
+  }
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -62,7 +78,9 @@ export function Decision({ decided, sheets, viewing, picked, clearPicked, canDec
       <h4>Your decision</h4>
       <div className="choices" role="group" aria-label="Your decision on this requirement">
         {CHOICES.map((c) => (
-          <button key={c.key} type="button" aria-pressed={choice === c.key} onClick={() => setChoice(choice === c.key ? null : c.key)}>
+          <button key={c.key} type="button" aria-pressed={choice === c.key} onClick={() => choose(choice === c.key ? null : c.key)}
+            disabled={c.key === "shown" && missing.length > 0}
+            title={c.key === "shown" && missing.length > 0 ? "A part is ticked as missing" : undefined}>
             {c.button}</button>
         ))}
       </div>

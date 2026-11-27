@@ -57,13 +57,13 @@ def _union(boxes) -> tuple[float, float, float, float]:
 GUTTER = 2.5                          # a horizontal gap wider than this many text heights separates two columns
 
 
-def _lines(texts) -> list[tuple[float, float, float, str, tuple]]:
+def _lines(texts, skip=NOT_NOTES) -> list[tuple[float, float, float, str, tuple]]:
     """Visual lines as (middle y, left x, height, text, box), top first. Sheet coordinates have y pointing up, so a larger y is
     higher on the sheet. Runs at one height are one line only while no column gap separates them."""
     items = []
     for t in texts:
         text = " ".join((t.text or "").split())
-        if not text or getattr(t, "kind", "unknown") in NOT_NOTES:
+        if not text or getattr(t, "kind", "unknown") in skip:
             continue
         x0, y0, x1, y1 = t.bbox
         height = t.height or abs(y1 - y0) or 1.0
@@ -90,7 +90,7 @@ def _lines(texts) -> list[tuple[float, float, float, str, tuple]]:
     return lines
 
 
-def _passages_of(sheet_id: str, block: list[tuple[str, tuple]]) -> list[Passage]:
+def _passages_of(sheet_id: str, block: list[tuple[str, tuple]], min_letters: int = MIN_LETTERS) -> list[Passage]:
     joined = " ".join(t for t, _b in block)
     spans, at = [], 0                                           # where each line stands in the joined block, with its box
     for t, box in block:
@@ -100,16 +100,16 @@ def _passages_of(sheet_id: str, block: list[tuple[str, tuple]]) -> list[Passage]
     for text in statements(joined):
         start = max(joined.find(text, cursor), cursor)
         cursor = start + len(text)
-        if sum(ch.isalpha() for ch in text) >= MIN_LETTERS:
+        if sum(ch.isalpha() for ch in text) >= min_letters:
             touched = [box for a, b, box in spans if a < cursor and b > start]
             out.append(Passage(sheet_id, text, _union(touched) if touched else None))
     return out
 
 
-def sheet_passages(sheet_id: str, texts) -> list[Passage]:
+def sheet_passages(sheet_id: str, texts, skip=NOT_NOTES, min_letters: int = MIN_LETTERS) -> list[Passage]:
     blocks: list[dict] = []                      # in the order they begin; each: lines, and where its last and first lines start
     open_blocks: list[dict] = []
-    for mid, left, height, text, box in _lines(texts):
+    for mid, left, height, text, box in _lines(texts, skip):
         open_blocks = [k for k in open_blocks if k["y"] - mid <= 2.2 * max(height, k["h"])]      # too far above: closed
         best = None
         if not NUMBERED.match(text):
@@ -126,7 +126,7 @@ def sheet_passages(sheet_id: str, texts) -> list[Passage]:
             open_blocks.append(best)
         best["lines"].append((text, box))
         best.update(y=mid, left=left, h=height)
-    return [p for k in blocks for p in _passages_of(sheet_id, k["lines"])]
+    return [p for k in blocks for p in _passages_of(sheet_id, k["lines"], min_letters)]
 
 
 def set_passages(models) -> list[Passage]:
