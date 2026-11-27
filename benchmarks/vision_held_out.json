@@ -1,0 +1,3744 @@
+{
+ "what": "Held out test of the frozen two model rule (docs/progress/M33): the same 20 questions on 14 areas chosen by the written rule from sources no vision question had used. Marked by eye by one person before any model ran on them; no plan reviewer has checked it. Areas are fractions of the page, boxes fractions of the area. The drawings are not in the repository.",
+ "unclear": [
+  "ch_07.dim",
+  "ch_08.cooktop",
+  "ch_08.fridge",
+  "ch_08.table",
+  "ch_08.fireplace",
+  "cl_02.roomname",
+  "cl_03.fridge",
+  "cl_03.tree",
+  "cl_03.north",
+  "cl_04.fridge",
+  "cl_04.fireplace",
+  "be_01.sink",
+  "be_02.sink",
+  "be_03.sink",
+  "no_02.cooktop",
+  "no_02.table",
+  "fl_03.shower",
+  "fl_04.dim",
+  "fl_05.window",
+  "fl_05.dim"
+ ],
+ "areas": [
+  {
+   "id": "ch_06",
+   "pdf": "ch_zeichenhilfe_baugesuch.pdf",
+   "page": 6,
+   "box": [
+    0.21,
+    0.655,
+    0.89,
+    0.94
+   ],
+   "questions": [
+    {
+     "id": "ch_06.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.5,
+       0.68,
+       0.55,
+       0.77
+      ],
+      [
+       0.71,
+       0.68,
+       0.76,
+       0.77
+      ]
+     ]
+    },
+    {
+     "id": "ch_06.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.545,
+       0.34,
+       0.61,
+       0.39
+      ],
+      [
+       0.76,
+       0.34,
+       0.825,
+       0.39
+      ]
+     ]
+    },
+    {
+     "id": "ch_06.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.32,
+       0.43,
+       0.46,
+       0.78
+      ]
+     ]
+    },
+    {
+     "id": "ch_06.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "ch_06.sink",
+     "what": "a washbasin or sink",
+     "present": false
+    },
+    {
+     "id": "ch_06.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "ch_06.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "ch_06.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "ch_06.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "ch_06.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "ch_06.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "ch_06.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "ch_06.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "ch_06.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "ch_06.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "ch_06.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "ch_06.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "ch_06.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.32,
+       0.0,
+       0.92,
+       0.2
+      ],
+      [
+       0.0,
+       0.5,
+       0.15,
+       0.78
+      ]
+     ]
+    },
+    {
+     "id": "ch_06.roomname",
+     "what": "a room name written inside a room",
+     "present": false
+    },
+    {
+     "id": "ch_06.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "ch_07",
+   "pdf": "ch_zeichenhilfe_baugesuch.pdf",
+   "page": 7,
+   "box": [
+    0.2,
+    0.17,
+    0.8,
+    0.415
+   ],
+   "questions": [
+    {
+     "id": "ch_07.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.32,
+       0.61,
+       0.4,
+       0.75
+      ],
+      [
+       0.65,
+       0.61,
+       0.73,
+       0.75
+      ]
+     ]
+    },
+    {
+     "id": "ch_07.window",
+     "what": "a window",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.39,
+       0.08,
+       0.49,
+       0.15
+      ],
+      [
+       0.715,
+       0.08,
+       0.81,
+       0.15
+      ]
+     ]
+    },
+    {
+     "id": "ch_07.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.05,
+       0.22,
+       0.26,
+       0.76
+      ]
+     ]
+    },
+    {
+     "id": "ch_07.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "ch_07.sink",
+     "what": "a washbasin or sink",
+     "present": false
+    },
+    {
+     "id": "ch_07.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "ch_07.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "ch_07.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "ch_07.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "ch_07.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "ch_07.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "ch_07.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "ch_07.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "ch_07.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "ch_07.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "ch_07.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "ch_07.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "ch_07.roomname",
+     "what": "a room name written inside a room",
+     "present": false
+    },
+    {
+     "id": "ch_07.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "ch_08",
+   "pdf": "ch_zeichenhilfe_baugesuch.pdf",
+   "page": 8,
+   "box": [
+    0.15,
+    0.465,
+    0.89,
+    0.945
+   ],
+   "questions": [
+    {
+     "id": "ch_08.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.51,
+       0.32,
+       0.57,
+       0.39
+      ],
+      [
+       0.59,
+       0.43,
+       0.66,
+       0.52
+      ],
+      [
+       0.49,
+       0.6,
+       0.54,
+       0.66
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.33,
+       0.225,
+       0.41,
+       0.25
+      ],
+      [
+       0.26,
+       0.27,
+       0.28,
+       0.36
+      ],
+      [
+       0.26,
+       0.59,
+       0.28,
+       0.68
+      ],
+      [
+       0.3,
+       0.72,
+       0.39,
+       0.74
+      ],
+      [
+       0.59,
+       0.72,
+       0.67,
+       0.74
+      ],
+      [
+       0.46,
+       0.72,
+       0.5,
+       0.74
+      ],
+      [
+       0.72,
+       0.6,
+       0.735,
+       0.7
+      ],
+      [
+       0.5,
+       0.225,
+       0.55,
+       0.25
+      ],
+      [
+       0.72,
+       0.3,
+       0.735,
+       0.38
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.stairs",
+     "what": "a staircase",
+     "present": false
+    },
+    {
+     "id": "ch_08.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.495,
+       0.68,
+       0.525,
+       0.715
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.54,
+       0.68,
+       0.58,
+       0.72
+      ],
+      [
+       0.465,
+       0.63,
+       0.495,
+       0.675
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "ch_08.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "ch_08.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "ch_08.bed",
+     "what": "a bed",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.32,
+       0.61,
+       0.46,
+       0.72
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "ch_08.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "ch_08.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "ch_08.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "ch_08.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.23,
+       0.0,
+       0.77,
+       0.15
+      ],
+      [
+       0.23,
+       0.84,
+       0.77,
+       0.99
+      ],
+      [
+       0.09,
+       0.19,
+       0.2,
+       0.78
+      ],
+      [
+       0.8,
+       0.19,
+       0.92,
+       0.78
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.31,
+       0.29,
+       0.44,
+       0.35
+      ],
+      [
+       0.59,
+       0.29,
+       0.7,
+       0.35
+      ],
+      [
+       0.32,
+       0.55,
+       0.43,
+       0.61
+      ],
+      [
+       0.57,
+       0.55,
+       0.69,
+       0.61
+      ],
+      [
+       0.46,
+       0.18,
+       0.57,
+       0.23
+      ],
+      [
+       0.45,
+       0.75,
+       0.56,
+       0.8
+      ]
+     ]
+    },
+    {
+     "id": "ch_08.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "cl_02",
+   "pdf": "de_baugesuch_cleebronn.pdf",
+   "page": 2,
+   "box": [
+    0.025,
+    0.13,
+    0.73,
+    0.8
+   ],
+   "questions": [
+    {
+     "id": "cl_02.door",
+     "what": "a door that swings open",
+     "present": false
+    },
+    {
+     "id": "cl_02.window",
+     "what": "a window",
+     "present": false
+    },
+    {
+     "id": "cl_02.stairs",
+     "what": "a staircase",
+     "present": false
+    },
+    {
+     "id": "cl_02.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "cl_02.sink",
+     "what": "a washbasin or sink",
+     "present": false
+    },
+    {
+     "id": "cl_02.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "cl_02.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "cl_02.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "cl_02.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "cl_02.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "cl_02.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "cl_02.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "cl_02.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "cl_02.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "cl_02.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "cl_02.car",
+     "what": "a car",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.59,
+       0.79,
+       0.73,
+       0.89
+      ]
+     ]
+    },
+    {
+     "id": "cl_02.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "cl_02.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.55,
+       0.51,
+       0.76,
+       0.56
+      ],
+      [
+       0.49,
+       0.58,
+       0.56,
+       0.94
+      ],
+      [
+       0.55,
+       0.95,
+       0.94,
+       0.99
+      ]
+     ]
+    },
+    {
+     "id": "cl_02.north",
+     "what": "a north arrow",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.52,
+       0.12,
+       0.69,
+       0.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cl_03",
+   "pdf": "de_baugesuch_cleebronn.pdf",
+   "page": 3,
+   "box": [
+    0.035,
+    0.12,
+    0.76,
+    0.88
+   ],
+   "questions": [
+    {
+     "id": "cl_03.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.22,
+       0.26,
+       0.34,
+       0.35
+      ],
+      [
+       0.22,
+       0.39,
+       0.31,
+       0.45
+      ],
+      [
+       0.2,
+       0.46,
+       0.27,
+       0.51
+      ],
+      [
+       0.21,
+       0.56,
+       0.3,
+       0.67
+      ],
+      [
+       0.31,
+       0.22,
+       0.34,
+       0.3
+      ],
+      [
+       0.26,
+       0.41,
+       0.34,
+       0.46
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.17,
+       0.3,
+       0.19,
+       0.34
+      ],
+      [
+       0.17,
+       0.4,
+       0.19,
+       0.44
+      ],
+      [
+       0.17,
+       0.5,
+       0.19,
+       0.54
+      ],
+      [
+       0.17,
+       0.58,
+       0.19,
+       0.62
+      ],
+      [
+       0.275,
+       0.74,
+       0.31,
+       0.76
+      ],
+      [
+       0.5,
+       0.31,
+       0.52,
+       0.37
+      ],
+      [
+       0.46,
+       0.5,
+       0.48,
+       0.57
+      ],
+      [
+       0.46,
+       0.62,
+       0.48,
+       0.69
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.255,
+       0.45,
+       0.3,
+       0.6
+      ],
+      [
+       0.36,
+       0.755,
+       0.46,
+       0.8
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.27,
+       0.28,
+       0.29,
+       0.32
+      ],
+      [
+       0.3,
+       0.71,
+       0.325,
+       0.745
+      ],
+      [
+       0.19,
+       0.49,
+       0.25,
+       0.53
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.3,
+       0.29,
+       0.32,
+       0.32
+      ],
+      [
+       0.335,
+       0.31,
+       0.36,
+       0.36
+      ],
+      [
+       0.355,
+       0.72,
+       0.38,
+       0.745
+      ],
+      [
+       0.255,
+       0.65,
+       0.275,
+       0.69
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "cl_03.shower",
+     "what": "a shower",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.27,
+       0.23,
+       0.33,
+       0.29
+      ],
+      [
+       0.255,
+       0.65,
+       0.3,
+       0.745
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.335,
+       0.34,
+       0.355,
+       0.365
+      ],
+      [
+       0.375,
+       0.72,
+       0.395,
+       0.745
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.washer",
+     "what": "a washing machine",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.185,
+       0.33,
+       0.205,
+       0.375
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "cl_03.table",
+     "what": "a table with chairs",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.375,
+       0.64,
+       0.435,
+       0.715
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "cl_03.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "cl_03.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "cl_03.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "cl_03.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.04,
+       0.22,
+       0.12,
+       0.76
+      ],
+      [
+       0.17,
+       0.06,
+       0.52,
+       0.15
+      ],
+      [
+       0.17,
+       0.84,
+       0.52,
+       0.99
+      ],
+      [
+       0.51,
+       0.28,
+       0.65,
+       0.45
+      ]
+     ]
+    },
+    {
+     "id": "cl_03.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.19,
+       0.25,
+       0.26,
+       0.29
+      ],
+      [
+       0.37,
+       0.28,
+       0.47,
+       0.3
+      ],
+      [
+       0.21,
+       0.33,
+       0.3,
+       0.38
+      ],
+      [
+       0.34,
+       0.61,
+       0.43,
+       0.66
+      ],
+      [
+       0.19,
+       0.41,
+       0.24,
+       0.45
+      ],
+      [
+       0.26,
+       0.41,
+       0.32,
+       0.43
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cl_04",
+   "pdf": "de_baugesuch_cleebronn.pdf",
+   "page": 4,
+   "box": [
+    0.035,
+    0.07,
+    0.76,
+    0.92
+   ],
+   "questions": [
+    {
+     "id": "cl_04.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.2,
+       0.4,
+       0.25,
+       0.46
+      ],
+      [
+       0.275,
+       0.37,
+       0.32,
+       0.405
+      ],
+      [
+       0.33,
+       0.41,
+       0.37,
+       0.45
+      ],
+      [
+       0.24,
+       0.58,
+       0.27,
+       0.63
+      ],
+      [
+       0.43,
+       0.52,
+       0.48,
+       0.57
+      ],
+      [
+       0.28,
+       0.7,
+       0.31,
+       0.735
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.26,
+       0.25,
+       0.32,
+       0.265
+      ],
+      [
+       0.175,
+       0.32,
+       0.19,
+       0.35
+      ],
+      [
+       0.175,
+       0.36,
+       0.19,
+       0.39
+      ],
+      [
+       0.175,
+       0.49,
+       0.19,
+       0.53
+      ],
+      [
+       0.175,
+       0.65,
+       0.19,
+       0.69
+      ],
+      [
+       0.36,
+       0.72,
+       0.41,
+       0.735
+      ],
+      [
+       0.47,
+       0.57,
+       0.48,
+       0.66
+      ],
+      [
+       0.51,
+       0.3,
+       0.525,
+       0.39
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.255,
+       0.46,
+       0.3,
+       0.59
+      ],
+      [
+       0.37,
+       0.73,
+       0.46,
+       0.77
+      ],
+      [
+       0.26,
+       0.18,
+       0.52,
+       0.23
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.19,
+       0.37,
+       0.22,
+       0.395
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.22,
+       0.35,
+       0.245,
+       0.37
+      ],
+      [
+       0.31,
+       0.34,
+       0.335,
+       0.41
+      ],
+      [
+       0.185,
+       0.66,
+       0.21,
+       0.69
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.bathtub",
+     "what": "a bathtub",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.28,
+       0.26,
+       0.33,
+       0.32
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.shower",
+     "what": "a shower",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.19,
+       0.265,
+       0.24,
+       0.31
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.235,
+       0.695,
+       0.26,
+       0.72
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.washer",
+     "what": "a washing machine",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.195,
+       0.32,
+       0.215,
+       0.345
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "cl_04.table",
+     "what": "a table with chairs",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.38,
+       0.59,
+       0.44,
+       0.68
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "cl_04.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "cl_04.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "cl_04.tree",
+     "what": "a tree or plant",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.19,
+       0.13,
+       0.4,
+       0.26
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.17,
+       0.03,
+       0.63,
+       0.13
+      ],
+      [
+       0.06,
+       0.25,
+       0.15,
+       0.74
+      ],
+      [
+       0.62,
+       0.25,
+       0.74,
+       0.78
+      ],
+      [
+       0.17,
+       0.88,
+       0.63,
+       0.99
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.24,
+       0.28,
+       0.31,
+       0.3
+      ],
+      [
+       0.37,
+       0.36,
+       0.48,
+       0.4
+      ],
+      [
+       0.24,
+       0.42,
+       0.3,
+       0.44
+      ],
+      [
+       0.22,
+       0.66,
+       0.29,
+       0.68
+      ],
+      [
+       0.36,
+       0.56,
+       0.45,
+       0.58
+      ],
+      [
+       0.19,
+       0.46,
+       0.25,
+       0.52
+      ],
+      [
+       0.21,
+       0.55,
+       0.25,
+       0.62
+      ]
+     ]
+    },
+    {
+     "id": "cl_04.north",
+     "what": "a north arrow",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.7,
+       0.0,
+       0.84,
+       0.09
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "be_01",
+   "pdf": "de_beispielgrundrisse_3raum.pdf",
+   "page": 1,
+   "box": [
+    0.38,
+    0.345,
+    0.915,
+    0.82
+   ],
+   "questions": [
+    {
+     "id": "be_01.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.14,
+       0.28,
+       0.25,
+       0.35
+      ],
+      [
+       0.14,
+       0.36,
+       0.24,
+       0.44
+      ],
+      [
+       0.34,
+       0.35,
+       0.43,
+       0.42
+      ],
+      [
+       0.52,
+       0.36,
+       0.63,
+       0.43
+      ],
+      [
+       0.61,
+       0.27,
+       0.71,
+       0.35
+      ],
+      [
+       0.28,
+       0.47,
+       0.38,
+       0.54
+      ],
+      [
+       0.58,
+       0.77,
+       0.69,
+       0.86
+      ]
+     ]
+    },
+    {
+     "id": "be_01.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.29,
+       0.0,
+       0.41,
+       0.04
+      ],
+      [
+       0.64,
+       0.0,
+       0.75,
+       0.04
+      ],
+      [
+       0.0,
+       0.0,
+       0.07,
+       0.04
+      ],
+      [
+       0.31,
+       0.86,
+       0.43,
+       0.89
+      ],
+      [
+       0.69,
+       0.86,
+       0.83,
+       0.89
+      ]
+     ]
+    },
+    {
+     "id": "be_01.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.01,
+       0.15,
+       0.13,
+       0.34
+      ]
+     ]
+    },
+    {
+     "id": "be_01.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "be_01.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "be_01.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "be_01.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "be_01.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "be_01.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "be_01.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "be_01.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "be_01.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "be_01.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "be_01.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "be_01.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "be_01.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "be_01.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.13,
+       0.06,
+       0.91,
+       0.08
+      ],
+      [
+       0.44,
+       0.02,
+       0.49,
+       0.86
+      ],
+      [
+       0.26,
+       0.8,
+       0.91,
+       0.82
+      ],
+      [
+       0.83,
+       0.02,
+       0.87,
+       0.98
+      ],
+      [
+       0.13,
+       0.23,
+       0.53,
+       0.26
+      ],
+      [
+       0.52,
+       0.9,
+       0.91,
+       0.93
+      ]
+     ]
+    },
+    {
+     "id": "be_01.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.2,
+       0.1,
+       0.31,
+       0.14
+      ],
+      [
+       0.62,
+       0.17,
+       0.76,
+       0.21
+      ],
+      [
+       0.27,
+       0.27,
+       0.39,
+       0.31
+      ],
+      [
+       0.25,
+       0.37,
+       0.37,
+       0.41
+      ],
+      [
+       0.29,
+       0.62,
+       0.43,
+       0.66
+      ],
+      [
+       0.62,
+       0.62,
+       0.75,
+       0.66
+      ],
+      [
+       0.54,
+       0.93,
+       0.66,
+       0.97
+      ]
+     ]
+    },
+    {
+     "id": "be_01.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "be_02",
+   "pdf": "de_beispielgrundrisse_3raum.pdf",
+   "page": 2,
+   "box": [
+    0.375,
+    0.295,
+    0.92,
+    0.815
+   ],
+   "questions": [
+    {
+     "id": "be_02.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.31,
+       0.47,
+       0.42,
+       0.57
+      ],
+      [
+       0.52,
+       0.48,
+       0.62,
+       0.57
+      ],
+      [
+       0.24,
+       0.57,
+       0.35,
+       0.65
+      ],
+      [
+       0.33,
+       0.59,
+       0.43,
+       0.66
+      ],
+      [
+       0.52,
+       0.65,
+       0.62,
+       0.73
+      ],
+      [
+       0.65,
+       0.58,
+       0.76,
+       0.66
+      ],
+      [
+       0.57,
+       0.13,
+       0.69,
+       0.25
+      ]
+     ]
+    },
+    {
+     "id": "be_02.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.24,
+       0.13,
+       0.39,
+       0.16
+      ],
+      [
+       0.69,
+       0.13,
+       0.84,
+       0.16
+      ],
+      [
+       0.03,
+       0.97,
+       0.16,
+       0.995
+      ],
+      [
+       0.4,
+       0.97,
+       0.53,
+       0.995
+      ],
+      [
+       0.76,
+       0.97,
+       0.9,
+       0.995
+      ]
+     ]
+    },
+    {
+     "id": "be_02.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.01,
+       0.67,
+       0.23,
+       0.86
+      ]
+     ]
+    },
+    {
+     "id": "be_02.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "be_02.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "be_02.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "be_02.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "be_02.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "be_02.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "be_02.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "be_02.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "be_02.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "be_02.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "be_02.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "be_02.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "be_02.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "be_02.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.1,
+       0.21,
+       0.92,
+       0.23
+      ],
+      [
+       0.84,
+       0.02,
+       0.87,
+       0.98
+      ],
+      [
+       0.23,
+       0.93,
+       0.92,
+       0.95
+      ],
+      [
+       0.27,
+       0.56,
+       0.3,
+       0.97
+      ]
+     ]
+    },
+    {
+     "id": "be_02.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.21,
+       0.31,
+       0.35,
+       0.35
+      ],
+      [
+       0.62,
+       0.31,
+       0.76,
+       0.35
+      ],
+      [
+       0.54,
+       0.04,
+       0.69,
+       0.09
+      ],
+      [
+       0.45,
+       0.57,
+       0.58,
+       0.62
+      ],
+      [
+       0.3,
+       0.67,
+       0.44,
+       0.72
+      ],
+      [
+       0.47,
+       0.83,
+       0.6,
+       0.88
+      ],
+      [
+       0.71,
+       0.82,
+       0.86,
+       0.87
+      ]
+     ]
+    },
+    {
+     "id": "be_02.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "be_03",
+   "pdf": "de_beispielgrundrisse_3raum.pdf",
+   "page": 3,
+   "box": [
+    0.06,
+    0.355,
+    0.94,
+    0.805
+   ],
+   "questions": [
+    {
+     "id": "be_03.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.11,
+       0.17,
+       0.17,
+       0.24
+      ],
+      [
+       0.8,
+       0.17,
+       0.86,
+       0.24
+      ],
+      [
+       0.19,
+       0.48,
+       0.25,
+       0.56
+      ],
+      [
+       0.34,
+       0.48,
+       0.41,
+       0.56
+      ],
+      [
+       0.58,
+       0.48,
+       0.64,
+       0.56
+      ],
+      [
+       0.73,
+       0.48,
+       0.79,
+       0.56
+      ],
+      [
+       0.12,
+       0.58,
+       0.18,
+       0.66
+      ],
+      [
+       0.35,
+       0.58,
+       0.41,
+       0.66
+      ],
+      [
+       0.56,
+       0.58,
+       0.62,
+       0.66
+      ],
+      [
+       0.79,
+       0.58,
+       0.86,
+       0.66
+      ],
+      [
+       0.17,
+       0.67,
+       0.23,
+       0.75
+      ],
+      [
+       0.33,
+       0.67,
+       0.38,
+       0.75
+      ],
+      [
+       0.57,
+       0.67,
+       0.63,
+       0.75
+      ],
+      [
+       0.72,
+       0.67,
+       0.77,
+       0.75
+      ],
+      [
+       0.47,
+       0.89,
+       0.53,
+       0.97
+      ]
+     ]
+    },
+    {
+     "id": "be_03.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.11,
+       0.16,
+       0.22,
+       0.19
+      ],
+      [
+       0.32,
+       0.16,
+       0.43,
+       0.19
+      ],
+      [
+       0.53,
+       0.16,
+       0.64,
+       0.19
+      ],
+      [
+       0.75,
+       0.16,
+       0.86,
+       0.19
+      ],
+      [
+       0.06,
+       0.94,
+       0.14,
+       0.97
+      ],
+      [
+       0.2,
+       0.94,
+       0.27,
+       0.97
+      ],
+      [
+       0.3,
+       0.94,
+       0.37,
+       0.97
+      ],
+      [
+       0.6,
+       0.94,
+       0.66,
+       0.97
+      ],
+      [
+       0.71,
+       0.94,
+       0.77,
+       0.97
+      ],
+      [
+       0.83,
+       0.94,
+       0.9,
+       0.97
+      ],
+      [
+       0.43,
+       0.94,
+       0.53,
+       0.97
+      ]
+     ]
+    },
+    {
+     "id": "be_03.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.41,
+       0.66,
+       0.56,
+       0.83
+      ]
+     ]
+    },
+    {
+     "id": "be_03.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "be_03.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "be_03.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "be_03.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "be_03.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "be_03.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "be_03.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "be_03.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "be_03.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "be_03.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "be_03.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "be_03.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "be_03.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "be_03.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.04,
+       0.23,
+       0.93,
+       0.25
+      ],
+      [
+       0.07,
+       0.19,
+       0.1,
+       0.55
+      ],
+      [
+       0.88,
+       0.19,
+       0.91,
+       0.55
+      ],
+      [
+       0.04,
+       0.88,
+       0.93,
+       0.92
+      ],
+      [
+       0.09,
+       0.09,
+       0.28,
+       0.15
+      ],
+      [
+       0.69,
+       0.09,
+       0.88,
+       0.15
+      ]
+     ]
+    },
+    {
+     "id": "be_03.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.1,
+       0.32,
+       0.2,
+       0.36
+      ],
+      [
+       0.32,
+       0.32,
+       0.4,
+       0.36
+      ],
+      [
+       0.56,
+       0.32,
+       0.65,
+       0.36
+      ],
+      [
+       0.75,
+       0.32,
+       0.84,
+       0.36
+      ],
+      [
+       0.08,
+       0.66,
+       0.16,
+       0.71
+      ],
+      [
+       0.2,
+       0.77,
+       0.28,
+       0.81
+      ],
+      [
+       0.32,
+       0.79,
+       0.39,
+       0.83
+      ],
+      [
+       0.15,
+       0.06,
+       0.23,
+       0.11
+      ],
+      [
+       0.23,
+       0.61,
+       0.3,
+       0.65
+      ],
+      [
+       0.61,
+       0.61,
+       0.68,
+       0.65
+      ],
+      [
+       0.57,
+       0.79,
+       0.64,
+       0.83
+      ],
+      [
+       0.68,
+       0.79,
+       0.76,
+       0.83
+      ],
+      [
+       0.81,
+       0.66,
+       0.88,
+       0.71
+      ],
+      [
+       0.75,
+       0.06,
+       0.83,
+       0.11
+      ]
+     ]
+    },
+    {
+     "id": "be_03.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "no_01",
+   "pdf": "nola_sketch.pdf",
+   "page": 1,
+   "box": [
+    0.335,
+    0.21,
+    0.585,
+    0.955
+   ],
+   "questions": [
+    {
+     "id": "no_01.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.14,
+       0.85,
+       0.29,
+       0.91
+      ],
+      [
+       0.28,
+       0.3,
+       0.43,
+       0.34
+      ],
+      [
+       0.28,
+       0.54,
+       0.41,
+       0.59
+      ],
+      [
+       0.68,
+       0.55,
+       0.81,
+       0.59
+      ],
+      [
+       0.49,
+       0.41,
+       0.58,
+       0.48
+      ],
+      [
+       0.72,
+       0.16,
+       0.84,
+       0.2
+      ]
+     ]
+    },
+    {
+     "id": "no_01.window",
+     "what": "a window",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.09,
+       0.41,
+       0.17,
+       0.49
+      ],
+      [
+       0.09,
+       0.79,
+       0.16,
+       0.86
+      ],
+      [
+       0.46,
+       0.87,
+       0.63,
+       0.91
+      ],
+      [
+       0.66,
+       0.87,
+       0.81,
+       0.91
+      ],
+      [
+       0.91,
+       0.61,
+       0.98,
+       0.69
+      ],
+      [
+       0.91,
+       0.74,
+       0.98,
+       0.81
+      ]
+     ]
+    },
+    {
+     "id": "no_01.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.11,
+       0.57,
+       0.25,
+       0.78
+      ]
+     ]
+    },
+    {
+     "id": "no_01.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.43,
+       0.185,
+       0.53,
+       0.235
+      ]
+     ]
+    },
+    {
+     "id": "no_01.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.46,
+       0.24,
+       0.54,
+       0.32
+      ],
+      [
+       0.86,
+       0.42,
+       0.96,
+       0.5
+      ]
+     ]
+    },
+    {
+     "id": "no_01.bathtub",
+     "what": "a bathtub",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.13,
+       0.19,
+       0.24,
+       0.29
+      ]
+     ]
+    },
+    {
+     "id": "no_01.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "no_01.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.55,
+       0.37,
+       0.64,
+       0.43
+      ]
+     ]
+    },
+    {
+     "id": "no_01.fridge",
+     "what": "a refrigerator",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.55,
+       0.48,
+       0.67,
+       0.56
+      ]
+     ]
+    },
+    {
+     "id": "no_01.washer",
+     "what": "a washing machine",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.86,
+       0.19,
+       0.97,
+       0.27
+      ]
+     ]
+    },
+    {
+     "id": "no_01.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "no_01.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "no_01.fireplace",
+     "what": "a fireplace",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.46,
+       0.56,
+       0.68,
+       0.61
+      ]
+     ]
+    },
+    {
+     "id": "no_01.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "no_01.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "no_01.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "no_01.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "no_01.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.0,
+       0.09,
+       0.12,
+       0.9
+      ],
+      [
+       0.09,
+       0.96,
+       0.96,
+       0.995
+      ]
+     ]
+    },
+    {
+     "id": "no_01.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.31,
+       0.38,
+       0.43,
+       0.5
+      ],
+      [
+       0.4,
+       0.69,
+       0.78,
+       0.74
+      ],
+      [
+       0.33,
+       0.09,
+       0.74,
+       0.16
+      ]
+     ]
+    },
+    {
+     "id": "no_01.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "no_02",
+   "pdf": "nola_sketch.pdf",
+   "page": 2,
+   "box": [
+    0.315,
+    0.17,
+    0.995,
+    0.675
+   ],
+   "questions": [
+    {
+     "id": "no_02.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.81,
+       0.41,
+       0.85,
+       0.49
+      ],
+      [
+       0.93,
+       0.42,
+       0.96,
+       0.5
+      ],
+      [
+       0.63,
+       0.58,
+       0.66,
+       0.66
+      ],
+      [
+       0.81,
+       0.6,
+       0.84,
+       0.68
+      ],
+      [
+       0.81,
+       0.73,
+       0.84,
+       0.81
+      ],
+      [
+       0.75,
+       0.82,
+       0.82,
+       0.86
+      ],
+      [
+       0.09,
+       0.63,
+       0.19,
+       0.83
+      ]
+     ]
+    },
+    {
+     "id": "no_02.window",
+     "what": "a window",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.055,
+       0.17,
+       0.095,
+       0.33
+      ],
+      [
+       0.055,
+       0.39,
+       0.095,
+       0.53
+      ],
+      [
+       0.26,
+       0.81,
+       0.36,
+       0.85
+      ],
+      [
+       0.42,
+       0.81,
+       0.5,
+       0.85
+      ],
+      [
+       0.55,
+       0.81,
+       0.63,
+       0.85
+      ],
+      [
+       0.8,
+       0.17,
+       0.83,
+       0.29
+      ]
+     ]
+    },
+    {
+     "id": "no_02.stairs",
+     "what": "a staircase",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.69,
+       0.86,
+       0.75,
+       0.96
+      ],
+      [
+       0.04,
+       0.61,
+       0.2,
+       0.9
+      ]
+     ]
+    },
+    {
+     "id": "no_02.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.86,
+       0.5,
+       0.89,
+       0.58
+      ],
+      [
+       0.895,
+       0.5,
+       0.925,
+       0.57
+      ],
+      [
+       0.9,
+       0.675,
+       0.93,
+       0.76
+      ]
+     ]
+    },
+    {
+     "id": "no_02.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.49,
+       0.25,
+       0.545,
+       0.31
+      ],
+      [
+       0.83,
+       0.5,
+       0.86,
+       0.55
+      ],
+      [
+       0.83,
+       0.675,
+       0.86,
+       0.73
+      ]
+     ]
+    },
+    {
+     "id": "no_02.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "no_02.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "no_02.fridge",
+     "what": "a refrigerator",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.825,
+       0.29,
+       0.87,
+       0.41
+      ],
+      [
+       0.24,
+       0.14,
+       0.33,
+       0.22
+      ],
+      [
+       0.24,
+       0.26,
+       0.36,
+       0.32
+      ]
+     ]
+    },
+    {
+     "id": "no_02.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "no_02.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "no_02.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "no_02.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "no_02.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "no_02.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "no_02.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "no_02.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.06,
+       0.0,
+       0.94,
+       0.1
+      ],
+      [
+       0.2,
+       0.9,
+       0.94,
+       0.99
+      ],
+      [
+       0.0,
+       0.12,
+       0.07,
+       0.6
+      ],
+      [
+       0.95,
+       0.14,
+       1.0,
+       0.96
+      ]
+     ]
+    },
+    {
+     "id": "no_02.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.65,
+       0.61,
+       0.7,
+       0.8
+      ],
+      [
+       0.86,
+       0.21,
+       0.9,
+       0.42
+      ]
+     ]
+    },
+    {
+     "id": "no_02.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "fl_03",
+   "pdf": "rebuildflorida_floorplans.pdf",
+   "page": 3,
+   "box": [
+    0.05,
+    0.065,
+    0.41,
+    0.58
+   ],
+   "questions": [
+    {
+     "id": "fl_03.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.36,
+       0.25,
+       0.43,
+       0.31
+      ],
+      [
+       0.65,
+       0.17,
+       0.72,
+       0.24
+      ],
+      [
+       0.64,
+       0.25,
+       0.72,
+       0.34
+      ],
+      [
+       0.64,
+       0.36,
+       0.72,
+       0.42
+      ],
+      [
+       0.64,
+       0.43,
+       0.72,
+       0.49
+      ],
+      [
+       0.64,
+       0.5,
+       0.72,
+       0.56
+      ],
+      [
+       0.35,
+       0.43,
+       0.41,
+       0.5
+      ],
+      [
+       0.28,
+       0.5,
+       0.33,
+       0.56
+      ],
+      [
+       0.35,
+       0.6,
+       0.41,
+       0.68
+      ],
+      [
+       0.44,
+       0.74,
+       0.51,
+       0.82
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.19,
+       0.23,
+       0.25,
+       0.25
+      ],
+      [
+       0.29,
+       0.23,
+       0.35,
+       0.25
+      ],
+      [
+       0.2,
+       0.805,
+       0.26,
+       0.82
+      ],
+      [
+       0.345,
+       0.805,
+       0.4,
+       0.82
+      ],
+      [
+       0.56,
+       0.805,
+       0.62,
+       0.82
+      ],
+      [
+       0.76,
+       0.805,
+       0.82,
+       0.82
+      ],
+      [
+       0.865,
+       0.41,
+       0.88,
+       0.47
+      ],
+      [
+       0.865,
+       0.65,
+       0.88,
+       0.71
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.stairs",
+     "what": "a staircase",
+     "present": false
+    },
+    {
+     "id": "fl_03.toilet",
+     "what": "a toilet",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.43,
+       0.42,
+       0.49,
+       0.49
+      ],
+      [
+       0.21,
+       0.55,
+       0.26,
+       0.61
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.sink",
+     "what": "a washbasin or sink",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.545,
+       0.29,
+       0.58,
+       0.34
+      ],
+      [
+       0.265,
+       0.56,
+       0.31,
+       0.6
+      ],
+      [
+       0.825,
+       0.41,
+       0.87,
+       0.47
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.bathtub",
+     "what": "a bathtub",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.535,
+       0.38,
+       0.585,
+       0.48
+      ],
+      [
+       0.15,
+       0.5,
+       0.2,
+       0.6
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.825,
+       0.31,
+       0.87,
+       0.37
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.fridge",
+     "what": "a refrigerator",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.73,
+       0.25,
+       0.785,
+       0.31
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.washer",
+     "what": "a washing machine",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.6,
+       0.31,
+       0.645,
+       0.35
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.bed",
+     "what": "a bed",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.15,
+       0.29,
+       0.29,
+       0.4
+      ],
+      [
+       0.26,
+       0.67,
+       0.37,
+       0.8
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.table",
+     "what": "a table with chairs",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.74,
+       0.52,
+       0.86,
+       0.64
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "fl_03.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "fl_03.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "fl_03.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "fl_03.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "fl_03.dim",
+     "what": "a written length on a dimension line",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.14,
+       0.0,
+       0.88,
+       0.22
+      ],
+      [
+       0.07,
+       0.23,
+       0.16,
+       0.82
+      ],
+      [
+       0.14,
+       0.83,
+       0.88,
+       0.98
+      ],
+      [
+       0.9,
+       0.24,
+       0.95,
+       0.8
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.29,
+       0.3,
+       0.36,
+       0.35
+      ],
+      [
+       0.43,
+       0.4,
+       0.49,
+       0.43
+      ],
+      [
+       0.2,
+       0.53,
+       0.24,
+       0.55
+      ],
+      [
+       0.27,
+       0.64,
+       0.34,
+       0.67
+      ],
+      [
+       0.75,
+       0.37,
+       0.81,
+       0.41
+      ],
+      [
+       0.67,
+       0.66,
+       0.73,
+       0.7
+      ],
+      [
+       0.78,
+       0.57,
+       0.83,
+       0.59
+      ]
+     ]
+    },
+    {
+     "id": "fl_03.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "fl_04",
+   "pdf": "rebuildflorida_floorplans.pdf",
+   "page": 4,
+   "box": [
+    0.07,
+    0.065,
+    0.45,
+    0.285
+   ],
+   "questions": [
+    {
+     "id": "fl_04.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.505,
+       0.54,
+       0.575,
+       0.88
+      ]
+     ]
+    },
+    {
+     "id": "fl_04.window",
+     "what": "a window",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.275,
+       0.54,
+       0.34,
+       0.8
+      ],
+      [
+       0.41,
+       0.54,
+       0.475,
+       0.8
+      ],
+      [
+       0.61,
+       0.54,
+       0.675,
+       0.8
+      ],
+      [
+       0.8,
+       0.54,
+       0.87,
+       0.8
+      ],
+      [
+       0.52,
+       0.59,
+       0.56,
+       0.7
+      ]
+     ]
+    },
+    {
+     "id": "fl_04.stairs",
+     "what": "a staircase",
+     "present": false
+    },
+    {
+     "id": "fl_04.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "fl_04.sink",
+     "what": "a washbasin or sink",
+     "present": false
+    },
+    {
+     "id": "fl_04.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "fl_04.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "fl_04.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "fl_04.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "fl_04.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "fl_04.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "fl_04.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "fl_04.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "fl_04.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "fl_04.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "fl_04.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "fl_04.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "fl_04.roomname",
+     "what": "a room name written inside a room",
+     "present": false
+    },
+    {
+     "id": "fl_04.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  },
+  {
+   "id": "fl_05",
+   "pdf": "rebuildflorida_floorplans.pdf",
+   "page": 5,
+   "box": [
+    0.06,
+    0.05,
+    0.475,
+    0.34
+   ],
+   "questions": [
+    {
+     "id": "fl_05.door",
+     "what": "a door that swings open",
+     "present": true,
+     "cue": "drawn",
+     "boxes": [
+      [
+       0.215,
+       0.54,
+       0.28,
+       0.79
+      ]
+     ]
+    },
+    {
+     "id": "fl_05.stairs",
+     "what": "a staircase",
+     "present": false
+    },
+    {
+     "id": "fl_05.toilet",
+     "what": "a toilet",
+     "present": false
+    },
+    {
+     "id": "fl_05.sink",
+     "what": "a washbasin or sink",
+     "present": false
+    },
+    {
+     "id": "fl_05.bathtub",
+     "what": "a bathtub",
+     "present": false
+    },
+    {
+     "id": "fl_05.shower",
+     "what": "a shower",
+     "present": false
+    },
+    {
+     "id": "fl_05.cooktop",
+     "what": "a kitchen cooktop or range",
+     "present": false
+    },
+    {
+     "id": "fl_05.fridge",
+     "what": "a refrigerator",
+     "present": false
+    },
+    {
+     "id": "fl_05.washer",
+     "what": "a washing machine",
+     "present": false
+    },
+    {
+     "id": "fl_05.bed",
+     "what": "a bed",
+     "present": false
+    },
+    {
+     "id": "fl_05.table",
+     "what": "a table with chairs",
+     "present": false
+    },
+    {
+     "id": "fl_05.fireplace",
+     "what": "a fireplace",
+     "present": false
+    },
+    {
+     "id": "fl_05.switch",
+     "what": "an electrical light switch",
+     "present": false
+    },
+    {
+     "id": "fl_05.smoke",
+     "what": "a smoke detector",
+     "present": false
+    },
+    {
+     "id": "fl_05.car",
+     "what": "a car",
+     "present": false
+    },
+    {
+     "id": "fl_05.tree",
+     "what": "a tree or plant",
+     "present": false
+    },
+    {
+     "id": "fl_05.roomname",
+     "what": "a room name written inside a room",
+     "present": true,
+     "cue": "named",
+     "boxes": [
+      [
+       0.29,
+       0.59,
+       0.35,
+       0.65
+      ],
+      [
+       0.44,
+       0.59,
+       0.49,
+       0.65
+      ],
+      [
+       0.57,
+       0.6,
+       0.63,
+       0.64
+      ]
+     ]
+    },
+    {
+     "id": "fl_05.north",
+     "what": "a north arrow",
+     "present": false
+    }
+   ]
+  }
+ ]
+}

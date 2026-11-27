@@ -64,3 +64,12 @@ All three are needed:
 Areas are chosen by hand (by the rule above), so finding the right area is not tested. One object per question is easier than a
 line of a checklist. Five sources are few. The two German sources and the Swiss one test another language and drawing habit,
 not every discipline.
+
+## The key, written before any run
+
+`benchmarks/vision_held_out.json`. Areas, by the rule: Swiss guide pages 6, 7, 8; German building application pages 2, 3, 4
+(page 1 is a site map); German floor plans pages 1, 2, 3; New Orleans sketch pages 1 and 2 (the first floor on page 1); Florida
+set pages 3, 4, 5 (the first drawing on each; the cover and the index were skipped). **14 areas, 260 scored questions** (93 about
+things there, of which 46 drawn only; 167 about things not there), **20 left out as unclear** (for example circles that may be a
+stove, or tables drawn without chairs). "A written length" and "a room name" count as named, so they play no part in mark C.
+Before this commit I drew the boxes back on the areas to check them and corrected two door boxes.
