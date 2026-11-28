@@ -196,6 +196,21 @@ def main(out: Path) -> None:
         expect(page.get_by_text("12 Elm Street, permit 2026-0413")).to_be_visible()
         shot("8_queue")
 
+        # the applicant resubmits: the earlier drawing is kept and last round's comments are read against the new one
+        page.get_by_text("12 Elm Street, permit 2026-0413").click()
+        revised = Path(make_plan(work / "revised", png=False)["pdf"])             # the same plan, the door no longer narrow
+        revised_name = revised.with_name("revised_" + revised.name)
+        revised.rename(revised_name)
+        page.locator("input[type=file]").nth(0).set_input_files(str(revised_name))
+        expect(page.get_by_text(revised_name.name)).to_be_visible(timeout=60000)
+        expect(page.get_by_role("link", name="Open the review desk")).to_be_visible(timeout=180000)
+        page.get_by_role("link", name="Open the review desk").click()
+        expect(page.get_by_role("tab", name=re.compile("^Resubmission"))).to_have_attribute("aria-selected", "true", timeout=60000)
+        page.get_by_role("button", name="Check the comments against the new drawings").click()
+        expect(page.locator(".resubmission .answer").first).to_be_visible(timeout=180000)
+        shot("8b_resubmission")
+        page.get_by_role("link", name="My work").first.click()
+
         page.get_by_role("link", name="Team").click()
         page.get_by_label("Email").fill("rene@example.test")
         page.get_by_role("button", name="Create invitation").click()

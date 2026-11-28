@@ -15,7 +15,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | FR-01 | M | Signed in user creates a project: name, occupancy, location, rule set | Partial | No occupancy or location field |
 | FR-02 | M | Upload PNG, JPG, PDF, SVG up to 50 MB | Built | Also DXF, DWG, TIFF; limit 200 MB |
 | FR-03 | M | Tell vector from raster by itself | Built | |
-| FR-04 | M | Each upload an immutable version named by content hash | **Missing** | A new upload deletes the old one |
+| FR-04 | M | Each upload an immutable version named by content hash | Built | Added 28 November: every drawing is kept under its content hash (requirement documents are still replaced) |
 | FR-05 | M | Find the scale and record how | Built | |
 | FR-06 | M | Walls, doors, windows, stairs, rooms, annotations with confidence | Built | Confidence is a tier per element; accuracy on real drawings is low (below) |
 | FR-07 | M | Read French and English labels and dimensions | Built | |
@@ -29,7 +29,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | FR-15 | M | Switch between original, what was detected, and violations | **Missing** | The detected rooms and elements already reach the screen; no switch shows them |
 | FR-16 | M | Filter findings by severity, rule family, room, status | Partial | Status only |
 | FR-17 | M | Accept, dismiss with a reason, assign, resolve; audit log | Partial | A dismissal needs no reason; no assign or resolve |
-| FR-18 | S | Re check a revision: resolved, persisting, new | Partial | Built and measured as a module ([M27](M27_back_check.md)), **not in the app** |
+| FR-18 | S | Re check a revision: resolved, persisting, new | Built | In the app since 28 November ([M27](M27_back_check.md) for what was measured): each earlier comment gets a reading the reviewer checks; changes nobody asked for are counted |
 | FR-19 | M | Annotated PDF, JSON and CSV | Built | |
 | FR-20 | C | BCF issues | Built | |
 | FR-21 | S | Dashboard with open findings and a readiness score | Partial | A work queue; no readiness score |
@@ -46,7 +46,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | FR-32 | M | Door and window tags linked to schedule rows | Built | |
 | FR-33 | S | Fixtures and door swings: clearances and conflicts | Partial | Swing conflicts; fixture clearances not done |
 | FR-34 | S | Align two sheets and overlay them | Partial | Automatic alignment inside the back check; no three point manual way, no screen |
-| FR-35 | S | Compare revisions element by element | Partial | Words, shapes and schedule rows are compared, not building elements; not in the app |
+| FR-35 | S | Compare revisions element by element | Partial | Words, shapes and schedule rows are compared, not building elements |
 | FR-36 | C | Site plan: setbacks and coverage | Missing | |
 | FR-37 | M | Link storeys through stairs and check routes across floors | **Missing** | Levels are read from titles; no route crosses floors |
 | FR-38 | M | Exits defined per rule pack | Partial | The proposal's default definition works, but it is fixed in the code |
@@ -88,9 +88,8 @@ written there; they were not rerun for this page.
 
 ## Count
 
-Counted from the table: of 38 functional requirements, **18 are built, 14 partial and 6 missing** (FR-04, FR-15, FR-26, FR-27,
-FR-36, FR-37). Of the 27 marked must, **16 are built and 11 are not fully built**: FR-01, FR-04, FR-15, FR-16, FR-17, FR-22,
-FR-24, FR-27, FR-28, FR-37 and FR-38.
+Counted from the table: of 38 functional requirements, **20 are built, 13 partial and 5 missing** (FR-15, FR-26, FR-27, FR-36, FR-37). Of the
+27 marked must, **17 are built and 10 are not fully built**: FR-01, FR-15, FR-16, FR-17, FR-22, FR-24, FR-27, FR-28, FR-37, FR-38.
 
 ## Order of work
 

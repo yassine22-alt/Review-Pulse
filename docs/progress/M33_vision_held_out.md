@@ -125,5 +125,6 @@ fold out bed. It should have been "unclear".
   this **after** seeing the numbers, so it supports nothing. A use where a wrong suggestion costs a reviewer one look ("check
   here", never "this is shown") might accept another mark than 2%, but that mark has to come from reviewers, and then be tested
   on drawings not used on this page or in M32.
-* The 7B on tiles, reported for completeness, was still running when this was written.
+* The 7B on tiles, which the rule does not use, finished later: there, yes for 58 of 93; drawn only, 22 of 46; of its yes
+  answers, 46 of 58 pointing at the thing; yes to something not there, 9 of 167 (5.4%).
 * Still untested: the program choosing the areas itself.

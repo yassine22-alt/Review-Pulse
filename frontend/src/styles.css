@@ -366,3 +366,10 @@ blockquote { margin: 6px 0 0; padding: 9px 12px; border-left: 3px solid var(--in
 .kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-right: 4px; }
 .ticked { list-style: none; padding: 0; margin: 8px 0; font-size: 12.5px; }
 .ticked li.missing { color: var(--bad); }
+.resubmission .answer { padding: 10px 12px; display: grid; gap: 6px; }
+.resubmission .answer p { margin: 0; }
+.resubmission .top { display: flex; gap: 8px; align-items: center; }
+.resubmission small button.link { margin-left: 10px; font-size: 12px; }
+.decided.bad { background: var(--bad-soft); color: var(--bad); }
+.decided.ask { background: var(--ask-soft); color: var(--ask); }
+.decided.ok { background: var(--info-soft); }

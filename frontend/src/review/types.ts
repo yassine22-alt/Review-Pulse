@@ -34,6 +34,14 @@ export interface CorrectionList {
   edit_burden: { items: number; accepted: number; edited: number; dropped: number; unreviewed: number };
 }
 
+export interface BackCheck {
+  available: boolean; why?: string; done?: boolean; comments?: number;
+  old_version?: { id: string; name: string; at: string }; new_version?: { id: string; name: string; at: string };
+  answers?: { id: string; comment: string; code: string; status: string; reason: string; person_must_check: string;
+              place: NoteRef | null }[];
+  changes_nobody_asked_for?: number; clouds_present?: boolean; changes_outside_clouds?: number;
+  sheets_added?: unknown[]; sheets_removed?: unknown[];
+}
 export interface NoteRef { sheet: string; text: string; box?: number[] | null }
 export interface Found extends NoteRef { kind?: string; times?: number }
 export interface PartSearch {

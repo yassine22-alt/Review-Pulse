@@ -3,7 +3,7 @@ copied or re-run with the CLI (``rp check <project>/run``).
 
     <data>/projects/<id>/
         project.json          name, inputs, settings
-        inputs/plan/<file>    uploaded drawing (one current plan)
+        inputs/plan/<hash>/<file>  every uploaded drawing, kept unchanged under its content hash
         inputs/req/<file>     uploaded requirement document
         run/                  pipeline run folder (sheet_*.json, building_*.json, findings.json, reports)
         drafts/               clauses.json, <doc>.drafts.yaml, review.json (curator decisions)
@@ -14,6 +14,7 @@ copied or re-run with the CLI (``rp check <project>/run``).
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import json
 import re
 import shutil
@@ -47,7 +48,9 @@ class Project:
     id: str
     name: str
     created: str
-    plan: str | None = None             # file name under inputs/plan
+    plan: str | None = None             # file name of the current plan
+    plan_version: str | None = None     # its content hash; None: made before versions were kept (the file is under inputs/plan)
+    versions: list[dict] = field(default_factory=list)   # every plan ever uploaded, oldest first: {id, name, bytes, at}
     requirements: str | None = None     # file name under inputs/req
     base_pack: str | None = None        # an explicit optional pack; user-supplied requirements are the default
     context_links: dict[str, list[str]] = field(default_factory=dict)
@@ -81,7 +84,38 @@ class Store:
         return self.dir(pid) / "pack"
 
     def plan_path(self, p: Project) -> Path | None:
-        return self.dir(p.id) / "inputs" / "plan" / p.plan if p.plan else None
+        if not p.plan:
+            return None
+        folder = self.dir(p.id) / "inputs" / "plan"
+        return folder / p.plan_version / p.plan if p.plan_version else folder / p.plan
+
+    def version_dir(self, pid: str, version: str) -> Path:
+        """The folder of one uploaded version: the drawing, and what belongs to that round (its comments, its back check)."""
+        if not re.fullmatch(r"[0-9a-f]{16}", version or ""):
+            raise KeyError(version)
+        return self.dir(pid) / "inputs" / "plan" / version
+
+    def version_path(self, p: Project, version: str) -> Path:
+        entry = next((v for v in p.versions if v["id"] == version), None)
+        if entry is None:
+            raise KeyError(version)
+        return self.version_dir(p.id, version) / entry["name"]
+
+    def _keep_plan(self, p: Project, name: str, data: bytes) -> Path:
+        """Store a drawing under its content hash. Nothing already stored is ever changed or removed; the same bytes sent
+        again are the same version."""
+        version = hashlib.sha256(data).hexdigest()[:16]
+        folder = self.version_dir(p.id, version)
+        entry = next((v for v in p.versions if v["id"] == version), None)
+        if entry is None:
+            folder.mkdir(parents=True, exist_ok=True)
+            publish(folder / name, data)
+            entry = {"id": version, "name": name, "bytes": len(data), "at": now()}
+        else:
+            p.versions.remove(entry)                 # an earlier version sent again becomes the current one
+        p.versions.append(entry)
+        p.plan, p.plan_version = entry["name"], version
+        return folder / entry["name"]
 
     def req_path(self, p: Project) -> Path | None:
         return self.dir(p.id) / "inputs" / "req" / p.requirements if p.requirements else None
@@ -136,15 +170,19 @@ class Store:
             raise ValueError(f"unsupported {kind} file type {Path(name).suffix or '(none)'}; "
                              f"expected one of {', '.join(sorted(types))}")
         self._ensure_folders(p.id)             # they may have vanished since the project was read (a long analysis)
-        folder = self.dir(p.id) / "inputs" / ("plan" if kind == "plan" else "req")
-        for old in folder.iterdir():          # one current file per kind
-            old.unlink()
-        path = folder / name
-        path.write_bytes(data)
         if kind == "plan":
-            p.plan = name
+            legacy = self.plan_path(p) if p.plan and not p.plan_version else None
+            if legacy is not None and legacy.is_file():        # a plan stored before versions were kept becomes the first one
+                self._keep_plan(p, legacy.name, legacy.read_bytes())
+                legacy.unlink()
+            path = self._keep_plan(p, name, data)
             shutil.rmtree(self.run_dir(p.id), ignore_errors=True)
         else:
+            folder = self.dir(p.id) / "inputs" / "req"
+            for old in folder.iterdir():      # one current requirement document
+                old.unlink()
+            path = folder / name
+            path.write_bytes(data)
             p.requirements = name
             p.context_links = {}
             for old in self.drafts_dir(p.id).glob("*"):

@@ -5,19 +5,21 @@ import { Logo, Problem, Spinner } from "../ui";
 import { Findings, toneOf, type ItemActions } from "./Findings";
 import { Requirements, undecided } from "./Requirements";
 import { SheetCanvas, type Mark } from "./SheetCanvas";
+import { Resubmission } from "./Resubmission";
 import { SignOffDrawer } from "./SignOff";
-import { noteShape, shapesOf, type Clause, type CorrectionList, type Determination, type NoteRef, type Reading, type View } from "./types";
+import { noteShape, shapesOf, type BackCheck, type Clause, type CorrectionList, type Determination, type NoteRef, type Reading, type View } from "./types";
 
 interface Data {
   project: Project; view: View | null; list: CorrectionList;
   clauses: Clause[]; readings: Record<string, Reading>; decisions: Record<string, Determination>; jobs: Job[];
+  rounds: BackCheck | null;
 }
 
 export function ReviewDesk({ user }: { user: User }) {
   const { id = "" } = useParams();
   const [data, setData] = useState<Data | null>(null);
   const [problem, setProblem] = useState("");
-  const [tab, setTab] = useState<"corrections" | "requirements" | null>(null);
+  const [tab, setTab] = useState<"corrections" | "requirements" | "resubmission" | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [opened, setOpened] = useState<Set<string>>(new Set());
   const [sheet, setSheet] = useState(0);
@@ -33,16 +35,18 @@ export function ReviewDesk({ user }: { user: User }) {
       // the jobs are asked for first, on their own: asked beside the rest, a job that ended between two answers left the list
       // new and the drawing old, with no job running to make the desk ask again (a correction with no pin on the sheet)
       const jobs = await api<Job[]>(`${url}/jobs`);
-      const [project, view, list, doc, readings, decisions] = await Promise.all([
+      const [project, view, list, doc, readings, decisions, rounds] = await Promise.all([
         api<Project>(url),
         api<View>(`${url}/view`).catch(() => null),
         api<CorrectionList>(`${url}/correction-list`),
         api<{ clauses: Clause[] }>(`${url}/document`).catch(() => ({ clauses: [] as Clause[] })),
         api<Record<string, Reading>>(`${url}/interpreted`),
         api<Record<string, Determination>>(`${url}/clause-states`),
+        api<BackCheck>(`${url}/back-check`).catch(() => null),
       ]);
-      setData({ project, view, list, clauses: doc.clauses, readings, decisions, jobs });
-      setTab((t) => t ?? (list.items.length ? "corrections" : "requirements"));
+      setData({ project, view, list, clauses: doc.clauses, readings, decisions, jobs, rounds });
+      // a resubmission starts with what was asked last time
+      setTab((t) => t ?? (rounds?.available ? "resubmission" : list.items.length ? "corrections" : "requirements"));
     } catch (e) { setProblem((e as Error).message); }
   }, [id]);
   useEffect(() => { load(); }, [load]);
@@ -182,10 +186,17 @@ export function ReviewDesk({ user }: { user: User }) {
             Corrections <span className="count">{list.items.length}</span></button>
           <button role="tab" aria-selected={tab === "requirements"} onClick={() => setTab("requirements")}>
             Requirements <span className="count">{data.clauses.length}</span></button>
+          {data.rounds?.available && (
+            <button role="tab" aria-selected={tab === "resubmission"} onClick={() => setTab("resubmission")}>
+              Resubmission <span className="count">{data.rounds.comments}</span></button>
+          )}
         </div>
         <div className="scroll">
           <Problem text={problem} />
-          {tab === "corrections" ? (
+          {tab === "resubmission" && data.rounds?.available ? (
+            <Resubmission data={data.rounds} sheets={view?.sheets ?? []} onShow={showNote} canDecide={canDecide}
+              busy={running.length > 0} compare={() => startJob("back-check")} />
+          ) : tab === "corrections" ? (
             <Findings sheets={view?.sheets ?? []} list={list} located={located} selected={selected} opened={opened} canDecide={canDecide}
               editing={editing} setEditing={setEditing} onSelect={(k) => select(selected === k ? null : k)}
               onZoom={() => selected && select(selected)} actions={actions} />

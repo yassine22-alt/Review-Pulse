@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import os
 import shutil
@@ -257,8 +258,15 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
     @app.post("/api/projects/{pid}/plan", status_code=202)
     async def upload_plan(pid: str, file: UploadFile = File(...)):
         p = project(pid)
+        data = await read_upload(file)
+        if p.plan_version and hashlib.sha256(data).hexdigest()[:16] != p.plan_version:
+            try:                                   # what was asked on the present drawings is kept before they are replaced
+                service.keep_round_comments(store, pid)
+            except ValueError:
+                pass                               # no correction list yet: there is nothing a later round could answer
+            p = project(pid)
         try:
-            store.put_input(p, "plan", file.filename or "plan", await read_upload(file))
+            store.put_input(p, "plan", file.filename or "plan", data)
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
         return jobs.submit(pid, "analyse", then_prepare(pid, lambda job: service.analyse(store, pid, job)))
@@ -340,6 +348,20 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
                 return interpretation.find_parts(store, pid, clause, llm)
         except ValueError as e:
             raise HTTPException(409, str(e)) from None
+
+    @app.get("/api/projects/{pid}/back-check")
+    def get_back_check(pid: str):
+        """The current drawings against the version before: what was asked, and how the new set answers each comment."""
+        project(pid)
+        return service.back_check_view(store, pid)
+
+    @app.post("/api/projects/{pid}/back-check", status_code=202)
+    def post_back_check(pid: str):
+        project(pid)
+        found, why = service.rounds(store, pid)
+        if found is None:
+            raise HTTPException(409, why)
+        return jobs.submit(pid, "backcheck", lambda job: service.run_back_check(store, pid, job))
 
     @app.get("/api/projects/{pid}/prepared")
     def get_prepared(pid: str):

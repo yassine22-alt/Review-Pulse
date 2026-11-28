@@ -470,11 +470,111 @@ def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
         except ValueError:
             pass
     records = workflow.signoffs(store, pid)
-    if cycle is None:
-        cycle = max([r["cycle"] for r in records], default=1)
+    if cycle is None:                                  # the round is that of the drawings under review
+        cycle = max([len(p.versions), 1, *(r["cycle"] for r in records)])
     return cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
                     states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
                     uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
+
+
+ROUND_COMMENTS = "comments.json"          # beside a version: the comments that were sent on it
+BACK_CHECK = "back_check.json"            # beside a version: how it answers the comments of the version before
+
+
+def keep_round_comments(store: Store, pid: str) -> bool:
+    """Save the current correction list beside the current drawing, with each comment's place on the PDF, before a new
+    version replaces it. Without this the next round could not be compared with what was asked. False: nothing to keep."""
+    from ..files import publish
+
+    p = store.get(pid)
+    if not p.plan_version or not any(store.run_dir(pid).glob("building_*.json")):
+        return False
+    path = correction_export(store, pid, "json")
+    try:
+        publish(store.version_dir(pid, p.plan_version) / ROUND_COMMENTS, path.read_bytes())
+    finally:
+        shutil.rmtree(path.parent, ignore_errors=True)
+    return True
+
+
+def rounds(store: Store, pid: str) -> tuple[dict | None, str]:
+    """({old, new, comments}, "") for the current drawing against the one before it, or (None, why not)."""
+    import json as _json
+
+    p = store.get(pid)
+    if len(p.versions) < 2 or not p.plan_version:
+        return None, "only one version of the drawings has been uploaded"
+    old, new = p.versions[-2], p.versions[-1]
+    if not old["name"].lower().endswith(".pdf") or not new["name"].lower().endswith(".pdf"):
+        return None, "two PDF versions are needed to compare them"
+    kept = store.version_dir(pid, old["id"]) / ROUND_COMMENTS
+    if not kept.exists():
+        return None, "no comments were kept for the earlier version (it was not analysed before the new one arrived)"
+    raw = _json.loads(kept.read_text(encoding="utf-8"))
+    return {"old": old, "new": new, "comments": raw["comments"] if isinstance(raw, dict) else raw}, ""
+
+
+def run_back_check(store: Store, pid: str, job: Job) -> dict:
+    """Every comment of the previous round against the new drawings (backcheck/). A reading for the reviewer: it closes
+    nothing by itself."""
+    import json as _json
+
+    from ..backcheck import back_check
+    from ..backcheck.comments import from_dict
+    from ..files import publish
+
+    found, why = rounds(store, pid)
+    if found is None:
+        raise ValueError(why)
+    p = store.get(pid)
+    job.progress(0.1, "comparing the two versions of the drawings")
+    comments = [from_dict(c, n) for n, c in enumerate(found["comments"])]
+    result = back_check(store.version_path(p, found["old"]["id"]), store.version_path(p, found["new"]["id"]), comments)
+    job.progress(0.9, "writing the answers")
+    out = result.to_dict()
+    out.pop("old_pdf", None), out.pop("new_pdf", None)                 # paths of this computer are not part of the answer
+    out.update(old_version=found["old"], new_version=found["new"], made=now_stamp())
+    publish(store.version_dir(pid, found["new"]["id"]) / BACK_CHECK, _json.dumps(out, default=float).encode("utf-8"))
+    return {"comments": len(comments), "counts": out["counts"]}
+
+
+def now_stamp() -> str:
+    from .store import now
+
+    return now()
+
+
+def back_check_view(store: Store, pid: str) -> dict:
+    """The saved back check of the current drawings, with each place on the new sheets as a box the screen can show."""
+    import json as _json
+
+    found, why = rounds(store, pid)
+    if found is None:
+        return {"available": False, "why": why}
+    kept = store.version_dir(pid, found["new"]["id"]) / BACK_CHECK
+    base = {"available": True, "comments": len(found["comments"]), "old_version": found["old"], "new_version": found["new"]}
+    if not kept.exists():
+        return {**base, "done": False}
+    data = _json.loads(kept.read_text(encoding="utf-8"))
+    sheets = {m.sheet.page: m.sheet for m in _models(store, pid)}
+    pt = 72 / 25.4
+
+    def place(spot: dict) -> dict | None:
+        sheet = sheets.get((spot.get("page") or 0) - 1)
+        if sheet is None or not spot.get("bbox"):
+            return None
+        x0, y0, x1, y1 = spot["bbox"]                                 # page points, y down; sheets are millimetres, y up
+        return {"sheet": sheet.id, "text": "", "box": [round(x0 / pt, 2), round(sheet.height - y1 / pt, 2),
+                                                       round(x1 / pt, 2), round(sheet.height - y0 / pt, 2)]}
+
+    answers = [{"id": v["comment"]["id"], "comment": v["comment"]["text"], "code": v["comment"].get("code", ""),
+                "status": v["status"], "reason": v["reason"], "person_must_check": v["evidence"]["person_must_check"],
+                "old_value": v["evidence"]["old_value"], "new_value": v["evidence"]["new_value"],
+                "place": place(v["evidence"]["new_place"])} for v in data["verdicts"]]
+    return {**base, "done": True, "made": data["made"], "counts": data["counts"], "answers": answers,
+            "changes_nobody_asked_for": len(data["new_issues"]), "clouds_present": data["clouds_present"],
+            "changes_outside_clouds": len(data["changes_not_clouded"]), "sheets_added": data["sheets_added"],
+            "sheets_removed": data["sheets_removed"]}
 
 
 def correction_export(store: Store, pid: str, fmt: str, cycle: int | None = None) -> Path:

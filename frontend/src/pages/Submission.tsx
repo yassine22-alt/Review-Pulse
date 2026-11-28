@@ -8,6 +8,7 @@ const PLAN_TYPES = ".pdf,.dxf,.dwg,.svg,.png,.jpg,.jpeg,.tif,.tiff";
 const REQ_TYPES = ".pdf,.md,.txt,.docx,.xlsx,.xlsm,.csv,.tsv,.html,.htm,.png,.jpg,.jpeg,.tif,.tiff";
 const JOB_NAMES: Record<string, string> = {
   analyse: "Reading the drawings", draft: "Reading the requirements", check: "Running the checks", interpret: "Reading each requirement",
+  backcheck: "Comparing with the earlier version",
 };
 
 export function Submission({ user }: { user: User }) {
