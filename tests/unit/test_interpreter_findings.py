@@ -93,3 +93,17 @@ def test_findings_carry_the_shared_assessment_and_an_unconfirmed_inventory_is_a_
     assert f.assessment.outcome == "UNRESOLVED" and f.assessment.rule_authority == "APPROVED_REQUIREMENT"
     assert "INCOMPLETE_INVENTORY" in {i.code.value for i in f.assessment.evidence_issues}
     assert f.assessment.dependencies, "the facts the answer rests on are recorded"
+
+
+def test_an_undecided_finding_says_in_words_what_is_not_known_and_of_which_element():
+    model = handmade.build()
+    door = next(e for e in model.elements if e.cls == "door")
+    door.tag = "D1"
+    graph = from_building(model, complete=True)
+    inputs = to_inputs(graph)
+    inputs.facts[door.id].pop("width_m")
+    program = rule(setop("forall", "doors", binary("ge", fact("width_m"), lit(0.5, "m"))))
+    findings, _ = to_findings(program, inputs, to_graph(graph), model, "T1")
+    (f,) = [x for x in findings if x.verdict == "NOT_EVALUATED"]
+    assert "Not established from the drawings: clear width of a door" in f.message and "(D1)" in f.message
+    assert f"{door.id}.width_m" not in f.message and f"{door.id}.width_m" in f.evidence["missing"]

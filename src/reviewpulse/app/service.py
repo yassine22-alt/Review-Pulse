@@ -151,7 +151,7 @@ def check(store: Store, pid: str, job: Job | None = None) -> dict:
 def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | None], split_only: bool = False) -> dict:
     """Requirement upload -> clauses (I3) -> drafted rules (I4) with the local model. ``split_only`` stops after the clauses: the
     review desk reads each clause when the reviewer asks, so drafting all of them at upload would be work nobody sees."""
-    from ..rules.clauses import write_clauses
+    from ..rules.clauses import split_cached, write_clauses
     from ..rules.draft import draft_document
 
     p = store.get(pid)
@@ -161,7 +161,8 @@ def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | N
     d = store.drafts_dir(pid)
     d.mkdir(parents=True, exist_ok=True)
     job.progress(0.02, "splitting the document into clauses")
-    cl = write_clauses(doc, d / "clauses.json")
+    cache = store.dir(pid) / "cache"                          # the same one the review desk reads from
+    cl = write_clauses(doc, d / "clauses.json", cache_dir=cache)
     n = len(json.loads(cl.read_text(encoding="utf-8"))["clauses"])
     if split_only:
         return {"clauses": n, "drafted": 0, "note": "each requirement is read when a reviewer asks"}
@@ -173,7 +174,7 @@ def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | N
     def progress(done: int, total: int) -> None:
         job.progress(0.05 + 0.95 * done / max(total, 1), f"drafting clause {done + 1} of {total}")
 
-    out = draft_document(doc, client, d, progress=progress)
+    out = draft_document(doc, client, d, progress=progress, split=split_cached(doc, cache))
     drafts = load_drafts(out)
     return {"clauses": n, "drafted": sum(1 for x in drafts if x.rule), "llm": getattr(client, "model", "")}
 

@@ -1,7 +1,7 @@
 import type { Evidence, NoteRef, SheetView } from "./types";
 
 const RESULT: Record<string, string> = {
-  agrees: "meets", contradicts: "does not meet", "no figure": "states no figure for", unclear: "is unclear about",
+  agrees: "meets", contradicts: "does not meet",
 };
 
 /** What the written notes of the drawing set say about a requirement. It points a reviewer to a place; it decides nothing. */
@@ -33,8 +33,8 @@ export function Notes({ evidence, sheets, onShow, onUse, picked }: {
           <h4>A note that seems to be about this</h4>
           <ul className="facts">{card(chosen, "chosen")}</ul>
           {evidence.checks?.map((c, i) => c.stated && (
-            <p key={i} className="where">The figure read, {c.stated}, {RESULT[c.result] ?? c.result} the limit {c.required}.
-              Check that it is the same property.</p>
+            <p key={i} className="where">The note has the figure {c.stated}; the limit is {c.required}. Check first that both
+              are about the same thing. Only if they are, the figure {RESULT[c.result] ?? c.result} the limit.</p>
           ))}
           <p className="muted small">Found by search and picked by the model. It is not a finding: read it on the sheet.</p>
         </>

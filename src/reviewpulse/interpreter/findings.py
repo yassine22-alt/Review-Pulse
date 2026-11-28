@@ -215,18 +215,38 @@ def to_findings(program: Program, inputs: Inputs, graph, model: BuildingModel | 
         if only_inventory:      # nothing wrong among what was found, but the list was not confirmed complete
             findings.append(Finding(
                 **base, verdict="WARNING", subject_ids=[m.entity for m in explained.members],
-                message=f"{program.title}: no violation among the {explained.selected} found; not confirmed, because the "
+                message=f"{program.title}: no violation among the {explained.selected} found; not confirmed, because "
                         f"nobody confirmed that the list of {_collection(program)} is complete.",
                 evidence={**meta, "checked": explained.selected}))
         else:
-            reason = ", ".join(explained.missing[:FACT_LIMIT]) or "facts the plan does not provide"
+            reason = _in_words(explained.missing[:FACT_LIMIT], inputs, locate) or "facts the plan does not provide"
             subjects = [m.entity for m in unknown]
             asked = _unsettled(program, resolutions, inputs, subjects)
             extra = ({"unsettled": asked} if asked else {})
             findings.append(Finding(**base, verdict="NOT_EVALUATED", subject_ids=subjects,
-                                    message=f"{program.title}: not decided, missing {reason}." + _asked_words(asked),
+                                    message=f"{program.title}: not decided. Not established from the drawings: {reason}. "
+                                            "Check on the drawings." + _asked_words(asked),
                                     evidence={**meta, "missing": explained.missing[:10], **extra}))
     return findings, explained
+
+
+def _in_words(missing: list[str], inputs: Inputs, locate) -> str:
+    """What could not be established, as a reviewer would say it: what the fact is, and of which element. The internal names
+    stay in the finding's evidence. A name that is not understood is shown as it is rather than dropped."""
+    said = []
+    for key in missing:
+        if key.startswith("incomplete collection:"):
+            said.append(f"that every one of the {key.split(':', 1)[1].replace('_', ' ')} was found")
+            continue
+        entity, dot, fact = key.rpartition(".")
+        binding = inputs.bindings.get(fact) if dot else None
+        if binding is None or not binding.description:
+            said.append(key)
+            continue
+        what = binding.description.split(". ")[0].rstrip(".")
+        name = "the building" if entity.endswith("building") else locate(entity).get("name") or entity
+        said.append(f"{what[:1].lower()}{what[1:]} ({name})")
+    return "; ".join(said)
 
 
 def _unsettled(program: Program, resolutions, inputs: Inputs, subjects: list[str]) -> list[dict]:

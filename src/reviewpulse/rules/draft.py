@@ -442,10 +442,11 @@ def _dump(rule: Rule) -> str:
 
 
 def draft_document(doc_path: str | Path, client: LLMClient, out_dir: str | Path = "drafts",
-                   only: list[str] | None = None, progress=None) -> Path:
-    """``progress(done, total)`` is called after each clause (a job runner reports it)."""
+                   only: list[str] | None = None, progress=None, split: tuple | None = None) -> Path:
+    """``progress(done, total)`` is called after each clause (a job runner reports it). ``split``: the document's text and
+    clauses when the caller has already read it, so a long document is not read twice."""
     doc_path = Path(doc_path)
-    full, clauses = split_document(doc_path)
+    full, clauses = split or split_document(doc_path)
     schema = output_schema()
     ph = prompt_hash()
     today = dt.date.today().isoformat()

@@ -908,8 +908,9 @@ def split_cached(path: str | Path, cache_dir: str | Path) -> tuple[str, list[Cla
     return full, clauses
 
 
-def write_clauses(path: str | Path, out: str | Path) -> Path:
-    full, clauses = split_document(path)
+def write_clauses(path: str | Path, out: str | Path, cache_dir: str | Path | None = None) -> Path:
+    """The clauses of a document as a file. With ``cache_dir`` the split is remembered for the screens that ask for it next."""
+    full, clauses = split_cached(path, cache_dir) if cache_dir else split_document(path)
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"doc": str(path), "full_text": full, "clauses": [asdict(c) for c in clauses]},

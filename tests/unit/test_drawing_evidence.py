@@ -79,7 +79,7 @@ def test_evidence_is_the_note_chosen_in_both_orders_with_its_figure():
     found = ev.find_evidence("Door to attached garage must be a 20-min. door.", ALL, Chooser("60"))
     assert found.chosen == {"sheet": "A5", "text": DOOR.text}
     assert [(c["required"], c["stated"], c["result"], c["basis"]) for c in found.checks] == [
-        (">= 20 min", "60 min", "agrees", "the only figure of that kind in the note")] and "meets" in found.summary
+        (">= 20 min", "60 min", "agrees", "the only figure of that kind in the note")] and "only if both are about the same thing" in found.summary
     assert "rating of 60 minutes" in found.checks[0]["words"]
 
 
@@ -164,3 +164,18 @@ def test_a_majority_over_rotations_is_believed_and_a_lean_to_one_position_is_not
     assert ev._stable(Leans(), ev.SYSTEM, "requirement", "door rating", options) == "n0"
     assert ev._stable(Chooser("", flip=True), ev.SYSTEM, "requirement", "door rating", options) is None
     assert ev._stable(Chooser("nothing"), ev.SYSTEM, "requirement", "door rating", options) is None
+
+
+def test_figures_that_fit_are_never_reported_as_meeting_the_requirement_on_their_own():
+    """Two figures with the same unit can measure different things: the summary has to ask a person to check."""
+    from reviewpulse.annotate.passages import Passage
+    from reviewpulse.interpreter.drawing_evidence import find_evidence
+
+    class First:
+        def complete(self, system, user, schema):
+            return {"choice": "n0"}
+
+    got = find_evidence("Window sills must be at least 24 in above the floor.",
+                        [Passage(sheet="A1", text="SAFETY GLAZING WITHIN 24 IN OF ANY DOOR SILL FLOOR WINDOW")], First())
+    assert got.checks and got.checks[0]["result"] == "agrees"
+    assert "only if both are about the same thing" in got.summary and "which meets" not in got.summary

@@ -438,10 +438,13 @@ def find_evidence(clause: str, passages: list[Passage], client, embedder=None, r
     where = f"sheet {note.sheet}" if note.sheet else "the drawings"
     if any(c.result == "contradicts" for c in checks):
         bad = next(c for c in checks if c.result == "contradicts")
-        ev.summary = f"{where} states {bad.stated}, and the requirement asks {bad.required}: '{note.text[:200]}'"
+        ev.summary = (f"{where} states {bad.stated}, and the requirement asks {bad.required}. Check that both are about the same "
+                      f"thing: '{note.text[:200]}'")
     elif checks and all(c.result == "agrees" for c in checks):
-        ev.summary = (f"{where} states {', '.join(c.stated for c in checks)}, which meets {', '.join(c.required for c in checks)}: "
-                      f"'{note.text[:200]}'")
+        # the units match and the numbers hold; nothing has shown that the two figures measure the same thing
+        ev.summary = (f"{where} states {', '.join(c.stated for c in checks)}; the requirement asks "
+                      f"{', '.join(c.required for c in checks)}. The numbers fit only if both are about the same thing: "
+                      f"check: '{note.text[:200]}'")
     else:
         ev.summary = f"{where} says: '{note.text[:240]}'"
     return ev
