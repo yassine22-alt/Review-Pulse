@@ -65,3 +65,8 @@ suggested places still saves a reviewer searching a set by hand half of the time
 
 Two sets from two places are not "any drawing set". Both are residential and in English. A pass does not show that reviewers
 find the suggestions useful.
+
+## Status
+
+28 November: **not run.** The two sets are downloaded; no page has been looked at, no key is written and no model has run on
+them. Nothing may be claimed about whole drawing sets.
