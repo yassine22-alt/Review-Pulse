@@ -195,6 +195,23 @@ scores are low; thinning removes that difference and with it most of what tells 
 in the app, and I stop here rather than tune to one drawing.** The untried option is a model trained to spot symbols on
 drawings, which has to be shown to carry over to sets it was not trained on.
 
+## Could a model that reads more results reach what is missed? (28 November)
+
+For the 9 parts where text bearing on them is written on the drawings but nothing useful was shown, I looked up where the first
+such text ranks in the first search stage, before reordering (`scripts/depth_eval.py`; notes and other written text searched
+apart, with the part and with the whole line). What counts as bearing on a part is a word pattern I wrote, so **a match is a
+candidate to be judged, not a useful piece**.
+
+| Among the first | 5 | 10 | 20 | 50 |
+| --- | --- | --- | --- | --- |
+| Parts with such text in at least one of the four searches (of 9) | 5 | 5 | 6 | 7 |
+
+So a model that reads 20 to 50 candidates and picks the useful ones could reach **at most 7** of these 9, if every match turned
+out useful; that is the ceiling on what it can add to the 26 of 56. The ceiling needs all four searches, so such a model would
+read the candidates of each. Two are out of reach this way (chimneys, and the fire resistant board note, which ranks 58th).
+Five rank among the first 5 before reordering and still did not become a useful result; I have not checked for each whether the
+reordering moved it away or the match is not useful.
+
 ## Known limits
 
 * Door and window size marks such as "2668" are read as measurements.
