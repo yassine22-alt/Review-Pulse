@@ -126,14 +126,41 @@ def main(out: Path) -> None:
         expect(page.locator(".canvas .pin").first).to_be_attached()
         page.wait_for_timeout(700)
         shot("5_desk_findings")
+        # the sheet alone, what the tool read on it, or the corrections
+        view = page.get_by_role("group", name="What to show on the sheet")
+        view.get_by_role("button", name="What was read").click()
+        expect(page.locator(".detected polygon, .detected polyline").first).to_be_attached()
+        expect(page.locator(".readout")).to_contain_text("Read on this sheet")
+        expect(page.locator(".canvas .pin")).to_have_count(0)
+        shot("5b_what_was_read")
+        view.get_by_role("button", name="Plan only").click()
+        expect(page.locator(".detected, .canvas .pin")).to_have_count(0)
+        view.get_by_role("button", name="Corrections").click()
+        expect(page.locator(".canvas .pin").first).to_be_attached()
         failing = page.locator(".item.bad").first
         failing.locator(".head").click()
         page.wait_for_timeout(900)
         expect(failing.locator("blockquote")).to_contain_text("0.80")
         shot("6_desk_evidence")
+        # a comment is not dismissed without saying why; the reason is shown, and the dismissal can be undone
+        failing.get_by_role("button", name="Dismiss D").click()
+        confirm = failing.get_by_role("button", name="Dismiss it")
+        expect(confirm).to_be_disabled()
+        failing.get_by_label("Why is this not a correction?").fill("The schedule on this sheet already states it")
+        shot("6a_dismiss_reason")
+        confirm.click()
+        expect(failing.get_by_text("Reason for dismissing: The schedule on this sheet already states it")).to_be_visible(timeout=30000)
+        failing.get_by_role("button", name="Undo").click()
+        expect(failing.get_by_role("button", name="Accept A")).to_be_visible(timeout=30000)
         page.locator("body").press("a")
         expect(failing.locator(".decided")).to_have_text("Accepted", timeout=30000)
         expect(failing.get_by_text("Accepted by Ada Martin")).to_be_visible()
+        # the comment is given to a person with a date
+        failing.get_by_label("Assigned to").select_option("Ada Martin")
+        failing.get_by_label("Due").fill("2026-12-04")
+        failing.get_by_role("button", name="Save assignment").click()
+        expect(failing.get_by_role("button", name="Save assignment")).to_have_count(0, timeout=30000)
+        shot("6b_assigned")
         # the reviewer decides requirements by hand: no model is needed, and the desk moves on to the next one
         page.get_by_role("tab", name="Requirements").click()
         left = page.locator(".runbar p strong").nth(1)
@@ -174,6 +201,22 @@ def main(out: Path) -> None:
         mine = page.locator(".item").filter(has_text="Show the exit door on the ground floor plan")
         mine.locator(".head").click()
         expect(mine.get_by_text("Written by Ada Martin")).to_be_visible()
+        # the filters narrow the list and say so, and "Show all" brings every item back
+        every = page.locator(".cards .item").count()
+        narrowed = []
+        for label in ("Filter by severity", "Filter by rule family", "Filter by room"):
+            box = page.get_by_label(label)
+            if box.count():
+                box.select_option(index=1)
+                narrowed.append((label, page.locator(".cards .item").count()))
+                if narrowed[-1][1] < every:
+                    expect(page.get_by_text(f"Showing {narrowed[-1][1]} of {every}.")).to_be_visible()
+                    shot("5c_filtered")
+                    page.get_by_role("button", name="Show all").click()
+                else:
+                    box.select_option(index=0)
+                expect(page.locator(".cards .item")).to_have_count(every)
+        assert any(n < every for _, n in narrowed), f"no filter narrowed anything: {narrowed} of {every}"
         review_record = context.request.get(base + "api/projects/" + page.url.split("/submissions/")[1].split("/")[0] + "/coverage.html")
         assert review_record.status == 200 and "Shown on the plans (decided by a reviewer)" in review_record.text()
 
@@ -193,11 +236,13 @@ def main(out: Path) -> None:
         page.set_viewport_size({"width": 1360, "height": 860})
 
         page.get_by_role("link", name="My work").first.click()
-        expect(page.get_by_text("12 Elm Street, permit 2026-0413")).to_be_visible()
+        expect(page.get_by_role("heading", name=re.compile("Comments assigned to you"))).to_be_visible(timeout=60000)
+        expect(page.get_by_text("Due 2026-12-04")).to_be_visible()
+        expect(page.get_by_text("12 Elm Street, permit 2026-0413").first).to_be_visible()
         shot("8_queue")
 
         # the applicant resubmits: the earlier drawing is kept and last round's comments are read against the new one
-        page.get_by_text("12 Elm Street, permit 2026-0413").click()
+        page.locator(".lane .queue a").filter(has=page.locator(".title", has_text=re.compile("^12 Elm Street, permit 2026-0413"))).click()
         revised = Path(make_plan(work / "revised", png=False)["pdf"])             # the same plan, the door no longer narrow
         revised_name = revised.with_name("revised_" + revised.name)
         revised.rename(revised_name)

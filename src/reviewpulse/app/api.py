@@ -72,6 +72,15 @@ class ItemAction(BaseModel):
     action: str                       # accept | edit | drop | reset
     reviewer: str = ""
     wording: str | None = None
+    reason: str = ""                  # why it is not a correction: required to dismiss
+
+
+class FollowUp(BaseModel):
+    reviewer: str = ""
+    assignee: str | None = None       # an empty name takes the assignment away
+    due: str = ""
+    resolved: bool | None = None
+    note: str = ""                    # what was checked: required to resolve
 
 
 class Place(BaseModel):
@@ -553,7 +562,46 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         if body.action != "reset" and not any(i["key"] == key for i in data["items"]):
             raise HTTPException(404, f"no correction item {key}")
         try:
-            workflow.set_item(store, pid, key, body.action, body.reviewer, body.wording)
+            workflow.set_item(store, pid, key, body.action, body.reviewer, body.wording, reason=body.reason)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+        return service.correction_list(store, pid)
+
+    def office(request: Request) -> list[dict]:
+        """The people of the signed in person's organisation a comment can be given to; none without accounts."""
+        from .auth.policy import OFFICE
+
+        user = getattr(request.state, "user", None)
+        if user is None:
+            return []
+        return [{"name": m["name"], "roles": m["roles"]} for m in app.state.accounts.members(user.org)
+                if m["active"] and OFFICE & set(m["roles"])]
+
+    @app.get("/api/people")
+    def people(request: Request):
+        return office(request)
+
+    @app.get("/api/my-items")
+    def my_items(request: Request):
+        user = getattr(request.state, "user", None)
+        return service.assigned_to(store, user.org, user.name) if user else []
+
+    @app.put("/api/projects/{pid}/correction-list/follow-up/{key:path}")
+    def put_follow_up(pid: str, key: str, body: FollowUp, request: Request):
+        data = current_list(pid)
+        body.reviewer = who(request, body.reviewer)
+        if not any(i["key"] == key for i in data["items"]):
+            raise HTTPException(404, f"no correction item {key}")
+        if body.assignee is None and body.resolved is None:
+            raise HTTPException(400, "say who takes it, or whether it is resolved")
+        accounts = getattr(request.state, "user", None) is not None
+        if body.assignee and accounts and body.assignee not in {m["name"] for m in office(request)}:
+            raise HTTPException(400, "choose someone of your organisation")
+        try:
+            if body.assignee is not None:
+                workflow.assign(store, pid, key, body.assignee, body.due, body.reviewer)
+            if body.resolved is not None:
+                workflow.resolve(store, pid, key, body.resolved, body.note, body.reviewer)
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
         return service.correction_list(store, pid)

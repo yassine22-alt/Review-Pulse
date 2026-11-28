@@ -88,6 +88,38 @@ def test_roles(office):
     assert office["applicant"].get(f"/api/projects/{pid}").status_code == 403
 
 
+def test_comments_are_assigned_only_to_the_office_and_each_person_sees_their_own(app, office, monkeypatch):
+    from reviewpulse.app import service, workflow
+
+    pid = office["reviewer"].post("/api/projects", json={"name": "12 Elm Street"}).json()["id"]
+    store = app.state.store
+
+    def one_comment(store, pid, cycle=None):                    # stands for an analysed plan with one correction
+        return {"items": [{"key": "Art. 1", "n": 1, "citation": "[Art. 1]", "wording": "Widen the door.", "dropped": False,
+                           "followup": workflow.followups(store, pid).get("Art. 1")}]}
+
+    monkeypatch.setattr(service, "correction_list", one_comment)
+    names = [p["name"] for p in office["reviewer"].get("/api/people").json()]
+    assert names == ["Ada Admin", "Cora Coordinator", "Rene Reviewer"]                 # no applicant, no email address
+    assert set(office["reviewer"].get("/api/people").json()[0]) == {"name", "roles"}
+    assert office["applicant"].get("/api/people").status_code == 403
+    assert office["applicant"].get("/api/my-items").status_code == 403
+    url = f"/api/projects/{pid}/correction-list/follow-up/Art. 1"
+    assert office["coordinator"].put(url, json={"assignee": "Rene Reviewer"}).status_code == 403    # a review decision
+    assert office["reviewer"].put(url, json={"assignee": "Alex Applicant"}).status_code == 400
+    assert office["reviewer"].put(url, json={"assignee": "Nobody Known"}).status_code == 400
+    assert office["reviewer"].put(url, json={"assignee": "Cora Coordinator", "due": "2026-12-04",
+                                             "reviewer": "Someone Else"}).status_code == 200
+    mine = office["coordinator"].get("/api/my-items").json()
+    assert [(m["project"], m["n"], m["due"], m["by"]) for m in mine] == [(pid, 1, "2026-12-04", "Rene Reviewer")]
+    assert office["reviewer"].get("/api/my-items").json() == []
+    app.state.accounts.create_organisation("South Office", "sam@south.test", "Cora Coordinator", PW)   # the same name elsewhere
+    assert client(app, "sam@south.test").get("/api/my-items").json() == []
+    assert office["reviewer"].put(url, json={"resolved": True, "note": "checked"}).status_code == 200
+    assert office["coordinator"].get("/api/my-items").json() == []
+    assert service.assigned_to(store, "no such organisation", "Cora Coordinator") == []
+
+
 def test_decisions_carry_the_account_name_not_a_typed_one(office):
     reviewer = office["reviewer"]
     created = reviewer.post("/api/projects", json={"name": "p", "curator": "Somebody Else"}).json()

@@ -90,6 +90,23 @@ def _severity_key(verdict: str) -> tuple[int, int]:
     return rs.rank(rs.rollup(rs.status_of_verdict(verdict))), -verdicts.index(verdict) if verdict in verdicts else 0
 
 
+SEVERITIES = ("critical", "major", "minor", "info")
+
+
+def _severity_of(findings: list[dict]) -> str:
+    """The most severe rating among the findings behind one item; empty when none is rated."""
+    rated = [f["severity"] for f in findings if f.get("severity") in SEVERITIES]
+    return min(rated, key=SEVERITIES.index) if rated else ""
+
+
+def _family(from_document: bool, findings: list[dict]) -> str:
+    """Where the rule behind an item comes from: the reviewer's document, or a family of the built-in rules."""
+    if from_document:
+        return "document"
+    found = re.match(r"([CKPQ])-", str(findings[0].get("rule_id", ""))) if findings else None
+    return found.group(1) if found else "other"
+
+
 def _location(finding: dict, sheets: dict[str, dict]) -> dict | None:
     ev = finding.get("evidence", {})
     sid = ev.get("sheet")
@@ -283,7 +300,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
                       "verdicts": sorted({f["verdict"] for f in r["findings"]}),
                       "wording_default": default, "question": question, "facts": facts,
                       "locations": locations[:MAX_LOCATIONS], "more_locations": more,
-                      "from_document": r["from_document"],
+                      "from_document": r["from_document"], "severity": _severity_of(r["findings"]),
+                      "family": _family(r["from_document"], r["findings"]),
                       "finding_ids": [f["evidence"]["finding_id"] for f in r["findings"] if f.get("evidence", {}).get("finding_id")],
                       "count": len(r["findings"]), "_order": r["order"]})
 
@@ -319,6 +337,7 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
                       "chapter_label": chapter_label, "status": "revision_required", "status_label": rs.label("revision_required"),
                       "outcome": "Found by the reviewer", "verdicts": [], "wording_default": _norm(wording), "question": "",
                       "facts": facts, "locations": locations, "more_locations": 0, "from_document": True, "finding_ids": [],
+                      "severity": "", "family": "reviewer",
                       "decided_by": st.get("by"), "overrode": rs.label(overrode) if overrode else None, "count": 1, "_order": order})
 
     d_order = disc.order()
@@ -334,7 +353,8 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
         if not e and it.get("decided_by"):          # the reviewer wrote it: it already has their decision
             e = {"action": "accept", "by": it["decided_by"], "at": states[it["clause"]].get("at")}
         action = e.get("action", "pending")
-        it["review"] = {"action": action, "by": e.get("by"), "at": e.get("at")}
+        it["review"] = {"action": action, "by": e.get("by"), "at": e.get("at"),
+                        **({"reason": e.get("reason", "")} if action == "drop" else {})}
         it["wording"] = _norm(e["wording"]) if action == "edit" and e.get("wording") else it["wording_default"]
         it["dropped"] = action == "drop"
         if it["dropped"]:

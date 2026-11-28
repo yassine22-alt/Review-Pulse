@@ -18,6 +18,7 @@ RULES = [                                       # the first rule that fits decid
     ("POST", r"/api/auth/sign-out", ANYONE),
     ("*", r"/api/admin(/.*)?", ADMIN),
     ("GET", r"/api/(packs|reviewer-states)", ANYONE),
+    ("GET", r"/api/(people|my-items)", OFFICE),
     ("GET", r"/api/projects(/.*)?", OFFICE),
     ("POST", r"/api/projects", OFFICE),                                    # intake: open, upload, run
     ("PATCH", _P, OFFICE),

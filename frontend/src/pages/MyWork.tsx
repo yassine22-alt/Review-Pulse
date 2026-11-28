@@ -4,6 +4,10 @@ import { api, type Project, type User } from "../api";
 import { stage, type Lane } from "../stage";
 import { Field, Problem, Spinner, when } from "../ui";
 
+interface Mine {
+  project: string; project_name: string; key: string; n: number; citation: string; wording: string; due: string | null; by: string;
+}
+
 const LANES: { key: Lane; title: string; empty: string }[] = [
   { key: "review", title: "Ready for you", empty: "Nothing is waiting for your review." },
   { key: "working", title: "Being read", empty: "No files are being read." },
@@ -16,6 +20,8 @@ export function MyWork({ user }: { user: User }) {
   const [name, setName] = useState("");
   const [opening, setOpening] = useState(false);
   const [search, setSearch] = useState("");
+  const [mine, setMine] = useState<Mine[]>([]);
+  useEffect(() => { api<Mine[]>("/api/my-items").then(setMine).catch(() => setMine([])); }, []);
   const navigate = useNavigate();
 
   const load = useCallback(() => api<Project[]>("/api/projects")
@@ -56,6 +62,22 @@ export function MyWork({ user }: { user: User }) {
       )}
       <Problem text={problem} />
       {!projects && !problem && <Spinner label="Loading submissions" />}
+      {mine.length > 0 && (
+        <section className="lane review assigned">
+          <h2>Comments assigned to you <span className="count">{mine.length}</span></h2>
+          <ul className="queue">
+            {mine.map((m) => (
+              <li key={`${m.project}/${m.key}`}>
+                <Link to={`/submissions/${m.project}/review`}>
+                  <span className="title"><span className="words">{m.wording}</span><small>{m.project_name}, comment {m.n}, {m.citation}</small></span>
+                  <span className="chip review">{m.due ? `Due ${m.due}` : "No due date"}</span>
+                  <span className="next">Assigned by {m.by}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {projects && projects.length === 0 && (
         <section className="empty">
           <h2>No submissions yet</h2>

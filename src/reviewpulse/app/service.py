@@ -472,9 +472,35 @@ def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
     records = workflow.signoffs(store, pid)
     if cycle is None:                                  # the round is that of the drawings under review
         cycle = max([len(p.versions), 1, *(r["cycle"] for r in records)])
-    return cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
-                    states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
-                    uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
+    built = cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
+                     states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
+                     uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
+    followed = workflow.followups(store, pid)
+    for item in built["items"]:
+        item["followup"] = followed.get(item["key"])
+    return built
+
+
+def assigned_to(store: Store, org: str, name: str) -> list[dict]:
+    """The open comments given to one person, over their organisation's submissions, the nearest due date first."""
+    from . import workflow
+
+    out = []
+    for p in store.list():
+        if p.org != org:
+            continue
+        mine = {k for k, f in workflow.followups(store, p.id).items()
+                if f.get("assignee") == name and not (f.get("resolved") and not f["resolved"].get("stale"))}
+        if not mine:
+            continue                                      # the list is only built where something is waiting
+        try:
+            items = correction_list(store, p.id)["items"]
+        except ValueError:
+            continue
+        out += [{"project": p.id, "project_name": p.name, "key": i["key"], "n": i["n"], "citation": i["citation"],
+                 "wording": i["wording"], "due": i["followup"].get("due"), "by": i["followup"].get("by")}
+                for i in items if i["key"] in mine and not i["dropped"]]
+    return sorted(out, key=lambda m: (m["due"] is None, m["due"] or "", m["project_name"], m["n"]))
 
 
 ROUND_COMMENTS = "comments.json"          # beside a version: the comments that were sent on it

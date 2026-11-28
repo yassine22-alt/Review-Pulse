@@ -4,7 +4,7 @@ import { api, type Job, type Project, type User } from "../api";
 import { Logo, Problem, Spinner } from "../ui";
 import { Findings, toneOf, type ItemActions } from "./Findings";
 import { Requirements, undecided } from "./Requirements";
-import { SheetCanvas, type Mark } from "./SheetCanvas";
+import { SheetCanvas, type Layer, type Mark } from "./SheetCanvas";
 import { Resubmission } from "./Resubmission";
 import { SignOffDrawer } from "./SignOff";
 import { noteShape, shapesOf, type BackCheck, type Clause, type CorrectionList, type Determination, type NoteRef, type Reading, type View } from "./types";
@@ -25,6 +25,10 @@ export function ReviewDesk({ user }: { user: User }) {
   const [sheet, setSheet] = useState(0);
   const [focus, setFocus] = useState(0);
   const [editing, setEditing] = useState(false);
+  const [dismissing, setDismissing] = useState(false);
+  const [people, setPeople] = useState<string[]>([]);
+  useEffect(() => { api<{ name: string }[]>("/api/people").then((p) => setPeople(p.map((x) => x.name))).catch(() => {}); }, []);
+  const [layer, setLayer] = useState<Layer>("corrections");
   const [signing, setSigning] = useState(false);
   const [note, setNote] = useState<{ sheet: number; mark: Mark } | null>(null);
   const canDecide = user.roles.includes("reviewer");
@@ -65,8 +69,10 @@ export function ReviewDesk({ user }: { user: User }) {
   const select = useCallback((key: string | null) => {
     setSelected(key);
     setEditing(false);
+    setDismissing(false);
     setNote(null);
     if (!key) return;
+    setLayer("corrections");
     setTab("corrections");
     setOpened((o) => new Set(o).add(key));
     const first = places.get(key)?.[0];
@@ -80,10 +86,12 @@ export function ReviewDesk({ user }: { user: User }) {
     };
     const url = `/api/projects/${id}`;
     return {
-      decide: async (item, action, wording) => {
+      decide: async (item, action, wording, reason) => {
         await run(() => api(`${url}/correction-list/items/${encodeURIComponent(item.key)}`,
-          { method: "PUT", json: { action, wording } }));
+          { method: "PUT", json: { action, wording, reason } }));
       },
+      follow: (item, change) => run(() => api(`${url}/correction-list/follow-up/${encodeURIComponent(item.key)}`,
+        { method: "PUT", json: change })),
       setAside: (item, state, note) => run(() => api(`${url}/clause-states`,
         { method: "PUT", json: { clause: item.clause, state, note } })),
       restore: (clause) => run(() => api(`${url}/clause-states`, { method: "PUT", json: { clause, state: "reset" } })),
@@ -105,7 +113,7 @@ export function ReviewDesk({ user }: { user: User }) {
       else if (k === "enter" && item && !(e.target as Element).closest("button, a")) setFocus((f) => f + 1);
       else if (item && canDecide && item.review.action === "pending") {
         if (k === "a" && (opened.has(item.key) || !located.has(item.key))) actions.decide(item, "accept");
-        else if (k === "d") actions.decide(item, "drop");
+        else if (k === "d") { e.preventDefault(); setDismissing(true); }
         else if (k === "e") { e.preventDefault(); setEditing(true); }
       }
     };
@@ -133,6 +141,7 @@ export function ReviewDesk({ user }: { user: User }) {
     const shape = target && ref.box ? noteShape(target, ref.box) : null;
     if (!target || !shape) return;
     setSelected(null);
+    setLayer("corrections");
     setNote({ sheet: target.index, mark: { key: "note", label: "", tone: "note", shapes: [shape] } });
     setSheet(target.index);
     setFocus((f) => f + 1);
@@ -159,7 +168,7 @@ export function ReviewDesk({ user }: { user: User }) {
         {current ? (
           <SheetCanvas key={current.index} project={project.id} sheet={current} marks={marks}
             selected={selected ?? (note && note.sheet === current.index ? "note" : null)}
-            focus={focus} onSelect={select} />
+            focus={focus} onSelect={select} layer={layer} setLayer={setLayer} />
         ) : <div className="canvas none"><p>The drawings have not been read yet.</p></div>}
         {view && view.sheets.length > 1 && (
           <nav className="filmstrip" aria-label="Sheets">
@@ -197,8 +206,8 @@ export function ReviewDesk({ user }: { user: User }) {
             <Resubmission data={data.rounds} sheets={view?.sheets ?? []} onShow={showNote} canDecide={canDecide}
               busy={running.length > 0} compare={() => startJob("back-check")} />
           ) : tab === "corrections" ? (
-            <Findings sheets={view?.sheets ?? []} list={list} located={located} selected={selected} opened={opened} canDecide={canDecide}
-              editing={editing} setEditing={setEditing} onSelect={(k) => select(selected === k ? null : k)}
+            <Findings view={view} list={list} located={located} selected={selected} opened={opened} canDecide={canDecide}
+              people={people} dismissing={dismissing} setDismissing={setDismissing} editing={editing} setEditing={setEditing} onSelect={(k) => select(selected === k ? null : k)}
               onZoom={() => selected && select(selected)} actions={actions} />
           ) : (
             <Requirements sheets={view?.sheets ?? []} viewing={current} onShowNote={showNote} project={project} clauses={data.clauses}
@@ -208,7 +217,7 @@ export function ReviewDesk({ user }: { user: User }) {
         </div>
         {tab === "corrections" && list.items.length > 0 && (
           <footer className="keys"><kbd>J</kbd><kbd>K</kbd> move <kbd>Enter</kbd> zoom <kbd>A</kbd> accept <kbd>E</kbd> edit
-            <kbd>D</kbd> drop <kbd>Esc</kbd> whole sheet</footer>
+            <kbd>D</kbd> dismiss <kbd>Esc</kbd> whole sheet</footer>
         )}
       </aside>
       {signing && <SignOffDrawer project={project.id} list={list} canSign={canDecide} close={() => setSigning(false)} reload={load} />}

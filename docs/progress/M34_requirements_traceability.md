@@ -26,9 +26,9 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | FR-12 | M | Finding carries element, values, severity, clause, confidence, evidence | Built | |
 | FR-13 | S | Live progress, and cancel | Partial | No cancel |
 | FR-14 | M | Plan with verdict overlay, selection both ways | Built | |
-| FR-15 | M | Switch between original, what was detected, and violations | **Missing** | The detected rooms and elements already reach the screen; no switch shows them |
-| FR-16 | M | Filter findings by severity, rule family, room, status | Partial | Status only |
-| FR-17 | M | Accept, dismiss with a reason, assign, resolve; audit log | Partial | A dismissal needs no reason; no assign or resolve |
+| FR-15 | M | Switch between original, what was detected, and violations | Built | Added 28 November: plan only, what was read (rooms and elements, with their counts and a warning that reading can miss), corrections |
+| FR-16 | M | Filter findings by severity, rule family, room, status | Built | Added 28 November. A comment is tied to a room through the room or element its check names; a comment about the whole sheet has no room |
+| FR-17 | M | Accept, dismiss with a reason, assign, resolve; audit log | Built | Added 28 November. The assigned person sees it on their work page; no email is sent. A "resolved" made on earlier drawings is flagged for a new look |
 | FR-18 | S | Re check a revision: resolved, persisting, new | Built | In the app since 28 November ([M27](M27_back_check.md) for what was measured): each earlier comment gets a reading the reviewer checks; changes nobody asked for are counted |
 | FR-19 | M | Annotated PDF, JSON and CSV | Built | |
 | FR-20 | C | BCF issues | Built | |
@@ -88,13 +88,13 @@ written there; they were not rerun for this page.
 
 ## Count
 
-Counted from the table: of 38 functional requirements, **20 are built, 13 partial and 5 missing** (FR-15, FR-26, FR-27, FR-36, FR-37). Of the
-27 marked must, **17 are built and 10 are not fully built**: FR-01, FR-15, FR-16, FR-17, FR-22, FR-24, FR-27, FR-28, FR-37, FR-38.
+Counted from the table: of 38 functional requirements, **23 are built, 11 partial and 4 missing** (FR-26, FR-27, FR-36, FR-37). Of the
+27 marked must, **20 are built and 7 are not fully built**: FR-01, FR-22, FR-24, FR-27, FR-28, FR-37, FR-38.
 
 ## Order of work
 
-1. Must requirements that are small or already half there: FR-04 (versions by hash), FR-15 (show what was detected), FR-16
-   (filters), FR-17 (reason, assign, resolve), FR-38 (exits per pack), FR-01 (occupancy, location).
+1. Must requirements that are small or already half there: FR-38 (exits per pack), FR-01 (occupancy, location). Done on
+   28 November: FR-04, FR-15, FR-16, FR-17.
 2. The back check in the app (FR-18, FR-35): built and measured already, and it is the step after the first review.
 3. The test cases of the test plan, run and recorded with their actual results.
 4. FR-37 (routes across floors): the one large must requirement.

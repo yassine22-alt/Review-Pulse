@@ -6,9 +6,39 @@ export interface Mark { key: string; label: string; tone: string; shapes: Findin
 const join = (p: Point[]) => p.map((q) => q.join(",")).join(" ");
 const still = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/** The sheet alone, what the tool read on it, or the evidence of the correction items. */
+export type Layer = "plan" | "read" | "corrections";
+const LAYERS: [Layer, string][] = [["plan", "Plan only"], ["read", "What was read"], ["corrections", "Corrections"]];
+
+/** Rooms and elements as the tool read them: a reviewer sees what a conclusion could and could not have rested on. */
+function Detected({ sheet }: { sheet: SheetView }) {
+  return (
+    <g className="detected">
+      {sheet.rooms.map((r) => (
+        <polygon key={r.id} className="room" points={join(r.poly)}><title>{r.label || "room without a label"}</title></polygon>
+      ))}
+      {sheet.elements.map((e) => e.line
+        ? <polyline key={e.id} className={`el ${e.cls}`} points={join(e.line)}><title>{e.cls}</title></polyline>
+        : e.poly && <polygon key={e.id} className={`el ${e.cls}`} points={join(e.poly)}><title>{e.cls}</title></polygon>)}
+    </g>
+  );
+}
+
+/** How many of each kind were read, in words; zero is said too, since nothing read is not nothing there. */
+export function readSummary(sheet: SheetView): string {
+  const counts = new Map<string, number>();
+  for (const e of sheet.elements) counts.set(e.cls, (counts.get(e.cls) ?? 0) + 1);
+  const parts = [`${sheet.rooms.length} room${sheet.rooms.length === 1 ? "" : "s"}`,
+    ...[...counts].sort((a, b) => b[1] - a[1]).map(([cls, n]) => `${n} ${cls.replace(/_/g, " ")}${n === 1 ? "" : "s"}`)];
+  return sheet.rooms.length + sheet.elements.length === 0
+    ? "No rooms or building elements were read on this sheet. That does not mean there are none."
+    : `Read on this sheet: ${parts.join(", ")}. Reading can miss and mislabel: check against the plan.`;
+}
+
 /** One sheet with pan, zoom and the evidence of the correction items drawn on it. `focus` changes make the view fly there. */
-export function SheetCanvas({ project, sheet, marks, selected, focus, onSelect }: {
+export function SheetCanvas({ project, sheet, marks, selected, focus, onSelect, layer, setLayer }: {
   project: string; sheet: SheetView; marks: Mark[]; selected: string | null; focus: number; onSelect: (key: string) => void;
+  layer: Layer; setLayer: (l: Layer) => void;
 }) {
   const frame = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 800, h: 600 });
@@ -107,7 +137,8 @@ export function SheetCanvas({ project, sheet, marks, selected, focus, onSelect }
       <svg viewBox={view.join(" ")} preserveAspectRatio="xMidYMid meet" aria-label={`Sheet ${sheet.id}`}>
         <rect className="paper" x={0} y={0} width={sheet.width} height={sheet.height} />
         <image href={`/api/projects/${project}/sheets/${sheet.index}/backdrop.png`} width={sheet.width} height={sheet.height} />
-        {ordered.map((m) => (
+        {layer === "read" && <Detected sheet={sheet} />}
+        {layer === "corrections" && ordered.map((m) => (
           <g key={m.key} className={`mark ${m.tone} ${selected === m.key ? "on" : selected ? "dim" : ""}`}>
             {m.shapes.map((g, i) => (
               <g key={i}>
@@ -126,6 +157,12 @@ export function SheetCanvas({ project, sheet, marks, selected, focus, onSelect }
           </g>
         ))}
       </svg>
+      <div className="layers" role="group" aria-label="What to show on the sheet">
+        {LAYERS.map(([key, label]) => (
+          <button key={key} aria-pressed={layer === key} onClick={() => setLayer(key)}>{label}</button>
+        ))}
+      </div>
+      {layer === "read" && <p className="readout" role="status">{readSummary(sheet)}</p>}
       <div className="zoomer">
         <button onClick={() => zoom(0.75)} aria-label="Zoom in">+</button>
         <button onClick={() => zoom(1.33)} aria-label="Zoom out">−</button>

@@ -19,7 +19,12 @@ export interface Item {
   wording: string; wording_default: string; question: string; facts: Fact[];
   locations: { sheet: string; where: string; bbox?: number[] | null }[]; more_locations: number; dropped: boolean;
   decided_by?: string; overrode?: string | null;
-  review: { action: "pending" | "accept" | "edit" | "drop"; by: string | null };
+  review: { action: "pending" | "accept" | "edit" | "drop"; by: string | null; reason?: string | null };
+  severity: string; family: string;
+  followup?: {
+    assignee?: string; due?: string | null; by?: string;
+    resolved?: { by: string; at: string; note: string; stale?: boolean } | null;
+  } | null;
   from_document: boolean; finding_ids: string[];
 }
 export interface CorrectionList {

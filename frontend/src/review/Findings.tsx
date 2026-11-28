@@ -1,24 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { FAMILY, roomsOf, SEVERITY } from "./filters";
 import { plainEvidence } from "./plain";
-import type { CorrectionList, Item, SheetView } from "./types";
+import type { CorrectionList, Item, SheetView, View } from "./types";
 
 export const TONE: Record<string, string> = { revision_required: "bad", information_requested: "ask" };
 export const toneOf = (i: Item) => TONE[i.status] ?? "ok";
-const DONE: Record<string, string> = { accept: "Accepted", edit: "Edited", drop: "Dropped" };
+const DONE: Record<string, string> = { accept: "Accepted", edit: "Edited", drop: "Dismissed" };
 
 export interface ItemActions {
-  decide: (item: Item, action: "accept" | "edit" | "drop" | "reset", wording?: string) => Promise<void>;
+  decide: (item: Item, action: "accept" | "edit" | "drop" | "reset", wording?: string, reason?: string) => Promise<void>;
+  follow: (item: Item, change: { assignee?: string; due?: string; resolved?: boolean; note?: string }) => Promise<void>;
   setAside: (item: Item, state: "deferred" | "not_applicable", note: string) => Promise<void>;
   restore: (clause: string) => Promise<void>;
 }
 
-export function Findings({ sheets, list, located, selected, opened, canDecide, editing, setEditing, onSelect, onZoom, actions }: {
-  sheets: SheetView[]; list: CorrectionList; located: Set<string>; selected: string | null; opened: Set<string>; canDecide: boolean;
-  editing: boolean; setEditing: (v: boolean) => void; onSelect: (key: string) => void; onZoom: () => void; actions: ItemActions;
+export function Findings({ view, list, located, selected, opened, canDecide, people, editing, setEditing, dismissing,
+  setDismissing, onSelect, onZoom, actions }: {
+  view: View | null; list: CorrectionList; located: Set<string>; selected: string | null; opened: Set<string>; canDecide: boolean;
+  people: string[]; editing: boolean; setEditing: (v: boolean) => void; dismissing: boolean; setDismissing: (v: boolean) => void;
+  onSelect: (key: string) => void; onZoom: () => void; actions: ItemActions;
 }) {
+  const sheets: SheetView[] = view?.sheets ?? [];
   const [filter, setFilter] = useState<string>("all");
+  const [picks, setPicks] = useState({ severity: "", family: "", room: "" });
   const statuses = [...new Set(list.items.map((i) => i.status))];
-  const shown = list.items.filter((i) => filter === "all" || i.status === filter);
+  const rooms = useMemo(() => new Map(list.items.map((i) => [i.key, roomsOf(i, view)])), [list, view]);
+  const options = {
+    severity: [...new Set(list.items.map((i) => i.severity || "none"))],
+    family: [...new Set(list.items.map((i) => i.family))],
+    room: [...new Set([...rooms.values()].flat())].sort(),
+  };
+  const shown = list.items.filter((i) => (filter === "all" || i.status === filter)
+    && (!picks.severity || (i.severity || "none") === picks.severity)
+    && (!picks.family || i.family === picks.family)
+    && (!picks.room || rooms.get(i.key)!.includes(picks.room)));
   const left = list.edit_burden.unreviewed;
 
   if (!list.items.length) {
@@ -51,14 +66,38 @@ export function Findings({ sheets, list, located, selected, opened, canDecide, e
             );
           })}
         </div>
+        <div className="picks">
+          {options.severity.length > 1 && (
+            <select aria-label="Filter by severity" value={picks.severity} onChange={(e) => setPicks({ ...picks, severity: e.target.value })}>
+              <option value="">Any severity</option>
+              {options.severity.map((v) => <option key={v} value={v}>{SEVERITY[v === "none" ? "" : v] ?? v}</option>)}
+            </select>
+          )}
+          {options.family.length > 1 && (
+            <select aria-label="Filter by rule family" value={picks.family} onChange={(e) => setPicks({ ...picks, family: e.target.value })}>
+              <option value="">Any rule family</option>
+              {options.family.map((v) => <option key={v} value={v}>{FAMILY[v] ?? v}</option>)}
+            </select>
+          )}
+          {options.room.length > 0 && (
+            <select aria-label="Filter by room" value={picks.room} onChange={(e) => setPicks({ ...picks, room: e.target.value })}>
+              <option value="">Any room</option>
+              {options.room.map((v) => <option key={v} value={v}>{v}</option>)}
+            </select>
+          )}
+        </div>
+        {shown.length < list.items.length && (
+          <p role="status">Showing {shown.length} of {list.items.length}.{" "}
+            <button className="link" onClick={() => { setFilter("all"); setPicks({ severity: "", family: "", room: "" }); }}>Show all</button></p>
+        )}
         <p>{left === 0 ? "Every item has your decision." : `${left} of ${list.items.length} still need your decision.`}
           {list.uncovered_clauses > 0 && ` ${list.uncovered_clauses} requirements are still undecided.`}</p>
       </div>
       <ol className="cards">
         {shown.map((item) => (
           <Card key={item.key} sheets={sheets} item={item} open={selected === item.key} located={located.has(item.key)}
-            seen={opened.has(item.key)} canDecide={canDecide} editing={editing && selected === item.key}
-            setEditing={setEditing} onSelect={onSelect} onZoom={onZoom} actions={actions} />
+            seen={opened.has(item.key)} canDecide={canDecide} editing={editing && selected === item.key} people={people}
+            dismissing={dismissing && selected === item.key} setDismissing={setDismissing} setEditing={setEditing} onSelect={onSelect} onZoom={onZoom} actions={actions} />
         ))}
       </ol>
       {list.deferred.length > 0 && (
@@ -74,14 +113,17 @@ export function Findings({ sheets, list, located, selected, opened, canDecide, e
   );
 }
 
-function Card({ sheets, item, open, located, seen, canDecide, editing, setEditing, onSelect, onZoom, actions }: {
+function Card({ sheets, item, open, located, seen, canDecide, people, editing, setEditing, dismissing, setDismissing, onSelect,
+  onZoom, actions }: {
   sheets: SheetView[]; item: Item; open: boolean; located: boolean; seen: boolean; canDecide: boolean; editing: boolean;
-  setEditing: (v: boolean) => void; onSelect: (key: string) => void; onZoom: () => void; actions: ItemActions;
+  people: string[]; dismissing: boolean; setDismissing: (v: boolean) => void; setEditing: (v: boolean) => void; onSelect: (key: string) => void; onZoom: () => void; actions: ItemActions;
 }) {
   const ref = useRef<HTMLLIElement>(null);
   const [draft, setDraft] = useState(item.wording);
   const [aside, setAside] = useState<"" | "deferred" | "not_applicable">("");
   const [note, setNote] = useState("");
+  const [reason, setReason] = useState("");
+  useEffect(() => { if (dismissing) setReason(""); }, [dismissing]);
   useEffect(() => setDraft(item.wording), [item.wording, editing]);
   useEffect(() => { if (open) ref.current?.scrollIntoView({ block: "nearest" }); else setAside(""); }, [open]);
   const state = item.review.action;
@@ -93,6 +135,7 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
           <span className="line"><strong>{item.status_label}</strong><em>{item.citation}</em></span>
           <span className="quote-short">{item.decided_by ? item.wording : item.quote}</span>
         </span>
+        {item.followup?.resolved && !item.followup.resolved.stale && <span className="decided ok">Resolved</span>}
         {state !== "pending" && <span className={`decided ${state}`}>{DONE[state]}</span>}
       </button>
       {open && (
@@ -141,7 +184,7 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
                   <button className="primary" disabled={located && !seen} onClick={() => actions.decide(item, "accept")}>
                     Accept <kbd>A</kbd></button>
                   <button onClick={() => setEditing(true)}>Edit <kbd>E</kbd></button>
-                  <button onClick={() => actions.decide(item, "drop")}>Drop <kbd>D</kbd></button>
+                  <button onClick={() => setDismissing(true)}>Dismiss <kbd>D</kbd></button>
                 </>
               ) : (
                 <>
@@ -160,6 +203,21 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
               )}
             </div>
           )}
+          {state === "drop" && item.review.reason && <p className="muted">Reason for dismissing: {item.review.reason}</p>}
+          {dismissing && state === "pending" && canDecide && (
+            <form className="why" onSubmit={async (e) => {
+              e.preventDefault();
+              await actions.decide(item, "drop", undefined, reason);
+              setDismissing(false);
+            }}>
+              <label>Why is this not a correction?
+                <small className="muted">Required. It stays in the history, so that a wrong finding can be traced.</small>
+                <input autoFocus required maxLength={500} value={reason} onChange={(e) => setReason(e.target.value)} /></label>
+              <div className="row"><button className="primary" disabled={!reason.trim()}>Dismiss it</button>
+                <button type="button" onClick={() => setDismissing(false)}>Cancel</button></div>
+            </form>
+          )}
+          {!item.dropped && <FollowUp item={item} canDecide={canDecide} people={people} actions={actions} />}
           {aside && (
             <form className="why" onSubmit={async (e) => { e.preventDefault(); await actions.setAside(item, aside, note); }}>
               <label>{aside === "deferred" ? "Who submits it, and when?" : "Why does it not apply here?"}
@@ -171,5 +229,62 @@ function Card({ sheets, item, open, located, seen, canDecide, editing, setEditin
         </div>
       )}
     </li>
+  );
+}
+
+/** Who takes a comment further and by when, and whether corrected drawings settled it. */
+function FollowUp({ item, canDecide, people, actions }: { item: Item; canDecide: boolean; people: string[]; actions: ItemActions }) {
+  const f = item.followup;
+  const [who, setWho] = useState(f?.assignee ?? "");
+  const [due, setDue] = useState(f?.due ?? "");
+  const [checked, setChecked] = useState("");
+  const [closing, setClosing] = useState(false);
+  useEffect(() => { setWho(f?.assignee ?? ""); setDue(f?.due ?? ""); }, [f?.assignee, f?.due]);
+  const done = f?.resolved;
+  if (!canDecide) {
+    return f?.assignee || done ? (
+      <div className="follow">
+        {f?.assignee && <span>Assigned to {f.assignee}{f.due ? `, due ${f.due}` : ""}.</span>}
+        {done && <span>Resolved by {done.by}.</span>}
+      </div>
+    ) : null;
+  }
+  const changed = who !== (f?.assignee ?? "") || due !== (f?.due ?? "");
+  return (
+    <div className="follow">
+      <div className="row">
+        <label>Assigned to
+          {people.length > 0 ? (
+            <select value={who} onChange={(e) => setWho(e.target.value)}>
+              <option value="">Nobody</option>
+              {[...new Set([...people, ...(who ? [who] : [])])].map((p) => <option key={p} value={p}>{p}</option>)}
+            </select>
+          ) : <input maxLength={80} value={who} onChange={(e) => setWho(e.target.value)} />}
+        </label>
+        <label>Due<input type="date" value={due} onChange={(e) => setDue(e.target.value)} disabled={!who} /></label>
+        {changed && <button onClick={() => actions.follow(item, { assignee: who, due: who ? due : "" })}>
+          {who ? "Save assignment" : "Remove assignment"}</button>}
+      </div>
+      {done && !done.stale ? (
+        <span>Resolved by {done.by}: {done.note}{" "}
+          <button className="link" onClick={() => actions.follow(item, { resolved: false })}>Reopen</button></span>
+      ) : (
+        <>
+          {done?.stale && <span className="notice-line">Marked resolved by {done.by} on earlier drawings. Check the new ones.</span>}
+          {closing ? (
+            <form className="why" onSubmit={async (e) => {
+              e.preventDefault();
+              await actions.follow(item, { resolved: true, note: checked });
+              setClosing(false);
+            }}>
+              <label>What did you check?<input autoFocus required maxLength={500} value={checked}
+                onChange={(e) => setChecked(e.target.value)} /></label>
+              <div className="row"><button className="primary" disabled={!checked.trim()}>Mark resolved</button>
+                <button type="button" onClick={() => setClosing(false)}>Cancel</button></div>
+            </form>
+          ) : <span><button className="link" onClick={() => setClosing(true)}>Mark resolved</button></span>}
+        </>
+      )}
+    </div>
   );
 }

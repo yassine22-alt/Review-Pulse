@@ -1,9 +1,10 @@
-"""What a reviewer does to a project beyond the rules: set a clause aside as deferred or not applicable, accept, edit or drop a
-correction item, sign off a discipline for a cycle. Each is stored under the project (``review/``) and each is written to a
+"""What a reviewer does to a project beyond the rules: set a clause aside as deferred or not applicable, accept, edit or dismiss
+a correction item, assign it and mark it resolved, sign off a discipline for a cycle. Each is stored under the project (``review/``) and each is written to a
 plain audit trail: who, what, when. A name is required for every change; nothing here runs a model.
 
     <project>/review/clause_states.json   {clause: {state, by, at, note}}
     <project>/review/edits.json           {item key: {action, wording, original, by, at, events}}
+    <project>/review/followups.json     {item key: {assignee, due, by, at, resolved: {by, at, note, basis}}}
     <project>/review/signoffs.json        [{reviewer, cycle, discipline, result, note, at}], every sign off ever made
     <project>/review/audit.jsonl          one JSON object per line
 """
@@ -13,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import json
 import threading
+from datetime import date
 from pathlib import Path
 
 from ..report import reviewer_states as rs
@@ -184,14 +186,18 @@ def item_edits(store: Store, pid: str) -> dict:
     return _read(_dir(store, pid) / "edits.json", {})
 
 
-def set_item(store: Store, pid: str, key: str, action: str, reviewer: str, wording: str | None = None, original: str = "") -> dict:
-    """accept, edit (new wording), drop, or reset one correction item. ``events`` counts how many times the reviewer changed
+def set_item(store: Store, pid: str, key: str, action: str, reviewer: str, wording: str | None = None, original: str = "",
+             reason: str = "") -> dict:
+    """accept, edit (new wording), drop (dismiss, always with a reason), or reset one correction item. ``events`` counts how many times the reviewer changed
     this item by hand (edit or drop): the edit burden of docs/REVIEWER_WORKFLOW.md section 6."""
     who = need_name(reviewer)
     if action not in EDIT_ACTIONS:
         raise ValueError(f"unknown action {action!r}; use {', '.join(EDIT_ACTIONS)}")
     if action == "edit" and not _is_text(wording):
         raise ValueError("the new wording is empty")
+    if action == "drop" and not _is_text(reason):
+        raise ValueError("say why this is not a correction")
+    why = {"reason": " ".join(reason.split())[:500]} if action == "drop" else {}
     with _lock(pid):
         edits = item_edits(store, pid)
         prev = edits.get(key, {})
@@ -201,12 +207,79 @@ def set_item(store: Store, pid: str, key: str, action: str, reviewer: str, wordi
         else:
             events += action in ("edit", "drop")
             edits[key] = {"action": action, "by": who, "at": now(), "events": events,
-                          "original": prev.get("original") or original,
+                          "original": prev.get("original") or original, **why,
                           **({"wording": " ".join(wording.split())} if action == "edit" else {})}
         _write(_dir(store, pid) / "edits.json", edits)
-        log(store, pid, who, f"correction item {key}: {action}", {"item": key, "action": action,
+        log(store, pid, who, f"correction item {key}: {action}", {"item": key, "action": action, **why,
                                                                     **({"wording": " ".join(wording.split())} if action == "edit" else {})})
     return edits.get(key, {"action": "pending"})
+
+
+# -- who takes a comment further, and whether it is settled ------------------------------------------------------------
+def followups(store: Store, pid: str) -> dict:
+    """Per item: the assignment and the resolution. A resolution speaks of the drawings it was made on: ``stale`` says they
+    have been replaced since."""
+    out, plan = _read(_dir(store, pid) / "followups.json", {}), None
+    for entry in out.values():
+        done = entry.get("resolved")
+        if done and (done.get("basis") or {}).get("plan"):
+            plan = _file_digest(store.plan_path(store.get(pid))) if plan is None else plan
+            done["stale"] = done["basis"]["plan"] != plan
+    return out
+
+
+def _change_followup(store: Store, pid: str, key: str, change) -> dict:
+    with _lock(pid):
+        all_ = _read(_dir(store, pid) / "followups.json", {})
+        entry = all_.get(key, {})
+        change(entry)
+        if entry:
+            all_[key] = entry
+        else:
+            all_.pop(key, None)
+        _write(_dir(store, pid) / "followups.json", all_)
+    return entry
+
+
+def assign(store: Store, pid: str, key: str, assignee: str, due: str, reviewer: str) -> dict:
+    """Give a comment to someone, with a date if wanted; an empty name takes the assignment away."""
+    who, name, due = need_name(reviewer), " ".join((assignee or "").split())[:80], (due or "").strip()
+    if due:
+        try:
+            due = date.fromisoformat(due).isoformat()
+        except ValueError:
+            raise ValueError("the due date is written year-month-day") from None
+
+    def change(entry):
+        for k in ("assignee", "due", "by", "at"):
+            entry.pop(k, None)
+        if name:
+            entry.update(assignee=name, due=due or None, by=who, at=now())
+
+    with _lock(pid):
+        entry = _change_followup(store, pid, key, change)
+        log(store, pid, who, f"correction item {key}: " + (f"assigned to {name}" if name else "assignment removed"),
+            {"item": key, "assignee": name, "due": due or None})
+    return entry
+
+
+def resolve(store: Store, pid: str, key: str, resolved: bool, note: str, reviewer: str) -> dict:
+    """A reviewer records that a comment is settled, saying what they checked; ``resolved=False`` opens it again."""
+    who = need_name(reviewer)
+    if resolved and not _is_text(note):
+        raise ValueError("say what you checked")
+    said = " ".join((note or "").split())[:500]
+
+    def change(entry):
+        entry.pop("resolved", None)
+        if resolved:
+            entry["resolved"] = {"by": who, "at": now(), "note": said, "basis": basis(store, pid, None)}
+
+    with _lock(pid):
+        entry = _change_followup(store, pid, key, change)
+        log(store, pid, who, f"correction item {key}: " + ("resolved" if resolved else "opened again"),
+            {"item": key, "resolved": resolved, "note": said})
+    return entry
 
 
 def _is_text(x) -> bool:

@@ -163,7 +163,10 @@ def test_accept_edit_drop_are_stored_counted_and_renumber(fresh):
     assert c.put(url + keys[0], json={"action": "edit", "reviewer": "Rev", "wording": "  "}).status_code == 400
     c.put(url + keys[0], json={"action": "accept", "reviewer": "Rev"})
     c.put(url + keys[1], json={"action": "edit", "reviewer": "Rev", "wording": "Show the exit on sheet 1.  [Art. X]"})
-    after = c.put(url + keys[2], json={"action": "drop", "reviewer": "Rev"}).json()
+    assert c.put(url + keys[2], json={"action": "drop", "reviewer": "Rev"}).status_code == 400   # dismissing needs a reason
+    assert c.put(url + keys[2], json={"action": "drop", "reviewer": "Rev", "reason": "  "}).status_code == 400
+    after = c.put(url + keys[2], json={"action": "drop", "reviewer": "Rev", "reason": "the sheet  shows it"}).json()
+    assert after["items"][2]["review"]["reason"] == "the sheet shows it"
     b = after["edit_burden"]
     assert (b["accepted"], b["edited"], b["dropped"], b["edit_count"]) == (1, 1, 1, 2)
     assert b["unreviewed"] == len(keys) - 3
@@ -181,6 +184,29 @@ def test_accept_edit_drop_are_stored_counted_and_renumber(fresh):
     assert not any(data["items"][2]["wording"] in x for x in contents)
     c.put(url + keys[2], json={"action": "reset", "reviewer": "Rev"})
     assert listing(c, pid)["edit_burden"]["dropped"] == 0
+
+
+def test_a_comment_is_assigned_resolved_and_opened_again_with_a_trail(fresh):
+    c, pid = fresh
+    first = listing(c, pid)["items"][0]
+    assert first["severity"] in ("critical", "major", "minor", "info") and first["family"]
+    url = f"/api/projects/{pid}/correction-list/follow-up/"
+    key = first["key"]
+    assert c.put(url + "no-such-item", json={"assignee": "Eng", "reviewer": "Rev"}).status_code == 404
+    assert c.put(url + key, json={"reviewer": "Rev"}).status_code == 400
+    assert c.put(url + key, json={"assignee": "Eng", "due": "next week", "reviewer": "Rev"}).status_code == 400
+    after = c.put(url + key, json={"assignee": "Eng", "due": "2026-12-04", "reviewer": "Rev"}).json()
+    assert after["items"][0]["followup"] == {**after["items"][0]["followup"], "assignee": "Eng", "due": "2026-12-04", "by": "Rev"}
+    assert c.put(url + key, json={"resolved": True, "reviewer": "Rev"}).status_code == 400       # say what was checked
+    done = c.put(url + key, json={"resolved": True, "note": "corrected on sheet 1", "reviewer": "Rev"}).json()
+    resolved = done["items"][0]["followup"]["resolved"]
+    assert resolved["by"] == "Rev" and resolved["note"] == "corrected on sheet 1" and resolved["stale"] is False
+    again = c.put(url + key, json={"resolved": False, "reviewer": "Rev"}).json()["items"][0]["followup"]
+    assert "resolved" not in again and again["assignee"] == "Eng"
+    assert c.put(url + key, json={"assignee": "", "reviewer": "Rev"}).json()["items"][0]["followup"] is None
+    trail = " | ".join(e["what"] for e in c.get(f"/api/projects/{pid}/audit").json())
+    for said in ("assigned to Eng", "resolved", "opened again", "assignment removed"):
+        assert said in trail
 
 
 def test_a_deferred_clause_leaves_the_list_and_goes_on_the_cover(fresh):

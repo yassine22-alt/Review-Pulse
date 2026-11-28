@@ -936,6 +936,10 @@ async function correctionsTab(pid) {
     $$("[data-act]", box).forEach((btn) => btn.addEventListener("click", () => {
       const a = btn.dataset.act;
       if (a === "edit") return act(key, { action: "edit", wording: $("textarea", box).value });
+      if (a === "drop") {
+        const reason = (window.prompt("Why is this not a correction?") || "").trim();
+        return reason ? act(key, { action: "drop", reason }) : undefined;
+      }
       if (a === "defer") return setClause(pid, box.dataset.clause, "deferred", reload);
       if (a === "na") return setClause(pid, box.dataset.clause, "not_applicable", reload);
       return act(key, { action: a });
