@@ -1,4 +1,4 @@
-"""Measure sheet recognition on real drawing pages whose kind was judged by eye (not by the system).
+"""Measure sheet recognition on real drawing pages whose kind an AI grader judged from renders (not the system under test).
 
     python scripts/sheet_kind_eval.py            (needs reports/real_plans/*.png from scripts/real_plan_study.py)
 

@@ -1,5 +1,8 @@
 # M35: can a visual search model put the right place first? (plan, written before any run)
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md). The wording of this plan is kept as it was written before the run.
+
 Written 28 November 2026. No visual search model has been run on these drawings when this page was written. The rules below are
 not edited after the first run; any departure is written as one.
 
@@ -63,3 +66,7 @@ No visual search model has been run yet when this section is written.
 Tiles of hand chosen areas are far fewer than the tiles of a whole set, so the score will be higher than in real use. The held
 out drawings have been looked at before, for the yes or no test; the search model has never seen them and nothing in its use is
 tuned. One person made both keys.
+
+**28 November, after a first attempt that gave no scores:** job 6049029 stopped while loading the model, because the library
+`accelerate` is not in the cluster environment. The script now moves the model to the GPU directly. Nothing about what is
+measured changed.

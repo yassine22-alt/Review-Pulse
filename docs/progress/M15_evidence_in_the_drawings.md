@@ -1,5 +1,8 @@
 # M15: what the drawings say about a requirement, found for any clause in any language
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 This note is for someone who has not followed the project. M14 counted mentions of nine kinds of note, from a word list I wrote. That
 works for the kinds on the list and for nothing else. This milestone replaces the list, for explanation, with a method that works for
 any clause: find the note of the drawing set that is about it, check that it is, and compare its figure with the requirement's.
@@ -138,7 +141,7 @@ above); this set could not show more, because it holds almost nothing to find.
 * Three real drawing sets were read, but only one of them in German and with almost nothing to find. A German or French set with written notes about safety provisions is still needed to measure cross language evidence on real notes.
 * Retrieval is not tuned: the number of passages shown to the model (five) and the fusion constant are the usual defaults.
 * Symbols with no words beside them are still not found.
-* A hosted model has not been run on this code, and the labels are by one person.
+* A hosted model has not been run on this code, and the labels are by one AI grader.
 
 ## Reproduce
 

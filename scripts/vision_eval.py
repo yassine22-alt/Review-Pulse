@@ -5,7 +5,7 @@
 
 The area is given (chosen by hand), so the score is the model's own, not a search's. Each question is asked once on the whole
 area ("whole") or on four overlapping tiles ("tiles"; yes if any tile says yes). Answers are saved one by one, so a stopped run
-goes on where it was. The key is one person's first pass: a score says how often the model agrees with it.
+goes on where it was. The key is an AI grader's first pass: a score says how often the model agrees with it.
 """
 
 from __future__ import annotations

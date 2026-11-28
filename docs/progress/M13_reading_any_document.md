@@ -1,5 +1,8 @@
 # M13: reading whatever document the user brings
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 This note is for someone who has not followed the project. After M12 I asked whether I trusted the first step of the pipeline, the
 one that turns a requirement document into clauses. I did not have a measure for it, so I built three, found real defects with them,
 fixed what they showed, and measured again. Every number below can be reproduced with the commands at the end.
@@ -94,7 +97,7 @@ explains: the clause stays declined and no verdict depends on it.
 
 * "See Table B4" cannot resolve when the table is a drawing: 37 of 119 references in the UK volume are unresolved. They are listed as
   unresolved on the rule, not guessed.
-* The labels are by one person, and two documents were labelled again after their ids changed. One synthetic plan was used.
+* The labels are by one AI grader, and two documents were labelled again after their ids changed. One synthetic plan was used.
 * Most numeric clauses of real codes (clear floor space, thresholds, reach heights) are about things the plan model does not carry.
   Reading is not the bottleneck for those: facts are.
 * A hosted model has not been run on this code. The Groq allowance is the limit (see `docs/RUNBOOK.md`).

@@ -1,5 +1,8 @@
 # M29: the review desk on a real permit set
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 Written 26 November 2026. Until now the app had only been walked through on a generated one sheet plan. This is the first run on
 `chief_architect_austin.pdf` (22 sheets) with the St. Petersburg residential checklist (130 requirements) and the local model
 qwen2.5:7b, on one laptop with a 6 GB graphics card. Evidence search over the drawing notes was switched off for speed, so this
@@ -84,7 +87,7 @@ rating), stretched highlight boxes into the schedule and mixed title block words
 column gap, each column grows its own note, and every note keeps the box of its own lines from the moment it is read. On this
 set 657 fragments became 530 notes; the six notes I checked read whole.
 
-**The same 14 items, graded by me (one grader, who also built this):**
+**The same 14 items, graded by one AI grader that also helped build this:**
 
 | | Before the layout fix | After |
 | --- | --- | --- |

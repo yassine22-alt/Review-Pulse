@@ -1,5 +1,5 @@
 {
- "what": "Narrow presence questions on drawing areas chosen by hand, to test a vision model without blaming a search. One person wrote the key by eye before any model was run; no plan reviewer has confirmed it. Areas are fractions of the page, object boxes fractions of the area. The drawings are not in the repository.",
+ "what": "Narrow presence questions on drawing areas chosen by hand, to test a vision model without blaming a search. An AI assistant (not a person) wrote the key from renders before any tested model was run; nobody has checked it. Areas are fractions of the page, object boxes fractions of the area. The drawings are not in the repository.",
  "areas": [
   {
    "id": "utility",

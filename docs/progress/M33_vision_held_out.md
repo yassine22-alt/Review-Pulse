@@ -1,5 +1,8 @@
 # M33: a held out test of the two model vision rule
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md). The wording of this plan is kept as it was written before the run.
+
 Written 27 November 2026, **before any of the new drawings were looked at for this test and before any model ran on them.**
 The commit that adds this page is the record of that order. Results go in a section added below; the rules above them are not
 edited afterwards, and any departure from them is written down as a departure.

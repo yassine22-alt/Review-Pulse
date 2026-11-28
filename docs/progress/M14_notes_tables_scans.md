@@ -1,5 +1,8 @@
 # M14: what the drawings say, tables that can be reached, scans that keep their lines
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 This note is for someone who has not followed the project. M13 ended with one finding: reading a requirement document is solid, and
 facts are now the bottleneck. Most lines of a real plan-review checklist ask about things a plan view does not draw to measure
 (smoke alarms, fire ratings, handrails). This milestone starts on that, and repairs three weaknesses of the reading step that M13
@@ -111,7 +114,7 @@ labelled lines I ran that way (8 of 10 correct, 0 wrong). So the facts did not d
 ## Still open
 
 * A real second plan. One real permit set was only used to see where its notes are; nothing was scored on it.
-* A hosted model has still not been run on this code, and the labels are still by one person.
+* A hosted model has still not been run on this code, and the labels are still by one AI grader.
 * Drawn symbols with no word beside them (an alarm symbol with no legend) are not found.
 
 ## Reproduce

@@ -20,7 +20,7 @@ Measured numbers, from `docs/SCOPE.md` and the M12 to M15 notes.
 | Evidence | For a declined clause, the note of the set that is about it: 17 of 46 lines on a real permit set (14 right, 3 partial, 0 wrong) | Text layer only: outlines, scans and symbols give nothing. The note is quoted, never turned into a value a rule can use |
 | Rules | Limits on one measured quantity and connection rules, checked by programs and multiple choice questions. 8 of 10 decidable lines correct, 0 wrong | Conditions, exceptions, alternatives and several limits in one sentence are declined |
 | Decisions | Three valued: unknown is never a pass | No calibrated confidence; no "missing information" verdict that asks the one question that would unlock a clause |
-| Measurement | Label free audits, planted errors, planted notes, three real drawing sets | Labels by one person; the hosted model has never run on this code |
+| Measurement | Label free audits, planted errors, planted notes, three real drawing sets | Labels by one AI grader, not checked by a person; the hosted model has never run on this code |
 
 **The bottom line.** On the labelled lines of four real checklists, ReviewPulse decides 8 of the 56 lines a plan can speak to,
 without a wrong decision, and quotes evidence for 17 more. Everything else is declined honestly. The bottleneck is not reading

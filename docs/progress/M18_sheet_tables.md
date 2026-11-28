@@ -1,5 +1,8 @@
 # M18: every table on a sheet, any columns (step 3, schedules part)
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 I built the schedules part of step 3 of `docs/PLAN_general_reviewpulse.md`. Until now we read one column of one table: the fire
 rating of a door schedule, found by the column name. Now every table on a sheet becomes rows of one kind of thing (doors, windows,
 rooms, finishes, fixtures, walls), each column is typed by the meaning of its header, and each number is read with its unit.

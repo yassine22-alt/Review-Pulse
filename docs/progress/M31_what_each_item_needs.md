@@ -1,7 +1,10 @@
 # M31: what each checklist item needs, and where to look
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 Written 27 November 2026. Measurements on the real St. Petersburg checklist (130 items) against the real Austin permit set (22
-sheets). **Both answer keys are mine, made by one person, and no plan reviewer has confirmed them.** The checklist is a Florida
+sheets). **Both answer keys were made by an AI assistant, and nobody has checked them.** The checklist is a Florida
 one and the drawings are from Texas, so many items have nothing to find on them. Nothing here is in the app yet.
 
 ## What the 130 items need
@@ -31,7 +34,7 @@ Same instructions for both models, not adjusted after seeing results. If everyth
 ## Finding the right sheet (`annotate/evidence_units.py`, `scripts/sheet_search_eval.py`)
 
 The drawing set model (M16) reads sheet and drawing titles in about 9 s and the note search did not use them. I expected that
-adding them would help. I graded the sheets for 71 drawing items **before** writing the new search
+adding them would help. The sheets for 71 drawing items were graded **before** writing the new search
 (`benchmarks/austin_stpete_sheets.json`; 13 more items have no sheet I could name). Several sheets are accepted for many items,
 which makes the score lenient: three random sheets would include an accepted one for about 18 of 71.
 

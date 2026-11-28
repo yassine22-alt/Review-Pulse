@@ -1,5 +1,5 @@
 {
- "what": "Held out test of the frozen two model rule (docs/progress/M33): the same 20 questions on 14 areas chosen by the written rule from sources no vision question had used. Marked by eye by one person before any model ran on them; no plan reviewer has checked it. Areas are fractions of the page, boxes fractions of the area. The drawings are not in the repository.",
+ "what": "Held out test of the frozen two model rule (docs/progress/M33): the same 20 questions on 14 areas chosen by the written rule from sources no vision question had used. Marked from large renders by an AI assistant (not a person) before any tested model ran on them; nobody has checked it. Areas are fractions of the page, boxes fractions of the area. The drawings are not in the repository.",
  "unclear": [
   "ch_07.dim",
   "ch_08.cooktop",

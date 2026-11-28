@@ -6,7 +6,7 @@ For the parts of the graded set where text that bears on the part is written on 
 (docs/progress/M32), this reports the rank of the first such piece among the candidates of the first search stage (words and
 meaning fused, before reordering), separately for notes and for other written text, and with the part or the whole line as
 the question. The patterns below say which words count as bearing on a part; they were written from a search of the set's
-text, by one person, and a piece matching them is a candidate to be judged, not a piece judged useful.
+text, by an AI grader, and a piece matching them is a candidate to be judged, not a piece judged useful.
 """
 
 from __future__ import annotations

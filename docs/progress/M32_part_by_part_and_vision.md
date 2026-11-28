@@ -1,7 +1,10 @@
 # M32: each requirement part by part, and what a vision model can and cannot see
 
-Written 27 November 2026. This follows [M31](M31_what_each_item_needs.md). **All answer keys here are mine, made by one person, and
-no plan reviewer has confirmed any of them.** The checklist is a Florida one and the real drawings are from Texas, so many lines
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
+Written 27 November 2026. This follows [M31](M31_what_each_item_needs.md). **All answer keys here were made by an AI assistant, and
+nobody has checked any of them.** The checklist is a Florida one and the real drawings are from Texas, so many lines
 have nothing to find. Nothing here is "working" in the sense of [REVIEWER_WORKFLOW.md](../REVIEWER_WORKFLOW.md); it is built.
 
 ## In the app now
@@ -23,7 +26,7 @@ private network (`llm/openai_compat.py`), which matches what the hosted model co
 ## Finding evidence, part by part (measured)
 
 The 37 lines of the St. Petersburg checklist that ask for something drawn were cut into 56 parts (the model cut 11 lines; the
-others stand whole). The results of today's search and of the new one were mixed and shuffled, and each piece was judged by one
+others stand whole). The results of today's search and of the new one were mixed and shuffled, and each piece was judged by an AI grader on one
 rule: opened on the sheet, would it show what the part asks for, or state it? The wording of a label can hint which search
 found it, so the judging is not fully blind (`scripts/parts_eval.py`, `benchmarks/austin_stpete_parts_judgements.json`).
 

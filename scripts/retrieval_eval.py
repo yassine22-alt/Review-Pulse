@@ -8,9 +8,9 @@ That note is planted, alone, among the real passages of the drawing set, and eve
 Nothing is labelled by hand: the planted note is the answer. Reported per method and per language: how often the planted note is
 first (recall@1), in the first five (recall@5, the number shown to the choosing model) and its mean reciprocal rank.
 
-A second, small check uses real notes only: for lines where the set holds a note that I read and judged to be about the line
+A second, small check uses real notes only: for lines where the set holds a note that an AI grader read and judged to be about the line
 (listed in REAL below, by what the note starts with), is that note in the first five? It is a handful of lines labelled by one
-person, so it is a sanity check on the planted result and not a measure of its own.
+AI grader, so it is a sanity check on the planted result and not a measure of its own.
 
 Methods: words (BM25); meaning (bge-m3); both fused by reciprocal rank (the method of M15); the fusion, then reranked by a
 cross-encoder that reads the requirement and each candidate together (bge-reranker-v2-m3); the same with a hypothetical note
@@ -48,7 +48,7 @@ HYDE = ("A building requirement is given. Write one or two sentences, in English
         "drawing that answers the requirement. Reply with JSON only: {\"note\": \"...\"}.")
 SCHEMA = {"type": "object", "properties": {"note": {"type": "string"}}, "required": ["note"]}
 
-# lines where the permit set holds a note I judged, by reading, to be about the line: (document part, line id, start of the note)
+# lines where the permit set holds a note an AI grader judged, by reading, to be about the line: (document part, line id, start of the note)
 REAL = [("allentown", "item 4", "4. DOORS BETWEEN GARAGE"), ("allentown", "item 16", "1. STAIRWAYS SHALL HAVE A MIN. WIDTH"),
         ("allentown", "item 21", "8. GUARDRAILS SHALL BE PROVIDED"), ("allentown", "item 24", "CONNECT SMOKE DETECTORS"),
         ("bloomfield", "item 64", "4. DOORS BETWEEN GARAGE"), ("bloomfield", "item 66", "8. ALL GLAZING WITHIN")]
@@ -149,7 +149,7 @@ def main() -> None:
                           f"{sum(1 / r for r in rs) / len(rs):.3f} |")
         md.append(f"| **{m}** | all | {len(every)} | **{sum(r == 1 for r in every) / len(every):.2f}** | **{sum(r <= 5 for r in every) / len(every):.2f}** | "
                   f"**{sum(1 / r for r in every) / len(every):.3f}** |")
-    md += ["", "## Real notes (6 lines read by one person): is the note among the first five?", ""]
+    md += ["", "## Real notes (6 lines read by an AI grader): is the note among the first five?", ""]
     md += [f"- {m}: {sum(v)} of {len(v)}" for m, v in real.items()]
     (out / "retrieval.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     print("\n".join(md), flush=True)

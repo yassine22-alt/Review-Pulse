@@ -3,7 +3,7 @@
     python scripts/sheet_search_eval.py <app data folder> <project id> <plan.pdf> benchmarks/austin_stpete_sheets.json <out folder>
 
 For each graded requirement and each variant of what is searched, the sheets of the best pieces are compared with the graded
-sheets. No reading model is asked. The grading is one person's first pass: a score says how often the search agrees with it.
+sheets. No reading model is asked. The grading is an AI grader's first pass: a score says how often the search agrees with it.
 """
 
 from __future__ import annotations

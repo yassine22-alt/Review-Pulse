@@ -1,5 +1,8 @@
 # What real documents and real drawings showed (November 2026)
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 Until now ReviewPulse was tested on documents and plans that we wrote or generated. This page records the first test on
 documents and drawings written by other people. It is not a success report. It lists what broke, what was fixed, what was
 measured, and what is still open. The real files are public documents downloaded for local testing and are never committed

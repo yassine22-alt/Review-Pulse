@@ -2,7 +2,7 @@
 
     python scripts/needs_eval.py <requirements document> benchmarks/stpete_evidence_needs.json reports/needs/run1 [--model qwen2.5:7b]
 
-Writes one line per item as it goes (a stopped run resumes), then a summary. The grading is a first pass by one person, so the
+Writes one line per item as it goes (a stopped run resumes), then a summary. The grading is a first pass by an AI grader, so the
 numbers say how often the reading agrees with it. The errors that matter are counted apart: a real requirement called
 "nothing to check" (it could be skipped) and a drawing requirement sent to the filed documents (nobody looks at the sheets).
 """

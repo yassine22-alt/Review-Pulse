@@ -32,7 +32,7 @@ def main() -> None:
             Image.open(args.tasks / t["file"]).convert("RGB")
         print(f"{len(tiles)} tiles read, {len(queries)} queries, processor loaded")
         return
-    model = ColQwen2ForRetrieval.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="cuda").eval()
+    model = ColQwen2ForRetrieval.from_pretrained(args.model, torch_dtype=torch.bfloat16).to("cuda").eval()
     started = time.time()
 
     def embed(make, items, size):
