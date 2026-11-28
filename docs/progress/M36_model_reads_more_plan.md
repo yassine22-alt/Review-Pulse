@@ -1,0 +1,47 @@
+# M36: a larger model that reads more search results (plan, written before any run)
+
+Written 28 November 2026. No model has judged any candidate when this page is written.
+
+## Why
+
+Of the 9 parts where text bearing on them is written on the drawings but nothing useful is shown, 7 have such text among the
+first 50 candidates of the first search stage ([M32](M32_part_by_part_and_vision.md)). Two ideas aim at them.
+
+1. **A reader of candidates.** Qwen2.5-32B-Instruct is asked about each candidate the question the human judging used: opened on
+   the sheet, would this piece let a reviewer see what the part asks about, or does it state it? It only picks among text that is
+   on the drawings.
+2. **Names to look for**, as in M32, with the 32B instead of the 7B, matched exactly in the drawing text.
+
+## Candidates
+
+For each of the 56 parts: the first 20 of the first search stage (words and meaning fused, before reordering), searched four
+ways (notes and other written text, each with the part and with the whole line), without duplicates. Made on the laptop
+(`scripts/judge_export.py`); the model only reads them on the cluster (`scripts/judge_cluster.py`).
+
+## What is measured
+
+* **Against the judgements already made:** on candidates a person has judged (`benchmarks/austin_stpete_parts_judgements.json`),
+  how many of the model's yes answers were judged useful (precision), and how many useful ones it says yes to (recall).
+* **In the layout it would have:** per part, the model's yes pieces first (at most 3, in search order), followed by what the app
+  shows today. Every new piece it puts there is judged by the same rule by the same person, who sees which pieces came from the
+  model; this is not blind, and the page will say so.
+
+## Pass marks, decided now
+
+All three, for the reader of candidates:
+
+| | Mark |
+| --- | --- |
+| A. Precision of its yes answers on the already judged candidates | at least **60%** |
+| B. Parts with a useful piece, in the layout above | at least **30 of 56** (26 today) |
+| C. Parts that lose their useful piece | **none** |
+
+For the names: it must add at least **3** parts that neither the app nor the reader of candidates reaches, adding at most 3 pieces
+per part on average.
+
+If a mark is missed, the idea stays out of the app and the result is recorded here.
+
+## What this cannot show
+
+The checklist and drawing set are the ones used while building. A pass would be a reason to test it on another set, not proof
+that it works there. One person's judgements are the truth used.
