@@ -12,7 +12,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 
 | ID | Pri. | Requirement, short | Status | What is missing |
 | --- | --- | --- | --- | --- |
-| FR-01 | M | Signed in user creates a project: name, occupancy, location, rule set | Partial | No occupancy or location field |
+| FR-01 | M | Signed in user creates a project: name, occupancy, location, rule set | Built | Added 28 November. Use and location are free text, recorded and printed on the correction list; they choose no rules. The only built in rule set holds example rules |
 | FR-02 | M | Upload PNG, JPG, PDF, SVG up to 50 MB | Built | Also DXF, DWG, TIFF; limit 200 MB |
 | FR-03 | M | Tell vector from raster by itself | Built | |
 | FR-04 | M | Each upload an immutable version named by content hash | Built | Added 28 November: every drawing is kept under its content hash (requirement documents are still replaced) |
@@ -88,13 +88,13 @@ written there; they were not rerun for this page.
 
 ## Count
 
-Counted from the table: of 38 functional requirements, **23 are built, 11 partial and 4 missing** (FR-26, FR-27, FR-36, FR-37). Of the
-27 marked must, **20 are built and 7 are not fully built**: FR-01, FR-22, FR-24, FR-27, FR-28, FR-37, FR-38.
+Counted from the table: of 38 functional requirements, **24 are built, 10 partial and 4 missing** (FR-26, FR-27, FR-36, FR-37). Of the
+27 marked must, **21 are built and 6 are not fully built**: FR-22, FR-24, FR-27, FR-28, FR-37, FR-38.
 
 ## Order of work
 
-1. Must requirements that are small or already half there: FR-38 (exits per pack), FR-01 (occupancy, location). Done on
-   28 November: FR-04, FR-15, FR-16, FR-17.
+1. Must requirements that are small or already half there: FR-38 (exits per pack). Done on 28 November: FR-01, FR-04,
+   FR-15, FR-16, FR-17.
 2. The back check in the app (FR-18, FR-35): built and measured already, and it is the step after the first review.
 3. The test cases of the test plan, run and recorded with their actual results.
 4. FR-37 (routes across floors): the one large must requirement.
