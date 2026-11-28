@@ -70,3 +70,37 @@ tuned. One person made both keys.
 **28 November, after a first attempt that gave no scores:** job 6049029 stopped while loading the model, because the library
 `accelerate` is not in the cluster environment. The script now moves the model to the GPU directly. Nothing about what is
 measured changed.
+
+## Results (added 28 November, after the run)
+
+`vidore/colqwen2-v1.0-hf` embedded 216 tiles and scored 88 queries in about a minute on one cluster GPU (job 6051290). Scored
+by `scripts/visual_score.py`, written before the run. A hit is a right tile among the first 3.
+
+| Queries | How many | Visual search | Chance | Today's text search |
+| --- | --- | --- | --- | --- |
+| **Held out, drawn only (the ones that count)** | 24 | **96%** (23) | 50% | 62% |
+| Held out, named | 28 | 93% | 67% | 75% |
+| Older, drawn only | 19 | 74% (14) | 23% | 26% |
+| Older, named | 17 | 94% | 14% | 88% |
+
+| Mark, held out drawn only | Needed | Got | |
+| --- | --- | --- | --- |
+| A. A right tile among the first 3 | at least 70% | 96% | met |
+| B. Above chance | at least 25 points | 45 points | met |
+| C. Above today's text search | at least 25 points | 34 points | met |
+
+**All three marks are met.** It is the first way of finding things drawn without words that passed a mark set before the run.
+
+**What this does not show.**
+
+* The areas were chosen by hand, and the pools are small: on the held out queries, 3 tiles taken at random already hold a right
+  one half of the time. A whole drawing set has many more tiles, so the score there will be lower. By how much is not known.
+* It orders places. It does not say that an object is there: asked about something that is absent, it still returns 3 places.
+  It must never feed a verdict.
+* The keys were made by an AI assistant and nobody has checked them. They were fixed before the model ran.
+* On the older drawn only queries it missed 5 of 19, four of them on the large 22 sheet set (a shower, a swinging door, a roof
+  slope symbol, a window), where the pools are larger.
+* Running it needs a GPU and the `torch` library. It has only been run on the cluster, not inside the app.
+
+**Next, as the plan says:** a test on whole sheets of a drawing set that is in neither key. The app does not change until that
+test is passed.
