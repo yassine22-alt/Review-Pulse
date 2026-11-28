@@ -21,7 +21,7 @@ from . import interpret as interpretation
 from . import service, workflow
 from .jobs import JobRunner
 from .prepare import Preparer
-from .store import PLAN_TYPES, REQ_TYPES, Store, read_whole
+from .store import PLAN_TYPES, REQ_TYPES, Store, one_line, read_whole
 
 STATIC = Path(__file__).parent / "static"
 WEB = Path(__file__).parent / "web"          # the product front end, built from frontend/ (npm run build)
@@ -46,10 +46,14 @@ class NewProject(BaseModel):
     name: str
     base_pack: str | None = None
     curator: str = ""
+    occupancy: str = ""
+    location: str = ""
 
 
 class Settings(BaseModel):
     name: str | None = None
+    occupancy: str | None = None
+    location: str | None = None
     base_pack: str | None = None
     curator: str | None = None
     inventory_reviewed: bool | None = None
@@ -229,7 +233,8 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         if body.base_pack and body.base_pack not in {p["name"] for p in service.base_packs()}:
             raise HTTPException(400, f"unknown base pack {body.base_pack!r}")
         user = getattr(request.state, "user", None)
-        return payload(store.create(body.name, body.base_pack, who(request, body.curator), user.org if user else ""))
+        return payload(store.create(body.name, body.base_pack, who(request, body.curator), user.org if user else "",
+                                    body.occupancy, body.location))
 
     @app.get("/api/projects/{pid}")
     def get_project(pid: str):
@@ -244,6 +249,10 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
             raise HTTPException(403, "only a reviewer can confirm the inventory or allow a hosted model")
         if body.name is not None:
             p.name = body.name.strip() or p.name
+        if body.occupancy is not None:
+            p.occupancy = one_line(body.occupancy)
+        if body.location is not None:
+            p.location = one_line(body.location)
         if body.curator is not None:
             p.curator = who(request, body.curator.strip())
         if body.inventory_reviewed is not None:

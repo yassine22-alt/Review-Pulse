@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { api, type Job, type Project, type User } from "../api";
 import { stage } from "../stage";
 import { Problem, Spinner, when } from "../ui";
+import { AboutFields, type Details } from "./About";
 
 const PLAN_TYPES = ".pdf,.dxf,.dwg,.svg,.png,.jpg,.jpeg,.tif,.tiff";
 const REQ_TYPES = ".pdf,.md,.txt,.docx,.xlsx,.xlsm,.csv,.tsv,.html,.htm,.png,.jpg,.jpeg,.tif,.tiff";
@@ -62,6 +63,14 @@ export function Submission({ user }: { user: User }) {
         <span className={`chip ${s.lane}`}>{s.label}</span>
       </header>
       <Problem text={problem} />
+      <Building project={project} save={async (v) => {
+        try {
+          await api(`/api/projects/${id}`, { method: "PATCH", json: { occupancy: v.occupancy, location: v.location,
+            ...(v.base_pack ? { base_pack: v.base_pack } : { clear_base_pack: true }) } });
+          setProblem("");
+          await load();
+        } catch (e) { setProblem((e as Error).message); }
+      }} />
       <div className="grid">
         <Drop title="Plan set" file={project.plan} accept={PLAN_TYPES} sending={sending === "plan"}
           disabled={running.length > 0} help="Vector PDF or DXF reads best. Scans are read with less certainty."
@@ -106,6 +115,25 @@ export function Submission({ user }: { user: User }) {
         </section>
       )}
     </>
+  );
+}
+
+function Building({ project, save }: { project: Project; save: (v: Details) => Promise<void> }) {
+  const [editing, setEditing] = useState<Details | null>(null);
+  const said = [project.occupancy, project.location, project.base_pack && `with the ${project.base_pack} rule set`].filter(Boolean);
+  if (!editing) {
+    return (
+      <p className="muted">{said.length ? said.join(" · ") : "No building use or location recorded."}{" "}
+        <button className="link" onClick={() => setEditing({ occupancy: project.occupancy ?? "", location: project.location ?? "",
+          base_pack: project.base_pack ?? "" })}>Edit details</button></p>
+    );
+  }
+  return (
+    <form className="card inline" onSubmit={async (e) => { e.preventDefault(); await save(editing); setEditing(null); }}>
+      <AboutFields value={editing} onChange={setEditing} />
+      <button className="primary">Save</button>
+      <button type="button" onClick={() => setEditing(null)}>Cancel</button>
+    </form>
   );
 }
 

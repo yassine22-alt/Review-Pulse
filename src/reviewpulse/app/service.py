@@ -472,7 +472,7 @@ def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
     records = workflow.signoffs(store, pid)
     if cycle is None:                                  # the round is that of the drawings under review
         cycle = max([len(p.versions), 1, *(r["cycle"] for r in records)])
-    built = cl.build({"name": p.name, "plan": p.plan}, findings, document, interpreted, _sheet_rows(models),
+    built = cl.build({"name": p.name, "plan": p.plan, "occupancy": p.occupancy, "location": p.location}, findings, document, interpreted, _sheet_rows(models),
                      states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
                      uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
     followed = workflow.followups(store, pid)

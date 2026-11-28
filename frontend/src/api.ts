@@ -7,6 +7,7 @@ export interface Job {
 }
 export interface Project {
   id: string; name: string; created: string; updated: string; curator: string;
+  occupancy: string; location: string; base_pack: string | null;
   plan: string | null; requirements: string | null;
   analysed: boolean; checked: boolean; has_drafts: boolean; active_jobs: Job[];
   rules: { total?: number; error?: string };

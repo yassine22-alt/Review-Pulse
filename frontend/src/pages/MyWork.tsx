@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { api, type Project, type User } from "../api";
 import { stage, type Lane } from "../stage";
 import { Field, Problem, Spinner, when } from "../ui";
+import { AboutFields, type Details } from "./About";
 
 interface Mine {
   project: string; project_name: string; key: string; n: number; citation: string; wording: string; due: string | null; by: string;
@@ -18,6 +19,7 @@ export function MyWork({ user }: { user: User }) {
   const [projects, setProjects] = useState<Project[] | null>(null);
   const [problem, setProblem] = useState("");
   const [name, setName] = useState("");
+  const [about, setAbout] = useState<Details>({ occupancy: "", location: "", base_pack: "" });
   const [opening, setOpening] = useState(false);
   const [search, setSearch] = useState("");
   const [mine, setMine] = useState<Mine[]>([]);
@@ -37,7 +39,8 @@ export function MyWork({ user }: { user: User }) {
   async function create(e: FormEvent) {
     e.preventDefault();
     try {
-      const p = await api<Project>("/api/projects", { method: "POST", json: { name } });
+      const p = await api<Project>("/api/projects",
+        { method: "POST", json: { name, ...about, base_pack: about.base_pack || null } });
       navigate(`/submissions/${p.id}`);
     } catch (err) { setProblem((err as Error).message); }
   }
@@ -57,6 +60,7 @@ export function MyWork({ user }: { user: User }) {
           <Field label="Name of the submission" hint="For example the address and the permit number.">
             <input autoFocus required maxLength={140} value={name} onChange={(e) => setName(e.target.value)} />
           </Field>
+          <AboutFields value={about} onChange={setAbout} />
           <button className="primary">Open it</button>
         </form>
       )}

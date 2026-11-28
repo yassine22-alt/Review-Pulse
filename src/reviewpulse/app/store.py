@@ -59,7 +59,13 @@ class Project:
     inventory_reviewed: bool = False    # a person confirmed every room, door and window was found: passes may be reported
     updated: str = ""
     org: str = ""                       # the organisation that owns the project (empty: made without accounts)
+    occupancy: str = ""                 # the building's use, in the office's own words: recorded, it selects no rule
+    location: str = ""                  # where the building is: recorded, it selects no rule
     notes: dict = field(default_factory=dict)
+
+
+def one_line(text: str, limit: int = 160) -> str:
+    return " ".join((text or "").split())[:limit]
 
 
 class Store:
@@ -121,9 +127,10 @@ class Store:
         return self.dir(p.id) / "inputs" / "req" / p.requirements if p.requirements else None
 
     # -- projects ------------------------------------------------------------
-    def create(self, name: str, base_pack: str | None = None, curator: str = "", org: str = "") -> Project:
+    def create(self, name: str, base_pack: str | None = None, curator: str = "", org: str = "", occupancy: str = "",
+               location: str = "") -> Project:
         p = Project(id=uuid.uuid4().hex[:12], name=name.strip() or "Untitled project", created=now(),
-                    base_pack=base_pack, curator=curator, org=org)
+                    base_pack=base_pack, curator=curator, org=org, occupancy=one_line(occupancy), location=one_line(location))
         self._ensure_folders(p.id)
         self.save(p)
         return p

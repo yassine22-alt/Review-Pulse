@@ -209,6 +209,19 @@ def test_a_comment_is_assigned_resolved_and_opened_again_with_a_trail(fresh):
         assert said in trail
 
 
+def test_the_building_use_and_location_are_kept_and_head_the_list(fresh):
+    c, pid = fresh
+    assert "Building use" not in c.get(f"/api/projects/{pid}/correction-list?format=html").text
+    got = c.patch(f"/api/projects/{pid}", json={"occupancy": "  Residential,\n two storeys ", "location": "<Aachen>"}).json()
+    assert got["occupancy"] == "Residential, two storeys" and got["location"] == "<Aachen>"
+    page = c.get(f"/api/projects/{pid}/correction-list?format=html").text
+    assert "Building use <b>Residential, two storeys</b>" in page and "&lt;Aachen&gt;" in page and "<Aachen>" not in page
+    assert "Building use: Residential, two storeys    Location: <Aachen>" in c.get(
+        f"/api/projects/{pid}/correction-list?format=txt").text
+    made = c.post("/api/projects", json={"name": "n", "occupancy": "Office", "location": "x" * 500}).json()
+    assert made["occupancy"] == "Office" and len(made["location"]) == 160 and made["base_pack"] is None
+
+
 def test_a_deferred_clause_leaves_the_list_and_goes_on_the_cover(fresh):
     c, pid = fresh
     before = listing(c, pid)

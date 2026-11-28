@@ -400,6 +400,7 @@ def build(project: dict, findings: list[dict], document: dict, interpreted: dict
     burden["mean_text_change"] = round(sum(distance) / len(distance), 3) if distance else 0.0
 
     return {"generated": datetime.now().isoformat(timespec="seconds"), "project": project.get("name"), "plan": project.get("plan"),
+            "occupancy": project.get("occupancy") or "", "location": project.get("location") or "",
             "document": document.get("name"), "cycle": cycle,
             "overall": {**overall, "signed": final, "unsigned_disciplines": [disc.label(d) for d in unsigned]},
             "disciplines": by_disc, "items": items, "deferred": cover["deferred"], "not_applicable": cover["not_applicable"],
@@ -436,8 +437,9 @@ def _where(it: dict) -> list[str]:
 
 
 def render_text(cl: dict) -> str:
+    about = [f"{label}: {cl[key]}" for label, key in (("Building use", "occupancy"), ("Location", "location")) if cl.get(key)]
     out = [f"CORRECTION LIST, cycle {cl['cycle']}", f"Project: {cl['project']}    Plan: {cl['plan']}    Requirements: {cl['document']}",
-           f"Proposed result: {cl['overall']['label']} ({cl['overall']['reason']})", ""]
+           *(["    ".join(about)] if about else []), f"Proposed result: {cl['overall']['label']} ({cl['overall']['reason']})", ""]
     if cl["deferred"]:
         out.append("DEFERRED SUBMITTALS (neither missing nor failing; review them when submitted)")
         out += [f"  - {d['quote']} {d['citation']} (set by {d['by']})" for d in cl["deferred"]] + [""]
@@ -497,11 +499,13 @@ def render_html(cl: dict) -> str:
                    + (f', signed {_e(d["signed"]["result"])} by {_e(d["signed"]["reviewer"])}' if d["signed"] else ", not signed") + "</li>"
                    for d in cl["disciplines"].values())
     body = "".join(parts) or "<p>No corrections.</p>"
+    about = "".join(f"<span>{label} <b>{_e(cl[key])}</b></span>"
+                    for label, key in (("Building use", "occupancy"), ("Location", "location")) if cl.get(key))
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Correction list</title><style>{CSS}</style></head><body><main>
 <h1>Correction list, cycle {cl["cycle"]}</h1>
 <div class="meta"><span>Project <b>{_e(cl["project"])}</b></span><span>Plan <b>{_e(cl["plan"])}</b></span>
-<span>Requirements <b>{_e(cl["document"])}</b></span><span>Generated <b>{_e(cl["generated"])}</b></span></div>
+<span>Requirements <b>{_e(cl["document"])}</b></span>{about}<span>Generated <b>{_e(cl["generated"])}</b></span></div>
 <p>Proposed result: <b>{_e(cl["overall"]["label"])}</b> <span class="muted">({_e(cl["overall"]["reason"])})</span></p><ul>{sign}</ul>{deferred}
 {body}
 <p class="muted">A requirement that could not be decided is listed as information requested, never as approved. The reviewer owns every item.</p>

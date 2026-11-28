@@ -86,8 +86,12 @@ def main(out: Path) -> None:
 
         page.get_by_role("button", name="New submission").click()
         page.get_by_label("Name of the submission").fill("12 Elm Street, permit 2026-0413")
+        page.get_by_label("Building use").fill("Residential, one or two homes")
+        page.get_by_label("Location").fill("Aachen")
+        shot("2b_new_submission")
         page.get_by_role("button", name="Open it").click()
         expect(page.get_by_role("heading", name="12 Elm Street, permit 2026-0413")).to_be_visible()
+        expect(page.get_by_text("Residential, one or two homes · Aachen")).to_be_visible()
         inputs = page.locator("input[type=file]")
         inputs.nth(0).set_input_files(str(drawing))
         expect(page.get_by_text(drawing.name)).to_be_visible(timeout=30000)
