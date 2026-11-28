@@ -17,7 +17,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | FR-03 | M | Tell vector from raster by itself | Built | |
 | FR-04 | M | Each upload an immutable version named by content hash | Built | Added 28 November: every drawing is kept under its content hash (requirement documents are still replaced) |
 | FR-05 | M | Find the scale and record how | Built | |
-| FR-06 | M | Walls, doors, windows, stairs, rooms, annotations with confidence | Built | Confidence is a tier per element; accuracy on real drawings is low (below) |
+| FR-06 | M | Walls, doors, windows, stairs, rooms, annotations with confidence | Built | Confidence is a tier per element; on real drawings walls and rooms are still weak (below) |
 | FR-07 | M | Read French and English labels and dimensions | Built | |
 | FR-08 | M | Find rooms, type them, compute areas, tell corridors apart | Built | |
 | FR-09 | M | Room graph with typed edges and exits | Built | |
@@ -61,7 +61,7 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | NFR-04 | Accuracy objectives O1 to O4 and O7 | Partly measured, partly missed | See below |
 | NFR-05 | No FAIL from unscaled geometry | Built | |
 | NFR-06 | Every finding traceable | Built | |
-| NFR-07 | Same input, same verdicts; versions recorded | Partial | Verdicts come from deterministic code; search order was made repeatable ([M32](M32_part_by_part_and_vision.md)); model versions are not recorded on every run |
+| NFR-07 | Same input, same verdicts; versions recorded | Partial | Verdicts come from deterministic code; search order was made repeatable ([M32](M32_part_by_part_and_vision.md)); the CAD drawing model's fingerprint is recorded per sheet ([M38](M38_which_reader.md)); other model versions are not recorded on every run |
 | NFR-08 | TLS, encryption at rest, role checks, OWASP review | Partial | Role checks on every route; no TLS or encryption of its own, no OWASP review |
 | NFR-09 | No drawing to an outside AI without consent | Built | Pictures of drawings are refused for outside models altogether |
 | NFR-10 | 95% availability in the pilot | Not applicable yet | No pilot |
@@ -75,7 +75,8 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 
 | | Target | Measured |
 | --- | --- | --- |
-| O1, O2 | Walls and doors on raster, and vector symbol classes | **Missed on real drawings:** on 100 FloorPlanCAD drawings the rules reached F1 0.28 for walls, 0.66 for doors, 0.20 for windows. On generated plans nearly all are found, which says little about real ones |
+| O1 | Raster walls and doors: precision and recall 0.90; room mIoU 0.70 on R2V | **Not measured as written** (not on R2V). On CubiCasa5K test scans: door F1 0.85, window F1 0.81 ([catalogue](../extraction_catalogue.md), 27 October, not rerun) |
+| O2 | Vector symbols: weighted F1 0.85 on FloorPlanCAD | **Not measured as written** (no weighted F1 over all classes). With the trained model on 100 test drawings, true scale given: doors F1 0.90, windows 0.81, walls 0.53 ([M38](M38_which_reader.md)). An earlier version of this row gave rules-only scores, which was wrong |
 | O3 | Room precision and recall 0.85 | Generated plans: 1.0. FloorPlanCAD, 40 drawings: room F1 about 0.74 |
 | O5 | 40 curated requirements from two sources and 15 consistency checks | **25 rule files** in the starter pack |
 | O6 | Precision and recall of rule drafting | Measured ([M11](M11_second_pass.md), [M12](M12_checklist_benchmark.md)) |
@@ -83,8 +84,8 @@ the test cases of our test plan are run separately. M, S and C are the proposal'
 | O8 | 60 s median per sheet end to end | Not measured as a median |
 | O9 | Usability study with six practitioners | Not done |
 
-The numbers in this table are quoted from the experiment log ([NOTES.md](../../NOTES.md)) and the progress notes, from the dates
-written there; they were not rerun for this page.
+Except for O2, which was rerun on 28 November, the numbers in this table are quoted from the experiment log
+([NOTES.md](../../NOTES.md)) and the progress notes, from the dates written there.
 
 ## Count
 

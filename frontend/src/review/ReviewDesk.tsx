@@ -15,6 +15,17 @@ interface Data {
   rounds: BackCheck | null;
 }
 
+/** Said wherever the reviewer is, not only in the "What was read" view: without the trained model, much is missed. */
+function ReadWarning({ sheets }: { sheets: View["sheets"] }) {
+  const without = sheets.filter((s) => s.reader?.kind === "rules").length;
+  if (!without) return null;
+  return (
+    <p className="notice-line" role="note">{without === sheets.length ? "These drawings were" : `${without} of ${sheets.length} sheets were`} read
+      without the trained drawing model. Checks that count or measure doors and windows can miss many of them. Ask your
+      administrator to install the model and upload the drawings again.</p>
+  );
+}
+
 export function ReviewDesk({ user }: { user: User }) {
   const { id = "" } = useParams();
   const [data, setData] = useState<Data | null>(null);
@@ -202,6 +213,7 @@ export function ReviewDesk({ user }: { user: User }) {
         </div>
         <div className="scroll">
           <Problem text={problem} />
+          <ReadWarning sheets={view?.sheets ?? []} />
           {tab === "resubmission" && data.rounds?.available ? (
             <Resubmission data={data.rounds} sheets={view?.sheets ?? []} onShow={showNote} canDecide={canDecide}
               busy={running.length > 0} compare={() => startJob("back-check")} />

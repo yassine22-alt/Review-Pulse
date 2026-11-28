@@ -348,7 +348,8 @@ def write_view(run: Path) -> Path:
                        "scale": {"method": model.sheet.scale.method,
                                  "metres_per_unit": model.sheet.scale.metres_per_unit,
                                  "confidence": model.sheet.scale.confidence},
-                       "warnings": model.sheet.warnings[:20], "elements": elements, "rooms": rooms,
+                       "warnings": model.sheet.warnings[:20], "reader": pipeline.reader_of(model),
+                       "elements": elements, "rooms": rooms,
                        "findings": fs})
     out = run / "view.json"
     publish(out, json.dumps({"sheets": sheets, "triage": {"confirmed": sorted(confirmed),

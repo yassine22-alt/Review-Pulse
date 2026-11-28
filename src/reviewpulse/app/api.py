@@ -215,8 +215,10 @@ def create_app(data_dir: str | Path = "data/app", llm: Callable[[], object | Non
         # probing the model server takes seconds; the answer is kept for LLM_STATUS_TTL_S
         if time.time() - llm_cache.get("at", 0) > LLM_STATUS_TTL_S:
             llm_cache.update(at=time.time(), status=service.llm_status(llm), hosted=service.llm_status(fallback))
+        from ..perception.learned.classifier import version
+
         return {"ok": True, "llm": llm_cache["status"], "hosted": llm_cache["hosted"], "plan_types": sorted(PLAN_TYPES),
-                "requirement_types": sorted(REQ_TYPES)}
+                "requirement_types": sorted(REQ_TYPES), "drawing_model": version()}
 
     @app.get("/api/packs")
     def packs():

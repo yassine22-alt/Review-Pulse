@@ -90,5 +90,10 @@ def test_learned_pass_is_the_default_when_a_model_is_installed(synth_dir, monkey
     monkeypatch.setenv("REVIEWPULSE_LEARNED", "0")
     off = _model_from(p)
     assert "learned primitive classifier applied (second pass)" in on.sheet.warnings
+    from reviewpulse.perception.learned.classifier import version
+    from reviewpulse.pipeline import reader_of
+
+    assert reader_of(on) == {"kind": "trained", "model": version()} and len(version()) == 12
+    assert reader_of(off) == {"kind": "rules", "model": None}
     assert not any("learned primitive classifier" in w for w in off.sheet.warnings)
     assert len(on.rooms) == len(off.rooms)

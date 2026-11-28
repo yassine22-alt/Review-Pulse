@@ -125,6 +125,23 @@ def area_calibrated_scale(rooms, assumed_mpu: float):
             spread)
 
 
+MODEL_LINE = "trained drawing model: "
+
+
+def reader_of(model: BuildingModel) -> dict:
+    """How one sheet was read, from what the reading itself wrote down: ``trained`` (with the model's version), ``rules`` (the
+    trained model did not run), ``fallback`` (it ran, found no wall where the rules did, and the rules' reading was kept) or
+    ``scan`` (a picture, read by the scan path)."""
+    said = model.sheet.warnings
+    if model.sheet.mode == "raster":
+        return {"kind": "scan", "model": None}
+    if "learned primitive classifier applied (second pass)" in said:
+        return {"kind": "trained", "model": next((w[len(MODEL_LINE):] for w in said if w.startswith(MODEL_LINE)), None)}
+    if any(w.startswith("learned primitive classifier found no walls") for w in said):
+        return {"kind": "fallback", "model": None}
+    return {"kind": "rules", "model": None}
+
+
 def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | None = None,
                 run_dir: Path | None = None, index: int = 0, learned: bool | None = None,
                 annotator=None, learned_mode: str | None = None, scale_hint=None) -> BuildingModel:
@@ -228,6 +245,10 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
             associate_tags(sheet, openings, mpu, scale_known)
             rooms, edges, room_warn = detect_rooms(sheet, walls, columns, openings, mpu, scale_known)
             sheet.warnings.append("learned primitive classifier applied (second pass)")
+            if by_classifier:
+                from .perception.learned.classifier import version
+
+                sheet.warnings.append(f"{MODEL_LINE}{version()}")
     sheet.warnings += room_warn
     if pristine is not None and rooms and (not scale_known or scale.method in UNVERIFIED_SCALES):
         found = area_calibrated_scale(rooms, mpu)

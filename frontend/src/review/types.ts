@@ -8,6 +8,7 @@ export interface SheetView {
   index: number; id: string; width: number; height: number; affine?: number[];
   elements: { id: string; cls: string; line?: Point[]; poly?: Point[] }[];
   rooms: { id: string; label: string | null; poly: Point[] }[];
+  reader?: { kind: "trained" | "rules" | "fallback" | "scan"; model: string | null };
   findings: FindingShape[];
 }
 export interface View { sheets: SheetView[] }

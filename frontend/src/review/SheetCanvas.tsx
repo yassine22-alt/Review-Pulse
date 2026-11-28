@@ -24,15 +24,24 @@ function Detected({ sheet }: { sheet: SheetView }) {
   );
 }
 
+/** Which reader made the reading, in words; a reviewer weighs what was read, and what was not, by it. */
+export const READER: Record<string, (model: string | null) => string> = {
+  trained: (m) => `Read with the trained drawing model${m ? ` (${m})` : ""}.`,
+  rules: () => "Read with the hand written rules only: the trained drawing model did not run. Expect many missed doors and windows on real drawings.",
+  fallback: () => "The trained model found no walls here, so the rules' reading is shown. This drawing style may be new to it.",
+  scan: () => "Read from a picture of the drawing, with less certainty than from a vector file.",
+};
+
 /** How many of each kind were read, in words; zero is said too, since nothing read is not nothing there. */
 export function readSummary(sheet: SheetView): string {
   const counts = new Map<string, number>();
   for (const e of sheet.elements) counts.set(e.cls, (counts.get(e.cls) ?? 0) + 1);
   const parts = [`${sheet.rooms.length} room${sheet.rooms.length === 1 ? "" : "s"}`,
     ...[...counts].sort((a, b) => b[1] - a[1]).map(([cls, n]) => `${n} ${cls.replace(/_/g, " ")}${n === 1 ? "" : "s"}`)];
-  return sheet.rooms.length + sheet.elements.length === 0
+  const how = sheet.reader ? ` ${READER[sheet.reader.kind](sheet.reader.model)}` : "";
+  return (sheet.rooms.length + sheet.elements.length === 0
     ? "No rooms or building elements were read on this sheet. That does not mean there are none."
-    : `Read on this sheet: ${parts.join(", ")}. Reading can miss and mislabel: check against the plan.`;
+    : `Read on this sheet: ${parts.join(", ")}. Reading can miss and mislabel: check against the plan.`) + how;
 }
 
 /** One sheet with pan, zoom and the evidence of the correction items drawn on it. `focus` changes make the view fly there. */

@@ -9,6 +9,7 @@ The model (LightGBM, trained by scripts/train_primitive_classifier.py) reads the
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from functools import lru_cache
@@ -27,6 +28,20 @@ def model_dir() -> Path:
 
 def available() -> bool:
     return (model_dir() / "model.txt").exists()
+
+
+@lru_cache(maxsize=2)
+def _digest(path: str, size: int, changed: int) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:12]
+
+
+def version() -> str | None:
+    """Which model is installed, as the first 12 characters of its file's SHA-256; None without one."""
+    if not available():
+        return None
+    path = model_dir() / "model.txt"
+    st = path.stat()
+    return _digest(str(path), st.st_size, st.st_mtime_ns)
 
 
 @lru_cache(maxsize=2)
