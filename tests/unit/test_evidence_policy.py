@@ -75,6 +75,44 @@ def test_ocr_absence_and_guidance_authority(pack):
     assert result.outcome == "VIOLATED" and result.verdict == "WARNING"
 
 
+def test_observed_annotation_is_not_a_missing_connection(pack):
+    import handmade
+
+    model = handmade.build(tier="T3")
+    rule = next(r for r in pack if r.check.fn == "present" and r.params.get("what") == "room_labels")
+    findings = run(model, [rule])
+    for finding in findings:
+        codes = {i.code for i in finding.assessment.evidence_issues}
+        assert IssueCode.MISSING_CONNECTION not in codes
+        assert IssueCode.UNVERIFIED_ANNOTATION in codes
+
+
+def test_absent_forbidden_connection_needs_complete_inventory(pack):
+    import handmade
+
+    model = handmade.build(tier="T3")
+    model.edges = model.edges[:1]
+    next(r for r in model.rooms if r.id == "bath").type = "garage"
+    rule = next(r for r in pack if r.check.fn == "forbidden_link")
+    finding = run(model, [rule])[0]
+    assert finding.assessment.outcome == "UNRESOLVED"
+    assert IssueCode.INCOMPLETE_INVENTORY in {i.code for i in finding.assessment.evidence_issues}
+    assert finding.message.startswith(rule.title) and "read none" not in finding.message
+    assert finding.evidence["title"] == rule.title
+
+
+@pytest.mark.parametrize("unknown,outcome", [(False, "SATISFIED"), (True, "UNRESOLVED")])
+def test_without_a_garage_there_is_nothing_to_connect_unless_a_room_is_unknown(pack, unknown, outcome):
+    import handmade
+
+    model = handmade.build(tier="T3")
+    model.edges = model.edges[:1]
+    if unknown:                                   # it may be the garage
+        next(r for r in model.rooms if r.id == "bath").type = None
+    rule = next(r for r in pack if r.check.fn == "forbidden_link")
+    assert run(model, [rule])[0].assessment.outcome == outcome
+
+
 @pytest.mark.parametrize("quantifier,complete,value,expected", [
     ("forall", False, False, "VIOLATED"),
     ("forall", False, True, "UNRESOLVED"),
@@ -120,3 +158,22 @@ def test_verdict_scoring_does_not_credit_warning_as_correct_failure():
     assert scores["decisive_coverage"] == 0.75
     assert scores["unresolved_reason_accuracy"] == 1
     assert verdict_metrics(findings, [])["precision_violated"] is None
+    assert verdict_metrics([], truth)["verdict_correctness"] == 0
+    ambiguous = verdict_metrics([findings[0], findings[0]], truth[:1])
+    assert ambiguous["ambiguous_prediction_keys"] == 1
+    assert ambiguous["matched_checks"] == 0
+    with pytest.raises(ValueError):
+        verdict_metrics(findings, [truth[0], truth[0]])
+
+
+def test_acceptance_crash_reports_the_actual_problem(monkeypatch, tmp_path):
+    from types import SimpleNamespace
+
+    from reviewpulse.eval.acceptance import Case, run_case
+
+    monkeypatch.setattr("reviewpulse.eval.acceptance.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(returncode=1, stderr="reader failed", stdout=""))
+    case = Case("failure", "vector", lambda directory: tmp_path / "input.dxf", {"T1"})
+    result = run_case(case, tmp_path)
+    assert result["ok"] is False
+    assert result["problems"] == ["crash: reader failed"]

@@ -890,7 +890,7 @@ def split_cached(path: str | Path, cache_dir: str | Path) -> tuple[str, list[Cla
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
             return data["full"], [Clause(**c) for c in data["clauses"]]
-        except (ValueError, KeyError, TypeError):
+        except (OSError, ValueError, KeyError, TypeError):
             pass                                              # a damaged cache is rebuilt, never trusted
     full, clauses = split_document(path)
     try:                       # the cache is an optimisation: several clauses are read at once, and a failed write never fails a read

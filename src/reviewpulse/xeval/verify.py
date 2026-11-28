@@ -145,6 +145,27 @@ def number_words(text: str, lang: str | None) -> list[float]:
     if not lang or lang not in wording():
         return []
     low = text.lower()
+    table = wording()[lang]
+    if "number_continuations" in table:
+        low = "".join("-" if unicodedata.category(char) == "Pd" else char for char in low)
+        numbers = {" ".join(re.findall(r"[^\W\d_]+", word.lower())): float(value)
+                   for word, value in table.get("numbers", {}).items()}
+        pieces = {piece for phrase in numbers for piece in phrase.split()} | set(table["number_continuations"])
+        tokens = list(re.finditer(r"[^\W\d_]+", low))
+        result, index = [], 0
+        while index < len(tokens):
+            if tokens[index].group() not in pieces:
+                index += 1
+                continue
+            end = index + 1
+            while (end < len(tokens) and tokens[end].group() in pieces and
+                   re.fullmatch(r"[\s\-–]+", low[tokens[end - 1].end():tokens[end].start()])):
+                end += 1
+            phrase = " ".join(token.group() for token in tokens[index:end])
+            if phrase in numbers:
+                result.append(numbers[phrase])
+            index = end
+        return result
     return [float(n) for w, n in wording()[lang].get("numbers", {}).items()
             if re.search(rf"(?<![^\W\d_]){re.escape(w)}(?![^\W\d_])", low)]
 
@@ -200,8 +221,15 @@ def _expected_operator(flat: str, start: int, end: int, lang: str) -> str | None
         for m in pattern.finditer(window):
             key = (m.end(), m.end() - m.start())
             if best is None or key > best[0]:
-                best = (key, op)
-    return best[1] if best and best[0][0] >= len(window) - 6 else None
+                best = (key, op, m.start())
+    if not best or best[0][0] < len(window) - 6:
+        return None
+    op = best[1]
+    prefix = window[:best[2]]
+    if any(re.search(rf"(?<!\w){re.escape(cue)}(?!\w)", prefix)
+           for cue in wording()[lang].get("negation_before_comparison", [])):
+        op = {"gt": "le", "ge": "lt", "lt": "ge", "le": "gt"}[op]
+    return op
 
 
 def check_directions(program: Program, text: str, lang: str) -> list[Issue]:

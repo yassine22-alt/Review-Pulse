@@ -67,6 +67,14 @@ prefixes: {Y: 1e24, Z: 1e21, E: 1e18, P: 1e15, T: 1e12, G: 1e9, M: 1e6, k: 1e3, 
 # units that take a prefix (kilo-, milli-, ...); "min", "h", "d", "ha"... do not, except where listed
 prefixable: [m, g, s, Hz, N, Pa, bar, J, Wh, W, A, V, K, mol, cd, lx, L, l, rad]
 
+# Explicit vocabulary spellings for compound units. Values use the general
+# dimensional grammar; adding a spelling does not add a checking primitive.
+aliases:
+  "W/m²/K": "W/m2/K"
+  "W/(m²·K)": "W/(m2.K)"
+  "m²·K/W": "m2.K/W"
+  "m².K/W": "m2.K/W"
+
 # how documents write units in words (all lower case); the value is a symbol above
 words:
   ft: [feet, foot]

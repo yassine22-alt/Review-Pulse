@@ -69,15 +69,26 @@ def room_labels(types: set[str]) -> dict[str, list[str]]:
     return out
 
 
+SIZES = ("width_m", "height_m", "sill_m")
+
+
 def schedule_rows(model) -> dict:
     """The rows of the door and window schedules by tag: what a plan view cannot show (the height of an opening, its sill)."""
-    rows = {}
+    rows: dict = {}
+    disagreeing: set[str] = set()
     for sched in getattr(model, "schedules", None) or []:
         for row in sched.get("rows", []):
             if row.get("tag"):
-                rows[tag_key(str(row["tag"]))] = row
+                tag = tag_key(str(row["tag"]))
+                seen = rows.get(tag)
+                if seen is not None and any(seen.get(k) != row.get(k) for k in SIZES):
+                    disagreeing.add(tag)
+                rows[tag] = row
         for tag, minutes in (sched.get("fire_rows") or {}).items():      # door fire ratings of the general sheet table reader
             rows.setdefault(tag_key(str(tag)), {"tag": tag}).setdefault("fire_rating_min", minutes)
+    # a tag listed with two different sizes does not say which row is the element's: its sizes stay unknown rather than guessed
+    for tag in disagreeing:
+        rows[tag] = {k: v for k, v in rows[tag].items() if k not in SIZES}
     return rows
 
 
