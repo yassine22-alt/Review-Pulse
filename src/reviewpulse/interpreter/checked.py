@@ -127,6 +127,11 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
             second["escalated_from"] = {"model": out["model"], "reason": out["reason"]}
             return second
         out["fallback_tried"] = {"model": second["model"], "reason": second["reason"]}
+    if out["status"] != "DRAFTED" and "could not be reached" not in (out.get("reason") or "") \
+            and os.environ.get("REVIEWPULSE_MENTIONS", "on") != "off":
+        mention = _mention(context, catalogue, body, client, out)
+        if mention is not None:
+            return mention
     if out["status"] != "DRAFTED" and "could not be reached" not in (out.get("reason") or ""):
         # an opaque "no rule could be written" tells a reviewer nothing: one short question says what the sentence seems to need.
         # It explains only; the clause stays declined and no verdict depends on it
@@ -136,6 +141,42 @@ def checked_draft(context: ContextBundle, inputs: Inputs, graph: FactGraph | Non
         if needs:
             out["needs"] = needs
             out["reason"] = f"{out['reason']} (the sentence seems to need: {needs})"
+    return out
+
+
+def _mention(context: ContextBundle, catalogue: dict, body: str, client, declined: dict) -> dict | None:
+    """No arm could write a rule, but the sentence is about something the drawing set can at least say (smoke alarms, a fire rating,
+    a handrail): the rule "the set mentions it" is offered instead, with everything else listed as not checked. Built by a program
+    from the plan reader's own word lists; see xeval/mention_arm.py."""
+    from ..annotate.notes import kinds_named
+    from ..xeval.mention_arm import draft_mention
+
+    if not set(kinds_named(body)) & set(catalogue.get("building") or []):
+        return None                              # nothing the drawing's notes are searched for: the decline stands as it is
+    quote = next(c.text for c in context.clauses if c.id == context.target)
+    draft = draft_mention(SimpleNamespace(id=context.target, text=body, catalogue=catalogue, lang=None, ctx=context, quote=quote))
+    tried = list(declined.get("tried") or []) + ["mention: " + ("wrote a rule" if draft.program is not None else draft.detail[:180])]
+    if draft.program is None:
+        declined["tried"] = tried
+        return None
+    program = draft.program
+    program.status, program.approved_by, program.document = "draft", None, context.document
+    program.id = "I-" + "".join(ch if ch.isalnum() or ch in ".-" else "_" for ch in context.target)
+    program.unresolved = sorted(set(program.unresolved + context.missing))
+    for span in program.sources:
+        context.check_span(span)
+    dumped = program.model_dump(mode="json")
+    out = {"status": "DRAFTED", "reason": "the sentence is about something a plan does not draw to measure; a rule on whether the "
+                                          "drawing set mentions it was written instead",
+           "arm": draft.arm, "model": None, "external": False, "program": dumped, "readback": to_text(dumped["requirement"]),
+           "tried": tried, "declined_first": declined.get("reason")}
+    out.update(describe_rule(dumped["requirement"], dumped["applicability"], dumped["exemption"],
+                             catalogue.get("bindings", {}), catalogue.get("whole") or "building"))
+    out["applies_when"], out["unless"] = to_text(dumped["applicability"]), to_text(dumped["exemption"])
+    out["notes"] = ["This rule only checks that the drawing set mentions the item. When the set never mentions it, a warning asks "
+                    "you to check whether the requirement applies here; it is never reported as a failure, and it never passes on "
+                    "its own: a person checks the rest of the sentence."]
+    out["notes"] += [f"Not checked by this rule (the plan does not show it): {part}" for part in program.not_checked]
     return out
 
 

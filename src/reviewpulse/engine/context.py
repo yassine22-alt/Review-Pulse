@@ -107,4 +107,4 @@ class Context:
         r = self.room(node)
         if r is None:
             return node
-        return r.label or f"room {r.id[-4:]} ({r.type or 'unlabelled'})"
+        return r.label or f"an unnamed {r.type or 'room'} (ref. {r.id[-4:]})"

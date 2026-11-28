@@ -132,11 +132,21 @@ python scripts\real_doc_study.py data\real_docs\your_document.pdf --n 20
 python scripts\real_doc_study.py data\real_docs\your_document.pdf --ids "3.2,item 27"
 
 # how well the splitter reads every document of the folder, with no labels (clauses cut mid sentence, started mid sentence)
-python scripts\split_audit.py dataeal_docs --json reports\split_audit.json
+python scripts\split_audit.py data\real_docs --json reports\split_audit.json
 # the same clauses written out as text, Word, Excel, csv, a web page and a scan, then read back (recall and precision per variant)
-python scriptsormat_robustness.py
-# every line of the checklists in benchmarks\checklist_labels.json read with the model (see docs\progress\M13_reading_any_document.md)
-python scripts\checklist_benchmark.py --out reportsenchmark
+python scripts\format_robustness.py
+# every line of the checklists in benchmarks\checklist_labels.json read with the model (see docs\progress\M13_reading_any_document.md); --plan-notes gives the plan a block of general notes
+python scripts\checklist_benchmark.py --out reports\benchmark --plan-notes
+# how many references to a table ("see Table B4") reach a table that was read (see docs\progress\M14_notes_tables_scans.md)
+python scripts\table_refs.py data\real_docs --json reports\table_refs.json
+# once, for scans in French, German, Spanish ...: the OCR model that keeps accents (8 MB, saved under data\models\ocr)
+python -c "from reviewpulse.rules.readers import fetch_latin_model; print(fetch_latin_model())"
+# once, for finding the note of the drawings that answers a requirement (docs\progress\M15_evidence_in_the_drawings.md)
+ollama pull bge-m3
+pip install tokenizers
+python -c "from reviewpulse.interpreter.drawing_evidence import fetch_reranker; print(fetch_reranker())"
+python scripts\evidence_eval.py --plans data\real_plans\your_set.pdf --out reports\evidence
+python scripts\retrieval_eval.py --plans data\real_plans\your_set.pdf --out reports\retrieval
 
 # every page of a drawing set through the plan analysis, with a picture of each page
 python scripts\real_plan_study.py data\real_plans\your_set.pdf --max-pages 12

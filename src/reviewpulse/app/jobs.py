@@ -69,6 +69,10 @@ class JobRunner:
         with self._guard:
             return self._locks.setdefault(pid, threading.Lock())
 
+    def any_active(self) -> bool:
+        """Whether a job of any project is queued or running in this process."""
+        return any(r["status"] in ("queued", "running") for r in list(self._live.values()))
+
     def submit(self, pid: str, kind: str, fn: Callable[[Job], dict | None]) -> dict:
         rec = {"id": uuid.uuid4().hex[:12], "project": pid, "kind": kind, "status": "queued", "progress": 0.0,
                "message": "queued", "error": None, "result": None, "created": now(), "started": None,

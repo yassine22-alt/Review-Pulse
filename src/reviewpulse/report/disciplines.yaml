@@ -1,0 +1,98 @@
+# Discipline tags for clauses and sheets. Language free: cue words in four languages plus the sheet number prefixes of
+# the usual drawing conventions. Read by report/disciplines.py; nothing in the code names a discipline.
+#
+# A clause (or a sheet title) scores one point per distinct cue it contains; a cue matches a whole word (or its plural or
+# ending), accents and case ignored; a cue written with a star ('brand*') matches the start of a word, for compounds. The highest score wins; a tie goes to the discipline listed first in `tie_order`. No cue at all gives `default`.
+# Add a language or a word here and the tags change; no code changes.
+
+default: general
+tie_order: [fire_life_safety, accessibility, structural, mechanical, plumbing, electrical, energy, planning, architectural, general]
+
+disciplines:
+  architectural:
+    label: Architectural
+    sheet_prefixes: [A, AD, AI]
+    cues:
+      en: [door, window, wall, room, bedroom, bathroom, kitchen, living, corridor, hallway, ceiling height, floor area, habitable, opening, stair, glazing, garage, partition, finish, roof, cabinet]
+      fr: [porte, fenetre, mur, piece, chambre, salle de bain, cuisine, sejour, couloir, hauteur sous plafond, surface, habitable, escalier, vitrage, cloison, toiture]
+      de: [tur, fenster*, wand, raum, schlafzimmer*, badezimmer*, kuche, wohnzimmer*, flur, lichte hohe, flache*, treppe*, verglasung*, trennwand*, dach]
+      es: [puerta, ventana, muro, habitacion, dormitorio, bano, cocina, salon, pasillo, altura libre, superficie, escalera, acristalamiento, tabique, cubierta]
+  structural:
+    label: Structural
+    sheet_prefixes: [S, SD]
+    cues:
+      en: [structural, foundation, footing, beam, column, joist, rafter, truss, shear, load, lateral, seismic, wind, concrete, rebar, masonry, header, bearing]
+      fr: [structure, fondation, poutre, poteau, solive, chevron, charge, sismique, vent, beton, armature, maconnerie, linteau, porteur]
+      de: [tragwerk*, fundament*, trager*, stutze*, balken*, sparren*, last, erdbeben*, wind, beton, bewehrung*, mauerwerk*, sturz, tragend*]
+      es: [estructura, cimentacion, viga, pilar, correa, carga, sismo, viento, hormigon, armadura, mamposteria, dintel, portante]
+  mechanical:
+    label: Mechanical
+    sheet_prefixes: [M, MH]
+    cues:
+      en: [mechanical, hvac, ventilation, duct, exhaust, heating, cooling, furnace, boiler, air conditioning, fan, make-up air, combustion air, chimney, flue]
+      fr: [mecanique, ventilation, conduit, extraction, chauffage, refroidissement, chaudiere, climatisation, cheminee]
+      de: [lufttechnik*, lueftung*, luftung*, kanal, abluft*, heizung*, kuhlung*, kessel*, klimaanlage*, schornstein*]
+      es: [mecanico, ventilacion, conducto, extraccion, calefaccion, refrigeracion, caldera, climatizacion, chimenea]
+  plumbing:
+    label: Plumbing
+    sheet_prefixes: [P, PL]
+    cues:
+      en: [plumbing, water closet, toilet, lavatory, sink, shower, bathtub, drain, sewer, water heater, water supply, backflow, vent pipe, fixture unit]
+      fr: [plomberie, sanitaire, wc, lavabo, evier, douche, baignoire, evacuation des eaux, egout, chauffe-eau, eau potable]
+      de: [sanitar*, wc, waschbecken*, spule, dusche*, badewanne*, abwasser*, kanalisation*, warmwasser*, trinkwasser*]
+      es: [fontaneria, sanitario, inodoro, lavabo, fregadero, ducha, banera, desague, alcantarillado, calentador, agua potable]
+  electrical:
+    label: Electrical
+    sheet_prefixes: [E, EL]
+    cues:
+      en: [electrical, receptacle, outlet, circuit, panel, lighting, luminaire, switch, wiring, grounding, gfci, afci, voltage, breaker]
+      fr: [electrique, prise, circuit, tableau, eclairage, luminaire, interrupteur, cablage, mise a la terre, tension, disjoncteur]
+      de: [elektro*, steckdose*, stromkreis*, verteiler*, beleuchtung*, leuchte*, schalter*, verkabelung*, erdung*, spannung*, sicherung*]
+      es: [electrico, enchufe, circuito, cuadro, iluminacion, luminaria, interruptor, cableado, puesta a tierra, tension, magnetotermico]
+  fire_life_safety:
+    label: Fire and life safety
+    sheet_prefixes: [F, FP, FS, LS]
+    cues:
+      en: [fire, smoke, alarm, sprinkler, egress, exit, escape, flame, rated, firestop, emergency, evacuation, travel distance, detector, hazardous]
+      fr: [incendie, feu, fumee, alarme, extincteur, sprinkler, evacuation, sortie, issue, degagement, coupe-feu, pare-flammes, secours, detecteur]
+      de: [brand, rauch, alarm, sprinkler*, flucht*, ausgang*, rettungsweg*, feuerwiderstand*, brandschutz*, notfall*, melder*, brandabschnitt*]
+      es: [incendio, fuego, humo, alarma, rociador, evacuacion, salida, escape, resistencia al fuego, cortafuego, emergencia, detector]
+  energy:
+    label: Energy
+    sheet_prefixes: [EN, T24]
+    cues:
+      en: [energy, insulation, thermal, u-factor, r-value, air leakage, airtight, solar heat, envelope, hers, blower door]
+      fr: [energie, isolation, thermique, coefficient u, resistance thermique, etancheite a l'air, enveloppe]
+      de: [energie*, dammung*, warmeschutz*, u-wert, luftdichtheit*, gebaudehulle*]
+      es: [energia, aislamiento, termico, transmitancia, resistencia termica, estanqueidad, envolvente]
+  accessibility:
+    label: Accessibility
+    sheet_prefixes: [AC, ADA]
+    cues:
+      en: [accessible, accessibility, wheelchair, ada, handicap, barrier-free, disabled, ramp, grab bar, turning space, clear floor space, tactile]
+      fr: [accessibilite, accessible, fauteuil roulant, pmr, handicap, rampe, mobilite reduite, barre d'appui, giration, tactile]
+      de: [barrierefrei*, rollstuhl*, behinderten*, rampe, haltegriff*, bewegungsflache*, taktil*]
+      es: [accesibilidad, accesible, silla de ruedas, discapacidad, rampa, barra de apoyo, espacio de giro, tactil]
+  planning:
+    label: Planning and zoning
+    sheet_prefixes: [C, L, SP, Z]
+    cues:
+      en: [setback, zoning, lot coverage, site plan, building height, parking, landscaping, easement, property line, floor area ratio, frontage, driveway]
+      fr: [recul, zonage, emprise au sol, plan de masse, hauteur maximale, stationnement, paysager, servitude, limite de propriete, voirie]
+      de: [abstandsflache*, grenzabstand*, bebauungsplan*, grundflachenzahl*, lageplan*, gebaudehohe*, stellplatz*, grundstucksgrenze*, geschossflachenzahl*, zufahrt*]
+      es: [retranqueo, zonificacion, ocupacion, plano de situacion, altura maxima, aparcamiento, paisajismo, servidumbre, linde, edificabilidad, vial]
+  general:
+    label: General
+    sheet_prefixes: [G, X]
+    cues: {}
+
+# Kinds a sheet can be (the drawing set reader's `sheet_type`) that point to a discipline when no prefix or title cue does.
+sheet_types:
+  structural: structural
+  site: planning
+  floor_plan: architectural
+  elevation: architectural
+  section: architectural
+  ceiling: architectural
+  schedule: architectural
+  cover: general

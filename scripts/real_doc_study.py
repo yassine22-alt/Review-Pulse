@@ -87,7 +87,7 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     rows = []
     llm = Real()
-    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1)) as c:
+    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1, auth=False)) as c:
         paths = make_plan(Path(tmp) / name, png=False, **kw) if kind == "make" else random_plan(Path(tmp) / name, **kw)
         pid = c.post("/api/projects", json={"name": doc.stem, "curator": "study"}).json()["id"]
         with open(paths["dxf"], "rb") as f:

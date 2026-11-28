@@ -17,6 +17,7 @@ from typing import Literal, TypeVar
 
 from pydantic import BaseModel, Field, model_validator
 
+from .files import publish
 from .outcomes import Assessment
 
 SCHEMA_VERSION = "0.1"
@@ -304,7 +305,7 @@ def load(cls: type[M], path: str | Path) -> M:
 def save_findings(findings: list[Finding], path: str | Path) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps([f.model_dump() for f in findings], indent=1), encoding="utf-8")
+    publish(path, json.dumps([f.model_dump() for f in findings], indent=1).encode("utf-8"))   # read while rewritten
     return path
 
 

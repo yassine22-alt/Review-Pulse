@@ -190,14 +190,92 @@ def ocr_available() -> bool:
         return False
 
 
-def ocr_lines(png_or_array) -> list[str]:
-    """The lines of text in an image, top to bottom (needs rapidocr_onnxruntime). Words on one visual line are joined."""
-    global _ENGINE
+LATIN_MODEL_URL = ("https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.4.0/onnx/PP-OCRv5/rec/"
+                   "latin_PP-OCRv5_rec_mobile_infer.onnx")
+LATIN_SHARE = 0.90          # share of letters that must be Latin for a page to be read again with the Latin-script model
+LATIN_MARGIN = 0.05         # how much less confident the Latin-script reading may be and still be kept
+_LATIN_ENGINE = None
+
+
+def latin_model_path() -> Path | None:
+    """The recogniser for Latin-script languages (accents and special letters of French, German, Spanish, Polish ...), when it
+    has been fetched: REVIEWPULSE_OCR_LATIN, else data/models/ocr/latin_rec.onnx under the working folder or the repository."""
+    import os
+
+    named = os.environ.get("REVIEWPULSE_OCR_LATIN")
+    places = [Path(named)] if named else [Path("data/models/ocr/latin_rec.onnx"),
+                                          Path(__file__).resolve().parents[3] / "data" / "models" / "ocr" / "latin_rec.onnx"]
+    return next((p for p in places if p.is_file()), None)
+
+
+def fetch_latin_model(dest: Path | None = None) -> Path:
+    """Download the Latin-script recogniser (8 MB, Apache 2.0, PaddleOCR PP-OCRv5 converted by RapidOCR). Run once."""
+    import urllib.request
+
+    dest = dest or Path("data/models/ocr/latin_rec.onnx")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    urllib.request.urlretrieve(LATIN_MODEL_URL, dest)  # noqa: S310 - a fixed https address
+    return dest
+
+
+def _mean_score(result) -> float:
+    """Confidence of a reading weighted by the length of each piece of text (a long line counts more than a page number)."""
+    weight = sum(len(t) for _, t, _ in result) if result else 0
+    return sum(len(t) * float(s) for _, t, s in result) / weight if weight else 0.0
+
+
+def _latin_share(result) -> float:
+    """Share of the letters read that belong to the Latin script (digits and punctuation say nothing about the script)."""
+    import unicodedata
+
+    letters = [ch for _, t, _ in (result or []) for ch in t if ch.isalpha()]
+    return sum("LATIN" in unicodedata.name(ch, "") for ch in letters) / len(letters) if letters else 0.0
+
+
+UPRIGHT_SURE = 0.80         # mean confidence above which a page read as upright is not read again with the line classifier
+
+
+def _read(engine, image):
+    """One reading of a page. The engine can decide for every line whether it is upside down, and on long lines of small print it
+    is often wrong: the line is turned, read as noise and dropped (on a clean French page 8 lines of 36 were lost this way). A
+    page has one orientation, so the page is read as upright first; only when that reading is poor (a page scanned upside down)
+    is it read again with the per-line classifier, and the more confident reading is kept."""
+    try:
+        upright, _ = engine(image, use_cls=False)
+    except TypeError:                            # an engine without the switch: read as it reads
+        upright, _ = engine(image)
+        return upright
+    if upright and _mean_score(upright) >= UPRIGHT_SURE:
+        return upright
+    turned, _ = engine(image)
+    return turned if _mean_score(turned) > _mean_score(upright) else upright
+
+
+def _recognise(png_or_array):
+    """Read the image with the recogniser that fits its script. The default model reads many scripts but only unaccented Latin
+    letters: it writes "etre" for "être". The Latin-script model keeps accents but cannot read other scripts, and it is sure of
+    itself even then (on a Chinese page it returns the digits alone, confidently), so its confidence cannot choose. The page is
+    therefore read with the default model first; when what it read is Latin script, the page is read again with the Latin-script
+    model and that reading is kept unless it is clearly less confident. No language is ever asked for. Without the Latin model
+    file everything is read as before."""
+    global _ENGINE, _LATIN_ENGINE
     from rapidocr_onnxruntime import RapidOCR
 
     if _ENGINE is None:
         _ENGINE = RapidOCR()
-    result, _ = _ENGINE(png_or_array)
+    first = _read(_ENGINE, png_or_array)
+    latin = latin_model_path()
+    if latin is None or not first or _latin_share(first) < LATIN_SHARE:
+        return first
+    if _LATIN_ENGINE is None:
+        _LATIN_ENGINE = RapidOCR(rec_model_path=str(latin))
+    second = _read(_LATIN_ENGINE, png_or_array)
+    return second if second and _mean_score(second) >= _mean_score(first) - LATIN_MARGIN else first
+
+
+def ocr_lines(png_or_array) -> list[str]:
+    """The lines of text in an image, top to bottom (needs rapidocr_onnxruntime). Words on one visual line are joined."""
+    result = _recognise(png_or_array)
     if not result:
         return []
     items = []

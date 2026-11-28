@@ -22,9 +22,13 @@ OUTCOME_LABEL = {
     "UNRESOLVED": "Could not be decided",
 }
 # order the report groups clauses in
-STATUS_ORDER = ["violated", "undecided", "satisfied", "not_applicable", "awaiting_approval", "not_run", "rejected",
-                "not_checked", "not_read"]
+STATUS_ORDER = ["violated", "reviewer_correction", "undecided", "satisfied", "reviewer_shown", "not_applicable",
+                "reviewer_not_applicable", "reviewer_deferred", "awaiting_approval", "not_run", "rejected", "not_checked", "not_read"]
 STATUS_LABEL = {
+    "reviewer_correction": "Correction written by a reviewer",
+    "reviewer_shown": "Shown on the plans (decided by a reviewer)",
+    "reviewer_not_applicable": "Does not apply (decided by a reviewer)",
+    "reviewer_deferred": "Deferred submittal (set by a reviewer)",
     "violated": "Violated",
     "satisfied": "Satisfied",
     "not_applicable": "Does not apply on this plan",
@@ -35,7 +39,8 @@ STATUS_LABEL = {
     "not_checked": "Not checked: no rule could be written",
     "not_read": "Not read yet",
 }
-DECIDED = {"violated", "satisfied", "not_applicable"}
+DECIDED = {"violated", "satisfied", "not_applicable", "reviewer_correction", "reviewer_shown", "reviewer_not_applicable",
+           "reviewer_deferred"}
 
 
 def _every(kinds: list[str] | None) -> str:
@@ -60,6 +65,8 @@ def _status(entry: dict | None, result: dict | None, looked_for: str = "every me
     if result is None:
         return "not_run", "run the check to apply the approved rule to the plan"
     outcome = result["outcome"]
+    if outcome == "VIOLATED" and (entry.get("program") or {}).get("advisory"):
+        return "undecided", "the drawings never mention it: check whether this requirement applies to this building"
     if outcome == "VIOLATED":
         return "violated", ""
     if outcome == "SATISFIED":
@@ -74,8 +81,9 @@ def _status(entry: dict | None, result: dict | None, looked_for: str = "every me
 
 
 def build(project: dict, document: dict, interpreted: dict, results: list[dict], findings: list[dict],
-          looked_for: list[str] | None = None) -> dict:
-    """`document`: {name, clauses:[{id, text}]}. `interpreted`: per clause. `results`: one record per approved rule and sheet."""
+          looked_for: list[str] | None = None, decisions: dict | None = None) -> dict:
+    """`document`: {name, clauses:[{id, text}]}. `interpreted`: per clause. `results`: one record per approved rule and sheet.
+    `decisions`: what reviewers decided by hand, per clause; a person's decision is the line's status."""
     by_clause: dict[str, list[dict]] = {}
     for r in results:
         by_clause.setdefault(r.get("clause"), []).append(r)
@@ -97,6 +105,12 @@ def build(project: dict, document: dict, interpreted: dict, results: list[dict],
             if result:
                 break
         status, reason = _status(entry, result, _every(looked_for))
+        hand = (decisions or {}).get(c["id"])
+        if hand:
+            place = (hand.get("evidence") or {})
+            where = f"sheet {place['page'] + 1}" if place.get("page") is not None else ""
+            said = "; ".join(x for x in (hand.get("note"), where, place.get("text")) if x)
+            status, reason = f"reviewer_{hand['state']}", f"{hand.get('by')}: {said}" if said else str(hand.get("by"))
         decision = (entry or {}).get("decision") or {}
         program = (entry or {}).get("approved_program") or (entry or {}).get("program")
         line = {"id": c["id"], "text": c["text"], "status": status, "status_label": STATUS_LABEL[status], "reason": reason,
@@ -140,7 +154,7 @@ main{max-width:960px;margin:0 auto;padding:28px 20px 60px}h1{font-size:24px;marg
 .clause{border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden;break-inside:avoid}
 .clause header{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
 .id{font-weight:650}.chip{font-size:12.5px;font-weight:650;border:1px solid currentColor;border-radius:99px;padding:1px 10px;white-space:nowrap}
-.s-violated{color:var(--fail)}.s-satisfied{color:var(--pass)}.s-undecided,.s-awaiting_approval,.s-not_run{color:var(--warn)}
+.s-violated,.s-reviewer_correction{color:var(--fail)}.s-satisfied,.s-reviewer_shown{color:var(--pass)}.s-undecided,.s-awaiting_approval,.s-not_run{color:var(--warn)}
 .s-not_applicable,.s-rejected,.s-not_checked,.s-not_read{color:var(--ne)}
 .body{padding:10px 14px}.body p{margin:4px 0}code{font:13px ui-monospace,Consolas,monospace;background:var(--soft);padding:1px 5px;border-radius:4px}
 ul{margin:6px 0 6px 20px;padding:0}li{margin:2px 0}footer{margin-top:34px;color:var(--muted);font-size:13px}
@@ -150,6 +164,13 @@ ul{margin:6px 0 6px 20px;padding:0}li{margin:2px 0}footer{margin-top:34px;color:
 
 def _e(x) -> str:
     return html.escape("" if x is None else str(x))
+
+
+def _drawing_set(data: dict) -> str:
+    """The drawing set summary when the project asked for one (REVIEWPULSE_DRAWINGSET=on); information only."""
+    from ..drawingset.summary import html_block
+
+    return html_block(data.get("drawing_set"), _e)
 
 
 def render_html(data: dict) -> str:
@@ -194,7 +215,7 @@ def render_html(data: dict) -> str:
 <div class="meta"><span>Project <b>{_e(data["project"])}</b></span><span>Plan <b>{_e(data["plan"])}</b></span>
 <span>Document <b>{_e(data["document"])}</b></span><span>Generated <b>{_e(data["generated"])}</b></span></div>
 <p><b>{s["decided"]}</b> of <b>{s["clauses"]}</b> clauses were decided on this plan ({round(100 * s["decided_share"])}%). The others are listed below with the reason.</p>
-<div class="cards">{cards}</div>{note}
+<div class="cards">{cards}</div>{note}{_drawing_set(data)}
 <h2>Clauses</h2>{"".join(parts)}
 <footer>A rule counts only after a named reviewer approves it. A clause that could not be decided is never counted as a pass.</footer>
 </main></body></html>"""

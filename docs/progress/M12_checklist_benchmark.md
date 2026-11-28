@@ -1,13 +1,16 @@
 # M12: a benchmark on real checklists, and the checks that came out of it
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 This note is for someone who has not followed the project. It describes the first benchmark (107 lines). The splitter was fixed afterwards and the benchmark now reads 291 lines: see `M13_reading_any_document.md` for the current numbers. It says what I measured on requirement documents written by building
 departments, what failed, what I changed, and what is still open. Every number can be reproduced with the commands in
 `docs/RUNBOOK.md` section 6b.
 
 ## What is measured
 
-Four public plan-review checklists (Allentown, Berkeley, Bloomfield Hills, St. Petersburg) were split into clauses. I labelled each of
-the 107 requirement lines once, by hand, in `benchmarks/checklist_labels.json`. The file holds only document names, clause ids and
+Four public plan-review checklists (Allentown, Berkeley, Bloomfield Hills, St. Petersburg) were split into clauses. An AI assistant labelled each of
+the 107 requirement lines once, in `benchmarks/checklist_labels.json`. The file holds only document names, clause ids and
 labels, never document text.
 
 | Label | Meaning | Lines |
@@ -83,5 +86,5 @@ failure is never mistaken for a refusal by the model. Iterate on the local model
 
 - 18 lines need facts the plan does not record: wall and door fire ratings, smoke and CO alarm symbols, stair landings and handrails,
   sprinkler notes, attic access size, appliance clearances. Each is reported as not checkable with its reason.
-- The labels were made by one person. A second labeller would show how much of the 5 of 7 is the labels.
+- The labels were made by one AI grader. A person labelling them would show how much of the 5 of 7 is the labels.
 - One synthetic plan was used. The measure on drawings other people made is in `M10` and `M11`.

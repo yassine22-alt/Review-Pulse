@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import string
 
+from ..annotate.scale import unmeasurable
 from ..outcomes import Assessment, EvidenceIssue, IssueCode
 from ..rules.registry import resolve
 from ..rules.schema import Rule
@@ -52,18 +53,39 @@ def render_message(template: str, raw: Raw, detected: str | None, required: str 
     try:
         return string.Formatter().vformat(template, (), values)
     except (KeyError, AttributeError, IndexError, ValueError):
-        return template
+        # The template words a violation ("X is reached only through Y"). Without what it names (no Y was found) the sentence
+        # does not apply: say what was read, never show the template and never claim the violation.
+        room = raw.vars.get("room")
+        who = f"{room['label']}: " if isinstance(room, dict) and room.get("label") else ""
+        return f"{who}read {detected or 'nothing'}; required {required or 'not stated'}."
+
+
+# what a rule needs, in the words of a reviewer; the codes stay in the finding's evidence for the program
+NEEDS = {"room_graph": "how the rooms connect (no connecting doors or openings were read)", "rooms": "rooms read from the plan",
+         "scale": "a scale for the drawing", "schedule": "a door or window schedule", "programme": "the project brief (programme)",
+         "doors": "doors read from the plan", "windows": "windows read from the plan",
+         "swing_polygons": "door swings read from the plan", "dimensions": "written dimensions"}
+
+
+def _could_connect(rule: Rule, model: BuildingModel) -> bool:
+    """Whether the plan has, or may have, the two rooms of a forbidden pair. With every room's kind read and one side of each
+    pair not among them, a missed door could not break the rule; a room of unknown kind may be the missing side."""
+    kinds = {r.type for r in model.rooms}
+    unknown = sum(r.type is None and not r.is_corridor for r in model.rooms)
+    return any(len(set(pair) - kinds) <= unknown for pair in rule.check.model_extra.get("pairs", []))
 
 
 def not_evaluated(rule: Rule, missing: list[str], tier: str) -> Finding:
+    needed = "; ".join(NEEDS.get(m, m.replace("_", " ")) for m in missing)
     return Finding(rule_id=rule.id, verdict="NOT_EVALUATED", severity=rule.severity, subject_ids=[],
-                   message=f"{rule.title}: not evaluated, missing {', '.join(missing)}", tier=tier,
+                   message=f"{rule.title}: not evaluated. It needs {needed}", tier=tier,
                    source=rule.source.model_dump(), evidence={"missing": missing},
                    assessment=assessment(rule, issues=[EvidenceIssue(code=IssueCode.MISSING_INPUT,
                                                                      detail=", ".join(missing))],
                                          dependencies=missing))
 
 
+NO_SIZE = "the sheet says it is not drawn to scale and no written dimension confirms the ratio in its title"
 OCR_ABSENCE = "verify on the drawing (text read by OCR may be missed)"
 OCR_GROUP_MIN = 4
 
@@ -111,10 +133,18 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
             raw.dependencies += [f"classification:{i}" for i in sorted(deciding)]
             raw.dependencies += [f"geometry:{i}" for i in sorted(deciding)]
             if rule.check.fn == "present":
+                raw.confirmation_issue = EvidenceIssue(code=IssueCode.UNVERIFIED_ANNOTATION,
+                                                        detail="annotation evidence needs confirmation")
                 raw.dependencies += [f"annotation:{i}" for i in sorted(deciding)]
                 if raw.violated and ocr_text:
                     raw.evidence_issues.append(EvidenceIssue(code=IssueCode.POSSIBLE_TEXT_OMISSION,
                                                             detail=OCR_ABSENCE))
+            unproven_absence = (rule.check.fn == "forbidden_link" and raw.violated is False and model.tier != "T1"
+                                and _could_connect(rule, model))
+            if unproven_absence:
+                raw.evidence_issues.append(EvidenceIssue(code=IssueCode.INCOMPLETE_INVENTORY,
+                                                        detail="connection inventory is not confirmed complete"))
+                raw.dependencies.append("inventory:connections")
             if rule.check.fn == "isolated_rooms" and raw.violated and model.tier != "T1":
                 raw.evidence_issues.append(EvidenceIssue(code=IssueCode.MISSING_CONNECTION,
                                                         detail="no confirmed opening connects this room"))
@@ -123,14 +153,25 @@ def run(model: BuildingModel, rules: list[Rule], confirmed: set | None = None,
                    r.prov.evidence.get("label_source") in ("llm", "vlm") for i in deciding):
                 raw.evidence_issues.append(EvidenceIssue(code=IssueCode.UNKNOWN_CLASS,
                                                         detail="verify room type (label read by a language model)"))
+            disowned = unmeasurable(model.sheet) if raw.metric else None
+            if disowned:                      # no figure is stated, so none can be quoted to an applicant
+                raw.missing = [NO_SIZE]
+                raw.detected, raw.measurement = None, None
             dec = decide(raw, ctx.tier, guidance=rule.is_guidance,
                          max_verdict=rule.params.get("max_verdict", "FAIL"),
                          all_confirmed=all_conf, scale_verified=scale_verified,
                          relative_uncertainty=relative_uncertainty)
             msg = render_message(rule.message, raw, raw.detected, raw.required)
-            if dec.reason and dec.verdict != "PASS":
+            if disowned:
+                room = raw.vars.get("room")
+                who = f"{room['label']}: " if isinstance(room, dict) and room.get("label") else f"{rule.title}: "
+                msg = f"{who}not measured, {NO_SIZE}."
+            elif dec.reason and dec.verdict != "PASS":
                 msg += f" [{dec.reason}]"
             ev = dict(raw.evidence)
+            if unproven_absence:              # the comment quotes the requirement, never the program's reading of it
+                ev["title"] = rule.title
+                msg = f"{rule.title}: none was read, but a door or opening may have been missed. Check the drawing."
             if raw.note:
                 ev["note"] = raw.note
             if raw.deciding_ids:

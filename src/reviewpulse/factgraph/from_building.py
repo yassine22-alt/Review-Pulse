@@ -9,12 +9,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from ..annotate.notes import DESCRIPTIONS, note_counts
+from ..annotate.scale import unmeasurable
 from ..annotate.text_classify import tag_key
 from ..interpreter.schema import Binding, Fact
 from ..schema import BuildingModel
 from .schema import Edge, FactGraph, Inventory, Node, Provenance
 
-BINDINGS = {
+NOTE_BINDINGS = {name: Binding(
+    kind="number", unit="count",
+    description=f"How many times the sheet's text mentions {what} (notes, legend entries, callouts). A mention, not a measurement: "
+                "it does not say where the item is or that it is of the right kind")
+    for name, what in DESCRIPTIONS.items()}
+BINDINGS = {**NOTE_BINDINGS,
     "room_type": Binding(kind="string", description="Room classification from its label"),
     "area_m2": Binding(kind="number", unit="m2", description="Measured net floor area"),
     "min_width_m": Binding(kind="number", unit="m", description="Measured minimum width of a room, hallway or other space"),
@@ -35,8 +42,10 @@ BINDINGS = {
     "stair_width_m": Binding(kind="number", unit="m", description="Stair flight width (length of the tread lines)"),
     "exit_distance_m": Binding(kind="number", unit="m",
                                description="Travel distance from the farthest point of the room to the outside"),
+    "fire_rating_min": Binding(kind="number", unit="min", description="Fire resistance rating of the door, in minutes, from the door schedule"),
     "tread_lines": Binding(kind="number", unit="count", description="Number of tread lines drawn in the stair flight"),
 }
+MEASURED_FACTS = {"area_m2", "min_width_m", "width_m", "tread_depth_m", "stair_width_m", "opening_area_m2"}   # read from lines
 STAIR_TRUST = 0.8                                   # calibrated probability a detected flight must reach to be trusted
 SCALE_METHODS = ("dxf_units", "dimension_consensus", "user", "scale_bar")
 BOUNDARY = {"EXIT": "exit", "EXTERIOR": "exterior"}
@@ -60,13 +69,26 @@ def room_labels(types: set[str]) -> dict[str, list[str]]:
     return out
 
 
+SIZES = ("width_m", "height_m", "sill_m")
+
+
 def schedule_rows(model) -> dict:
     """The rows of the door and window schedules by tag: what a plan view cannot show (the height of an opening, its sill)."""
-    rows = {}
+    rows: dict = {}
+    disagreeing: set[str] = set()
     for sched in getattr(model, "schedules", None) or []:
         for row in sched.get("rows", []):
             if row.get("tag"):
-                rows[tag_key(str(row["tag"]))] = row
+                tag = tag_key(str(row["tag"]))
+                seen = rows.get(tag)
+                if seen is not None and any(seen.get(k) != row.get(k) for k in SIZES):
+                    disagreeing.add(tag)
+                rows[tag] = row
+        for tag, minutes in (sched.get("fire_rows") or {}).items():      # door fire ratings of the general sheet table reader
+            rows.setdefault(tag_key(str(tag)), {"tag": tag}).setdefault("fire_rating_min", minutes)
+    # a tag listed with two different sizes does not say which row is the element's: its sizes stay unknown rather than guessed
+    for tag in disagreeing:
+        rows[tag] = {k: v for k, v in rows[tag].items() if k not in SIZES}
     return rows
 
 
@@ -92,25 +114,46 @@ def window_area(model, room_id: str, areas: dict) -> float | None:
     return sum(areas[e.via] for e in windows)
 
 
-def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: bool = False) -> FactGraph:
-    """`part_of_set`: the sheet is one of several floor plans of one building. A level with no door to the outside leaves the
+def set_notes(models) -> tuple[dict[str, int], bool] | None:
+    """Mentions of safety provisions over every sheet of one submission (floor plans, general notes, schedules, details), and
+    whether the text of every sheet was read. General notes usually sit on their own sheet, so a floor plan alone would say
+    "no smoke alarm is mentioned" about a set that mentions it four times. None when no sheet had any text."""
+    total: dict[str, int] = {}
+    read_all, any_read = True, False
+    for m in models:
+        counts = note_counts(m.sheet.texts)
+        if counts is None:
+            read_all = False
+            continue
+        any_read = True
+        for name, n in counts.items():
+            total[name] = total.get(name, 0) + n
+    return (total, read_all) if any_read else None
+
+
+def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: bool = False,
+                  notes: tuple[dict[str, int], bool] | None = None) -> FactGraph:
+    """`notes`: the result of `set_notes` over the whole submission; without it only this sheet's own text is counted.
+
+    `part_of_set`: the sheet is one of several floor plans of one building. A level with no door to the outside leaves the
     building by stairs this sheet does not show, so "no route to the exit" is not proven there even when every room, door
     and window was found (the rooms are still complete; the routes are not)."""
     t1 = model.tier == "T1"
+    unscaled = unmeasurable(model.sheet) is not None      # the sheet disowns its only ratio: no size is read from its lines
     scale_known = model.sheet.scale.method in SCALE_METHODS
     measured = t1 and scale_known
     nodes: list[Node] = []
     used: set[str] = set()
 
     def fact(name, value, source, trusted):
-        if value is None:
+        if value is None or (unscaled and name in MEASURED_FACTS):
             return None
         used.add(name)
         return Fact(value=value, source=source, trusted=trusted)
 
     distances = _exit_distances(model)
     rows = schedule_rows(model)
-    opening_area = opening_areas(model, rows)
+    opening_area = {} if unscaled else opening_areas(model, rows)
     labels_read = any(r.label for r in model.rooms)
     exit_openings = {e.via for e in model.edges if e.via and (e.a in BOUNDARY or e.b in BOUNDARY)}
     for room in model.rooms:
@@ -129,14 +172,14 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
             "has_label": fact("has_label", bool(room.label), src, label_ok and labels_read),
             # a walked distance needs the geometry and the scale; how rooms connect is derived from the graph below
         }.items() if v is not None}
-        glazing = window_area(model, room.id, opening_area)
+        glazing = None if unscaled else window_area(model, room.id, opening_area)
         if glazing is not None:
             used.update(("window_area_m2",))
             attrs["window_area_m2"] = Fact(value=round(glazing, 4), source=src, trusted=measured)
             if room.area_m2:
                 used.add("window_area_ratio")
                 attrs["window_area_ratio"] = Fact(value=round(glazing / room.area_m2, 4), source=src, trusted=sure)
-        if model.sheet.scale.metres_per_unit:
+        if model.sheet.scale.metres_per_unit and not unscaled:
             # with a scale the distance is a fact of every room; where no route reaches the outside its value is unknown
             # (not absent), so a rule about it is undecided instead of impossible to write
             used.add("exit_distance_m")
@@ -169,13 +212,25 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
             "sill_height_m": fact("sill_height_m", sill if el.cls == "window" else None, src, t1 or el.confirmed),
             "opening_area_m2": fact("opening_area_m2", opening_area.get(el.id), src, trusted),
             "tag": fact("tag", el.tag, src, t1 or el.confirmed),
+            "fire_rating_min": fact("fire_rating_min", (row or {}).get("fire_rating_min") if el.cls == "door" else None, src,
+                                    t1 or el.confirmed),
             # an exit door (egress door, entrance) is one whose far side is the outside; only a door has the property
             "leads_to_exit": fact("leads_to_exit", el.id in exit_openings, src, t1 or el.confirmed) if el.cls == "door" else None,
         }.items() if v is not None}
         nodes.append(Node(id=el.id, kind=el.cls, label=el.tag, attrs=attrs))
     # what the sheet itself says about the drawing: plan reviewers ask whether it is to scale and whether it is dimensioned
     whole = f"{model.sheet.id}:building"
+    if not notes_enabled():
+        counts, zero_ok = {}, False
+    elif notes is not None:
+        counts, zero_ok = notes                   # the whole set was searched: a zero counts when every sheet's text was read
+    else:
+        # words found are evidence wherever they sit; no words found is evidence only when this sheet is the whole submission
+        # (a note on another sheet of the set would be missed), so a zero on a sheet that is part of a set stays untrusted
+        counts, zero_ok = note_counts(model.sheet.texts) or {}, not part_of_set
+    note_facts = {name: fact(name, float(n), whole, t1 and (n > 0 or zero_ok)) for name, n in counts.items()}
     nodes.append(Node(id="building", kind="building", role="whole", attrs={k: v for k, v in {
+        **note_facts,
         "scale_stated": fact("scale_stated", model.sheet.scale.method != "none", whole, t1),
         "dimension_count": fact("dimension_count", float(len(model.sheet.dimensions)), whole, t1),
         "is_dimensioned": fact("is_dimensioned", len(model.sheet.dimensions) > 0, whole, t1),
@@ -188,7 +243,7 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
     edges = []
     for i, e in enumerate(model.edges):
         attrs = {}
-        if e.width_m is not None:
+        if e.width_m is not None and not unscaled:
             used.add("width_m")
             attrs["width_m"] = Fact(value=e.width_m, source=f"{model.sheet.id}:{e.via or i}", trusted=measured)
         inferred = bool(e.prov.evidence.get("inferred"))          # joined by label-seeded splitting, not by a drawn opening
@@ -210,6 +265,13 @@ def from_building(model: BuildingModel, *, complete: bool = False, part_of_set: 
         value_labels={"room_type": room_labels(_room_vocabulary() | {n.attrs["room_type"].value for n in nodes
                                                                      if "room_type" in n.attrs})},
         passable=["door", "opening"], route_targets=["EXIT"]))
+
+
+def notes_enabled() -> bool:
+    """REVIEWPULSE_NOTES=0 leaves the note facts out (used to measure what they change)."""
+    import os
+
+    return os.environ.get("REVIEWPULSE_NOTES", "1") != "0"
 
 
 def _exit_distances(model: BuildingModel) -> dict[str, float]:

@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import shutil
+import uuid
 from collections.abc import Callable
 from pathlib import Path
 
@@ -14,7 +16,7 @@ from .. import pipeline
 from ..rules.draft import OllamaClient, load_drafts, make_client
 from ..schema import BuildingModel, load, load_findings
 from .jobs import Job
-from .store import Project, Store, now
+from .store import Project, Store, now, publish
 
 PACKS_ROOT = Path(__file__).resolve().parents[1] / "rules" / "packs"
 
@@ -112,6 +114,13 @@ def analyse(store: Store, pid: str, job: Job, then_check: bool = True) -> dict:
            "tiers": [m.tier for m in models],
            "not_floor_plans": [{"sheet": m.sheet.id, "kind": m.sheet.sheet_kind} for m in models
                                 if m.sheet.sheet_kind and m.sheet.sheet_kind != "floor_plan"]}
+    job.progress(0.75, "indexing the notes written on the drawings")
+    try:
+        from . import interpret
+
+        out["notes_indexed"] = interpret.index_notes(store, pid, models)
+    except Exception as e:  # noqa: BLE001 - the search then indexes on first use; reading the drawings must not fail for it
+        out["notes_indexed"], out["notes_index_problem"] = 0, f"{type(e).__name__}: {e}"
     if then_check and packs_for(store, p):
         job.progress(0.80, "checking the rules")
         out["findings"] = check(store, pid, job)["summary"]
@@ -131,16 +140,18 @@ def check(store: Store, pid: str, job: Job | None = None) -> dict:
     programs = interpret.approved_programs(store, p.id)
     if not packs and not programs:
         raise ValueError("no rules: approve drafted rules or choose a base pack")
-    summary = pipeline.check(run, packs, programs=programs, inventory_complete=p.inventory_reviewed)
+    summary = pipeline.check(run, packs, programs=programs, inventory_complete=p.inventory_reviewed,
+                              attestations=interpret.attestations(store, p.id))
     if job:
         job.progress(0.95, "preparing the viewer")
     write_view(run)
     return {"summary": summary, "rules": rules_summary(store, p)}
 
 
-def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | None]) -> dict:
-    """Requirement upload -> clauses (I3) -> drafted rules (I4) with the local model."""
-    from ..rules.clauses import write_clauses
+def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | None], split_only: bool = False) -> dict:
+    """Requirement upload -> clauses (I3) -> drafted rules (I4) with the local model. ``split_only`` stops after the clauses: the
+    review desk reads each clause when the reviewer asks, so drafting all of them at upload would be work nobody sees."""
+    from ..rules.clauses import split_cached, write_clauses
     from ..rules.draft import draft_document
 
     p = store.get(pid)
@@ -150,8 +161,11 @@ def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | N
     d = store.drafts_dir(pid)
     d.mkdir(parents=True, exist_ok=True)
     job.progress(0.02, "splitting the document into clauses")
-    cl = write_clauses(doc, d / "clauses.json")
+    cache = store.dir(pid) / "cache"                          # the same one the review desk reads from
+    cl = write_clauses(doc, d / "clauses.json", cache_dir=cache)
     n = len(json.loads(cl.read_text(encoding="utf-8"))["clauses"])
+    if split_only:
+        return {"clauses": n, "drafted": 0, "note": "each requirement is read when a reviewer asks"}
     client = llm_factory()
     if client is None:
         return {"clauses": n, "drafted": 0, "llm": "unavailable",
@@ -160,7 +174,7 @@ def draft(store: Store, pid: str, job: Job, llm_factory: Callable[[], object | N
     def progress(done: int, total: int) -> None:
         job.progress(0.05 + 0.95 * done / max(total, 1), f"drafting clause {done + 1} of {total}")
 
-    out = draft_document(doc, client, d, progress=progress)
+    out = draft_document(doc, client, d, progress=progress, split=split_cached(doc, cache))
     drafts = load_drafts(out)
     return {"clauses": n, "drafted": sum(1 for x in drafts if x.rule), "llm": getattr(client, "model", "")}
 
@@ -283,11 +297,11 @@ def write_view(run: Path) -> Path:
     tri = pipeline.load_triage(run)
     confirmed, rejected = set(tri["confirmed"]), set(tri["rejected"])
     sheets = []
-    for bp in sorted(run.glob("building_*.json")):
+    for bp in _sheet_files(run):
         idx = int(bp.stem.split("_")[1])
         model = load(BuildingModel, bp)
         png, w, h, to_px = _backdrop(model)
-        (run / f"backdrop_{idx}.png").write_bytes(png)
+        publish(run / f"backdrop_{idx}.png", png)
         a, b, c, d, e, f = _affine(to_px)
         k = (abs(a * e - b * d)) ** 0.5           # sheet unit -> px
 
@@ -330,15 +344,274 @@ def write_view(run: Path) -> Path:
                        "anchor": px(anc) if anc else None,
                        "subjects": fd.subject_ids, "deciding": ev.get("deciding_ids", [])})
         sheets.append({"index": idx, "id": model.sheet.id, "width": w, "height": h, "tier": model.tier,
+                       "affine": [a, b, c, d, e, f],     # sheet space -> pixels of the backdrop: x = a x + b y + c, y = d x + e y + f
                        "mode": model.sheet.mode, "sheet_type": model.sheet.sheet_type,
                        "scale": {"method": model.sheet.scale.method,
                                  "metres_per_unit": model.sheet.scale.metres_per_unit,
                                  "confidence": model.sheet.scale.confidence},
-                       "warnings": model.sheet.warnings[:20], "elements": elements, "rooms": rooms,
+                       "warnings": model.sheet.warnings[:20], "reader": pipeline.reader_of(model),
+                       "elements": elements, "rooms": rooms,
                        "findings": fs})
     out = run / "view.json"
-    out.write_text(json.dumps({"sheets": sheets, "triage": {"confirmed": sorted(confirmed),
+    publish(out, json.dumps({"sheets": sheets, "triage": {"confirmed": sorted(confirmed),
                                                             "rejected": sorted(rejected),
-                                                            "dismissed": tri["dismissed"]}}),
-                   encoding="utf-8")
+                                                            "dismissed": tri["dismissed"]}}).encode("utf-8"))
     return out
+
+
+# -- correction list and reviewer workflow --------------------------------------------------------------------------------
+def _sheet_files(run: Path) -> list[Path]:
+    """The sheet files in page order (by name, sheet 11 would come before sheet 2)."""
+    return sorted(run.glob("building_*.json"), key=lambda f: int(f.stem.split("_")[1]))
+
+
+_MODELS: dict[Path, tuple[tuple, list[BuildingModel]]] = {}     # run folder -> (what its files were, the models)
+_MODELS_KEPT = 3
+
+
+def _models(store: Store, pid: str) -> list[BuildingModel]:
+    """The project's sheet models, for reading only. Loading a 22 sheet set took 9 seconds, on every correction list request, so
+    they are kept until a file changes (a new plan or a new analysis)."""
+    run = store.run_dir(pid)
+    files = _sheet_files(run)
+    seen = tuple((f.name, s.st_mtime_ns, s.st_size) for f in files for s in [f.stat()])
+    kept = _MODELS.get(run)
+    if kept is None or kept[0] != seen:
+        kept = (seen, [load(BuildingModel, f) for f in files])
+        _MODELS.pop(run, None)
+        while len(_MODELS) >= _MODELS_KEPT:
+            _MODELS.pop(next(iter(_MODELS)), None)
+        _MODELS[run] = kept
+    return list(kept[1])
+
+
+def _sheet_rows(models: list[BuildingModel]) -> list[dict]:
+    from ..report.disciplines import sheet_discipline
+
+    rows = []
+    for m in models:
+        titles = " ".join(t.text for t in m.sheet.texts if t.kind == "title_block")[:300]
+        rows.append({"id": m.sheet.id, "page": m.sheet.page, "width": m.sheet.width, "height": m.sheet.height,
+                     "scale_method": m.sheet.scale.method, "sheet_type": m.sheet.sheet_type,
+                     "discipline": sheet_discipline(m.sheet.id, titles, m.sheet.sheet_type)})
+    return rows
+
+
+def _note_locator(models: list[BuildingModel]):
+    """Where a note sits on its sheet: the bounding box of the text runs that make up the note's words."""
+    by_id = {m.sheet.id: m for m in models}
+
+    def locate(sheet_id: str, text: str) -> list[float] | None:
+        m = by_id.get(sheet_id)
+        if m is None:
+            return None
+        words = {w for w in " ".join(text.split()).casefold().split() if len(w) > 3}
+        if not words:
+            return None
+        hit = [t for t in m.sheet.texts if t.text.strip() and {w for w in t.text.casefold().split() if len(w) > 3} & words
+               and t.text.strip().casefold()[:20] in " ".join(text.split()).casefold()]
+        if not hit:
+            return None
+        return [min(t.bbox[0] for t in hit), min(t.bbox[1] for t in hit), max(t.bbox[2] for t in hit), max(t.bbox[3] for t in hit)]
+
+    return locate
+
+
+def checked_place(store: Store, pid: str, place: dict) -> dict:
+    """The place a reviewer points at, if it exists in this project: a decision never rests on a sheet or a spot that is not
+    there."""
+    model = next((m for m in _models(store, pid) if m.sheet.id == place.get("sheet")), None)
+    if model is None:
+        raise ValueError("that sheet is not part of this submission")
+    box = place.get("box")
+    if box is not None:
+        slack = 0.02 * max(model.sheet.width, model.sheet.height)
+        ok = (len(box) == 4 and all(math.isfinite(v) for v in box) and box[0] <= box[2] and box[1] <= box[3]
+              and box[0] >= -slack and box[1] >= -slack and box[2] <= model.sheet.width + slack and box[3] <= model.sheet.height + slack)
+        if not ok:
+            raise ValueError("that spot is not on the sheet")
+    return {"sheet": model.sheet.id, "page": model.sheet.page, "box": [round(float(v), 2) for v in box] if box else None,
+            "text": " ".join(str(place.get("text") or "").split())[:600]}
+
+
+def clause_texts(store: Store, pid: str) -> dict[str, str]:
+    """The words of every requirement of the current document; empty without one."""
+    from . import interpret
+
+    try:
+        return {c["id"]: c["text"] for c in interpret.document(store, pid)["clauses"]}
+    except ValueError:
+        return {}
+
+
+def known_clause(store: Store, pid: str, clause: str) -> None:
+    if clause not in clause_texts(store, pid):
+        raise ValueError(f"the requirement document has no clause {clause}")
+
+
+def correction_list(store: Store, pid: str, cycle: int | None = None) -> dict:
+    """The project's correction list (see report/correction_list.py), with the reviewer's edits, states and sign offs applied."""
+    from ..report import correction_list as cl
+    from . import interpret, workflow
+
+    p = store.get(pid)
+    f = store.run_dir(pid) / "findings.json"
+    findings = [x.model_dump() for x in load_findings(f)] if f.exists() else []
+    try:
+        document = interpret.document(store, pid)
+    except ValueError:
+        document = {"name": p.requirements, "clauses": []}
+    interpreted = interpret.load_results(store, pid)
+    models = _models(store, pid)
+    decided = workflow.holding(store, pid, {c["id"]: c["text"] for c in document["clauses"]})
+    uncovered = 0
+    if document["clauses"]:
+        try:
+            counts = interpret.coverage(store, pid)["summary"]["counts"]        # clauses a person decided are not counted here
+            uncovered = sum(counts.get(k, 0) for k in ("awaiting_approval", "not_run", "rejected", "not_checked", "not_read"))
+        except ValueError:
+            pass
+    records = workflow.signoffs(store, pid)
+    if cycle is None:                                  # the round is that of the drawings under review
+        cycle = max([len(p.versions), 1, *(r["cycle"] for r in records)])
+    built = cl.build({"name": p.name, "plan": p.plan, "occupancy": p.occupancy, "location": p.location}, findings, document, interpreted, _sheet_rows(models),
+                     states=decided, edits=workflow.item_edits(store, pid), signoffs=records,
+                     uncovered=uncovered, cycle=cycle, locate_note=_note_locator(models))
+    followed = workflow.followups(store, pid)
+    for item in built["items"]:
+        item["followup"] = followed.get(item["key"])
+    return built
+
+
+def assigned_to(store: Store, org: str, name: str) -> list[dict]:
+    """The open comments given to one person, over their organisation's submissions, the nearest due date first."""
+    from . import workflow
+
+    out = []
+    for p in store.list():
+        if p.org != org:
+            continue
+        mine = {k for k, f in workflow.followups(store, p.id).items()
+                if f.get("assignee") == name and not (f.get("resolved") and not f["resolved"].get("stale"))}
+        if not mine:
+            continue                                      # the list is only built where something is waiting
+        try:
+            items = correction_list(store, p.id)["items"]
+        except ValueError:
+            continue
+        out += [{"project": p.id, "project_name": p.name, "key": i["key"], "n": i["n"], "citation": i["citation"],
+                 "wording": i["wording"], "due": i["followup"].get("due"), "by": i["followup"].get("by")}
+                for i in items if i["key"] in mine and not i["dropped"]]
+    return sorted(out, key=lambda m: (m["due"] is None, m["due"] or "", m["project_name"], m["n"]))
+
+
+ROUND_COMMENTS = "comments.json"          # beside a version: the comments that were sent on it
+BACK_CHECK = "back_check.json"            # beside a version: how it answers the comments of the version before
+
+
+def keep_round_comments(store: Store, pid: str) -> bool:
+    """Save the current correction list beside the current drawing, with each comment's place on the PDF, before a new
+    version replaces it. Without this the next round could not be compared with what was asked. False: nothing to keep."""
+    from ..files import publish
+
+    p = store.get(pid)
+    if not p.plan_version or not any(store.run_dir(pid).glob("building_*.json")):
+        return False
+    path = correction_export(store, pid, "json")
+    try:
+        publish(store.version_dir(pid, p.plan_version) / ROUND_COMMENTS, path.read_bytes())
+    finally:
+        shutil.rmtree(path.parent, ignore_errors=True)
+    return True
+
+
+def rounds(store: Store, pid: str) -> tuple[dict | None, str]:
+    """({old, new, comments}, "") for the current drawing against the one before it, or (None, why not)."""
+    import json as _json
+
+    p = store.get(pid)
+    if len(p.versions) < 2 or not p.plan_version:
+        return None, "only one version of the drawings has been uploaded"
+    old, new = p.versions[-2], p.versions[-1]
+    if not old["name"].lower().endswith(".pdf") or not new["name"].lower().endswith(".pdf"):
+        return None, "two PDF versions are needed to compare them"
+    kept = store.version_dir(pid, old["id"]) / ROUND_COMMENTS
+    if not kept.exists():
+        return None, "no comments were kept for the earlier version (it was not analysed before the new one arrived)"
+    raw = _json.loads(kept.read_text(encoding="utf-8"))
+    return {"old": old, "new": new, "comments": raw["comments"] if isinstance(raw, dict) else raw}, ""
+
+
+def run_back_check(store: Store, pid: str, job: Job) -> dict:
+    """Every comment of the previous round against the new drawings (backcheck/). A reading for the reviewer: it closes
+    nothing by itself."""
+    import json as _json
+
+    from ..backcheck import back_check
+    from ..backcheck.comments import from_dict
+    from ..files import publish
+
+    found, why = rounds(store, pid)
+    if found is None:
+        raise ValueError(why)
+    p = store.get(pid)
+    job.progress(0.1, "comparing the two versions of the drawings")
+    comments = [from_dict(c, n) for n, c in enumerate(found["comments"])]
+    result = back_check(store.version_path(p, found["old"]["id"]), store.version_path(p, found["new"]["id"]), comments)
+    job.progress(0.9, "writing the answers")
+    out = result.to_dict()
+    out.pop("old_pdf", None), out.pop("new_pdf", None)                 # paths of this computer are not part of the answer
+    out.update(old_version=found["old"], new_version=found["new"], made=now_stamp())
+    publish(store.version_dir(pid, found["new"]["id"]) / BACK_CHECK, _json.dumps(out, default=float).encode("utf-8"))
+    return {"comments": len(comments), "counts": out["counts"]}
+
+
+def now_stamp() -> str:
+    from .store import now
+
+    return now()
+
+
+def back_check_view(store: Store, pid: str) -> dict:
+    """The saved back check of the current drawings, with each place on the new sheets as a box the screen can show."""
+    import json as _json
+
+    found, why = rounds(store, pid)
+    if found is None:
+        return {"available": False, "why": why}
+    kept = store.version_dir(pid, found["new"]["id"]) / BACK_CHECK
+    base = {"available": True, "comments": len(found["comments"]), "old_version": found["old"], "new_version": found["new"]}
+    if not kept.exists():
+        return {**base, "done": False}
+    data = _json.loads(kept.read_text(encoding="utf-8"))
+    sheets = {m.sheet.page: m.sheet for m in _models(store, pid)}
+    pt = 72 / 25.4
+
+    def place(spot: dict) -> dict | None:
+        sheet = sheets.get((spot.get("page") or 0) - 1)
+        if sheet is None or not spot.get("bbox"):
+            return None
+        x0, y0, x1, y1 = spot["bbox"]                                 # page points, y down; sheets are millimetres, y up
+        return {"sheet": sheet.id, "text": "", "box": [round(x0 / pt, 2), round(sheet.height - y1 / pt, 2),
+                                                       round(x1 / pt, 2), round(sheet.height - y0 / pt, 2)]}
+
+    answers = [{"id": v["comment"]["id"], "comment": v["comment"]["text"], "code": v["comment"].get("code", ""),
+                "status": v["status"], "reason": v["reason"], "person_must_check": v["evidence"]["person_must_check"],
+                "old_value": v["evidence"]["old_value"], "new_value": v["evidence"]["new_value"],
+                "place": place(v["evidence"]["new_place"])} for v in data["verdicts"]]
+    return {**base, "done": True, "made": data["made"], "counts": data["counts"], "answers": answers,
+            "changes_nobody_asked_for": len(data["new_issues"]), "clouds_present": data["clouds_present"],
+            "changes_outside_clouds": len(data["changes_not_clouded"]), "sheets_added": data["sheets_added"],
+            "sheets_removed": data["sheets_removed"]}
+
+
+def correction_export(store: Store, pid: str, fmt: str, cycle: int | None = None) -> Path:
+    """The correction list as pdf (the submitted PDF with annotations), bcf, json or csv, written under the run folder."""
+    from ..report.correction_list import export
+
+    p = store.get(pid)
+    plan = store.plan_path(p)
+    data = correction_list(store, pid, cycle)
+    own = store.run_dir(pid) / "exports" / uuid.uuid4().hex[:12]     # one folder a request: two exports never share a file
+    return export(data, fmt, own, _models(store, pid),
+                  plan if plan is not None and plan.suffix.lower() == ".pdf" else None)

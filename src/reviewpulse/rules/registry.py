@@ -18,6 +18,7 @@ class Fn:
     impl: str              # "module:function" inside reviewpulse.engine
     needs_scale: bool = False
     doc: str = ""
+    whole_building: str = ""   # "count" or "route": one sheet of a set cannot show that the building lacks it (engine/setwide.py)
 
 
 _FNS = [
@@ -26,14 +27,14 @@ _FNS = [
     Fn("width_m", "door or window element", "number (m)", "metric:fn_width_m", True, "Clear width of an opening"),
     Fn("ratio", "two numbers", "number", "metric:fn_ratio", True, "Window area over floor area"),
     Fn("exists_path", "graph, from, to, via_edges, avoid", "bool + witness path", "traversal:fn_exists_path",
-       False, "Reachability avoiding room types"),
+       False, "Reachability avoiding room types", "route"),
     Fn("shortest_path_m", "graph, from, to", "length + path", "traversal:fn_shortest_path_m", True,
-       "Travel distance from the farthest point of the room, walked around corners, door to door"),
+       "Travel distance from the farthest point of the room, walked around corners, door to door", "route"),
     Fn("swing_with_escape", "graph, doors (exit | route)", "door side opened into", "traversal:fn_swing_with_escape",
        False, "Doors open in the direction of escape"),
     Fn("disjoint_paths", "graph, from, to", "count + paths", "traversal:fn_disjoint_paths", False,
-       "Number of independent routes to exits"),
-    Fn("count_exits", "graph", "count", "traversal:fn_count_exits", False, "Number of exit doors"),
+       "Number of independent routes to exits", "route"),
+    Fn("count_exits", "graph", "count", "traversal:fn_count_exits", False, "Number of exit doors", "count"),
     Fn("forbidden_link", "graph, pairs", "offending edges", "traversal:fn_forbidden_link", False,
        "Door or opening between forbidden room types"),
     Fn("dead_end_no_window", "graph, room", "bool", "traversal:fn_dead_end_no_window", False,

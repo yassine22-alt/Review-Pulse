@@ -293,8 +293,12 @@ def rules_test(pack: Path = typer.Argument(DEFAULT_PACK), out: Path = typer.Opti
 @app.command()
 def serve(host: str = typer.Option("127.0.0.1", help="interface to listen on (0.0.0.0 in a container)"),
           port: int = typer.Option(8000), data: Path = typer.Option(Path("data/app"), help="projects folder"),
-          workers: int = typer.Option(2, help="background jobs that may run at once")):
+          workers: int = typer.Option(2, help="background jobs that may run at once"),
+          no_accounts: bool = typer.Option(False, "--no-accounts", help="no sign in; only on this machine (127.0.0.1)")):
     """Run the ReviewPulse web app (projects, uploads, rule review, results) on http://HOST:PORT."""
+    local = host in ("127.0.0.1", "localhost", "::1")
+    if no_accounts and not local:
+        _fail("--no-accounts is only allowed on 127.0.0.1: anyone who reaches the port could read and sign reviews", 1)
     try:
         import uvicorn
 
@@ -302,7 +306,40 @@ def serve(host: str = typer.Option("127.0.0.1", help="interface to listen on (0.
     except ImportError:
         _fail('the web app needs: pip install -e ".[app]"', 1)
     console.print(f"ReviewPulse on http://{host}:{port}  (projects in {data.resolve()})")
-    uvicorn.run(create_app(data, workers=workers), host=host, port=port, log_level="info")
+    if not no_accounts:
+        from .app.auth import Accounts
+
+        if not Accounts(data / "accounts.sqlite").has_users():
+            console.print(f"No account yet. Create the first administrator:  rp create-admin --data {data}")
+        if not local:
+            console.print("Serve other machines only through HTTPS (a reverse proxy), or passwords cross the network in clear.")
+    uvicorn.run(create_app(data, workers=workers, auth=not no_accounts), host=host, port=port, log_level="info")
+
+
+@app.command("create-admin")
+def create_admin(organisation: str = typer.Option(..., prompt="Organisation name"),
+                 email: str = typer.Option(..., prompt="Your email"),
+                 name: str = typer.Option(..., prompt="Your full name"),
+                 password: str = typer.Option(..., prompt="Password (12 characters or more)", hide_input=True,
+                                              confirmation_prompt=True),
+                 data: Path = typer.Option(Path("data/app"), help="projects folder"),
+                 adopt_projects: bool = typer.Option(False, help="give projects made without accounts to this organisation")):
+    """Create an organisation and its first administrator (also a reviewer). Run on the machine that serves the app."""
+    from .app.auth import Accounts, AuthError
+    from .app.store import Store
+
+    try:
+        user = Accounts(data / "accounts.sqlite").create_organisation(organisation, email, name, password)
+    except AuthError as e:
+        _fail(str(e), 1)
+    if adopt_projects:
+        store = Store(data)
+        orphans = [p for p in store.list() if not p.org]
+        for p in orphans:
+            p.org = user.org
+            store.save(p)
+        console.print(f"{len(orphans)} existing project(s) now belong to {user.org_name}")
+    console.print(f"Administrator {user.email} created. Start the app with: rp serve --data {data}")
 
 
 @app.command()

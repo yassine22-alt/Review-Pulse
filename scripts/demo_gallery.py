@@ -69,7 +69,7 @@ def main() -> None:
     only = {x.strip() for x in args.only.split(",") if x.strip()}
     rows = []
     llm = Hybrid()
-    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1)) as c:
+    with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "data", llm=lambda: llm, workers=1, auth=False)) as c:
         for name, kind, kw, shows in SCENARIOS:
             if only and name.split("_")[0] not in only:
                 continue

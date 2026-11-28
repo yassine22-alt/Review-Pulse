@@ -139,6 +139,10 @@ class Program(Model):
     # Parts of the sentence the plan cannot show (a riser height, a handrail). The rule covers the rest: a violation of the covered
     # part is a violation whatever the uncovered part says, but the rule can never report "satisfied" while a part is unchecked.
     not_checked: list[str] = Field(default_factory=list)
+    # The rule is a pointer for a person, not a verdict: when it does not hold, the finding is a warning that asks someone to look,
+    # never a failure. Used where the rule checks less than the sentence says and cannot know whether the sentence applies at all
+    # ("the drawings mention a sprinkler system" for "townhouses require an automatic sprinkler system").
+    advisory: bool = False
 
 
 class Binding(Model):

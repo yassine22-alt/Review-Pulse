@@ -184,7 +184,10 @@ def draft_relation(arm: str, item, client) -> Draft:
                     out.append(v)
         return out
 
-    sheet = _sheet_requirement(client, item.text, cat)
+    # a list item ("Site drainage to public way") read under its lead ("Provide a completely dimensioned plot plan showing:") names a
+    # thing to be shown; the drawing level property belongs to the lead, and a rule on it would pass for an item it says nothing about
+    own = next((c for c in ctx.clauses if c.id == ctx.target), None)
+    sheet = [] if own is not None and own.kind == "subitem" else _sheet_requirement(client, item.text, cat)
     if sheet:
         whole = cat.get("whole") or "building"
         draft = _assemble(arm, item, cat, " and ".join(f"{whole}.{f} == true" for f in sheet), "sheet", t0)

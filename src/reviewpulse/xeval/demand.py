@@ -32,9 +32,9 @@ def _unit_patterns() -> list[tuple[str, str]]:
     symbols = sorted((s for s in U.UNITS if s not in ("1", "count") and s.isascii()), key=len, reverse=True)
     for sym in symbols:
         if sym in U.PREFIXABLE:
-            out.append(((r"(?-i:(?:" + "|".join(map(re.escape, prefixes)) + r")?" + re.escape(sym) + r")") + r"(?![A-Za-zµ°²³0-9])", sym))
+            out.append(((r"(?-i:(?:" + "|".join(map(re.escape, prefixes)) + r")?" + re.escape(sym) + r")") + r"(?![\wµ°²³])", sym))
         else:
-            out.append((r"(?-i:" + re.escape(sym) + r")(?![A-Za-zµ°²³0-9])", sym))
+            out.append((r"(?-i:" + re.escape(sym) + r")(?![\wµ°²³])", sym))
     out += [(r"%", "%"), (r"°", "deg")]
     return out
 

@@ -1,0 +1,66 @@
+# The reviewer's own statuses and how ReviewPulse outcomes map onto them. One place, data only.
+# Read by report/reviewer_states.py. Nothing in the code decides a status by name: change this file to change the mapping.
+#
+# Rules that must hold (checked by tests/unit/test_reviewer_states.py):
+#   * unknown is never a pass: no undecided outcome maps to a status that rolls up to Approved
+#   * the tool never sets Rejected: only a named person does, at sign off
+#   * the internal verdict policy (PASS, WARNING, FAIL, NOT_EVALUATED) is unchanged; this file only names it
+
+# Status written on one correction item or clause, by a reviewer.
+statuses:
+  approved:               {label: "Approved",                 rollup: "Approved"}
+  approved_with_comments: {label: "Approved with comments",   rollup: "Approved with comments"}
+  information_requested:  {label: "Information requested",    rollup: "Revision required"}
+  revision_required:      {label: "Revision required",        rollup: "Revision required"}
+  not_applicable:         {label: "Not applicable",           rollup: "Not required"}
+  deferred:               {label: "Deferred submittal",       rollup: "Approved with comments"}
+
+# Result of a whole review or of one discipline, least to most severe. The overall result is the most severe one.
+results:
+  - "Not required"
+  - "Approved"
+  - "Approved with comments"
+  - "Revision required"
+  - "Rejected"
+
+# What the tool may propose. It never proposes Rejected.
+tool_max_result: "Revision required"
+
+# When some clauses of the requirement document were not decided on this plan, the proposed result cannot be better than this.
+uncovered_floor: "Approved with comments"
+
+# Finding verdict -> status. NOT_EVALUATED and WARNING both ask for information: unknown is never a pass.
+verdicts:
+  FAIL: revision_required
+  WARNING: information_requested
+  NOT_EVALUATED: information_requested
+  PASS: approved
+
+# Outcome of the compound interpreter -> status (used for clauses that produced no finding).
+outcomes:
+  VIOLATED: revision_required
+  UNRESOLVED: information_requested
+  SATISFIED: approved
+  NOT_APPLICABLE: not_applicable
+  EXEMPT: not_applicable
+
+# What a reviewer may decide by hand on any clause, under their name, and the status each decision is. "shown" and
+# "correction" are the reviewer's own reading of the plans: the tool never makes them. Deferred submittals are listed on the
+# cover of the correction list: they are neither missing nor failing, and a deferral is not a waiver of review.
+reviewer_decisions:
+  shown:          {status: approved,          needs: evidence}   # where the plans show it: a note, a sheet, or words
+  correction:     {status: revision_required, needs: note}       # the comment to the applicant
+  not_applicable: {status: not_applicable,    needs: ""}
+  deferred:       {status: deferred,          needs: ""}
+
+# Result a person may record at sign off.
+signoff_results: ["Approved", "Approved with comments", "Revision required", "Rejected", "Not required"]
+
+# Wording of the correction items, in the reviewer's imperative style. The clause is quoted as written, never rephrased.
+templates:
+  revision_required: 'Revise the plans to comply with this requirement: "{quote}" {citation}'
+  information_requested: 'Show on the plans, or provide, the information that settles this requirement: "{quote}" {citation}'
+  measured: "Detected {detected}; required {required}."
+  reviewer_correction: '{comment} Requirement: "{quote}" {citation}'
+  question_prefix: "To settle it:"
+  not_shown: "No sheet shows this: say where the plans address it."

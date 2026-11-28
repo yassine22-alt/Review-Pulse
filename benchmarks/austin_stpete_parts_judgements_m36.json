@@ -1,0 +1,320 @@
+{
+ "what": "Judgements made for the M36 run by an AI assistant, not by a person, on the same rule as the earlier ones (which an AI assistant also made). The new pieces were shuffled with 40 already judged ones whose marks were hidden. The judge had seen the layout rule, so this is not independent of the work it measures.",
+ "yes": {
+  "item 47.2": [
+   "667aea3dafd0",
+   "f33824cc8e66"
+  ],
+  "item 48.1": [
+   "e1d8cccc8786",
+   "fbcc78f40e20",
+   "dc7be31206eb"
+  ],
+  "item 49.1": [],
+  "item 49.2": [
+   "644dc56fff83"
+  ],
+  "item 50.1": [],
+  "item 51.1": [
+   "46dd7935ff7a",
+   "43637c8f6ac7",
+   "8f172c5146d3",
+   "b402717273ac",
+   "db105f92343c"
+  ],
+  "item 53.1": [
+   "3c73447d222b"
+  ],
+  "item 55.1": [],
+  "item 55.2": [
+   "5a49098f96d4"
+  ],
+  "item 55.3": [],
+  "item 56.1": [
+   "c228e0eb6e6c"
+  ],
+  "item 57.1": [],
+  "item 61.1": [],
+  "item 63.1": [],
+  "item 64.1": [],
+  "item 64.2": [],
+  "item 66.1": [
+   "75924052af84",
+   "f9364806de60"
+  ],
+  "item 66.2": [
+   "30ba9d9a2395",
+   "e46115490125"
+  ],
+  "item 66.3": [],
+  "item 66.4": [
+   "3e7b5c14151f",
+   "d73ada85a734",
+   "35feab336026",
+   "0c73d3d65192",
+   "9cceb8dbc9d3",
+   "13266b3e95f8"
+  ],
+  "item 66.5": [
+   "cb1478476eab"
+  ],
+  "item 67.1": [],
+  "item 69.1": [
+   "b1c573ff7516",
+   "cb1478476eab"
+  ],
+  "item 70.1": [],
+  "item 73.1": [],
+  "item 73.2": [],
+  "item 76.1": [],
+  "item 78.1": [],
+  "item 78.2": [],
+  "item 87.1": [
+   "70d690bf6df4"
+  ],
+  "item 92.1": [],
+  "item 93.1": [
+   "efd62ed336cb",
+   "efad46c26aec",
+   "8ead1295a863",
+   "b348872184f3",
+   "f89afead48e8",
+   "6cdaa35e10ce",
+   "997a460b9b95"
+  ],
+  "item 93.2": [],
+  "item 94.1": [
+   "b348872184f3",
+   "f272c32fa965",
+   "bee7dd7527da",
+   "6cf0d1e00113"
+  ],
+  "item 95.1": [],
+  "item 96.1": [
+   "34e1378b1c45"
+  ],
+  "item 97.1": [],
+  "item 98.1": [],
+  "item 99.1": [],
+  "item 99.2": [],
+  "item 99.3": [],
+  "item 101.1": [],
+  "item 101.2": [],
+  "item 102.1": [],
+  "7.1": []
+ },
+ "no": {
+  "item 47.2": [
+   "53627cfcea9b",
+   "ea4bb3cd9197",
+   "ddad3b47c944",
+   "43ed4a06f917"
+  ],
+  "item 48.1": [
+   "cd5ec2546934",
+   "f7b7bf1d9a5c",
+   "5be42f715efd",
+   "9ca465e55169",
+   "ace26a629142"
+  ],
+  "item 49.1": [
+   "6d2572a270de",
+   "9fbda8c4e0cb"
+  ],
+  "item 49.2": [
+   "4e509e941b31",
+   "e8318bd45e69",
+   "57e3c245edfc",
+   "799cd53206e8"
+  ],
+  "item 50.1": [
+   "fbe160f438a2",
+   "b7fa14cb1139",
+   "eb1609ce0483",
+   "01621c04d838",
+   "0a0046a4eb8f",
+   "3ef9682c66e9"
+  ],
+  "item 51.1": [],
+  "item 53.1": [
+   "e5fee8b31ec5"
+  ],
+  "item 55.1": [
+   "7935dbe83496"
+  ],
+  "item 55.2": [
+   "282cc86cb565",
+   "1fd77f4de533"
+  ],
+  "item 55.3": [
+   "5a49098f96d4",
+   "b4e30d448555",
+   "e8318bd45e69"
+  ],
+  "item 56.1": [
+   "a1d1d55f4038",
+   "9f100e01790d",
+   "cbafe8427a5a"
+  ],
+  "item 57.1": [
+   "b311784125bf",
+   "28a687ea7485"
+  ],
+  "item 61.1": [
+   "1dbe2b0fefd9"
+  ],
+  "item 63.1": [
+   "ef1cbd992448",
+   "1dbe2b0fefd9",
+   "f9364806de60",
+   "9b00bc5e2811",
+   "f57922428ce1",
+   "c9c0e85dc4d9"
+  ],
+  "item 64.1": [
+   "0f73f7ed3e51",
+   "e32edf38f149",
+   "8b6467921efa",
+   "096d0c528f07",
+   "c2be97f83aa5"
+  ],
+  "item 64.2": [
+   "be6110e8b852",
+   "c2be97f83aa5",
+   "57e3c245edfc",
+   "e8318bd45e69",
+   "552175665851"
+  ],
+  "item 66.1": [],
+  "item 66.2": [
+   "28a687ea7485"
+  ],
+  "item 66.3": [
+   "d8c5f162898d",
+   "daf0cd0b9488"
+  ],
+  "item 66.4": [
+   "aaba9cbfdf2e"
+  ],
+  "item 66.5": [],
+  "item 67.1": [
+   "13266b3e95f8",
+   "3e7b5c14151f",
+   "d73ada85a734",
+   "35feab336026",
+   "0c73d3d65192"
+  ],
+  "item 69.1": [
+   "c2be97f83aa5",
+   "552175665851",
+   "10566c357572",
+   "e5fee8b31ec5"
+  ],
+  "item 70.1": [
+   "0f73f7ed3e51",
+   "5a70e5b80717",
+   "e5fee8b31ec5",
+   "10566c357572"
+  ],
+  "item 73.1": [
+   "5947e5d340e1",
+   "588c4c9d2b23",
+   "338872af7909",
+   "cd64ccb5b927",
+   "fb24328ad054",
+   "9c2be3b428fa"
+  ],
+  "item 73.2": [
+   "d2702fac8814",
+   "9c2be3b428fa",
+   "cd64ccb5b927"
+  ],
+  "item 76.1": [
+   "17ac4ab88681",
+   "1dbe2b0fefd9",
+   "ce3374d296ec",
+   "205e5d808c17",
+   "5b093a1e5448"
+  ],
+  "item 78.1": [
+   "44cefad640f8",
+   "c6f8d6e8d9f8"
+  ],
+  "item 78.2": [
+   "e6cfcc3bdab3",
+   "f9364806de60",
+   "c6f8d6e8d9f8"
+  ],
+  "item 87.1": [
+   "d185f2701a22",
+   "44e1024137ed",
+   "5dab7076aabc",
+   "cbafe8427a5a"
+  ],
+  "item 92.1": [
+   "afbaf19c4062",
+   "f272c32fa965"
+  ],
+  "item 93.1": [
+   "165abc3012b5"
+  ],
+  "item 93.2": [
+   "42c17fc104e4"
+  ],
+  "item 94.1": [
+   "165abc3012b5",
+   "3ee32e202f91"
+  ],
+  "item 95.1": [
+   "dcec155bd38a",
+   "879516813319",
+   "5b648c2c4bf8"
+  ],
+  "item 96.1": [],
+  "item 97.1": [
+   "613f3695d455",
+   "5dab7076aabc"
+  ],
+  "item 98.1": [
+   "568f095cb2b3"
+  ],
+  "item 99.1": [
+   "be6110e8b852",
+   "b35883e345c5",
+   "c2be97f83aa5",
+   "552175665851",
+   "9c2be3b428fa"
+  ],
+  "item 99.2": [
+   "b1c573ff7516",
+   "277b09b45863",
+   "be6110e8b852",
+   "0b83e17ee3be"
+  ],
+  "item 99.3": [
+   "c2be97f83aa5",
+   "552175665851"
+  ],
+  "item 101.1": [
+   "83048fa3ecee"
+  ],
+  "item 101.2": [
+   "cd861a5b70a0"
+  ],
+  "item 102.1": [
+   "ce9cdb7f7362"
+  ],
+  "7.1": [
+   "b865e946e975",
+   "d2702fac8814",
+   "efddb9b5e2d4"
+  ]
+ },
+ "control": {
+  "yes_yes": 19,
+  "yes_no": 1,
+  "no_yes": 0,
+  "no_no": 20,
+  "same": "39 of 40"
+ }
+}

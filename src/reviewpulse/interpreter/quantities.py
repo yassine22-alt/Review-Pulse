@@ -36,7 +36,7 @@ def one_unit_system(text: str) -> str:
 # They are rewritten as a number and a unit word before anything reads the sentence ("3'" -> "3 ft", "6'8\"" -> "80 in").
 
 _FEET_INCHES = re.compile(r"(\d+)\s*['′’]\s*-?\s*(\d+)(?:\s+(\d+)/(\d+))?\s*(?:\"|″|”)")
-_INCHES = re.compile(r"(?<![\d/.])(\d+)(?:\s+(\d+)/(\d+)|\.(\d+))?\s*(?:\"|″|”)")
+_INCHES = re.compile(r"(?<![\d/.])(\d+)(?:(?:\s+|\s*[-‑]\s*)(\d+)/(\d+)|\.(\d+))?\s*(?:\"|″|”)")
 _FRACTION_INCH = re.compile(r"(?<![\d/])(\d+)/(\d+)\s*(?:\"|″|”)")
 _FEET = re.compile(r"(?<![\w/])(\d+(?:\.\d+)?)\s*['′’](?![\w'])")
 _SQ_FT = re.compile(r"(?<=\d)\s*(?:s\.\s?f\.?|sq\.?\s?ft\.?|sf)(?![A-Za-z])", re.I)

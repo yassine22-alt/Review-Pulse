@@ -148,6 +148,7 @@ async function projectView(pid, tab) {
       <a href="#/p/${pid}/requirements" class="${tab === "requirements" ? "on" : ""}">Requirements</a>
       <a href="#/p/${pid}/rules" class="${tab === "rules" ? "on" : ""}">Rules${nd ? `<span class="n">${nd} to review</span>` : ""}</a>
       <a href="#/p/${pid}/results" class="${tab === "results" ? "on" : ""}">Results</a>
+      <a href="#/p/${pid}/corrections" class="${tab === "corrections" ? "on" : ""}">Corrections</a>
     </nav>
     <section id="tab"></section>`;
   $("#runcheck").addEventListener("click", async () => {
@@ -162,6 +163,7 @@ async function projectView(pid, tab) {
   if (tab === "requirements") return requirementsTab(pid);
   if (tab === "rules") return rulesTab(pid);
   if (tab === "results") return resultsTab(pid);
+  if (tab === "corrections") return correctionsTab(pid);
   return setupTab(pid);
 }
 
@@ -633,7 +635,7 @@ function renderFindings() {
     return `<article class="fcard v-${f.verdict} ${R.sel === n ? "sel" : ""} ${dism ? "dismissed" : ""}" data-n="${n}">
       <header><span class="muted mono">#${n + 1}</span><span class="badge verdict">${VLABEL[f.verdict]}</span><span class="badge">${esc(f.tier)}</span><span class="rid">${esc(f.rule_id)}</span><span class="sev">${esc(f.severity)}</span></header>
       <p class="msg">${esc(f.message)}</p>
-      ${f.detected || f.required ? `<p class="vals">detected <b>${esc(f.detected || "–")}</b> · required <b>${esc(f.required || "–")}</b></p>` : ""}
+      ${f.detected || f.required ? `<p class="vals">detected <b>${esc(f.detected || "not stated")}</b> · required <b>${esc(f.required || "not stated")}</b></p>` : ""}
       ${src.clause ? `<p class="src">${esc(src.clause)}${src.doc ? ` · ${esc(String(src.doc).split("/").pop())}` : ""}</p>` : ""}
       ${f.evidence && f.evidence.interpreted === true ? `<p class="src"><span class="badge state-approved">From clause ${esc(src.clause || "")}, approved by ${esc(f.evidence.approved_by || "")}</span></p>` : ""}
       ${dism ? `<p class="src">dismissed: ${esc(dism)}</p>` : ""}
@@ -874,6 +876,114 @@ function elementPopover(e, ev) {
   box.append(pop);
   pop.addEventListener("click", (x) => x.stopPropagation());
   for (const b of $$("[data-t]", pop)) b.addEventListener("click", () => { closePop(); triage({ [b.dataset.t]: [e.id], recheck: true }); });
+}
+
+/* ---------------------------------------------------------------- corrections tab */
+/* The correction list a reviewer delivers: numbered, by discipline and code chapter. Accept, edit or drop each item, set a clause
+   aside as a deferred submittal, sign off a discipline, then export. Every change is stored under the project and audited. */
+const ITEM_BADGE = { revision_required: "state-rejected", information_requested: "state-pending" };
+
+function reviewerName() {
+  const f = $("#reviewer");
+  return ((f && f.value) || state.reviewer || (state.project && state.project.curator) || "").trim();
+}
+
+async function correctionsTab(pid) {
+  const [cl, rstates] = await Promise.all([api(`/api/projects/${pid}/correction-list`), api("/api/reviewer-states")]);
+  const b = cl.edit_burden;
+  let html = "";
+  let lastD = null, lastC = null;
+  for (const it of cl.items) {
+    if (it.discipline !== lastD) { html += `<h2 class="cl-disc">${esc(it.discipline_label)}</h2>`; lastD = it.discipline; lastC = null; }
+    if (it.chapter_label !== lastC) { html += `<h3 class="cl-chap">${esc(it.chapter_label)}</h3>`; lastC = it.chapter_label; }
+    html += correctionItem(it);
+  }
+  const signRows = Object.entries(cl.disciplines).map(([id, d]) => `
+    <div class="signrow"><b>${esc(d.label)}</b><span class="muted">proposed: ${esc(d.proposed)}</span>
+      ${d.signed ? `<span class="badge state-approved">signed ${esc(d.signed.result)} by ${esc(d.signed.reviewer)}</span>${d.differs ? `<span class="badge state-rejected">differs from the proposal</span>` : ""}` : `<span class="badge state-pending">not signed</span>`}
+      <select data-sign-result="${esc(id)}">${rstates.signoff_results.map((r) => `<option ${r === d.proposed ? "selected" : ""}>${esc(r)}</option>`).join("")}</select>
+      <button class="btn sm" data-sign="${esc(id)}">Sign off</button></div>`).join("");
+  const deferred = cl.deferred.length ? `<div class="notice info"><b>Deferred submittals</b> (neither missing nor failing, listed on the cover):<ul>${cl.deferred.map((d) =>
+    `<li>${esc(d.quote)} ${esc(d.citation)} <span class="muted">set by ${esc(d.by)}</span> <button class="btn sm" data-undefer="${esc(d.clause)}">Undo</button></li>`).join("")}</ul></div>` : "";
+  $("#tab").innerHTML = `
+    <div class="card pad">
+      <div class="row"><h2 style="margin:0">Correction list · cycle ${cl.cycle}</h2><div class="spacer"></div>
+        <label class="field" style="margin:0">Reviewer<input type="text" id="reviewer" value="${esc(state.reviewer || state.project.curator)}" placeholder="your name (required)"></label>
+        <a class="btn" href="/api/projects/${pid}/correction-list?format=html" target="_blank" rel="noopener">HTML</a>
+        <a class="btn" href="/api/projects/${pid}/correction-list?format=txt" target="_blank" rel="noopener">Text</a>
+        <a class="btn" href="/api/projects/${pid}/correction-list?format=json&file=true">JSON file</a>
+        <a class="btn" href="/api/projects/${pid}/correction-list?format=csv">CSV</a>
+        <a class="btn" href="/api/projects/${pid}/correction-list?format=bcf">BCF</a>
+        <a class="btn primary" id="exportpdf" href="/api/projects/${pid}/correction-list.pdf" target="_blank" rel="noopener">Export marked up PDF</a></div>
+      <p class="muted" style="margin-top:8px">Proposed result: <b>${esc(cl.overall.label)}</b> (${esc(cl.overall.reason)}).
+        ${cl.overall.signed ? `Signed overall: <b>${esc(cl.overall.signed)}</b>.` : cl.overall.unsigned_disciplines.length ? `Not yet signed: ${esc(cl.overall.unsigned_disciplines.join(", "))}.` : ""}
+        ${cl.uncovered_clauses ? ` ${cl.uncovered_clauses} clause(s) were not decided on this plan, so this is never a plain Approved.` : ""}</p>
+      <p class="muted">Edit burden so far: ${b.items} item(s), ${b.accepted} accepted, ${b.edited} edited, ${b.dropped} dropped, ${b.unreviewed} not yet reviewed
+        (${b.edit_count} edit${b.edit_count === 1 ? "" : "s"}). <a href="/api/projects/${pid}/audit" target="_blank" rel="noopener">Audit trail</a></p>
+      ${deferred}${signRows ? `<div class="signs">${signRows}</div>` : ""}
+    </div>
+    <div id="clitems">${html || `<div class="card pad empty">No corrections yet. Run a check; items appear when a requirement fails or could not be decided.</div>`}</div>`;
+  const reload = () => correctionsTab(pid);
+  $("#reviewer").addEventListener("input", (ev) => { state.reviewer = ev.target.value; });
+  const act = async (key, body) => {
+    const who = reviewerName();
+    if (!who) { toast("Enter your name first (top right of this list)", true); return; }
+    try { await api(`/api/projects/${pid}/correction-list/items/${encodeURIComponent(key)}`, { method: "PUT", json: { ...body, reviewer: who } }); await reload(); }
+    catch (e) { toast(e.message, true); }
+  };
+  for (const box of $$("[data-item]")) {
+    const key = box.dataset.item;
+    $$("[data-act]", box).forEach((btn) => btn.addEventListener("click", () => {
+      const a = btn.dataset.act;
+      if (a === "edit") return act(key, { action: "edit", wording: $("textarea", box).value });
+      if (a === "drop") {
+        const reason = (window.prompt("Why is this not a correction?") || "").trim();
+        return reason ? act(key, { action: "drop", reason }) : undefined;
+      }
+      if (a === "defer") return setClause(pid, box.dataset.clause, "deferred", reload);
+      if (a === "na") return setClause(pid, box.dataset.clause, "not_applicable", reload);
+      return act(key, { action: a });
+    }));
+  }
+  $$("[data-undefer]").forEach((btn) => btn.addEventListener("click", () => setClause(pid, btn.dataset.undefer, "reset", reload)));
+  $$("[data-sign]").forEach((btn) => btn.addEventListener("click", async () => {
+    const who = reviewerName();
+    if (!who) { toast("Enter your name first", true); return; }
+    const d = btn.dataset.sign;
+    try {
+      await api(`/api/projects/${pid}/signoffs`, { method: "POST", json: { reviewer: who, discipline: d, result: $(`[data-sign-result="${d}"]`).value, cycle: cl.cycle } });
+      toast("Signed off"); await reload();
+    } catch (e) { toast(e.message, true); }
+  }));
+}
+
+async function setClause(pid, clause, st, reload) {
+  const who = reviewerName();
+  if (!who) { toast("Enter your name first", true); return; }
+  let note = "";
+  if (st !== "reset") note = window.prompt(st === "deferred" ? "Why is this a deferred submittal (who submits it, and when)?" : "Why does this not apply?") || "";
+  try { await api(`/api/projects/${pid}/clause-states`, { method: "PUT", json: { clause, state: st, reviewer: who, note } }); await reload(); }
+  catch (e) { toast(e.message, true); }
+}
+
+function correctionItem(it) {
+  const act = it.review.action;
+  const where = it.locations.map((l) => l.where).concat(it.more_locations ? [`and ${it.more_locations} more`] : []);
+  const facts = it.facts.slice(0, 3).map((f) => `<div class="muted">Fact: ${esc(f.subject ? f.subject + ": " : "")}${esc(f.statement)} <span class="mono">(${esc(f.source)})</span></div>`).join("");
+  const review = act === "pending" ? ["state-pending", "not reviewed"] : act === "drop" ? ["state-rejected", "dropped"] : ["state-approved", act === "edit" ? "edited" : "accepted"];
+  return `<div class="card pad clitem ${it.dropped ? "dropped" : ""}" data-item="${esc(it.key)}" data-clause="${esc(it.clause)}">
+    <div class="row"><b>${it.n ?? "dropped"}</b><span class="badge ${ITEM_BADGE[it.status] || "state-pending"}">${esc(it.status_label)}</span>
+      <span class="badge ${review[0]}">${review[1]}</span><span class="muted mono">${esc(it.citation)}</span></div>
+    <textarea rows="3" aria-label="Wording of item ${it.n ?? ""}" ${it.dropped ? "disabled" : ""}>${esc(it.wording)}</textarea>
+    <div class="muted">Where: ${esc(where.join("; ") || "not shown on any sheet")}</div>${facts}
+    ${it.question ? `<div><b>Question:</b> ${esc(it.question)}</div>` : ""}
+    <div class="row" style="margin-top:8px">
+      <button class="btn sm ok" data-act="accept">Accept</button>
+      <button class="btn sm" data-act="edit">Save edited wording</button>
+      <button class="btn sm danger" data-act="drop">Drop</button>
+      <button class="btn sm" data-act="reset">Reset</button>
+      <button class="btn sm" data-act="defer" title="List this clause on the cover as a deferred submittal">Deferred submittal</button>
+      <button class="btn sm" data-act="na">Not applicable</button></div></div>`;
 }
 
 /* A hosted model is offered only when the server has one configured; the reviewer decides per project. */

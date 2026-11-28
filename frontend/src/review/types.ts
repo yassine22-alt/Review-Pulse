@@ -1,0 +1,124 @@
+export type Point = [number, number];
+
+export interface FindingShape {
+  n: number; id: string | null; anchor: Point | null;
+  polygons: Point[][]; polylines: Point[][]; points: Point[]; subjects: string[]; deciding: string[];
+}
+export interface SheetView {
+  index: number; id: string; width: number; height: number; affine?: number[];
+  elements: { id: string; cls: string; line?: Point[]; poly?: Point[] }[];
+  rooms: { id: string; label: string | null; poly: Point[] }[];
+  reader?: { kind: "trained" | "rules" | "fallback" | "scan"; model: string | null };
+  findings: FindingShape[];
+}
+export interface View { sheets: SheetView[] }
+
+export interface Fact { subject?: string; statement: string; source: string }
+export interface Item {
+  key: string; clause: string; n: number | null; citation: string; quote: string; title: string;
+  discipline: string; discipline_label: string; status: string; status_label: string; outcome: string;
+  wording: string; wording_default: string; question: string; facts: Fact[];
+  locations: { sheet: string; where: string; bbox?: number[] | null }[]; more_locations: number; dropped: boolean;
+  decided_by?: string; overrode?: string | null;
+  review: { action: "pending" | "accept" | "edit" | "drop"; by: string | null; reason?: string | null };
+  severity: string; family: string;
+  followup?: {
+    assignee?: string; due?: string | null; by?: string;
+    resolved?: { by: string; at: string; note: string; stale?: boolean } | null;
+  } | null;
+  from_document: boolean; finding_ids: string[];
+}
+export interface CorrectionList {
+  cycle: number; items: Item[]; approved_count: number; uncovered_clauses: number;
+  overall: { label: string; signed: string | null; unsigned_disciplines: string[] };
+  disciplines: Record<string, {
+    label: string; items: number; proposed: string; differs: boolean;
+    signed: { reviewer: string; result: string; at: string } | null;
+  }>;
+  deferred: { clause: string; quote: string; citation: string; by: string }[];
+  shown: { clause: string; citation: string; by: string; overrode: string | null }[];
+  edit_burden: { items: number; accepted: number; edited: number; dropped: number; unreviewed: number };
+}
+
+export interface BackCheck {
+  available: boolean; why?: string; done?: boolean; comments?: number;
+  old_version?: { id: string; name: string; at: string }; new_version?: { id: string; name: string; at: string };
+  answers?: { id: string; comment: string; code: string; status: string; reason: string; person_must_check: string;
+              place: NoteRef | null }[];
+  changes_nobody_asked_for?: number; clouds_present?: boolean; changes_outside_clouds?: number;
+  sheets_added?: unknown[]; sheets_removed?: unknown[];
+}
+export interface NoteRef { sheet: string; text: string; box?: number[] | null }
+export interface Found extends NoteRef { kind?: string; times?: number }
+export interface PartSearch {
+  parts: { text: string; notes: Found[]; written: Found[] }[]; whole_line?: Found[]; split_by_model: boolean; left_out: string[];
+}
+export interface Evidence {
+  chosen?: NoteRef | null; candidates?: NoteRef[];
+  checks?: { required: string; stated: string | null; result: string }[];
+}
+export interface Determination {
+  state: "shown" | "correction" | "not_applicable" | "deferred"; by: string; at: string; note: string;
+  evidence?: (NoteRef & { page?: number }) | null; stale?: string | null; parts?: { text: string; mark: "seen" | "missing" }[];
+}
+export interface Clause { id: string; heading: string; text: string }
+export interface Reading {
+  status: "DRAFTED" | "UNRESOLVED"; reason?: string; plain?: string; readback?: string;
+  plain_applies_when?: string; plain_unless?: string; notes?: string[];
+  preview?: { outcome: string; missing?: string[] };
+  review?: { review?: { issues?: { message: string }[]; limitations?: string[] } };
+  decision?: { state: "approved" | "rejected"; by: string; at: string } | null;
+  evidence?: Evidence;
+}
+
+/** The places on the sheets that carry the evidence of one correction item: one shape per finding behind it. */
+export function shapesOf(item: Item, view: View | null): { sheet: number; shape: FindingShape }[] {
+  if (item.decided_by) {            // written by a reviewer: the place they pointed at
+    return (view?.sheets ?? []).flatMap((s) => item.locations.filter((l) => l.sheet === s.id && l.bbox).flatMap((l) => {
+      const shape = noteShape(s, l.bbox!);
+      if (!shape) return [];
+      const [a, b] = shape.polygons[0];
+      return [{ sheet: s.index, shape: { ...shape, anchor: [(a[0] + b[0]) / 2, a[1]] as Point } }];
+    }));
+  }
+  const mine = new Set(item.finding_ids);
+  return (view?.sheets ?? []).flatMap((s) => s.findings.filter((g) => g.id !== null && mine.has(g.id) && drawable(g))
+    .map((shape) => ({ sheet: s.index, shape })));
+}
+
+/** Whether something of this shape appears on the sheet: a pin, an outline, a line or a point. */
+const drawable = (g: FindingShape) => !!g.anchor || g.polygons.length + g.polylines.length + g.points.length > 0;
+
+export type Box = [number, number, number, number];
+
+/** The outline of a note, from sheet space to the pixels of the sheet's picture, with a little air around the words. */
+export function noteShape(sheet: SheetView, box: number[]): FindingShape | null {
+  if (!sheet.affine) return null;
+  const [a, b, c, d, e, f] = sheet.affine;
+  const px = (x: number, y: number): Point => [a * x + b * y + c, d * x + e * y + f];
+  const corners = [px(box[0], box[1]), px(box[2], box[1]), px(box[2], box[3]), px(box[0], box[3])];
+  const xs = corners.map((p) => p[0]);
+  const ys = corners.map((p) => p[1]);
+  const air = 6;
+  const [x0, y0, x1, y1] = [Math.min(...xs) - air, Math.min(...ys) - air, Math.max(...xs) + air, Math.max(...ys) + air];
+  return { n: -1, id: null, anchor: null, polygons: [[[x0, y0], [x1, y0], [x1, y1], [x0, y1]]], polylines: [], points: [],
+    subjects: [], deciding: [] };
+}
+
+/** The box around a shape and the elements it is about, in the sheet's pixels. */
+export function boundsOf(sheet: SheetView, shapes: FindingShape[]): Box | null {
+  const pts: Point[] = [];
+  for (const g of shapes) {
+    pts.push(...g.polygons.flat(), ...g.polylines.flat(), ...g.points);
+    if (g.anchor) pts.push(g.anchor);
+    const ids = new Set(g.subjects);
+    for (const e of sheet.elements) if (ids.has(e.id)) pts.push(...(e.line ?? e.poly ?? []));
+    for (const r of sheet.rooms) if (ids.has(r.id)) pts.push(...r.poly);
+  }
+  if (!pts.length) return null;
+  const xs = pts.map((p) => p[0]);
+  const ys = pts.map((p) => p[1]);
+  const x = Math.min(...xs);
+  const y = Math.min(...ys);
+  return [x, y, Math.max(...xs) - x, Math.max(...ys) - y];
+}

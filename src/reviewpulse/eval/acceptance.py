@@ -207,7 +207,7 @@ def run_case(case: Case, work: Path, env: dict | None = None) -> dict:
                        env={**os.environ, **(env or {})}, timeout=3600)
     secs = time.time() - t0
     res: dict = {"case": case.name, "kind": case.kind, "input": src.name, "exit": p.returncode,
-                 "seconds": round(secs, 1), "problems": [], "note": case.note}
+                 "seconds": round(secs, 1), "problems": [], "note": case.note, "ok": False}
     if p.returncode != 0:
         res["problems"].append("crash: " + (p.stderr or p.stdout)[-600:])
         return res

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 
 from pydantic import Field
 
@@ -40,6 +41,37 @@ def review_fingerprint(program: Program, context: ContextBundle, inputs: Inputs)
     return hashlib.sha256(json.dumps(content, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
+NOT_IN_SOURCE = " (The passage the second reader quoted is not in this clause: read the whole clause.)"
+
+
+def _find(quote: str, text: str) -> tuple[int, int] | None:
+    """Where ``quote`` stands in ``text``, whatever the spacing, line breaks and letter case. None when the words are not there."""
+    words = quote.split()
+    if not words:
+        return None
+    found = re.search(r"\s+".join(map(re.escape, words)), text, re.IGNORECASE)
+    return found.span() if found else None
+
+
+def anchor(issue: dict, context: ContextBundle) -> dict:
+    """One issue of the second reader, tied to words that really are in the document. A model cannot count character offsets,
+    so the quote is looked for in the clause it names, then in the other clauses given to it. A quote that is nowhere is never
+    shown: the concern is kept (it still has to be read before approval), tied to the whole target clause and says so."""
+    source = issue.get("source") if isinstance(issue, dict) else None
+    source = source if isinstance(source, dict) else {}
+    message = str(issue.get("message") or "").strip() if isinstance(issue, dict) else ""
+    named = sorted(context.clauses, key=lambda c: (c.id != source.get("clause"), c.id != context.target))
+    for clause in named:
+        at = _find(str(source.get("quote") or ""), clause.text)
+        if at:
+            start, end = clause.start + at[0], clause.start + at[1]
+            return {"message": message, "source": {"clause": clause.id, "start": start, "end": end,
+                                                  "quote": context.text[start:end]}}
+    target = next(c for c in context.clauses if c.id == context.target)
+    return {"message": (message or "The second reader raised a concern without saying what.") + NOT_IN_SOURCE,
+            "source": {"clause": target.id, "start": target.start, "end": target.end, "quote": target.text}}
+
+
 def review_program(program: Program, context: ContextBundle, inputs: Inputs, client: LLMClient) -> dict:
     validate_program(program, inputs.bindings, list(inputs.collections))
     system = """Independently audit the proposed formal interpretation against the supplied source.
@@ -56,7 +88,10 @@ Do not rewrite the source or approve the program. Return issues and limitations 
         },
         ensure_ascii=False,
     )
-    review = Review.model_validate(client.complete(system, user, Review.model_json_schema()))
+    answer = client.complete(system, user, Review.model_json_schema())
+    if isinstance(answer, dict) and isinstance(answer.get("issues"), list):
+        answer = {**answer, "issues": [anchor(i, context) for i in answer["issues"]]}
+    review = Review.model_validate(answer)
     for issue in review.issues:
         context.check_span(issue.source)
     return {

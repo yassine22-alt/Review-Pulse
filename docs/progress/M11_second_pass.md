@@ -1,5 +1,8 @@
 # Second pass on real drawings and real requirements (November 2026)
 
+> **Correction, 28 November 2026:** the answer keys and by-eye marks on this page were made by an AI assistant, not by a person,
+> and nobody has checked them. See [who graded the answer keys](../WHO_GRADED.md).
+
 This page records the second round of work after the first test on documents and drawings written by other people
 ([M10_real_world_findings.md](M10_real_world_findings.md)). It lists what was changed, how each change was measured, what was tried
 and rejected, and what remains. The statement of what the tool does well is in [../SCOPE.md](../SCOPE.md).

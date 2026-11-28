@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from ..factgraph.schema import FactGraph
 from ..rules.clauses import split_text
@@ -88,8 +88,10 @@ def interpreter_router(llm_factory: Callable) -> APIRouter:
         return _execute(review_program, body.program, body.context, body.inputs, client())
 
     @router.post("/approve")
-    def approve(body: ApprovalRequest):
-        return _execute(approve_program, body.program, body.context, body.inputs, body.report, body.reviewer)
+    def approve(body: ApprovalRequest, request: Request):
+        user = getattr(request.state, "user", None)      # a signed in account approves under its own name
+        return _execute(approve_program, body.program, body.context, body.inputs, body.report,
+                        user.name if user else body.reviewer)
 
     @router.post("/check")
     def check(body: CheckRequest):

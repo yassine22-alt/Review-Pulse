@@ -9,18 +9,24 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import threading
 from collections.abc import Callable
+from dataclasses import asdict
 from datetime import datetime
 
-from ..factgraph.convert import to_graph, to_inputs
-from ..factgraph.from_building import from_building
+from ..factgraph.convert import to_graph
+from ..factgraph.from_building import from_building, set_notes
+from ..files import publish
 from ..interpreter.checked import checked_draft
 from ..interpreter.context import assemble_context
 from ..interpreter.review import ReviewArtifact, approve_program, review_program
 from ..interpreter.runtime import run_program
 from ..interpreter.schema import Program
+from ..ledger.wiring import attest as _attest
+from ..ledger.wiring import build_inputs, load_attestations
+from ..regs.context import with_resolved_context
 from ..rules.clauses import split_cached
 from ..schema import BuildingModel
 from .store import Store, replace
@@ -69,7 +75,8 @@ def document(store: Store, pid: str) -> dict:
         raise ValueError("upload a requirement document first")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
     return {"name": path.name, "text": full,
-            "clauses": [{"id": c.id, "heading": c.heading, "text": c.text, "kind": c.kind, "start": c.start, "end": c.end}
+            "clauses": [{"id": c.id, "heading": c.heading, "text": c.text, "kind": c.kind, "start": c.start, "end": c.end,
+                         "scope": c.scope}
                         for c in clauses if c.kind not in SKIP_KINDS and len(c.text.strip()) > 15 and not _is_title(c)]}
 
 
@@ -93,8 +100,20 @@ def _plan(store: Store, pid: str):
         raise ValueError("no floor plan was found in this upload (the sheets show: " + ", ".join(kinds).replace("_", " ") + ")")
     model = max(plans, key=lambda m: (any(e.a in ("EXIT", "EXTERIOR") or e.b in ("EXIT", "EXTERIOR") for e in m.edges),
                                       len(m.rooms)))
-    graph = from_building(model, complete=False)
-    return graph, to_inputs(graph), to_graph(graph)
+    graph = from_building(model, complete=False, part_of_set=len(plans) > 1, notes=set_notes(models))
+    inputs, _ = build_inputs(graph, load_attestations(store.drafts_dir(pid)), model)      # REVIEWPULSE_LEDGER=off: plain conversion
+    return graph, inputs, to_graph(graph)
+
+
+def attestations(store: Store, pid: str):
+    """What reviewers confirmed for this project (kept in the project's drafts folder, so a reload restores it)."""
+    return load_attestations(store.drafts_dir(pid))
+
+
+def attest(store: Store, pid: str, entity: str, fact: str, value, reviewer: str, source: str, unit: str = "1"):
+    """A reviewer states one value for one fact of one entity. A name and a source are required; nothing is written otherwise."""
+    with _lock(pid):
+        return _attest(store.drafts_dir(pid), entity, fact, value, reviewer=reviewer, source=source, unit=unit)
 
 
 def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callable[[], object | None],
@@ -108,12 +127,13 @@ def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callab
         raise ValueError("the drafting model is not available")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
     source_hash = hashlib.sha256(path.read_bytes()).hexdigest()
-    context = assemble_context(path.name, full, clauses, clause_id, p.context_links)
+    context = with_resolved_context(assemble_context(path.name, full, clauses, clause_id, p.context_links), clauses)
     graph, inputs, route_graph = _plan(store, pid)
     # a hosted model is asked only for a clause the local one could not read, and only when the reviewer allowed it
     fallback = fallback_factory() if fallback_factory is not None and p.external_consent else None
     out = checked_draft(context, inputs, graph, client, fallback=fallback, triage=triage)
     out["clause"] = clause_id
+    _attach_evidence(store, pid, context, client, out)
     if out["program"] is not None:
         out["program"]["id"] = rule_id(clause_id)
         result = run_program(Program.model_validate(out["program"]), inputs, include_drafts=True, graph=route_graph)
@@ -128,6 +148,234 @@ def interpret_clause(store: Store, pid: str, clause_id: str, llm_factory: Callab
         results = load_results(store, pid)
         results[clause_id] = out            # a new reading replaces the old rule, its review and its decision
         _save(store, pid, results)
+    return out
+
+
+_EMBEDDER: list = []                     # the embedding model, looked for once per process ([None] when it is not installed)
+_RERANKER: list = []                     # the cross-encoder, the same way
+
+
+def _attach_evidence(store: Store, pid: str, context, client, out: dict) -> None:
+    """For a clause no measured rule was written for: what the drawings say about it (the note, its sheet, its figure against the
+    requirement's). It explains and points; the clause keeps its status and no verdict depends on it. Any failure leaves the
+    reading exactly as it was."""
+    import os
+
+    measured = out.get("status") == "DRAFTED" and out.get("arm") != "expr_mention"
+    if measured or out.get("arm") == "label" or "could not be reached" in (out.get("reason") or "") \
+            or os.environ.get("REVIEWPULSE_EVIDENCE", "on") == "off":
+        return
+    try:
+        from ..annotate.passages import set_passages
+        from ..interpreter.checked import clause_body
+        from ..interpreter.drawing_evidence import default_reranker, find_evidence
+
+        models = [BuildingModel.model_validate_json(f.read_text(encoding="utf-8"))
+                  for f in sorted(store.run_dir(pid).glob("building_*.json"))]
+        passages = set_passages(models)
+        embedder = _embedder()
+        if embedder is not None and hasattr(embedder, "load"):
+            embedder.load(store.run_dir(pid) / NOTE_VECTORS, [p.text for p in passages])
+        if not _RERANKER:
+            _RERANKER.append(default_reranker())
+        found = find_evidence(clause_body(context), passages, client, embedder, _RERANKER[0])
+    except Exception:  # noqa: BLE001 - evidence is an explanation; without it the reading stands
+        return
+    out["evidence"] = found.as_dict()
+    if found.chosen:
+        out["notes"] = [*(out.get("notes") or []), "In the drawings: " + found.summary]
+
+
+NOTE_VECTORS = "note_vectors.npz"        # in the run folder: made again whenever the drawings are read again
+
+
+def _embedder():
+    from ..interpreter.drawing_evidence import default_embedder
+
+    if not _EMBEDDER:
+        _EMBEDDER.append(default_embedder())
+    return _EMBEDDER[0]
+
+
+def index_notes(store: Store, pid: str, models: list) -> int:
+    """Prepare the meaning search over the drawing notes while the drawings are being read, not when a reviewer first asks.
+    Returns the number of notes indexed; 0 when note search is off or no embedding model is installed."""
+    import os
+
+    from ..annotate.passages import set_passages
+
+    if os.environ.get("REVIEWPULSE_EVIDENCE", "on") == "off" or (embedder := _embedder()) is None:
+        return 0
+    texts = [p.text for p in set_passages(models)]
+    labels = [u.search for u in drawing_texts(store, pid, models)]
+    if texts or labels:
+        embedder.save(store.run_dir(pid) / NOTE_VECTORS, [*texts, *labels])
+    return len(texts)
+
+
+WRITTEN = "written_text.json"            # in the run folder: the labels, table rows and measurements, with their places
+
+
+def drawing_texts(store: Store, pid: str, models: list) -> list:
+    """What is written on the drawings besides the notes (annotate.evidence_units.written_units), read once per analysis."""
+    from ..annotate.evidence_units import Unit, written_units
+
+    kept = store.run_dir(pid) / WRITTEN
+    if kept.exists():
+        return [Unit(**{**u, "box": tuple(u["box"]) if u["box"] else None}) for u in json.loads(kept.read_text(encoding="utf-8"))]
+    plan = store.plan_path(store.get(pid))
+    drawing_set = None
+    if plan is not None and plan.suffix.lower() == ".pdf":
+        from ..drawingset import build_from_pdf
+
+        try:
+            drawing_set = build_from_pdf(plan)
+        except Exception:  # noqa: BLE001 - without sheet and drawing titles the pieces are still found, only less well placed
+            drawing_set = None
+    units = written_units(models, drawing_set)
+    publish(kept, json.dumps([asdict(u) for u in units], ensure_ascii=False).encode("utf-8"))
+    return units
+
+
+def find_notes(store: Store, pid: str, clause_id: str, top: int = 5) -> dict:
+    """The written notes closest to one requirement, each with its place. Retrieval only (words, meaning, reordering): no
+    reading model is asked, so it answers in seconds and works for any clause, read or not."""
+    from ..annotate.passages import set_passages
+    from ..interpreter.checked import clause_body
+    from ..interpreter.drawing_evidence import _placed, default_reranker, retrieve
+
+    context = _context(store, pid, clause_id)
+    files = sorted(store.run_dir(pid).glob("building_*.json"))
+    if not files:
+        raise ValueError("upload and analyse a plan first")
+    from .service import _models
+
+    passages = set_passages(_models(store, pid))
+    embedder = None
+    if os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off":
+        embedder = _embedder()
+        if embedder is not None and hasattr(embedder, "load"):
+            embedder.load(store.run_dir(pid) / NOTE_VECTORS, [p.text for p in passages])
+    if not _RERANKER:
+        _RERANKER.append(default_reranker() if os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off" else None)
+    found = retrieve(clause_body(context), passages, embedder, top=top, reranker=_RERANKER[0]) if passages else []
+    return {"candidates": [_placed(p) for p in found], "notes_on_drawings": len(passages)}
+
+
+PARTS_FILE = "parts.json"                # in the drafts folder: how each requirement was cut, with the words it was cut from
+NOTES_PER_PART, WRITTEN_PER_PART, NOTES_FOR_WHOLE = 2, 3, 5
+FOUND = "found"                          # in the run folder: what each search showed, kept until the drawings are read again
+
+
+def _drawings_stamp(store: Store, pid: str) -> list:
+    """Which analysis of which drawings: the sheet files of the run, by name, time and size."""
+    return [(f.name, s.st_mtime_ns, s.st_size) for f in sorted(store.run_dir(pid).glob("building_*.json")) for s in [f.stat()]]
+
+
+def search_stamp(store: Store, pid: str) -> str | None:
+    """What a prepared search was made from, or None when there are no analysed drawings or no requirement document yet."""
+    drawings = _drawings_stamp(store, pid)
+    project = store.get(pid)
+    document_file = store.req_path(project)
+    if not drawings or document_file is None or not document_file.exists():
+        return None
+    stat = document_file.stat()
+    return json.dumps([drawings, document_file.name, stat.st_mtime_ns, stat.st_size, project.context_links], sort_keys=True)
+
+
+def searchable_clauses(store: Store, pid: str) -> list[str]:
+    return [c["id"] for c in document(store, pid)["clauses"]]
+
+
+def _split(store: Store, pid: str, context, body: str, llm_factory: Callable[[], object | None]):
+    """The parts of a requirement: kept once a model has answered (also when it left the line whole), asked again when its
+    words change. Without an answer the line stands whole and nothing is kept, so it is cut when a model is there."""
+    from ..interpreter.parts import Split, split_requirement, whole
+
+    path = store.drafts_dir(pid) / PARTS_FILE
+    key = hashlib.sha256(body.encode()).hexdigest()
+    kept = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    if (got := kept.get(context.target)) and got["words"] == key:
+        return Split(tuple(got["parts"]), got["by_model"], tuple(got["left_out"]))
+    try:
+        client = llm_factory()
+    except Exception:  # noqa: BLE001 - no model: the line stands whole
+        client = None
+    if client is None:
+        return whole(body, answered=False)
+    clause = next(c for c in context.clauses if c.id == context.target)
+    above = next((c.text for c in context.clauses if c.id == clause.parent), "")
+    split = split_requirement(client, body, above)
+    if split.answered:
+        with _lock(pid):
+            kept = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+            kept[context.target] = {"words": key, "parts": list(split.parts), "by_model": split.by_model,
+                                    "left_out": list(split.left_out)}
+            path.parent.mkdir(parents=True, exist_ok=True)
+            publish(path, json.dumps(kept, indent=1, ensure_ascii=False).encode("utf-8"))
+    return split
+
+
+def offered_parts(store: Store, pid: str, clause_id: str) -> list[str]:
+    """The parts a reviewer was shown for a requirement: the kept cut, or the whole line when there is none."""
+    from ..interpreter.checked import clause_body
+
+    context = _context(store, pid, clause_id)
+    return list(_split(store, pid, context, clause_body(context), lambda: None).parts)
+
+
+def find_parts(store: Store, pid: str, clause_id: str, llm_factory: Callable[[], object | None]) -> dict:
+    """The things one requirement asks for, each searched alone: the notes that mention it, and what is written on the
+    drawings about it (labels, table rows, measurements). The closest notes for the whole line are always given too: cut
+    into parts with two notes each, a search showed less than five notes for the line (measured, docs/progress/M32), so the
+    parts add to those five and never replace them. A search, never a finding: a reviewer ticks each part."""
+    from ..annotate.passages import Passage, set_passages
+    from ..interpreter.checked import clause_body
+    from ..interpreter.drawing_evidence import _placed, default_reranker, retrieve
+    from .service import _models
+
+    context = _context(store, pid, clause_id)
+    # taken before anything is read: a search that is still running when new drawings are analysed is kept under the old
+    # drawings' name, so it can never be shown as what the new ones say
+    drawings = _drawings_stamp(store, pid)
+    if not drawings:
+        raise ValueError("upload and analyse a plan first")
+    body = clause_body(context)
+    split = _split(store, pid, context, body, llm_factory)
+    on = os.environ.get("REVIEWPULSE_EVIDENCE", "on") != "off"
+    asked = json.dumps([drawings, body, list(split.parts), on], ensure_ascii=False)
+    kept = store.run_dir(pid) / FOUND / f"{hashlib.sha256(asked.encode()).hexdigest()[:24]}.json"
+    if kept.exists():
+        return json.loads(kept.read_text(encoding="utf-8"))
+    models = _models(store, pid)
+    passages = set_passages(models)
+    written = drawing_texts(store, pid, models)
+    searched = [Passage(str(i), u.search) for i, u in enumerate(written)]
+    embedder = _embedder() if on else None
+    if embedder is not None and hasattr(embedder, "load"):
+        embedder.load(store.run_dir(pid) / NOTE_VECTORS, [*(p.text for p in passages), *(p.text for p in searched)])
+    if not _RERANKER:
+        _RERANKER.append(default_reranker() if on else None)
+
+    def placed(p: Passage) -> dict:
+        u = written[int(p.sheet)]
+        return {"sheet": u.sheet, "text": u.text, "kind": u.kind, "times": u.times,
+                **({"box": [round(v, 2) for v in u.box]} if u.box else {})}
+
+    def notes_for(words: str, top: int) -> list[dict]:
+        return [_placed(p) for p in retrieve(words, passages, embedder, top=top, reranker=_RERANKER[0])] if passages else []
+
+    whole_line = notes_for(body, NOTES_FOR_WHOLE)
+    parts = []
+    for part in split.parts:
+        near = retrieve(part, searched, embedder, top=WRITTEN_PER_PART, reranker=_RERANKER[0]) if searched else []
+        # a line that stands whole is its own single part: its notes are the five for the line
+        notes = whole_line if len(split.parts) == 1 else notes_for(part, NOTES_PER_PART)
+        parts.append({"text": part, "notes": notes, "written": [placed(p) for p in near]})
+    out = {"parts": parts, "whole_line": whole_line if len(parts) > 1 else [], "split_by_model": split.by_model,
+           "left_out": list(split.left_out), "notes_on_drawings": len(passages), "texts_on_drawings": len(written)}
+    kept.parent.mkdir(parents=True, exist_ok=True)
+    publish(kept, json.dumps(out, ensure_ascii=False).encode("utf-8"))
     return out
 
 
@@ -181,7 +429,7 @@ def _context(store: Store, pid: str, clause_id: str):
     if path is None or not path.exists():
         raise ValueError("upload a requirement document first")
     full, clauses = split_cached(path, store.dir(pid) / "cache")
-    return assemble_context(path.name, full, clauses, clause_id, project.context_links)
+    return with_resolved_context(assemble_context(path.name, full, clauses, clause_id, project.context_links), clauses)
 
 
 def set_context_links(store: Store, pid: str, links: dict[str, list[str]]) -> dict:
@@ -279,6 +527,14 @@ def coverage(store: Store, pid: str) -> dict:
     findings = read("findings.json", {})
     findings = findings.get("findings", []) if isinstance(findings, dict) else findings
     from ..factgraph.from_building import LOOKED_FOR
+    from . import workflow
 
-    return build(project, document(store, pid), load_results(store, pid), read("interpreted_results.json", []), findings,
-                 looked_for=list(LOOKED_FOR))
+    doc = document(store, pid)
+    data = build(project, doc, load_results(store, pid), read("interpreted_results.json", []), findings,
+                 looked_for=list(LOOKED_FOR), decisions=workflow.holding(store, pid, {c["id"]: c["text"] for c in doc["clauses"]}))
+    from ..drawingset.summary import enabled, summary_for_pdf
+
+    plan = store.plan_path(store.get(pid))
+    if enabled() and plan is not None and plan.exists():          # off by default: it reads every page of the PDF
+        data["drawing_set"] = summary_for_pdf(plan)
+    return data

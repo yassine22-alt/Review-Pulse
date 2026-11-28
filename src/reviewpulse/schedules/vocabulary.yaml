@@ -1,0 +1,207 @@
+# Header words of sheet tables, by MEANING. Add a language or a synonym by adding a line; no code names a header word.
+#
+# meanings: name -> {dim, words}
+#   dim    what the column measures: length, area, volume, time, mass, power, voltage, count, ratio, size, text, tag
+#   words  phrases (lower case, accents removed, ss for the German sharp s). A phrase matches a header when the header equals
+#          it (best), contains all of its words, or is made of some of its words (weaker). One or two letter phrases only match
+#          the whole header. Quote the words YAML would turn into booleans ("no", "on").
+# kinds: entity kind -> words that appear in a table title, and tag prefixes.
+# kind_hints: columns that point at a kind when no title says it.
+# unit_aliases: how drawings write units, mapped to the unit table of interpreter/units.yaml.
+
+meanings:
+  tag:
+    dim: tag
+    words: [mark, tag, id, "no", nr, n, "#", ref, reference, repere, rep, numero, nummer, pos, position, item,
+            marca, etiqueta, kennzeichen, kennung, symbol, sym, door number, door no, window number, window no,
+            door mark, window mark, fixture mark, door tag, window tag, "n°", num, tuer nr, tur nr, ident, nr., pos nr, positions nr]
+  room_number:
+    dim: tag
+    words: [room number, room no, =room, =rm, rm no, rm number, room id, numero de piece, numero de =local, local, piece n, raum nr,
+            raumnummer, raum nummer, =raum, numero de =habitacion, habitacion, space number, space no, =space]
+  room_name:
+    dim: text
+    words: [room =name, name, nom, nom de la piece, nom du local, nom piece, raumname, bezeichnung raum,
+            space name, =use, =usage, utilisation, nutzung, =uso, raumbezeichnung, designation piece, nombre del espacio]
+  level:
+    dim: text
+    words: [level, floor level, storey, story, niveau, etage, geschoss, stockwerk, planta, nivel, ebene, og, eg]
+  type:
+    dim: text
+    words: [type, door type, window type, =style, =nature, =kind, =category, typ, tipo, modele, model type, =art, bauart, tur typ,
+            tuer typ, fenstertyp, type de porte, type de fenetre, type porte, designation]
+  width:
+    dim: length
+    words: [width, wide, w, wd, wdth, largeur, larg, l, breite, br, ancho, anchura, door width, window width, clear width, nominal width,
+            largeur passage, largeur de passage, breite lichtmass, lichte breite, rohbaubreite, rb breite, width door, tuerbreite,
+            turbreite, fensterbreite]
+  height:
+    dim: length
+    words: [height, high, h, ht, hgt, hauteur, haut, hoehe, hohe, ho, alto, altura, door height, window height, clear height, nominal height,
+            hauteur de passage, lichte hohe, rohbauhohe, rb hohe, height door, tuerhoehe, turhohe, fensterhoehe, fensterhohe]
+  depth:
+    dim: length
+    words: [depth, =d, profondeur, prof, tiefe, profundidad, =length, longueur, laenge, lange, longitud]
+  thickness:
+    dim: length
+    words: [thickness, thick, t, epaisseur, ep, dicke, staerke, starke, espesor, wall thickness, frame depth]
+  sill:
+    dim: length
+    words: [sill, sill height, sill ht, allege, hauteur d allege, hauteur allege, brustung, brustungshohe, brustungshoehe, parapet,
+            parapet height, antepecho, alfeizar, ht from floor]
+  ceiling_height:
+    dim: length
+    words: [ceiling height, ceiling ht, clg ht, clg height, clg, plafond, hauteur sous plafond, hsp, raumhohe, raumhoehe,
+            lichte raumhohe, deckenhohe, altura techo, headroom]
+  size:
+    dim: size
+    words: [size, dimensions, dimension, dim, dims, taille, format, masse, abmessungen, abmessung, grosse, tamano, dimensiones,
+            w x h, wxh, width x height, largeur x hauteur, l x h, breite x hohe, b x h, nominal size, rough opening, ro, opening size]
+  area:
+    dim: area
+    words: [area, floor area, surface, surf, flache, grundflache, superficie, area sf, area m2, sq ft, sq m, sqft, net area,
+            gross area, nutzflache, wohnflache, aire, surface habitable]
+  perimeter:
+    dim: length
+    words: [perimeter, perimetre, umfang, perimetro]
+  volume:
+    dim: volume
+    words: [volume, vol, volumen, rauminhalt, capacity, capacite, kapazitat]
+  quantity:
+    dim: count
+    words: [quantity, qty, leaf qty, leaves, qte, quantite, nb, nbre, nombre, number of, count, anzahl, menge, stuck, stk, cantidad, cant, units, pcs, pieces]
+  fire_rating:
+    dim: time
+    words: [fire rating, fire rated, fire, fr, rating, rated, fire resistance, fire resist, fire res, fire label, fire class,
+            resistance au feu, resistance feu, degre de resistance au feu, coupe feu, coupe-feu, cf, rf, reaction au feu,
+            feuerwiderstand, feuerwiderstandsklasse, brandschutz, brandschutzklasse, feuerschutz, feuerhemmend, brandklasse,
+            rei, ei, ei class, resistencia al fuego, proteccion contra incendios, fire hr, fire time, fire protection, fire door,
+            f rating, hr rating, rated hr, rate, fire rating hr, fire rating min]
+  material:
+    dim: text
+    words: [material, materials, materiau, matiere, werkstoff, baustoff, door material, frame material, =frame,
+            =cadre, =rahmen, =marco, =construction, =leaf, =vantail, =blatt, =core, finish door, door leaf]
+  finish_floor:
+    dim: text
+    words: [floor finish, =flooring, =floor, =sol, revetement de sol, revetement sol, bodenbelag, =boden, fussboden, =suelo,
+            =pavimento, floor material, =flr, flr finish, sol revetement]
+  finish_wall:
+    dim: text
+    words: [wall finish, =walls, =wall, =mur, =murs, revetement mural, revetement mur, wandbelag, =wand, =wande, wandoberflache,
+            =pared, =paredes, wall material, wall treatment]
+  finish_ceiling:
+    dim: text
+    words: [ceiling finish, =plafond, =ceiling, clg finish, plafond finition, =decke, deckenbelag, deckenoberflache, =techo]
+  finish_base:
+    dim: text
+    words: [=base, base material, base finish, plinthe, sockel, sockelleiste, zocalo, baseboard, skirting, wainscot]
+  glazing:
+    dim: text
+    words: [glazing, glass, glazing type, vitrage, type de vitrage, verglasung, glas, acristalamiento, vidrio, pane, lite]
+  u_value:
+    dim: ratio
+    words: [u value, u factor, u-value, u-factor, uw, ug, valeur u, coefficient u, u wert, u-wert, transmittance, thermal transmittance,
+            r value, shgc]
+  hardware:
+    dim: text
+    words: [hardware, hdw, hw, hardware set, hdw set, quincaillerie, beschlag, beschlage, herrajes, ironmongery, lockset, closer]
+  manufacturer:
+    dim: text
+    words: [manufacturer, mfr, mfg, mfgr, make, brand, fabricant, hersteller, fabricante, marque, marke, vendor, supplier]
+  model:
+    dim: text
+    words: [model, model number, model no, catalog number, catalog no, cat no, product, product number, reference produit, modell,
+            produkt, modele de produit, part number, part no, series, serie]
+  color:
+    dim: text
+    words: [color, colour, couleur, farbe, ral, color finish, paint, peinture, anstrich]
+  power:
+    dim: power
+    words: [power, wattage, watts, watt, w rating, load, puissance, leistung, potencia, input power, rated power, kw]
+  voltage:
+    dim: voltage
+    words: [voltage, volts, volt, tension, spannung, voltaje, v]
+  weight:
+    dim: mass
+    words: [weight, wt, mass, poids, gewicht, masa, peso, kg]
+  remarks:
+    dim: text
+    words: [remarks, remark, notes, note, comments, comment, remarque, remarques, observations, observation, bemerkung,
+            bemerkungen, anmerkung, anmerkungen, hinweis, notas, observaciones, nota, =description, =descr, =desc,
+            beschreibung, descripcion, =details, =detail]
+  location:
+    dim: text
+    words: [location, loc, emplacement, localisation, lage, standort, ort, ubicacion, serves]
+
+kinds:
+  doors:
+    title: [door, doors, porte, portes, tur, turen, tuer, tueren, puerta, puertas, huisserie, portail]
+    prefix: [d, p, t, dr]
+  windows:
+    title: [window, windows, fenetre, fenetres, fenster, ventana, ventanas, glazing, vitrage, baie, baies, skylight, lucarne]
+    prefix: [w, f, v, wd, win]
+  rooms:
+    title: [room, rooms, raum, raume, raumbuch, raumliste, raumprogramm, piece, pieces, local, locaux, space, spaces, habitacion,
+            habitaciones, area tabulation, program]
+    prefix: [r, rm]
+  finishes:
+    title: [finish, finishes, finition, finitions, oberflachen, oberflaechen, revetement, revetements, acabados]
+    prefix: []
+  fixtures:
+    title: [air handling, exhaust fan, cabinet, cabinets, fixture, fixtures, plumbing, lighting, luminaire, luminaires, light, lights, sanitary, sanitar, appareil, appareils,
+            equipment, equipement, ausstattung, geraete, equipo, electrical, mechanical, appliance, appliances, panel, panneau]
+    prefix: [l, pf, e, ex, eq, a]
+  walls:
+    title: [wall type, wall types, wall legend, wall schedule, partition, partitions, cloison, cloisons, wandaufbau, wandtypen]
+    prefix: [wt]
+
+kind_hints:
+  doors: [fire_rating, hardware]
+  windows: [sill, glazing, u_value]
+  finishes: [finish_floor, finish_wall, finish_ceiling, finish_base]
+  rooms: [room_number, area, ceiling_height]
+  fixtures: [power, voltage, manufacturer, model]
+
+unit_aliases:
+  '"': in
+  "''": in
+  inch: in
+  inches: in
+  "in.": in
+  "'": ft
+  foot: ft
+  feet: ft
+  "ft.": ft
+  sf: ft2
+  sqft: ft2
+  sq ft: ft2
+  sq.ft: ft2
+  sq.ft.: ft2
+  "sq. ft.": ft2
+  sqm: m2
+  sq m: m2
+  sq.m: m2
+  "m^2": m2
+  "m²": m2
+  "ft²": ft2
+  "ft^2": ft2
+  hr: h
+  hrs: h
+  hour: h
+  hours: h
+  heure: h
+  heures: h
+  stunde: h
+  stunden: h
+  std: h
+  minute: min
+  minutes: min
+  mins: min
+  mn: min
+  lbs: lb
+  kilo: kg
+  watts: W
+  watt: W
+  volts: V
+  volt: V
+  kw: kW

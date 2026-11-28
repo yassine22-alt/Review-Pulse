@@ -98,6 +98,7 @@ class Raw:
     measurement: Measurement | None = None
     evidence_issues: list[EvidenceIssue] = field(default_factory=list)
     dependencies: list[str] = field(default_factory=list)
+    confirmation_issue: EvidenceIssue | None = None      # what needs confirming, when it is not geometry or a connection
 
 
 @dataclass
@@ -138,8 +139,9 @@ def decide(raw: Raw, tier: str, *, guidance: bool, max_verdict: str = "FAIL",
     if outcome == "UNRESOLVED" and not uncertain_scale and not raw.beyond_band:
         issues.append(EvidenceIssue(code=IssueCode.TOLERANCE_BAND, detail="within regulatory review tolerance"))
     if tier != "T1" and not all_confirmed:
-        issues.append(EvidenceIssue(code=IssueCode.UNVERIFIED_GEOMETRY if raw.metric else IssueCode.MISSING_CONNECTION,
-                                    detail="deciding geometry or connections need confirmation"))
+        issues.append(raw.confirmation_issue or EvidenceIssue(
+            code=IssueCode.UNVERIFIED_GEOMETRY if raw.metric else IssueCode.MISSING_CONNECTION,
+            detail="the walls, doors or room links this depends on are not confirmed yet"))
         outcome = "UNRESOLVED"
     if raw.evidence_issues:
         outcome = "UNRESOLVED"

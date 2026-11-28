@@ -229,7 +229,7 @@ DRAWING_UNIT_MM = [1.0, 10.0, 1000.0, 25.4, 304.8]     # mm, cm, m, inch, foot p
 
 # "not to scale" notes; matched on accent-stripped lower-case text (annotate.text_classify.normalise)
 NOT_TO_SCALE_RE = re.compile(
-    r"\bn\.?\s?t\.?\s?s\b|not to scale|sans echelle|pas a l'?echelle|non a l'?echelle|hors echelle"
+    r"\bn\.?\s?t\.?\s?s\b|not to scale|\bno scale\b|sans echelle|pas a l'?echelle|non a l'?echelle|hors echelle"
     r"|nicht (?:ma(?:ss|ß)stablich|im ma(?:ss|ß)stab)|unma(?:ss|ß)stablich|no a escala|sin escala|non in scala"
     r"|fuori scala|niet op schaal|sem escala|fora de escala|ei mittakaavassa|ej skalenlig|inte skalenlig"
     r"|بدون مقياس|ليس بمقياس")
@@ -244,6 +244,18 @@ def not_to_scale(sheet: Sheet) -> str | None:
         if NOT_TO_SCALE_RE.search(normalise(t.text)):
             return t.text
     return None
+
+
+# a ratio that something besides the sheet's own title confirms: the drawing's units, its written dimensions, a drawn scale bar,
+# or a person
+CONFIRMED_SCALES = ("dxf_units", "user", "dimension_consensus", "scale_bar")
+
+
+def unmeasurable(sheet: Sheet) -> str | None:
+    """The sheet's "not to scale" note when nothing but such a sheet's own title block gives a ratio: then no size is measured on
+    it, since the only ratio is one the sheet itself disowns. None when sizes may be estimated or measured."""
+    note = not_to_scale(sheet)
+    return note if note and sheet.scale.method not in CONFIRMED_SCALES else None
 
 
 def recover_scale(sheet: Sheet, calibrate: tuple[float, float, float, float, float] | None = None) -> tuple[Scale, ScaleReport]:

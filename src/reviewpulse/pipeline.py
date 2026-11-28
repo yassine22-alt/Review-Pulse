@@ -125,6 +125,23 @@ def area_calibrated_scale(rooms, assumed_mpu: float):
             spread)
 
 
+MODEL_LINE = "trained drawing model: "
+
+
+def reader_of(model: BuildingModel) -> dict:
+    """How one sheet was read, from what the reading itself wrote down: ``trained`` (with the model's version), ``rules`` (the
+    trained model did not run), ``fallback`` (it ran, found no wall where the rules did, and the rules' reading was kept) or
+    ``scan`` (a picture, read by the scan path)."""
+    said = model.sheet.warnings
+    if model.sheet.mode == "raster":
+        return {"kind": "scan", "model": None}
+    if "learned primitive classifier applied (second pass)" in said:
+        return {"kind": "trained", "model": next((w[len(MODEL_LINE):] for w in said if w.startswith(MODEL_LINE)), None)}
+    if any(w.startswith("learned primitive classifier found no walls") for w in said):
+        return {"kind": "fallback", "model": None}
+    return {"kind": "rules", "model": None}
+
+
 def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | None = None,
                 run_dir: Path | None = None, index: int = 0, learned: bool | None = None,
                 annotator=None, learned_mode: str | None = None, scale_hint=None) -> BuildingModel:
@@ -228,6 +245,10 @@ def build_model(sheet: Sheet, calibrate: tuple | None = None, confirmed: set | N
             associate_tags(sheet, openings, mpu, scale_known)
             rooms, edges, room_warn = detect_rooms(sheet, walls, columns, openings, mpu, scale_known)
             sheet.warnings.append("learned primitive classifier applied (second pass)")
+            if by_classifier:
+                from .perception.learned.classifier import version
+
+                sheet.warnings.append(f"{MODEL_LINE}{version()}")
     sheet.warnings += room_warn
     if pristine is not None and rooms and (not scale_known or scale.method in UNVERIFIED_SCALES):
         found = area_calibrated_scale(rooms, mpu)
@@ -326,15 +347,17 @@ def apply_rejection(model: BuildingModel, rejected: set) -> None:
 
 def check(run_dir: str | Path, pack, confirmed: set | None = None,
           dismissed: dict | None = None, reports: bool = True, brief: str | Path | None = None,
-          programs: list | None = None, inventory_complete: bool = False) -> dict:
+          programs: list | None = None, inventory_complete: bool = False, attestations=None) -> dict:
     """Run the rules on every sheet of a run. ``brief``: the project's brief (programme) table; it is
     kept in the run folder so later checks use it too. ``programs``: rules approved by a reviewer from the requirement
     document (interpreter programs); they run on the same plan and their findings join the others, with the full
     outcome of each saved in ``interpreted_results.json``. ``inventory_complete``: a person confirmed that every room,
-    door and window was found, which is what allows a rule over "every" member to be reported as satisfied."""
+    door and window was found, which is what allows a rule over "every" member to be reported as satisfied.
+    ``attestations``: what reviewers confirmed (ledger `Attestations`); they outrank every producer for the facts they cover."""
     import shutil
 
     from .engine.run import run, summarise
+    from .engine.setwide import combine, leads_elsewhere
     from .report.csv_out import write_csv
     from .rules.programme import attach_programme
     from .schema import save_findings
@@ -355,7 +378,12 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
     models = []
     interpreted_results: list[dict] = []
     paths = sorted(run_dir.glob("building_*.json"))
-    n_plans = sum(1 for bp in paths if _is_plan(load(BuildingModel, bp)))
+    loaded = [load(BuildingModel, bp) for bp in paths]
+    n_plans = sum(1 for m in loaded if _is_plan(m))
+    from .factgraph.from_building import set_notes
+
+    notes = set_notes(loaded)                   # general notes sit on their own sheets: every sheet of the set is searched
+    titles = {r.id: r.title for r in rules}
     for bp in paths:
         model = load(BuildingModel, bp)
         if briefs and n_sheets == 1:
@@ -371,8 +399,11 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
             models.append(model)
             continue
         findings = run(model, rules, confirmed)
+        for f in findings:
+            f.evidence["title"] = titles.get(f.rule_id, "")
         if programs:
-            findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1)
+            findings += _run_programs(model, programs, inventory_complete, interpreted_results, part_of_set=n_plans > 1,
+                                      notes=notes, attestations=attestations)
         for f in findings:
             key = finding_key(f)
             f.evidence["finding_id"] = key
@@ -381,6 +412,7 @@ def check(run_dir: str | Path, pack, confirmed: set | None = None,
                 f.evidence["dismissed"] = dismissed[key]
         all_findings += findings
         models.append(model)
+    all_findings = combine(all_findings, rules, n_plans, {m.sheet.id for m in models if _is_plan(m) and leads_elsewhere(m)})
     save_findings(all_findings, run_dir / "findings.json")
     (run_dir / "interpreted_results.json").write_text(json.dumps(interpreted_results, indent=1), encoding="utf-8")
     write_csv(all_findings, models, run_dir / "findings.csv")
@@ -398,17 +430,20 @@ def _is_plan(model) -> bool:
     return not model.sheet.sheet_kind or model.sheet.sheet_kind == "floor_plan"
 
 
-def _run_programs(model, programs, inventory_complete: bool, results: list[dict], part_of_set: bool = False) -> list:
+def _run_programs(model, programs, inventory_complete: bool, results: list[dict], part_of_set: bool = False,
+                  notes=None, attestations=None) -> list:
     """Approved interpreter programs on one sheet: findings for the viewer and one outcome record per program."""
-    from .factgraph.convert import to_graph, to_inputs
+    from .factgraph.convert import to_graph
     from .factgraph.from_building import from_building
     from .interpreter.findings import to_findings
+    from .ledger.wiring import build_inputs
 
-    graph_facts = from_building(model, complete=inventory_complete, part_of_set=part_of_set)
-    inputs, graph = to_inputs(graph_facts), to_graph(graph_facts)
+    graph_facts = from_building(model, complete=inventory_complete, part_of_set=part_of_set, notes=notes)
+    inputs, resolutions = build_inputs(graph_facts, attestations, model)       # REVIEWPULSE_LEDGER=off: the plain conversion
+    graph = to_graph(graph_facts)
     out = []
     for program in programs:
-        found, explained = to_findings(program, inputs, graph, model, model.tier)
+        found, explained = to_findings(program, inputs, graph, model, model.tier, resolutions=resolutions)
         out += found
         clause = program.sources[0].clause if program.sources else None
         results.append({

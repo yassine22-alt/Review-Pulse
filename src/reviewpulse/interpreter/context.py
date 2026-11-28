@@ -10,9 +10,9 @@ from ..rules.clauses import Clause
 from .schema import Model, Span
 
 REFERENCE = re.compile(
-    r"\b(article|art\.?|paragraph|section|table|tableau|rule|regulation|clause|§)\s*(\d+(?:\.\d+)*)(?:\(([a-z0-9]+)\))?", re.I
+    r"\b(article|art\.?|paragraph|section|tables?|tableaux?|tabellen?|tablas?|rule|regulation|clause|§)\s*((?:[A-Z]{1,2})?\d+(?:\.\d+)*)(?:\(([a-z0-9]+)\))?", re.I
 )
-TABLE_WORDS = {"table", "tableau"}
+TABLE_WORDS = {"table", "tables", "tableau", "tableaux", "tabelle", "tabellen", "tabla", "tablas"}
 
 
 class ContextBundle(Model):
@@ -98,7 +98,7 @@ def assemble_context(
         queue.extend((links or {}).get(cid, []))
         for match in REFERENCE.finditer(clause.text):
             word, number, subitem = match.groups()
-            if word.lower() in TABLE_WORDS:                 # "Table 2" is the table, never clause 2
+            if word.lower() in TABLE_WORDS:                 # "Table 2" is the table, never clause 2; "Table B4" an annex table
                 candidates = [f"Table {number}", f"Tableau {number}"]
             else:
                 candidates = [number, f"Art. {number}", f"§ {number}", f"{word.capitalize()} {number}"]

@@ -16,6 +16,7 @@ What it does that a bare HTTP call does not, because the drafting pipeline depen
 
 from __future__ import annotations
 
+import base64
 import ipaddress
 import json
 import re
@@ -24,6 +25,8 @@ import time
 import urllib.error
 import urllib.request
 from urllib.parse import urlparse
+
+from .local import direct
 
 
 class LLMError(RuntimeError):
@@ -110,7 +113,7 @@ class OpenAICompatClient:
                  reasoning_effort: str | None = None):
         if not model:
             raise LLMError("a model name is required (set REVIEWPULSE_LLM_MODEL)")
-        self.base_url = base_url.rstrip("/")
+        self.base_url = direct(base_url.rstrip("/"))
         self.model, self.provider = model, provider
         self.external = is_external(self.base_url)
         self.structured = structured                       # auto | json_schema | json_object | text
@@ -207,7 +210,7 @@ class OpenAICompatClient:
         raise LLMError(f"{self.provider}: no answer after {self.max_retries + 1} attempts")
 
     # -- the call ---------------------------------------------------------------------------------------------------
-    def _body(self, system: str, user: str, schema: dict, mode: str) -> dict:
+    def _body(self, system: str, user: str | list, schema: dict, mode: str) -> dict:
         body: dict = {"model": self.model, "temperature": self.temperature, "max_tokens": self.max_tokens,
                       "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
         if self.seed is not None:
@@ -229,7 +232,14 @@ class OpenAICompatClient:
                                               "and nothing else:\n" + json.dumps(schema))
         return body
 
-    def complete(self, system: str, user: str, json_schema: dict) -> dict:
+    def complete(self, system: str, user: str, json_schema: dict, images: tuple[bytes, ...] = ()) -> dict:
+        """`images`: PNG pictures sent with the question, to a model that can read them. Pictures of drawings are never sent
+        outside this machine and its private network: consent to use a hosted model covers the checklist's words only."""
+        if images:
+            if self.external:
+                raise LLMError(f"{self.provider}: pictures of drawings are not sent to a service outside this network")
+            user = [*({"type": "image_url", "image_url": {"url": "data:image/png;base64," + base64.b64encode(i).decode()}}
+                      for i in images), {"type": "text", "text": user}]
         try:
             return self._complete(system, user, json_schema)
         except LLMError as exc:
