@@ -40,6 +40,24 @@ On the drawn only queries of the **held out key**, all three:
 * **If any is missed:** it stays out of the app, and this page records where it failed.
 * The older key is reported but does not count: it was used while building the vision question.
 
+## Changes made before the first run (28 November)
+
+No visual search model has been run yet when this section is written.
+
+* **Another model, for its licence.** `vidore/colqwen2.5-v0.2` is listed as Apache 2.0 by the ColPali project, but the model under
+  it, Qwen2.5-VL-3B, is under the Qwen **research** licence, as the model's own card says and as the maintainers confirm
+  ([issue 334](https://github.com/illuin-tech/colpali/issues/334)). A product could not use it. The model used instead is
+  **`vidore/colqwen2-v1.0-hf`**: the same method on Qwen2-VL-2B, which is Apache 2.0. The maintainers describe its quality as
+  close; I have not compared the two. This version runs on the `transformers` library alone.
+* **A query** is one object on one source file. It is **drawn only** when every place the key gives for it in that source is
+  drawn without its name; if any is named, it counts with the named ones.
+* **Unclear marks:** for a query, the tiles of an area whose answer the key marks unclear are left out of its pool.
+* **The text search** orders the tiles that have text, with the search the app uses (words, meaning, then reordering). Tiles
+  without text follow in random order, and its score is the expected value over those orders.
+* **Tiles** are pictures with the longer side 1344 pixels, without the grid. The scores come from the model on the cluster; the
+  ranking, chance and the text search are computed on the laptop by a script written before the run
+  (`scripts/visual_score.py`).
+
 ## What this cannot show
 
 Tiles of hand chosen areas are far fewer than the tiles of a whole set, so the score will be higher than in real use. The held
